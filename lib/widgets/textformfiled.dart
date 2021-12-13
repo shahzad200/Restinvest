@@ -27,6 +27,7 @@ class CustomFormField extends StatefulWidget {
   final Function(String)? onChange;
   bool obscureText;
   final int fieldType;
+
   final IconData? icon;
   final bool hasIcon;
   final bool isRounded;
@@ -55,6 +56,9 @@ class _CustomFormFieldState extends State<CustomFormField> {
           filled: true,
           labelText: widget.label,
           hintText: widget.hint,
+          hintStyle: TextStyle(
+            color: AppColor.black,
+          ),
           fillColor: AppColor.whiteColor),
       keyboardType: widget.textInputType,
       textAlign: widget.textAlign,
@@ -80,7 +84,7 @@ class CustomTextFormField extends StatefulWidget {
   CustomTextFormField(
       {Key? key,
       this.label,
-      this.textColor,
+      this.hintColor,
       this.hint,
       this.textAlign = TextAlign.start,
       this.textInputType = TextInputType.emailAddress,
@@ -89,13 +93,14 @@ class CustomTextFormField extends StatefulWidget {
       this.obscureText = false,
       this.fieldType = 2,
       this.controller,
+      this.textcolor,
       this.icon,
       this.isRounded = true,
       this.hasIcon = true})
       : super(key: key);
   final String? label;
   final String? hint;
-  final textColor;
+  final hintColor;
   final TextAlign textAlign;
   final TextInputType textInputType;
   final Function(String)? validations;
@@ -103,6 +108,7 @@ class CustomTextFormField extends StatefulWidget {
   bool obscureText;
   final int fieldType;
   final IconData? icon;
+  final textcolor;
   final bool hasIcon;
   final bool isRounded;
   final TextEditingController? controller;
@@ -120,7 +126,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       obscuringCharacter: "*",
       decoration: InputDecoration(
         isDense: true, // Added this
-        contentPadding: EdgeInsets.all(10),
+        contentPadding: EdgeInsets.all(9),
         border: _inputBorder(widget.isRounded),
         disabledBorder: _inputBorder(widget.isRounded),
         enabledBorder: widget.isRounded ? _inputBorder(widget.isRounded) : null,
@@ -144,7 +150,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   InputBorder _inputBorder(isRounded) {
     return OutlineInputBorder(
       borderSide:
-          BorderSide(width: isRounded ? 0.8 : 2, color: AppColor.dimblack),
+          BorderSide(width: isRounded ? 0.5 : 2, color: AppColor.dimblack),
       borderRadius: BorderRadius.circular(
         isRounded ? 0 : 0,
       ),

@@ -16,7 +16,31 @@ class Constants {
 
   //date time formats
   static const String date = 'yyyy-MM-dd';
-  static const String time = 'jm';
-  static const String logo = 'assets/images/logo.png';
 
+  //assets images
+  static const String logo = 'assets/images/logo.png';
+  static const String calender = 'assets/images/calender.png';
+  static const String home = 'assets/images/home.png';
+  static const String portofolio = 'assets/images/portofolio.png';
+  static const String redemption = 'assets/images/redemption.png';
+  static const String purchase = 'assets/images/purchase.png';
+  static const String f2f = 'assets/images/f2f.png';
+  static const String report = 'assets/images/report.png';
+  static const String complaint = 'assets/images/complaint.png';
+  static const String logout = 'assets/images/logout.png';
+  static const String market = 'assets/images/market.png';
+  static const String portofol = 'assets/images/portofol.png';
+  static const String fundmanager = 'assets/images/fundmanager.png';
+  static const String news = 'assets/images/news.png';
+  static const String product = 'assets/images/product.png';
+  static const String picfund = 'assets/images/picfund.png';
+  static const String learning = 'assets/images/learning.png';
+  static const String branches = 'assets/images/branches.png';
+  static const String nav = 'assets/images/nav.png';
+  static const String call = 'assets/images/call.png';
+  static const String sms = 'assets/images/sms.png';
+  static const String chat = 'assets/images/chat.png';
+  static const String mail = 'assets/images/mail.png';
+  static const String calculator = 'assets/images/calculator.png';
+  static const String dailynav = 'assets/images/dailynav.png';
 }

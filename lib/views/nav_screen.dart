@@ -162,18 +162,6 @@ class NavScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      RoundColumnButton(
-                        text: "GO",
-                        textColor: AppColor.dimblack,
-                        buttonColor: AppColor.whiteColor,
-                        height: 30,
-                        width: 40,
-                        onPress: () {},
-                      )
-                    ],
-                  )
                 ],
               ),
             ),

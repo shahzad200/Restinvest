@@ -21,15 +21,18 @@ class LoginScreen extends StatelessWidget {
         builder: (_) {
           return SafeArea(
               child: Scaffold(
-            backgroundColor: AppColor.lightWhite,
+            backgroundColor: AppColor.whiteColor,
             key: _.scaffoldKey,
             body: SingleChildScrollView(
               padding: const EdgeInsets.only(top: 40, left: 30, right: 30),
               child: Column(
                 children: [
-                  const Logo(),
+                  Logo(
+                    height: 200,
+                    width: 200,
+                  ),
                   const SizedBox(
-                    height: 40,
+                    height: 10,
                   ),
                   CustomFormField(
                     hint: "User name",
@@ -42,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   CustomFormField(
                     hint: "Password",

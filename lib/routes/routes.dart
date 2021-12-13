@@ -20,4 +20,6 @@ class AppRoute {
   static const String f2ftransferRoute = '/f2ftransfer';
   static const String reportsRoute = '/reports';
   static const String viewreportsRoute = '/viewreports';
+  static const String dailynavRoute = '/dailynav';
+  static const String taxcalculatorRoute = '/taxcalculator';
 }

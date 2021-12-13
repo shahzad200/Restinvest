@@ -4,6 +4,11 @@ import 'package:get/get.dart';
 
 class UserrScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
+  String titlevalue = "";
+  String bracketvalue = "";
+  String incomevalue = "";
+  String occupationvalue = "";
+
   displayDialog(BuildContext context, list) async {
     return showDialog(
         context: context,

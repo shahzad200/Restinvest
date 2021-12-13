@@ -6,7 +6,9 @@ class RedemptionScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool isChecked = false;
-
+  String dropdownvalue = "";
+  String amountvalue = "";
+  String paymentvalue = "";
   bool investButton = false;
   bool portfolioButton = false;
   bool buttonclick3 = false;
@@ -41,5 +43,15 @@ class RedemptionScreenController extends GetxController {
           break;
         }
     }
+  }
+
+  displayDialog(BuildContext context, Widget body) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: body,
+          );
+        });
   }
 }

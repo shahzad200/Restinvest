@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:investintrust/controller/report_screen_controller.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/custom_divider.dart';
+import '../controller/report_screen_controller.dart';
+import '../routes/routes.dart';
+import '../widgets/constant_widget.dart';
+import '../widgets/custom_divider.dart';
 
 import '../utils/colors.dart';
 
@@ -43,7 +43,7 @@ class ReportsScreen extends StatelessWidget {
                       height: 50,
                       width: Get.width,
                       child: const Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(15.0),
                         child: RestInvestTitle(
                           text: "Reports",
                           textColor: AppColor.whiteColor,
@@ -60,7 +60,7 @@ class ReportsScreen extends StatelessWidget {
                     },
                     text: "Account Statement",
                   ),
-                  const CustomDivider(),
+                  CustomDivider(color: AppColor.black.withOpacity(0.8)),
                   ReportsInkWellButton(
                     onTap: () {
                       Get.toNamed(AppRoute.viewreportsRoute);
@@ -92,14 +92,14 @@ class ReportsScreen extends StatelessWidget {
                     },
                     text: "Redemption Report",
                   ),
-                  const CustomDivider(),
+                  CustomDivider(color: AppColor.black.withOpacity(0.8)),
                   ReportsInkWellButton(
                     onTap: () {
                       Get.toNamed(AppRoute.viewreportsRoute);
                     },
                     text: "Purchase Report",
                   ),
-                  const CustomDivider(),
+                  CustomDivider(color: AppColor.black.withOpacity(0.8)),
                   ReportsInkWellButton(
                     onTap: () {
                       Get.toNamed(AppRoute.viewreportsRoute);

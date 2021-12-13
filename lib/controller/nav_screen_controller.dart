@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/utils/colors.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
 class NavScreenController extends GetxController {
@@ -33,101 +32,40 @@ class NavScreenController extends GetxController {
   }
 
   displayDialog(BuildContext context, controller) async {
-    int _value = 1;
+    int value = 0;
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            actions: [
-              Column(
-                children: <Widget>[
-                  for (int i = 1; i <= 10; i++)
-                    ListTile(
-                      title: Text(
-                        'Radio $i',
-                        style: TextStyle(),
-                      ),
-                      leading: Radio(
-                        value: i,
-                        groupValue: _value,
-                        onChanged: i == 10
-                            ? null
-                            : (int? data) {
-                                _value = data!;
-                                update();
-                              },
-                      ),
-                    ),
-                ],
-              ),
-              // ListTile(
-              //   onTap: () {
-              //     controller.text();
-              //     controller.update();
-              //   },
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 1, groupValue: 1, onChanged: (int) {}),
-              // ),
-              // ListTile(
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 1, groupValue: 0, onChanged: (val) {}),
-              // ),
-              // ListTile(
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 0, groupValue: 1, onChanged: (int) {}),
-              // ),
-              // ListTile(
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 0, groupValue: 1, onChanged: (int) {}),
-              // ),
-              // ListTile(
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 0, groupValue: 1, onChanged: (int) {}),
-              // ),
-              // ListTile(
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 0, groupValue: 1, onChanged: (int) {}),
-              // ),
-              // ListTile(
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 0, groupValue: 1, onChanged: (int) {}),
-              // ),
-              // ListTile(
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 0, groupValue: 1, onChanged: (int) {}),
-              // ),
-              // ListTile(
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 0, groupValue: 1, onChanged: (int) {}),
-              // ),
-              // ListTile(
-              //   leading: const RestInvestTitle(
-              //     text: "Please Selected",
-              //   ),
-              //   trailing: Radio(value: 0, groupValue: 1, onChanged: (int) {}),
-              // )
-            ],
+          return const SizedBox(
+            height: 300,
+            child: SingleChildScrollView(
+              child: AlertDialog(actions: [
+                NavDropDownContainer(
+                  nitpfcsText: "NIT-PFCSF",
+                  nitpfmsfText: "NIT-IPFESF",
+                  selectText: " Please Select",
+                  nitText: "NIT-IEF",
+                  nitiifText: "NIT-IIF",
+                  niutText: "NI(U)T",
+                  nitgbfText: "NIT-GBF",
+                  nitifText: "NIT-IF",
+                  nitmmfText: "NIT-MMF",
+                  nitsefText: "NIT-SEF",
+                  nitemofText: "NIT-EMOF",
+                  nitpfText: "NIT-PF",
+                  nitipfText: "NIT-IPF",
+                  nitpfsefText: "NIT-PFESF",
+                  nitipfmsfText: "NIT-PFMMSF",
+                  nitpfdsText: "NIT-PFDSF",
+                  nitimmfText: "NIT-IPFMMSF",
+                  nitipfdsfText: "NIT-IPFDSF",
+                  nitaaafText: "NIT-AAF",
+                  nitpgtText: "NIT-PGETF",
+                  nitipfesText: "NIT-IMMF",
+                )
+              ]),
+            ),
           );
         });
   }
 }
-
-enum SingingCharacter { lafayette, jefferson }

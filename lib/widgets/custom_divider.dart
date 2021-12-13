@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:investintrust/utils/colors.dart';
-
 
 class CustomDivider extends StatelessWidget {
-  const CustomDivider({Key? key}) : super(key: key);
+  const CustomDivider({Key? key, this.color}) : super(key: key);
+  final color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 6.0),
-      color: AppColor.black.withOpacity(0.10),
+      color: color,
       height: 1,
     );
   }

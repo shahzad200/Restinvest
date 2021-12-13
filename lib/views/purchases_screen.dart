@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/views/portfolio_screen.dart';
+import 'package:investintrust/utils/lists.dart';
+
 import '../widgets/datefield.dart';
 import '../controller/purchases_screen_controller.dart';
 
@@ -20,6 +21,9 @@ class PurchasesScreen extends StatelessWidget {
     return GetBuilder<PurchasesScreenController>(
         init: PurchasesScreenController(),
         builder: (_) {
+          var space = const SizedBox(
+            height: 15,
+          );
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -41,30 +45,162 @@ class PurchasesScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Row(
-                    children: const [
+                    children: [
                       Expanded(
-                          child: DropDownContainerIcon(
-                        textColor: AppColor.blueColor,
-                        text: "Amount No.",
-                      )),
-                      SizedBox(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const RestInvestTitle(
+                              text: "Account No.",
+                              textColor: AppColor.blueColor,
+                            ),
+                            Container(
+                              // margin: EdgeInsets.all(10.0),
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
+                              height: 35,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  border: Border.all(
+                                      width: 0.5, color: AppColor.dimblack)),
+                              child: Center(
+                                child: DropdownButton(
+                                  isExpanded: true,
+                                  underline: Container(
+                                    color: AppColor.whiteColor,
+                                  ),
+
+                                  borderRadius: BorderRadius.circular(6),
+                                  // value: _.dropdownvalue,
+                                  hint: RestInvestTitle(
+                                    text: _.amountvalue == null ||
+                                            _.amountvalue == ""
+                                        ? "Account No."
+                                        : _.amountvalue,
+                                    textColor: AppColor.black,
+                                  ),
+                                  icon: const Icon(Icons.keyboard_arrow_down,
+                                      color: AppColor.blueColor, size: 30),
+                                  items: fromAccountItems
+                                      .map((String? fromAccountItems) {
+                                    return DropdownMenuItem<String>(
+                                        value: fromAccountItems,
+                                        child: Text(fromAccountItems!));
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    _.amountvalue = value!;
+                                    _.update();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Expanded(
+                      //     child: DropDownContainerIcon(
+                      //   voidcallback: () {
+                      //     _.displayDialog(
+                      //         context,
+                      //         const DropDownAccountValueButton(
+                      //           accountText: "Account No.",
+                      //           hintText: "81656",
+                      //           titleText: "69558",
+                      //         ));
+                      //   },
+                      //   textColor: AppColor.blueColor,
+                      //   text: "Amount No.",
+                      // )),
+                      const SizedBox(
                         width: 6,
                       ),
                       Expanded(
-                        child: DropDownContainerIcon(
-                          textColor: AppColor.blueColor,
-                          text: 'Fund Name.',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const RestInvestTitle(
+                              text: "Fund Name",
+                              textColor: AppColor.blueColor,
+                            ),
+                            Container(
+                              // margin: EdgeInsets.all(10.0),
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
+                              height: 35,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  border: Border.all(
+                                      width: 0.5, color: AppColor.dimblack)),
+                              child: Center(
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  underline: Container(
+                                    color: AppColor.whiteColor,
+                                  ),
+
+                                  borderRadius: BorderRadius.circular(6),
+                                  // value: _.dropdownvalue,
+                                  hint: RestInvestTitle(
+                                    text: _.dropdownvalue == null ||
+                                            _.dropdownvalue == ""
+                                        ? "Fund Name"
+                                        : _.dropdownvalue,
+                                    textColor: AppColor.black,
+                                  ),
+                                  icon: const Icon(Icons.keyboard_arrow_down,
+                                      color: AppColor.blueColor, size: 35),
+                                  items: fundNameItems
+                                      .map((String? fundNameItems) {
+                                    return DropdownMenuItem<String>(
+                                        value: fundNameItems,
+                                        child: Text(fundNameItems!));
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    _.dropdownvalue = value!;
+                                    _.update();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                      // Expanded(
+                      //   child: DropDownContainerIcon(
+                      //     voidcallback: () {
+                      //       _.displayDialog(
+                      //           context,
+                      //           DropDownSelectValueContainer(
+                      //             onTap: () {},
+                      //             fundText: "Fund Name",
+                      //             niText: "NIUT",
+                      //             nitText: "NITGBF",
+                      //             nitfText: "NITIF",
+                      //             niefText: "NITEF",
+                      //             nimmText: "NIT-MMF",
+                      //             nifiText: "NIT-II",
+                      //             niaaText: "NIT-AAF",
+                      //             nitmfText: "NIT IMMF",
+                      //             space: space,
+                      //           ));
+                      //     },
+                      //     textColor: AppColor.blueColor,
+                      //     text: 'Fund Name.',
+                      //   ),
+                      // ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  space,
                   Row(
                     children: const [
                       Expanded(
                           child: EmptyRowContainer(
+                        fontWeight: FontWeight.w800,
+                        fontsize: 14,
+                        hintColor: AppColor.black,
+                        hint: "BANK AL HABIB LIMITED",
                         text: "Fund Bank Deposit",
                         textColor: AppColor.blueColor,
                       )),
@@ -73,20 +209,68 @@ class PurchasesScreen extends StatelessWidget {
                       ),
                       Expanded(
                           child: EmptyRowContainer(
+                        fontWeight: FontWeight.w800,
+                        fontsize: 14,
+                        hintColor: AppColor.black,
+                        hint: "0081-17426901-1",
                         text: "Fund Account Deposit",
                         textColor: AppColor.blueColor,
                       ))
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  space,
                   Row(
                     children: [
-                      const Expanded(
-                        child: DropDownContainerIcon(
-                          textColor: AppColor.blueColor,
-                          text: 'Payment Mode.',
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const RestInvestTitle(
+                              text: "Payment Mode",
+                              textColor: AppColor.blueColor,
+                            ),
+                            Container(
+                              // margin: EdgeInsets.all(10.0),
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
+                              height: 35,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  border: Border.all(
+                                      width: 0.5, color: AppColor.dimblack)),
+                              child: Center(
+                                child: DropdownButton(
+                                  isExpanded: true,
+                                  underline: Container(
+                                    color: AppColor.whiteColor,
+                                  ),
+
+                                  borderRadius: BorderRadius.circular(6),
+                                  // value: _.dropdownvalue,
+                                  hint: RestInvestTitle(
+                                    text: _.paymentvalue == null ||
+                                            _.paymentvalue == ""
+                                        ? "Cheque"
+                                        : _.paymentvalue,
+                                    textColor: AppColor.black,
+                                  ),
+                                  icon: const Icon(Icons.keyboard_arrow_down,
+                                      color: AppColor.blueColor, size: 35),
+                                  items: paymentModeItems
+                                      .map((String? paymentModeItems) {
+                                    return DropdownMenuItem<String>(
+                                        value: paymentModeItems,
+                                        child: Text(paymentModeItems!));
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    _.paymentvalue = value!;
+                                    _.update();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(
@@ -101,16 +285,14 @@ class PurchasesScreen extends StatelessWidget {
                             CustomTextFormField(
                               isRounded: true,
                               hint: "",
-                              // textInputType: TextInputType.emailAddress,
+                              //  textInputType: TextInputType.emailAddress,
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  space,
                   Row(
                     children: [
                       Expanded(
@@ -148,9 +330,7 @@ class PurchasesScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  space,
                   Row(
                     children: [
                       Expanded(
@@ -180,16 +360,14 @@ class PurchasesScreen extends StatelessWidget {
                                 textColor: AppColor.blueColor),
                             SizedBox(
                               height: 35,
-                              child: DateFormFieldContainer(),
+                              child: DateFieldContainer(),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  space,
                   Row(
                     children: [
                       Expanded(
@@ -220,9 +398,7 @@ class PurchasesScreen extends StatelessWidget {
                   ContainerCheckBoxText(
                     isChecked: false,
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  space,
                   SizedBox(
                     height: 40,
                     child: RestInvestButton(

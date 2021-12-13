@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/utils/lists.dart';
+
 import '../controller/f2f_transfer_screen_controller.dart';
 import '/controller/f2f_transfer_screen_controller.dart';
 
@@ -40,20 +42,153 @@ class F2FTransferScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Row(
-                    children: const [
+                    children: [
                       Expanded(
-                          child: DropDownContainerIcon(
-                        textColor: AppColor.dimblack,
-                        text: "From Account",
-                      )),
-                      SizedBox(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const RestInvestTitle(
+                              text: "Account No.",
+                              textColor: AppColor.dimblack,
+                            ),
+                            Container(
+                              // margin: EdgeInsets.all(10.0),
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
+                              height: 35,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  border: Border.all(
+                                      width: 0.5, color: AppColor.dimblack)),
+                              child: Center(
+                                child: DropdownButton(
+                                  isExpanded: true,
+                                  underline: Container(
+                                    color: AppColor.whiteColor,
+                                  ),
+
+                                  borderRadius: BorderRadius.circular(6),
+                                  // value: _.dropdownvalue,
+                                  hint: RestInvestTitle(
+                                    text: _.accountvalue == null ||
+                                            _.accountvalue == ""
+                                        ? "81656"
+                                        : _.accountvalue,
+                                    textColor: AppColor.black,
+                                  ),
+                                  icon: const Icon(Icons.keyboard_arrow_down,
+                                      color: AppColor.blueColor, size: 35),
+                                  items: fromAccountItems
+                                      .map((String? fromAccountItems) {
+                                    return DropdownMenuItem<String>(
+                                        value: fromAccountItems,
+                                        child: Text(fromAccountItems!));
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    _.accountvalue = value!;
+                                    _.update();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
                         width: 6,
                       ),
                       Expanded(
-                          child: DropDownContainerIcon(
-                        textColor: AppColor.dimblack,
-                        text: "Transfer From Fund",
-                      ))
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const RestInvestTitle(
+                              text: "Fund Name",
+                              textColor: AppColor.dimblack,
+                            ),
+                            Container(
+                              // margin: EdgeInsets.all(10.0),
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
+                              height: 35,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  border: Border.all(
+                                      width: 0.5, color: AppColor.dimblack)),
+                              child: Center(
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  underline: Container(
+                                    color: AppColor.whiteColor,
+                                  ),
+
+                                  borderRadius: BorderRadius.circular(6),
+                                  // value: _.dropdownvalue,
+                                  hint: RestInvestTitle(
+                                    text: _.transfervalue == null ||
+                                            _.transfervalue == ""
+                                        ? "NITIEF"
+                                        : _.transfervalue,
+                                    textColor: AppColor.black,
+                                  ),
+                                  icon: const Icon(Icons.keyboard_arrow_down,
+                                      color: AppColor.blueColor, size: 35),
+                                  items: transferItems
+                                      .map((String? transferItems) {
+                                    return DropdownMenuItem<String>(
+                                        value: transferItems,
+                                        child: Text(transferItems!));
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    _.transfervalue = value!;
+                                    _.update();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Expanded(
+                      //     child: DropDownContainerIcon(
+                      //   voidcallback: () {
+                      //     _.displayDialog(
+                      //         context,
+                      //         const DropDownAccountValueButton(
+                      //           accountText: "Account No.",
+                      //           hintText: "81656",
+                      //           titleText: "69558",
+                      //         ));
+                      //   },
+                      //   textColor: AppColor.dimblack,
+                      //   text: "From Account",
+                      // )),
+                      // const SizedBox(
+                      //   width: 6,
+                      // ),
+                      // Expanded(
+                      //     child: DropDownContainerIcon(
+                      //   voidcallback: () {
+                      //     _.displayDialog(
+                      //         context,
+                      //         Column(
+                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                      //           children: [
+                      //             InkWell(
+                      //               onTap: () {},
+                      //               child: const RestInvestTitle(
+                      //                 text: "NITIEF",
+                      //               ),
+                      //             ),
+                      //             const SizedBox(height: 20),
+                      //             const CustomDivider(),
+                      //           ],
+                      //         ));
+                      //   },
+                      //   textColor: AppColor.dimblack,
+                      //   text: "Transfer From Fund",
+                      // ))
                     ],
                   ),
                   const SizedBox(
@@ -63,6 +198,10 @@ class F2FTransferScreen extends StatelessWidget {
                     children: const [
                       Expanded(
                           child: EmptyRowContainer(
+                        fontWeight: FontWeight.w800,
+                        fontsize: 14,
+                        hintColor: AppColor.black,
+                        hint: "0",
                         text: "From Fund Electronic Units",
                         textColor: AppColor.dimblack,
                       )),
@@ -71,6 +210,10 @@ class F2FTransferScreen extends StatelessWidget {
                       ),
                       Expanded(
                           child: EmptyRowContainer(
+                        fontWeight: FontWeight.w800,
+                        fontsize: 14,
+                        hintColor: AppColor.black,
+                        hint: "0.00",
                         text: "From Fund Amount (Rs.)",
                         textColor: AppColor.dimblack,
                       )),
@@ -80,20 +223,149 @@ class F2FTransferScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
-                    children: const [
+                    children: [
                       Expanded(
-                          child: DropDownContainerIcon(
-                        textColor: AppColor.dimblack,
-                        text: "To Account",
-                      )),
-                      SizedBox(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const RestInvestTitle(
+                              text: "Account No.",
+                              textColor: AppColor.dimblack,
+                            ),
+                            Container(
+                              // margin: EdgeInsets.all(10.0),
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
+                              height: 35,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  border: Border.all(
+                                      width: 0.5, color: AppColor.dimblack)),
+                              child: Center(
+                                child: DropdownButton(
+                                  isExpanded: true,
+                                  underline: Container(
+                                    color: AppColor.whiteColor,
+                                  ),
+
+                                  borderRadius: BorderRadius.circular(6),
+                                  // value: _.dropdownvalue,
+                                  hint: RestInvestTitle(
+                                    text: _.toaccountvalue == null ||
+                                            _.toaccountvalue == ""
+                                        ? "81656"
+                                        : _.toaccountvalue,
+                                    textColor: AppColor.black,
+                                  ),
+                                  icon: const Icon(Icons.keyboard_arrow_down,
+                                      color: AppColor.blueColor, size: 35),
+                                  items: toAccountItems
+                                      .map((String? toAccountItems) {
+                                    return DropdownMenuItem<String>(
+                                        value: toAccountItems,
+                                        child: Text(toAccountItems!));
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    _.toaccountvalue = value!;
+                                    _.update();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(
                         width: 6,
                       ),
                       Expanded(
-                          child: DropDownContainerIcon(
-                        textColor: AppColor.dimblack,
-                        text: "Transfer to Fund",
-                      ))
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const RestInvestTitle(
+                              text: "Fund Name",
+                              textColor: AppColor.dimblack,
+                            ),
+                            Container(
+                              // margin: EdgeInsets.all(10.0),
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
+                              height: 35,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  border: Border.all(
+                                      width: 0.5, color: AppColor.dimblack)),
+                              child: Center(
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  underline: Container(
+                                    color: AppColor.whiteColor,
+                                  ),
+
+                                  borderRadius: BorderRadius.circular(6),
+                                  // value: _.dropdownvalue,
+                                  hint: RestInvestTitle(
+                                    text:
+                                        _.fundvalue == null || _.fundvalue == ""
+                                            ? "NIUT"
+                                            : _.fundvalue,
+                                    textColor: AppColor.black,
+                                  ),
+                                  icon: const Icon(Icons.keyboard_arrow_down,
+                                      color: AppColor.blueColor, size: 35),
+                                  items: transferFundItems
+                                      .map((String? transferFundItems) {
+                                    return DropdownMenuItem<String>(
+                                        value: transferFundItems,
+                                        child: Text(transferFundItems!));
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    _.fundvalue = value!;
+                                    _.update();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Expanded(
+                      //     child: DropDownContainerIcon(
+                      //   voidcallback: () {
+                      //     _.displayDialog(
+                      //         context,
+                      //         const AccountDropDownContainer(
+                      //           titleText: "81656",
+                      //           hintText: "69558",
+                      //         ));
+                      //   },
+                      //   textColor: AppColor.dimblack,
+                      //   text: "To Account",
+                      // )),
+                      // const SizedBox(
+                      //   width: 6,
+                      // ),
+                      // Expanded(
+                      //     child: DropDownContainerIcon(
+                      //   voidcallback: () {
+                      //     _.displayDialog(
+                      //         context,
+                      //         const FundTransferDroDownContainer(
+                      //           niutText: "NIUT",
+                      //           nitgbText: "NITGBF",
+                      //           nitifText: "NITIF",
+                      //           nitmmfText: "NIT-MMF",
+                      //           nitiifText: "NIT-IIF",
+                      //           nitaafText: "NIT AAF",
+                      //           nitimmffText: "NIT IMMF",
+                      //         ));
+                      //   },
+                      //   textColor: AppColor.dimblack,
+                      //   text: "Transfer to Fund",
+                      // ))
                     ],
                   ),
                   const SizedBox(
@@ -156,6 +428,8 @@ class F2FTransferScreen extends StatelessWidget {
                           child: SizedBox(
                         height: 35,
                         child: RoundContainer(
+                          text: "Approx. Amount",
+                          textColor: AppColor.blueColor,
                           isSquare: true,
                           voidcallback: () {},
                         ),

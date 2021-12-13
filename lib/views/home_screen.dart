@@ -38,8 +38,8 @@ class HomeScreen extends StatelessWidget {
                   Image.asset(
                     'assets/images/logo.png',
                     fit: BoxFit.contain,
-                    height: 60,
-                    width: 60,
+                    height: 100,
+                    width: 100,
                   )
                 ]),
               ),
@@ -60,11 +60,8 @@ class HomeScreen extends StatelessWidget {
                             Get.toNamed(AppRoute.navRoute);
                           },
                           child: IconButtonText(
-                            icon: const Icon(
-                              Icons.timelapse_sharp,
-                              color: AppColor.whiteColor,
-                            ),
-                            text: "Nav",
+                            icon: const Nav(),
+                            text: "NAV History",
                           ),
                         ),
                         InkWell(
@@ -72,10 +69,10 @@ class HomeScreen extends StatelessWidget {
                             Get.toNamed(AppRoute.branchesRoute);
                           },
                           child: IconButtonText(
-                            icon: const Icon(
-                              Icons.timelapse_sharp,
-                              color: AppColor.whiteColor,
-                            ),
+                            icon: const Branches(),
+
+                            // color: AppColor.whiteColor,
+
                             text: "BRANCHES",
                           ),
                         ),
@@ -84,11 +81,7 @@ class HomeScreen extends StatelessWidget {
                             Get.toNamed(AppRoute.learningRoute);
                           },
                           child: IconButtonText(
-                              icon: const Icon(
-                                Icons.timelapse_sharp,
-                                color: AppColor.whiteColor,
-                              ),
-                              text: "LEARNING"),
+                              icon: const Learning(), text: "LEARNING"),
                         )
                       ],
                     ),
@@ -97,8 +90,8 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Expanded(
                           child: ContainerBox(
+                        icon: const Market(),
                         textColor: AppColor.blueColor,
-                        icon: const Icon(Icons.mark_as_unread_outlined),
                         text: 'Market',
                         voidcallback: () {
                           Get.toNamed(AppRoute.marketRoute);
@@ -107,8 +100,8 @@ class HomeScreen extends StatelessWidget {
                       )),
                       Expanded(
                           child: ContainerBox(
+                        icon: const Portofol(),
                         textColor: AppColor.blueColor,
-                        icon: const Icon(Icons.person),
                         text: 'LOGIN',
                         voidcallback: () {
                           Get.toNamed(AppRoute.loginRoute);
@@ -121,8 +114,8 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Expanded(
                           child: ContainerBox(
+                        icon: const FundManager(),
                         textColor: AppColor.blueColor,
-                        icon: const Icon(Icons.mark_as_unread_outlined),
                         text: 'FUND MANAGER\n       REPORT',
                         voidcallback: () {
                           Get.toNamed(AppRoute.fundManagerRoute);
@@ -132,7 +125,7 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                           child: ContainerBox(
                         textColor: AppColor.blueColor,
-                        icon: const Icon(Icons.mark_as_unread_outlined),
+                        icon: const News(),
                         text: 'NEWS',
                         voidcallback: () {},
                         containerColor: AppColor.whiteColor,
@@ -143,8 +136,8 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Expanded(
                           child: ContainerBox(
+                        icon: const Product(),
                         textColor: AppColor.blueColor,
-                        icon: const Icon(Icons.mark_as_unread_outlined),
                         text: 'PRODUCTS',
                         voidcallback: () {
                           Get.toNamed(AppRoute.productRoute);
@@ -153,8 +146,8 @@ class HomeScreen extends StatelessWidget {
                       )),
                       Expanded(
                           child: ContainerBox(
+                        icon: const PicFund(),
                         textColor: AppColor.blueColor,
-                        icon: const Icon(Icons.mark_as_unread_outlined),
                         text: 'PIC YOUR FUND',
                         voidcallback: () {
                           Get.toNamed(AppRoute.fundRoute);
@@ -164,61 +157,72 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    children: [
+                      Expanded(
+                          child: ContainerBox(
+                        icon: const Calculator(),
+                        textColor: AppColor.blueColor,
+                        text: 'TEXT CALCULATOR',
+                        voidcallback: () {
+                          Get.toNamed(AppRoute.taxcalculatorRoute);
+                        },
+                        containerColor: AppColor.liteblue,
+                      )),
+                      Expanded(
+                          child: ContainerBox(
+                              icon: const DailyNav(),
+                              textColor: AppColor.blueColor,
+                              text: 'DAILY NAV',
+                              voidcallback: () {
+                                Get.toNamed(AppRoute.dailynavRoute);
+                              },
+                              containerColor: AppColor.whiteColor)),
+                    ],
+                  ),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
                           child: RowContainerBox(
-                        containerColor: AppColor.blueColor.withOpacity(.8),
-                        text: "Call",
-                        textColor: AppColor.whiteColor,
-                        voidcallback: () {},
-                        icon: const Icon(
-                          Icons.local_phone,
-                          color: AppColor.whiteColor,
-                        ),
-                      )),
+                              containerColor:
+                                  AppColor.blueColor.withOpacity(.8),
+                              text: "Call",
+                              textColor: AppColor.whiteColor,
+                              voidcallback: () {},
+                              icon: const Call())),
                       const SizedBox(
                         width: 2,
                       ),
                       Expanded(
                           child: RowContainerBox(
-                        containerColor: AppColor.blueColor.withOpacity(.8),
-                        text: "SMS",
-                        textColor: AppColor.whiteColor,
-                        voidcallback: () {},
-                        icon: const Icon(
-                          Icons.message,
-                          color: AppColor.whiteColor,
-                        ),
-                      )),
+                              containerColor:
+                                  AppColor.blueColor.withOpacity(.8),
+                              text: "SMS",
+                              textColor: AppColor.whiteColor,
+                              voidcallback: () {},
+                              icon: const Sms())),
                       const SizedBox(
                         width: 2,
                       ),
                       Expanded(
                           child: RowContainerBox(
-                        containerColor: AppColor.blueColor.withOpacity(.8),
-                        text: "EMAIL",
-                        textColor: AppColor.whiteColor,
-                        voidcallback: () {},
-                        icon: const Icon(
-                          Icons.email,
-                          color: AppColor.whiteColor,
-                        ),
-                      )),
+                              containerColor:
+                                  AppColor.blueColor.withOpacity(.8),
+                              text: "EMAIL",
+                              textColor: AppColor.whiteColor,
+                              voidcallback: () {},
+                              icon: const Mail())),
                       const SizedBox(
                         width: 2,
                       ),
                       Expanded(
                           child: RowContainerBox(
-                        containerColor: AppColor.blueColor.withOpacity(.8),
-                        text: "ABOUT",
-                        textColor: AppColor.whiteColor,
-                        voidcallback: () {},
-                        icon: const Icon(
-                          Icons.home,
-                          color: AppColor.whiteColor,
-                        ),
-                      ))
+                              containerColor:
+                                  AppColor.blueColor.withOpacity(.8),
+                              text: "ABOUT Us",
+                              textColor: AppColor.whiteColor,
+                              voidcallback: () {},
+                              icon: const Chat()))
                     ],
                   )
                 ],

@@ -20,6 +20,13 @@ class PortofolioScreen extends StatelessWidget {
         builder: (_) {
           return Scaffold(
             appBar: AppBar(
+              title: Padding(
+                padding: const EdgeInsets.only(right: 50),
+                child: Logo(
+                  height: 80,
+                  width: 80,
+                ),
+              ),
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
@@ -43,6 +50,14 @@ class PortofolioScreen extends StatelessWidget {
                     height: 50,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RestInvestTitle(
+                          fontSize: 16,
+                          textColor: AppColor.greyColor,
+                          text: "As on Dec 10,2021",
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ],
                     ),
                   ),
                   ListTile(
@@ -52,12 +67,12 @@ class PortofolioScreen extends StatelessWidget {
                     ),
                     trailing: const RestInvestTitle(
                       text: "PKR.00",
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                       textColor: AppColor.black,
                     ),
                     onTap: () {},
                   ),
-                  const CustomDivider(),
+                  CustomDivider(color: AppColor.dimblack.withOpacity(0.2)),
                   ListTile(
                     leading: const RestInvestTitle(
                       text: "81656",
@@ -65,7 +80,7 @@ class PortofolioScreen extends StatelessWidget {
                     ),
                     trailing: const RestInvestTitle(
                       text: "PKR.00",
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                       textColor: AppColor.black,
                     ),
                     onTap: () {},
@@ -78,7 +93,10 @@ class PortofolioScreen extends StatelessWidget {
                       text: "Total Investment Value",
                       fontWeight: FontWeight.w900,
                     ),
-                    trailing: const RestInvestTitle(text: "PKR.00"),
+                    trailing: const RestInvestTitle(
+                      text: "PKR.00",
+                      fontWeight: FontWeight.w900,
+                    ),
                     onTap: () {},
                   ),
                   Row(
@@ -114,8 +132,9 @@ class PortofolioScreen extends StatelessWidget {
                   Column(
                     children: [
                       RoundColumnButton(
+                        icon: const Calender(),
                         height: 45,
-                        width: 50,
+                        width: 45,
                         textColor: AppColor.black,
                         onPress: () {
                           _.invest(0);
@@ -128,8 +147,9 @@ class PortofolioScreen extends StatelessWidget {
                         height: 6,
                       ),
                       RoundColumnButton(
+                        icon: const Calender(),
                         height: 45,
-                        width: 50,
+                        width: 45,
                         textColor: AppColor.black,
                         onPress: () {
                           _.invest(1);
@@ -142,8 +162,9 @@ class PortofolioScreen extends StatelessWidget {
                         height: 6,
                       ),
                       RoundColumnButton(
+                        icon: const Calender(),
                         height: 45,
-                        width: 50,
+                        width: 45,
                         textColor: AppColor.black,
                         onPress: () {
                           _.invest(2);

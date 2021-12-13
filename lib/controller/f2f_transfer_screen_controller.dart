@@ -6,6 +6,10 @@ class F2FTransferScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool isChecked = false;
+  String accountvalue = "";
+  String fundvalue = "";
+  String toaccountvalue = "";
+  String transfervalue = "";
 
   bool investButton = false;
   bool portfolioButton = false;
@@ -41,5 +45,15 @@ class F2FTransferScreenController extends GetxController {
           break;
         }
     }
+  }
+
+  displayDialog(BuildContext context, Widget body) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: body,
+          );
+        });
   }
 }

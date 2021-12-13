@@ -22,103 +22,105 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            leading: const Icon(
-              Icons.home,
-            ),
+            leading: const Home(),
             title: const RestInvestTitle(
               text: "Home",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          const CustomDivider(),
-          ListTile(
-            onTap: () {
-              Get.toNamed(AppRoute.loginRoute);
-            },
-            leading: const Icon(
-              Icons.person,
-            ),
-            title: const RestInvestTitle(
-              text: "Login",
-            ),
+          CustomDivider(
+            color: AppColor.black.withOpacity(0.1),
           ),
-          const CustomDivider(),
           ListTile(
             onTap: () {
               Get.toNamed(AppRoute.portofolioRoute);
             },
-            leading: const Icon(
-              Icons.home,
-            ),
+            leading: const Portofolio(),
             title: const RestInvestTitle(
               text: "Portofolio",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          const CustomDivider(),
+          CustomDivider(
+            color: AppColor.black.withOpacity(0.1),
+          ),
           ListTile(
             onTap: () {
               Get.toNamed(AppRoute.redemptionRoute);
             },
-            leading: const Icon(
-              Icons.person,
-            ),
+            leading: const Redemption(),
             title: const RestInvestTitle(
               text: "Redemption",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          const CustomDivider(),
+          CustomDivider(
+            color: AppColor.black.withOpacity(0.1),
+          ),
           ListTile(
             onTap: () {
               Get.toNamed(AppRoute.purchasesRoute);
             },
-            leading: const Icon(
-              Icons.home,
-            ),
+            leading: const Purchase(),
             title: const RestInvestTitle(
               text: "Purchases",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          const CustomDivider(),
+          CustomDivider(
+            color: AppColor.black.withOpacity(0.1),
+          ),
           ListTile(
             onTap: () {
               Get.toNamed(AppRoute.f2ftransferRoute);
             },
-            leading: const Icon(
-              Icons.person,
-            ),
+            leading: const F2F(),
             title: const RestInvestTitle(
               text: "F2F Transfer",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          const CustomDivider(),
+          CustomDivider(
+            color: AppColor.black.withOpacity(0.1),
+          ),
           ListTile(
             onTap: () {
               Get.toNamed(AppRoute.reportsRoute);
             },
-            leading: const Icon(
-              Icons.home,
-            ),
+            leading: const Report(),
             title: const RestInvestTitle(
               text: "Reports",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          const CustomDivider(),
+          CustomDivider(
+            color: AppColor.black.withOpacity(0.1),
+          ),
           ListTile(
             onTap: () {},
-            leading: const Icon(
-              Icons.person,
-            ),
+            leading: const Complaint(),
             title: const RestInvestTitle(
               text: "Complaints",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          const CustomDivider(),
+          CustomDivider(
+            color: AppColor.black.withOpacity(0.1),
+          ),
           ListTile(
             onTap: () {},
-            leading: const Icon(
-              Icons.home,
-            ),
+            leading: const Logout(),
             title: const RestInvestTitle(
               text: "Logout",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ]),

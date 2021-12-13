@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/views/fundmanager_screen.dart';
-import 'package:investintrust/views/learning_screen.dart';
-import 'package:investintrust/views/market_screen.dart';
-import 'package:investintrust/views/nav_screen.dart';
-import 'package:investintrust/views/picfund_screen.dart';
-import 'package:investintrust/views/portfolio_screen.dart';
-import 'package:investintrust/views/product_screen.dart';
-import 'package:investintrust/views/f2f_transfer_screen.dart';
-import 'package:investintrust/views/purchases_screen.dart';
-import 'package:investintrust/views/redemption_screen.dart';
-import 'package:investintrust/views/reports_screen.dart';
-import 'package:investintrust/views/userr_screen.dart';
-import 'package:investintrust/views/view_report_screen.dart';
+import '../views/daily_nav_screen.dart';
+import '../views/fundmanager_screen.dart';
+import '../views/learning_screen.dart';
+import '../views/market_screen.dart';
+import '../views/nav_screen.dart';
+import '../views/picfund_screen.dart';
+import '../views/portfolio_screen.dart';
+import '../views/product_screen.dart';
+import '../views/f2f_transfer_screen.dart';
+import '../views/purchases_screen.dart';
+import '../views/redemption_screen.dart';
+import '../views/reports_screen.dart';
+import '../views/text_calculator_screen.dart';
+import '../views/userr_screen.dart';
+import '../views/view_report_screen.dart';
+
 import '../views/home_screen.dart';
 
 import '../routes/routes.dart';
@@ -110,6 +113,14 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: AppRoute.viewreportsRoute,
           page: () => const ViewReportsScreen(),
+        ),
+        GetPage(
+          name: AppRoute.dailynavRoute,
+          page: () => const DailyNavScreen(),
+        ),
+        GetPage(
+          name: AppRoute.taxcalculatorRoute,
+          page: () => const TaxCalculatorScreen(),
         ),
       ],
       debugShowCheckedModeBanner: false,
