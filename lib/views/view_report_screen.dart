@@ -49,7 +49,9 @@ class ViewReportsScreen extends StatelessWidget {
                                 text: 'Start Date.', textColor: AppColor.black),
                             SizedBox(
                               height: 35,
-                              child: DateFormFieldContainer(),
+                              child: DateFormFieldContainer(
+                                isRounded: false,
+                              ),
                             ),
                           ],
                         ),
@@ -65,7 +67,9 @@ class ViewReportsScreen extends StatelessWidget {
                                 text: 'End Date.', textColor: AppColor.black),
                             SizedBox(
                               height: 35,
-                              child: DateFormFieldContainer(),
+                              child: DateFormFieldContainer(
+                                isRounded: false,
+                              ),
                             ),
                           ],
                         ),
@@ -92,7 +96,7 @@ class ViewReportsScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,

@@ -320,7 +320,15 @@ class PicFund extends StatelessWidget {
 }
 
 class Calender extends StatelessWidget {
-  const Calender({Key? key}) : super(key: key);
+  const Calender(
+      {this.color = AppColor.blueColor,
+      required this.height,
+      required this.width,
+      Key? key})
+      : super(key: key);
+  final Color color;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -331,9 +339,9 @@ class Calender extends StatelessWidget {
       ),
       child: Image.asset(
         Constants.calender,
-        color: AppColor.blueColor,
-        width: 15,
-        height: 15,
+        color: color,
+        width: width,
+        height: height,
       ),
     );
   }
@@ -565,6 +573,7 @@ class DropDownContainerIcon extends StatelessWidget {
     required this.text,
     required this.textColor,
     required this.voidcallback,
+    this.color = AppColor.dimblack,
     required this.fontsize,
     required this.fontWeight,
     Key? key,
@@ -572,6 +581,7 @@ class DropDownContainerIcon extends StatelessWidget {
   final text;
   final Color textColor;
   final fontWeight;
+  final Color color;
   final voidcallback;
   final double fontsize;
 
@@ -589,6 +599,7 @@ class DropDownContainerIcon extends StatelessWidget {
         SizedBox(
           height: 35,
           child: DropDownContainer(
+            color: color,
             icon: const Icon(
               Icons.keyboard_arrow_down,
               size: 35,
@@ -619,6 +630,7 @@ class CustomCreditContainer extends StatelessWidget {
       children: [
         Expanded(
             child: EmptyRowContainer(
+          color: AppColor.blueColor,
           hintColor: AppColor.black,
           hint: "0.0",
           fontWeight: FontWeight.w900,
@@ -631,6 +643,7 @@ class CustomCreditContainer extends StatelessWidget {
         ),
         Expanded(
             child: EmptyRowContainer(
+          color: AppColor.blueColor,
           hintColor: AppColor.black,
           hint: "0.0",
           text: credittext,
@@ -776,6 +789,7 @@ class RoundContainer extends StatelessWidget {
     required this.text,
     required this.voidcallback,
     required this.isSquare,
+    this.color = AppColor.dimblack,
     this.textColor,
   }) : super(key: key);
 
@@ -783,6 +797,7 @@ class RoundContainer extends StatelessWidget {
   final bool isSquare;
   final VoidCallback voidcallback;
   final String text;
+  final Color color;
 
   final textColor;
 
@@ -794,7 +809,7 @@ class RoundContainer extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColor.whiteColor,
             border: Border.all(
-              width: 0.3,
+              width: 1, color: color,
               // color: textColor,
             ),
             borderRadius: isSquare
@@ -825,10 +840,12 @@ class DropDownContainer extends StatelessWidget {
     this.height = 70,
     required this.voidcallback,
     required this.isSquare,
+    this.color = AppColor.dimblack,
     required this.icon,
   }) : super(key: key);
 
   final double height;
+  final Color color;
   final isSquare;
   final voidcallback;
   final icon;
@@ -844,8 +861,8 @@ class DropDownContainer extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColor.whiteColor,
                 border: Border.all(
-                  width: 0.5,
-                  color: AppColor.dimblack,
+                  width: 1,
+                  color: color,
                 ),
                 borderRadius: isSquare
                     ? BorderRadius.vertical(
@@ -929,6 +946,7 @@ class EmptyRowContainer extends StatelessWidget {
     required this.hint,
     required this.textColor,
     required this.fontsize,
+    this.color = AppColor.dimblack,
     this.fontWeight,
     required this.hintColor,
     this.text,
@@ -937,6 +955,7 @@ class EmptyRowContainer extends StatelessWidget {
   final hint;
   final fontWeight;
   final double fontsize;
+  final Color color;
   final Color textColor;
 
   final hintColor;
@@ -955,6 +974,7 @@ class EmptyRowContainer extends StatelessWidget {
         SizedBox(
           height: 35,
           child: RoundContainer(
+            color: color,
             text: hint,
             isSquare: true,
             voidcallback: () {},

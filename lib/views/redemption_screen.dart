@@ -47,6 +47,7 @@ class RedemptionScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const RestInvestTitle(
+                              // fontWeight: FontWeight.w900,
                               text: "Account No.",
                               textColor: AppColor.dimblack,
                             ),
@@ -59,7 +60,7 @@ class RedemptionScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -103,6 +104,7 @@ class RedemptionScreen extends StatelessWidget {
                           children: [
                             const RestInvestTitle(
                               text: "Fund Name",
+                              // fontWeight: FontWeight.w900,
                               textColor: AppColor.dimblack,
                             ),
                             Container(
@@ -114,7 +116,7 @@ class RedemptionScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton<String>(
                                   isExpanded: true,
@@ -188,24 +190,24 @@ class RedemptionScreen extends StatelessWidget {
                     children: const [
                       Expanded(
                           child: EmptyRowContainer(
-                        fontWeight: FontWeight.w800,
+                        // fontWeight: FontWeight.w900,
                         fontsize: 14,
                         hintColor: AppColor.dimblack,
                         hint: "0",
                         text: "Electric Units",
-                        textColor: AppColor.black,
+                        textColor: AppColor.dimblack,
                       )),
                       SizedBox(
                         width: 6,
                       ),
                       Expanded(
                           child: EmptyRowContainer(
-                        fontWeight: FontWeight.w800,
+                        // fontWeight: FontWeight.w900,
                         fontsize: 14,
                         hintColor: AppColor.dimblack,
                         hint: "0.00",
                         text: "Amount",
-                        textColor: AppColor.black,
+                        textColor: AppColor.dimblack,
                       )),
                     ],
                   ),

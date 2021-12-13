@@ -106,13 +106,15 @@ class UserrScreen extends StatelessWidget {
                   Row(
                     children: const [
                       Expanded(
-                        child: DateFormFieldContainer(),
+                        child: DateFormFieldContainer(
+                          isRounded: true,
+                        ),
                       ),
                       SizedBox(
                         width: 4,
                       ),
                       Expanded(
-                        child: DateFormFieldContainer(),
+                        child: DateFormFieldContainer(isRounded: false),
                       ),
                     ],
                   ),

@@ -95,6 +95,7 @@ class CustomTextFormField extends StatefulWidget {
       this.controller,
       this.textcolor,
       this.icon,
+      this.color = AppColor.dimblack,
       this.isRounded = true,
       this.hasIcon = true})
       : super(key: key);
@@ -110,8 +111,9 @@ class CustomTextFormField extends StatefulWidget {
   final IconData? icon;
   final textcolor;
   final bool hasIcon;
-  final bool isRounded;
   final TextEditingController? controller;
+  final bool isRounded;
+  final Color color;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -149,8 +151,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   InputBorder _inputBorder(isRounded) {
     return OutlineInputBorder(
-      borderSide:
-          BorderSide(width: isRounded ? 0.5 : 2, color: AppColor.dimblack),
+      borderSide: BorderSide(width: isRounded ? 1 : 2, color: widget.color),
       borderRadius: BorderRadius.circular(
         isRounded ? 0 : 0,
       ),

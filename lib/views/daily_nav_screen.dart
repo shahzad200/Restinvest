@@ -3,6 +3,7 @@ import 'package:investintrust/controller/daily_nav_screen_controller.dart';
 
 import 'package:get/get.dart';
 import 'package:investintrust/utils/lists.dart';
+import 'package:investintrust/widgets/button.dart';
 import '../utils/colors.dart';
 import '../widgets/constant_widget.dart';
 
@@ -44,7 +45,7 @@ class DailyNavScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           const CustomTextContainer(
-                            height: 45,
+                            height: 40,
                             text: "DAILY FUND PRICES",
                             textAlign: TextAlign.end,
                           ),
@@ -58,77 +59,78 @@ class DailyNavScreen extends StatelessWidget {
                                   text: "MUTUAL FUNDS",
                                   textAlign: TextAlign.start,
                                 ),
+                                space,
                                 const CustomFundList(
                                   fontWeight: FontWeight.w900,
                                   fundText: "Fund Type",
                                   dateText: "Date",
                                   saleText: "Sale",
                                   purchaseText: "Repurchase",
-                                  textSize: 14,
+                                  textSize: 12.0,
                                 ),
                                 Column(
                                   children:
                                       List.generate(mutualfund.length, (index) {
                                     return CustomFundList(
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: FontWeight.w700,
                                         fundText: mutualfund[index]
                                             ["fund_type"],
                                         dateText: mutualfund[index]["date"],
                                         saleText: mutualfund[index]["sale"],
                                         purchaseText: mutualfund[index]
                                             ["repurchase"],
-                                        textSize: 9.0);
+                                        textSize: 12.0);
                                   }),
                                 ),
-                                space,
                                 space,
                                 const CustomTextContainer(
                                   height: 25,
                                   text: "PENSION FUNDS",
                                   textAlign: TextAlign.start,
                                 ),
+                                space,
                                 const CustomFundList(
                                   fontWeight: FontWeight.w900,
                                   fundText: "Fund Type",
                                   dateText: "Date",
                                   saleText: "Sale",
                                   purchaseText: "Repurchase",
-                                  textSize: 14,
+                                  textSize: 12.0,
                                 ),
                                 Column(
                                   children: List.generate(pensionfund.length,
                                       (index) {
                                     return CustomFundList(
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: FontWeight.w700,
                                         fundText: pensionfund[index]
                                             ["fund_type"],
                                         dateText: pensionfund[index]["date"],
                                         saleText: pensionfund[index]["sale"],
                                         purchaseText: pensionfund[index]
                                             ["repurchase"],
-                                        textSize: 9.0);
+                                        textSize: 12.0);
                                   }),
                                 ),
-                                space,
                                 space,
                                 const CustomTextContainer(
                                   height: 25,
                                   text: "EXCHANGE TRADED FUND",
                                   textAlign: TextAlign.left,
                                 ),
+                                space,
                                 const CustomFundList(
                                   fontWeight: FontWeight.w900,
                                   fundText: "Fund Type",
                                   dateText: "Date",
                                   saleText: "Sale",
                                   purchaseText: "Repurchase",
-                                  textSize: 14,
+                                  textSize: 12.0,
                                 ),
                                 Column(
                                   children: List.generate(
                                       exchangetradedfund.length, (index) {
                                     return CustomFundList(
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: FontWeight.w700,
                                         fundText: exchangetradedfund[index]
                                             ["fund_type"],
                                         dateText: exchangetradedfund[index]
@@ -137,9 +139,24 @@ class DailyNavScreen extends StatelessWidget {
                                             ["sale"],
                                         purchaseText: exchangetradedfund[index]
                                             ["repurchase"],
-                                        textSize: 9.0);
+                                        textSize: 12.0);
                                   }),
                                 ),
+                                space,
+                                space,
+                                SizedBox(
+                                  width: 300,
+                                  height: 25,
+                                  child: RestInvestButton(
+                                    isSquare: true,
+                                    text: "NAV HISTORY",
+                                    onPress: () {},
+                                    buttonColor: AppColor.blueColor,
+                                    textColor: AppColor.whiteColor,
+                                  ),
+                                ),
+                                space,
+                                space
                               ],
                             ),
                           )

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../controller/picfund_screen_controller.dart';
 import '../utils/colors.dart';
 import '../widgets/constant_widget.dart';
+
 class PicFundScreen extends StatelessWidget {
   const PicFundScreen({Key? key}) : super(key: key);
   @override
