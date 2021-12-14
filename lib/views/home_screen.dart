@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/widgets/no_internet.dart';
 
 import '../controller/home_screen_controller.dart';
 import '../routes/routes.dart';
@@ -17,14 +18,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeScreenController>(
         init: HomeScreenController(),
-        builder: (_) {
+        builder: (controller) {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
                 onTap: () {
-                  _.scaffoldKey.currentState!.openDrawer();
+                  controller.scaffoldKey.currentState!.openDrawer();
                 },
                 child: const Icon(
                   Icons.menu,
@@ -45,9 +46,11 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             drawer: const CustomDrawer(),
-            key: _.scaffoldKey,
+            key: controller.scaffoldKey,
             body: SingleChildScrollView(
-              child: Column(
+              child: controller.isLoading ? const CircularProgressIndicator():
+              controller.noInternet ? NoInternetWgt(onTryAgain: controller.getSocialLinks, key: controller.scaffoldKey):
+              Column(
                 children: [
                   Container(
                     color: AppColor.blueColor,
