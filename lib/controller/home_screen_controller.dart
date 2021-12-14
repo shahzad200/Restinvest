@@ -4,7 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/social_media_links.dart';
 import 'package:investintrust/data/repository.dart';
-class HomeScreenController extends GetxController{
+import 'package:url_launcher/url_launcher.dart';
+
+class HomeScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   final _repository = Repository();
@@ -12,28 +14,36 @@ class HomeScreenController extends GetxController{
   bool noInternet = false;
   late SocialMediaLink socialMediaLink;
   // Exception ex = Exception([message]);
+
   @override
   void onInit() async {
     getSocialLinks();
     super.onInit();
   }
 
+  void customLaunch(command) async {
+    if (await canLaunch(command)) {
+      await launch(command);
+    } else {
+      print(' could not launch $command');
+    }
+  }
+
   @override
   void onReady() {
     // TODO: implement onReady
     super.onReady();
-
   }
 
-
   getSocialLinks() async {
-    try{
+    try {
       isLoading = true;
       socialMediaLink = await _repository.socialMediaLinks();
       isLoading = false;
+      print(socialMediaLink.response!.toJson());
       update();
-    }catch (e){
-      if(e.toString() == 'Exception: No Internet'){
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
         isLoading = false;
         noInternet = true;
         update();
@@ -51,10 +61,5 @@ class HomeScreenController extends GetxController{
             fontSize: 16.0);
       }
     }
-
   }
-
-
-
-
 }

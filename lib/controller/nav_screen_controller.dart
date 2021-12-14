@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/controller/home_screen_controller.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
 class NavScreenController extends GetxController {
@@ -8,6 +9,8 @@ class NavScreenController extends GetxController {
   String? formatted;
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool ischeck = false;
+
+  final homeController = Get.find<HomeScreenController>();
 
   DateTime selectedDate = DateTime.now();
   DateTime endDate = DateTime.now();

@@ -22,7 +22,7 @@ class RestInvestTitle extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
   final String? fontFamily;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
 
   final EdgeInsetsGeometry margin;
   final bool isAsterisk;
@@ -37,7 +37,7 @@ class RestInvestTitle extends StatelessWidget {
         fontSize: fontSize,
         fontFamily: fontFamily,
       ),
-      textAlign: textAlign,
+      textAlign: textAlign!,
     );
   }
 }
