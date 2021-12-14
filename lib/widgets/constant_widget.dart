@@ -29,22 +29,6 @@ class RestInvestTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: margin,
-        child: isAsterisk
-            ? Row(
-                children: [
-                  getx(),
-                  const Text(
-                    "*",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ],
-              )
-            : getx());
-  }
-
-  Widget getx() {
     return Text(
       text,
       style: TextStyle(
