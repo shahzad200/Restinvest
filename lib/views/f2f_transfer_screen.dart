@@ -60,7 +60,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -115,7 +115,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton<String>(
                                   isExpanded: true,
@@ -241,7 +241,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -297,7 +297,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton<String>(
                                   isExpanded: true,

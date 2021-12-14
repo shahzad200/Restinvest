@@ -60,7 +60,9 @@ class ReportsScreen extends StatelessWidget {
                     },
                     text: "Account Statement",
                   ),
-                  CustomDivider(color: AppColor.black.withOpacity(0.8)),
+                  CustomDivider(
+                    color: AppColor.black.withOpacity(0.1),
+                  ),
                   ReportsInkWellButton(
                     onTap: () {
                       Get.toNamed(AppRoute.viewreportsRoute);
@@ -92,14 +94,16 @@ class ReportsScreen extends StatelessWidget {
                     },
                     text: "Redemption Report",
                   ),
-                  CustomDivider(color: AppColor.black.withOpacity(0.8)),
+                  CustomDivider(
+                    color: AppColor.black.withOpacity(0.1),
+                  ),
                   ReportsInkWellButton(
                     onTap: () {
                       Get.toNamed(AppRoute.viewreportsRoute);
                     },
                     text: "Purchase Report",
                   ),
-                  CustomDivider(color: AppColor.black.withOpacity(0.8)),
+                  CustomDivider(color: AppColor.black.withOpacity(0.1)),
                   ReportsInkWellButton(
                     onTap: () {
                       Get.toNamed(AppRoute.viewreportsRoute);

@@ -4,11 +4,20 @@ import 'package:investintrust/utils/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
-class DateFormFieldContainer extends StatelessWidget {
+class DateFormFieldContainer extends StatefulWidget {
   const DateFormFieldContainer({
+    required this.isRounded,
+    this.color = AppColor.dimblack,
     Key? key,
   }) : super(key: key);
+  final bool isRounded;
+  final Color color;
 
+  @override
+  State<DateFormFieldContainer> createState() => _DateFormFieldContainerState();
+}
+
+class _DateFormFieldContainerState extends State<DateFormFieldContainer> {
   @override
   Widget build(BuildContext context) {
     return DateTimeFormField(
@@ -18,13 +27,22 @@ class DateFormFieldContainer extends StatelessWidget {
         hintStyle: TextStyle(color: AppColor.dimblack),
         errorStyle: TextStyle(color: Colors.redAccent),
         border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightGreyColor)),
+            borderSide: BorderSide(color: AppColor.dimblack, width: 1)),
         contentPadding: EdgeInsets.all(10),
         hintText: "CNIC Expiry Date",
       ),
       dateFormat: DateFormat('dd/MM/yyyy'),
       mode: DateTimeFieldPickerMode.date,
       autovalidateMode: AutovalidateMode.always,
+    );
+  }
+
+  InputBorder _inputBorder(isRounded) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(width: isRounded ? 1 : 2, color: widget.color),
+      borderRadius: BorderRadius.circular(
+        isRounded ? 0 : 0,
+      ),
     );
   }
 }
@@ -39,7 +57,11 @@ class DateFieldContainer extends StatelessWidget {
     return DateTimeFormField(
       initialValue: DateTime.now(),
       decoration: const InputDecoration(
-        suffix: const Calender(),
+        suffix: Calender(
+          color: AppColor.blueColor,
+          height: 15,
+          width: 15,
+        ),
         fillColor: AppColor.whiteColor,
         hintStyle: TextStyle(color: AppColor.dimblack),
         errorStyle: TextStyle(color: Colors.redAccent),

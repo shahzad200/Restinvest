@@ -63,7 +63,7 @@ class PurchasesScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -132,7 +132,7 @@ class PurchasesScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton<String>(
                                   isExpanded: true,
@@ -238,7 +238,7 @@ class PurchasesScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -341,6 +341,7 @@ class PurchasesScreen extends StatelessWidget {
                                 text: 'Check/Instrument No.',
                                 textColor: AppColor.blueColor),
                             CustomTextFormField(
+                              color: AppColor.dimblack,
                               isRounded: true,
                               hint: "",
                               // textInputType: TextInputType.emailAddress,

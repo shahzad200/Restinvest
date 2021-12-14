@@ -46,7 +46,7 @@ class NavScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: AppColor.lightGreyColor,
                             border:
-                                Border.all(width: 1, color: AppColor.dimblack),
+                                Border.all(width: 1, color: AppColor.greyColor),
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(4.0),
                                 bottomLeft: Radius.circular(4.0))),
@@ -74,7 +74,7 @@ class NavScreen extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             border:
-                                Border.all(width: 1, color: AppColor.dimblack),
+                                Border.all(width: 1, color: AppColor.greyColor),
                           ),
                         ),
                       ))
@@ -90,14 +90,15 @@ class NavScreen extends StatelessWidget {
                         width: 40,
                         decoration: BoxDecoration(
                             border:
-                                Border.all(width: 1, color: AppColor.dimblack),
+                                Border.all(width: 1, color: AppColor.greyColor),
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(4.0),
                                 bottomLeft: Radius.circular(4.0))),
                         child: IconButton(
-                          icon: const Icon(
-                            Icons.event,
-                            color: AppColor.dimblack,
+                          icon: const Calender(
+                            color: AppColor.greyColor,
+                            height: 80,
+                            width: 80,
                           ),
                           onPressed: () {
                             _.selectDate(context, 0);
@@ -109,7 +110,7 @@ class NavScreen extends StatelessWidget {
                           height: 35,
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  width: 1, color: AppColor.dimblack)),
+                                  width: 1, color: AppColor.greyColor)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -131,14 +132,15 @@ class NavScreen extends StatelessWidget {
                         width: 40,
                         decoration: BoxDecoration(
                             border:
-                                Border.all(width: 1, color: AppColor.dimblack),
+                                Border.all(width: 1, color: AppColor.greyColor),
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(4.0),
                                 bottomLeft: Radius.circular(4.0))),
                         child: IconButton(
-                          icon: const Icon(
-                            Icons.event,
-                            color: AppColor.dimblack,
+                          icon: const Calender(
+                            color: AppColor.greyColor,
+                            height: 30,
+                            width: 30,
                           ),
                           onPressed: () {
                             _.selectDate(context, 1);
@@ -150,7 +152,7 @@ class NavScreen extends StatelessWidget {
                           height: 35,
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  width: 1, color: AppColor.dimblack)),
+                                  width: 1, color: AppColor.greyColor)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[

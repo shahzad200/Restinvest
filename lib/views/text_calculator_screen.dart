@@ -44,7 +44,7 @@ class TaxCalculatorScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    height: Get.height,
+                    // height: Get.height,
                     decoration: BoxDecoration(
                         border:
                             Border.all(width: 1, color: AppColor.blueColor)),
@@ -82,8 +82,8 @@ class TaxCalculatorScreen extends StatelessWidget {
                                         decoration: BoxDecoration(
                                             color: AppColor.whiteColor,
                                             border: Border.all(
-                                                width: 0.5,
-                                                color: AppColor.dimblack)),
+                                                width: 1,
+                                                color: AppColor.blueColor)),
                                         child: Center(
                                           child: DropdownButton(
                                             isExpanded: true,
@@ -136,6 +136,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                                         fontWeight: FontWeight.w900,
                                       ),
                                       CustomTextFormField(
+                                        color: AppColor.blueColor,
                                         textInputType: TextInputType.number,
                                         isRounded: true,
                                         hint: "0.0",
@@ -160,6 +161,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                               children: [
                                 Expanded(
                                     child: DropDownContainerIcon(
+                                  color: AppColor.blueColor,
                                   fontWeight: FontWeight.w900,
                                   voidcallback: () {},
                                   text: "TAX(%):",
@@ -171,6 +173,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                                 ),
                                 const Expanded(
                                     child: EmptyRowContainer(
+                                  color: AppColor.blueColor,
                                   hintColor: AppColor.black,
                                   fontWeight: FontWeight.w900,
                                   fontsize: 12,
@@ -269,6 +272,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                               fontWeight: FontWeight.w900,
                               fontSize: 10,
                             ),
+                            space
                           ],
                         ),
                       ),
