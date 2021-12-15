@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get_utils/src/extensions/dynamic_extensions.dart';
 import 'package:http/http.dart' as http;
 import 'package:investintrust/data/models/calculate_tax.dart';
 import 'package:investintrust/data/models/daily_nav_prices.dart';
@@ -17,7 +18,6 @@ class ApiClient {
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
   static const _epCalculateTax = _baseUrl + 'calculateTax';
   static const _epLoadDailyNavPrices = _baseUrl + 'loadDailyNavPrices';
-
 
   Future<SocialMediaLink> socialMediaLinks() async {
     try {
@@ -67,8 +67,8 @@ class ApiClient {
   }
 
   Future<LoadDashboard> onLoadDashBoard({
-     userId,
-     folioNumber,
+    userId,
+    folioNumber,
   }) async {
     try {
       final response = await http.post(
@@ -99,9 +99,8 @@ class ApiClient {
     }
   }
 
-
-  Future<CalculateTax> onCalculateTax(String salaried,
-      String annualIncome) async {
+  Future<CalculateTax> onCalculateTax(
+      String salaried, String annualIncome) async {
     try {
       final response = await http.post(
         Uri.parse(_epCalculateTax),
@@ -116,7 +115,7 @@ class ApiClient {
       if (response.statusCode == 200) {
         print(response.body);
         CalculateTax calculateTax =
-        CalculateTax.fromJson(jsonDecode(response.body));
+            CalculateTax.fromJson(jsonDecode(response.body));
         if (calculateTax.meta!.code.toString() == 200.toString()) {
           return calculateTax;
         } else {
@@ -133,10 +132,12 @@ class ApiClient {
   Future<DailyNavPrices> onLoadDailyNavPrices() async {
     try {
       final response = await http.post(Uri.parse(_epLoadDailyNavPrices));
+      print(response.statusCode.runtimeType);
       if (response.statusCode == 200) {
-        print(response.body);
+        print("${response.body}");
         DailyNavPrices dailyNavPrices =
-        DailyNavPrices.fromJson(jsonDecode(response.body));
+            DailyNavPrices.fromJson(jsonDecode(response.body));
+
         if (dailyNavPrices.meta!.code.toString() == 200.toString()) {
           return dailyNavPrices;
         } else {
@@ -146,10 +147,8 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
+      print("errrororororororrooo" + e.toString());
       throw Exception('No Internet');
     }
   }
-
-
-
 }

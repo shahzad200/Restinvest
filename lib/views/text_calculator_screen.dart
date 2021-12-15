@@ -138,11 +138,12 @@ class TaxCalculatorScreen extends StatelessWidget {
                                       Form(
                                         key: _.formKey,
                                         child: CustomTextFormField(
-                                          validations: (value){
-                                            print('hgfhfhfghfghfgh'+value.toString());
-                                            if(value.isNotEmpty){
+                                          validations: (value) {
+                                            print('hgfhfhfghfghfgh' +
+                                                value.toString());
+                                            if (value.isNotEmpty) {
                                               return null;
-                                            } else{
+                                            } else {
                                               return 'Please Fill';
                                             }
                                           },
@@ -164,6 +165,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                                 text: "CALCULATE",
                                 textSize: 12,
                                 onPress: () {
+                                  // _.displayDialog(context, _);
                                   _.onCalculate();
                                 },
                                 height: 30,
@@ -175,23 +177,24 @@ class TaxCalculatorScreen extends StatelessWidget {
                               children: [
                                 Expanded(
                                     child: DropDownContainerIcon(
+                                  text: "Tax (%)",
                                   color: AppColor.blueColor,
                                   fontWeight: FontWeight.w900,
                                   voidcallback: () {},
-                                  text: "TAX(%):",
+                                  text1: "${_.tax}",
                                   fontsize: 12,
                                   textColor: AppColor.black,
                                 )),
                                 const SizedBox(
                                   width: 6,
                                 ),
-                                const Expanded(
+                                Expanded(
                                     child: EmptyRowContainer(
                                   color: AppColor.blueColor,
                                   hintColor: AppColor.black,
                                   fontWeight: FontWeight.w900,
                                   fontsize: 12,
-                                  hint: "0.0",
+                                  hint: "${_.income}",
                                   text: "INCOME TAX AMOUNT:",
                                   textColor: AppColor.black,
                                 ))
@@ -219,9 +222,11 @@ class TaxCalculatorScreen extends StatelessWidget {
                             const CustomDivider(color: AppColor.blueColor),
                             space,
                             space,
-                            const CustomCreditContainer(
+                            CustomCreditContainer(
+                              text1: "${_.pension}",
                               investtext: "INVESTMENT IN PENSION FUND:",
                               credittext: "TAX CREDIT IN PENSION FUND:",
+                              text2: "${_.creditPension}",
                             ),
                             space,
                             space,
@@ -245,9 +250,11 @@ class TaxCalculatorScreen extends StatelessWidget {
                             const CustomDivider(color: AppColor.blueColor),
                             space,
                             space,
-                            const CustomCreditContainer(
+                            CustomCreditContainer(
+                              text1: "${_.mutual}",
                               investtext: "INVESTMENT IN MUTUAL FUND:",
                               credittext: "TAX CREDIT IN MUTUAL FUND:",
+                              text2: "${_.creditMutual}",
                             ),
                             space,
                             Container(
@@ -255,12 +262,12 @@ class TaxCalculatorScreen extends StatelessWidget {
                               color: AppColor.blueColor,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children: [
                                   RestInvestTitle(
-                                    text: "TOTAL TAX CREDIT:Rs.0",
+                                    text: "TOTAL TAX CREDIT:Rs ${_.taxCredit}",
                                     textColor: AppColor.whiteColor,
                                     fontWeight: FontWeight.w900,
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

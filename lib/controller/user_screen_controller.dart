@@ -14,8 +14,8 @@ class UserrScreenController extends GetxController {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: DialogListView(
-              options: list,
+            content: CircularProgressIndicator(
+              color: Colors.red,
             ),
           );
         });

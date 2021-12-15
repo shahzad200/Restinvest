@@ -68,20 +68,45 @@ class DailyNavScreen extends StatelessWidget {
                                   purchaseText: "Repurchase",
                                   textSize: 12.0,
                                 ),
-                                Column(
-                                  children:
-                                      List.generate(mutualfund.length, (index) {
-                                    return CustomFundList(
-                                        fontWeight: FontWeight.w700,
-                                        fundText: mutualfund[index]
-                                            ["fund_type"],
-                                        dateText: mutualfund[index]["date"],
-                                        saleText: mutualfund[index]["sale"],
-                                        purchaseText: mutualfund[index]
-                                            ["repurchase"],
-                                        textSize: 12.0);
-                                  }),
-                                ),
+                                // Column(
+                                //   children: List.generate(
+                                //       _
+                                //           .dailyNavPrices!
+                                //           .response!
+                                //           .dailyMutualFundNavList!
+                                //           .length, (index) {
+                                //     return CustomFundList(
+                                //         fontWeight: FontWeight.w700,
+                                //         fundText: "12",
+                                //         // _
+                                //         //     .dailyNavPrices!
+                                //         //     .response!
+                                //         //     .dailyMutualFundNavList![index]
+                                //         //     .fundType!,
+                                //         dateText: "123/234/4",
+                                //         // _
+                                //         //     .dailyNavPrices!
+                                //         //     .response!
+                                //         //     .dailyMutualFundNavList![index]
+                                //         //     .funddate!,
+                                //         saleText: "12",
+                                //         // _
+                                //         //     .dailyNavPrices!
+                                //         //     .response!
+                                //         //     .dailyMutualFundNavList![index]
+                                //         //     .fundSale!
+                                //         //     .toString(),
+                                //         purchaseText: "12",
+                                //         // _
+                                //         //     .dailyNavPrices!
+                                //         //     .response!
+                                //         //     .dailyMutualFundNavList![index]
+                                //         //     .fundRepurchase!
+                                //         //     .toString(),
+                                //         textSize: 12.0);
+                                //   }),
+                                // ),
+
                                 space,
                                 const CustomTextContainer(
                                   height: 25,
