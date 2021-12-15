@@ -14,7 +14,8 @@ class HomeScreenController extends GetxController{
   // Exception ex = Exception([message]);
   @override
   void onInit() async {
-    getSocialLinks();
+    await _repository.onLoadDailyNavPrices();
+    // getSocialLinks();
     super.onInit();
   }
 
@@ -30,6 +31,7 @@ class HomeScreenController extends GetxController{
     try{
       isLoading = true;
       socialMediaLink = await _repository.socialMediaLinks();
+      print(socialMediaLink);
       isLoading = false;
       update();
     }catch (e){
@@ -53,6 +55,7 @@ class HomeScreenController extends GetxController{
     }
 
   }
+
 
 
 

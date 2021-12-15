@@ -143,7 +143,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       keyboardType: widget.textInputType,
       textAlign: widget.textAlign,
       obscureText: widget.obscureText,
-      validator: (val) {},
+      validator: (val) {
+        widget.validations!(val!);
+      },
       onChanged: (val) {},
       onSaved: (val) {},
     );

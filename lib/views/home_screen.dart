@@ -47,10 +47,10 @@ class HomeScreen extends StatelessWidget {
             ),
             drawer: const CustomDrawer(),
             key: controller.scaffoldKey,
-            body: SingleChildScrollView(
-              child: controller.isLoading ? const CircularProgressIndicator():
-              controller.noInternet ? NoInternetWgt(onTryAgain: controller.getSocialLinks, key: controller.scaffoldKey):
-              Column(
+            body: controller.isLoading ? const Center(child: CircularProgressIndicator()):
+            controller.noInternet ? NoInternetWgt(onTryAgain: controller.getSocialLinks, key: controller.scaffoldKey):
+            SingleChildScrollView(
+              child: Column(
                 children: [
                   Container(
                     color: AppColor.blueColor,

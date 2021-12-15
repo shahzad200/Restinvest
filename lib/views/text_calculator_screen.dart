@@ -95,10 +95,10 @@ class TaxCalculatorScreen extends StatelessWidget {
                                                 BorderRadius.circular(6),
                                             // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
-                                              text: _.categoryvalue == null ||
-                                                      _.categoryvalue == ""
+                                              text: _.categoryValue == null ||
+                                                      _.categoryValue == ""
                                                   ? "Select"
-                                                  : _.categoryvalue,
+                                                  : _.categoryValue,
                                               textColor: AppColor.dimblack,
                                             ),
                                             icon: const Icon(
@@ -112,7 +112,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                                                   child: Text(catergoryItems!));
                                             }).toList(),
                                             onChanged: (String? value) {
-                                              _.categoryvalue = value!;
+                                              _.categoryValue = value!;
                                               _.update();
                                             },
                                           ),
@@ -135,12 +135,24 @@ class TaxCalculatorScreen extends StatelessWidget {
                                         fontSize: 12,
                                         fontWeight: FontWeight.w900,
                                       ),
-                                      CustomTextFormField(
-                                        color: AppColor.blueColor,
-                                        textInputType: TextInputType.number,
-                                        isRounded: true,
-                                        hint: "0.0",
-                                        //  textInputType: TextInputType.emailAddress,
+                                      Form(
+                                        key: _.formKey,
+                                        child: CustomTextFormField(
+                                          validations: (value){
+                                            print('hgfhfhfghfghfgh'+value.toString());
+                                            if(value.isNotEmpty){
+                                              return null;
+                                            } else{
+                                              return 'Please Fill';
+                                            }
+                                          },
+                                          controller: _.textEditingController,
+                                          color: AppColor.blueColor,
+                                          textInputType: TextInputType.number,
+                                          isRounded: true,
+                                          hint: "0.0",
+                                          //  textInputType: TextInputType.emailAddress,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -151,7 +163,9 @@ class TaxCalculatorScreen extends StatelessWidget {
                               child: CustomRoundButton(
                                 text: "CALCULATE",
                                 textSize: 12,
-                                onPress: () {},
+                                onPress: () {
+                                  _.onCalculate();
+                                },
                                 height: 30,
                                 width: Get.width / 1.9,
                               ),
@@ -194,7 +208,8 @@ class TaxCalculatorScreen extends StatelessWidget {
                                   fontSize: 18,
                                 ),
                                 RestInvestTitle(
-                                  text: "(SECTION 62 OF ITO)",
+                                  // text: "(SECTION 62 OF ITO)",
+                                  text: "(SE)",
                                   fontSize: 12,
                                   textColor: AppColor.blueColor,
                                   fontWeight: FontWeight.w900,
@@ -219,7 +234,8 @@ class TaxCalculatorScreen extends StatelessWidget {
                                   fontSize: 18,
                                 ),
                                 RestInvestTitle(
-                                  text: "(SECTION 63 OF ITO)",
+                                  // text: "(SECTION 63 OF ITO)",
+                                  text: "(SE)",
                                   fontSize: 12,
                                   textColor: AppColor.blueColor,
                                   fontWeight: FontWeight.w900,

@@ -35,10 +35,11 @@ class LoginScreen extends StatelessWidget {
                     height: 10,
                   ),
                   CustomFormField(
+                    controller: _.userNameController,
                     hint: "User name",
                     textAlign: TextAlign.center,
                     validations: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value.isEmpty) {
                         return 'Please Enter  Email';
                       }
                       return null;
@@ -48,6 +49,7 @@ class LoginScreen extends StatelessWidget {
                     height: 10,
                   ),
                   CustomFormField(
+                    controller: _.passwordController,
                     hint: "Password",
                     textAlign: TextAlign.center,
                   ),
