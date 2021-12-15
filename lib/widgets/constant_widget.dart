@@ -2199,7 +2199,9 @@ class CustomFundList extends StatelessWidget {
         left: 8,
         right: 8,
       ),
+      alignment: Alignment.center,
       child: Table(
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         columnWidths: const {
           0: FlexColumnWidth(1.5),
           1: FlexColumnWidth(.8),
@@ -2210,7 +2212,7 @@ class CustomFundList extends StatelessWidget {
             SizedBox(
               height: 35,
               child: RestInvestTitle(
-                margin: const EdgeInsets.only(top: 10),
+                  margin: const EdgeInsets.only(top: 10),
                 textAlign: TextAlign.center,
                 text: fundText,
                 fontSize: textSize,

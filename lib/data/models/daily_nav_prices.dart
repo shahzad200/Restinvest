@@ -95,8 +95,8 @@ class DailyExchangeFundNavList {
     this.funddate,
   });
   String? fundCode;
-  double? fundRepurchase;
-  double? fundSale;
+  dynamic fundRepurchase;
+  dynamic fundSale;
   String? fundType;
   String? funddate;
 
@@ -128,8 +128,8 @@ class DailyMutualFundNavList {
     this.funddate,
   });
   String? fundCode;
-  double? fundRepurchase;
-  double? fundSale;
+  dynamic fundRepurchase;
+  dynamic fundSale;
   String? fundType;
   String? funddate;
 
@@ -161,8 +161,8 @@ class DailyPensionFundNavList {
     this.funddate,
   });
   String? fundCode;
-  double? fundRepurchase;
-  double? fundSale;
+  dynamic fundRepurchase;
+  dynamic fundSale;
   String? fundType;
   String? funddate;
 

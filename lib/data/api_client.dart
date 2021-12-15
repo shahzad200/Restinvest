@@ -147,8 +147,10 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
-      print("errrororororororrooo" + e.toString());
+      print(e);
+      DailyNavPrices dailyNavPrices = DailyNavPrices();
       throw Exception('No Internet');
+      // return dailyNavPrices;
     }
   }
 }

@@ -66,51 +66,53 @@ class DailyNavScreen extends StatelessWidget {
                                   dateText: "Date",
                                   saleText: "Sale",
                                   purchaseText: "Repurchase",
+
                                   textSize: 12.0,
                                 ),
-                                // Column(
-                                //   children: List.generate(
-                                //       _
-                                //           .dailyNavPrices!
-                                //           .response!
-                                //           .dailyMutualFundNavList!
-                                //           .length, (index) {
-                                //     return CustomFundList(
-                                //         fontWeight: FontWeight.w700,
-                                //         fundText: "12",
-                                //         // _
-                                //         //     .dailyNavPrices!
-                                //         //     .response!
-                                //         //     .dailyMutualFundNavList![index]
-                                //         //     .fundType!,
-                                //         dateText: "123/234/4",
-                                //         // _
-                                //         //     .dailyNavPrices!
-                                //         //     .response!
-                                //         //     .dailyMutualFundNavList![index]
-                                //         //     .funddate!,
-                                //         saleText: "12",
-                                //         // _
-                                //         //     .dailyNavPrices!
-                                //         //     .response!
-                                //         //     .dailyMutualFundNavList![index]
-                                //         //     .fundSale!
-                                //         //     .toString(),
-                                //         purchaseText: "12",
-                                //         // _
-                                //         //     .dailyNavPrices!
-                                //         //     .response!
-                                //         //     .dailyMutualFundNavList![index]
-                                //         //     .fundRepurchase!
-                                //         //     .toString(),
-                                //         textSize: 12.0);
-                                //   }),
-                                // ),
+                                _
+                                    .dailyNavPrices == null ? CircularProgressIndicator() :Column(
+                                  children: List.generate(
+                                      _
+                                          .dailyNavPrices!
+                                          .response!
+                                          .dailyMutualFundNavList!
+                                          .length, (index) {
+                                    return CustomFundList(
+                                        fontWeight: FontWeight.w700,
+                                        fundText:
+                                         _
+                                            .dailyNavPrices!
+                                           .response!
+                                            .dailyMutualFundNavList![index]
+                                            .fundType!,
+                                        dateText:
+                                         _
+                                             .dailyNavPrices!
+                                           .response!
+                                             .dailyMutualFundNavList![index]
+                                           .funddate!,
+                                        saleText:
+                                         _
+                                             .dailyNavPrices!
+                                            .response!
+                                            .dailyMutualFundNavList![index]
+                                            .fundSale!
+                                             .toString(),
+                                        purchaseText:
+                                         _
+                                            .dailyNavPrices!
+                                            .response!
+                                            .dailyMutualFundNavList![index]
+                                            .fundRepurchase!
+                                             .toString(),
+                                        textSize: 12.0);
+                                  }),
+    ),
 
                                 space,
                                 const CustomTextContainer(
                                   height: 25,
-                                  text: "PENSION FUNDS",
+                                  text: "PENSION ",
                                   textAlign: TextAlign.start,
                                 ),
                                 space,
