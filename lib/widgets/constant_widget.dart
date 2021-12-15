@@ -22,29 +22,13 @@ class RestInvestTitle extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
   final String? fontFamily;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
 
   final EdgeInsetsGeometry margin;
   final bool isAsterisk;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: margin,
-        child: isAsterisk
-            ? Row(
-                children: [
-                  getx(),
-                  const Text(
-                    "*",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ],
-              )
-            : getx());
-  }
-
-  Widget getx() {
     return Text(
       text,
       style: TextStyle(
@@ -53,7 +37,7 @@ class RestInvestTitle extends StatelessWidget {
         fontSize: fontSize,
         fontFamily: fontFamily,
       ),
-      textAlign: textAlign,
+      textAlign: textAlign!,
     );
   }
 }

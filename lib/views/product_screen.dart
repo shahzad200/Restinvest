@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../controller/product_screen_controller.dart';
 
@@ -32,6 +32,10 @@ class ProductScreen extends StatelessWidget {
                 textColor: AppColor.whiteColor,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+            body: WebView(
+              initialUrl:
+                  '${_.homeController.socialMediaLink.response!.homeLinks!.products}',
             ),
           );
         });

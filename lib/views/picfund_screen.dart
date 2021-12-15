@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../controller/picfund_screen_controller.dart';
 import '../utils/colors.dart';
 import '../widgets/constant_widget.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class PicFundScreen extends StatelessWidget {
   const PicFundScreen({Key? key}) : super(key: key);
@@ -13,23 +14,25 @@ class PicFundScreen extends StatelessWidget {
         init: PicFundScreenController(),
         builder: (_) {
           return Scaffold(
-            appBar: AppBar(
-              backgroundColor: AppColor.blueColor,
-              leading: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: AppColor.whiteColor,
-                  )),
-              title: const RestInvestTitle(
-                text: "Pic Your Fund",
-                textColor: AppColor.whiteColor,
-                fontWeight: FontWeight.bold,
+              appBar: AppBar(
+                backgroundColor: AppColor.blueColor,
+                leading: IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: AppColor.whiteColor,
+                    )),
+                title: const RestInvestTitle(
+                  text: "Pic Your Fund",
+                  textColor: AppColor.whiteColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          );
+              body: WebView(
+                initialUrl: 'https://nit.com.pk/newnit/Pickyourfunds.aspx ',
+              ));
         });
   }
 }

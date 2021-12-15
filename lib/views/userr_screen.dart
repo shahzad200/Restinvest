@@ -32,7 +32,7 @@ class UserrScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    alignment: Alignment.center,
+                    // alignment: Alignment.center,
                     width: Get.width,
                     // margin: EdgeInsets.all(10.0),
                     // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
@@ -43,8 +43,8 @@ class UserrScreen extends StatelessWidget {
                         border:
                             Border.all(width: 0.5, color: AppColor.dimblack)),
                     child: DropdownButton(
-                      alignment: Alignment.center,
-
+                      // alignment: Alignment.center,
+                      isExpanded: true,
                       icon: const Visibility(
                         visible: false,
                         child: Icon(Icons.arrow_downward),
@@ -57,6 +57,7 @@ class UserrScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       // value: _.dropdownvalue,
                       hint: RestInvestTitle(
+                        textAlign: TextAlign.center,
                         text: _.titlevalue == null || _.titlevalue == ""
                             ? "Title"
                             : _.titlevalue,
@@ -114,7 +115,7 @@ class UserrScreen extends StatelessWidget {
                         width: 4,
                       ),
                       Expanded(
-                        child: DateFormFieldContainer(isRounded: false),
+                        child: DateFormFieldContainer(isRounded: true),
                       ),
                     ],
                   ),

@@ -22,27 +22,23 @@ class _DateFormFieldContainerState extends State<DateFormFieldContainer> {
   Widget build(BuildContext context) {
     return DateTimeFormField(
       initialValue: DateTime.now(),
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         fillColor: AppColor.whiteColor,
         hintStyle: TextStyle(color: AppColor.dimblack),
         errorStyle: TextStyle(color: Colors.redAccent),
         border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.dimblack, width: 1)),
+          borderSide: BorderSide(
+              width: widget.isRounded ? 1 : 0, color: AppColor.dimblack),
+          borderRadius: BorderRadius.circular(
+            widget.isRounded ? 8 : 0,
+          ),
+        ),
         contentPadding: EdgeInsets.all(10),
         hintText: "CNIC Expiry Date",
       ),
       dateFormat: DateFormat('dd/MM/yyyy'),
       mode: DateTimeFieldPickerMode.date,
       autovalidateMode: AutovalidateMode.always,
-    );
-  }
-
-  InputBorder _inputBorder(isRounded) {
-    return OutlineInputBorder(
-      borderSide: BorderSide(width: isRounded ? 1 : 2, color: widget.color),
-      borderRadius: BorderRadius.circular(
-        isRounded ? 0 : 0,
-      ),
     );
   }
 }

@@ -4,7 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/social_media_links.dart';
 import 'package:investintrust/data/repository.dart';
-class HomeScreenController extends GetxController{
+import 'package:url_launcher/url_launcher.dart';
+
+class HomeScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   final _repository = Repository();
@@ -12,11 +14,20 @@ class HomeScreenController extends GetxController{
   bool noInternet = false;
   late SocialMediaLink socialMediaLink;
   // Exception ex = Exception([message]);
+
   @override
   void onInit() async {
     await _repository.onLoadDailyNavPrices();
     // getSocialLinks();
     super.onInit();
+  }
+
+  void customLaunch(command) async {
+    if (await canLaunch(command)) {
+      await launch(command);
+    } else {
+      print(' could not launch $command');
+    }
   }
 
   @override
@@ -31,7 +42,6 @@ class HomeScreenController extends GetxController{
     try{
       isLoading = true;
       socialMediaLink = await _repository.socialMediaLinks();
-      print(socialMediaLink);
       isLoading = false;
       update();
     }catch (e){
@@ -53,9 +63,7 @@ class HomeScreenController extends GetxController{
             fontSize: 16.0);
       }
     }
-
   }
-
 
 
 
