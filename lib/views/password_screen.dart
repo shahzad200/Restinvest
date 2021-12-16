@@ -38,7 +38,9 @@ class PasswordScreen extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val){
+                    _.updateUserName(val);
+                  },
                     hint: "User ID",
                     textAlign: TextAlign.center,
                   ),
@@ -47,6 +49,9 @@ class PasswordScreen extends StatelessWidget {
                   ),
                   CustomFormField(
                     hint: "CNIC - 85202-6761678-8",
+                    onTextChange: (val){
+                      _.updateUserName(val);
+                    },
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(

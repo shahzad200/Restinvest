@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/utils/constant.dart';
 
 import '../controller/login_screen_controller.dart';
 import '../routes/routes.dart';
@@ -37,21 +38,25 @@ class LoginScreen extends StatelessWidget {
                   CustomFormField(
                     controller: _.userNameController,
                     hint: "User name",
-                    textAlign: TextAlign.center,
-                    validations: (value) {
-                      if (value.isEmpty) {
-                        return 'Please Enter  Email';
-                      }
-                      return null;
+                    // textAlign: TextAlign.center,
+                    fieldType: Constants.userName,
+                    onTextChange: (val) {
+                      _.updateUserName(val);
                     },
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   CustomFormField(
+                    obscureText: true,
                     controller: _.passwordController,
+                    fieldType: Constants.passwordField,
                     hint: "Password",
                     textAlign: TextAlign.center,
+
+                    onTextChange: (val) {
+                      _.updatePassword(val);
+                    },
                   ),
                   const SizedBox(
                     height: 20,
@@ -72,10 +77,17 @@ class LoginScreen extends StatelessWidget {
                     text: "Login",
                     buttonColor: AppColor.blueColor,
                     textColor: AppColor.whiteColor,
-                    onPress: () {
-                      Get.toNamed(AppRoute.redemptionRoute);
-                    },
-                  ),
+                      onPress:(){(_.onLoginPress);
+                        // if (_.formKey.currentState!.validate()) {
+                        //   print("Validated");
+                        // }else{
+                        //   print("Not Validated");
+                        // }
+                      }),
+
+
+
+
                   const SizedBox(
                     height: 20,
                   ),
@@ -104,12 +116,34 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   InkWell(
                       onTap: () {
-                        Get.toNamed(AppRoute.userrRoute);
+                        Get.toNamed(AppRoute.taxcalculatorRoute);
+                      },
+                      child: const RestInvestTitle(
+                          text: "Tax Calculator",
+                          textAlign: TextAlign.center,
+                          textColor: AppColor.blueColor)),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoute.dailynavRoute);
+                      },
+                      child: const RestInvestTitle(
+                          text: "Daily Nav",
+                          textAlign: TextAlign.center,
+                          textColor: AppColor.blueColor)),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoute.userRoute);
                       },
                       child: const RestInvestTitle(
                           text: "New User",
                           textAlign: TextAlign.center,
-                          textColor: AppColor.dimBlue)),
+                          textColor: AppColor.blueColor)),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

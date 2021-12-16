@@ -4,10 +4,45 @@ import 'package:get/get.dart';
 
 class UserrScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
+  var userName = "".obs;
+  var password = "".obs;
+  var number = "".obs;
+  var email = "".obs;
+
+  TextEditingController userNameController = TextEditingController();
+
+  TextEditingController numberController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
   String titlevalue = "";
   String bracketvalue = "";
   String incomevalue = "";
   String occupationvalue = "";
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  void updateUserName(value) {
+    userName(value);
+    update();
+  }
+
+  void updatePassword(value) {
+    password(value);
+    update();
+  }
+  void updateEmail(value) {
+    email(value);
+    update();
+  }
+
+  void updateNumber(value) {
+    number(value);
+    update();
+  }
 
   displayDialog(BuildContext context, list) async {
     return showDialog(

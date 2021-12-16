@@ -6,28 +6,23 @@ import 'package:investintrust/utils/constant.dart';
 class CustomFormField extends StatefulWidget {
   CustomFormField(
       {Key? key,
-      this.label,
-      this.hint,
-      this.textAlign = TextAlign.start,
-      this.textInputType = TextInputType.emailAddress,
-      this.validations,
-      this.onChange,
-      this.obscureText = false,
-      this.fieldType = 2,
-      this.controller,
-      this.icon,
-      this.isRounded = true,
-      this.hasIcon = true})
+        required this.hint,
+        this.textInputType = TextInputType.emailAddress,
+        required this.onTextChange,
+        this.obscureText = false,
+        this.fieldType = 2,
+        this.textAlign = TextAlign.start,
+        this.controller,
+        this.icon,
+        this.isRounded=true,
+        this.hasIcon = true})
       : super(key: key);
-  final String? label;
-  final String? hint;
+  final String hint;
   final TextAlign textAlign;
   final TextInputType textInputType;
-  final Function(String)? validations;
-  final Function(String)? onChange;
+  final Function(String) onTextChange;
   bool obscureText;
   final int fieldType;
-
   final IconData? icon;
   final bool hasIcon;
   final bool isRounded;
@@ -39,43 +34,80 @@ class CustomFormField extends StatefulWidget {
 class _CustomFormFieldState extends State<CustomFormField> {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      cursorColor: AppColor.blueColor,
-      cursorHeight: 20,
+    return TextFormField(controller: widget.controller,
       obscuringCharacter: "*",
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          border: _inputBorder(widget.isRounded),
+
+
+
+          contentPadding: const EdgeInsets.all(10.0),
+          border:  _inputBorder(widget.isRounded) ,
           disabledBorder: _inputBorder(widget.isRounded),
-          enabledBorder:
-              widget.isRounded ? _inputBorder(widget.isRounded) : null,
+          enabledBorder:widget.isRounded?  _inputBorder(widget.isRounded):null,
           errorBorder: _inputBorder(widget.isRounded),
           focusedBorder: _inputBorder(widget.isRounded),
           focusedErrorBorder: _inputBorder(widget.isRounded),
           filled: true,
-          labelText: widget.label,
           hintText: widget.hint,
-          hintStyle: TextStyle(
-            color: AppColor.black,
-          ),
-          fillColor: AppColor.whiteColor),
+          fillColor: Colors.white),
       keyboardType: widget.textInputType,
-      textAlign: widget.textAlign,
       obscureText: widget.obscureText,
-      validator: (val) {},
-      onChanged: (val) {},
+      textAlign: TextAlign.center,
+      cursorColor: AppColor.blueColor,
+      validator: (val) {
+        switch (widget.fieldType) {
+          case Constants.emailField:
+            {
+              if (val!.isEmpty) {
+                return "Please fill all field";
+              } else if (!GetUtils.isEmail(val)) {
+                return "fill all field";
+              } else {
+                return null;
+              }
+            }
+          case Constants.passwordField:
+            {
+              if (val!.isEmpty) {
+                return "Please fill all field";
+              } else if (val.length <= 6) {
+                return "Password must be at least 6 character in length.";
+              } else {
+                return null;
+              }
+            }
+          case Constants.text:
+            {
+              if (val!.isEmpty) {
+                return "Please fill all field";
+              } else {
+                return null;
+              }
+            }
+          case Constants.userName:
+            {
+              if (val!.isEmpty) {
+                return "Please fill all field";
+              } else {
+                return null;
+              }
+            }
+
+          default:
+            {}
+        }
+      },
+      onChanged: (text) {
+        widget.onTextChange(text);
+      },
       onSaved: (val) {},
     );
   }
 
   InputBorder _inputBorder(isRounded) {
     return OutlineInputBorder(
-      borderSide:
-          BorderSide(width: isRounded ? 0.5 : 2, color: AppColor.dimblack),
-      borderRadius: BorderRadius.circular(
-        isRounded ? 10 : 10,
-      ),
+      borderSide:  BorderSide(width: isRounded ? 0.5 : 2, color: AppColor.dimblack),
+      borderRadius: BorderRadius.circular(isRounded?10:10,),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/utils/constant.dart';
 
 import '../controller/register_controller.dart';
 
@@ -31,29 +32,37 @@ class RegisterScreen extends StatelessWidget {
                   const SizedBox(
                     height: 40,
                   ),
-                  CustomFormField(
+                  CustomFormField( onTextChange: (val) {
+                    _.updateUserName(val);
+                  },
                     hint: "Account No.",
+                    fieldType: Constants.text,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val) {
+                    _.updateNumber(val);
+                  },
                     hint: "CNIC - 85202-6761678-8",
+                    fieldType: Constants.text,
+
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val){_.updateEmail(val);},
                     hint: "Register Email",
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val){_.updatePassword(val);},
                     textInputType: TextInputType.number,
+                    fieldType: Constants.phoneNumberField,
                     hint: "Register Cell Number",
                     textAlign: TextAlign.center,
                   ),

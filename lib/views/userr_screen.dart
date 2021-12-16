@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/utils/constant.dart';
 
 import 'package:investintrust/utils/lists.dart';
 import 'package:investintrust/widgets/datefield.dart';
@@ -83,22 +84,25 @@ class UserrScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val){_.updateUserName(val);},
                     hint: "Full Name",
+                    fieldType: Constants.userName,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val){_.updateUserName(val);},
                     hint: "Name of Father/Husband",
+                    fieldType: Constants.userName,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val){_.updateUserName(val);},
                     hint: "CNIC - 85202-6761678-8",
+                    fieldType: Constants.text,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
@@ -122,8 +126,9 @@ class UserrScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val){_.updateNumber(val);},
                     hint: "Passport No.",
+                    fieldType: Constants.text,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
@@ -235,16 +240,18 @@ class UserrScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val){_.updateUserName(val);},
                     hint: "NTN",
+                    fieldType: Constants.text,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
+                  CustomFormField(onTextChange: (val){_.updateEmail(val);},
                     hint: "Address",
                     textAlign: TextAlign.center,
+                    fieldType: Constants.emailField,
                   ),
                   const SizedBox(
                     height: 10,

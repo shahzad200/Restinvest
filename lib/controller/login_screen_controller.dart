@@ -7,10 +7,24 @@ class LoginScreenController extends GetxController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  var userName = "".obs;
+  var password = "".obs;
+
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+  }
+
+  void updateUserName(value) {
+    userName(value);
+    update();
+  }
+
+  void updatePassword(value) {
+    password(value);
+    update();
   }
 
   @override
@@ -20,7 +34,14 @@ class LoginScreenController extends GetxController {
   }
 
   void onLoginPress() {
-    if (formKey.currentState!.validate()) {}
+    if (formKey.currentState!.validate()) {
+      var data = {'userName': userName, 'password' : password};
+
+
+
+
+
+    }
 
     // const plainText = 'SAAD30';
     // final key = Key.fromUtf8('codingaffairscom');
