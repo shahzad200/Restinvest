@@ -73,7 +73,8 @@ class LoginScreen extends StatelessWidget {
                     buttonColor: AppColor.blueColor,
                     textColor: AppColor.whiteColor,
                     onPress: () {
-                      Get.toNamed(AppRoute.redemptionRoute);
+                      _.onLoginPress();
+                      // Get.toNamed(AppRoute.portofolioRoute);
                     },
                   ),
                   const SizedBox(

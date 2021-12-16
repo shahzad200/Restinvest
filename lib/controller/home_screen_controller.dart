@@ -64,8 +64,4 @@ class HomeScreenController extends GetxController {
       }
     }
   }
-
-
-
-
 }

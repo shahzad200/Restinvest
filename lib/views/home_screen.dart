@@ -227,6 +227,7 @@ class HomeScreen extends StatelessWidget {
                                         text: "EMAIL",
                                         textColor: AppColor.whiteColor,
                                         voidcallback: () {
+                                          printInfo(info: "${controller.socialMediaLink.response!.homeLinks!.advisorEmail}");
                                           customLaunch(
                                               'email: ${controller.socialMediaLink.response!.homeLinks!.advisorEmail}');
                                         },

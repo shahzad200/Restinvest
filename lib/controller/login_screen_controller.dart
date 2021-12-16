@@ -1,6 +1,12 @@
-import 'package:encrypt/encrypt.dart';
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/login_model.dart';
+import 'package:investintrust/data/repository.dart';
 
 
 class LoginScreenController extends GetxController {
@@ -8,6 +14,11 @@ class LoginScreenController extends GetxController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final _repository = Repository();
+  static late LoginModel loginModel;
+  bool isLoading = false;
+  bool noInternet = false;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -21,21 +32,46 @@ class LoginScreenController extends GetxController {
   }
 
 
-  void onLoginPress(){
-    if(formKey.currentState!.validate()){
+  void onLoginPress() async{
+    String name = userNameController.value.text;
+    String password = passwordController.value.text;
+    final key = encrypt.Key.fromUtf8('codingaffairscom');
 
+    final bytes = utf8.encode('codingaffairscom');
+    final base64Str = base64.encode(bytes);
+
+    print("keyyyyyyyyyy..........${key.bytes}");
+
+    final iv = encrypt.IV.fromLength(16);
+
+    final encrypter = encrypt.Encrypter(encrypt.AES(key,mode: encrypt.AESMode.cbc));
+
+    final encrypted = encrypter.encrypt(password, iv: iv);
+    try{
+      isLoading = true;
+      loginModel = await _repository.onLogin(name,encrypted.base16.toString());
+      await _repository.onLoadDashBoard(loginModel.response!.accounts![0].folioNumber.toString());
+      isLoading = false;
+      update();
+    }catch (e){
+      if(e.toString() == 'Exception: No Internet'){
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
     }
-
-      // const plainText = 'SAAD30';
-      // final key = Key.fromUtf8('codingaffairscom');
-      // final iv = IV.fromLength(16);
-
-      // final encrypter = Encrypter(AES(key));
-
-      // final encrypted = encrypter.encrypt(plainText, iv: iv);
-
+    print("keyyyy encrypted  ${encrypted.base16}");
   }
-
-
-
 }
