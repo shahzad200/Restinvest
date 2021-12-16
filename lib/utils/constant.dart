@@ -8,6 +8,10 @@ class Constants {
   static const int userName = 3;
   static const int text = 4;
 
+  static const int cnicNumber=5;
+
+  static const int userId=6;
+  static const int accountNo=7;
   //homeScreen button id
   static const int meetingButtonId = 1;
   static const int chatButtonId = 2;

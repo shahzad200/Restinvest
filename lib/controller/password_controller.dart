@@ -7,23 +7,21 @@ import 'package:investintrust/data/repository.dart';
 class PasswordScreenController extends GetxController{
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
-<<<<<<< HEAD
 
 
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  var userName = "".obs;
-  var password = "".obs;
-  void updateUserName(value) {
-    userName(value);
+
+  var userId = "".obs;
+  var cnicNumber = "".obs;
+  void updateUserId(value) {
+    userId(value);
     update();
   }
 
-  void updatePassword(value) {
-    password(value);
+  void updateCNICNumber(value) {
+    cnicNumber(value);
     update();
   }
-=======
+
   final _repository = Repository();
   TextEditingController userIdController = TextEditingController();
   TextEditingController cNicController = TextEditingController();
@@ -42,6 +40,7 @@ class PasswordScreenController extends GetxController{
       isLoading = true;
       common = await _repository.onResetPassword(userIdController.value.text,
           cNicController.value.text);
+
       isLoading = false;
       update();
     }catch (e){
@@ -69,6 +68,5 @@ class PasswordScreenController extends GetxController{
   }
 
 
- 
->>>>>>> 15508a7b74805021b6d6fe3a3bebb1f0aeaf468e
+
 }

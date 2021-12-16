@@ -35,28 +35,34 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomFormField(
-                    controller: _.userNameController,
-                    hint: "User name",
-                    // textAlign: TextAlign.center,
-                    fieldType: Constants.userName,
-                    onTextChange: (val) {
-                      _.updateUserName(val);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomFormField(
-                    obscureText: true,
-                    controller: _.passwordController,
-                    fieldType: Constants.passwordField,
-                    hint: "Password",
-                    textAlign: TextAlign.center,
-
-                    onTextChange: (val) {
-                      _.updatePassword(val);
-                    },
+                  Form(
+                    key: _.formKey,
+                    child: Column(
+                      children: [
+                        CustomFormField(
+                          controller: _.userNameController,
+                          hint: "User name",
+                          // textAlign: TextAlign.center,
+                          fieldType: Constants.userName,
+                          onTextChange: (val) {
+                            _.updateUserName(val);
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomFormField(
+                          obscureText: true,
+                          controller: _.passwordController,
+                          fieldType: Constants.passwordField,
+                          hint: "Password",
+                          textAlign: TextAlign.center,
+                          onTextChange: (val) {
+                            _.updatePassword(val);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -74,28 +80,15 @@ class LoginScreen extends StatelessWidget {
                     height: 20,
                   ),
                   RestInvestButton(
-                    text: "Login",
-                    buttonColor: AppColor.blueColor,
-                    textColor: AppColor.whiteColor,
-<<<<<<< HEAD
-                      onPress:(){(_.onLoginPress);
-                        // if (_.formKey.currentState!.validate()) {
-                        //   print("Validated");
-                        // }else{
-                        //   print("Not Validated");
-                        // }
+                      text: "Login",
+                      buttonColor: AppColor.blueColor,
+                      textColor: AppColor.whiteColor,
+                      onPress: () {
+                        if (_.formKey.currentState!.validate()) {
+                          _.formKey.currentState!.save();
+                          (_.onLoginPress());
+                        }
                       }),
-
-
-
-
-=======
-                    onPress: () {
-                      _.onLoginPress();
-                      // Get.toNamed(AppRoute.portofolioRoute);
-                    },
-                  ),
->>>>>>> 15508a7b74805021b6d6fe3a3bebb1f0aeaf468e
                   const SizedBox(
                     height: 20,
                   ),

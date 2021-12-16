@@ -19,7 +19,7 @@ import 'package:investintrust/views/register_screen.dart';
 import 'package:investintrust/views/reports_screen.dart';
 import 'package:investintrust/views/splash_screen.dart';
 import 'package:investintrust/views/text_calculator_screen.dart';
-import 'package:investintrust/views/userr_screen.dart';
+import 'package:investintrust/views/user_screen.dart';
 import 'package:investintrust/views/view_report_screen.dart';
 
 class AppRoute {
@@ -37,7 +37,7 @@ class AppRoute {
   static const String productRoute = '/product';
   static const String fundRoute = '/fund';
   static const String fundManagerRoute = '/fundManager';
-  static const String userrRoute = '/userr';
+
   static const String redemptionRoute = '/redemption';
   static const String portofolioRoute = '/portofolio';
   static const String purchasesRoute = '/purchases';
@@ -100,8 +100,8 @@ class AppRoute {
         page: () => const FundManagerScreen(),
       ),
       GetPage(
-        name: AppRoute.userrRoute,
-        page: () => const UserrScreen(),
+        name: AppRoute.userRoute,
+        page: () => const UserScreen(),
       ),
       GetPage(
         name: AppRoute.redemptionRoute,

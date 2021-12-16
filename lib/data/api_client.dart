@@ -203,7 +203,7 @@ class ApiClient {
   }
 
   Future<Common> onLoadFundsPlans(String userId,String cNic) async {
-    print(userId+'nkj'+cNic);
+    print(userId+cNic);
     try {
       final response = await http.post(
         Uri.parse(_epLoadFundsPlans),

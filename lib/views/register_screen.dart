@@ -32,54 +32,60 @@ class RegisterScreen extends StatelessWidget {
                   const SizedBox(
                     height: 40,
                   ),
-                  CustomFormField( onTextChange: (val) {
-                    _.updateUserName(val);
-                  },
-                    hint: "Account No.",
-                    fieldType: Constants.text,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomFormField(onTextChange: (val) {
-                    _.updateNumber(val);
-                  },
-                    hint: "CNIC - 85202-6761678-8",
-                    fieldType: Constants.text,
+                 Form(key: _.formKey,child: Column(children: [ CustomFormField( onTextChange: (val) {
+                   _.updateUserName(val);
+                 },
+                   hint: "Account No.",
+                   fieldType: Constants.accountNo,
+                   textAlign: TextAlign.center,
+                 ),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   CustomFormField(onTextChange: (val) {
+                     _.updateNumber(val);
+                   },
+                     hint: "CNIC - 85202-6761678-8",
+                     fieldType: Constants.cnicNumber,
 
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomFormField(onTextChange: (val){_.updateEmail(val);},
-                    hint: "Register Email",
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomFormField(onTextChange: (val){_.updatePassword(val);},
-                    textInputType: TextInputType.number,
-                    fieldType: Constants.phoneNumberField,
-                    hint: "Register Cell Number",
-                    textAlign: TextAlign.center,
-                  ),
+                     textAlign: TextAlign.center,
+                   ),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   CustomFormField(onTextChange: (val){_.updateEmail(val);},
+                     hint: "Register Email",
+                     fieldType: Constants.emailField,
+                     textAlign: TextAlign.center,
+                   ),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   CustomFormField(onTextChange: (val){_.updatePassword(val);},
+                     textInputType: TextInputType.number,
+                     fieldType: Constants.phoneNumberField,
+                     hint: "Register Cell Number",
+                     textAlign: TextAlign.center,
+                   ),],),),
                   const SizedBox(height: 20),
                   RestInvestButton(
                     text: "Submit",
                     buttonColor: AppColor.blueColor,
                     textColor: AppColor.whiteColor,
                     onPress: () {
-                      Fluttertoast.showToast(
-                          msg: "Please fill all fields",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.black,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
+                      if (_.formKey.currentState!.validate()) {
+                        _.formKey.currentState!.save();
+
+                      }
+
+                      // Fluttertoast.showToast(
+                      //     msg: "Please fill all fields",
+                      //     toastLength: Toast.LENGTH_SHORT,
+                      //     gravity: ToastGravity.BOTTOM,
+                      //     timeInSecForIosWeb: 1,
+                      //     backgroundColor: Colors.black,
+                      //     textColor: Colors.white,
+                      //     fontSize: 16.0);
                     },
                   ),
                 ],

@@ -59,9 +59,9 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.emailField:
             {
               if (val!.isEmpty) {
-                return "Please fill all field";
+                return "Please fill the field";
               } else if (!GetUtils.isEmail(val)) {
-                return "fill all field";
+                return  "Please fill the field";
               } else {
                 return null;
               }
@@ -69,17 +69,17 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.passwordField:
             {
               if (val!.isEmpty) {
-                return "Please fill all field";
+                return  "Please fill the field";
               } else if (val.length <= 6) {
                 return "Password must be at least 6 character in length.";
               } else {
                 return null;
               }
             }
-          case Constants.text:
+          case Constants.phoneNumberField:
             {
               if (val!.isEmpty) {
-                return "Please fill all field";
+                return  "Please fill the field";
               } else {
                 return null;
               }
@@ -87,12 +87,36 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.userName:
             {
               if (val!.isEmpty) {
-                return "Please fill all field";
+                return "Please fill the field";
               } else {
                 return null;
               }
             }
+          case Constants.userId:
+            {
+              if (val!.isEmpty) {
+                return "Please fill the field";
+              } else {
+                return null;
+              }
+            } case Constants.cnicNumber:
+          {
+            if (val!.isEmpty) {
+              return "Please fill the field";
+            } else {
+              return null;
+            }
 
+          }
+          case Constants.accountNo:
+            {
+              if (val!.isEmpty) {
+                return "Please fill the field";
+              } else {
+                return null;
+              }
+
+            }
           default:
             {}
         }

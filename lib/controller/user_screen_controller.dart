@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UserrScreenController extends GetxController {
+class UserScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var userName = "".obs;
   var password = "".obs;
@@ -34,6 +34,7 @@ class UserrScreenController extends GetxController {
     password(value);
     update();
   }
+
   void updateEmail(value) {
     email(value);
     update();
