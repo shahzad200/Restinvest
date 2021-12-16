@@ -46,7 +46,7 @@ class ViewReportsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             RestInvestTitle(
-                                text: 'Start Date.', textColor: AppColor.black),
+                                text: 'Start Date', textColor: AppColor.black),
                             SizedBox(
                               height: 35,
                               child: DateFormFieldContainer(
@@ -64,7 +64,7 @@ class ViewReportsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             RestInvestTitle(
-                                text: 'End Date.', textColor: AppColor.black),
+                                text: 'End Date', textColor: AppColor.black),
                             SizedBox(
                               height: 35,
                               child: DateFormFieldContainer(
@@ -85,7 +85,7 @@ class ViewReportsScreen extends StatelessWidget {
                           children: [
                             const RestInvestTitle(
                               text: "Account No.",
-                              textColor: AppColor.blueColor,
+                              textColor: AppColor.black,
                             ),
                             Container(
                               // margin: EdgeInsets.all(10.0),
@@ -136,10 +136,11 @@ class ViewReportsScreen extends StatelessWidget {
                       ),
                       Expanded(
                           child: DropDownContainerIcon(
+                        text1: "All",
                         fontsize: 14,
                         fontWeight: FontWeight.bold,
                         voidcallback: () {},
-                        text: "Fund Name.",
+                        text: "Fund Name",
                         textColor: AppColor.black,
                       ))
                     ],

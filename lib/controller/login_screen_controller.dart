@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/data/repository.dart';
 
-
 class LoginScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();

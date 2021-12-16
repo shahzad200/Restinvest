@@ -156,7 +156,7 @@ class ApiClient {
     try {
       final response = await http.post(Uri.parse(_epLoadDailyNavPrices));
       if (response.statusCode == 200) {
-        print(response.body);
+        print("${response.body}");
         DailyNavPrices dailyNavPrices =
         DailyNavPrices.fromJson(jsonDecode(response.body));
         if (dailyNavPrices.meta!.code.toString() == 200.toString()) {

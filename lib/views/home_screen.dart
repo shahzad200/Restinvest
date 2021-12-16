@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
             key: controller.scaffoldKey,
             body: SingleChildScrollView(
               child: controller.isLoading
-                  ? const CircularProgressIndicator()
+                  ? Center(child: const CircularProgressIndicator())
                   : controller.noInternet
                       ? NoInternetWgt(
                           onTryAgain: controller.getSocialLinks,

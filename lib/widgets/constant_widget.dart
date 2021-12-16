@@ -554,6 +554,7 @@ class DailyNav extends StatelessWidget {
 
 class DropDownContainerIcon extends StatelessWidget {
   const DropDownContainerIcon({
+    required this.text1,
     required this.text,
     required this.textColor,
     required this.voidcallback,
@@ -562,10 +563,11 @@ class DropDownContainerIcon extends StatelessWidget {
     required this.fontWeight,
     Key? key,
   }) : super(key: key);
-  final text;
+  final String text1;
   final Color textColor;
   final fontWeight;
   final Color color;
+  final String? text;
   final voidcallback;
   final double fontsize;
 
@@ -574,15 +576,14 @@ class DropDownContainerIcon extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RestInvestTitle(
-          text: text,
-          textColor: textColor,
-          fontWeight: fontWeight,
-          fontSize: fontsize,
+        Text(
+          text!,
+          style: TextStyle(color: AppColor.black, fontWeight: fontWeight),
         ),
         SizedBox(
           height: 35,
           child: DropDownContainer(
+            text: text1,
             color: color,
             icon: const Icon(
               Icons.keyboard_arrow_down,
@@ -601,12 +602,16 @@ class DropDownContainerIcon extends StatelessWidget {
 
 class CustomCreditContainer extends StatelessWidget {
   const CustomCreditContainer({
-    this.investtext,
-    this.credittext,
+    required this.investtext,
+    required this.text1,
+    required this.text2,
+    required this.credittext,
     Key? key,
   }) : super(key: key);
-  final investtext;
-  final credittext;
+  final String investtext;
+  final String credittext;
+  final String text2;
+  final text1;
 
   @override
   Widget build(BuildContext context) {
@@ -616,7 +621,7 @@ class CustomCreditContainer extends StatelessWidget {
             child: EmptyRowContainer(
           color: AppColor.blueColor,
           hintColor: AppColor.black,
-          hint: "0.0",
+          hint: text1,
           fontWeight: FontWeight.w900,
           text: investtext,
           fontsize: 12,
@@ -629,7 +634,7 @@ class CustomCreditContainer extends StatelessWidget {
             child: EmptyRowContainer(
           color: AppColor.blueColor,
           hintColor: AppColor.black,
-          hint: "0.0",
+          hint: text2,
           text: credittext,
           fontWeight: FontWeight.w900,
           fontsize: 12,
@@ -822,6 +827,7 @@ class DropDownContainer extends StatelessWidget {
   const DropDownContainer({
     Key? key,
     this.height = 70,
+    this.text,
     required this.voidcallback,
     required this.isSquare,
     this.color = AppColor.dimblack,
@@ -830,6 +836,7 @@ class DropDownContainer extends StatelessWidget {
 
   final double height;
   final Color color;
+  final text;
   final isSquare;
   final voidcallback;
   final icon;
@@ -856,9 +863,13 @@ class DropDownContainer extends StatelessWidget {
                     : BorderRadius.circular(8),
               ),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // ignore: prefer_const_literals_to_create_immutables
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Text(text),
+                  ),
                   Center(
                     child: icon,
                   )
@@ -936,7 +947,7 @@ class EmptyRowContainer extends StatelessWidget {
     this.text,
     Key? key,
   }) : super(key: key);
-  final hint;
+  final String hint;
   final fontWeight;
   final double fontsize;
   final Color color;
@@ -2188,7 +2199,9 @@ class CustomFundList extends StatelessWidget {
         left: 8,
         right: 8,
       ),
+      alignment: Alignment.center,
       child: Table(
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         columnWidths: const {
           0: FlexColumnWidth(1.5),
           1: FlexColumnWidth(.8),
@@ -2198,13 +2211,16 @@ class CustomFundList extends StatelessWidget {
           TableRow(children: [
             SizedBox(
               height: 35,
-              child: RestInvestTitle(
-                margin: const EdgeInsets.only(top: 10),
-                textAlign: TextAlign.center,
-                text: fundText,
-                fontSize: textSize,
-                fontWeight: fontWeight,
-                textColor: AppColor.black,
+              child: Padding(
+                padding: const EdgeInsets.only(top:10),
+                child: RestInvestTitle(
+                    margin: const EdgeInsets.only(top: 10),
+                  textAlign: TextAlign.center,
+                  text: fundText,
+                  fontSize: textSize,
+                  fontWeight: fontWeight,
+                  textColor: AppColor.black,
+                ),
               ),
             ),
             RestInvestTitle(

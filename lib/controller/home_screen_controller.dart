@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/social_media_links.dart';
 import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/utils/lists.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreenController extends GetxController {
@@ -11,14 +12,14 @@ class HomeScreenController extends GetxController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   final _repository = Repository();
   bool isLoading = false;
+
   bool noInternet = false;
   late SocialMediaLink socialMediaLink;
   // Exception ex = Exception([message]);
 
   @override
   void onInit() async {
-    await _repository.onLoadDailyNavPrices();
-    // getSocialLinks();
+    getSocialLinks();
     super.onInit();
   }
 
@@ -34,18 +35,18 @@ class HomeScreenController extends GetxController {
   void onReady() {
     // TODO: implement onReady
     super.onReady();
-
   }
 
-
   getSocialLinks() async {
-    try{
+    try {
       isLoading = true;
       socialMediaLink = await _repository.socialMediaLinks();
+      
+
       isLoading = false;
       update();
-    }catch (e){
-      if(e.toString() == 'Exception: No Internet'){
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
         isLoading = false;
         noInternet = true;
         update();

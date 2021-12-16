@@ -66,26 +66,53 @@ class DailyNavScreen extends StatelessWidget {
                                   dateText: "Date",
                                   saleText: "Sale",
                                   purchaseText: "Repurchase",
+
                                   textSize: 12.0,
                                 ),
-                                Column(
-                                  children:
-                                      List.generate(mutualfund.length, (index) {
+                                _.dailyNavPrices == null ? const CircularProgressIndicator() :Column(
+                                  children: List.generate(
+                                      _
+                                          .dailyNavPrices!
+                                          .response!
+                                          .dailyMutualFundNavList!
+                                          .length, (index) {
                                     return CustomFundList(
                                         fontWeight: FontWeight.w700,
-                                        fundText: mutualfund[index]
-                                            ["fund_type"],
-                                        dateText: mutualfund[index]["date"],
-                                        saleText: mutualfund[index]["sale"],
-                                        purchaseText: mutualfund[index]
-                                            ["repurchase"],
-                                        textSize: 12.0);
+                                        fundText:
+                                         _
+                                            .dailyNavPrices!
+                                           .response!
+                                            .dailyMutualFundNavList![index]
+                                            .fundType!,
+                                        dateText:
+                                         _
+                                             .dailyNavPrices!
+                                           .response!
+                                             .dailyMutualFundNavList![index]
+                                           .funddate!,
+                                        saleText:
+                                         _
+                                             .dailyNavPrices!
+                                            .response!
+                                            .dailyMutualFundNavList![index]
+                                            .fundSale!
+                                             .toString(),
+                                        purchaseText:
+                                         _
+                                            .dailyNavPrices!
+                                            .response!
+                                            .dailyMutualFundNavList![index]
+                                            .fundRepurchase!
+                                             .toString(),
+                                        textSize: 12.0
+                                    );
                                   }),
-                                ),
+    ),
+
                                 space,
                                 const CustomTextContainer(
                                   height: 25,
-                                  text: "PENSION FUNDS",
+                                  text: "PENSION ",
                                   textAlign: TextAlign.start,
                                 ),
                                 space,
@@ -97,20 +124,44 @@ class DailyNavScreen extends StatelessWidget {
                                   purchaseText: "Repurchase",
                                   textSize: 12.0,
                                 ),
-                                Column(
-                                  children: List.generate(pensionfund.length,
-                                      (index) {
-                                    return CustomFundList(
-                                        fontWeight: FontWeight.w700,
-                                        fundText: pensionfund[index]
-                                            ["fund_type"],
-                                        dateText: pensionfund[index]["date"],
-                                        saleText: pensionfund[index]["sale"],
-                                        purchaseText: pensionfund[index]
-                                            ["repurchase"],
-                                        textSize: 12.0);
-                                  }),
-                                ),
+                                _.dailyNavPrices == null ? const CircularProgressIndicator() :    Column(
+                              children: List.generate(
+                                  _
+                                      .dailyNavPrices!
+                                      .response!
+                                      .dailyPensionFundNavList!
+                                      .length, (index) {
+                                return CustomFundList(
+                                    fontWeight: FontWeight.w700,
+                                    fundText:
+                                    _
+                                        .dailyNavPrices!
+                                        .response!
+                                        .dailyPensionFundNavList![index]
+                                        .fundType!,
+                                    dateText:
+                                    _
+                                        .dailyNavPrices!
+                                        .response!
+                                        .dailyPensionFundNavList![index]
+                                        .funddate!,
+                                    saleText:
+                                    _
+                                        .dailyNavPrices!
+                                        .response!
+                                        .dailyPensionFundNavList![index]
+                                        .fundSale!
+                                        .toString(),
+                                    purchaseText:
+                                    _
+                                        .dailyNavPrices!
+                                        .response!
+                                        .dailyPensionFundNavList![index]
+                                        .fundRepurchase!
+                                        .toString(),
+                                    textSize: 12.0
+                                );
+                              }),),
                                 space,
                                 const CustomTextContainer(
                                   height: 25,
@@ -126,22 +177,44 @@ class DailyNavScreen extends StatelessWidget {
                                   purchaseText: "Repurchase",
                                   textSize: 12.0,
                                 ),
-                                Column(
+                                _.dailyNavPrices == null ? const CircularProgressIndicator() :    Column(
                                   children: List.generate(
-                                      exchangetradedfund.length, (index) {
+                                      _
+                                          .dailyNavPrices!
+                                          .response!
+                                          .dailyExchangeFundNavList!
+                                          .length, (index) {
                                     return CustomFundList(
                                         fontWeight: FontWeight.w700,
-                                        fundText: exchangetradedfund[index]
-                                            ["fund_type"],
-                                        dateText: exchangetradedfund[index]
-                                            ["date"],
-                                        saleText: exchangetradedfund[index]
-                                            ["sale"],
-                                        purchaseText: exchangetradedfund[index]
-                                            ["repurchase"],
-                                        textSize: 12.0);
-                                  }),
-                                ),
+                                        fundText:
+                                        _
+                                            .dailyNavPrices!
+                                            .response!
+                                            .dailyExchangeFundNavList![index]
+                                            .fundType!,
+                                        dateText:
+                                        _
+                                            .dailyNavPrices!
+                                            .response!
+                                            .dailyExchangeFundNavList![index]
+                                            .funddate!,
+                                        saleText:
+                                        _
+                                            .dailyNavPrices!
+                                            .response!
+                                            .dailyExchangeFundNavList![index]
+                                            .fundSale!
+                                            .toString(),
+                                        purchaseText:
+                                        _
+                                            .dailyNavPrices!
+                                            .response!
+                                            .dailyExchangeFundNavList![index]
+                                            .fundRepurchase!
+                                            .toString(),
+                                        textSize: 12.0
+                                    );
+                                  }),),
                                 space,
                                 space,
                                 SizedBox(
