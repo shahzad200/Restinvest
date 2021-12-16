@@ -2211,13 +2211,16 @@ class CustomFundList extends StatelessWidget {
           TableRow(children: [
             SizedBox(
               height: 35,
-              child: RestInvestTitle(
-                  margin: const EdgeInsets.only(top: 10),
-                textAlign: TextAlign.center,
-                text: fundText,
-                fontSize: textSize,
-                fontWeight: fontWeight,
-                textColor: AppColor.black,
+              child: Padding(
+                padding: const EdgeInsets.only(top:10),
+                child: RestInvestTitle(
+                    margin: const EdgeInsets.only(top: 10),
+                  textAlign: TextAlign.center,
+                  text: fundText,
+                  fontSize: textSize,
+                  fontWeight: fontWeight,
+                  textColor: AppColor.black,
+                ),
               ),
             ),
             RestInvestTitle(

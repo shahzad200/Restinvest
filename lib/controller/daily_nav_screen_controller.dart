@@ -21,15 +21,16 @@ class DailyNavScreenController extends GetxController {
   DailyNavPrices? dailyNavPrices;
 
   @override
-  void onInit() {
+  void onInit() async{   dailyNavPrices = await _repository.onLoadDailyNavPrices();
+  update();
     super.onInit();
   }
 
   @override
-  void onReady() async {
-    dailyNavPrices = await _repository.onLoadDailyNavPrices();
-    update();
+  void onReady()  {
+
     // TODO: implement onReady
     super.onReady();
   }
+
 }

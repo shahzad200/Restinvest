@@ -99,7 +99,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                                                       _.categoryValue == ""
                                                   ? "Select"
                                                   : _.categoryValue,
-                                              textColor: AppColor.dimblack,
+                                              textColor: AppColor.black,
                                             ),
                                             icon: const Icon(
                                                 Icons.keyboard_arrow_down,
