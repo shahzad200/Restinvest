@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:get/get_utils/src/extensions/dynamic_extensions.dart';
 import 'package:http/http.dart' as http;
 import 'package:investintrust/data/models/calculate_tax.dart';
+import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/daily_nav_prices.dart';
 
 import 'package:investintrust/data/models/social_media_links.dart';
@@ -18,6 +18,32 @@ class ApiClient {
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
   static const _epCalculateTax = _baseUrl + 'calculateTax';
   static const _epLoadDailyNavPrices = _baseUrl + 'loadDailyNavPrices';
+  static const _epChangePassword = _baseUrl + 'changePassword';
+  static const _epLoadFundsPlans = _baseUrl + 'loadFundsPlans';
+
+
+  static const _epGeneratePinCode = _baseUrl + 'generatePinCode';
+  static const _epSaveRedemption = _baseUrl + 'saveRedemption';
+  static const _epSaveFundTransfer = _baseUrl + 'saveFundTransfer';
+  static const _epSavePurchase = _baseUrl + 'savePurchase';
+
+  static const _epViewReport = _baseUrl + 'viewReport';
+  static const _epTaxCalculator = _baseUrl + 'taxCalculator';
+  static const _epNewsNotification = _baseUrl + 'NewsNotification';
+  static const _epRegisteredUser = _baseUrl + 'registeredUser';
+  static const _epPickFundQuestions = _baseUrl + 'pickFundQuestions';
+  static const _epGetExpectedFund = _baseUrl + 'getExpectedFund';
+
+  static const _epNewUserRegData = _baseUrl + 'NewUserRegData';
+  static const _epCityData = _baseUrl + 'CityData';
+  static const _epCitySectorData = _baseUrl + 'CitySectorData';
+  static const _epNewUserPinGenration = _baseUrl + 'newUserPinGenration';
+  static const _epNewUserRegister = _baseUrl + 'newUserRegister';
+
+
+
+
+
 
   Future<SocialMediaLink> socialMediaLinks() async {
     try {
@@ -38,7 +64,7 @@ class ApiClient {
     }
   }
 
-  Future<LoginModel> onLogin() async {
+  Future<LoginModel> onLogin(String userId,String password) async {
     try {
       final response = await http.post(
         Uri.parse(_epLogin),
@@ -46,8 +72,8 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
-          'userId': 'SAAD30',
-          'password': '1319A3B16FD2045B3A013760DFF2056B'
+          'userId': userId,
+          'password': password
         }),
       );
       if (response.statusCode == 200) {
@@ -66,10 +92,8 @@ class ApiClient {
     }
   }
 
-  Future<LoadDashboard> onLoadDashBoard({
-    userId,
-    folioNumber,
-  }) async {
+  Future<LoadDashboard> onLoadDashBoard(String userId, String folioNumber) async {
+    print(userId+'nkj'+folioNumber);
     try {
       final response = await http.post(
         Uri.parse(_epLoadDashBoard),
@@ -99,8 +123,7 @@ class ApiClient {
     }
   }
 
-  Future<CalculateTax> onCalculateTax(
-      String salaried, String annualIncome) async {
+  Future<CalculateTax> onCalculateTax(String salaried, String annualIncome) async {
     try {
       final response = await http.post(
         Uri.parse(_epCalculateTax),
@@ -115,7 +138,7 @@ class ApiClient {
       if (response.statusCode == 200) {
         print(response.body);
         CalculateTax calculateTax =
-            CalculateTax.fromJson(jsonDecode(response.body));
+        CalculateTax.fromJson(jsonDecode(response.body));
         if (calculateTax.meta!.code.toString() == 200.toString()) {
           return calculateTax;
         } else {
@@ -132,12 +155,10 @@ class ApiClient {
   Future<DailyNavPrices> onLoadDailyNavPrices() async {
     try {
       final response = await http.post(Uri.parse(_epLoadDailyNavPrices));
-      print(response.statusCode.runtimeType);
       if (response.statusCode == 200) {
         print("${response.body}");
         DailyNavPrices dailyNavPrices =
-            DailyNavPrices.fromJson(jsonDecode(response.body));
-
+        DailyNavPrices.fromJson(jsonDecode(response.body));
         if (dailyNavPrices.meta!.code.toString() == 200.toString()) {
           return dailyNavPrices;
         } else {
@@ -147,10 +168,71 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
-      print(e);
-      DailyNavPrices dailyNavPrices = DailyNavPrices();
       throw Exception('No Internet');
-      // return dailyNavPrices;
     }
   }
+
+  Future<Common> onResetPassword(String userId,String cNic) async {
+    print(userId+'nkj'+cNic);
+    try {
+      final response = await http.post(
+        Uri.parse(_epChangePassword),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'userId': userId,
+          'cnic': cNic,
+          'requestType': 'F'
+        }),
+      );
+      if (response.statusCode == 200) {
+        Common common = Common.fromJson(jsonDecode(response.body));
+        print(response.body);
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<Common> onLoadFundsPlans(String userId,String cNic) async {
+    print(userId+'nkj'+cNic);
+    try {
+      final response = await http.post(
+        Uri.parse(_epLoadFundsPlans),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'userId': userId,
+          'fundCode': '00002',
+          'folioNumber': '69558',
+          'requestType' : 'RED'
+        }),
+      );
+      if (response.statusCode == 200) {
+        Common common = Common.fromJson(jsonDecode(response.body));
+        print(response.body);
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+
+
 }

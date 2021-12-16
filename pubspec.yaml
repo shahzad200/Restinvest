@@ -34,7 +34,17 @@ dependencies:
   fluttertoast: ^8.0.8
   http: ^0.13.3
   webview_flutter: ^3.0.0
+
+  #encryptions
+  pointycastle: ^3.3.4
   encrypt: ^5.0.1
+  asn1lib: ^1.0.2
+
+  # String to HEXA
+  string_to_hex: ^0.2.2
+  convert: ^3.0.1
+  crypto: ^3.0.1
+
 
   url_launcher: ^6.0.9
   # The following adds the Cupertino Icons font to your application.

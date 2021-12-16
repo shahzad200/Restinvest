@@ -38,9 +38,14 @@ class PasswordScreen extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
+<<<<<<< HEAD
                   CustomFormField(onTextChange: (val){
                     _.updateUserName(val);
                   },
+=======
+                  CustomFormField(
+                    controller: _.userIdController,
+>>>>>>> 15508a7b74805021b6d6fe3a3bebb1f0aeaf468e
                     hint: "User ID",
                     textAlign: TextAlign.center,
                   ),
@@ -48,6 +53,7 @@ class PasswordScreen extends StatelessWidget {
                     height: 15,
                   ),
                   CustomFormField(
+                    controller: _.cNicController,
                     hint: "CNIC - 85202-6761678-8",
                     onTextChange: (val){
                       _.updateUserName(val);
@@ -64,7 +70,9 @@ class PasswordScreen extends StatelessWidget {
                     text: "Submit",
                     buttonColor: AppColor.blueColor,
                     textColor: AppColor.whiteColor,
-                    onPress: () {},
+                    onPress: () {
+                      _.onSubmit();
+                    },
                   ),
                   const SizedBox(
                     height: 20,

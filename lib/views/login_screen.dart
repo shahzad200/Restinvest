@@ -77,6 +77,7 @@ class LoginScreen extends StatelessWidget {
                     text: "Login",
                     buttonColor: AppColor.blueColor,
                     textColor: AppColor.whiteColor,
+<<<<<<< HEAD
                       onPress:(){(_.onLoginPress);
                         // if (_.formKey.currentState!.validate()) {
                         //   print("Validated");
@@ -88,6 +89,13 @@ class LoginScreen extends StatelessWidget {
 
 
 
+=======
+                    onPress: () {
+                      _.onLoginPress();
+                      // Get.toNamed(AppRoute.portofolioRoute);
+                    },
+                  ),
+>>>>>>> 15508a7b74805021b6d6fe3a3bebb1f0aeaf468e
                   const SizedBox(
                     height: 20,
                   ),

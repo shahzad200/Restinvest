@@ -1,0 +1,6 @@
+
+class Constant{
+
+  // static
+
+}
