@@ -8,9 +8,11 @@ class DateFormFieldContainer extends StatefulWidget {
   const DateFormFieldContainer({
     required this.isRounded,
     this.color = AppColor.dimblack,
+   required this.text,
     Key? key,
   }) : super(key: key);
   final bool isRounded;
+  final String? text;
   final Color color;
 
   @override
@@ -34,7 +36,7 @@ class _DateFormFieldContainerState extends State<DateFormFieldContainer> {
           ),
         ),
         contentPadding: EdgeInsets.all(10),
-        hintText: "CNIC Expiry Date",
+        hintText:widget. text!,
       ),
       dateFormat: DateFormat('dd/MM/yyyy'),
       mode: DateTimeFieldPickerMode.date,

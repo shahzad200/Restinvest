@@ -4,6 +4,7 @@ import 'package:investintrust/views/branches_screen.dart';
 import 'package:investintrust/views/daily_nav_screen.dart';
 import 'package:investintrust/views/f2f_transfer_screen.dart';
 import 'package:investintrust/views/fundmanager_screen.dart';
+import 'package:investintrust/views/generate_code_screen.dart';
 import 'package:investintrust/views/home_screen.dart';
 import 'package:investintrust/views/learning_screen.dart';
 import 'package:investintrust/views/login_screen.dart';
@@ -36,9 +37,10 @@ class AppRoute {
   static const String marketRoute = '/market';
   static const String productRoute = '/product';
   static const String fundRoute = '/fund';
-  static const String fundManagerRoute = '/fundManager';
+  static const String generateCode = '/generateCode';
 
   static const String redemptionRoute = '/redemption';
+  static const String fundManagerRoute = '/fundManager';
   static const String portofolioRoute = '/portofolio';
   static const String purchasesRoute = '/purchases';
   static const String f2ftransferRoute = '/f2ftransfer';
@@ -134,6 +136,10 @@ class AppRoute {
       GetPage(
         name: AppRoute.taxcalculatorRoute,
         page: () => const TaxCalculatorScreen(),
+      ),
+      GetPage(
+        name: AppRoute.generateCode,
+        page: () => const GenerateCodeScreen(),
       ),
     ];
   }

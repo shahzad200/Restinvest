@@ -49,7 +49,7 @@ class ViewReportsScreen extends StatelessWidget {
                                 text: 'Start Date', textColor: AppColor.black),
                             SizedBox(
                               height: 35,
-                              child: DateFormFieldContainer(
+                              child: DateFormFieldContainer(text:"CNIC Expirey date",
                                 isRounded: false,
                               ),
                             ),
@@ -67,7 +67,7 @@ class ViewReportsScreen extends StatelessWidget {
                                 text: 'End Date', textColor: AppColor.black),
                             SizedBox(
                               height: 35,
-                              child: DateFormFieldContainer(
+                              child: DateFormFieldContainer(text:"CNIC Expirey date",
                                 isRounded: false,
                               ),
                             ),

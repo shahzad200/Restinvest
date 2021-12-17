@@ -37,9 +37,8 @@ class RestInvestButton extends StatelessWidget {
           minimumSize: Size(width, height),
           shape: RoundedRectangleBorder(
             borderRadius: isSquare
-                ? BorderRadius.vertical(
-                    top: Radius.circular(0),
-                    bottom: Radius.circular(0),
+                ? BorderRadius.circular(10
+
                   )
                 : BorderRadius.circular(30.0),
           ),

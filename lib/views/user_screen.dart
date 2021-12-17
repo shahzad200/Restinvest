@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
 import '../utils/constant.dart';
 
 import '../utils/lists.dart';
@@ -114,7 +115,7 @@ class UserScreen extends StatelessWidget {
                     Row(
                       children: const [
                         Expanded(
-                          child: DateFormFieldContainer(
+                          child: DateFormFieldContainer(text:"CNIC Start date",
                             isRounded: true,
                           ),
                         ),
@@ -122,7 +123,7 @@ class UserScreen extends StatelessWidget {
                           width: 4,
                         ),
                         Expanded(
-                          child: DateFormFieldContainer(isRounded: true),
+                          child: DateFormFieldContainer(isRounded: true,text:"CNIC Expirey date"),
                         ),
                       ],
                     ),
@@ -315,12 +316,14 @@ class UserScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    RestInvestButton(
+                    RestInvestButton(isSquare: true,
                       text: "Submit",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
-                      onPress: () {  if (_.formKey.currentState!.validate()) {
-                        _.formKey.currentState!.save();
+                      onPress: () {
+                        // if (_.formKey.currentState!.validate()) {
+                        // _.formKey.currentState!.save();
+                        Get.toNamed(AppRoute.generateCode);
 
                       }
                         // Fluttertoast.showToast(
@@ -331,7 +334,7 @@ class UserScreen extends StatelessWidget {
                         //     backgroundColor: Colors.black,
                         //     textColor: Colors.white,
                         //     fontSize: 16.0);
-                      },
+
                     ),
                   ],
                 ),
