@@ -13,7 +13,7 @@ import '../views/purchases_screen.dart';
 import '../views/redemption_screen.dart';
 import '../views/reports_screen.dart';
 import '../views/text_calculator_screen.dart';
-import '../views/userr_screen.dart';
+import '../views/user_screen.dart';
 import '../views/view_report_screen.dart';
 
 import '../views/home_screen.dart';

@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/routes/routes.dart';
 
 class LoginScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -17,7 +18,17 @@ class LoginScreenController extends GetxController {
   static late LoginModel loginModel;
   bool isLoading = false;
   bool noInternet = false;
+  var userName = "".obs;
+  var password = "".obs;
+  void updateUserName(value) {
+    userName(value);
+    update();
+  }
 
+  void updatePassword(value) {
+    password(value);
+    update();
+  }
   @override
   void onInit() {
     // TODO: implement onInit
@@ -32,24 +43,23 @@ class LoginScreenController extends GetxController {
 
 
   void onLoginPress() async{
-    String name = userNameController.value.text;
-    String password = passwordController.value.text;
     final key = encrypt.Key.fromUtf8('codingaffairscom');
 
     final bytes = utf8.encode('codingaffairscom');
-    final base64Str = base64.encode(bytes);
+    // final base64Str = base64.encode(bytes);
 
-    print("keyyyyyyyyyy..........${key.bytes}");
 
     final iv = encrypt.IV.fromLength(16);
 
     final encrypter = encrypt.Encrypter(encrypt.AES(key,mode: encrypt.AESMode.cbc));
 
-    final encrypted = encrypter.encrypt(password, iv: iv);
+    final encrypted = encrypter.encrypt("${passwordController.text}", iv: iv);
+
     try{
       isLoading = true;
-      loginModel = await _repository.onLogin(name,encrypted.base16.toString());
+      loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
       await _repository.onLoadDashBoard(loginModel.response!.accounts![0].folioNumber.toString());
+      Get.offAllNamed(AppRoute.redemptionRoute);
       isLoading = false;
       update();
     }catch (e){

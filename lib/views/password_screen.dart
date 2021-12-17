@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/controller/password_controller.dart';
+import 'package:investintrust/utils/constant.dart';
 
 import '../utils/colors.dart';
 import '../widgets/button.dart';
@@ -36,35 +37,49 @@ class PasswordScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       textColor: AppColor.black),
                   const SizedBox(
-                    height: 8,
+                    height: 10,
                   ),
-                  CustomFormField(
-                    controller: _.userIdController,
-                    hint: "User ID",
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  CustomFormField(
-                    controller: _.cNicController,
-                    hint: "CNIC - 85202-6761678-8",
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 20,
+                  Form(
+                    key: _.formKey,
+                    child: Column(
+                      children: [
+                        CustomFormField(  controller: _.userIdController,
+                          fieldType: Constants.userId,
+                          onTextChange: (val) {
+                            _.updateUserId(val);
+                          },
+                          hint: "User ID",
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomFormField(
+                          hint: "CNIC - 85202-6761678-8",
+                          controller: _.cNicController,
+
+                          fieldType: Constants.cnicNumber,
+                          onTextChange: (val) {
+                            _.updateCNICNumber(val);
+                          },
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   RestInvestButton(
-                    text: "Submit",
-                    buttonColor: AppColor.blueColor,
-                    textColor: AppColor.whiteColor,
-                    onPress: () {
-                      _.onSubmit();
-                    },
-                  ),
+                      text: "Submit",
+                      buttonColor: AppColor.blueColor,
+                      textColor: AppColor.whiteColor,
+                      onPress: () {
+                        if (_.formKey.currentState!.validate()) {
+                          _.formKey.currentState!.save();
+                           (_.onSubmit());
+                        }
+                      }),
                   const SizedBox(
                     height: 20,
                   ),

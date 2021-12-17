@@ -5,31 +5,43 @@ import 'package:get/get.dart';
 import 'package:investintrust/data/models/new_user_reg_data.dart';
 import 'package:investintrust/data/repository.dart';
 
-class UserrScreenController extends GetxController {
+class UserScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
+  var userName = "".obs;
+  var password = "".obs;
+  var number = "".obs;
+  var email = "".obs;
+
+  TextEditingController userNameController = TextEditingController();
+
+  TextEditingController numberController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
   String titlevalue = "";
   String bracketvalue = "";
   String incomevalue = "";
   String occupationvalue = "";
+
   final _repository = Repository();
   bool isLoading = false;
   bool noInternet = false;
   late NewUserRegData newUserRegData;
+
   @override
   void onInit() {
     onNewUserRegData();
-    // TODO: implement onInit
     super.onInit();
   }
 
   onNewUserRegData() async {
-    try{
+    try {
       isLoading = true;
       newUserRegData = await _repository.onNewUserRegData();
       isLoading = false;
       update();
-    }catch (e){
-      if(e.toString() == 'Exception: No Internet'){
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
         isLoading = false;
         noInternet = true;
         update();
@@ -49,6 +61,25 @@ class UserrScreenController extends GetxController {
     }
   }
 
+  void updateUserName(value) {
+    userName(value);
+    update();
+  }
+
+  void updatePassword(value) {
+    password(value);
+    update();
+  }
+
+  void updateEmail(value) {
+    email(value);
+    update();
+  }
+
+  void updateNumber(value) {
+    number(value);
+    update();
+  }
 
   displayDialog(BuildContext context, list) async {
     return showDialog(
@@ -68,15 +99,7 @@ class UserrScreenController extends GetxController {
   Widget build(BuildContext context) {
     throw UnimplementedError();
   }
-
-
-
 }
-
-
-
-
-
 
 class DialogListView extends StatelessWidget {
   const DialogListView({

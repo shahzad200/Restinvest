@@ -200,6 +200,7 @@ class ApiClient {
     }
   }
 
+
   Future<Common> onLoadFundsPlans(String userId, String cNic) async {
     print(userId + 'nkj' + cNic);
     try {

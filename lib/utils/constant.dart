@@ -2,11 +2,16 @@ class Constants {
   //TextFormFieldType
   static const int emailField = 0;
   static const int passwordField = 1;
-  static const int plainTextField = 2;
-  static const int phoneNumberField = 3;
-  static const int firstNameField = 4;
-  static const int lastNameField = 5;
 
+  static const int phoneNumberField = 2;
+
+  static const int userName = 3;
+  static const int text = 4;
+
+  static const int cnicNumber=5;
+
+  static const int userId=6;
+  static const int accountNo=7;
   //homeScreen button id
   static const int meetingButtonId = 1;
   static const int chatButtonId = 2;
