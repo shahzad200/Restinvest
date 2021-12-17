@@ -59,7 +59,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.emailField:
             {
               if (val!.isEmpty) {
-                return "Please fill the field";
+                return "Please enter the Address";
               } else if (!GetUtils.isEmail(val)) {
                 return  "Please fill the field";
               } else {
@@ -69,7 +69,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.passwordField:
             {
               if (val!.isEmpty) {
-                return  "Please fill the field";
+                return "Please enter the password";
               } else if (val.length <= 6) {
                 return "Password must be at least 6 character in length.";
               } else {
@@ -79,7 +79,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.phoneNumberField:
             {
               if (val!.isEmpty) {
-                return  "Please fill the field";
+                return  "Please enter the cell number";
               } else {
                 return null;
               }
@@ -87,7 +87,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.userName:
             {
               if (val!.isEmpty) {
-                return "Please fill the field";
+                return "Please enter the user name";
               } else {
                 return null;
               }
@@ -95,14 +95,14 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.userId:
             {
               if (val!.isEmpty) {
-                return "Please fill the field";
+                return "Please enter the user Id";
               } else {
                 return null;
               }
             } case Constants.cnicNumber:
           {
             if (val!.isEmpty) {
-              return "Please fill the field";
+              return "Please enter the cnic number";
             } else {
               return null;
             }
@@ -111,7 +111,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.accountNo:
             {
               if (val!.isEmpty) {
-                return "Please fill the field";
+                return "Please enter the account number";
               } else {
                 return null;
               }
