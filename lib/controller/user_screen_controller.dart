@@ -10,10 +10,8 @@ class UserScreenController extends GetxController {
   var email = "".obs;
 
   TextEditingController userNameController = TextEditingController();
-
   TextEditingController numberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
   String titlevalue = "";
   String bracketvalue = "";
@@ -49,8 +47,8 @@ class UserScreenController extends GetxController {
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            content: CircularProgressIndicator(
+          return const AlertDialog(
+            content:  CircularProgressIndicator(
               color: Colors.red,
             ),
           );
