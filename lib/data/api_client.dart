@@ -9,6 +9,7 @@ import 'package:investintrust/data/models/new_user_reg_data.dart';
 
 import 'package:investintrust/data/models/social_media_links.dart';
 
+import 'models/city_sector_model.dart';
 import 'models/load_dashboard.dart';
 import 'models/login_model.dart';
 import 'models/new_user_reg.dart';
@@ -32,16 +33,14 @@ class ApiClient {
   static const _epGeneratePinCode = _baseUrl + 'generatePinCode';
   static const _epSaveRedemption = _baseUrl + 'saveRedemption';
   static const _epSaveFundTransfer = _baseUrl + 'saveFundTransfer';
-  static const _epSavePurchase = _baseUrl + 'savePurchase';
 
+  static const _epSavePurchase = _baseUrl + 'savePurchase';
   static const _epViewReport = _baseUrl + 'viewReport';
   static const _epTaxCalculator = _baseUrl + 'taxCalculator';
   static const _epNewsNotification = _baseUrl + 'NewsNotification';
   static const _epRegisteredUser = _baseUrl + 'registeredUser';
   static const _epPickFundQuestions = _baseUrl + 'pickFundQuestions';
   static const _epGetExpectedFund = _baseUrl + 'getExpectedFund';
-
-
 
   Future<SocialMediaLink> socialMediaLinks() async {
     try {
@@ -73,8 +72,8 @@ class ApiClient {
             <String, String>{'userId': userId, 'password': password}),
       );
       if (response.statusCode == 200) {
-        LoginModel loginModel = LoginModel.fromJson(jsonDecode(response.body));
         print(response.body);
+        LoginModel loginModel = LoginModel.fromJson(jsonDecode(response.body));
         if (loginModel.meta!.code.toString() == 200.toString()) {
           return loginModel;
         } else {
@@ -98,15 +97,15 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
-          'userId': 'SAAD30',
-          'folioNumber': '81656',
+          'userId': userId,
+          'folioNumber': folioNumber,
           'reqType': 'MDBMPG'
         }),
       );
       if (response.statusCode == 200) {
+        print(response.body);
         LoadDashboard loadDashboard =
             LoadDashboard.fromJson(jsonDecode(response.body));
-        print(response.body);
         if (loadDashboard.meta!.code.toString() == 200.toString()) {
           return loadDashboard;
         } else {
@@ -279,7 +278,7 @@ class ApiClient {
     }
   }
 
-  Future<Common> onCitySectorData(String cityCode)async{
+  Future<CitySector> onCitySectorData(String cityCode)async{
     try {
       final response = await http.post(
         Uri.parse(_epCitySectorData),
@@ -291,12 +290,13 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        Common common =
-        Common.fromJson(jsonDecode(response.body));
-        if (common.meta!.code.toString() == 200.toString()) {
-          return common;
+        print(response);
+        CitySector citySector =
+        CitySector.fromJson(jsonDecode(response.body));
+        if (citySector.meta!.code.toString() == 200.toString()) {
+          return citySector;
         } else {
-          throw Exception(common.meta!.message);
+          throw Exception(citySector.meta!.message);
         }
       } else {
         throw Exception('No Internet');
@@ -378,6 +378,13 @@ class ApiClient {
       String filerNonFiler,
       String pinCode,
       String pinCodeExpiryConfigID) async {
+    print(title+fatherOrHusbandName+
+        cnicIsueDate+cNicExpiryDate+
+        address+country+phone+cell+email+gender+
+        occupation+incomeSource+name+cnic+passport+
+        ntn+city+otherCity+sector+fax+birthDate+
+        maritalStatus+incomeBracket+religion+filerNonFiler+
+        pinCode+pinCodeExpiryConfigID);
     try {
       final response = await http.post(
         Uri.parse(_epNewUserRegister),

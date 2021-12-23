@@ -35,7 +35,7 @@ class BranchesScreen extends StatelessWidget {
             ),
             body: WebView(
                 initialUrl:
-                    '${_.homeController.socialMediaLink.response!.homeLinks!.branchLocator}'),
+                    '${_.homeController.socialMediaLink!.response!.homeLinks!.branchLocator}'),
           );
         });
   }

@@ -1,36 +1,51 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:investintrust/data/models/new_user_reg_data.dart';
 import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/routes/routes.dart';
 
 class UserScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
+
+  var formKeyGenCode = GlobalKey<FormState>();
+  var scaffoldKeyGenCode = GlobalKey<ScaffoldState>();
+
+
   var userName = "".obs;
   var password = "".obs;
   var number = "".obs;
   var email = "".obs;
 
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController numberController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  String titlevalue = "";
-  String bracketvalue = "";
-  String incomevalue = "";
-  String occupationvalue = "";
-
+  TextEditingController nameController = TextEditingController();
+  TextEditingController fatherNameController = TextEditingController();
+  TextEditingController cNicController = TextEditingController();
+  TextEditingController passPortController = TextEditingController();
+  TextEditingController ntnController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  String titleValue = "";
+  String bracketValue = "";
+  String bracketCode = "";
+  String incomeValue = "";
+  String incomeCode = "";
+  String occupationValue = "";
+  String occupationCode = "";
+  String issueDate = '';
+  String expiryDate = '';
   final _repository = Repository();
   bool isLoading = false;
   bool noInternet = false;
-  late NewUserRegData newUserRegData;
+   late NewUserRegData newUserRegData;
 
   @override
   void onInit() {
     onNewUserRegData();
     super.onInit();
   }
+
+
 
   onNewUserRegData() async {
     try {
@@ -58,6 +73,80 @@ class UserScreenController extends GetxController {
       }
     }
   }
+
+
+  void goTONext(){
+    // if (formKey.currentState!.validate()) {
+    //   formKey.currentState!.save();
+      if(titleValue == '' || titleValue == null){
+        Fluttertoast.showToast(
+            msg: 'Please Select Title',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else if(issueDate == '' || issueDate == null){
+        Fluttertoast.showToast(
+            msg: 'Please Select CNIC Issue Date',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else if(expiryDate == '' || expiryDate == null){
+        Fluttertoast.showToast(
+            msg: 'Please Select CNIC Expiry Date',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else if(bracketValue == '' || bracketValue == null){
+        Fluttertoast.showToast(
+            msg: 'Please Select Source of Income',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else if(occupationValue == '' || occupationValue == null){
+        Fluttertoast.showToast(
+            msg: 'Please Select Occupation',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else if(incomeValue == '' || incomeValue == null){
+        Fluttertoast.showToast(
+            msg: 'Please Select Income Bracket',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }else {
+        Get.toNamed(AppRoute.generateCode);
+      }
+    // }
+  }
+
+
+  String dateTime(DateTime date){
+    return date.day.toString()+'/'+date.month.toString()+'/'+date.year.toString();
+   //  int day = date.day;
+   // return DateFormat("yyyy-MM-dd")
+   //     .format(date);
+  }
+
+
 
   void updateUserName(value) {
     userName(value);
@@ -97,6 +186,7 @@ class UserScreenController extends GetxController {
   Widget build(BuildContext context) {
     throw UnimplementedError();
   }
+
 }
 
 class DialogListView extends StatelessWidget {

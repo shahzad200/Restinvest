@@ -1,3 +1,4 @@
+import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,13 +45,19 @@ class ViewReportsScreen extends StatelessWidget {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            RestInvestTitle(
+                          children: [
+                            const RestInvestTitle(
                                 text: 'Start Date', textColor: AppColor.black),
                             SizedBox(
                               height: 35,
-                              child: DateFormFieldContainer(text:"CNIC Expirey date",
-                                isRounded: false,
+                              child: DateFormFieldContainer(
+                                text: 'CNIC Issue Date',
+                                mode: DateTimeFieldPickerMode.date,
+                                dateFormatTrue: true,
+                                initialValue: DateTime.now(),
+                                onDateSelected: (value){
+
+                                },
                               ),
                             ),
                           ],
@@ -62,13 +69,19 @@ class ViewReportsScreen extends StatelessWidget {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            RestInvestTitle(
+                          children: [
+                            const RestInvestTitle(
                                 text: 'End Date', textColor: AppColor.black),
                             SizedBox(
                               height: 35,
-                              child: DateFormFieldContainer(text:"CNIC Expirey date",
-                                isRounded: false,
+                              child: DateFormFieldContainer(
+                                text: 'CNIC Expiry Date',
+                                mode: DateTimeFieldPickerMode.date,
+                                dateFormatTrue: true,
+                                initialValue: DateTime.now(),
+                                onDateSelected: (value){
+
+                                },
                               ),
                             ),
                           ],

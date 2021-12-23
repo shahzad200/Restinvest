@@ -35,7 +35,7 @@ class ProductScreen extends StatelessWidget {
             ),
             body: WebView(
               initialUrl:
-                  '${_.homeController.socialMediaLink.response!.homeLinks!.products}',
+                  '${_.homeController.socialMediaLink!.response!.homeLinks!.products}',
             ),
           );
         });

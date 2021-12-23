@@ -71,6 +71,9 @@ class _CustomFormFieldState extends State<CustomFormField> {
               if (val!.isEmpty) {
                 return "Please enter the password";
 
+              } else if (val.length >= 5) {
+                return "Password must be at least 6 character in length.";
+
               } else {
                 return null;
               }

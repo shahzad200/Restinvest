@@ -35,7 +35,7 @@ class LearningScreen extends StatelessWidget {
               ),
               body: WebView(
                   initialUrl:
-                      '${_.homeController.socialMediaLink.response!.homeLinks!.learning}'));
+                      '${_.homeController.socialMediaLink!.response!.homeLinks!.learning}'));
         });
   }
 }

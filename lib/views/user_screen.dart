@@ -1,9 +1,11 @@
+import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/new_user_reg_data.dart';
 import 'package:investintrust/routes/routes.dart';
 import '../utils/constant.dart';
 
@@ -29,7 +31,8 @@ class UserScreen extends StatelessWidget {
           return SafeArea(
               child: Scaffold(
             key: _.scaffoldKey,
-            body: SingleChildScrollView(
+            body: _.isLoading ?
+            const Center(child: CircularProgressIndicator()) : SingleChildScrollView(
               padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
               child: Form(key: _.formKey,
                 child: Column(
@@ -62,9 +65,9 @@ class UserScreen extends StatelessWidget {
                         hint: Center(
                           child: RestInvestTitle(
                             textAlign: TextAlign.center,
-                            text: _.titlevalue == null || _.titlevalue == ""
+                            text: _.titleValue == null || _.titleValue == ""
                                 ? "Title"
-                                : _.titlevalue,
+                                : _.titleValue,
                             textColor: AppColor.black,
                           ),
                         ),
@@ -74,7 +77,7 @@ class UserScreen extends StatelessWidget {
                               value: titleItems, child: Text(titleItems!));
                         }).toList(),
                         onChanged: (String? value) {
-                          _.titlevalue = value!;
+                          _.titleValue = value!;
                           _.update();
                         },
                       ),
@@ -89,6 +92,7 @@ class UserScreen extends StatelessWidget {
                       height: 10,
                     ),
                     CustomFormField(onTextChange: (val){_.updateUserName(val);},
+                      controller: _.nameController,
                       hint: "Full Name",
                       fieldType: Constants.userName,
                       textAlign: TextAlign.center,
@@ -97,6 +101,7 @@ class UserScreen extends StatelessWidget {
                       height: 10,
                     ),
                     CustomFormField(onTextChange: (val){_.updateUserName(val);},
+                      controller: _.fatherNameController,
                       hint: "Name of Father/Husband",
                       fieldType: Constants.userName,
                       textAlign: TextAlign.center,
@@ -105,6 +110,7 @@ class UserScreen extends StatelessWidget {
                       height: 10,
                     ),
                     CustomFormField(onTextChange: (val){_.updateUserName(val);},
+                      controller: _.cNicController,
                       hint: "CNIC - 85202-6761678-8",
                       fieldType: Constants.cnicNumber,
                       textAlign: TextAlign.center,
@@ -113,17 +119,31 @@ class UserScreen extends StatelessWidget {
                       height: 10,
                     ),
                     Row(
-                      children: const [
+                      children: [
                         Expanded(
-                          child: DateFormFieldContainer(text:"CNIC Start date",
-                            isRounded: true,
+                          child: DateFormFieldContainer(
+                            text: 'CNIC Issue Date',
+                            mode: DateTimeFieldPickerMode.date,
+                            dateFormatTrue: true,
+                            initialValue: DateTime.now(),
+                            onDateSelected: (value) {
+                              _.issueDate = _.dateTime(value);
+                            },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 4,
                         ),
                         Expanded(
-                          child: DateFormFieldContainer(isRounded: true,text:"CNIC Expirey date"),
+                          child: DateFormFieldContainer(
+                            text: 'CNIC Expiry Date',
+                            mode: DateTimeFieldPickerMode.date,
+                            dateFormatTrue: true,
+                            initialValue: DateTime.now(),
+                            onDateSelected: (value){
+                              _.expiryDate = _.dateTime(value);
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -131,6 +151,7 @@ class UserScreen extends StatelessWidget {
                       height: 10,
                     ),
                     CustomFormField(onTextChange: (val){_.updateNumber(val);},
+                      controller: _.passPortController,
                       hint: "Passport No.",
                       fieldType: Constants.accountNo,
                       textAlign: TextAlign.center,
@@ -166,19 +187,21 @@ class UserScreen extends StatelessWidget {
                         // value: _.dropdownvalue,
                         hint: Center(
                           child: RestInvestTitle(
-                            text: _.incomevalue == null || _.incomevalue == ""
+                            text: _.bracketValue == null || _.bracketValue == ""
                                 ? "Source of Income"
-                                : _.incomevalue,
+                                : _.bracketValue,
                             textColor: AppColor.black,
                           ),
                         ),
-
-                        items: incomeItems.map((String? incomeItems) {
-                          return DropdownMenuItem<String>(
-                              value: incomeItems, child: Text(incomeItems!));
+                        items: _.newUserRegData.response!.incomeSources!.map<DropdownMenuItem<IncomeSources>>((IncomeSources? value){
+                          return DropdownMenuItem<IncomeSources>(
+                            value: value,
+                            child: Text(value!.incomeSourceName!),
+                          );
                         }).toList(),
-                        onChanged: (String? value) {
-                          _.incomevalue = value!;
+                        onChanged: (IncomeSources? value) {
+                          _.bracketValue = value!.incomeSourceName!;
+                          _.bracketCode = value!.incomeSourceId!;
                           _.update();
                         },
                       ),
@@ -216,21 +239,23 @@ class UserScreen extends StatelessWidget {
                         hint: Center(
                           child: RestInvestTitle(
                             text:
-                                _.occupationvalue == null || _.occupationvalue == ""
+                                _.occupationValue == null || _.occupationValue == ""
                                     ? "Occupations"
-                                    : _.occupationvalue,
+                                    : _.occupationValue,
                             textColor: AppColor.black,
                             textAlign: TextAlign.center,
                           ),
                         ),
 
-                        items: occupationItems.map((String? occupationItems) {
-                          return DropdownMenuItem<String>(
-                              value: occupationItems,
-                              child: Text(occupationItems!));
+                        items: _.newUserRegData.response!.occupations!.map<DropdownMenuItem<Occupations>>((Occupations? value){
+                          return DropdownMenuItem<Occupations>(
+                            value: value,
+                            child: Text(value!.occupoationName!),
+                          );
                         }).toList(),
-                        onChanged: (String? value) {
-                          _.occupationvalue = value!;
+                        onChanged: (Occupations? value) {
+                          _.occupationValue = value!.occupoationName!;
+                          _.occupationCode = value!.occupoationCode!;
                           _.update();
                         },
                       ),
@@ -249,6 +274,7 @@ class UserScreen extends StatelessWidget {
                       height: 10,
                     ),
                     CustomFormField(onTextChange: (val){_.updateUserName(val);},
+                      controller: _.ntnController,
                       hint: "NTN",
                       fieldType: Constants.text,
                       textAlign: TextAlign.center,
@@ -257,6 +283,7 @@ class UserScreen extends StatelessWidget {
                       height: 10,
                     ),
                     CustomFormField(onTextChange: (val){_.updateEmail(val);},
+                      controller: _.addressController,
                       hint: "Address",
                       textAlign: TextAlign.center,
                       fieldType: Constants.emailField,
@@ -290,19 +317,22 @@ class UserScreen extends StatelessWidget {
                         // value: _.dropdownvalue,
                         hint: Center(
                           child: RestInvestTitle(
-                            text: _.bracketvalue == null || _.bracketvalue == ""
+                            text: _.incomeValue == null || _.incomeValue == ""
                                 ? "Income Bracket"
-                                : _.bracketvalue,
+                                : _.incomeValue,
                             textColor: AppColor.black,
                           ),
                         ),
 
-                        items: bracketItems.map((String? bracketItems) {
-                          return DropdownMenuItem<String>(
-                              value: bracketItems, child: Text(bracketItems!));
+                        items: _.newUserRegData.response!.incomeBrackets!.map<DropdownMenuItem<IncomeBrackets>>((IncomeBrackets? value){
+                          return DropdownMenuItem<IncomeBrackets>(
+                            value: value,
+                            child: Text(value!.incomeBracketName!),
+                          );
                         }).toList(),
-                        onChanged: (String? value) {
-                          _.bracketvalue = value!;
+                        onChanged: (IncomeBrackets? value) {
+                          _.incomeValue = value!.incomeBracketName!;
+                          _.incomeCode = value!.incomeBracketId!;
                           _.update();
                         },
                       ),
@@ -316,15 +346,17 @@ class UserScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
+<<<<<<< HEAD
                     CustomRoundButton(isSquare: true,
                       text: "Submit",
+=======
+                    RestInvestButton(isSquare: true,
+                      text: "Next",
+>>>>>>> 1bc54382ef0ca64e1a0d20c3ddf98db2728d22d5
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
                       onPress: () {
-                        // if (_.formKey.currentState!.validate()) {
-                        // _.formKey.currentState!.save();
-                        Get.toNamed(AppRoute.generateCode);
-
+                      _.goTONext();
                       }
                         // Fluttertoast.showToast(
                         //     msg: "Please fill all fields",
@@ -339,7 +371,7 @@ class UserScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
+            ) ,
           ));
         });
   }

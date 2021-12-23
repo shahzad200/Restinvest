@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/utils/colors.dart';
+import 'package:investintrust/utils/strings.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
 import 'custom_divider.dart';
@@ -17,10 +18,39 @@ class CustomDrawer extends StatelessWidget {
       color: AppColor.whiteColor,
       width: Get.width / 1.9,
       child: Drawer(
-        child: ListView(children: [
+        child: Strings.userId == '-0456' ?
+        ListView(children: [
           ListTile(
             onTap: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
+              Get.offAllNamed(AppRoute.homeRoute);
+            },
+            leading: const Home(),
+            title: const RestInvestTitle(
+              text: "Home",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          CustomDivider(
+            color: AppColor.black.withOpacity(0.1),
+          ),
+          ListTile(
+            onTap: () {
+              Get.toNamed(AppRoute.loginRoute);
+            },
+            leading: const Logout(),
+            title: const RestInvestTitle(
+              text: "Login",
+              textColor: AppColor.black,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ])
+         : ListView(children: [
+          ListTile(
+            onTap: () {
+              Get.offAllNamed(AppRoute.homeRoute);
             },
             leading: const Home(),
             title: const RestInvestTitle(

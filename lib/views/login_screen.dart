@@ -85,10 +85,11 @@ class LoginScreen extends StatelessWidget {
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
                       onPress: () {
-                        if (_.formKey.currentState!.validate()) {
-                          _.formKey.currentState!.save();
-                          (_.onLoginPress());
-                        }
+                        _.onLoginPress();
+                        // if (_.formKey.currentState!.validate()) {
+                        //   _.formKey.currentState!.save();
+                        //   (_.onLoginPress());
+                        // }
                       }),
                   const SizedBox(
                     height: 20,

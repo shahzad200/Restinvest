@@ -41,8 +41,6 @@ class HomeScreenController extends GetxController {
     try {
       isLoading = true;
       socialMediaLink = await _repository.socialMediaLinks();
-      
-
       isLoading = false;
       update();
     } catch (e) {

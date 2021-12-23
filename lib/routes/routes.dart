@@ -139,7 +139,7 @@ class AppRoute {
       ),
       GetPage(
         name: AppRoute.generateCode,
-        page: () => const GenerateCodeScreen(),
+        page: () =>  GenerateCodeScreen(),
       ),
     ];
   }

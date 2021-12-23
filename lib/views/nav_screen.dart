@@ -37,7 +37,7 @@ class NavScreen extends StatelessWidget {
               body: WebView(
                 // initialUrl: 'https://nit.com.pk/NewNit/NAV.aspx',
                 initialUrl:
-                    '${_.homeController.socialMediaLink.response!.homeLinks!.latestNav}',
+                    '${_.homeController.socialMediaLink!.response!.homeLinks!.latestNav}',
               )
 
               // SingleChildScrollView(

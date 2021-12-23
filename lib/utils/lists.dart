@@ -53,6 +53,19 @@ List<String> titleItems = [
   'Mr',
   'Ms',
 ];
+List<String> gender = [
+  'Male',
+  'Female',
+];
+
+List<String> maritalStatus = [
+  'Single',
+  'Married',
+];
+List<String> filerNonFiler = [
+  'Filer',
+  'Non Filer',
+];
 List<String> incomeItems = [
   "Source of Income",
   "Bussiness/Self-employed",
