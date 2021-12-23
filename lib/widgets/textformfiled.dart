@@ -59,10 +59,10 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.emailField:
             {
               if (val!.isEmpty) {
-                return "Please enter the Address";
-              } else if (!GetUtils.isEmail(val)) {
-                return  "Please fill the field";
-              } else {
+                return "Please enter the email ";
+              }
+
+               else {
                 return null;
               }
             }
@@ -70,8 +70,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
             {
               if (val!.isEmpty) {
                 return "Please enter the password";
-              } else if (val.length <= 6) {
-                return "Password must be at least 6 character in length.";
+
               } else {
                 return null;
               }
@@ -79,7 +78,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.phoneNumberField:
             {
               if (val!.isEmpty) {
-                return  "Please enter the cell number";
+                return  "Please enter the phone number";
               } else {
                 return null;
               }
@@ -117,6 +116,43 @@ class _CustomFormFieldState extends State<CustomFormField> {
               }
 
             }
+          case Constants.pincode:
+            {
+              if (val!.isEmpty) {
+                return "Please enter the pin code";
+              } else {
+                return null;
+              }
+
+            }
+          case Constants.cityname:
+            {
+              if (val!.isEmpty) {
+                return "Please enter the city name";
+              } else {
+                return null;
+              }
+
+            }
+          case Constants.faxnumber:
+            {
+              if (val!.isEmpty) {
+                return "Please enter the  fax number";
+              } else {
+                return null;
+              }
+
+            }
+          case Constants.cellnumber:
+            {
+              if (val!.isEmpty) {
+                return "Please enter the  cell number";
+              } else {
+                return null;
+              }
+
+            }
+
           default:
             {}
         }

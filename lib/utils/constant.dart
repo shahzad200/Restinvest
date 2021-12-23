@@ -12,6 +12,12 @@ class Constants {
 
   static const int userId=6;
   static const int accountNo=7;
+  static const int faxnumber=8;
+
+  static const int pincode=9;
+
+  static const int cityname=10;
+  static const int cellnumber=11;
   //homeScreen button id
   static const int meetingButtonId = 1;
   static const int chatButtonId = 2;

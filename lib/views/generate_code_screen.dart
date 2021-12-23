@@ -77,7 +77,7 @@ class GenerateCodeScreen extends StatelessWidget {
                       child: CustomFormField(
                         onTextChange: (val) {},
                         hint: "Other City",
-                        fieldType: Constants.accountNo,
+                        fieldType: Constants.cityname,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -134,7 +134,7 @@ class GenerateCodeScreen extends StatelessWidget {
                       onTextChange: (val) {},
                       hint: "Cell",
                       textAlign: TextAlign.center,
-                      fieldType: Constants.phoneNumberField,
+                      fieldType: Constants.cellnumber,
                     ),
                     const SizedBox(
                       height: 10,
@@ -143,7 +143,7 @@ class GenerateCodeScreen extends StatelessWidget {
                       onTextChange: (val) {},
                       hint: "Fax",
                       textAlign: TextAlign.center,
-                      fieldType: Constants.phoneNumberField,
+                      fieldType: Constants.faxnumber,
                     ),
                    const SizedBox(height: 10,),
                     CustomFormField(
@@ -204,7 +204,7 @@ class GenerateCodeScreen extends StatelessWidget {
                         child: CustomFormField(
                           onTextChange: (val) {},
                           hint: "Pin Code",
-                          fieldType: Constants.accountNo,
+                          fieldType: Constants.pincode,
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -227,7 +227,7 @@ class GenerateCodeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    RestInvestButton(isSquare: true,
+                    CustomRoundButton(isSquare: true,
                       text: "Generate Pin Code",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
@@ -241,7 +241,7 @@ class GenerateCodeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    RestInvestButton(isSquare: true,
+                    CustomRoundButton(isSquare: true,
                       text: "Submit",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,

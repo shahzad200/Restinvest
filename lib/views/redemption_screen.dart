@@ -325,8 +325,8 @@ class RedemptionScreen extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 40,
-                    child: RestInvestButton(
-                      isSquare: true,
+                    child: RestInvestButton(isSquare:true,
+
                       text: "Submit",
                       onPress: () {},
                       buttonColor: AppColor.blueColor,

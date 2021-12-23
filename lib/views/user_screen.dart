@@ -316,7 +316,7 @@ class UserScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    RestInvestButton(isSquare: true,
+                    CustomRoundButton(isSquare: true,
                       text: "Submit",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
