@@ -10,7 +10,10 @@ import 'package:investintrust/data/models/social_media_links.dart';
 import 'package:investintrust/utils/strings.dart';
 
 import 'api_client.dart';
+import 'models/city_data.dart';
+import 'models/city_sector_model.dart';
 import 'models/common_model.dart';
+import 'models/new_user_pin_gen.dart';
 import 'models/new_user_reg.dart';
 
 class Repository {
@@ -27,7 +30,7 @@ class Repository {
 
 
   Future<LoadDashboard> onLoadDashBoard(String folioNumber)
-  => _apiClient.onLoadDashBoard(LoginScreenController.loginModel.response!.user!.userid.toString(),folioNumber);
+  => _apiClient.onLoadDashBoard(Strings.userId,folioNumber);
 
   Future<CalculateTax> onCalculateTax(String salaried,
   String annualIncome)
@@ -39,10 +42,17 @@ class Repository {
   Future<NewUserRegData> onNewUserRegData()
   => _apiClient.onNewUserRegData();
 
+  Future<CityData> onCityData(String countryCode)
+  => _apiClient.onCityData(countryCode);
 
+  Future<CitySector> onCitySectorData(String cityCode)
+  => _apiClient.onCitySectorData(cityCode);
 
+  Future<NewUserPinGenration> onNewUserPinGenration(String address,
+      String cell, String cNic, String email)
+  => _apiClient.onNewUserPinGenration(address, cell, cNic, email);
 
-  Future<NewUserRegister> onRegNewUser(String title, String fatherOrHusbandName, String cnicIsueDate,
+    Future<NewUserRegister> onRegNewUser(String title, String fatherOrHusbandName, String cnicIsueDate,
       String cNicExpiryDate, String address, String country, String phone,
       String cell, String email, String gender, String occupation,
       String incomeSource, String name, String cnic, String passport,

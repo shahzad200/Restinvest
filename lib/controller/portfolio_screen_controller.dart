@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/load_dashboard.dart';
+import 'package:investintrust/data/repository.dart';
+
+import 'login_screen_controller.dart';
 
 class PortofolioScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -11,6 +16,22 @@ class PortofolioScreenController extends GetxController {
   bool buttonclick3 = false;
   bool buttonclick4 = true;
   bool buttonclick5 = false;
+  bool isLoading = false;
+  bool noInternet = false;
+  final _repository = Repository();
+  LoadDashboard? loadDashboard;
+  LoginScreenController loginScreenController = Get.find<LoginScreenController>();
+  @override
+  void onInit() {
+    onLoadDashboard();
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+  }
 
   investTrust(index) {
     switch (index) {
@@ -64,4 +85,32 @@ class PortofolioScreenController extends GetxController {
         }
     }
   }
+
+  onLoadDashboard() async {
+    try {
+      isLoading = true;
+      loadDashboard =  await _repository.onLoadDashBoard(LoginScreenController.loginModel.response!.accounts![0].folioNumber.toString());
+      isLoading = false;
+      update();
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
+
 }

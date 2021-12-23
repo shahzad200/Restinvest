@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/utils/strings.dart';
 import 'package:investintrust/widgets/no_internet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -48,14 +49,14 @@ class HomeScreen extends StatelessWidget {
             ),
             drawer: const CustomDrawer(),
             key: controller.scaffoldKey,
-            body: SingleChildScrollView(
-              child: controller.isLoading
-                  ? Center(child: const CircularProgressIndicator())
-                  : controller.noInternet
-                      ? NoInternetWgt(
-                          onTryAgain: controller.getSocialLinks,
-                          key: controller.scaffoldKey)
-                      : Column(
+            body: controller.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : controller.noInternet
+                    ? NoInternetWgt(
+                        onTryAgain: controller.getSocialLinks,
+                        key: controller.scaffoldKey)
+                    : SingleChildScrollView(
+                        child: Column(
                           children: [
                             Container(
                               color: AppColor.blueColor,
@@ -104,20 +105,32 @@ class HomeScreen extends StatelessWidget {
                                   textColor: AppColor.blueColor,
                                   text: 'Market',
                                   voidcallback: () {
+                                    print('MARRJJJSJSSTTT'+controller.socialMediaLink!.response!.homeLinks!.market.toString());
                                     Get.toNamed(AppRoute.marketRoute);
                                   },
                                   containerColor: AppColor.whiteColor,
                                 )),
-                                Expanded(
-                                    child: ContainerBox(
-                                  icon: const Portofol(),
-                                  textColor: AppColor.blueColor,
-                                  text: 'LOGIN',
-                                  voidcallback: () {
-                                    Get.toNamed(AppRoute.loginRoute);
-                                  },
-                                  containerColor: AppColor.liteblue,
-                                )),
+                                Strings.userId == '-0456'
+                                    ? Expanded(
+                                        child: ContainerBox(
+                                        icon: const Portofol(),
+                                        textColor: AppColor.blueColor,
+                                        text: 'LOGIN',
+                                        voidcallback: () {
+                                          Get.toNamed(AppRoute.loginRoute);
+                                        },
+                                        containerColor: AppColor.liteblue,
+                                      ))
+                                    : Expanded(
+                                        child: ContainerBox(
+                                        icon: const Portofol(),
+                                        textColor: AppColor.blueColor,
+                                        text: 'DashBoard',
+                                        voidcallback: () {
+                                          Get.toNamed(AppRoute.portofolioRoute);
+                                        },
+                                        containerColor: AppColor.liteblue,
+                                      ))
                               ],
                             ),
                             Row(
@@ -200,7 +213,7 @@ class HomeScreen extends StatelessWidget {
                                         textColor: AppColor.whiteColor,
                                         voidcallback: () {
                                           customLaunch(
-                                              'tel: ${controller.socialMediaLink.response!.homeLinks!.advisorPhone}');
+                                              'tel: ${controller.socialMediaLink!.response!.homeLinks!.advisorPhone}');
                                         },
                                         icon: const Call())),
                                 const SizedBox(
@@ -214,7 +227,7 @@ class HomeScreen extends StatelessWidget {
                                         textColor: AppColor.whiteColor,
                                         voidcallback: () {
                                           customLaunch(
-                                              'sms: ${controller.socialMediaLink.response!.homeLinks!.advisorSms} ');
+                                              'sms: ${controller.socialMediaLink!.response!.homeLinks!.advisorSms} ');
                                         },
                                         icon: const Sms())),
                                 const SizedBox(
@@ -227,9 +240,11 @@ class HomeScreen extends StatelessWidget {
                                         text: "EMAIL",
                                         textColor: AppColor.whiteColor,
                                         voidcallback: () {
-                                          printInfo(info: "${controller.socialMediaLink.response!.homeLinks!.advisorEmail}");
+                                          printInfo(
+                                              info:
+                                                  "${controller.socialMediaLink!.response!.homeLinks!.advisorEmail}");
                                           customLaunch(
-                                              'email: ${controller.socialMediaLink.response!.homeLinks!.advisorEmail}');
+                                              'email: ${controller.socialMediaLink!.response!.homeLinks!.advisorEmail}');
                                         },
                                         icon: const Mail())),
                                 const SizedBox(
@@ -243,14 +258,14 @@ class HomeScreen extends StatelessWidget {
                                         textColor: AppColor.whiteColor,
                                         voidcallback: () {
                                           customLaunch(
-                                              'about: ${controller.socialMediaLink.response!.homeLinks!.aboutUs}');
+                                              'about: ${controller.socialMediaLink!.response!.homeLinks!.aboutUs}');
                                         },
                                         icon: const Chat()))
                               ],
                             )
                           ],
                         ),
-            ),
+                      ),
           );
         });
   }

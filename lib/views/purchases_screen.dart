@@ -1,3 +1,4 @@
+import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -355,13 +356,21 @@ class PurchasesScreen extends StatelessWidget {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            RestInvestTitle(
+                          children: [
+                            const RestInvestTitle(
                                 text: 'Check/Instrument Date.',
                                 textColor: AppColor.blueColor),
                             SizedBox(
                               height: 35,
-                              child: DateFieldContainer(),
+                              child: DateFormFieldContainer(
+                                text: '',
+                                mode: DateTimeFieldPickerMode.date,
+                                dateFormatTrue: true,
+                                initialValue: DateTime.now(),
+                                onDateSelected: (value){
+
+                                },
+                              ),
                             ),
                           ],
                         ),

@@ -36,7 +36,7 @@ class MarketScreen extends StatelessWidget {
             ),
             body: WebView(
               initialUrl:
-                  '${_.homeController.socialMediaLink.response!.homeLinks!.market}',
+                  '${_.homeController.socialMediaLink!.response!.homeLinks!.market}',
             ),
           );
         });

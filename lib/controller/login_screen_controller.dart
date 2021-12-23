@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/strings.dart';
 
 class LoginScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -57,9 +58,10 @@ class LoginScreenController extends GetxController {
 
     try{
       isLoading = true;
+      update();
       loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
-      await _repository.onLoadDashBoard(loginModel.response!.accounts![0].folioNumber.toString());
-      Get.offAllNamed(AppRoute.redemptionRoute);
+      Strings.userId = loginModel.response!.user!.userid.toString();
+      Get.toNamed(AppRoute.portofolioRoute);
       isLoading = false;
       update();
     }catch (e){

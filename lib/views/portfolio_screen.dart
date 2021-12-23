@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/controller/login_screen_controller.dart';
 import 'package:investintrust/controller/portfolio_screen_controller.dart';
+import 'package:investintrust/data/models/login_model.dart';
 
 import '../utils/colors.dart';
 import '../widgets/button.dart';
@@ -60,31 +62,14 @@ class PortofolioScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ListTile(
-                    leading: const RestInvestTitle(
-                      text: "81656",
-                      textColor: AppColor.dimblack,
-                    ),
-                    trailing: const RestInvestTitle(
-                      text: "PKR.00",
-                      fontWeight: FontWeight.w900,
-                      textColor: AppColor.black,
-                    ),
-                    onTap: () {},
-                  ),
-                  CustomDivider(color: AppColor.dimblack.withOpacity(0.2)),
-                  ListTile(
-                    leading: const RestInvestTitle(
-                      text: "81656",
-                      textColor: AppColor.dimblack,
-                    ),
-                    trailing: const RestInvestTitle(
-                      text: "PKR.00",
-                      fontWeight: FontWeight.w900,
-                      textColor: AppColor.black,
-                    ),
-                    onTap: () {},
-                  ),
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: LoginScreenController.loginModel.response!.accounts!.length,
+                  itemBuilder: (context, index) {
+                    // RemoteMessage message = _messages[index];
+                    return listItem(LoginScreenController.loginModel.response!.accounts![index].folioNumber, '0.0');
+                  }),
+
                   const SizedBox(
                     height: 40,
                   ),
@@ -181,4 +166,26 @@ class PortofolioScreen extends StatelessWidget {
           );
         });
   }
+
+  Widget listItem(String? folioNumber, String? amount){
+    return Column(
+      children: [
+        ListTile(
+          leading: RestInvestTitle(
+            text: folioNumber ?? '6564',
+            textColor: AppColor.dimblack,
+          ),
+          trailing: RestInvestTitle(
+            text: 'PKR '+ amount! ?? '0.0',
+            fontWeight: FontWeight.w900,
+            textColor: AppColor.black,
+          ),
+          onTap: () {},
+        ),
+        CustomDivider(color: AppColor.dimblack.withOpacity(0.2)),
+      ],
+    );
+  }
+
+
 }

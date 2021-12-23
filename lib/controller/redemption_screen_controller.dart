@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/controller/login_screen_controller.dart';
+import 'package:investintrust/data/models/load_dashboard.dart';
+import 'package:investintrust/data/repository.dart';
 
 class RedemptionScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -12,6 +16,15 @@ class RedemptionScreenController extends GetxController {
   bool investButton = false;
   bool portfolioButton = false;
   bool buttonclick3 = false;
+
+
+  @override
+  void onInit() {
+
+    super.onInit();
+  }
+
+
 
   investTrust(index) {
     switch (index) {
