@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:investintrust/utils/constant.dart';
+import 'package:investintrust/widgets/dialogbox.dart';
 
 import '../controller/login_screen_controller.dart';
 import '../routes/routes.dart';
@@ -117,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   InkWell(
                       onTap: () {
-                        Get.toNamed(AppRoute.taxcalculatorRoute);
+                        DialogBox;
                       },
                       child: const RestInvestTitle(
                           text: "Tax Calculator",
