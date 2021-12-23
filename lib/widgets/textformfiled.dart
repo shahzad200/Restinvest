@@ -139,7 +139,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
           case Constants.cityname:
             {
               if (val!.isEmpty) {
-                return "Please enter the city name";
+                return "";
               } else {
                 return null;
               }

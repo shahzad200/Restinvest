@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../controller/nav_screen_controller.dart';
@@ -37,7 +38,7 @@ class NavScreen extends StatelessWidget {
               body: WebView(
                 // initialUrl: 'https://nit.com.pk/NewNit/NAV.aspx',
                 initialUrl:
-                    '${_.homeController.socialMediaLink!.response!.homeLinks!.latestNav}',
+                    '${Constant.socialMediaLink!.response!.homeLinks!.latestNav}',
               )
 
               // SingleChildScrollView(

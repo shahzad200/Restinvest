@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/utils/strings.dart';
 
 class LoginScreenController extends GetxController {
@@ -16,7 +17,7 @@ class LoginScreenController extends GetxController {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _repository = Repository();
-  static late LoginModel loginModel;
+  // static late LoginModel loginModel;
   bool isLoading = false;
   bool noInternet = false;
   var userName = "".obs;
@@ -59,8 +60,8 @@ class LoginScreenController extends GetxController {
     try{
       isLoading = true;
       update();
-      loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
-      Strings.userId = loginModel.response!.user!.userid.toString();
+      Constant.loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
+      Constant.userId = Constant.loginModel!.response!.user!.userid.toString();
       Get.toNamed(AppRoute.portofolioRoute);
       isLoading = false;
       update();

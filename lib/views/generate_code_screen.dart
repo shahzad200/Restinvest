@@ -151,7 +151,7 @@ class GenerateCodeScreen extends StatelessWidget {
 
 
                         const SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
                         Row(children: [
                           Expanded(
@@ -159,6 +159,7 @@ class GenerateCodeScreen extends StatelessWidget {
                               controller: _.otherCityController,
                               onTextChange: (val) {},
                               hint: "Other City",
+                              fieldType: Constants.cityname,
 
                               textAlign: TextAlign.center,
                             ),
@@ -217,7 +218,7 @@ class GenerateCodeScreen extends StatelessWidget {
                           ),
                         ],),
                         const SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
                         Container(height: 50,
                             // alignment: Alignment.center,
@@ -270,7 +271,7 @@ class GenerateCodeScreen extends StatelessWidget {
 
 
                         const SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
 
 
@@ -282,7 +283,7 @@ class GenerateCodeScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 6,
                         ),
                         CustomFormField(
                           controller: _.cellController,
@@ -292,7 +293,7 @@ class GenerateCodeScreen extends StatelessWidget {
                           fieldType: Constants.cellnumber,
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
                         CustomFormField(
                           controller: _.faxController,
@@ -309,7 +310,7 @@ class GenerateCodeScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           fieldType: Constants.emailField,
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 8,),
 
                         DateFormFieldContainer(isRounded:true,
                           text: 'Date of Birth',
@@ -321,7 +322,7 @@ class GenerateCodeScreen extends StatelessWidget {
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 6,
                         ),
                         Row(
                           children: [
@@ -373,7 +374,7 @@ class GenerateCodeScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(
-                              width: 6,
+                              width: 8,
                             ),
                             Expanded(
                               child: Container(height: 50,
@@ -427,7 +428,7 @@ class GenerateCodeScreen extends StatelessWidget {
 
 
                         const SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
                         Row(children: [
                           Expanded(
@@ -489,7 +490,7 @@ class GenerateCodeScreen extends StatelessWidget {
                           ),
                         ],),
                         const SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
                         CustomRoundButton(
                           isSquare: true,
@@ -503,7 +504,7 @@ class GenerateCodeScreen extends StatelessWidget {
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 6,
                         ),
                         CustomRoundButton(
                           isSquare: true,

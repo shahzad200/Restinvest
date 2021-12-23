@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/utils/constants.dart';
 
 import '../controller/market_screen_controller.dart';
 
@@ -36,7 +36,7 @@ class MarketScreen extends StatelessWidget {
             ),
             body: WebView(
               initialUrl:
-                  '${_.homeController.socialMediaLink!.response!.homeLinks!.market}',
+                  '${Constant.socialMediaLink!.response!.homeLinks!.market}',
             ),
           );
         });

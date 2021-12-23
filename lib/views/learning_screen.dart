@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../controller/learning_screen_controller.dart';
@@ -35,7 +36,7 @@ class LearningScreen extends StatelessWidget {
               ),
               body: WebView(
                   initialUrl:
-                      '${_.homeController.socialMediaLink!.response!.homeLinks!.learning}'));
+                      '${Constant.socialMediaLink!.response!.homeLinks!.learning}'));
         });
   }
 }

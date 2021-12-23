@@ -10,7 +10,7 @@ class NavScreenController extends GetxController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool ischeck = false;
 
-  final homeController = Get.find<HomeScreenController>();
+  // final homeController = Get.find<HomeScreenController>();
 
   DateTime selectedDate = DateTime.now();
   DateTime endDate = DateTime.now();

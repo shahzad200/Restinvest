@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/utils/strings.dart';
 import 'package:investintrust/widgets/no_internet.dart';
+import 'package:investintrust/widgets/web_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../controller/home_screen_controller.dart';
@@ -67,7 +69,10 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Get.toNamed(AppRoute.navRoute);
+                                      // Get.toNamed(AppRoute.navRoute);
+                                      Get.to(WebView(title: 'NAV',
+                                        link: '${Constant.socialMediaLink!.response!.homeLinks!.latestNav}',
+                                      ));
                                     },
                                     child: IconButtonText(
                                       icon: const Nav(),
@@ -76,19 +81,23 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      Get.toNamed(AppRoute.branchesRoute);
+                                      // Get.toNamed(AppRoute.branchesRoute);
+                                      Get.to(WebView(title: 'Branches',
+                                        link: '${Constant.socialMediaLink!.response!.homeLinks!.branchLocator}',
+                                      ));
                                     },
                                     child: IconButtonText(
                                       icon: const Branches(),
-
                                       // color: AppColor.whiteColor,
-
                                       text: "BRANCHES",
                                     ),
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      Get.toNamed(AppRoute.learningRoute);
+                                      // Get.toNamed(AppRoute.learningRoute);
+                                      Get.to(WebView(title: 'Learning',
+                                        link: '${Constant.socialMediaLink!.response!.homeLinks!.learning}',
+                                      ));
                                     },
                                     child: IconButtonText(
                                         icon: const Learning(),
@@ -105,12 +114,14 @@ class HomeScreen extends StatelessWidget {
                                   textColor: AppColor.blueColor,
                                   text: 'Market',
                                   voidcallback: () {
-                                    print('MARRJJJSJSSTTT'+controller.socialMediaLink!.response!.homeLinks!.market.toString());
-                                    Get.toNamed(AppRoute.marketRoute);
+                                    // Get.toNamed(AppRoute.marketRoute);
+                                    Get.to(WebView(title: 'MARKET',
+                                      link: '${Constant.socialMediaLink!.response!.homeLinks!.market}',
+                                    ));
                                   },
                                   containerColor: AppColor.whiteColor,
                                 )),
-                                Strings.userId == '-0456'
+                                Constant.userId == '-0456'
                                     ? Expanded(
                                         child: ContainerBox(
                                         icon: const Portofol(),
@@ -141,7 +152,10 @@ class HomeScreen extends StatelessWidget {
                                   textColor: AppColor.blueColor,
                                   text: 'FUND MANAGER\n       REPORT',
                                   voidcallback: () {
-                                    Get.toNamed(AppRoute.fundManagerRoute);
+                                    // Get.toNamed(AppRoute.fundManagerRoute);
+                                    Get.to(WebView(title: 'Fund Manager Reports',
+                                      link: 'https://nit.com.pk/newnit/ConsolidatedFMR.aspx',
+                                    ));
                                   },
                                   containerColor: AppColor.liteblue,
                                 )),
@@ -163,7 +177,11 @@ class HomeScreen extends StatelessWidget {
                                   textColor: AppColor.blueColor,
                                   text: 'PRODUCTS',
                                   voidcallback: () {
-                                    Get.toNamed(AppRoute.productRoute);
+                                    // Get.toNamed(AppRoute.productRoute);
+                                    Get.to(WebView(title: 'Products',
+                                      link: '${Constant.socialMediaLink!.response!.homeLinks!.products}',
+                                    ));
+
                                   },
                                   containerColor: AppColor.whiteColor,
                                 )),
@@ -173,7 +191,11 @@ class HomeScreen extends StatelessWidget {
                                   textColor: AppColor.blueColor,
                                   text: 'PIC YOUR FUND',
                                   voidcallback: () {
-                                    Get.toNamed(AppRoute.fundRoute);
+                                    // Get.toNamed(AppRoute.fundRoute);
+                                    Get.to(WebView(title: 'Pic Your Fund',
+                                      link: 'https://nit.com.pk/newnit/Pickyourfunds.aspx',
+                                    ));
+
                                   },
                                   containerColor: AppColor.liteblue,
                                 )),
@@ -212,8 +234,11 @@ class HomeScreen extends StatelessWidget {
                                         text: "Call",
                                         textColor: AppColor.whiteColor,
                                         voidcallback: () {
-                                          customLaunch(
-                                              'tel: ${controller.socialMediaLink!.response!.homeLinks!.advisorPhone}');
+                                          // customLaunch(
+                                          //     'tel: ${Constant.socialMediaLink!.response!.homeLinks!.advisorPhone}');
+                                          Get.to(WebView(title: 'About Us',
+                                            link: Constant.linkAboutUs,
+                                          ));
                                         },
                                         icon: const Call())),
                                 const SizedBox(
@@ -227,7 +252,7 @@ class HomeScreen extends StatelessWidget {
                                         textColor: AppColor.whiteColor,
                                         voidcallback: () {
                                           customLaunch(
-                                              'sms: ${controller.socialMediaLink!.response!.homeLinks!.advisorSms} ');
+                                              'sms: ${Constant.socialMediaLink!.response!.homeLinks!.advisorSms} ');
                                         },
                                         icon: const Sms())),
                                 const SizedBox(
@@ -242,9 +267,9 @@ class HomeScreen extends StatelessWidget {
                                         voidcallback: () {
                                           printInfo(
                                               info:
-                                                  "${controller.socialMediaLink!.response!.homeLinks!.advisorEmail}");
+                                                  "${Constant.socialMediaLink!.response!.homeLinks!.advisorEmail}");
                                           customLaunch(
-                                              'email: ${controller.socialMediaLink!.response!.homeLinks!.advisorEmail}');
+                                              'email: ${Constant.socialMediaLink!.response!.homeLinks!.advisorEmail}');
                                         },
                                         icon: const Mail())),
                                 const SizedBox(
@@ -257,8 +282,11 @@ class HomeScreen extends StatelessWidget {
                                         text: "ABOUT Us",
                                         textColor: AppColor.whiteColor,
                                         voidcallback: () {
-                                          customLaunch(
-                                              'about: ${controller.socialMediaLink!.response!.homeLinks!.aboutUs}');
+                                          // customLaunch(
+                                          //     'about: ${Constant.socialMediaLink!.response!.homeLinks!.aboutUs}');
+                                          Get.to(WebView(title: 'About Us',
+                                            link: Constant.linkAboutUs,
+                                          ));
                                         },
                                         icon: const Chat()))
                               ],
