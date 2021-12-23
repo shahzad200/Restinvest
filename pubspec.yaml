@@ -33,7 +33,7 @@ dependencies:
   date_field: ^2.1.2
   fluttertoast: ^8.0.8
   http: ^0.13.3
-  webview_flutter: ^3.0.0
+  webview_flutter: ^2.8.0
   intl: ^0.17.0
   #encryptions
   pointycastle: ^3.3.4

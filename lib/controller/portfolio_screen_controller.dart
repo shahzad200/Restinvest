@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/load_dashboard.dart';
 import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/utils/constants.dart';
 
 import 'login_screen_controller.dart';
 
@@ -20,7 +21,7 @@ class PortofolioScreenController extends GetxController {
   bool noInternet = false;
   final _repository = Repository();
   LoadDashboard? loadDashboard;
-  LoginScreenController loginScreenController = Get.find<LoginScreenController>();
+  // LoginScreenController loginScreenController = Get.find<LoginScreenController>();
   @override
   void onInit() {
     onLoadDashboard();
@@ -89,7 +90,7 @@ class PortofolioScreenController extends GetxController {
   onLoadDashboard() async {
     try {
       isLoading = true;
-      loadDashboard =  await _repository.onLoadDashBoard(LoginScreenController.loginModel.response!.accounts![0].folioNumber.toString());
+      loadDashboard =  await _repository.onLoadDashBoard(Constant.loginModel!.response!.accounts![0].folioNumber.toString());
       isLoading = false;
       update();
     } catch (e) {

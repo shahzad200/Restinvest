@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/utils/colors.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/utils/strings.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:investintrust/widgets/web_view.dart';
 
 import 'custom_divider.dart';
 
@@ -18,7 +20,7 @@ class CustomDrawer extends StatelessWidget {
       color: AppColor.whiteColor,
       width: Get.width / 1.9,
       child: Drawer(
-        child: Strings.userId == '-0456' ?
+        child: Constant.userId == '-0456' ?
         ListView(children: [
           ListTile(
             onTap: () {
@@ -133,7 +135,11 @@ class CustomDrawer extends StatelessWidget {
             color: AppColor.black.withOpacity(0.1),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.to(WebView(title: 'Complains',
+                link: 'https://nit.com.pk/NewNit/Complains.aspx',
+              ));
+            },
             leading: const Complaint(),
             title: const RestInvestTitle(
               text: "Complaints",

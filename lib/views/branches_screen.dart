@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../controller/branches_screen_controller.dart';
@@ -34,8 +35,10 @@ class BranchesScreen extends StatelessWidget {
               ),
             ),
             body: WebView(
+              javascriptMode: JavascriptMode.unrestricted,
                 initialUrl:
-                    '${_.homeController.socialMediaLink!.response!.homeLinks!.branchLocator}'),
+                    Constant.linkBranches),
+
           );
         });
   }

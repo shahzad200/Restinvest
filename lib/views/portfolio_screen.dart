@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:investintrust/controller/login_screen_controller.dart';
 import 'package:investintrust/controller/portfolio_screen_controller.dart';
 import 'package:investintrust/data/models/login_model.dart';
+import 'package:investintrust/utils/constants.dart';
 
 import '../utils/colors.dart';
 import '../widgets/button.dart';
@@ -64,10 +65,10 @@ class PortofolioScreen extends StatelessWidget {
                   ),
               ListView.builder(
                   shrinkWrap: true,
-                  itemCount: LoginScreenController.loginModel.response!.accounts!.length,
+                  itemCount: Constant.loginModel!.response!.accounts!.length,
                   itemBuilder: (context, index) {
                     // RemoteMessage message = _messages[index];
-                    return listItem(LoginScreenController.loginModel.response!.accounts![index].folioNumber, '0.0');
+                    return listItem(Constant.loginModel!.response!.accounts![index].folioNumber, '0.0');
                   }),
 
                   const SizedBox(

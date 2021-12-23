@@ -7,5 +7,5 @@ import 'home_screen_controller.dart';
 class LearningScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  final homeController = Get.find<HomeScreenController>();
+  // final homeController = Get.find<HomeScreenController>();
 }

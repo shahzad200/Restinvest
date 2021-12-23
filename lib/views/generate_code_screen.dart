@@ -536,12 +536,3 @@ class GenerateCodeScreen extends StatelessWidget {
         });
   }
 }
-// {"address":"jhgjh jhhj jhgj jhv jhgj jv","birthDate":"16/12/2014",
-// "cell":"+923746435353","city":"000001",
-// "cnic":"5675-7656565-8","cnicExpiryDate":"31/12/2021",
-// "cnicIsueDate":"1/12/2021","country":"001","email":
-// "talhakhanxada@gmail.com","fatherOrHusbandName":"bhjhg",
-// "fax":"fax88738","filerNonFiler":"Filer","gender":"M","incomeBracket":"4",
-// "incomeSource":"08","maritalStatus":"Single","name":"jhgj","ntn":"ntn884",
-// "occupation":"015","otherCity":"","passport":"pass004","phone":"+923746435353",
-// "pinCode":"3c77","pinCodeExpiryConfigID":3,"religion":"01","sector":"NORTH","title":"Mr"}

@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/social_media_links.dart';
 import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/utils/lists.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,12 +15,13 @@ class HomeScreenController extends GetxController {
   bool isLoading = false;
 
   bool noInternet = false;
-  late SocialMediaLink socialMediaLink;
-  // Exception ex = Exception([message]);
-
+  // https://nit.com.pk/NewNit/Complains.aspx
+  // https://nit.com.pk/NewNit/ConsolidatedFMRW.aspx
   @override
   void onInit() async {
-    getSocialLinks();
+    if(Constant.socialMediaLink == null) {
+      getSocialLinks();
+    }
     super.onInit();
   }
 
@@ -40,7 +42,7 @@ class HomeScreenController extends GetxController {
   getSocialLinks() async {
     try {
       isLoading = true;
-      socialMediaLink = await _repository.socialMediaLinks();
+      Constant.socialMediaLink = await _repository.socialMediaLinks();
       isLoading = false;
       update();
     } catch (e) {
