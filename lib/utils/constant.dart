@@ -5,7 +5,7 @@ class Constants {
 
   static const int phoneNumberField = 2;
 
-  static const int userName = 3;
+  static const int name = 3;
   static const int text = 4;
 
   static const int cnicNumber=5;
@@ -18,6 +18,10 @@ class Constants {
 
   static const int cityname=10;
   static const int cellnumber=11;
+  static const int fathername=12;
+  static const int username= 13;
+  static const int ntnnumber=14;
+  static const int passportnumber= 15;
   //homeScreen button id
   static const int meetingButtonId = 1;
   static const int chatButtonId = 2;

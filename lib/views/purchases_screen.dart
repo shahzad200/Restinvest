@@ -362,8 +362,8 @@ class PurchasesScreen extends StatelessWidget {
                                 textColor: AppColor.blueColor),
                             SizedBox(
                               height: 35,
-                              child: DateFormFieldContainer(
-                                text: '',
+                              child: DateFormFieldContainer(isRounded:false,
+                                text: 'fff',
                                 mode: DateTimeFieldPickerMode.date,
                                 dateFormatTrue: true,
                                 initialValue: DateTime.now(),

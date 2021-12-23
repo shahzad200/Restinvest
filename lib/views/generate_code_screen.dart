@@ -44,59 +44,6 @@ class GenerateCodeScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Container(height: 50,
-                                  // alignment: Alignment.center,
-                                  // width: Get.width,
-                                  // margin: EdgeInsets.all(10.0),
-                                  // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
-
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: AppColor.whiteColor,
-                                      border: Border.all(
-                                          width: 0.5,
-                                          color: AppColor.dimblack)),
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    alignment: Alignment.center,
-                                    icon: const Visibility(
-                                      visible: false,
-                                      child: Icon(Icons.arrow_downward),
-                                    ),
-                                    iconSize: 0,
-                                    underline: Container(
-                                      alignment: Alignment.center,
-                                      color: AppColor.whiteColor,
-                                    ),
-
-                                    borderRadius: BorderRadius.circular(10),
-                                    // value: _.dropdownvalue,
-                                    hint: Center(
-                                      child: RestInvestTitle(
-                                        text: _.countryValue == null || _.countryValue == ""
-                                            ? "Select Country"
-                                            : _.countryValue,
-                                        textColor: AppColor.black,
-                                      ),
-                                    ),
-                                    items: controller.newUserRegData.response!.countries!.map<DropdownMenuItem<Countries>>((Countries? value){
-                                      return DropdownMenuItem<Countries>(
-                                        value: value,
-                                        child: Text(value!.countryName!),
-                                      );
-                                    }).toList(),
-                                    onChanged: (Countries? value) {
-                                      _.countryValue = value!.countryName!;
-                                      _.countryCode = value!.countryCode!;
-                                      _.onCityData(value!.countryCode!);
-                                    },
-                                  ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 6,
-                            ),
-                            Expanded(
-                              child: Container(height: 50,
                                 // alignment: Alignment.center,
                                 // width: Get.width,
                                 // margin: EdgeInsets.all(10.0),
@@ -106,7 +53,60 @@ class GenerateCodeScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                     color: AppColor.whiteColor,
                                     border: Border.all(
-                                        width: 0.5, color: AppColor.dimblack)),
+                                        width: 0.5,
+                                        color: AppColor.dimblack)),
+                                child: DropdownButton(
+                                  isExpanded: true,
+                                  alignment: Alignment.center,
+                                  icon: const Visibility(
+                                    visible: false,
+                                    child: Icon(Icons.arrow_downward),
+                                  ),
+                                  iconSize: 0,
+                                  underline: Container(
+                                    alignment: Alignment.center,
+                                    color: AppColor.whiteColor,
+                                  ),
+
+                                  borderRadius: BorderRadius.circular(10),
+                                  // value: _.dropdownvalue,
+                                  hint: Center(
+                                    child: RestInvestTitle(
+                                      text: _.countryValue == null || _.countryValue == ""
+                                          ? "Select Country"
+                                          : _.countryValue,
+                                      textColor: AppColor.black,
+                                    ),
+                                  ),
+                                  items: controller.newUserRegData.response!.countries!.map<DropdownMenuItem<Countries>>((Countries? value){
+                                    return DropdownMenuItem<Countries>(
+                                      value: value,
+                                      child: Text(value!.countryName!),
+                                    );
+                                  }).toList(),
+                                  onChanged: (Countries? value) {
+                                    _.countryValue = value!.countryName!;
+                                    _.countryCode = value!.countryCode!;
+                                    _.onCityData(value!.countryCode!);
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            Expanded(
+                              child: Container(height: 50,
+                                  // alignment: Alignment.center,
+                                  // width: Get.width,
+                                  // margin: EdgeInsets.all(10.0),
+                                  // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
+
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: AppColor.whiteColor,
+                                      border: Border.all(
+                                          width: 0.5, color: AppColor.dimblack)),
                                   child: _.cityData != null
                                       ? DropdownButton(
                                     isExpanded: true,
@@ -159,23 +159,23 @@ class GenerateCodeScreen extends StatelessWidget {
                               controller: _.otherCityController,
                               onTextChange: (val) {},
                               hint: "Other City",
-                              fieldType: Constants.accountNo,
+
                               textAlign: TextAlign.center,
                             ),
                           ),
                           const SizedBox(width: 6,),
                           Expanded(
                             child: Container(height: 50,
-                              // alignment: Alignment.center,
-                              // width: Get.width,
-                              // margin: EdgeInsets.all(10.0),
-                              // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
+                                // alignment: Alignment.center,
+                                // width: Get.width,
+                                // margin: EdgeInsets.all(10.0),
+                                // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
 
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColor.whiteColor,
-                                  border: Border.all(
-                                      width: 0.5, color: AppColor.dimblack)),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: AppColor.whiteColor,
+                                    border: Border.all(
+                                        width: 0.5, color: AppColor.dimblack)),
                                 child: _.citySector != null
                                     ? DropdownButton(
                                   isExpanded: true,
@@ -190,112 +190,6 @@ class GenerateCodeScreen extends StatelessWidget {
                                     color: AppColor.whiteColor,
                                   ),
 
-<<<<<<< HEAD
-
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  Row(children: [
-                    Expanded(
-                      child: CustomFormField(
-                        onTextChange: (val) {},
-                        hint: "Other City",
-                        fieldType: Constants.cityname,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                   const SizedBox(width: 6,),
-                    Expanded(
-                      child: Container(height: 50,
-                        // alignment: Alignment.center,
-                        // width: Get.width,
-                        // margin: EdgeInsets.all(10.0),
-                        // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
-
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColor.whiteColor,
-                            border: Border.all(
-                                width: 0.5, color: AppColor.dimblack)),
-                      ),
-                    ),
-                  ],),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(height: 50,
-                      // alignment: Alignment.center,
-                       width: Get.width,
-                      // margin: EdgeInsets.all(10.0),
-                      // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
-
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColor.whiteColor,
-                          border: Border.all(
-                              width: 0.5, color: AppColor.dimblack)),
-                    ),
-
-
-                    const SizedBox(
-                      height: 10,
-                    ),
-
-
-
-
-                    CustomFormField(
-                      onTextChange: (val) {},
-                      hint: "Phone",
-                      fieldType: Constants.phoneNumberField,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomFormField(
-                      onTextChange: (val) {},
-                      hint: "Cell",
-                      textAlign: TextAlign.center,
-                      fieldType: Constants.cellnumber,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomFormField(
-                      onTextChange: (val) {},
-                      hint: "Fax",
-                      textAlign: TextAlign.center,
-                      fieldType: Constants.faxnumber,
-                    ),
-                   const SizedBox(height: 10,),
-                    CustomFormField(
-                      onTextChange: (val) {},
-                      hint: "Email",
-                      textAlign: TextAlign.center,
-                      fieldType: Constants.emailField,
-                    ),
-                    const SizedBox(height: 10,),
-
-                  const  DateFormFieldContainer(isRounded:true,text:"Date Of Birth"),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(height: 50,
-                            // alignment: Alignment.center,
-                            // width: Get.width,
-                            // margin: EdgeInsets.all(10.0),
-                            // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
-
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: AppColor.whiteColor,
-                                border: Border.all(
-                                    width: 0.5, color: AppColor.dimblack)),
-=======
                                   borderRadius: BorderRadius.circular(10),
                                   // value: _.dropdownvalue,
                                   hint: Center(
@@ -320,17 +214,14 @@ class GenerateCodeScreen extends StatelessWidget {
                                 )
                                     : const SizedBox()
                             ),
->>>>>>> 1bc54382ef0ca64e1a0d20c3ddf98db2728d22d5
                           ),
                         ],),
                         const SizedBox(
                           height: 10,
                         ),
-<<<<<<< HEAD
-                        Expanded(
-                          child: Container(height: 50,
+                        Container(height: 50,
                             // alignment: Alignment.center,
-                            // width: Get.width,
+                            width: Get.width,
                             // margin: EdgeInsets.all(10.0),
                             // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
 
@@ -339,41 +230,6 @@ class GenerateCodeScreen extends StatelessWidget {
                                 color: AppColor.whiteColor,
                                 border: Border.all(
                                     width: 0.5, color: AppColor.dimblack)),
-                          ),
-                        ),
-                      ],
-                    ),
-
-
-
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(children: [
-                      Expanded(
-                        child: CustomFormField(
-                          onTextChange: (val) {},
-                          hint: "Pin Code",
-                          fieldType: Constants.pincode,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      const SizedBox(width: 6,),
-                      Expanded(
-                        child: Container(height: 50,
-=======
-                        Container(height: 50,
->>>>>>> 1bc54382ef0ca64e1a0d20c3ddf98db2728d22d5
-                          // alignment: Alignment.center,
-                          width: Get.width,
-                          // margin: EdgeInsets.all(10.0),
-                          // padding: const EdgeInsets.only(left: 10.0, right: 5.0),
-
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: AppColor.whiteColor,
-                              border: Border.all(
-                                  width: 0.5, color: AppColor.dimblack)),
                             child: DropdownButton(
                               isExpanded: true,
                               alignment: Alignment.center,
@@ -411,37 +267,7 @@ class GenerateCodeScreen extends StatelessWidget {
                             )
 
                         ),
-<<<<<<< HEAD
-                      ),
-                    ],),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomRoundButton(isSquare: true,
-                      text: "Generate Pin Code",
-                      buttonColor: AppColor.blueColor,
-                      textColor: AppColor.whiteColor,
-                      onPress: () {
-                        if (_.formKey.currentState!.validate()) {
-                          _.formKey.currentState!.save();
-                        }
 
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomRoundButton(isSquare: true,
-                      text: "Submit",
-                      buttonColor: AppColor.blueColor,
-                      textColor: AppColor.whiteColor,
-                      onPress: () {
-                        if (_.formKey.currentState!.validate()) {
-                          _.formKey.currentState!.save();
-                        }
-=======
-
->>>>>>> 1bc54382ef0ca64e1a0d20c3ddf98db2728d22d5
 
                         const SizedBox(
                           height: 10,
@@ -463,7 +289,7 @@ class GenerateCodeScreen extends StatelessWidget {
                           onTextChange: (val) {},
                           hint: "Cell",
                           textAlign: TextAlign.center,
-                          fieldType: Constants.phoneNumberField,
+                          fieldType: Constants.cellnumber,
                         ),
                         const SizedBox(
                           height: 10,
@@ -473,7 +299,7 @@ class GenerateCodeScreen extends StatelessWidget {
                           onTextChange: (val) {},
                           hint: "Fax",
                           textAlign: TextAlign.center,
-                          fieldType: Constants.phoneNumberField,
+                          fieldType: Constants.faxnumber,
                         ),
                         const SizedBox(height: 10,),
                         CustomFormField(
@@ -485,7 +311,7 @@ class GenerateCodeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 10,),
 
-                        DateFormFieldContainer(
+                        DateFormFieldContainer(isRounded:true,
                           text: 'Date of Birth',
                           mode: DateTimeFieldPickerMode.date,
                           dateFormatTrue: true,
@@ -562,38 +388,38 @@ class GenerateCodeScreen extends StatelessWidget {
                                     border: Border.all(
                                         width: 0.5, color: AppColor.dimblack)),
                                 child: DropdownButton(
-                                // alignment: Alignment.center,
-                                isExpanded: true,
-                                icon: const Visibility(
-                                  visible: false,
-                                  child: Icon(Icons.arrow_downward),
-                                ),
-                                iconSize: 0,
-                                underline: Container(
-                                  color: AppColor.whiteColor,
-                                ),
-
-                                borderRadius: BorderRadius.circular(10),
-                                // value: _.dropdownvalue,
-                                hint: Center(
-                                  child: RestInvestTitle(
-                                    textAlign: TextAlign.center,
-                                    text: _.maritalStatusValue == null || _.maritalStatusValue == ""
-                                        ? "Marital Status"
-                                        : _.maritalStatusValue,
-                                    textColor: AppColor.black,
+                                  // alignment: Alignment.center,
+                                  isExpanded: true,
+                                  icon: const Visibility(
+                                    visible: false,
+                                    child: Icon(Icons.arrow_downward),
                                   ),
-                                ),
+                                  iconSize: 0,
+                                  underline: Container(
+                                    color: AppColor.whiteColor,
+                                  ),
 
-                                items: maritalStatus.map((String? titleItems) {
-                                  return DropdownMenuItem<String>(
-                                      value: titleItems, child: Text(titleItems!));
-                                }).toList(),
-                                onChanged: (String? value) {
-                                  _.maritalStatusValue = value!;
-                                  _.update();
-                                },
-                              ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  // value: _.dropdownvalue,
+                                  hint: Center(
+                                    child: RestInvestTitle(
+                                      textAlign: TextAlign.center,
+                                      text: _.maritalStatusValue == null || _.maritalStatusValue == ""
+                                          ? "Marital Status"
+                                          : _.maritalStatusValue,
+                                      textColor: AppColor.black,
+                                    ),
+                                  ),
+
+                                  items: maritalStatus.map((String? titleItems) {
+                                    return DropdownMenuItem<String>(
+                                        value: titleItems, child: Text(titleItems!));
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    _.maritalStatusValue = value!;
+                                    _.update();
+                                  },
+                                ),
                               ),
                             ),
                           ],
@@ -609,7 +435,7 @@ class GenerateCodeScreen extends StatelessWidget {
                               controller: _.pinCodeController,
                               onTextChange: (val) {},
                               hint: "Pin Code",
-                              fieldType: Constants.accountNo,
+                              fieldType: Constants.pincode,
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -665,7 +491,7 @@ class GenerateCodeScreen extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        RestInvestButton(
+                        CustomRoundButton(
                           isSquare: true,
                           text: "Generate Pin Code",
                           buttonColor: AppColor.blueColor,
@@ -679,27 +505,27 @@ class GenerateCodeScreen extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        RestInvestButton(
+                        CustomRoundButton(
                           isSquare: true,
                           text: "Submit",
                           buttonColor: AppColor.blueColor,
                           textColor: AppColor.whiteColor,
                           onPress: () {
-                            _.onRegNewUser(controller.titleValue, controller.fatherNameController.value.text,
-                                controller.issueDate, controller.expiryDate,
-                                controller.addressController.value.text, _.countryCode,
-                                _.phoneController.value.text, _.cellController.value.text,
-                                _.emailController.value.text, _.genderValue,
-                                controller.occupationCode, controller.incomeCode,
-                                controller.nameController.value.text, controller.cNicController.value.text,
-                                controller.passPortController.value.text,
-                                controller.ntnController.value.text, _.cityCode, _.otherCityController.value.text,
-                                _.sectorCode, _.faxController.value.text, _.dateOfBirth,
-                                _.maritalStatusValue, controller.bracketCode, _.religionCode, _.filerValue,
-                                _.pinCodeController.value.text, _.newUserPinGenration!.response!.pinCodeConfigId!.toString());
-                            // if (_.formKey.currentState!.validate()) {
-                            //   _.formKey.currentState!.save();
-                            // }
+                            // _.onRegNewUser(controller.titleValue, controller.fatherNameController.value.text,
+                            //     controller.issueDate, controller.expiryDate,
+                            //     controller.addressController.value.text, _.countryCode,
+                            //     _.phoneController.value.text, _.cellController.value.text,
+                            //     _.emailController.value.text, _.genderValue,
+                            //     controller.occupationCode, controller.incomeCode,
+                            //     controller.nameController.value.text, controller.cNicController.value.text,
+                            //     controller.passPortController.value.text,
+                            //     controller.ntnController.value.text, _.cityCode, _.otherCityController.value.text,
+                            //     _.sectorCode, _.faxController.value.text, _.dateOfBirth,
+                            //     _.maritalStatusValue, controller.bracketCode, _.religionCode, _.filerValue,
+                            //     _.pinCodeController.value.text, _.newUserPinGenration!.response!.pinCodeConfigId!.toString());
+                            if (_.formKey.currentState!.validate()) {
+                              _.formKey.currentState!.save();
+                            }
                           },
                         ),
                       ],
@@ -710,12 +536,3 @@ class GenerateCodeScreen extends StatelessWidget {
         });
   }
 }
-// {"address":"jhgjh jhhj jhgj jhv jhgj jv","birthDate":"16/12/2014",
-// "cell":"+923746435353","city":"000001",
-// "cnic":"5675-7656565-8","cnicExpiryDate":"31/12/2021",
-// "cnicIsueDate":"1/12/2021","country":"001","email":
-// "talhakhanxada@gmail.com","fatherOrHusbandName":"bhjhg",
-// "fax":"fax88738","filerNonFiler":"Filer","gender":"M","incomeBracket":"4",
-// "incomeSource":"08","maritalStatus":"Single","name":"jhgj","ntn":"ntn884",
-// "occupation":"015","otherCity":"","passport":"pass004","phone":"+923746435353",
-// "pinCode":"3c77","pinCodeExpiryConfigID":3,"religion":"01","sector":"NORTH","title":"Mr"}

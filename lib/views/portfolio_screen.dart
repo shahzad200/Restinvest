@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/controller/login_screen_controller.dart';
 import 'package:investintrust/controller/portfolio_screen_controller.dart';
-import 'package:investintrust/data/models/login_model.dart';
+
 
 import '../utils/colors.dart';
 import '../widgets/button.dart';

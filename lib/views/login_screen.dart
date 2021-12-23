@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                           controller: _.userNameController,
                           hint: "User name",
                           // textAlign: TextAlign.center,
-                          fieldType: Constants.userName,
+                          fieldType: Constants.username,
                           onTextChange: (val) {
                             _.updateUserName(val);
                           },

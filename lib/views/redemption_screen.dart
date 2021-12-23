@@ -49,7 +49,7 @@ class RedemptionScreen extends StatelessWidget {
                             const RestInvestTitle(
                               // fontWeight: FontWeight.w900,
                               text: "Account No.",
-                              textColor: AppColor.dimblack,
+                              textColor: AppColor.black,
                             ),
                             Container(
                               // margin: EdgeInsets.all(10.0),
@@ -105,7 +105,7 @@ class RedemptionScreen extends StatelessWidget {
                             const RestInvestTitle(
                               text: "Fund Name",
                               // fontWeight: FontWeight.w900,
-                              textColor: AppColor.dimblack,
+                              textColor: AppColor.black,
                             ),
                             Container(
                               // margin: EdgeInsets.all(10.0),
@@ -192,10 +192,10 @@ class RedemptionScreen extends StatelessWidget {
                           child: EmptyRowContainer(
                         // fontWeight: FontWeight.w900,
                         fontsize: 14,
-                        hintColor: AppColor.dimblack,
+                        hintColor: AppColor.black,
                         hint: "0",
                         text: "Electric Units",
-                        textColor: AppColor.dimblack,
+                        textColor: AppColor.black,
                       )),
                       SizedBox(
                         width: 6,
@@ -204,10 +204,10 @@ class RedemptionScreen extends StatelessWidget {
                           child: EmptyRowContainer(
                         // fontWeight: FontWeight.w900,
                         fontsize: 14,
-                        hintColor: AppColor.dimblack,
+                        hintColor: AppColor.black,
                         hint: "0.00",
                         text: "Amount",
-                        textColor: AppColor.dimblack,
+                        textColor: AppColor.black,
                       )),
                     ],
                   ),
@@ -275,7 +275,7 @@ class RedemptionScreen extends StatelessWidget {
                         height: 35,
                         child: RoundContainer(
                           text: "Approx. Amount",
-                          textColor: AppColor.dimblack,
+                          textColor: AppColor.black,
                           isSquare: true,
                           voidcallback: () {},
                         ),

@@ -1,5 +1,6 @@
 import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:investintrust/utils/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
@@ -82,6 +83,7 @@ import 'package:investintrust/widgets/constant_widget.dart';
 class DateFormFieldContainer extends StatelessWidget {
   const DateFormFieldContainer(
       {Key? key,
+       required  this.isRounded,
         required this.mode,
         required this.dateFormatTrue,
         required this.onDateSelected,
@@ -94,24 +96,32 @@ class DateFormFieldContainer extends StatelessWidget {
   final Function(dynamic) onDateSelected;
   final dynamic dateFormat;
   final dynamic initialValue;
+  final bool isRounded;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return DateTimeFormField(
-      decoration: InputDecoration(
-        hintStyle: const TextStyle(color: Colors.black45),
+      decoration: InputDecoration(fillColor: AppColor.whiteColor,filled: true,
+        hintStyle: const TextStyle(color: Colors.black),
         errorStyle: const TextStyle(color: Colors.redAccent),
-        border: const OutlineInputBorder(),
-        suffixIcon: const Icon(Icons.event_note),
-        hintText: text,
+    border: OutlineInputBorder(
+          borderSide: BorderSide(
+              width: isRounded ? 0.1 : 0.1, color: AppColor.lightWhite),
+          borderRadius: BorderRadius.circular(
+            isRounded ? 8 : 0,
+          ),
+        ),
+
+      hintText: text,
+        contentPadding: const EdgeInsets.all(8),
         // labelText: 'Only time',
       ),
       mode: mode,
-      initialValue: initialValue,
+      // initialValue: initialValue,
       dateFormat: dateFormatTrue ? DateFormat('dd/MM/yyyy') : null,
       autovalidateMode: AutovalidateMode.always,
-      // validator: (e) => (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
+
       onDateSelected: (DateTime value) {
         onDateSelected(value);
       },

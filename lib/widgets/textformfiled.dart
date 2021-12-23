@@ -48,7 +48,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
           focusedBorder: _inputBorder(widget.isRounded),
           focusedErrorBorder: _inputBorder(widget.isRounded),
           filled: true,
-          hintText: widget.hint,
+          hintText: widget.hint,hintStyle:const TextStyle(color: AppColor.black,fontWeight: FontWeight.bold),
           fillColor: Colors.white),
       keyboardType: widget.textInputType,
       obscureText: widget.obscureText,
@@ -86,10 +86,18 @@ class _CustomFormFieldState extends State<CustomFormField> {
                 return null;
               }
             }
-          case Constants.userName:
+          case Constants.name:
             {
               if (val!.isEmpty) {
-                return "Please enter the user name";
+                return "Please enter the  name";
+              } else {
+                return null;
+              }
+            }
+          case Constants.fathername:
+            {
+              if (val!.isEmpty) {
+                return "Please enter the father name";
               } else {
                 return null;
               }
@@ -146,10 +154,37 @@ class _CustomFormFieldState extends State<CustomFormField> {
               }
 
             }
+          case Constants.passportnumber:
+            {
+              if (val!.isEmpty) {
+                return "Please enter the  passport number";
+              } else {
+                return null;
+              }
+
+            }
+          case Constants.ntnnumber:
+            {
+              if (val!.isEmpty) {
+                return "Please enter the  ntn number";
+              } else {
+                return null;
+              }
+
+            }
           case Constants.cellnumber:
             {
               if (val!.isEmpty) {
                 return "Please enter the  cell number";
+              } else {
+                return null;
+              }
+
+            }
+          case Constants.username:
+            {
+              if (val!.isEmpty) {
+                return "Please enter the user name";
               } else {
                 return null;
               }
@@ -232,7 +267,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusedErrorBorder: _inputBorder(widget.isRounded),
         filled: true,
         labelText: widget.label,
-        hintText: widget.hint,
+        hintText: widget.hint,hintStyle: TextStyle(color: AppColor.black),
         fillColor: AppColor.whiteColor,
       ),
       keyboardType: widget.textInputType,
