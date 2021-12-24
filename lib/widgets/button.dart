@@ -133,8 +133,8 @@ class CustomRowButton extends StatelessWidget {
             fontSize: textSize,
           ),
           minimumSize: Size(width, height),
-          shape: const RoundedRectangleBorder(
-              side: const BorderSide(color: AppColor.blueColor)),
+          shape:  RoundedRectangleBorder(
+              side:  BorderSide(color: AppColor.blueColor)),
         ),
         child: Text(text));
   }

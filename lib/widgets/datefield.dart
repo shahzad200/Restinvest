@@ -84,6 +84,7 @@ class DateFormFieldContainer extends StatelessWidget {
   const DateFormFieldContainer(
       {Key? key,
        required  this.isRounded,
+
         required this.mode,
         required this.dateFormatTrue,
         required this.onDateSelected,
@@ -102,12 +103,12 @@ class DateFormFieldContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DateTimeFormField(
-      decoration: InputDecoration(fillColor: AppColor.whiteColor,filled: true,
-        hintStyle: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(fillColor: AppColor.whiteColor,filled: true,alignLabelWithHint: false,
+        hintStyle: const TextStyle(color: AppColor.black,),
         errorStyle: const TextStyle(color: Colors.redAccent),
     border: OutlineInputBorder(
           borderSide: BorderSide(
-              width: isRounded ? 0.1 : 0.1, color: AppColor.lightWhite),
+              width: isRounded ? 0.1 : 0, color: AppColor.dimblack),
           borderRadius: BorderRadius.circular(
             isRounded ? 8 : 0,
           ),
@@ -115,9 +116,9 @@ class DateFormFieldContainer extends StatelessWidget {
 
       hintText: text,
         contentPadding: const EdgeInsets.all(8),
-        // labelText: 'Only time',
+
       ),
-      mode: mode,
+      mode: DateTimeFieldPickerMode.date,
       // initialValue: initialValue,
       dateFormat: dateFormatTrue ? DateFormat('dd/MM/yyyy') : null,
       autovalidateMode: AutovalidateMode.always,
