@@ -10,7 +10,7 @@ class NoInternetWgt extends StatelessWidget {
 
   const NoInternetWgt({
     required this.onTryAgain,
-    required Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -19,12 +19,12 @@ class NoInternetWgt extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: _sizeImg,
-          height: _sizeImg,
+          width: 100,
+          height: 100,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
-              image: AssetImage(MyImages.notInternet),
+              image: AssetImage('assets/images/no_internet.jpg'),
               fit: BoxFit.cover,
             ),
           ),

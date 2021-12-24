@@ -86,7 +86,7 @@ class CustomRoundButton extends StatelessWidget {
           ),
           minimumSize: Size(width, height),
           shape: RoundedRectangleBorder(
-            borderRadius: isSquare
+            borderRadius: false
                 ? BorderRadius.circular(10
 
             )
