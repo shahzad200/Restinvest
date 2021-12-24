@@ -39,11 +39,28 @@ class HomeScreenController extends GetxController {
     super.onReady();
   }
 
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
+    // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
+    // such as spaces in the input, which would cause `launch` to fail on some
+    // platforms.
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launch(launchUri.toString());
+  }
+
+
   getSocialLinks() async {
     try {
       isLoading = true;
+      update();
       Constant.socialMediaLink = await _repository.socialMediaLinks();
       isLoading = false;
+      if(noInternet) {
+        noInternet = false;
+      }
       update();
     } catch (e) {
       if (e.toString() == 'Exception: No Internet') {
