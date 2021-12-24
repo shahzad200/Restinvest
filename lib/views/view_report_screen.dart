@@ -109,7 +109,7 @@ class ViewReportsScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.dimblack)),
+                                      width: 0.8, color: AppColor.black)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -155,6 +155,7 @@ class ViewReportsScreen extends StatelessWidget {
                         voidcallback: () {},
                         text: "Fund Name",
                         textColor: AppColor.black,
+                            color: AppColor.black,
                       ))
                     ],
                   ),

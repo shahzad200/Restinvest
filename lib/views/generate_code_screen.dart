@@ -209,7 +209,7 @@ class GenerateCodeScreen extends StatelessWidget {
                                   }).toList(),
                                   onChanged: (sector.Response? value) {
                                     _.sectorValue = value!.sectorName!;
-                                    _.sectorCode = value!.sectorCode!;
+                                    _.sectorCode = value.sectorCode!;
                                     _.update();
                                   },
                                 )
@@ -262,7 +262,7 @@ class GenerateCodeScreen extends StatelessWidget {
                               }).toList(),
                               onChanged: (Religions? value) {
                                 _.religionValue = value!.religionName!;
-                                _.religionCode = value!.religionCode!;
+                                _.religionCode = value.religionCode!;
                                 _.update();
                               },
                             )

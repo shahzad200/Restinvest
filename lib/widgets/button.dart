@@ -127,14 +127,18 @@ class CustomRowButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPress,
         style: ElevatedButton.styleFrom(
+
           primary: buttonColor,
           onPrimary: textColor,
           textStyle: TextStyle(
             fontSize: textSize,
           ),
           minimumSize: Size(width, height),
-          shape:  RoundedRectangleBorder(
-              side:  BorderSide(color: AppColor.blueColor)),
+         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+
+         side:const BorderSide(color: AppColor.dimblack,width: 1,),
+
+
         ),
         child: Text(text));
   }

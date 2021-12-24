@@ -204,7 +204,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
 
   InputBorder _inputBorder(isRounded) {
     return OutlineInputBorder(
-      borderSide:  BorderSide(width: isRounded ? 0.5 : 2, color: AppColor.dimblack),
+      borderSide:  BorderSide(width: isRounded ? 0.8 : 2, color: AppColor.black),
       borderRadius: BorderRadius.circular(isRounded?10:10,),
     );
   }
