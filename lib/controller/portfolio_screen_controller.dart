@@ -11,7 +11,7 @@ import 'login_screen_controller.dart';
 class PortofolioScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
-
+  double totalInvestment = 0.0;
   bool investButton = true;
   bool portfolioButton = false;
   bool buttonclick3 = false;
@@ -21,6 +21,7 @@ class PortofolioScreenController extends GetxController {
   bool noInternet = false;
   final _repository = Repository();
   LoadDashboard? loadDashboard;
+  final loginController = Get.find<LoginScreenController>();
   // LoginScreenController loginScreenController = Get.find<LoginScreenController>();
   @override
   void onInit() {
@@ -90,7 +91,7 @@ class PortofolioScreenController extends GetxController {
   onLoadDashboard() async {
     try {
       isLoading = true;
-      loadDashboard =  await _repository.onLoadDashBoard(Constant.loginModel!.response!.accounts![0].folioNumber.toString());
+      loadDashboard =  await _repository.onLoadDashBoard(loginController.loginModel!.response!.accounts![0].folioNumber.toString());
       isLoading = false;
       update();
     } catch (e) {

@@ -67,13 +67,21 @@ class PortofolioScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: Constant.loginModel!.response!.accounts!.length,
-                  itemBuilder: (context, index) {
-                    // RemoteMessage message = _messages[index];
-                    return listItem(Constant.loginModel!.response!.accounts![index].folioNumber, '0.0');
-                  }),
+              Container(
+                height: Get.height/3.5,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _.loginController.loginModel!.response!.accounts!.length,
+                    itemBuilder: (context, index) {
+                      // RemoteMessage message = _messages[index];
+                      _.totalInvestment = _.totalInvestment + double.parse(_.loginController.loginModel!.response!.accounts![index]!.portfolioInvestmentValue!);
+                      var userfund = 0.0;
+                      for(int i = 0; i < _.loginController.loginModel!.response!.accounts![index].userFundBalances!.length; i++){
+                        userfund = userfund + double.parse(_.loginController.loginModel!.response!.accounts![index].userFundBalances![i].fundvolume!);
+                      }
+                      return listItem(_.loginController.loginModel!.response!.accounts![index].folioNumber, userfund.toStringAsFixed(2));
+                    }),
+              ),
 
                   const SizedBox(
                     height: 40,
@@ -83,8 +91,8 @@ class PortofolioScreen extends StatelessWidget {
                       text: "Total Investment Value",
                       fontWeight: FontWeight.w900,
                     ),
-                    trailing: const RestInvestTitle(
-                      text: "PKR.00",
+                    trailing:  RestInvestTitle(
+                      text: "PKR "+ _.totalInvestment.toStringAsFixed(2),
                       fontWeight: FontWeight.w900,
                     ),
                     onTap: () {},
@@ -95,7 +103,9 @@ class PortofolioScreen extends StatelessWidget {
                       Expanded(
                           child: CustomRoundButton(
                               text: "Investment by Fund",
-                              textColor: AppColor.black,
+                              textColor: _.investButton
+                                  ? Colors.white
+                                  : AppColor.black,
                               onPress: () {
                                 _.investTrust(0);
                               },
@@ -105,7 +115,9 @@ class PortofolioScreen extends StatelessWidget {
                       Expanded(
                           child: CustomRoundButton(
                         text: "Portfolio Allocation",
-                        textColor: AppColor.black,
+                        textColor: _.portfolioButton
+                            ? Colors.white
+                            : AppColor.black,
                         onPress: () {
                           _.investTrust(1);
                         },
@@ -119,10 +131,10 @@ class PortofolioScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Column(
+                  _.portfolioButton?const SizedBox():Column(
                     children: [
                       RoundColumnButton(
-                        icon: Icon(Icons.cabin),
+                        icon:const Icon(Icons.cabin),
                         height: 45,
                         width: 45,
                         textColor: AppColor.black,

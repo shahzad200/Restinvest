@@ -22,6 +22,7 @@ class LoginScreenController extends GetxController {
   bool noInternet = false;
   var userName = "".obs;
   var password = "".obs;
+  LoginModel? loginModel;
   void updateUserName(value) {
     userName(value);
     update();
@@ -60,8 +61,8 @@ class LoginScreenController extends GetxController {
     try{
       isLoading = true;
       update();
-      Constant.loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
-      Constant.userId = Constant.loginModel!.response!.user!.userid.toString();
+      loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
+      Constant.userId = loginModel!.response!.user!.userid.toString();
       Get.toNamed(AppRoute.portofolioRoute);
       isLoading = false;
       update();

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get_utils/src/extensions/dynamic_extensions.dart';
 import 'package:http/http.dart' as http;
 import 'package:investintrust/data/models/calculate_tax.dart';
 import 'package:investintrust/data/models/city_data.dart';
@@ -72,7 +73,7 @@ class ApiClient {
             <String, String>{'userId': userId, 'password': password}),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        printInfo(info:response.body);
         LoginModel loginModel = LoginModel.fromJson(jsonDecode(response.body));
         if (loginModel.meta!.code.toString() == 200.toString()) {
           return loginModel;
