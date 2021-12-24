@@ -86,8 +86,8 @@ class GenerateCodeScreen extends StatelessWidget {
                                   }).toList(),
                                   onChanged: (Countries? value) {
                                     _.countryValue = value!.countryName!;
-                                    _.countryCode = value!.countryCode!;
-                                    _.onCityData(value!.countryCode!);
+                                    _.countryCode = value.countryCode!;
+                                    _.onCityData(value.countryCode!);
                                   },
                                 ),
                               ),
@@ -139,8 +139,8 @@ class GenerateCodeScreen extends StatelessWidget {
                                     }).toList(),
                                     onChanged: (res.Response? value) {
                                       _.cityValue = value!.cityName!;
-                                      _.cityCode = value!.cityCode!;
-                                      _.onCitySectorData(value!.cityCode!);
+                                      _.cityCode = value.cityCode!;
+                                      _.onCitySectorData(value.cityCode!);
                                     },
                                   )
                                       : const SizedBox()
