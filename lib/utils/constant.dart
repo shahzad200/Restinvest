@@ -58,4 +58,8 @@ class Constants {
   static const String mail = 'assets/images/mail.png';
   static const String calculator = 'assets/images/calculator.png';
   static const String dailynav = 'assets/images/dailynav.png';
+  static const String logonit = 'assets/images/logonit.png';
+  static const String icpurchases = 'assets/images/icpurchases.png';
+  static const String icfund = 'assets/images/icfund.png';
+  static const String iccategory = 'assets/images/iccategory.png';
 }

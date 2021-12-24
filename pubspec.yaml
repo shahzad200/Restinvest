@@ -101,7 +101,10 @@ flutter:
     - assets/images/calculator.png
     - assets/images/dailynav.png
     - assets/images/no_internet.jpg
-  
+    - assets/images/logonit.png
+    - assets/images/icpurchases.png
+    - assets/images/icfund.png
+    - assets/images/iccategory.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

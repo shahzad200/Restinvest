@@ -433,6 +433,69 @@ class Branches extends StatelessWidget {
   }
 }
 
+class LogoNit extends StatelessWidget {
+  const LogoNit({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      Constants.logonit,
+
+      width: 60,
+      height: 60,
+    );
+  }
+}
+class IcPurchases extends StatelessWidget {
+  const IcPurchases({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 4),
+      child: Image.asset(
+        Constants.icpurchases,
+        color: AppColor.black,
+        width: 20,
+        height: 20,
+      ),
+    );
+  }
+}
+class IcFund extends StatelessWidget {
+  const IcFund({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 4),
+      child: Image.asset(
+        Constants.icfund,
+        color: AppColor.black,
+        width: 20,
+        height: 20,
+      ),
+    );
+  }
+}
+class IcCatagory extends StatelessWidget {
+  const IcCatagory({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 4),
+      child: Image.asset(
+        Constants.iccategory,
+        color: AppColor.black,
+        width: 20,
+        height: 20,
+      ),
+    );
+  }
+}
+
+
 class Nav extends StatelessWidget {
   const Nav({Key? key}) : super(key: key);
 
@@ -817,6 +880,49 @@ class RoundContainer extends StatelessWidget {
             ),
           ),
           height: 45,
+        ),
+      ),
+    ]);
+  }
+}
+
+class FromFundDropDownContainer extends StatefulWidget {
+  const FromFundDropDownContainer({
+    required this.nitText,
+    required this.fundText,
+    Key? key,
+  }) : super(key: key);
+  final String? nitText;
+  final String? fundText;
+
+  @override
+  State<FromFundDropDownContainer> createState() =>
+      _FromFundDropDownContainerState();
+}
+
+class _FromFundDropDownContainerState extends State<FromFundDropDownContainer> {
+  String fundTitle = "";
+  @override
+  Widget build(BuildContext context) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      RestInvestTitle(
+        text: widget.fundText!,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      ),
+      const SizedBox(
+        height: 30,
+      ),
+      InkWell(
+        onTap: () {
+          setState(() {
+            fundTitle = widget.nitText!;
+            Navigator.pop(context);
+          });
+        },
+        child: RestInvestTitle(
+          text: widget.nitText!,
+          fontSize: 18,
         ),
       ),
     ]);

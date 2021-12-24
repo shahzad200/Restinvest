@@ -317,9 +317,7 @@ class RedemptionScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  ContainerCheckBoxText(
-                    isChecked: false,
-                  ),
+                  CheckBoxContainer(isChecked: false,),
                   const SizedBox(
                     height: 10,
                   ),
@@ -341,45 +339,73 @@ class RedemptionScreen extends StatelessWidget {
   }
 }
 
-class FromFundDropDownContainer extends StatefulWidget {
-  const FromFundDropDownContainer({
-    required this.nitText,
-    required this.fundText,
+class CheckBoxContainer extends StatefulWidget {
+   CheckBoxContainer({required this.isChecked,
     Key? key,
   }) : super(key: key);
-  final String? nitText;
-  final String? fundText;
-
+ bool isChecked;
   @override
-  State<FromFundDropDownContainer> createState() =>
-      _FromFundDropDownContainerState();
+  State<CheckBoxContainer> createState() => _CheckBoxContainerState();
 }
 
-class _FromFundDropDownContainerState extends State<FromFundDropDownContainer> {
-  String fundTitle = "";
+class _CheckBoxContainerState extends State<CheckBoxContainer> {
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      RestInvestTitle(
-        text: widget.fundText!,
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
+    return Container(
+      color: AppColor.lightGreyColor,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Checkbox(
+            checkColor: AppColor.whiteColor,
+            activeColor: AppColor.blueColor,
+            value: widget.isChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                widget.isChecked = value!;
+              });
+            },
+          ),
+                Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,children: [  const RestInvestTitle(
+    text: "I have read understood the guidlines as stated in the",
+    fontSize: 11,fontWeight: FontWeight.w900,
+                ),
+                const HeadingText(
+    text: "offering Documents / truest Deed & Fund Manager Report of",
+    underlineColor: AppColor.blueColor,
+    textColor: AppColor.blueColor,
+    fontSize: 11,fontWeight: FontWeight.w900,
+                ),
+                const RestInvestTitle(
+    text: "the fund and the risk involved.",
+    fontSize: 11,fontWeight: FontWeight.w900,
+                ),
+                const   SizedBox(height: 10,),
+    Row(children:const [
+       RestInvestTitle(
+        text: "I confirm acceptance of",
+        fontSize: 11,fontWeight: FontWeight.w900,
       ),
-      const SizedBox(
-        height: 30,
+       HeadingText(
+        text: "Term & Conditions",
+        underlineColor: AppColor.blueColor,
+        textColor: AppColor.blueColor,
+        fontSize: 11,fontWeight: FontWeight.w900,
       ),
-      InkWell(
-        onTap: () {
-          setState(() {
-            fundTitle = widget.nitText!;
-            Navigator.pop(context);
-          });
-        },
-        child: RestInvestTitle(
-          text: widget.nitText!,
-          fontSize: 18,
-        ),
+       RestInvestTitle(
+        text: "and all charges governing in",
+        fontSize: 11,fontWeight: FontWeight.w900,
+      )
+    ],),
+    const RestInvestTitle(
+      text: "in this transaction.",
+      fontSize: 11,fontWeight: FontWeight.w900,
+    )
+                ],)
+        ],
       ),
-    ]);
+      height: 80,
+    );
   }
 }

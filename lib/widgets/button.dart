@@ -70,9 +70,9 @@ class CustomRoundButton extends StatelessWidget {
   final Color borderColor;
   final double width;
   final double height;
- final isSquare;
+  final  isSquare;
 
-  final color1;
+  final  color1;
   final color2;
   @override
   Widget build(BuildContext context) {
@@ -85,11 +85,8 @@ class CustomRoundButton extends StatelessWidget {
             fontSize: textSize,
           ),
           minimumSize: Size(width, height),
-          shape: RoundedRectangleBorder(
-            borderRadius: false
-                ? BorderRadius.circular(10
-
-            )
+          shape: RoundedRectangleBorder(borderRadius:
+             isSquare? BorderRadius.circular(10)
                 : BorderRadius.circular(0.0),
           ),
         ),
@@ -136,7 +133,7 @@ class CustomRowButton extends StatelessWidget {
           minimumSize: Size(width, height),
          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
 
-         side:const BorderSide(color: AppColor.dimblack,width: 1,),
+         side:const BorderSide(color: AppColor.blueColor,width: 1,),
 
 
         ),

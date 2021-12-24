@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/utils/lists.dart';
+import 'package:investintrust/views/redemption_screen.dart';
 
 import '../widgets/datefield.dart';
 import '../controller/purchases_screen_controller.dart';
@@ -404,10 +405,14 @@ class PurchasesScreen extends StatelessWidget {
                       ))
                     ],
                   ),
+                  Row(children: [
+                    Column(children:const [
+                      RestInvestTitle(text: "Payment Proof",textColor: AppColor.blueColor,),
+
+                    ],)
+                  ],),
                   const SizedBox(height: 10),
-                  ContainerCheckBoxText(
-                    isChecked: false,
-                  ),
+                  CheckBoxContainer(isChecked: false,),
                   space,
                   SizedBox(
                     height: 40,

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/utils/lists.dart';
+import 'package:investintrust/views/redemption_screen.dart';
 
 import '../controller/f2f_transfer_screen_controller.dart';
 import '/controller/f2f_transfer_screen_controller.dart';
@@ -471,9 +472,7 @@ class F2FTransferScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  ContainerCheckBoxText(
-                    isChecked: false,
-                  ),
+                  CheckBoxContainer(isChecked: false,),
                   const SizedBox(
                     height: 10,
                   ),

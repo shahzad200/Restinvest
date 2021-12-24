@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/login_screen_controller.dart';
+
 import 'package:investintrust/controller/portfolio_screen_controller.dart';
 
-
-
-import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/utils/constants.dart';
-
 
 import '../utils/colors.dart';
 import '../widgets/button.dart';
@@ -27,13 +23,7 @@ class PortofolioScreen extends StatelessWidget {
         builder: (_) {
           return Scaffold(
             appBar: AppBar(
-              title: Padding(
-                padding: const EdgeInsets.only(right: 50),
-                child: Logo(
-                  height: 80,
-                  width: 80,
-                ),
-              ),
+              title: const LogoNit(),
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
@@ -67,14 +57,17 @@ class PortofolioScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: Constant.loginModel!.response!.accounts!.length,
-                  itemBuilder: (context, index) {
-                    // RemoteMessage message = _messages[index];
-                    return listItem(Constant.loginModel!.response!.accounts![index].folioNumber, '0.0');
-                  }),
-
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount:
+                          Constant.loginModel!.response!.accounts!.length,
+                      itemBuilder: (context, index) {
+                        // RemoteMessage message = _messages[index];
+                        return listItem(
+                            Constant.loginModel!.response!.accounts![index]
+                                .folioNumber,
+                            '0.0');
+                      }),
                   const SizedBox(
                     height: 40,
                   ),
@@ -172,7 +165,7 @@ class PortofolioScreen extends StatelessWidget {
         });
   }
 
-  Widget listItem(String? folioNumber, String? amount){
+  Widget listItem(String? folioNumber, String? amount) {
     return Column(
       children: [
         ListTile(
@@ -181,7 +174,7 @@ class PortofolioScreen extends StatelessWidget {
             textColor: AppColor.dimblack,
           ),
           trailing: RestInvestTitle(
-            text: 'PKR '+ amount! ?? '0.0',
+            text: 'PKR ' + amount! ?? '0.0',
             fontWeight: FontWeight.w900,
             textColor: AppColor.black,
           ),
@@ -191,6 +184,4 @@ class PortofolioScreen extends StatelessWidget {
       ],
     );
   }
-
-
 }
