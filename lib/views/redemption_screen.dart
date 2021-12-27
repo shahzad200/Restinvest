@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/utils/lists.dart';
+import '../utils/lists.dart';
 
 import '../controller/redemption_screen_controller.dart';
 
@@ -60,7 +60,7 @@ class RedemptionScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.black)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -116,7 +116,7 @@ class RedemptionScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.black)),
                               child: Center(
                                 child: DropdownButton<String>(
                                   isExpanded: true,
@@ -220,35 +220,43 @@ class RedemptionScreen extends StatelessWidget {
                       Expanded(
                           child: CustomRowButton(
                               text: "Units",
-                              textColor: AppColor.black,
+                              textColor:
+                              _.unitButton
+                                  ? AppColor.whiteColor
+                                  : AppColor.black,
                               textSize: 14,
                               onPress: () {
                                 _.investTrust(0);
                               },
-                              buttonColor: _.investButton
+                              buttonColor:
+                              _.unitButton
                                   ? AppColor.blueColor
                                   : AppColor.whiteColor)),
                       Expanded(
                           child: CustomRowButton(
                         text: "Percentages",
-                        textColor: AppColor.black,
+                        textColor: _.percentageButton
+                            ? AppColor.whiteColor
+                            : AppColor.black,
                         textSize: 14,
                         onPress: () {
                           _.investTrust(1);
                         },
-                        buttonColor: _.portfolioButton
+                        buttonColor: _.percentageButton
                             ? AppColor.blueColor
                             : AppColor.whiteColor,
                       )),
                       Expanded(
                           child: CustomRowButton(
                         text: "All Units",
-                        textColor: AppColor.black,
+                        textColor: _.allUnitButton
+                            ? AppColor.whiteColor
+                            : AppColor.black,
                         textSize: 14,
                         onPress: () {
                           _.investTrust(2);
                         },
-                        buttonColor: _.buttonclick3
+                        buttonColor: _.allUnitButton
                             ? AppColor.blueColor
                             : AppColor.whiteColor,
                       )),
@@ -258,13 +266,69 @@ class RedemptionScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
+                  _.unitButton?Column(children: [ Row(
+                   children: [
+                     Expanded(
+                       child: CustomTextFormField(
+                         isRounded: true,
+                         hint: "Unit Balance",hintColor: AppColor.black,
+                         textInputType: TextInputType.emailAddress,
+                       ),
+                     ),
+                     const SizedBox(
+                       width: 6,
+                     ),
+                     Expanded(
+                         child: SizedBox(
+                           height: 35,
+                           child: RoundContainer(
+                             text: "Approx. Amount",
+                             textColor: AppColor.black,
+                             isSquare: true,
+                             voidcallback: () {},
+                           ),
+                         ))
+                   ],
+                 ),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   Row(
+                     children: [
+                       Expanded(
+                         child: SizedBox(
+                           height: 35,
+                           child: CustomTextFormField(
+                             isRounded: true,
+                             hint: "Pin Code",hintColor: AppColor.black,
+                             textInputType: TextInputType.emailAddress,
+                           ),
+                         ),
+                       ),
+                       const SizedBox(
+                         width: 6,
+                       ),
+                       Expanded(
+                           child: SizedBox(
+                             height: 35,
+                             child: RestInvestButton(
+                               isSquare: true,
+                               onPress: () {},
+                               text: "Generate Financial PIN",
+                               buttonColor: AppColor.blueColor,
+                               textColor: AppColor.whiteColor,
+                               textSize: 16,
+                             ),
+                           ))
+                     ],
+                   ),],):SizedBox(),
+                  _.percentageButton?Column(children: [ Row(
                     children: [
                       Expanded(
                         child: CustomTextFormField(
                           isRounded: true,
-                          hint: "Unit Balance",
-                          textInputType: TextInputType.emailAddress,
+                          hint: "Percentage",hintColor: AppColor.black,
+                          textInputType: TextInputType.numberWithOptions(),
                         ),
                       ),
                       const SizedBox(
@@ -272,48 +336,119 @@ class RedemptionScreen extends StatelessWidget {
                       ),
                       Expanded(
                           child: SizedBox(
-                        height: 35,
-                        child: RoundContainer(
-                          text: "Approx. Amount",
-                          textColor: AppColor.black,
-                          isSquare: true,
-                          voidcallback: () {},
-                        ),
-                      ))
+                            height: 35,
+                            child: RoundContainer(
+                              text: "Approx. Amount",
+                              textColor: AppColor.black,
+                              isSquare: true,
+                              voidcallback: () {},
+                            ),
+                          ))
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: 35,
-                          child: CustomTextFormField(
-                            isRounded: true,
-                            hint: "Pin Code",
-                            textInputType: TextInputType.emailAddress,
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 35,
+                      child: RoundContainer(
+                        text: "Approx.Units",
+                        textColor: AppColor.blueColor,
+                        isSquare: true,
+                        voidcallback: () {},
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 35,
+                            child: CustomTextFormField(
+                              isRounded: true,
+                              hint: "Pin Code",hintColor: AppColor.black,
+                              textInputType: TextInputType.numberWithOptions(),
+                            ),
                           ),
                         ),
-                      ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        Expanded(
+                            child: SizedBox(
+                              height: 35,
+                              child: RestInvestButton(
+                                isSquare: true,
+                                onPress: () {},
+                                text: "Generate Financial PIN",
+                                buttonColor: AppColor.blueColor,
+                                textColor: AppColor.whiteColor,
+                                textSize: 16,
+                              ),
+                            ))
+                      ],
+                    ),],):SizedBox(),
+                  _.allUnitButton?Column(children: [ Row(
+                    children: [
+                      Expanded(
+                          child: SizedBox(
+                            height: 35,
+                            child: RoundContainer(
+                              text: "0",
+                              textColor: AppColor.black,
+                              isSquare: true,
+                              voidcallback: () {},
+                            ),
+                          )),
                       const SizedBox(
                         width: 6,
                       ),
                       Expanded(
                           child: SizedBox(
-                        height: 35,
-                        child: RestInvestButton(
-                          isSquare: true,
-                          onPress: () {},
-                          text: "Generate Financial PIN",
-                          buttonColor: AppColor.blueColor,
-                          textColor: AppColor.whiteColor,
-                          textSize: 16,
-                        ),
-                      ))
+                            height: 35,
+                            child: RoundContainer(
+                              text: "0.00",
+                              textColor: AppColor.black,
+                              isSquare: true,
+                              voidcallback: () {},
+                            ),
+                          ))
                     ],
                   ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 35,
+                            child: CustomTextFormField(
+                              isRounded: true,
+                              hint: "Pin Code",hintColor: AppColor.black,
+                              textInputType: TextInputType.numberWithOptions(),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        Expanded(
+                            child: SizedBox(
+                              height: 35,
+                              child: RestInvestButton(
+                                isSquare: true,
+                                onPress: () {},
+                                text: "Generate Financial PIN",
+                                buttonColor: AppColor.blueColor,
+                                textColor: AppColor.whiteColor,
+                                textSize: 16,
+                              ),
+                            ))
+                      ],
+                    ),],):SizedBox(),
                   const SizedBox(
                     height: 10,
                   ),
@@ -336,76 +471,5 @@ class RedemptionScreen extends StatelessWidget {
             ),
           );
         });
-  }
-}
-
-class CheckBoxContainer extends StatefulWidget {
-   CheckBoxContainer({required this.isChecked,
-    Key? key,
-  }) : super(key: key);
- bool isChecked;
-  @override
-  State<CheckBoxContainer> createState() => _CheckBoxContainerState();
-}
-
-class _CheckBoxContainerState extends State<CheckBoxContainer> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: AppColor.lightGreyColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Checkbox(
-            checkColor: AppColor.whiteColor,
-            activeColor: AppColor.blueColor,
-            value: widget.isChecked,
-            onChanged: (bool? value) {
-              setState(() {
-                widget.isChecked = value!;
-              });
-            },
-          ),
-                Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,children: [  const RestInvestTitle(
-    text: "I have read understood the guidlines as stated in the",
-    fontSize: 11,fontWeight: FontWeight.w900,
-                ),
-                const HeadingText(
-    text: "offering Documents / truest Deed & Fund Manager Report of",
-    underlineColor: AppColor.blueColor,
-    textColor: AppColor.blueColor,
-    fontSize: 11,fontWeight: FontWeight.w900,
-                ),
-                const RestInvestTitle(
-    text: "the fund and the risk involved.",
-    fontSize: 11,fontWeight: FontWeight.w900,
-                ),
-                const   SizedBox(height: 10,),
-    Row(children:const [
-       RestInvestTitle(
-        text: "I confirm acceptance of",
-        fontSize: 11,fontWeight: FontWeight.w900,
-      ),
-       HeadingText(
-        text: "Term & Conditions",
-        underlineColor: AppColor.blueColor,
-        textColor: AppColor.blueColor,
-        fontSize: 11,fontWeight: FontWeight.w900,
-      ),
-       RestInvestTitle(
-        text: "and all charges governing in",
-        fontSize: 11,fontWeight: FontWeight.w900,
-      )
-    ],),
-    const RestInvestTitle(
-      text: "in this transaction.",
-      fontSize: 11,fontWeight: FontWeight.w900,
-    )
-                ],)
-        ],
-      ),
-      height: 80,
-    );
   }
 }

@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:investintrust/controller/view_report_screen_controller.dart';
-import 'package:investintrust/utils/lists.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/datefield.dart';
+import '../controller/view_report_screen_controller.dart';
+import '../utils/lists.dart';
+import '../widgets/constant_widget.dart';
+import '../widgets/datefield.dart';
 
 import '../utils/colors.dart';
 

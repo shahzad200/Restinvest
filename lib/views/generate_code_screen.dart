@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/controller/generate_code_screen.dart';
-import 'package:investintrust/controller/user_screen_controller.dart';
-import 'package:investintrust/data/models/city_data.dart';
-import 'package:investintrust/data/models/new_user_reg_data.dart';
-import 'package:investintrust/utils/lists.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
+import '../controller/generate_code_screen.dart';
+import '../controller/user_screen_controller.dart';
+
+import '../data/models/new_user_reg_data.dart';
+import '../utils/lists.dart';
+import '../widgets/constant_widget.dart';
 import '../utils/constant.dart';
-import 'package:investintrust/data/models/city_data.dart' as res;
-import 'package:investintrust/data/models/city_sector_model.dart' as sector;
+import '../data/models/city_data.dart' as res;
+import '../data/models/city_sector_model.dart' as sector;
 import '../widgets/datefield.dart';
 
 import '../utils/colors.dart';
@@ -486,7 +486,7 @@ class GenerateCodeScreen extends StatelessWidget {
                       height: 8,
                     ),
                     CustomRoundButton(
-                      isSquare: true,
+
                       text: "Generate Pin Code",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
@@ -502,7 +502,7 @@ class GenerateCodeScreen extends StatelessWidget {
                       height: 6,
                     ),
                     CustomRoundButton(
-                        isSquare: true,
+
                         text: "Submit",
                         buttonColor: AppColor.blueColor,
                         textColor: AppColor.whiteColor,

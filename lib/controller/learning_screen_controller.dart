@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'home_screen_controller.dart';
+
 
 class LearningScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();

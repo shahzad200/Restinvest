@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 
 import 'package:get/get.dart';
-import 'package:investintrust/utils/constant.dart';
+import 'package:investintrust/routes/routes.dart';
+import '../utils/constant.dart';
 
 import '../controller/register_controller.dart';
 
@@ -28,7 +29,7 @@ class RegisterScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
               child: Column(
                 children: [
-                  Logo(height: 200, width: 200),
+                  Logo(height: 120, width: 120),
                   const SizedBox(
                     height: 40,
                   ),
@@ -75,7 +76,7 @@ class RegisterScreen extends StatelessWidget {
                     onPress: () {
                       if (_.formKey.currentState!.validate()) {
                         _.formKey.currentState!.save();
-
+                        Get.toNamed(AppRoute.pinConfirmation);
                       }
 
                       // Fluttertoast.showToast(

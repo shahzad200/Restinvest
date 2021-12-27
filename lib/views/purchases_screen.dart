@@ -2,8 +2,8 @@ import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/utils/lists.dart';
-import 'package:investintrust/views/redemption_screen.dart';
+import '../utils/lists.dart';
+import '../views/redemption_screen.dart';
 
 import '../widgets/datefield.dart';
 import '../controller/purchases_screen_controller.dart';
@@ -364,7 +364,7 @@ class PurchasesScreen extends StatelessWidget {
                             SizedBox(
                               height: 35,
                               child: DateFormFieldContainer(isRounded:false,
-                                text: 'fff',
+                                text: '',
                                 mode: DateTimeFieldPickerMode.date,
                                 dateFormatTrue: true,
                                 initialValue: DateTime.now(),

@@ -22,6 +22,7 @@ class Constants {
   static const int username= 13;
   static const int ntnnumber=14;
   static const int passportnumber= 15;
+  static const int securitycode=16;
   //homeScreen button id
   static const int meetingButtonId = 1;
   static const int chatButtonId = 2;

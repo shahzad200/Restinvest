@@ -47,10 +47,12 @@ class CustomTextContainer extends StatelessWidget {
     required this.height,
     required this.text,
     required this.textAlign,
+    required this.fontSize,
     Key? key,
   }) : super(key: key);
   final double height;
   final TextAlign textAlign;
+  final  fontSize;
   final String text;
 
   @override
@@ -59,7 +61,7 @@ class CustomTextContainer extends StatelessWidget {
       height: height,
       color: AppColor.blueColor,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           RestInvestTitle(
             textAlign: textAlign,
@@ -449,16 +451,14 @@ class LogoNit extends StatelessWidget {
 class IcPurchases extends StatelessWidget {
   const IcPurchases({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 4),
-      child: Image.asset(
-        Constants.icpurchases,
-        color: AppColor.black,
-        width: 20,
-        height: 20,
-      ),
+    return Image.asset(
+      Constants.icpurchases,
+       color: AppColor.dimblack,
+      width: 25,
+      height: 25,
     );
   }
 }
@@ -467,30 +467,97 @@ class IcFund extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 4),
-      child: Image.asset(
-        Constants.icfund,
-        color: AppColor.black,
-        width: 20,
-        height: 20,
-      ),
+    return Image.asset(
+      Constants.icfund,
+       color: AppColor.dimblack,
+      width: 25,
+      height: 25,
     );
   }
 }
+
+class CheckBoxContainer extends StatefulWidget {
+  CheckBoxContainer({required this.isChecked,
+    Key? key,
+  }) : super(key: key);
+  bool isChecked;
+  @override
+  State<CheckBoxContainer> createState() => _CheckBoxContainerState();
+}
+
+class _CheckBoxContainerState extends State<CheckBoxContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColor.lightGreyColor,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Checkbox(
+            checkColor: AppColor.whiteColor,
+            activeColor: AppColor.blueColor,
+            value: widget.isChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                widget.isChecked = value!;
+              });
+            },
+          ),
+          Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,children: [  const RestInvestTitle(
+            text: "I have read understood the guidlines as stated in the",
+            fontSize: 11,fontWeight: FontWeight.w900,
+          ),
+            const HeadingText(
+              text: "offering Documents / truest Deed & Fund Manager Report of",
+              underlineColor: AppColor.blueColor,
+              textColor: AppColor.blueColor,
+              fontSize: 11,fontWeight: FontWeight.w900,
+            ),
+            const RestInvestTitle(
+              text: "the fund and the risk involved.",
+              fontSize: 11,fontWeight: FontWeight.w900,
+            ),
+            const   SizedBox(height: 10,),
+            Row(children:const [
+              RestInvestTitle(
+                text: "I confirm acceptance of",
+                fontSize: 11,fontWeight: FontWeight.w900,
+              ),
+              HeadingText(
+                text: "Term & Conditions",
+                underlineColor: AppColor.blueColor,
+                textColor: AppColor.blueColor,
+                fontSize: 11,fontWeight: FontWeight.w900,
+              ),
+              RestInvestTitle(
+                text: "and all charges governing in",
+                fontSize: 11,fontWeight: FontWeight.w900,
+              )
+            ],),
+            const RestInvestTitle(
+              text: "in this transaction.",
+              fontSize: 11,fontWeight: FontWeight.w900,
+            )
+          ],)
+        ],
+      ),
+      height: 80,
+    );
+  }
+}
+
 class IcCatagory extends StatelessWidget {
   const IcCatagory({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 4),
-      child: Image.asset(
-        Constants.iccategory,
-        color: AppColor.black,
-        width: 20,
-        height: 20,
-      ),
+    return Image.asset(
+      Constants.iccategory,
+       color: AppColor.dimblack
+      ,
+      width: 25,
+      height: 25,
     );
   }
 }
@@ -861,7 +928,7 @@ class RoundContainer extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColor.whiteColor,
             border: Border.all(
-              width: 1, color: color,
+              width: 1, color:AppColor. black,
               // color: textColor,
             ),
             borderRadius: isSquare

@@ -2,11 +2,11 @@ import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/new_user_reg_data.dart';
-import 'package:investintrust/routes/routes.dart';
+import '../data/models/new_user_reg_data.dart';
+
 import '../utils/constant.dart';
 
 import '../utils/lists.dart';
@@ -346,7 +346,7 @@ class UserScreen extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        CustomRoundButton(isSquare: true,
+                        CustomRoundButton(
                             text: "Next",
                             buttonColor: AppColor.blueColor,
                             textColor: AppColor.whiteColor,

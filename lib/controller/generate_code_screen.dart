@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/city_data.dart';
-import 'package:investintrust/data/models/city_sector_model.dart';
-import 'package:investintrust/data/models/new_user_pin_gen.dart';
-import 'package:investintrust/data/models/new_user_reg.dart';
-import 'package:investintrust/data/repository.dart';
+import '../data/models/city_data.dart';
+import '../data/models/city_sector_model.dart';
+import '../data/models/new_user_pin_gen.dart';
+import '../data/models/new_user_reg.dart';
+import '../data/repository.dart';
 
 
 
