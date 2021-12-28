@@ -1,29 +1,31 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:investintrust/views/account_opening_request_screen.dart';
-import 'package:investintrust/views/branches_screen.dart';
-import 'package:investintrust/views/daily_nav_screen.dart';
-import 'package:investintrust/views/f2f_transfer_screen.dart';
-import 'package:investintrust/views/fundmanager_screen.dart';
-import 'package:investintrust/views/generate_code_screen.dart';
-import 'package:investintrust/views/home_screen.dart';
-import 'package:investintrust/views/learning_screen.dart';
-import 'package:investintrust/views/login_screen.dart';
-import 'package:investintrust/views/market_screen.dart';
-import 'package:investintrust/views/nav_screen.dart';
-import 'package:investintrust/views/password_screen.dart';
-import 'package:investintrust/views/picfund_screen.dart';
-import 'package:investintrust/views/pin_confirmation_screen.dart';
-import 'package:investintrust/views/portfolio_screen.dart';
-import 'package:investintrust/views/product_screen.dart';
-import 'package:investintrust/views/purchases_screen.dart';
-import 'package:investintrust/views/redemption_screen.dart';
-import 'package:investintrust/views/register_screen.dart';
-import 'package:investintrust/views/reports_screen.dart';
-import 'package:investintrust/views/splash_screen.dart';
-import 'package:investintrust/views/text_calculator_screen.dart';
-import 'package:investintrust/views/user_screen.dart';
-import 'package:investintrust/views/view_report_screen.dart';
+import '../views/account_opening_bank_detail_screen.dart';
+import '../views/account_opening_basic_information_screen.dart';
+import '../views/account_opening_request_screen.dart';
+import '../views/branches_screen.dart';
+import '../views/daily_nav_screen.dart';
+import '../views/f2f_transfer_screen.dart';
+import '../views/fundmanager_screen.dart';
+import '../views/generate_code_screen.dart';
+import '../views/home_screen.dart';
+import '../views/learning_screen.dart';
+import '../views/login_screen.dart';
+import '../views/market_screen.dart';
+import '../views/nav_screen.dart';
+import '../views/password_screen.dart';
+import '../views/picfund_screen.dart';
+import '../views/pin_confirmation_screen.dart';
+import '../views/portfolio_screen.dart';
+import '../views/product_screen.dart';
+import '../views/purchases_screen.dart';
+import '../views/redemption_screen.dart';
+import '../views/register_screen.dart';
+import '../views/reports_screen.dart';
+import '../views/splash_screen.dart';
+import '../views/text_calculator_screen.dart';
+import '../views/user_screen.dart';
+import '../views/view_report_screen.dart';
 
 class AppRoute {
   static const String splashRoute = '/';
@@ -53,6 +55,8 @@ class AppRoute {
   static const String pinConfirmation='/pinConfirmation';
 
   static const String accountopeningrequest='/accountopeningrequest';
+  static const String accountopeningbasicinformation='/accountopeningbasicinformation';
+  static const String accountopeningbankdetail='/accountopeningbankdetail';
 
   AppRoute._();
 
@@ -80,7 +84,7 @@ class AppRoute {
       ),
       GetPage(
         name: AppRoute.navRoute,
-        page: () => NavScreen(),
+        page: () =>const NavScreen(),
       ),
       GetPage(
         name: AppRoute.branchesRoute,
@@ -148,11 +152,19 @@ class AppRoute {
       ),
       GetPage(
         name: AppRoute.pinConfirmation,
-        page: () =>  PinConfirmationScreen()
+        page: () =>const  PinConfirmationScreen()
       ),
       GetPage(
           name: AppRoute.accountopeningrequest,
-          page: () =>  AccountOpenRequestScreen()
+          page: () => const AccountOpenRequestScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountopeningbasicinformation,
+          page: () =>const  AccountOpenBasicInformationScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountopeningbankdetail,
+          page: () => const AccountOpenBankDetailScreen()
       ),
     ];
   }

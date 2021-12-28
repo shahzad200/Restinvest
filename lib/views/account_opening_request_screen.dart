@@ -4,13 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/controller/account_opening_request_screen_controller.dart';
-import 'package:investintrust/utils/constant.dart';
-import '../controller/tax_calculator_screen_controller.dart';
+import '../controller/account_opening_request_screen_controller.dart';
+import '../utils/constant.dart';
+import '../widgets/button.dart';
+
 import '../utils/colors.dart';
 import '../utils/lists.dart';
-import '../widgets/button.dart';
-import '../widgets/custom_divider.dart';
+
 import '../widgets/textformfiled.dart';
 
 import '../widgets/constant_widget.dart';
@@ -31,8 +31,8 @@ class AccountOpenRequestScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: Padding(
-                padding: const EdgeInsets.only(right: 50),
+              title: const Padding(
+                padding:  EdgeInsets.only(right: 50),
                 child: Logo(
                   height: 80,
                   width: 80,
@@ -53,7 +53,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                     child: Column(children: [
                     const  CustomTextContainer(
                         fontSize: 16,
-                        height: 40,
+                        height: 35,
                         text: "Account Opening Request",
                         textAlign: TextAlign.start,
                       ),
@@ -137,14 +137,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                   ),
 
                                   borderRadius: BorderRadius.circular(6),
-                                  // value: _.dropdownvalue,
-                                  // hint: RestInvestTitle(
-                                  //   text:
-                                  //   _.fundvalue == null || _.fundvalue == ""
-                                  //       ? "NIUT"
-                                  //       : _.fundvalue,
-                                  //   textColor: AppColor.black,
-                                  // ),
+
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
                                   items: transferFundItems
@@ -153,16 +146,76 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                         value: transferFundItems,
                                         child: Text(transferFundItems!));
                                   }).toList(),
-                                  // onChanged: (String? value) {
-                                  //   _.fundvalue = value!;
-                                  //   _.update();
-                                  // },
+
                                 ),
                               ),
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
+                            Container(
+                              // margin: EdgeInsets.all(10.0),
+                              padding:
+                              const EdgeInsets.only(left: 10.0, right: 5.0),
+                              height: 45,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  border: Border.all(
+                                      width: 1, color: AppColor.blueColor)),
+                          child: Row(children: [
+                            Checkbox(
+                              checkColor: AppColor.whiteColor,
+                              activeColor: AppColor.blueColor,
+                              value: _.isChecked,
+                              onChanged: (bool? value) {
+
+                                  _.isChecked = value!;
+                                  _.update();
+                                }),
+                            const    RestInvestTitle(
+                              text: "I’m not a robot",
+                              textAlign: TextAlign.start,
+                              textColor: AppColor.black,
+                              fontWeight: FontWeight.w900,
+                            ),
+
+
+                          ],),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const  CustomTextContainer(
+                              fontSize: 16,
+                              height: 35 ,
+                              text: "GET VERIFICATION CODE",
+                              textAlign: TextAlign.start,
+                            ),const  SizedBox(height: 10,),
+                            const  CustomTextContainer(
+                              fontSize: 16,
+                              height: 35,
+                              text: "RESEND VERIFICATION CODE",
+                              textAlign: TextAlign.start,
+                            ),
+                          const  SizedBox(height: 10,),
+                            const    RestInvestTitle(
+                              text: "VERIFICATION CODE",
+                              textAlign: TextAlign.start,
+                              textColor: AppColor.black,
+                              fontWeight: FontWeight.w900,
+                            ),
+                            CustomTextFormField(
+
+                              hint: "Please Enter your (OTP) Verification Code Received Via SMS or Email",
+                              fieldType: Constants.pincode,
+
+                              textAlign: TextAlign.start,
+                            ),
+                          const SizedBox(height: 10,),
+                            CustomRoundButton(text: "Next", onPress: (){}),
+                            const SizedBox(height: 10,),
+
                           ],
                         ),
                       ),
