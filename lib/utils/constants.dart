@@ -3,7 +3,7 @@ import 'package:investintrust/data/models/social_media_links.dart';
 
 class Constant{
   static String userId = '-0456';
-  // static LoginModel? loginModel;
+  static LoginModel? loginModel;
   static SocialMediaLink? socialMediaLink;
   static String linkComplains = 'https://nit.com.pk/NewNit/Complains.aspx';
   static String linkConsolidatedFMRW = 'https://nit.com.pk/NewNit/ConsolidatedFMRW.aspx';

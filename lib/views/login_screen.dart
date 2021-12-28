@@ -25,7 +25,9 @@ class LoginScreen extends StatelessWidget {
               child: Scaffold(
             backgroundColor: AppColor.whiteColor,
             key: _.scaffoldKey,
-            body: SingleChildScrollView(
+            body:
+            // _.isLoading?const Center( child: DialogBox(),) :
+            SingleChildScrollView(
               padding: const EdgeInsets.only(top: 40, left: 30, right: 30),
               child: Column(
                 children: [
@@ -80,12 +82,12 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  RestInvestButton(
+                   RestInvestButton(
                       text: "Login",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
                       onPress: () {
-                        _.onLoginPress();
+                        _.onLoginPress(context);
                         // if (_.formKey.currentState!.validate()) {
                         //   _.formKey.currentState!.save();
                         //   (_.onLoginPress());

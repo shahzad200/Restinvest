@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/load_dashboard.dart';
+import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/utils/constants.dart';
+import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:investintrust/widgets/custome_dialog.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'login_screen_controller.dart';
 
@@ -14,26 +19,119 @@ class PortofolioScreenController extends GetxController {
   double totalInvestment = 0.0;
   bool investButton = true;
   bool portfolioButton = false;
-  bool buttonclick3 = false;
-  bool buttonclick4 = true;
+  bool buttonclick3 = true;
+  bool buttonclick4 = false;
   bool buttonclick5 = false;
   bool isLoading = false;
   bool noInternet = false;
+  bool isCardView = false;
   final _repository = Repository();
   LoadDashboard? loadDashboard;
-  final loginController = Get.find<LoginScreenController>();
+  Accounts? selectedAccount;
+  // final loginController = Get.find<LoginScreenController>();
   // LoginScreenController loginScreenController = Get.find<LoginScreenController>();
+  late List<ChartData>? chartDataPurchase = [];
+  late List<ChartData>? chartDataSummery = [];
+  late List<ChartData>? chartDataRedumption = [];
+  late List<ChartData> data = [];
+  late TooltipBehavior tooltip;
+  TooltipBehavior? tooltipBehavior;
   @override
-  void onInit() {
-    onLoadDashboard();
+  void onInit() async{
+    tooltipBehavior = TooltipBehavior(enable: true,);
+
+
+      // data = [
+      //   ChartData('CHN', 12),
+      //   ChartData('GER', 15),
+      //   ChartData('RUS', 30),
+      //   ChartData('BRZ', 6.4),
+      //   ChartData('IND', 14)
+      // ];
+      tooltip = TooltipBehavior(enable: true);
+
+    Constant.loginModel!.response!.accounts!.forEach((element) {
+      totalInvestment = totalInvestment + double.parse(element.portfolioInvestmentValue!);
+    });
+
+    update();
     super.onInit();
   }
 
   @override
-  void onReady() {
-    // TODO: implement onReady
+  void onReady() async{
+    selectedAccount = Constant.loginModel!.response!.accounts![0];
+    loadDashboard =  await _repository.onLoadDashBoard(Constant.loginModel!.response!.accounts![0].folioNumber.toString());
+
+
+
+    // loadDashboard.response
+    loadDashboard!.response!.portfolioSummary!.forEach((element) {
+      if(double.parse('${element.scaleValueYaxis}') != 0.0){
+        chartDataSummery!.add(
+          ChartData('${element.transMonthXaxis}', double.parse('${element.scaleValueYaxis}')),
+        );
+      }
+
+    });
+    selectedAccount!.portfolioAnalyPurchases!.forEach((element) {
+      if(double.parse('${element.amountYaxis}') != 0.0) {
+        chartDataPurchase!.add(
+          ChartData('${element.fundShortXaxis}',
+              double.parse('${element.amountYaxis}')),
+        );
+      }
+    });
+    selectedAccount!.portfolioAllocationData!.forEach((element) {
+      print("pie value");
+      print("pie value${element}");
+      print("pie value");
+      if(double.parse('${element["fundPercent"]}') != 0.0) {
+        data.add(
+          ChartData('${element["fundShort"]}',
+              double.parse('${element["fundPercent"]}')),
+        );
+      }
+    });
+    selectedAccount!.portfolioAnalyRedemptions!.forEach((element) {
+      if(double.parse('${element.amountYaxis}') != 0.0) {
+        chartDataRedumption!.add(
+          ChartData('${element.fundShortXaxis}',
+              double.parse('${element.amountYaxis}')),
+        );
+      }
+    });
     super.onReady();
   }
+
+  // List<ChartSeries<ChartData, String>> getStackedColumnSeries() {
+  //   return <ChartSeries<ChartData, String>>[
+  //     StackedColumn100Series<ChartData, String>(
+  //         dataSource: chartData!,
+  //         dataLabelSettings: const DataLabelSettings(isVisible: true),
+  //         xValueMapper: (ChartData sales, _) => sales.x,
+  //         yValueMapper: (ChartData sales, _) => sales.y1,
+  //         name: 'Product A'),
+  //     StackedColumn100Series<ChartData, String>(
+  //         dataSource: chartData!,
+  //         dataLabelSettings: const DataLabelSettings(isVisible: true),
+  //         xValueMapper: (ChartData sales, _) => sales.x,
+  //         yValueMapper: (ChartData sales, _) => sales.y2,
+  //         name: 'Product B'),
+  //     StackedColumn100Series<ChartData, String>(
+  //         dataSource: chartData!,
+  //         dataLabelSettings: const DataLabelSettings(isVisible: true),
+  //         xValueMapper: (ChartData sales, _) => sales.x,
+  //         yValueMapper: (ChartData sales, _) => sales.y3,
+  //         name: 'Product C'),
+  //     StackedColumn100Series<ChartData, String>(
+  //         dataSource: chartData!,
+  //         dataLabelSettings: const DataLabelSettings(isVisible: true),
+  //         xValueMapper: (ChartData sales, _) => sales.x,
+  //         yValueMapper: (ChartData sales, _) => sales.y4,
+  //         name: 'Product D')
+  //   ];
+  // }
 
   investTrust(index) {
     switch (index) {
@@ -88,12 +186,17 @@ class PortofolioScreenController extends GetxController {
     }
   }
 
-  onLoadDashboard() async {
+ Future<LoadDashboard?> onLoadDashboard(folioNumber,context) async {
+   LoadDashboard? dashboad;
     try {
+
       isLoading = true;
-      loadDashboard =  await _repository.onLoadDashBoard(loginController.loginModel!.response!.accounts![0].folioNumber.toString());
+      CustomDialog(context);
+      dashboad =  await _repository.onLoadDashBoard(folioNumber);
+      Get.back();
       isLoading = false;
       update();
+
     } catch (e) {
       if (e.toString() == 'Exception: No Internet') {
         isLoading = false;
@@ -113,6 +216,14 @@ class PortofolioScreenController extends GetxController {
             fontSize: 16.0);
       }
     }
+    return dashboad!;
   }
 
+}
+
+class ChartData {
+  ChartData(this.x, this.y);
+
+  final String x;
+  final double y;
 }
