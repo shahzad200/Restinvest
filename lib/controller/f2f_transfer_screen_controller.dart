@@ -11,35 +11,35 @@ class F2FTransferScreenController extends GetxController {
   String toaccountvalue = "";
   String transfervalue = "";
 
-  bool investButton = false;
-  bool portfolioButton = false;
-  bool buttonclick3 = false;
+  bool unit = false;
+  bool percentage = false;
+  bool allUnit = false;
 
   investTrust(index) {
     switch (index) {
       case 0:
         {
-          investButton = true;
-          portfolioButton = false;
-          buttonclick3 = false;
+          unit = true;
+          percentage = false;
+          allUnit = false;
 
           update();
           break;
         }
       case 1:
         {
-          investButton = false;
-          portfolioButton = true;
-          buttonclick3 = false;
+          unit = false;
+          percentage = true;
+          allUnit = false;
 
           update();
           break;
         }
       case 2:
         {
-          investButton = false;
-          portfolioButton = false;
-          buttonclick3 = true;
+          unit = false;
+          percentage = false;
+          allUnit = true;
 
           update();
           break;

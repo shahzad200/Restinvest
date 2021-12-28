@@ -22,6 +22,7 @@ class Constants {
   static const int username= 13;
   static const int ntnnumber=14;
   static const int passportnumber= 15;
+  static const int securitycode=16;
   //homeScreen button id
   static const int meetingButtonId = 1;
   static const int chatButtonId = 2;
@@ -58,4 +59,8 @@ class Constants {
   static const String mail = 'assets/images/mail.png';
   static const String calculator = 'assets/images/calculator.png';
   static const String dailynav = 'assets/images/dailynav.png';
+  static const String logonit = 'assets/images/logonit.png';
+  static const String icpurchases = 'assets/images/icpurchases.png';
+  static const String icfund = 'assets/images/icfund.png';
+  static const String iccategory = 'assets/images/iccategory.png';
 }

@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:investintrust/data/models/new_user_reg_data.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/routes/routes.dart';
+
+import '../data/models/new_user_reg_data.dart';
+import '../data/repository.dart';
+import '../routes/routes.dart';
 
 class UserScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();

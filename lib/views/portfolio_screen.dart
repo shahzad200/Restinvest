@@ -38,13 +38,7 @@ class PortofolioScreen extends StatelessWidget {
         builder: (_) {
           return Scaffold(
             appBar: AppBar(
-              title: Padding(
-                padding: const EdgeInsets.only(right: 50),
-                child: Logo(
-                  height: 80,
-                  width: 80,
-                ),
-              ),
+              title: const LogoNit(),
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
@@ -59,9 +53,7 @@ class PortofolioScreen extends StatelessWidget {
             ),
             drawer: const CustomDrawer(),
             key: _.scaffoldKey,
-            body:
-            // _.loadDashboard == null || _.selectedAccount == null? const Center( child: DialogBox(),) :
-            SingleChildScrollView(
+            body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -458,6 +450,4 @@ class PortofolioScreen extends StatelessWidget {
       ],
     );
   }
-
-
 }

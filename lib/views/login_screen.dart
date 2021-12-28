@@ -25,18 +25,16 @@ class LoginScreen extends StatelessWidget {
               child: Scaffold(
             backgroundColor: AppColor.whiteColor,
             key: _.scaffoldKey,
-            body:
-            // _.isLoading?const Center( child: DialogBox(),) :
-            SingleChildScrollView(
-              padding: const EdgeInsets.only(top: 40, left: 30, right: 30),
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
               child: Column(
                 children: [
                   Logo(
-                    height: 200,
-                    width: 200,
+                    height: 120,
+                    width: 120,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   Form(
                     key: _.formKey,
@@ -121,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   InkWell(
                       onTap: () {
-                        DialogBox;
+                        Get.toNamed(AppRoute.taxcalculatorRoute);
                       },
                       child: const RestInvestTitle(
                           text: "Tax Calculator",
@@ -136,6 +134,17 @@ class LoginScreen extends StatelessWidget {
                       },
                       child: const RestInvestTitle(
                           text: "Daily Nav",
+                          textAlign: TextAlign.center,
+                          textColor: AppColor.blueColor)),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoute.accountopeningrequest);
+                      },
+                      child: const RestInvestTitle(
+                          text: "Form",
                           textAlign: TextAlign.center,
                           textColor: AppColor.blueColor)),
                   const SizedBox(

@@ -49,7 +49,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                         border:
                             Border.all(width: 1, color: AppColor.blueColor)),
                     child: Column(children: [
-                      const CustomTextContainer(
+                       CustomTextContainer(fontSize: 14,
                         height: 45,
                         text: "TAX SAVING CALCULATOR",
                         textAlign: TextAlign.center,

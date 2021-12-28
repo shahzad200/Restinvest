@@ -104,35 +104,6 @@ class PortofolioScreenController extends GetxController {
     super.onReady();
   }
 
-  // List<ChartSeries<ChartData, String>> getStackedColumnSeries() {
-  //   return <ChartSeries<ChartData, String>>[
-  //     StackedColumn100Series<ChartData, String>(
-  //         dataSource: chartData!,
-  //         dataLabelSettings: const DataLabelSettings(isVisible: true),
-  //         xValueMapper: (ChartData sales, _) => sales.x,
-  //         yValueMapper: (ChartData sales, _) => sales.y1,
-  //         name: 'Product A'),
-  //     StackedColumn100Series<ChartData, String>(
-  //         dataSource: chartData!,
-  //         dataLabelSettings: const DataLabelSettings(isVisible: true),
-  //         xValueMapper: (ChartData sales, _) => sales.x,
-  //         yValueMapper: (ChartData sales, _) => sales.y2,
-  //         name: 'Product B'),
-  //     StackedColumn100Series<ChartData, String>(
-  //         dataSource: chartData!,
-  //         dataLabelSettings: const DataLabelSettings(isVisible: true),
-  //         xValueMapper: (ChartData sales, _) => sales.x,
-  //         yValueMapper: (ChartData sales, _) => sales.y3,
-  //         name: 'Product C'),
-  //     StackedColumn100Series<ChartData, String>(
-  //         dataSource: chartData!,
-  //         dataLabelSettings: const DataLabelSettings(isVisible: true),
-  //         xValueMapper: (ChartData sales, _) => sales.x,
-  //         yValueMapper: (ChartData sales, _) => sales.y4,
-  //         name: 'Product D')
-  //   ];
-  // }
-
   investTrust(index) {
     switch (index) {
       case 0:

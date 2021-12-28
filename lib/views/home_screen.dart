@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/utils/strings.dart';
-import 'package:investintrust/widgets/no_internet.dart';
-import 'package:investintrust/widgets/web_view.dart';
+import '../utils/constants.dart';
+
+import '../widgets/no_internet.dart';
+import '../widgets/web_view.dart';
 import 'package:open_mail_app/open_mail_app.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../controller/home_screen_controller.dart';

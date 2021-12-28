@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:investintrust/views/account_opening_request_screen.dart';
 import 'package:investintrust/views/branches_screen.dart';
 import 'package:investintrust/views/daily_nav_screen.dart';
 import 'package:investintrust/views/f2f_transfer_screen.dart';
@@ -12,6 +13,7 @@ import 'package:investintrust/views/market_screen.dart';
 import 'package:investintrust/views/nav_screen.dart';
 import 'package:investintrust/views/password_screen.dart';
 import 'package:investintrust/views/picfund_screen.dart';
+import 'package:investintrust/views/pin_confirmation_screen.dart';
 import 'package:investintrust/views/portfolio_screen.dart';
 import 'package:investintrust/views/product_screen.dart';
 import 'package:investintrust/views/purchases_screen.dart';
@@ -48,6 +50,9 @@ class AppRoute {
   static const String viewreportsRoute = '/viewreports';
   static const String dailynavRoute = '/dailynav';
   static const String taxcalculatorRoute = '/taxcalculator';
+  static const String pinConfirmation='/pinConfirmation';
+
+  static const String accountopeningrequest='/accountopeningrequest';
 
   AppRoute._();
 
@@ -140,6 +145,14 @@ class AppRoute {
       GetPage(
         name: AppRoute.generateCode,
         page: () =>  GenerateCodeScreen(),
+      ),
+      GetPage(
+        name: AppRoute.pinConfirmation,
+        page: () =>  PinConfirmationScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountopeningrequest,
+          page: () =>  AccountOpenRequestScreen()
       ),
     ];
   }

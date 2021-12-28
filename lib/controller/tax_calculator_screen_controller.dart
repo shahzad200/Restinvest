@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/calculate_tax.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/utils/colors.dart';
+import '../data/models/calculate_tax.dart';
+import '../data/repository.dart';
+
 
 class TaxCalculatorScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();

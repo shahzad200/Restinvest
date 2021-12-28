@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:investintrust/controller/daily_nav_screen_controller.dart';
+import '../controller/daily_nav_screen_controller.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/utils/lists.dart';
-import 'package:investintrust/widgets/button.dart';
+
+import '../widgets/button.dart';
 import '../utils/colors.dart';
 import '../widgets/constant_widget.dart';
 
@@ -44,7 +44,7 @@ class DailyNavScreen extends StatelessWidget {
                               Border.all(width: 1, color: AppColor.blueColor)),
                       child: Column(
                         children: [
-                          const CustomTextContainer(
+                           CustomTextContainer(fontSize: 14,
                             height: 40,
                             text: "DAILY FUND PRICES",
                             textAlign: TextAlign.end,
@@ -54,7 +54,7 @@ class DailyNavScreen extends StatelessWidget {
                           SingleChildScrollView(
                             child: Column(
                               children: [
-                                const CustomTextContainer(
+                                 CustomTextContainer(fontSize: 14,
                                   height: 25,
                                   text: "MUTUAL FUNDS",
                                   textAlign: TextAlign.start,
@@ -110,7 +110,7 @@ class DailyNavScreen extends StatelessWidget {
     ),
 
                                 space,
-                                const CustomTextContainer(
+                                 CustomTextContainer(fontSize: 14,
                                   height: 25,
                                   text: "PENSION ",
                                   textAlign: TextAlign.start,
@@ -163,7 +163,7 @@ class DailyNavScreen extends StatelessWidget {
                                 );
                               }),),
                                 space,
-                                const CustomTextContainer(
+                                 CustomTextContainer(fontSize: 14,
                                   height: 25,
                                   text: "EXCHANGE TRADED FUND",
                                   textAlign: TextAlign.left,

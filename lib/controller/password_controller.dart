@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/common_model.dart';
-import 'package:investintrust/data/repository.dart';
+import '../data/models/common_model.dart';
+import '../data/repository.dart';
 class PasswordScreenController extends GetxController{
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();

@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/social_media_links.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/utils/lists.dart';
+
+import '../data/repository.dart';
+import '../utils/constants.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreenController extends GetxController {

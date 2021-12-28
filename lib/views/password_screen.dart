@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/password_controller.dart';
-import 'package:investintrust/utils/constant.dart';
+import '../controller/password_controller.dart';
+import '../utils/constant.dart';
 
 import '../utils/colors.dart';
 import '../widgets/button.dart';

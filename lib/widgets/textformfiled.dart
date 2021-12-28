@@ -191,6 +191,15 @@ class _CustomFormFieldState extends State<CustomFormField> {
               }
 
             }
+          case Constants.securitycode:
+            {
+              if (val!.isEmpty) {
+                return "Please enter the security code";
+              } else {
+                return null;
+              }
+
+            }
 
           default:
             {}
@@ -227,7 +236,7 @@ class CustomTextFormField extends StatefulWidget {
       this.obscureText = false,
       this.fieldType = 2,
       this.controller,
-      this.textcolor,
+
       this.icon,
       this.color = AppColor.dimblack,
       this.isRounded = true,
@@ -243,7 +252,7 @@ class CustomTextFormField extends StatefulWidget {
   bool obscureText;
   final int fieldType;
   final IconData? icon;
-  final textcolor;
+
   final bool hasIcon;
   final TextEditingController? controller;
   final bool isRounded;
@@ -271,7 +280,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusedErrorBorder: _inputBorder(widget.isRounded),
         filled: true,
         labelText: widget.label,
-        hintText: widget.hint,hintStyle: TextStyle(color: AppColor.black),
+        hintText: widget.hint,hintStyle: TextStyle(color:widget.hintColor),
         fillColor: AppColor.whiteColor,
       ),
       keyboardType: widget.textInputType,
@@ -287,7 +296,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   InputBorder _inputBorder(isRounded) {
     return OutlineInputBorder(
-      borderSide: BorderSide(width: isRounded ? 1 : 2, color: widget.color),
+      borderSide: BorderSide(width: isRounded ? 1 : 2, color: AppColor.black),
       borderRadius: BorderRadius.circular(
         isRounded ? 0 : 0,
       ),

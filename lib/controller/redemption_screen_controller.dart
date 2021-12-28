@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:get/get.dart';
-import 'package:investintrust/controller/login_screen_controller.dart';
-import 'package:investintrust/data/models/load_dashboard.dart';
-import 'package:investintrust/data/repository.dart';
 
 class RedemptionScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -13,9 +10,9 @@ class RedemptionScreenController extends GetxController {
   String dropdownvalue = "";
   String amountvalue = "";
   String paymentvalue = "";
-  bool investButton = false;
-  bool portfolioButton = false;
-  bool buttonclick3 = false;
+  bool unitButton = false;
+  bool percentageButton = false;
+  bool allUnitButton = false;
 
 
   @override
@@ -30,27 +27,27 @@ class RedemptionScreenController extends GetxController {
     switch (index) {
       case 0:
         {
-          investButton = true;
-          portfolioButton = false;
-          buttonclick3 = false;
+          unitButton = true;
+          percentageButton = false;
+          allUnitButton = false;
 
           update();
           break;
         }
       case 1:
         {
-          investButton = false;
-          portfolioButton = true;
-          buttonclick3 = false;
+          unitButton = false;
+          percentageButton = true;
+          allUnitButton = false;
 
           update();
           break;
         }
       case 2:
         {
-          investButton = false;
-          portfolioButton = false;
-          buttonclick3 = true;
+          unitButton = false;
+          percentageButton = false;
+          allUnitButton = true;
 
           update();
           break;

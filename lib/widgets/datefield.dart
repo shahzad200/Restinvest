@@ -100,32 +100,36 @@ class DateFormFieldContainer extends StatelessWidget {
   final bool isRounded;
   final String text;
 
+
   @override
   Widget build(BuildContext context) {
-    return DateTimeFormField(
-      decoration: InputDecoration(fillColor: AppColor.whiteColor,filled: true,alignLabelWithHint: false,
-        hintStyle: const TextStyle(color: AppColor.black,),
-        errorStyle: const TextStyle(color: Colors.redAccent),
-    border: OutlineInputBorder(
-          borderSide: BorderSide(
-              width: isRounded ? 0.1 : 0, color: AppColor.dimblack),
-          borderRadius: BorderRadius.circular(
-            isRounded ? 8 : 0,
+    return Container(
+      child: DateTimeFormField(
+        decoration: InputDecoration(fillColor: AppColor.whiteColor,filled: true,
+          hintStyle: const TextStyle(color: AppColor.black,),
+          errorStyle: const TextStyle(color: Colors.redAccent),
+      border: OutlineInputBorder(
+            borderSide: BorderSide(
+                width: isRounded ? 0.1 : 0, color: AppColor.dimblack),
+            borderRadius: BorderRadius.circular(
+              isRounded ? 8 : 0,
+            ),
           ),
-        ),
 
-      hintText: text,
-        contentPadding: const EdgeInsets.all(8),
+        hintText: text,
+          contentPadding: const EdgeInsets.all(8),
+
+        ),
+        mode: DateTimeFieldPickerMode.date,
+        // initialValue: initialValue,
+        dateFormat: dateFormatTrue ? DateFormat('dd/MM/yyyy') : null,
+        autovalidateMode: AutovalidateMode.always,
+
+        onDateSelected: (DateTime value) {
+          onDateSelected(value);
+        },
 
       ),
-      mode: DateTimeFieldPickerMode.date,
-      // initialValue: initialValue,
-      dateFormat: dateFormatTrue ? DateFormat('dd/MM/yyyy') : null,
-      autovalidateMode: AutovalidateMode.always,
-
-      onDateSelected: (DateTime value) {
-        onDateSelected(value);
-      },
     );
   }
 }
