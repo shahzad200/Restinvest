@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/login_screen_controller.dart';
-import 'package:investintrust/controller/portfolio_screen_controller.dart';
 
+import '../controller/portfolio_screen_controller.dart';
 
-
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/utils/constants.dart';
-
+import '../utils/constants.dart';
 
 import '../utils/colors.dart';
 import '../widgets/button.dart';
@@ -27,13 +23,7 @@ class PortofolioScreen extends StatelessWidget {
         builder: (_) {
           return Scaffold(
             appBar: AppBar(
-              title: Padding(
-                padding: const EdgeInsets.only(right: 50),
-                child: Logo(
-                  height: 80,
-                  width: 80,
-                ),
-              ),
+              title: const LogoNit(),
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
@@ -67,14 +57,17 @@ class PortofolioScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: Constant.loginModel!.response!.accounts!.length,
-                  itemBuilder: (context, index) {
-                    // RemoteMessage message = _messages[index];
-                    return listItem(Constant.loginModel!.response!.accounts![index].folioNumber, '0.0');
-                  }),
-
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount:
+                          Constant.loginModel!.response!.accounts!.length,
+                      itemBuilder: (context, index) {
+                        // RemoteMessage message = _messages[index];
+                        return listItem(
+                            Constant.loginModel!.response!.accounts![index]
+                                .folioNumber,
+                            '0.0');
+                      }),
                   const SizedBox(
                     height: 40,
                   ),
@@ -95,7 +88,9 @@ class PortofolioScreen extends StatelessWidget {
                       Expanded(
                           child: CustomRoundButton(
                               text: "Investment by Fund",
-                              textColor: AppColor.black,
+                              textColor: _.investButton
+                                  ? AppColor.whiteColor
+                                  : AppColor.black,
                               onPress: () {
                                 _.investTrust(0);
                               },
@@ -105,7 +100,9 @@ class PortofolioScreen extends StatelessWidget {
                       Expanded(
                           child: CustomRoundButton(
                         text: "Portfolio Allocation",
-                        textColor: AppColor.black,
+                        textColor: _.investButton
+                            ? AppColor.black
+                            : AppColor.whiteColor,
                         onPress: () {
                           _.investTrust(1);
                         },
@@ -122,46 +119,44 @@ class PortofolioScreen extends StatelessWidget {
                   Column(
                     children: [
                       RoundColumnButton(
-                        icon: Icon(Icons.cabin),
-                        height: 45,
-                        width: 45,
-                        textColor: AppColor.black,
+                        icon: const IcCatagory(),
+                        height: 40,
+                        width: 00,
+                        iconColor: _.categoryButton
+                            ? AppColor.whiteColor
+                            : AppColor.black,
                         onPress: () {
                           _.invest(0);
                         },
-                        buttonColor: _.buttonclick3
+                        buttonColor: _.categoryButton
                             ? AppColor.blueColor
-                            : AppColor.whiteColor,
-                      ),
-                      const SizedBox(
-                        height: 6,
+                            : AppColor.lightWhite,
                       ),
                       RoundColumnButton(
-                        icon: Icon(Icons.cabin),
-                        height: 45,
-                        width: 45,
-                        textColor: AppColor.black,
+                        icon: const IcFund(),
+                        height: 40,
+                        width: 00,
+                        iconColor:
+                            _.purchasesButton ? AppColor.red : AppColor.black,
                         onPress: () {
                           _.invest(1);
                         },
-                        buttonColor: _.buttonclick4
+                        buttonColor: _.purchasesButton
                             ? AppColor.blueColor
-                            : AppColor.whiteColor,
-                      ),
-                      const SizedBox(
-                        height: 6,
+                            : AppColor.lightWhite,
                       ),
                       RoundColumnButton(
-                        icon: Icon(Icons.cabin),
-                        height: 45,
-                        width: 45,
-                        textColor: AppColor.black,
+                        icon: const IcPurchases(),
+                        height: 40,
+                        width: 00,
+                        iconColor:
+                            _.fundButton ? AppColor.whiteColor : AppColor.black,
                         onPress: () {
                           _.invest(2);
                         },
-                        buttonColor: _.buttonclick5
+                        buttonColor: _.fundButton
                             ? AppColor.blueColor
-                            : AppColor.whiteColor,
+                            : AppColor.lightWhite,
                       ),
                     ],
                   )
@@ -172,7 +167,7 @@ class PortofolioScreen extends StatelessWidget {
         });
   }
 
-  Widget listItem(String? folioNumber, String? amount){
+  Widget listItem(String? folioNumber, String? amount) {
     return Column(
       children: [
         ListTile(
@@ -181,7 +176,7 @@ class PortofolioScreen extends StatelessWidget {
             textColor: AppColor.dimblack,
           ),
           trailing: RestInvestTitle(
-            text: 'PKR '+ amount! ?? '0.0',
+            text: 'PKR ' + amount! ?? '0.0',
             fontWeight: FontWeight.w900,
             textColor: AppColor.black,
           ),
@@ -191,6 +186,4 @@ class PortofolioScreen extends StatelessWidget {
       ],
     );
   }
-
-
 }

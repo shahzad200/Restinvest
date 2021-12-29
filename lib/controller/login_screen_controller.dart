@@ -5,11 +5,11 @@ import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/utils/strings.dart';
+
+import '../data/repository.dart';
+import '../routes/routes.dart';
+import '../utils/constants.dart';
+
 
 class LoginScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();

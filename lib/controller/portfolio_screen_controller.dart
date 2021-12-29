@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/load_dashboard.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/utils/constants.dart';
+import '../data/models/load_dashboard.dart';
+import '../data/repository.dart';
+import '../utils/constants.dart';
 
-import 'login_screen_controller.dart';
 
 class PortofolioScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -14,9 +13,9 @@ class PortofolioScreenController extends GetxController {
 
   bool investButton = true;
   bool portfolioButton = false;
-  bool buttonclick3 = false;
-  bool buttonclick4 = true;
-  bool buttonclick5 = false;
+  bool categoryButton = false;
+  bool purchasesButton = true;
+  bool fundButton = false;
   bool isLoading = false;
   bool noInternet = false;
   final _repository = Repository();
@@ -59,27 +58,27 @@ class PortofolioScreenController extends GetxController {
     switch (index) {
       case 0:
         {
-          buttonclick3 = true;
-          buttonclick4 = false;
-          buttonclick5 = false;
+          categoryButton = true;
+          purchasesButton = false;
+          fundButton = false;
 
           update();
           break;
         }
       case 1:
         {
-          buttonclick3 = false;
-          buttonclick4 = true;
-          buttonclick5 = false;
+          categoryButton = false;
+          purchasesButton = true;
+          fundButton = false;
 
           update();
           break;
         }
       case 2:
         {
-          buttonclick3 = false;
-          buttonclick4 = false;
-          buttonclick5 = true;
+          categoryButton = false;
+          purchasesButton = false;
+          fundButton = true;
 
           update();
           break;

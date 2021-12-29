@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/password_controller.dart';
-import 'package:investintrust/utils/constant.dart';
+import '../controller/password_controller.dart';
+import '../utils/constant.dart';
 
 import '../utils/colors.dart';
 import '../widgets/button.dart';
@@ -25,11 +25,11 @@ class PasswordScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Logo(
-                    height: 200,
-                    width: 200,
+                    height: 100,
+                    width: 100,
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 40,
                   ),
                   const RestInvestTitle(
                       text:

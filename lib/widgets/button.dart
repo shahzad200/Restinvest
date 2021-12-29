@@ -52,7 +52,7 @@ class CustomRoundButton extends StatelessWidget {
       {Key? key,
       this.color1 = true,
       this.color2 = false,
-        this.isSquare,
+
       required this.text,
       required this.onPress,
       this.height = 48,
@@ -70,9 +70,9 @@ class CustomRoundButton extends StatelessWidget {
   final Color borderColor;
   final double width;
   final double height;
- final isSquare;
 
-  final color1;
+
+  final  color1;
   final color2;
   @override
   Widget build(BuildContext context) {
@@ -85,12 +85,9 @@ class CustomRoundButton extends StatelessWidget {
             fontSize: textSize,
           ),
           minimumSize: Size(width, height),
-          shape: RoundedRectangleBorder(
-            borderRadius: false
-                ? BorderRadius.circular(10
+          shape: RoundedRectangleBorder(borderRadius:
+              BorderRadius.circular(0.0)
 
-            )
-                : BorderRadius.circular(0.0),
           ),
         ),
         child: Text(text));
@@ -127,14 +124,18 @@ class CustomRowButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPress,
         style: ElevatedButton.styleFrom(
+
           primary: buttonColor,
           onPrimary: textColor,
           textStyle: TextStyle(
             fontSize: textSize,
           ),
           minimumSize: Size(width, height),
-          shape:  RoundedRectangleBorder(
-              side:  BorderSide(color: AppColor.blueColor)),
+         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+
+         side:const BorderSide(color: AppColor.blueColor,width: 1,),
+
+
         ),
         child: Text(text));
   }
@@ -151,14 +152,14 @@ class RoundColumnButton extends StatelessWidget {
       this.textSize = 18.0,
       this.buttonColor = AppColor.blueColor,
       required this.icon,
-      this.textColor = AppColor.whiteColor,
+      this.iconColor = AppColor.whiteColor,
       this.borderColor = AppColor.blueColor})
       : super(key: key);
 
   final VoidCallback? onPress;
   final double textSize;
   final Color buttonColor;
-  final Color textColor;
+  final Color iconColor;
   final Color borderColor;
   final icon;
   final double width;
@@ -172,7 +173,7 @@ class RoundColumnButton extends StatelessWidget {
       onPressed: onPress,
       style: ElevatedButton.styleFrom(
         primary: buttonColor,
-        onPrimary: textColor,
+
         textStyle: TextStyle(
           fontSize: textSize,
         ),
@@ -181,7 +182,7 @@ class RoundColumnButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(2),
             side: BorderSide(color: AppColor.dimblack, width: 0.2)),
       ),
-      child: icon,
+      child: icon                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ,
     );
   }
 }

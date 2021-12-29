@@ -2,11 +2,11 @@ import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/new_user_reg_data.dart';
-import 'package:investintrust/routes/routes.dart';
+import '../data/models/new_user_reg_data.dart';
+
 import '../utils/constant.dart';
 
 import '../utils/lists.dart';
@@ -47,7 +47,7 @@ class UserScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               color: AppColor.whiteColor,
                               border:
-                              Border.all(width: 0.5, color: AppColor.dimblack)),
+                              Border.all(width: 0.8, color: AppColor.black)),
                           child: DropdownButton(
                             // alignment: Alignment.center,
                             isExpanded: true,
@@ -170,7 +170,7 @@ class UserScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               color: AppColor.whiteColor,
                               border:
-                              Border.all(width: 0.5, color: AppColor.dimblack)),
+                              Border.all(width: 0.8, color: AppColor.black)),
                           child: DropdownButton(   isExpanded: true,
                             alignment: Alignment.center,
                             icon: const Visibility(
@@ -201,7 +201,7 @@ class UserScreen extends StatelessWidget {
                             }).toList(),
                             onChanged: (IncomeSources? value) {
                               _.bracketValue = value!.incomeSourceName!;
-                              _.bracketCode = value!.incomeSourceId!;
+                              _.bracketCode = value.incomeSourceId!;
                               _.update();
                             },
                           ),
@@ -220,7 +220,7 @@ class UserScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               color: AppColor.whiteColor,
                               border:
-                              Border.all(width: 0.5, color: AppColor.dimblack)),
+                              Border.all(width: 0.8, color: AppColor.black)),
                           child: DropdownButton(   isExpanded: true,
                             alignment: Alignment.center,
                             icon: const Visibility(
@@ -255,7 +255,7 @@ class UserScreen extends StatelessWidget {
                             }).toList(),
                             onChanged: (Occupations? value) {
                               _.occupationValue = value!.occupoationName!;
-                              _.occupationCode = value!.occupoationCode!;
+                              _.occupationCode = value.occupoationCode!;
                               _.update();
                             },
                           ),
@@ -301,7 +301,7 @@ class UserScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               color: AppColor.whiteColor,
                               border:
-                              Border.all(width: 0.5, color: AppColor.dimblack)),
+                              Border.all(width: 0.8, color: AppColor.black)),
                           child: DropdownButton(   isExpanded: true,
                             alignment: Alignment.center,
                             icon: const Visibility(
@@ -332,7 +332,7 @@ class UserScreen extends StatelessWidget {
                             }).toList(),
                             onChanged: (IncomeBrackets? value) {
                               _.incomeValue = value!.incomeBracketName!;
-                              _.incomeCode = value!.incomeBracketId!;
+                              _.incomeCode = value.incomeBracketId!;
                               _.update();
                             },
                           ),
@@ -346,7 +346,7 @@ class UserScreen extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        CustomRoundButton(isSquare: true,
+                        CustomRoundButton(
                             text: "Next",
                             buttonColor: AppColor.blueColor,
                             textColor: AppColor.whiteColor,

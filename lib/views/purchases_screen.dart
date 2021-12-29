@@ -2,7 +2,8 @@ import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/utils/lists.dart';
+import '../utils/lists.dart';
+import '../views/redemption_screen.dart';
 
 import '../widgets/datefield.dart';
 import '../controller/purchases_screen_controller.dart';
@@ -363,7 +364,7 @@ class PurchasesScreen extends StatelessWidget {
                             SizedBox(
                               height: 35,
                               child: DateFormFieldContainer(isRounded:false,
-                                text: 'fff',
+                                text: '',
                                 mode: DateTimeFieldPickerMode.date,
                                 dateFormatTrue: true,
                                 initialValue: DateTime.now(),
@@ -404,10 +405,14 @@ class PurchasesScreen extends StatelessWidget {
                       ))
                     ],
                   ),
+                  Row(children: [
+                    Column(children:const [
+                      RestInvestTitle(text: "Payment Proof",textColor: AppColor.blueColor,),
+
+                    ],)
+                  ],),
                   const SizedBox(height: 10),
-                  ContainerCheckBoxText(
-                    isChecked: false,
-                  ),
+                  CheckBoxContainer(isChecked: false,),
                   space,
                   SizedBox(
                     height: 40,

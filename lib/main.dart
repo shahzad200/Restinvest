@@ -1,29 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../views/daily_nav_screen.dart';
-import '../views/fundmanager_screen.dart';
-import '../views/learning_screen.dart';
-import '../views/market_screen.dart';
-import '../views/nav_screen.dart';
-import '../views/picfund_screen.dart';
-import '../views/portfolio_screen.dart';
-import '../views/product_screen.dart';
-import '../views/f2f_transfer_screen.dart';
-import '../views/purchases_screen.dart';
-import '../views/redemption_screen.dart';
-import '../views/reports_screen.dart';
-import '../views/text_calculator_screen.dart';
-import '../views/user_screen.dart';
-import '../views/view_report_screen.dart';
 
-import '../views/home_screen.dart';
 
 import '../routes/routes.dart';
-import '../views/login_screen.dart';
-import '../views/password_screen.dart';
-import '../views/register_screen.dart';
-import '../views/splash_screen.dart';
-import 'views/branches_screen.dart';
+
 
 void main() async {
   runApp(const MyApp());

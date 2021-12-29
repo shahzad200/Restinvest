@@ -85,5 +85,4 @@ class F2FTransferScreenController extends GetxController {
 
   }
 
-
 }
