@@ -1,14 +1,13 @@
-
-
-import 'package:investintrust/controller/login_screen_controller.dart';
 import 'package:investintrust/data/models/calculate_tax.dart';
 import 'package:investintrust/data/models/daily_nav_prices.dart';
 import 'package:investintrust/data/models/load_dashboard.dart';
+import 'package:investintrust/data/models/load_fund_plans.dart';
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/data/models/new_user_reg_data.dart';
 import 'package:investintrust/data/models/social_media_links.dart';
+import 'package:investintrust/data/models/view_reports.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/utils/strings.dart';
-
 import 'api_client.dart';
 import 'models/city_data.dart';
 import 'models/city_sector_model.dart';
@@ -28,6 +27,9 @@ class Repository {
   Future<Common> onResetPassword(String userId,String cNic)
   => _apiClient.onResetPassword(userId,cNic);
 
+  Future<LoadFundsPlans> onLoadFundsPlans(String fundCode,
+      String folioNumber,String requestType)
+  => _apiClient.onLoadFundsPlans(Constant.userId, fundCode, folioNumber, requestType);
 
   Future<LoadDashboard> onLoadDashBoard(String folioNumber)
   => _apiClient.onLoadDashBoard(Strings.userId,folioNumber);
@@ -51,6 +53,10 @@ class Repository {
   Future<NewUserPinGenration> onNewUserPinGenration(String address,
       String cell, String cNic, String email)
   => _apiClient.onNewUserPinGenration(address, cell, cNic, email);
+
+  Future<ViewReport> onViewReport(String fromDate,
+      String toDate, String fundCode, String reportType, String folioNumber)
+  => _apiClient.onViewReport(fromDate, toDate, fundCode, reportType, folioNumber, Constant.userId);
 
     Future<NewUserRegister> onRegNewUser(String title, String fatherOrHusbandName, String cnicIsueDate,
       String cNicExpiryDate, String address, String country, String phone,

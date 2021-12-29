@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/login_model.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/utils/lists.dart';
 
 import '../controller/f2f_transfer_screen_controller.dart';
@@ -71,22 +73,22 @@ class F2FTransferScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6),
                                   // value: _.dropdownvalue,
                                   hint: RestInvestTitle(
-                                    text: _.accountvalue == null ||
-                                            _.accountvalue == ""
-                                        ? "81656"
-                                        : _.accountvalue,
+                                    text: _.accountValue == null ||
+                                            _.accountValue == ""
+                                        ? ""
+                                        : _.accountValue,
                                     textColor: AppColor.black,
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
-                                  items: fromAccountItems
-                                      .map((String? fromAccountItems) {
-                                    return DropdownMenuItem<String>(
-                                        value: fromAccountItems,
-                                        child: Text(fromAccountItems!));
+                                  items: Constant.loginModel!.response!.accounts!.map<DropdownMenuItem<Accounts>>((Accounts? value){
+                                    return DropdownMenuItem<Accounts>(
+                                      value: value,
+                                      child: Text(value!.folioNumber!),
+                                    );
                                   }).toList(),
-                                  onChanged: (String? value) {
-                                    _.accountvalue = value!;
+                                  onChanged: (Accounts? value) {
+                                    _.accountValue = value!.folioNumber!;
                                     _.update();
                                   },
                                 ),
@@ -117,7 +119,7 @@ class F2FTransferScreen extends StatelessWidget {
                                   border: Border.all(
                                       width: 1, color: AppColor.dimblack)),
                               child: Center(
-                                child: DropdownButton<String>(
+                                child: DropdownButton(
                                   isExpanded: true,
                                   underline: Container(
                                     color: AppColor.whiteColor,
@@ -126,22 +128,23 @@ class F2FTransferScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6),
                                   // value: _.dropdownvalue,
                                   hint: RestInvestTitle(
-                                    text: _.transfervalue == null ||
-                                            _.transfervalue == ""
-                                        ? "NITIEF"
-                                        : _.transfervalue,
+                                    text: _.fundValue == null ||
+                                        _.fundValue == ""
+                                        ? ""
+                                        : _.fundValue,
                                     textColor: AppColor.black,
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
-                                  items: transferItems
-                                      .map((String? transferItems) {
-                                    return DropdownMenuItem<String>(
-                                        value: transferItems,
-                                        child: Text(transferItems!));
+                                  items: Constant.loginModel!.response!.accounts![_.findIndex()].userFundBalances!.map<DropdownMenuItem<UserFundBalances>>((UserFundBalances? value){
+                                    return DropdownMenuItem<UserFundBalances>(
+                                      value: value,
+                                      child: Text(value!.fundShort!),
+                                    );
                                   }).toList(),
-                                  onChanged: (String? value) {
-                                    _.transfervalue = value!;
+                                  onChanged: (UserFundBalances? value) {
+                                    _.fundValue = value!.fundShort!;
+                                    _.fundCode = value!.fundCode!;
                                     _.update();
                                   },
                                 ),
@@ -195,17 +198,17 @@ class F2FTransferScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
-                    children: const [
-                      Expanded(
+                    children: [
+                       Expanded(
                           child: EmptyRowContainer(
                         fontWeight: FontWeight.w800,
                         fontsize: 14,
                         hintColor: AppColor.black,
                         hint: "0",
-                        text: "From Fund Electronic Units",
+                        text: _.electronicUnit() ?? '',
                         textColor: AppColor.dimblack,
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
                       Expanded(
@@ -214,7 +217,7 @@ class F2FTransferScreen extends StatelessWidget {
                         fontsize: 14,
                         hintColor: AppColor.black,
                         hint: "0.00",
-                        text: "From Fund Amount (Rs.)",
+                        text: _.fundAmount() ?? '',
                         textColor: AppColor.dimblack,
                       )),
                     ],
@@ -380,7 +383,7 @@ class F2FTransferScreen extends StatelessWidget {
                               textColor: AppColor.black,
                               textSize: 14,
                               onPress: () {
-                                _.investTrust(0);
+                                // _.investTrust(0);
                               },
                               buttonColor: _.investButton
                                   ? AppColor.blueColor
@@ -391,7 +394,7 @@ class F2FTransferScreen extends StatelessWidget {
                         textColor: AppColor.black,
                         textSize: 14,
                         onPress: () {
-                          _.investTrust(1);
+                          // _.investTrust(1);
                         },
                         buttonColor: _.portfolioButton
                             ? AppColor.blueColor
@@ -403,7 +406,7 @@ class F2FTransferScreen extends StatelessWidget {
                         textColor: AppColor.black,
                         textSize: 14,
                         onPress: () {
-                          _.investTrust(2);
+                          // _.investTrust(2);
                         },
                         buttonColor: _.buttonclick3
                             ? AppColor.blueColor

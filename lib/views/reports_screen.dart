@@ -56,7 +56,7 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute);
+                      Get.toNamed(AppRoute.viewreportsRoute+"?param=AccStmt");
                     },
                     text: "Account Statement",
                   ),
@@ -65,7 +65,7 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute);
+                      Get.toNamed(AppRoute.viewreportsRoute+"?param=StmtOfAcc");
                     },
                     text: "Statement of Account ",
                   ),
@@ -90,7 +90,7 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute);
+                      Get.toNamed(AppRoute.viewreportsRoute+"?param=RedStatus");
                     },
                     text: "Redemption Report",
                   ),
@@ -99,14 +99,14 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute);
+                      Get.toNamed(AppRoute.viewreportsRoute+"?param=SaleStatus");
                     },
                     text: "Purchase Report",
                   ),
                   CustomDivider(color: AppColor.black.withOpacity(0.1)),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute);
+                      Get.toNamed(AppRoute.viewreportsRoute+"?param=TransferStatus");
                     },
                     text: "F2F Transfer Report",
                   ),

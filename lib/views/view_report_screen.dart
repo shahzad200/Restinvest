@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:investintrust/controller/view_report_screen_controller.dart';
-import 'package:investintrust/utils/lists.dart';
+import 'package:investintrust/data/constant_values.dart';
+import 'package:investintrust/data/models/login_model.dart';
+import 'package:investintrust/utils/constants.dart' as cons;
+import 'package:investintrust/utils/constants.dart';
+import 'package:investintrust/widgets/button.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 import 'package:investintrust/widgets/datefield.dart';
+import 'package:investintrust/widgets/no_internet.dart';
 
 import '../utils/colors.dart';
 
@@ -36,130 +41,177 @@ class ViewReportsScreen extends StatelessWidget {
             ),
             drawer: const CustomDrawer(),
             key: _.scaffoldKey,
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-              child: Column(
-                children: [
-                  Row(
+            body: Stack(
+              children: [
+                SingleChildScrollView(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const RestInvestTitle(
-                                text: 'Start Date', textColor: AppColor.black),
-                            SizedBox(
-                              height: 35,
-                              child: DateFormFieldContainer(isRounded:false,
-                                text: 'CNIC Issue Date',
-                                mode: DateTimeFieldPickerMode.date,
-                                dateFormatTrue: true,
-                                initialValue: DateTime.now(),
-                                onDateSelected: (value){
-
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const RestInvestTitle(
-                                text: 'End Date', textColor: AppColor.black),
-                            SizedBox(
-                              height: 35,
-                              child: DateFormFieldContainer(isRounded:false,
-                                text: 'CNIC Expiry Date',
-                                mode: DateTimeFieldPickerMode.date,
-                                dateFormatTrue: true,
-                                initialValue: DateTime.now(),
-                                onDateSelected: (value){
-
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const RestInvestTitle(
-                              text: "Account No.",
-                              textColor: AppColor.black,
-                            ),
-                            Container(
-                              // margin: EdgeInsets.all(10.0),
-                              padding:
-                                  const EdgeInsets.only(left: 10.0, right: 5.0),
-                              height: 35,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  color: AppColor.whiteColor,
-                                  border: Border.all(
-                                      width: 1, color: AppColor.dimblack)),
-                              child: Center(
-                                child: DropdownButton(
-                                  isExpanded: true,
-                                  underline: Container(
-                                    color: AppColor.whiteColor,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const RestInvestTitle(
+                                    text: 'Start Date', textColor: AppColor.black),
+                                SizedBox(
+                                  height: 35,
+                                  child:
+                                  DateFormFieldContainer(isRounded:false,
+                                    text: 'Selected Date',
+                                    mode: DateTimeFieldPickerMode.date,
+                                    dateFormatTrue: true,
+                                    enable: _.isLoading || _.noInternet ? false : true,
+                                    initialValue: DateTime.now(),
+                                    onDateSelected: (value){
+                                      _.startDate = _.dateTime(value);
+                                    },
                                   ),
-
-                                  borderRadius: BorderRadius.circular(6),
-                                  // value: _.dropdownvalue,
-                                  hint: RestInvestTitle(
-                                    text: _.amountvalue == null ||
-                                            _.amountvalue == ""
-                                        ? "81656"
-                                        : _.amountvalue,
-                                    textColor: AppColor.black,
-                                  ),
-                                  icon: const Icon(Icons.keyboard_arrow_down,
-                                      color: AppColor.blueColor, size: 35),
-                                  items: fromAccountItems
-                                      .map((String? fromAccountItems) {
-                                    return DropdownMenuItem<String>(
-                                        value: fromAccountItems,
-                                        child: Text(fromAccountItems!));
-                                  }).toList(),
-                                  onChanged: (String? value) {
-                                    _.amountvalue = value!;
-                                    _.update();
-                                  },
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const RestInvestTitle(
+                                    text: 'End Date', textColor: AppColor.black),
+                                SizedBox(
+                                  height: 35,
+                                  child: DateFormFieldContainer(isRounded:false,
+                                    text: 'Selected Date',
+                                    mode: DateTimeFieldPickerMode.date,
+                                    dateFormatTrue: true,
+                                    enable: _.isLoading || _.noInternet ? false : true,
+                                    initialValue: DateTime.now(),
+                                    onDateSelected: (value){
+                                      _.endDate = _.dateTime(value);
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const RestInvestTitle(
+                                  text: "Account No.",
+                                  textColor: AppColor.black,
+                                ),
+                                Container(
+                                  // margin: EdgeInsets.all(10.0),
+                                  padding:
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
+                                  height: 35,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: AppColor.whiteColor,
+                                      border: Border.all(
+                                          width: 1, color: AppColor.dimblack)),
+                                  child: Center(
+                                    child: DropdownButton(
+                                      isExpanded: true,
+                                      alignment: Alignment.center,
+                                      icon: const Visibility(
+                                        visible: false,
+                                        child: Icon(Icons.arrow_downward),
+                                      ),
+                                      iconSize: 0,
+                                      underline: Container(
+                                        alignment: Alignment.center,
+                                        color: AppColor.whiteColor,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      // value: _.dropdownvalue,
+                                      hint: RestInvestTitle(
+                                        text: _.selectedAccount == null || _.selectedAccount == ""
+                                            ? "Select Account"
+                                            : _.selectedAccount,
+                                        textColor: AppColor.black,
+                                      ),
+                                      items: cons.Constant.loginModel!.response!.accounts!.map<DropdownMenuItem<Accounts>>((Accounts? value){
+                                        return DropdownMenuItem<Accounts>(
+                                          value: value,
+                                          child: Text(value!.folioNumber!),
+                                        );
+                                      }).toList(),
+                                      onChanged: _.isLoading || _.noInternet ? null : (Accounts? value) {
+                                        _.selectedAccount = value!.folioNumber!;
+                                        _.update();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Expanded(
+                              child: DropDownContainerIcon(
+                                text1: "All",
+                                fontsize: 14,
+                                fontWeight: FontWeight.bold,
+                                voidcallback: () {},
+                                text: "Fund Name",
+                                textColor: AppColor.black,
+                              ))
+                        ],
+                      ),
+                      const SizedBox(height: 25),
+                      SizedBox(
+                        height: 40,
+                        width: 200,
+                        child: RestInvestButton(
+                          text: 'VIEW REPORT',
+                          buttonColor: AppColor.blueColor,
+                          textColor: AppColor.whiteColor,
+                          onPress: (){
+                            _.isLoading || _.noInternet ? null :
+                            _.onViewReport();
+                          },
                         ),
                       ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Expanded(
-                          child: DropDownContainerIcon(
-                        text1: "All",
-                        fontsize: 14,
-                        fontWeight: FontWeight.bold,
-                        voidcallback: () {},
-                        text: "Fund Name",
-                        textColor: AppColor.black,
-                      ))
                     ],
                   ),
-                ],
-              ),
+                ),
+                _.isLoading
+                    ? const Center(
+                  child: DialogBox(),
+                )
+                    : _.noInternet
+                    ? Align(
+                  alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: Container(
+                          height: 180,
+                          width: Get.width,
+                          color: Colors.white,
+                          child: NoInternetWgt(
+                            onTryAgain: (){
+                              _.noInternet = false;
+                              _.update();
+                            },
+                          ),
+                        ),
+                      ),
+                    )
+                    : const SizedBox()
+              ],
             ),
           );
         });
