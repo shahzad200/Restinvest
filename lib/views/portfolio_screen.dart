@@ -126,7 +126,7 @@ class PortofolioScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                          child: CustomRoundButton(
+                          child: CustomRoundButton(isRound:false,
                               text: "Investment by Fund",
 
                               textColor: _.investButton
@@ -141,7 +141,7 @@ class PortofolioScreen extends StatelessWidget {
                                   ? AppColor.blueColor
                                   : AppColor.whiteColor)),
                       Expanded(
-                          child: CustomRoundButton(
+                          child: CustomRoundButton(isRound:false,
                         text: "Portfolio Allocation",
                         textColor: _.portfolioButton
                             ? Colors.white

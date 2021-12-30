@@ -2,11 +2,9 @@ import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-
 import 'package:get/get.dart';
-import '../controller/generate_code_screen.dart';
+import '../controller/generate_code_screen_controller.dart';
 import '../controller/user_screen_controller.dart';
-
 import '../data/models/new_user_reg_data.dart';
 import '../utils/lists.dart';
 import '../widgets/constant_widget.dart';
@@ -14,11 +12,8 @@ import '../utils/constant.dart';
 import '../data/models/city_data.dart' as res;
 import '../data/models/city_sector_model.dart' as sector;
 import '../widgets/datefield.dart';
-
 import '../utils/colors.dart';
-
 import '../widgets/button.dart';
-
 import '../widgets/textformfiled.dart';
 
 class GenerateCodeScreen extends StatelessWidget {
@@ -61,9 +56,7 @@ class GenerateCodeScreen extends StatelessWidget {
                                 alignment: Alignment.center,
                                 color: AppColor.whiteColor,
                               ),
-
                               borderRadius: BorderRadius.circular(10),
-                              // value: _.dropdownvalue,
                               hint: Center(
                                 child: RestInvestTitle(
                                   text: _.countryValue == null ||
@@ -219,14 +212,12 @@ class GenerateCodeScreen extends StatelessWidget {
                     ),
                     Container(
                         height: 50,
-
                         width: Get.width,
-
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: AppColor.whiteColor,
-                            border: Border.all(
-                                width: 0.8, color: AppColor.black)),
+                            border:
+                                Border.all(width: 0.8, color: AppColor.black)),
                         child: DropdownButton(
                           isExpanded: true,
                           alignment: Alignment.center,
@@ -239,9 +230,7 @@ class GenerateCodeScreen extends StatelessWidget {
                             alignment: Alignment.center,
                             color: AppColor.whiteColor,
                           ),
-
                           borderRadius: BorderRadius.circular(10),
-                          // value: _.dropdownvalue,
                           hint: Center(
                             child: RestInvestTitle(
                               text: _.religionValue == null ||
@@ -309,6 +298,7 @@ class GenerateCodeScreen extends StatelessWidget {
                       height: 8,
                     ),
                     DateFormFieldContainer(
+                      isTrue: false,
                       isRounded: true,
                       text: 'Date of Birth',
                       mode: DateTimeFieldPickerMode.date,
@@ -380,7 +370,6 @@ class GenerateCodeScreen extends StatelessWidget {
                                 border: Border.all(
                                     width: 0.8, color: AppColor.black)),
                             child: DropdownButton(
-                              // alignment: Alignment.center,
                               isExpanded: true,
                               icon: const Visibility(
                                 visible: false,
@@ -390,9 +379,7 @@ class GenerateCodeScreen extends StatelessWidget {
                               underline: Container(
                                 color: AppColor.whiteColor,
                               ),
-
                               borderRadius: BorderRadius.circular(10),
-                              // value: _.dropdownvalue,
                               hint: Center(
                                 child: RestInvestTitle(
                                   textAlign: TextAlign.center,
@@ -403,7 +390,6 @@ class GenerateCodeScreen extends StatelessWidget {
                                   textColor: AppColor.black,
                                 ),
                               ),
-
                               items: maritalStatus.map((String? titleItems) {
                                 return DropdownMenuItem<String>(
                                     value: titleItems,
@@ -485,8 +471,7 @@ class GenerateCodeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
-                    CustomRoundButton(
-
+                    CustomRoundButton(isRound:true,
                       text: "Generate Pin Code",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
@@ -501,8 +486,7 @@ class GenerateCodeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 6,
                     ),
-                    CustomRoundButton(
-
+                    CustomRoundButton(isRound:true,
                         text: "Submit",
                         buttonColor: AppColor.blueColor,
                         textColor: AppColor.whiteColor,

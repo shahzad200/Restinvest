@@ -311,26 +311,25 @@ class PicFund extends StatelessWidget {
 class Calender extends StatelessWidget {
   const Calender(
       {this.color = AppColor.blueColor,
-      required this.height,
-      required this.width,
+
       Key? key})
       : super(key: key);
   final Color color;
-  final double height;
-  final double width;
+
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
         right: 4,
-        top: 6,
+        bottom: 6,top: 6
+
       ),
       child: Image.asset(
         Constants.calender,
         color: color,
-        width: width,
-        height: height,
+        width:10 ,
+        height:10 ,
       ),
     );
   }
@@ -724,7 +723,7 @@ class DropDownContainerIcon extends StatelessWidget {
   final Color textColor;
   final fontWeight;
   final Color color;
-  final String? text;
+  final String text;
   final voidcallback;
   final double fontsize;
 
@@ -734,7 +733,7 @@ class DropDownContainerIcon extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          text!,
+          text,
           style: TextStyle(color: AppColor.black, fontWeight: fontWeight),
         ),
         SizedBox(
@@ -1032,6 +1031,7 @@ class DropDownContainer extends StatelessWidget {
     required this.voidcallback,
     required this.isSquare,
     this.color = AppColor.dimblack,
+    this.fontSize,
     required this.icon,
   }) : super(key: key);
 
@@ -1040,7 +1040,8 @@ class DropDownContainer extends StatelessWidget {
   final text;
   final isSquare;
   final voidcallback;
-  final icon;
+  final fontSize;
+  final Icon icon;
 
   @override
   Widget build(BuildContext context) {
@@ -1069,11 +1070,12 @@ class DropDownContainer extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 8),
-                    child: Text(text),
+                    child: Text(text,),
                   ),
                   Center(
                     child: icon,
-                  )
+                  ),
+                  fontSize,
                 ],
               ),
               height: 45,

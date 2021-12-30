@@ -11,6 +11,7 @@ class AccountOpenBankDetailScreenController extends GetxController{
   var number = "".obs;
   var email = "".obs;
   bool isChecked=false;
+  var charactor=0;
 
   TextEditingController userNameController = TextEditingController();
 

@@ -10,6 +10,9 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   var password = "".obs;
   var number = "".obs;
   var email = "".obs;
+  String dropdownvalue = "";
+  String amountvalue = "";
+  String paymentvalue = "";
   bool isChecked=false;
 
   TextEditingController userNameController = TextEditingController();

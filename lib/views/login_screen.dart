@@ -23,18 +23,18 @@ class LoginScreen extends StatelessWidget {
         builder: (_) {
           return SafeArea(
               child: Scaffold(
-            backgroundColor: AppColor.lightWhite,
+
             key: _.scaffoldKey,
             body: SingleChildScrollView(
               padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
               child: Column(
                 children: [
-                  Logo(
+                  const Logo(
                     height: 120,
                     width: 120,
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   Form(
                     key: _.formKey,
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         CustomFormField(
                           obscureText: true,
@@ -76,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                           text: "Don't remember your password?",
                           textAlign: TextAlign.center,
                           textColor: AppColor.dimblack,
-                          fontSize: 16)),
+                          )),
                   const SizedBox(
                     height: 20,
                   ),
@@ -147,6 +147,22 @@ class LoginScreen extends StatelessWidget {
                           text: "Form",
                           textAlign: TextAlign.center,
                           textColor: AppColor.blueColor)),
+                  InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoute.accountopeningbankdetail);
+                      },
+                      child: const RestInvestTitle(
+                          text: "Form2",
+                          textAlign: TextAlign.center,
+                          textColor: AppColor.blueColor)),
+                  InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoute.accountopeningbasicinformation);
+                      },
+                      child: const RestInvestTitle(
+                          text: "Form3",
+                          textAlign: TextAlign.center,
+                          textColor: AppColor.blueColor)),
                   const SizedBox(
                     height: 10,
                   ),
@@ -166,7 +182,7 @@ class LoginScreen extends StatelessWidget {
                         text: "Powered by",
                         textAlign: TextAlign.center,
                         textColor: AppColor.blueColor,
-                        fontSize: 12,
+                        fontSize: 14,
                       ),
                       SizedBox(
                         width: 2,

@@ -1,12 +1,14 @@
 import 'dart:ui';
 
+import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/widgets/datefield.dart';
 import '../controller/account_opening_basic_information_screen_controller.dart';
 
-import '../utils/constant.dart';
+
 import '../widgets/button.dart';
 
 import '../utils/colors.dart';
@@ -32,11 +34,11 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                 appBar: AppBar(
                   centerTitle: true,
                   backgroundColor: AppColor.whiteColor,
-                  title: Padding(
-                    padding: const EdgeInsets.only(right: 50),
+                  title: const Padding(
+                    padding: EdgeInsets.only(right: 50),
                     child: Logo(
-                      height: 80,
-                      width: 80,
+                      height: 60,
+                      width: 60,
                     ),
                   ),
                   elevation: 0,
@@ -55,7 +57,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                           const  CustomTextContainer(
                             fontSize: 16,
                             height: 35,
-                            text: "Account Opening Request",
+                            text: "Basic Information",
                             textAlign: TextAlign.start,
                           ),
                           space,
@@ -64,157 +66,301 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.start,
                               children:  [
-                                const  RestInvestTitle(
-                                  text: " OTP> VERIFY",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.blueColor,
-                                  fontWeight: FontWeight.w900,
-                                ),
+                               Row(children:const [
+                                   RestInvestTitle(
+                                   text: " OTP VERIFY > ",
+                                   textAlign: TextAlign.start,
+                                   textColor: AppColor.dimblack,
+                                   fontWeight: FontWeight.w900,
+                                 ),
+                                   RestInvestTitle(
+                                   text: " BASIC INFORMATION > ",
+                                   textAlign: TextAlign.start,
+                                   textColor: AppColor.blueColor,
+                                   fontWeight: FontWeight.w900,
+                                 ),
+                               ],),
                                 const SizedBox(height: 10,),
-                                const    RestInvestTitle(
-                                  text: "CNIC/NICOP NUMBER",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.black,
-                                  fontWeight: FontWeight.w900,
-                                ),
-
-                                CustomTextFormField(
-
-                                  hint: "Enter Your CNIC/NICOP Numbers",
-                                  fieldType: Constants.cnicNumber,
-
-                                  textAlign: TextAlign.start,
-                                ),
-                                const SizedBox(height: 10,),
-                                const    RestInvestTitle(
-                                  text: "MOBILE NUMBER",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.black,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                CustomTextFormField(
-
-                                  hint: "+9234xxxxxxxx",
-                                  fieldType: Constants.phoneNumberField,
-
-                                  textAlign: TextAlign.start,
-                                ),
-                                const SizedBox(height: 10,),
-                                const    RestInvestTitle(
-                                  text: "EMAIL ADDRESS",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.black,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                CustomTextFormField(
-
-                                  hint: "abc@gamil.com",
-                                  fieldType: Constants.emailField,
-
-                                  textAlign: TextAlign.start,
-                                ),
-                                const SizedBox(height: 10,),
-                                const    RestInvestTitle(
-                                  text: "OWNERSHIP OF YOUR MOBILE NUMBER",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.black,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                Container(
-                                  // margin: EdgeInsets.all(10.0),
-                                  padding:
-                                  const EdgeInsets.only(left: 10.0, right: 5.0),
-                                  height: 35,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      color: AppColor.whiteColor,
-                                      border: Border.all(
-                                          width: 1, color: AppColor.black)),
-                                  child: Center(
-                                    child: DropdownButton<String>(
-                                      isExpanded: true,
-                                      underline: Container(
-                                        color: AppColor.whiteColor,
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const RestInvestTitle(
+                                              text: 'NAME(as per CNIC)*',
+                                              textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                          CustomTextFormField(
+                                            isRounded: true,
+                                            hint: "Full Name",
+                                            // textInputType: TextInputType.emailAddress,
+                                          ),
+                                        ],
                                       ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const RestInvestTitle(
+                                              text: "FATHER / HUSBAND'S NAME*",
+                                              textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                          CustomTextFormField(
+                                            isRounded: true,
+                                            hint: "Full Name",
+                                            // textInputType: TextInputType.emailAddress,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                space,
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const RestInvestTitle(
+                                              text: "MOTHER MAIDEN'S NAME*",
+                                              textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                          CustomTextFormField(
+                                            isRounded: true,
+                                            hint: "Full Name",
+                                            // textInputType: TextInputType.emailAddress,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const RestInvestTitle(
+                                              text: "CNIC / NICOP NUMBER*",
+                                              textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                          CustomTextFormField(
+                                            isRounded: true,
+                                            hint: "Full Name",
+                                            // textInputType: TextInputType.emailAddress,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10,),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const RestInvestTitle(
+                                              text: 'CNIC/NICOP ISSUE DATE*',
+                                              textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                          SizedBox(
+                                            height: 35,
+                                            child: DateFormFieldContainer(isRounded:false,isTrue:true,
+                                              text: '',
+                                              mode: DateTimeFieldPickerMode.date,
+                                              dateFormatTrue: true,
+                                              initialValue: DateTime.now(),
+                                              onDateSelected: (value){
 
-                                      borderRadius: BorderRadius.circular(6),
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const RestInvestTitle(
+                                              text: 'CNIC/NICOP EXPIRY DATE* LIFETIME',
+                                              textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                          SizedBox(
+                                            height: 35,
+                                            child: DateFormFieldContainer(isRounded:false,
+                                              text: '',
+                                              mode: DateTimeFieldPickerMode.date,
+                                              dateFormatTrue: true,isTrue:true,
+                                              initialValue: DateTime.now(),
+                                              onDateSelected: (value){
 
-                                      icon: const Icon(Icons.keyboard_arrow_down,
-                                          color: AppColor.blueColor, size: 35),
-                                      items: transferFundItems
-                                          .map((String? transferFundItems) {
-                                        return DropdownMenuItem<String>(
-                                            value: transferFundItems,
-                                            child: Text(transferFundItems!));
-                                      }).toList(),
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10,),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const RestInvestTitle(
+                                            text: 'DATE OF BIRTH*',
+                                            textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                          SizedBox(
+                                            height: 35,
+                                            child: DateFormFieldContainer(isRounded:false,isTrue:true,
+                                              text: '',
+                                              mode: DateTimeFieldPickerMode.date,
+                                              dateFormatTrue: true,
+                                              initialValue: DateTime.now(),
+                                              onDateSelected: (value){
 
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    // DropDownContainer(text: "MARITAL STATUS*",fontSize: 12,voidcallback:(){},isSquare:false,icon: Icon(Icons.home),),
+                                  ],
+                                ),
+                                const SizedBox(height: 10,),
+                                Row(
+                                  children: [
+
+                                     SizedBox(
+                                      width: 6,
+                                    ),
+
+                                  ],
+                                ),
+                                const SizedBox(height: 10,),
+                                Row(
+                                  children: [
+
+                                    SizedBox(
+                                      width: 6,
+                                    ),
+
+                                  ],
+                                ),
+
+
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                        Row(
+                          children: [
+                            // DropDownContainer(voidcallback: (){},text: "RETIREMENT AGE ( VPS Account )",fontSize: 12,isSquare: false,icon: Icon(Icons.home),),
+                          const  SizedBox(
+                              width: 6,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                 const  RestInvestTitle(
+                                    text: "MOBILE NUMBER*",
+                                    textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                  CustomTextFormField(
+                                    isRounded: true,
+                                    hint: "",
+                                    // textInputType: TextInputType.emailAddress,
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                                const SizedBox(height: 10,),
+                                const    RestInvestTitle(
+                                  text: "EMAIL ADDRESS*",
+
+                                  textAlign: TextAlign.start,
+                                  textColor: AppColor.black,
+                                  fontWeight: FontWeight.w900,fontSize: 12,
+                                ),
+
+                                CustomTextFormField(
+                                  isRounded: true,
+                                  hint: "",
+                                  // textInputType: TextInputType.emailAddress,
+                                ),
+                                const SizedBox(height: 10,),
+                                Row(
+                                  children: [  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const  RestInvestTitle(
+                                          text: "CURRENT ADDRESS*",
+                                          textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                        CustomTextFormField(
+                                          isRounded: true,
+                                          hint: "",
+                                          // textInputType: TextInputType.emailAddress,
+                                        ),
+
+                                      ],
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  // margin: EdgeInsets.all(10.0),
-                                  padding:
-                                  const EdgeInsets.only(left: 10.0, right: 5.0),
-                                  height: 45,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      color: AppColor.whiteColor,
-                                      border: Border.all(
-                                          width: 1, color: AppColor.blueColor)),
-                                  child: Row(children: [
-                                    Checkbox(
-                                        checkColor: AppColor.whiteColor,
-                                        activeColor: AppColor.blueColor,
-                                        value: _.isChecked,
-                                        onChanged: (bool? value) {
-
-                                          _.isChecked = value!;
-                                          _.update();
-                                        }),
-                                    const    RestInvestTitle(
-                                      text: "I’m not a robot",
-                                      textAlign: TextAlign.start,
-                                      textColor: AppColor.black,
-                                      fontWeight: FontWeight.w900,
+                                    // const  DropDownContainer(text: "RETIREMENT AGE ( VPS Account )",fontSize: 12,),
+                                    const  SizedBox(
+                                      width: 6,
                                     ),
+                                       // DropDownContainer(text: "CURRENT COUNTRY*",fontSize: 12,isSquare: false,icon: Icon(Icons.home),voidcallback: (){},),
 
-
-                                  ],),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const  CustomTextContainer(
-                                  fontSize: 16,
-                                  height: 35 ,
-                                  text: "GET VERIFICATION CODE",
-                                  textAlign: TextAlign.start,
-                                ),const  SizedBox(height: 10,),
-                                const  CustomTextContainer(
-                                  fontSize: 16,
-                                  height: 35,
-                                  text: "RESEND VERIFICATION CODE",
-                                  textAlign: TextAlign.start,
-                                ),
-                                const  SizedBox(height: 10,),
-                                const    RestInvestTitle(
-                                  text: "VERIFICATION CODE",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.black,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                CustomTextFormField(
-
-                                  hint: "Please Enter your (OTP) Verification Code Received Via SMS or Email",
-                                  fieldType: Constants.pincode,
-
-                                  textAlign: TextAlign.start,
+                                  ],
                                 ),
                                 const SizedBox(height: 10,),
-                                CustomRoundButton(text: "Next", onPress: (){}),
+                                Row(
+                                  children: [  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const  RestInvestTitle(
+                                          text: "MAILING ADDRESS*",
+                                          textColor: AppColor.black,fontSize: 12,fontWeight: FontWeight.w900,),
+                                        CustomTextFormField(
+                                          isRounded: true,
+                                          hint: "",
+                                          // textInputType: TextInputType.emailAddress,
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                    // const  DropDownContainer(text: "RETIREMENT AGE ( VPS Account )",fontSize: 12,),
+                                    const  SizedBox(
+                                      width: 6,
+                                    ),
+                                      // DropDownContainer(text: "MAILING COUNTRY*",fontSize: 12,isSquare: false,icon: Icon(Icons.home),voidcallback: (){},),
+
+                                  ],
+                                ),
+
+
+
+                                const  SizedBox(height: 10,),
+
+
+                                CustomRoundButton(text: "SAVE&NEXT", onPress: (){},isRound:false),
                                 const SizedBox(height: 10,),
 
                               ],
