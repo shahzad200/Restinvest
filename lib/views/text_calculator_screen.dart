@@ -161,7 +161,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                               ],
                             ),
                             Center(
-                              child: CustomRoundButton(
+                              child: CustomRoundButton(isRound: false,
                                 text: "CALCULATE",
                                 textSize: 12,
                                 onPress: () {
@@ -175,16 +175,26 @@ class TaxCalculatorScreen extends StatelessWidget {
                             space,
                             Row(
                               children: [
+                                // Expanded(
+                                //     child: DropDownContainerIcon(
+                                //   text: "Tax (%)",
+                                //   color: AppColor.blueColor,
+                                //   fontWeight: FontWeight.w900,
+                                //   voidcallback: () {},
+                                //   text1: "${_.tax}",
+                                //   fontsize: 12,
+                                //   textColor: AppColor.black,
+                                // )),
                                 Expanded(
-                                    child: DropDownContainerIcon(
-                                  text: "Tax (%)",
-                                  color: AppColor.blueColor,
-                                  fontWeight: FontWeight.w900,
-                                  voidcallback: () {},
-                                  text1: "${_.tax}",
-                                  fontsize: 12,
-                                  textColor: AppColor.black,
-                                )),
+                                    child: EmptyRowContainer(
+                                      color: AppColor.blueColor,
+                                      hintColor: AppColor.black,
+                                      fontWeight: FontWeight.w900,
+                                      fontsize: 12,
+                                      hint: "${_.tax}",
+                                      text:  "Tax (%)",
+                                      textColor: AppColor.black,
+                                    )),
                                 const SizedBox(
                                   width: 6,
                                 ),

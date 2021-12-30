@@ -122,7 +122,7 @@ class UserScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: DateFormFieldContainer(isRounded:true,
-                                text: 'CNIC Issue Date',
+                                text: 'CNIC Issue Date',isTrue:false,
                                 mode: DateTimeFieldPickerMode.date,
                                 dateFormatTrue: true,
                                 initialValue: DateTime.now(),
@@ -135,7 +135,7 @@ class UserScreen extends StatelessWidget {
                               width: 4,
                             ),
                             Expanded(
-                              child: DateFormFieldContainer(isRounded:true,
+                              child: DateFormFieldContainer(isRounded:true,isTrue:false,
                                 text: 'CNIC Expiry Date',
                                 mode: DateTimeFieldPickerMode.date,
                                 dateFormatTrue: true,
@@ -346,7 +346,7 @@ class UserScreen extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        CustomRoundButton(
+                        CustomRoundButton(isRound: true,
                             text: "Next",
                             buttonColor: AppColor.blueColor,
                             textColor: AppColor.whiteColor,

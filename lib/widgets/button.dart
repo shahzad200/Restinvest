@@ -55,6 +55,7 @@ class CustomRoundButton extends StatelessWidget {
 
       required this.text,
       required this.onPress,
+        required this.isRound,
       this.height = 48,
       this.width = double.infinity,
       this.textSize = 18.0,
@@ -70,6 +71,7 @@ class CustomRoundButton extends StatelessWidget {
   final Color borderColor;
   final double width;
   final double height;
+  final bool isRound;
 
 
   final  color1;
@@ -86,7 +88,7 @@ class CustomRoundButton extends StatelessWidget {
           ),
           minimumSize: Size(width, height),
           shape: RoundedRectangleBorder(borderRadius:
-              BorderRadius.circular(0.0)
+            isRound?BorderRadius.circular(8.0):BorderRadius.circular(0)
 
           ),
         ),

@@ -213,7 +213,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                               textAlign: TextAlign.start,
                             ),
                           const SizedBox(height: 10,),
-                            CustomRoundButton(text: "Next", onPress: (){}),
+                            CustomRoundButton(isRound:false,text: "Next", onPress: (){}),
                             const SizedBox(height: 10,),
 
                           ],
