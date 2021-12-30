@@ -493,7 +493,7 @@ class RedemptionScreen extends StatelessWidget {
                       text: "Submit",
                       onPress: () {
                       // if(){
-                        trans.showDialog(context,"","","","");
+                      //   trans.showDialog(context,"","","","");
                       // }
 
                       },

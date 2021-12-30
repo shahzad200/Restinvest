@@ -73,7 +73,8 @@ class Repository {
       maritalStatus, incomeBracket, religion, filerNonFiler,
       pinCode, pinCodeExpiryConfigID);
 
-
+  Future<Common> onGeneratePinCode(String folioNumber,String req) async
+  => _apiClient.onGeneratePinCode(Constant.userId, folioNumber, req);
 
   Future<Common> onSaveRedemption(String accessCode,String authorizationPinCode,
       String folioNumber,String fundCode,

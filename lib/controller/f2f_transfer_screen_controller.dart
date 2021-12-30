@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/load_fund_plans.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/utils/constants.dart';
+import 'package:investintrust/widgets/constant_widget.dart';
 
 class F2FTransferScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -33,6 +35,7 @@ class F2FTransferScreenController extends GetxController {
   bool isLoading = false;
   bool noInternet = false;
   LoadFundsPlans? loadFundsPlans;
+  Common? common;
   @override
   void onInit() async {
     findIndex();
@@ -78,14 +81,17 @@ class F2FTransferScreenController extends GetxController {
 
   String approxAmount = '';
   String approxUnits = '';
+  String dataValue = '';
     calculateUnits(String s){
       if(unitButton){
+        dataValue = s;
         String d = loadFundsPlans!.response!.portfolioAllocationData![index].fundRedPrice ?? '0';
         double val = double.parse(d) * double.parse(s);
         approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
         update();
       }
       if(percentageButton){
+        dataValue = s;
         String d = loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0';
         String red = loadFundsPlans!.response!.portfolioAllocationData![index].fundRedPrice ?? '0';
         double val = double.parse(d) * double.parse(s);
@@ -103,6 +109,7 @@ class F2FTransferScreenController extends GetxController {
             double val = double.parse(d) * double.parse(u);
             approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
             unitBalanceController.text = u.toString();
+            dataValue = u;
             update();
           }
           }
@@ -148,6 +155,40 @@ class F2FTransferScreenController extends GetxController {
     }
   }
 
+  onGeneratePinCode(BuildContext context) async {
+    try {
+      isLoading = true;
+      update();
+      common = await _repository.onGeneratePinCode(accountValue, "RED");
+      isLoading = false;
+      if(noInternet) {
+        noInternet = false;
+      }
+      if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+        customDialogPin(context);
+      }
+      // update();
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+
+  }
 
   onLoadFundsPlans() async {
     try {

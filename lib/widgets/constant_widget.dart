@@ -6,9 +6,9 @@ import 'package:investintrust/utils/constant.dart';
 import 'custom_divider.dart';
 
 class RestInvestTitle extends StatelessWidget {
-   const RestInvestTitle({
+  const RestInvestTitle({
     Key? key,
-     this.text,
+    this.text,
     this.textColor = Colors.black,
     this.fontWeight,
     this.fontSize,
@@ -52,7 +52,7 @@ class CustomTextContainer extends StatelessWidget {
   }) : super(key: key);
   final double height;
   final TextAlign textAlign;
-  final  fontSize;
+  final fontSize;
   final String text;
 
   @override
@@ -139,7 +139,7 @@ class HeadingText extends StatelessWidget {
 }
 
 class Logo extends StatelessWidget {
- const Logo({
+  const Logo({
     Key? key,
     required this.height,
     required this.width,
@@ -445,26 +445,26 @@ class LogoNit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       Constants.logonit,
-
       width: 60,
       height: 60,
     );
   }
 }
+
 class IcPurchases extends StatelessWidget {
   const IcPurchases({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
       Constants.icpurchases,
-       color: AppColor.dimblack,
+      color: AppColor.dimblack,
       width: 25,
       height: 25,
     );
   }
 }
+
 class IcFund extends StatelessWidget {
   const IcFund({Key? key}) : super(key: key);
 
@@ -472,7 +472,7 @@ class IcFund extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       Constants.icfund,
-       color: AppColor.dimblack,
+      color: AppColor.dimblack,
       width: 25,
       height: 25,
     );
@@ -480,10 +480,12 @@ class IcFund extends StatelessWidget {
 }
 
 class CheckBoxContainer extends StatefulWidget {
-  CheckBoxContainer({required this.isChecked,
+  CheckBoxContainer({
+    required this.isChecked,
     Key? key,
   }) : super(key: key);
   bool isChecked;
+
   @override
   State<CheckBoxContainer> createState() => _CheckBoxContainerState();
 }
@@ -514,14 +516,23 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
               },
             ),
           ),
-           Expanded(
-             child: Column(
-               children: [
-                 RichText(text:const TextSpan(
-                  text: 'I have read understood the guidlines as stated in the', style: TextStyle(color: Colors.black, fontSize: 12),children: [TextSpan(text: 'offering Documents / truest Deed & Fund Manager Report of',)])),
-               ],
-             ),
-           ),
+          Expanded(
+            child: Column(
+              children: [
+                RichText(
+                    text: const TextSpan(
+                        text:
+                            'I have read understood the guidlines as stated in the',
+                        style: TextStyle(color: Colors.black, fontSize: 12),
+                        children: [
+                      TextSpan(
+                        text:
+                            'offering Documents / truest Deed & Fund Manager Report of',
+                      )
+                    ])),
+              ],
+            ),
+          ),
           // Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,children: [  const RestInvestTitle(
           //   text: "I have read understood the guidlines as stated in the",
           //   fontSize: 11,fontWeight: FontWeight.w900,
@@ -572,14 +583,12 @@ class IcCatagory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       Constants.iccategory,
-       color: AppColor.dimblack
-      ,
+      color: AppColor.dimblack,
       width: 25,
       height: 25,
     );
   }
 }
-
 
 class Nav extends StatelessWidget {
   const Nav({Key? key}) : super(key: key);
@@ -946,7 +955,7 @@ class RoundContainer extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColor.whiteColor,
             border: Border.all(
-              width: 1, color:AppColor. black,
+              width: 1, color: AppColor.black,
               // color: textColor,
             ),
             borderRadius: isSquare
@@ -987,6 +996,7 @@ class FromFundDropDownContainer extends StatefulWidget {
 
 class _FromFundDropDownContainerState extends State<FromFundDropDownContainer> {
   String fundTitle = "";
+
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -1128,7 +1138,7 @@ class _ContainerCheckBoxTextState extends State<ContainerCheckBoxText> {
 }
 
 class EmptyRowContainer extends StatelessWidget {
-   EmptyRowContainer({
+  EmptyRowContainer({
     required this.hint,
     required this.textColor,
     required this.fontsize,
@@ -1233,6 +1243,7 @@ class DropDownAccountValueButton extends StatefulWidget {
 class _DropDownAccountValueButtonState
     extends State<DropDownAccountValueButton> {
   String account = "";
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -1294,6 +1305,7 @@ class AccountDropDownContainer extends StatefulWidget {
 
 class _AccountDropDownContainerState extends State<AccountDropDownContainer> {
   String amount = "";
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -1387,6 +1399,7 @@ class NavDropDownContainer extends StatefulWidget {
 class _NavDropDownContainerState extends State<NavDropDownContainer> {
   String select = "";
   int _value = 0;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -1947,6 +1960,7 @@ class FundTransferDroDownContainer extends StatefulWidget {
 class _FundTransferDroDownContainerState
     extends State<FundTransferDroDownContainer> {
   String fundTransfer = "";
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -2403,9 +2417,9 @@ class CustomFundList extends StatelessWidget {
             SizedBox(
               height: 35,
               child: Padding(
-                padding: const EdgeInsets.only(top:10),
+                padding: const EdgeInsets.only(top: 10),
                 child: RestInvestTitle(
-                    margin: const EdgeInsets.only(top: 10),
+                  margin: const EdgeInsets.only(top: 10),
                   textAlign: TextAlign.center,
                   text: fundText,
                   fontSize: textSize,
@@ -2446,18 +2460,103 @@ class CustomFundList extends StatelessWidget {
     );
   }
 }
+
 class DialogBox extends StatelessWidget {
   const DialogBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  AlertDialog(
+    return AlertDialog(
       // title: const Text('AlertDialog Title'),
-      content: Row(children:const  [CircularProgressIndicator(),SizedBox(width: 20,),Text("Please wait....",style: TextStyle(color: Colors.black),)],),
-
+      content: Row(
+        children: const [
+          CircularProgressIndicator(),
+          SizedBox(
+            width: 20,
+          ),
+          Text(
+            "Please wait....",
+            style: TextStyle(color: Colors.black),
+          )
+        ],
+      ),
     );
+  }
+}
 
 
+Future<void> customDialogPin (context){
+  return showGeneralDialog(
+    barrierLabel: "Barrier",
+    barrierDismissible: true,
+    barrierColor: Colors.black.withOpacity(0.5),
+    transitionDuration: const Duration(milliseconds: 700),
+    context: context,
+    pageBuilder: (_, __, ___) {
+      return const DialogPinCode();
+    },
+    // transitionBuilder: (_, anim, __, child) {
+    //   return SlideTransition(
+    //     position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+    //     child: child,
+    //   );
+    // },
+  );
 
+}
+
+
+class DialogPinCode extends StatelessWidget {
+  const DialogPinCode({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      // title: const Text('AlertDialog Title'),
+      content: SizedBox(
+        height: 140,
+        width: Get.width / 1.2,
+        child: Column(
+          children: [
+            Center(
+                child: Column(
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(top: 15.0),
+                      child: Text(
+                        "Invest In Trust",
+                        style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        "Pin Code sent to your email address successfully",
+                        maxLines: 3,
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    )
+                  ],
+                ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: InkWell(
+                  onTap: (){
+                    Get.back();
+                  },
+                  child: const Text(
+                    "OK",
+                    style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

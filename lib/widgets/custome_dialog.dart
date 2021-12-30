@@ -6,7 +6,7 @@ Future<void> CustomDialog (context){
     barrierLabel: "Barrier",
     barrierDismissible: true,
     barrierColor: Colors.black.withOpacity(0.5),
-    transitionDuration: Duration(milliseconds: 700),
+    transitionDuration: const Duration(milliseconds: 700),
     context: context,
     pageBuilder: (_, __, ___) {
       return const DialogBox();

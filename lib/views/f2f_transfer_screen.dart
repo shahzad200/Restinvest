@@ -6,7 +6,7 @@ import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/data/models/load_fund_plans.dart' as fund;
 import '../controller/f2f_transfer_screen_controller.dart';
 import '/controller/f2f_transfer_screen_controller.dart';
-
+import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
 import '../utils/colors.dart';
 import '../widgets/button.dart';
 import '../widgets/constant_widget.dart';
@@ -541,7 +541,9 @@ class F2FTransferScreen extends StatelessWidget {
                         height: 35,
                         child: RestInvestButton(
                           isSquare: true,
-                          onPress: () {},
+                          onPress: () {
+                            _.onGeneratePinCode(context);
+                          },
                           text: "Generate Financial",
                           buttonColor: AppColor.blueColor,
                           textColor: AppColor.whiteColor,
@@ -564,7 +566,10 @@ class F2FTransferScreen extends StatelessWidget {
                     child: RestInvestButton(
                       isSquare: true,
                       text: "Submit",
-                      onPress: () {},
+                      onPress: () {
+                        trans.showDialog(context,_.accountValue,_.toAccountValue,_.fundValue,
+                            _.toFundValue,'',_.dataValue,_.percentageButton ? 'Percentage':'Units','FTF');
+                      },
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
                     ),

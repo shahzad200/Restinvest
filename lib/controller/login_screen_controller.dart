@@ -66,8 +66,8 @@ class LoginScreenController extends GetxController {
       CustomDialog(context);
       update();
 
-      // Constant.loginModel = await _repository.onLogin('MAHESH9',encrypted.base16.toString());
-      Constant.loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
+      Constant.loginModel = await _repository.onLogin('MAHESH9',encrypted.base16.toString());
+      // Constant.loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
       Get.back();
       Get.toNamed(AppRoute.portofolioRoute);
       Constant.userId = Constant.loginModel!.response!.user!.userid.toString();
