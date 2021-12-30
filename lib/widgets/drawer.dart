@@ -6,6 +6,7 @@ import 'package:investintrust/utils/colors.dart';
 import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/utils/strings.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:investintrust/widgets/custome_dialog.dart';
 import 'package:investintrust/widgets/web_view.dart';
 
 import 'custom_divider.dart';
@@ -66,7 +67,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.toNamed(AppRoute.portofolioRoute);
+              Get.offAllNamed(AppRoute.portofolioRoute);
             },
             leading: const Portofolio(),
             title: const RestInvestTitle(
@@ -80,7 +81,8 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.toNamed(AppRoute.redemptionRoute);
+              Get.offAllNamed(AppRoute.redemptionRoute);
+              CustomDialog(context);
             },
             leading: const Redemption(),
             title: const RestInvestTitle(
@@ -94,7 +96,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.toNamed(AppRoute.purchasesRoute);
+              Get.offAllNamed(AppRoute.purchasesRoute);
             },
             leading: const Purchase(),
             title: const RestInvestTitle(
@@ -108,7 +110,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.toNamed(AppRoute.f2ftransferRoute);
+              Get.offAllNamed(AppRoute.f2ftransferRoute);
             },
             leading: const F2F(),
             title: const RestInvestTitle(
@@ -122,7 +124,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.toNamed(AppRoute.reportsRoute);
+              Get.offAllNamed(AppRoute.reportsRoute);
             },
             leading: const Report(),
             title: const RestInvestTitle(
@@ -151,7 +153,11 @@ class CustomDrawer extends StatelessWidget {
             color: AppColor.black.withOpacity(0.1),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Constant.userId = '-0456';
+              Constant.loginModel = null;
+              Get.offAllNamed(AppRoute.homeRoute);
+            },
             leading: const Logout(),
             title: const RestInvestTitle(
               text: "Logout",

@@ -6,9 +6,9 @@ import 'package:investintrust/utils/constant.dart';
 import 'custom_divider.dart';
 
 class RestInvestTitle extends StatelessWidget {
-  const RestInvestTitle({
+   const RestInvestTitle({
     Key? key,
-    required this.text,
+     this.text,
     this.textColor = Colors.black,
     this.fontWeight,
     this.fontSize,
@@ -17,7 +17,7 @@ class RestInvestTitle extends StatelessWidget {
     this.textAlign = TextAlign.left,
     this.margin = const EdgeInsets.only(left: 0),
   }) : super(key: key);
-  final String text;
+  final String? text;
   final Color textColor;
   final double? fontSize;
   final FontWeight? fontWeight;
@@ -30,7 +30,7 @@ class RestInvestTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text!,
       style: TextStyle(
         fontWeight: fontWeight,
         color: textColor,
@@ -496,52 +496,67 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
         mainAxisAlignment: MainAxisAlignment.start,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Checkbox(
-            checkColor: AppColor.whiteColor,
-            activeColor: AppColor.blueColor,
-            value: widget.isChecked,
-            onChanged: (bool? value) {
-              setState(() {
-                widget.isChecked = value!;
-              });
-            },
-          ),
-          Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,children: [  const RestInvestTitle(
-            text: "I have read understood the guidlines as stated in the",
-            fontSize: 11,fontWeight: FontWeight.w900,
-          ),
-            const HeadingText(
-              text: "offering Documents / truest Deed & Fund Manager Report of",
-              underlineColor: AppColor.blueColor,
-              textColor: AppColor.blueColor,
-              fontSize: 11,fontWeight: FontWeight.w900,
+          SizedBox(
+            height: 15,
+            width: 15,
+            child: Checkbox(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              tristate: true,
+              splashRadius: 10.0,
+              checkColor: AppColor.whiteColor,
+              activeColor: AppColor.blueColor,
+              value: widget.isChecked,
+              onChanged: (bool? value) {
+                setState(() {
+                  widget.isChecked = value!;
+                });
+              },
             ),
-            const RestInvestTitle(
-              text: "the fund and the risk involved.",
-              fontSize: 11,fontWeight: FontWeight.w900,
-            ),
-            const   SizedBox(height: 10,),
-            Row(children:const [
-              RestInvestTitle(
-                text: "I confirm acceptance of",
-                fontSize: 11,fontWeight: FontWeight.w900,
-              ),
-              HeadingText(
-                text: "Term & Conditions",
-                underlineColor: AppColor.blueColor,
-                textColor: AppColor.blueColor,
-                fontSize: 11,fontWeight: FontWeight.w900,
-              ),
-              RestInvestTitle(
-                text: "and all charges governing in",
-                fontSize: 11,fontWeight: FontWeight.w900,
-              )
-            ],),
-            const RestInvestTitle(
-              text: "in this transaction.",
-              fontSize: 11,fontWeight: FontWeight.w900,
-            )
-          ],)
+          ),
+           Expanded(
+             child: Column(
+               children: [
+                 RichText(text:const TextSpan(
+                  text: 'I have read understood the guidlines as stated in the', style: TextStyle(color: Colors.black, fontSize: 12),children: [TextSpan(text: 'offering Documents / truest Deed & Fund Manager Report of',)])),
+               ],
+             ),
+           ),
+          // Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,children: [  const RestInvestTitle(
+          //   text: "I have read understood the guidlines as stated in the",
+          //   fontSize: 11,fontWeight: FontWeight.w900,
+          // ),
+          //   const HeadingText(
+          //     text: "offering Documents / truest Deed & Fund Manager Report of",
+          //     underlineColor: AppColor.blueColor,
+          //     textColor: AppColor.blueColor,
+          //     fontSize: 11,fontWeight: FontWeight.w900,
+          //   ),
+          //   const RestInvestTitle(
+          //     text: "the fund and the risk involved.",
+          //     fontSize: 11,fontWeight: FontWeight.w900,
+          //   ),
+          //   const   SizedBox(height: 10,),
+          //   Row(children:const [
+          //     RestInvestTitle(
+          //       text: "I confirm acceptance of",
+          //       fontSize: 11,fontWeight: FontWeight.w900,
+          //     ),
+          //     HeadingText(
+          //       text: "Term & Conditions",
+          //       underlineColor: AppColor.blueColor,
+          //       textColor: AppColor.blueColor,
+          //       fontSize: 11,fontWeight: FontWeight.w900,
+          //     ),
+          //     RestInvestTitle(
+          //       text: "and all charges governing in",
+          //       fontSize: 11,fontWeight: FontWeight.w900,
+          //     )
+          //   ],),
+          //   const RestInvestTitle(
+          //     text: "in this transaction.",
+          //     fontSize: 11,fontWeight: FontWeight.w900,
+          //   )
+          // ],)
         ],
       ),
       height: 80,
@@ -1115,7 +1130,7 @@ class _ContainerCheckBoxTextState extends State<ContainerCheckBoxText> {
 }
 
 class EmptyRowContainer extends StatelessWidget {
-  const EmptyRowContainer({
+   EmptyRowContainer({
     required this.hint,
     required this.textColor,
     required this.fontsize,

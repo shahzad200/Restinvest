@@ -196,7 +196,7 @@ class PurchasesScreen extends StatelessWidget {
                   ),
                   space,
                   Row(
-                    children: const [
+                    children:  [
                       Expanded(
                           child: EmptyRowContainer(
                         fontWeight: FontWeight.w800,

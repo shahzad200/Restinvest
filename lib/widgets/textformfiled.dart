@@ -54,6 +54,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
       obscureText: widget.obscureText,
       textAlign: TextAlign.center,
       cursorColor: AppColor.blueColor,
+      textCapitalization:widget.fieldType == 13? TextCapitalization.characters:TextCapitalization.none,
       validator: (val) {
         switch (widget.fieldType) {
           case Constants.emailField:
@@ -205,7 +206,10 @@ class _CustomFormFieldState extends State<CustomFormField> {
         }
       },
       onChanged: (text) {
+
         widget.onTextChange(text);
+
+
       },
       onSaved: (val) {},
     );
@@ -285,7 +289,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       validator: (val) {
         widget.validations!(val!);
       },
-      onChanged: (val) {},
+      onChanged: widget.onChange,
       onSaved: (val) {},
     );
   }

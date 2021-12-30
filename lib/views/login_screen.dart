@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import '../utils/constant.dart';
+import 'package:investintrust/utils/constant.dart';
 
 
 import '../controller/login_screen_controller.dart';
@@ -80,12 +80,12 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  RestInvestButton(
+                   RestInvestButton(
                       text: "Login",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
                       onPress: () {
-                        _.onLoginPress();
+                        _.onLoginPress(context);
                         // if (_.formKey.currentState!.validate()) {
                         //   _.formKey.currentState!.save();
                         //   (_.onLoginPress());

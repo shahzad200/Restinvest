@@ -83,16 +83,16 @@ import 'package:investintrust/widgets/constant_widget.dart';
 class DateFormFieldContainer extends StatelessWidget {
   const DateFormFieldContainer(
       {Key? key,
-       required  this.isRounded,
+        required  this.isRounded,
 
         required this.mode,
         required this.dateFormatTrue,
         required this.onDateSelected,
         this.initialValue,
+        this.enable = true,
         this.isTrue,
-
         this.dateFormat,
-   required this.text,})
+        required this.text,})
       : super(key: key);
   final DateTimeFieldPickerMode mode;
   final bool dateFormatTrue;
@@ -100,40 +100,45 @@ class DateFormFieldContainer extends StatelessWidget {
   final dynamic dateFormat;
   final dynamic initialValue;
   final bool isRounded;
+  final bool enable;
   final String text;
   final isTrue;
 
-
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: DateTimeFormField(
-        decoration: InputDecoration(fillColor: AppColor.whiteColor,filled: true,
-          hintStyle: const TextStyle(color: AppColor.black,),
-          errorStyle: const TextStyle(color: Colors.redAccent),
-      border: OutlineInputBorder(
-            borderSide: BorderSide(
-                width: isRounded ? 0.1 : 0, color: AppColor.dimblack),
-            borderRadius: BorderRadius.circular(
-              isRounded ? 8 : 0,
-            ),
+    return DateTimeFormField(
+      enabled: enable,
+      decoration: InputDecoration(fillColor: AppColor.whiteColor,filled: true,alignLabelWithHint: false,
+        hintStyle: const TextStyle(color: AppColor.black,),
+        errorStyle: const TextStyle(color: Colors.redAccent),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+              width: isRounded ? 0.1 : 0, color: AppColor.dimblack),
+          borderRadius: BorderRadius.circular(
+            isRounded ? 8 : 0,
           ),
+        ),
 
         hintText: text,
-          contentPadding: const EdgeInsets.all(8),   suffixIcon: isTrue? (Calender()):SizedBox(),
-
-        ),
-        mode: DateTimeFieldPickerMode.date,
-        // initialValue: initialValue,
-        dateFormat: dateFormatTrue ? DateFormat('dd/MM/yyyy') : null,
-        autovalidateMode: AutovalidateMode.always,
-
-        onDateSelected: (DateTime value) {
-          onDateSelected(value);
-        },
+        contentPadding: const EdgeInsets.all(8),
+        suffixIcon: isTrue? (Calender()):SizedBox(),
 
       ),
+      mode: DateTimeFieldPickerMode.date,
+      // initialValue: initialValue,
+      dateFormat: dateFormatTrue ? DateFormat('dd/MM/yyyy') : null,
+      autovalidateMode: AutovalidateMode.always,
+
+      onDateSelected: (DateTime value) {
+        onDateSelected(value);
+      },
     );
   }
 }
+
+
+
+
+// hintText: text,
+// contentPadding: const EdgeInsets.all(8),
+// suffixIcon: isTrue? (Calender()):SizedBox(),
