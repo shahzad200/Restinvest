@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-class AccountOpenRequestScreenController extends GetxController{
+class AccountOpenBankDetailScreenController extends GetxController{
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var userName = "".obs;

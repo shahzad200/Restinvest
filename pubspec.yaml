@@ -44,7 +44,8 @@ dependencies:
   string_to_hex: ^0.2.2
   convert: ^3.0.1
   crypto: ^3.0.1
-
+  syncfusion_flutter_pdfviewer: ^19.4.38-beta
+  path_provider: ^2.0.1
   open_mail_app: ^0.4.1
   url_launcher: ^6.0.9
   # The following adds the Cupertino Icons font to your application.

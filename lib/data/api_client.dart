@@ -6,19 +6,24 @@ import 'package:investintrust/data/models/calculate_tax.dart';
 import 'package:investintrust/data/models/city_data.dart';
 import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/daily_nav_prices.dart';
+import 'package:investintrust/data/models/fund_questions.dart';
 import 'package:investintrust/data/models/new_user_reg_data.dart';
 
 import 'package:investintrust/data/models/social_media_links.dart';
 
 import 'models/city_sector_model.dart';
 import 'models/load_dashboard.dart';
+import 'models/load_fund_plans.dart';
 import 'models/login_model.dart';
+import 'models/new_notifications.dart';
 import 'models/new_user_reg.dart';
 import 'models/new_user_pin_gen.dart';
+import 'models/view_reports.dart';
 
 class ApiClient {
   static const _baseUrl =
-      'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      // 'http://192.168.0.181:8094/AssetConnectMobilePortal/UserService/';
+  'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
@@ -34,7 +39,6 @@ class ApiClient {
   static const _epGeneratePinCode = _baseUrl + 'generatePinCode';
   static const _epSaveRedemption = _baseUrl + 'saveRedemption';
   static const _epSaveFundTransfer = _baseUrl + 'saveFundTransfer';
-
   static const _epSavePurchase = _baseUrl + 'savePurchase';
   static const _epViewReport = _baseUrl + 'viewReport';
   static const _epTaxCalculator = _baseUrl + 'taxCalculator';
@@ -42,6 +46,253 @@ class ApiClient {
   static const _epRegisteredUser = _baseUrl + 'registeredUser';
   static const _epPickFundQuestions = _baseUrl + 'pickFundQuestions';
   static const _epGetExpectedFund = _baseUrl + 'getExpectedFund';
+
+  Future<ViewReport> onViewReport(
+    String fromDate,
+    String toDate,
+    String fundCode,
+    String reportType,
+    String folioNumber,
+    String userId,
+  ) async {
+    printInfo(info: fromDate+toDate+fundCode+reportType+folioNumber+userId);
+    try {
+      final response = await http.post(
+        Uri.parse(_epViewReport),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'fromDate': fromDate,
+          'toDate': toDate,
+          'folioNumber': folioNumber,
+          'reportType': reportType,
+          'fundCode': fundCode,
+          'userId': userId
+        }),
+      );
+      if (response.statusCode == 200) {
+
+        printInfo(info: response.body);
+        ViewReport viewReport = ViewReport.fromJson(jsonDecode(response.body));
+        if (viewReport.meta!.code.toString() == 200.toString()) {
+          return viewReport;
+        } else {
+          throw Exception(viewReport.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<Common> onTaxCalculator(
+    String userId,
+    String unitPlan,
+    String fundCode,
+    String unitClass,
+    String folioNumber,
+    String transactionValue,
+  ) async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epTaxCalculator),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'monthlyTaxableIncome': userId,
+          'incomeType': unitPlan,
+          'investmentIn': fundCode,
+          'age': unitClass,
+          'mutualFundInvestAmount': folioNumber,
+          'pensionFundInvestAmount': transactionValue
+        }),
+      );
+      if (response.statusCode == 200) {
+        print(response.body);
+        Common common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<Common> onSavePurchase(
+      String userId,
+      String unitPlan,
+      String fundCode,
+      String unitClass,
+      String folioNumber,
+      String transactionValue,
+      String chequeNo,
+      String chequeDate,
+      String bankName,
+      String bankAccountNo,
+      String paymentMode) async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epSavePurchase),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'userId': userId,
+          'unitPlan': unitPlan,
+          'fundCode': fundCode,
+          'unitClass': unitClass,
+          'folioNumber': folioNumber,
+          'transactionValue': transactionValue,
+          'chequeNo': chequeNo,
+          'chequeDate': chequeDate,
+          'bankBranch': bankName,
+          'bankAccountNo': bankAccountNo,
+          'paymentMode': paymentMode
+        }),
+      );
+      if (response.statusCode == 200) {
+        print(response.body);
+        Common common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<Common> onRegisteredUser(
+      String accountNo, String cnic, String email, String cell) async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epRegisteredUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'folioNumber': accountNo,
+          'cnic': cnic,
+          'registeredEmail': email,
+          'registeredCellNo': cell,
+        }),
+      );
+      if (response.statusCode == 200) {
+        print(response.body);
+        Common common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<Common> onRegisteredUserPin(String accountNo, String cNic,
+      String email, String cell, String pinCode) async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epRegisteredUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'folioNumber': accountNo,
+          'cnic': cNic,
+          'registeredEmail': email,
+          'registeredCellNo': cell,
+          'securePinCode': pinCode
+        }),
+      );
+      if (response.statusCode == 200) {
+        print(response.body);
+        Common common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<FundQuestions> onPickFundQuestions() async {
+    try {
+      final response = await http.post(Uri.parse(_epPickFundQuestions));
+      if (response.statusCode == 200) {
+        FundQuestions fundQuestions =
+            FundQuestions.fromJson(jsonDecode(response.body));
+        if (fundQuestions.meta!.code.toString() == 200.toString()) {
+          return fundQuestions;
+        } else {
+          throw Exception(fundQuestions.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<Common> onGetExpectedFund() async {
+    try {
+      final response = await http.post(Uri.parse(_epGetExpectedFund));
+      if (response.statusCode == 200) {
+        Common common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<NewsNotification> onNewsNotification() async {
+    try {
+      final response = await http.post(Uri.parse(_epNewsNotification));
+      if (response.statusCode == 200) {
+        NewsNotification newsNotification =
+            NewsNotification.fromJson(jsonDecode(response.body));
+        if (newsNotification.meta!.code.toString() == 200.toString()) {
+          return newsNotification;
+        } else {
+          throw Exception(newsNotification.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
 
   Future<SocialMediaLink> socialMediaLinks() async {
     try {
@@ -72,6 +323,7 @@ class ApiClient {
         body: jsonEncode(
             <String, String>{'userId': userId, 'password': password}),
       );
+      printInfo(info: password);
       if (response.statusCode == 200) {
         printInfo(info:response.body);
         LoginModel loginModel = LoginModel.fromJson(jsonDecode(response.body));
@@ -104,7 +356,7 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        printInfo(info:response.body);
         LoadDashboard loadDashboard =
             LoadDashboard.fromJson(jsonDecode(response.body));
         if (loadDashboard.meta!.code.toString() == 200.toString()) {
@@ -200,9 +452,8 @@ class ApiClient {
     }
   }
 
-
-  Future<Common> onLoadFundsPlans(String userId, String cNic) async {
-    print(userId + 'nkj' + cNic);
+  Future<LoadFundsPlans> onLoadFundsPlans(String userId, String fundCode,String folioNumber,String requestType) async {
+    print(userId + 'nkj' + fundCode+ 'nkj' + folioNumber+ 'nkj' + requestType);
     try {
       final response = await http.post(
         Uri.parse(_epLoadFundsPlans),
@@ -217,12 +468,12 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        Common common = Common.fromJson(jsonDecode(response.body));
+        LoadFundsPlans loadFundsPlans = LoadFundsPlans.fromJson(jsonDecode(response.body));
         print(response.body);
-        if (common.meta!.code.toString() == 200.toString()) {
-          return common;
+        if (loadFundsPlans.meta!.code.toString() == 200.toString()) {
+          return loadFundsPlans;
         } else {
-          throw Exception(common.meta!.message);
+          throw Exception(loadFundsPlans.meta!.message);
         }
       } else {
         throw Exception('No Internet');
@@ -232,13 +483,13 @@ class ApiClient {
     }
   }
 
-  Future<NewUserRegData> onNewUserRegData()async{
+  Future<NewUserRegData> onNewUserRegData() async {
     try {
       final response = await http.post(Uri.parse(_epNewUserRegData));
       if (response.statusCode == 200) {
         print("${response.body}");
         NewUserRegData newUserRegData =
-        NewUserRegData.fromJson(jsonDecode(response.body));
+            NewUserRegData.fromJson(jsonDecode(response.body));
         if (newUserRegData.meta!.code.toString() == 200.toString()) {
           return newUserRegData;
         } else {
@@ -252,20 +503,17 @@ class ApiClient {
     }
   }
 
-  Future<CityData> onCityData(String countryCode)async{
+  Future<CityData> onCityData(String countryCode) async {
     try {
       final response = await http.post(
         Uri.parse(_epCityData),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        body: jsonEncode(<String, String>{
-          'countryCode': countryCode
-        }),
+        body: jsonEncode(<String, String>{'countryCode': countryCode}),
       );
       if (response.statusCode == 200) {
-        CityData cityData =
-        CityData.fromJson(jsonDecode(response.body));
+        CityData cityData = CityData.fromJson(jsonDecode(response.body));
         if (cityData.meta!.code.toString() == 200.toString()) {
           return cityData;
         } else {
@@ -279,21 +527,18 @@ class ApiClient {
     }
   }
 
-  Future<CitySector> onCitySectorData(String cityCode)async{
+  Future<CitySector> onCitySectorData(String cityCode) async {
     try {
       final response = await http.post(
         Uri.parse(_epCitySectorData),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        body: jsonEncode(<String, String>{
-          'cityCode': cityCode
-        }),
+        body: jsonEncode(<String, String>{'cityCode': cityCode}),
       );
       if (response.statusCode == 200) {
         print(response);
-        CitySector citySector =
-        CitySector.fromJson(jsonDecode(response.body));
+        CitySector citySector = CitySector.fromJson(jsonDecode(response.body));
         if (citySector.meta!.code.toString() == 200.toString()) {
           return citySector;
         } else {
@@ -306,16 +551,9 @@ class ApiClient {
       throw Exception('No Internet');
     }
   }
-  //
-  // {"address":"dfsdf dfgdf dfbdf cfbd",
-  // "cell":"+9879732323",
-  // "cnic":"32233-3223232-3",
-  // "email":"talhakhanxada@gmail.com",
-  // "pinCodeConfigId":"3"}
 
-
-  Future<NewUserPinGenration> onNewUserPinGenration(String address,
-      String cell, String cNic, String email)async{
+  Future<NewUserPinGenration> onNewUserPinGenration(
+      String address, String cell, String cNic, String email) async {
     try {
       final response = await http.post(
         Uri.parse(_epNewUserPinGenration),
@@ -327,12 +565,12 @@ class ApiClient {
           "cell": cell,
           "cnic": cNic,
           "email": email,
-          "pinCodeConfigId":"3"
+          "pinCodeConfigId": "3"
         }),
       );
       if (response.statusCode == 200) {
         NewUserPinGenration newUserPinGenration =
-        NewUserPinGenration.fromJson(jsonDecode(response.body));
+            NewUserPinGenration.fromJson(jsonDecode(response.body));
         if (newUserPinGenration.meta!.code.toString() == 200.toString()) {
           return newUserPinGenration;
         } else {
@@ -344,12 +582,7 @@ class ApiClient {
     } catch (e) {
       throw Exception('No Internet');
     }
-
   }
-
-
-  // _epCityData
-
 
   Future<NewUserRegister> onRegNewUser(
       String title,
@@ -379,13 +612,33 @@ class ApiClient {
       String filerNonFiler,
       String pinCode,
       String pinCodeExpiryConfigID) async {
-    print(title+fatherOrHusbandName+
-        cnicIsueDate+cNicExpiryDate+
-        address+country+phone+cell+email+gender+
-        occupation+incomeSource+name+cnic+passport+
-        ntn+city+otherCity+sector+fax+birthDate+
-        maritalStatus+incomeBracket+religion+filerNonFiler+
-        pinCode+pinCodeExpiryConfigID);
+    print(title +
+        fatherOrHusbandName +
+        cnicIsueDate +
+        cNicExpiryDate +
+        address +
+        country +
+        phone +
+        cell +
+        email +
+        gender +
+        occupation +
+        incomeSource +
+        name +
+        cnic +
+        passport +
+        ntn +
+        city +
+        otherCity +
+        sector +
+        fax +
+        birthDate +
+        maritalStatus +
+        incomeBracket +
+        religion +
+        filerNonFiler +
+        pinCode +
+        pinCodeExpiryConfigID);
     try {
       final response = await http.post(
         Uri.parse(_epNewUserRegister),
@@ -424,7 +677,7 @@ class ApiClient {
       );
       if (response.statusCode == 200) {
         NewUserRegister newUserRegister =
-        NewUserRegister.fromJson(jsonDecode(response.body));
+            NewUserRegister.fromJson(jsonDecode(response.body));
         print(response.body);
         if (newUserRegister.meta!.code.toString() == 200.toString()) {
           return newUserRegister;
@@ -576,6 +829,4 @@ class ApiClient {
       throw Exception('No Internet');
     }
   }
-
-
 }

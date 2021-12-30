@@ -43,8 +43,8 @@ class HomeScreen extends StatelessWidget {
                   Image.asset(
                     'assets/images/logo.png',
                     fit: BoxFit.contain,
-                    height: 100,
-                    width: 100,
+                    height: 50,
+                    width: 50,
                   )
                 ]),
               ),

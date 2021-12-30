@@ -63,11 +63,14 @@ class CustomTextContainer extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          RestInvestTitle(
-            textAlign: textAlign,
-            text: text,
-            textColor: AppColor.whiteColor,
-            fontWeight: FontWeight.w900,
+          Padding(
+            padding: const EdgeInsets.only(left: 6),
+            child: RestInvestTitle(
+              textAlign: textAlign,
+              text: text,
+              textColor: AppColor.whiteColor,
+              fontWeight: FontWeight.w900,
+            ),
           )
         ],
       ),
@@ -136,7 +139,7 @@ class HeadingText extends StatelessWidget {
 }
 
 class Logo extends StatelessWidget {
-  Logo({
+ const Logo({
     Key? key,
     required this.height,
     required this.width,

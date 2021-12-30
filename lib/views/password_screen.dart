@@ -25,11 +25,11 @@ class PasswordScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Logo(
-                    height: 200,
-                    width: 200,
+                    height: 100,
+                    width: 100,
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 40,
                   ),
                   const RestInvestTitle(
                       text:

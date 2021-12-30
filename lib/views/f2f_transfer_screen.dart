@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../utils/lists.dart';
-import '../views/redemption_screen.dart';
+import 'package:investintrust/data/models/login_model.dart';
+import 'package:investintrust/utils/constants.dart';
+import 'package:investintrust/utils/lists.dart';
 
 import '../controller/f2f_transfer_screen_controller.dart';
 import '/controller/f2f_transfer_screen_controller.dart';
@@ -72,22 +73,22 @@ class F2FTransferScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6),
                                   // value: _.dropdownvalue,
                                   hint: RestInvestTitle(
-                                    text: _.accountvalue == null ||
-                                            _.accountvalue == ""
-                                        ? "81656"
-                                        : _.accountvalue,
+                                    text: _.accountValue == null ||
+                                            _.accountValue == ""
+                                        ? ""
+                                        : _.accountValue,
                                     textColor: AppColor.black,
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
-                                  items: fromAccountItems
-                                      .map((String? fromAccountItems) {
-                                    return DropdownMenuItem<String>(
-                                        value: fromAccountItems,
-                                        child: Text(fromAccountItems!));
+                                  items: Constant.loginModel!.response!.accounts!.map<DropdownMenuItem<Accounts>>((Accounts? value){
+                                    return DropdownMenuItem<Accounts>(
+                                      value: value,
+                                      child: Text(value!.folioNumber!),
+                                    );
                                   }).toList(),
-                                  onChanged: (String? value) {
-                                    _.accountvalue = value!;
+                                  onChanged: (Accounts? value) {
+                                    _.accountValue = value!.folioNumber!;
                                     _.update();
                                   },
                                 ),
@@ -118,7 +119,7 @@ class F2FTransferScreen extends StatelessWidget {
                                   border: Border.all(
                                       width: 1, color: AppColor.dimblack)),
                               child: Center(
-                                child: DropdownButton<String>(
+                                child: DropdownButton(
                                   isExpanded: true,
                                   underline: Container(
                                     color: AppColor.whiteColor,
@@ -127,22 +128,23 @@ class F2FTransferScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6),
                                   // value: _.dropdownvalue,
                                   hint: RestInvestTitle(
-                                    text: _.transfervalue == null ||
-                                            _.transfervalue == ""
-                                        ? "NITIEF"
-                                        : _.transfervalue,
+                                    text: _.fundValue == null ||
+                                        _.fundValue == ""
+                                        ? ""
+                                        : _.fundValue,
                                     textColor: AppColor.black,
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
-                                  items: transferItems
-                                      .map((String? transferItems) {
-                                    return DropdownMenuItem<String>(
-                                        value: transferItems,
-                                        child: Text(transferItems!));
+                                  items: Constant.loginModel!.response!.accounts![_.findIndex()].userFundBalances!.map<DropdownMenuItem<UserFundBalances>>((UserFundBalances? value){
+                                    return DropdownMenuItem<UserFundBalances>(
+                                      value: value,
+                                      child: Text(value!.fundShort!),
+                                    );
                                   }).toList(),
-                                  onChanged: (String? value) {
-                                    _.transfervalue = value!;
+                                  onChanged: (UserFundBalances? value) {
+                                    _.fundValue = value!.fundShort!;
+                                    _.fundCode = value!.fundCode!;
                                     _.update();
                                   },
                                 ),
@@ -196,17 +198,17 @@ class F2FTransferScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
-                    children: const [
-                      Expanded(
+                    children: [
+                       Expanded(
                           child: EmptyRowContainer(
                         fontWeight: FontWeight.w800,
                         fontsize: 14,
                         hintColor: AppColor.black,
                         hint: "0",
-                        text: "From Fund Electronic Units",
+                        text: _.electronicUnit() ?? '',
                         textColor: AppColor.dimblack,
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
                       Expanded(
@@ -215,7 +217,7 @@ class F2FTransferScreen extends StatelessWidget {
                         fontsize: 14,
                         hintColor: AppColor.black,
                         hint: "0.00",
-                        text: "From Fund Amount (Rs.)",
+                        text: _.fundAmount() ?? '',
                         textColor: AppColor.dimblack,
                       )),
                     ],
@@ -242,7 +244,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.black)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -298,7 +300,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.black)),
+                                      width: 1, color: AppColor.dimblack)),
                               child: Center(
                                 child: DropdownButton<String>(
                                   isExpanded: true,
@@ -378,59 +380,48 @@ class F2FTransferScreen extends StatelessWidget {
                       Expanded(
                           child: CustomRowButton(
                               text: "Units",
-                              textColor:  _.unit
-                                  ? AppColor.whiteColor
-                                  : AppColor.black,
+                              textColor: AppColor.black,
                               textSize: 14,
                               onPress: () {
-                                _.investTrust(0);
+                                // _.investTrust(0);
                               },
-                              buttonColor: _.unit
+                              buttonColor: _.investButton
                                   ? AppColor.blueColor
                                   : AppColor.whiteColor)),
                       Expanded(
                           child: CustomRowButton(
                         text: "Percentages",
-                        textColor:   _.percentage
-          ? AppColor.whiteColor
-              : AppColor.black,
+                        textColor: AppColor.black,
                         textSize: 14,
                         onPress: () {
-                          _.investTrust(1);
+                          // _.investTrust(1);
                         },
-                        buttonColor:
-                        _.percentage
+                        buttonColor: _.portfolioButton
                             ? AppColor.blueColor
                             : AppColor.whiteColor,
                       )),
                       Expanded(
                           child: CustomRowButton(
                         text: "All Units",
-                        textColor:  _.allUnit
-                        ? AppColor.whiteColor
-                            : AppColor.black,
+                        textColor: AppColor.black,
                         textSize: 14,
                         onPress: () {
-                          _.investTrust(2);
+                          // _.investTrust(2);
                         },
-                        buttonColor:
-                        _.allUnit
+                        buttonColor: _.buttonclick3
                             ? AppColor.blueColor
                             : AppColor.whiteColor,
                       )),
                     ],
                   ),
-
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  _.unit?Column(children: [ Row(
+                  const SizedBox(height: 10),
+                  Row(
                     children: [
                       Expanded(
                         child: CustomTextFormField(
                           isRounded: true,
-                          hint: "Unit Balance",hintColor: AppColor.black,
-                          textInputType: TextInputType.emailAddress,
+                          hint: "Unit Balance",
+                          textInputType: TextInputType.number,
                         ),
                       ),
                       const SizedBox(
@@ -438,179 +429,54 @@ class F2FTransferScreen extends StatelessWidget {
                       ),
                       Expanded(
                           child: SizedBox(
-                            height: 35,
-                            child: RoundContainer(
-                              text: "Approx. Amount",
-                              textColor: AppColor.black,
-                              isSquare: true,
-                              voidcallback: () {},
-                            ),
-                          ))
+                        height: 35,
+                        child: RoundContainer(
+                          text: "Approx. Amount",
+                          textColor: AppColor.blueColor,
+                          isSquare: true,
+                          voidcallback: () {},
+                        ),
+                      ))
                     ],
                   ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: CustomTextFormField(
-                              isRounded: true,
-                              hint: "Pin Code",hintColor: AppColor.black,
-                              textInputType: TextInputType.numberWithOptions(),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Expanded(
-                            child: SizedBox(
-                              height: 35,
-                              child: RestInvestButton(
-                                isSquare: true,
-                                onPress: () {},
-                                text: "Generate Financial PIN",
-                                buttonColor: AppColor.blueColor,
-                                textColor: AppColor.whiteColor,
-                                textSize: 16,
-                              ),
-                            ))
-                      ],
-                    ),],):SizedBox(),
-                  _.percentage?Column(children: [ Row(
-                    children: [
-                      Expanded(
-                        child: CustomTextFormField(
-                          isRounded: true,
-                          hint: "Percentage",hintColor: AppColor.blueColor,
-                          textInputType: TextInputType.name,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: RoundContainer(
-                              text: "Approx. Amount",
-                              textColor: AppColor.blueColor,
-                              isSquare: true,
-                              voidcallback: () {},
-                            ),
-                          ))
-                    ],
-                  ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 35,
-                      child: RoundContainer(
-                        text: "Approx.Units",
-                        textColor: AppColor.blueColor,
-                        isSquare: true,
-                        voidcallback: () {},
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: CustomTextFormField(
-                              isRounded: true,
-                              hint: "Pin Code",hintColor: AppColor.blueColor,
-                              textInputType: TextInputType.numberWithOptions(),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Expanded(
-                            child: SizedBox(
-                              height: 35,
-                              child: RestInvestButton(
-                                isSquare: true,
-                                onPress: () {},
-                                text: "Generate Financial PIN",
-                                buttonColor: AppColor.blueColor,
-                                textColor: AppColor.whiteColor,
-                                textSize: 16,
-                              ),
-                            ))
-                      ],
-                    ),],):SizedBox(),
-                  _.allUnit?Column(children: [ Row(
-                    children: [
-                      Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: RoundContainer(
-                              text: "0",
-                              textColor: AppColor.black,
-                              isSquare: true,
-                              voidcallback: () {},
-                            ),
-                          )),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: RoundContainer(
-                              text: "0.00",
-                              textColor: AppColor.black,
-                              isSquare: true,
-                              voidcallback: () {},
-                            ),
-                          ))
-                    ],
-                  ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: CustomTextFormField(
-                              isRounded: true,
-                              hint: "Pin Code",hintColor: AppColor.blueColor,
-                              textInputType: TextInputType.numberWithOptions(),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Expanded(
-                            child: SizedBox(
-                              height: 35,
-                              child: RestInvestButton(
-                                isSquare: true,
-                                onPress: () {},
-                                text: "Generate Financial PIN",
-                                buttonColor: AppColor.blueColor,
-                                textColor: AppColor.whiteColor,
-                                textSize: 16,
-                              ),
-                            ))
-                      ],
-                    ),],):SizedBox(),
                   const SizedBox(
                     height: 10,
                   ),
-                  CheckBoxContainer(isChecked: false,),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 35,
+                          child: CustomTextFormField(
+                            isRounded: true,
+                            hint: "Pin Code",
+                            textInputType: TextInputType.emailAddress,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Expanded(
+                          child: SizedBox(
+                        height: 35,
+                        child: RestInvestButton(
+                          isSquare: true,
+                          onPress: () {},
+                          text: "Generate Financial PIN",
+                          buttonColor: AppColor.blueColor,
+                          textColor: AppColor.whiteColor,
+                          textSize: 16,
+                        ),
+                      ))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ContainerCheckBoxText(
+                    isChecked: false,
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
