@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/login_screen_controller.dart';
 import 'package:investintrust/controller/portfolio_screen_controller.dart';
 
 
 
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/utils/constants.dart';
+import 'package:investintrust/utils/my_images.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
@@ -62,12 +62,12 @@ class PortofolioScreen extends StatelessWidget {
                     height: 50,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children:  [
                         RestInvestTitle(
                           fontSize: 16,
                           textColor: AppColor.greyColor,
-                          text: "As on Dec 10,2021",
-                          fontWeight: FontWeight.w900,
+                          text: "As on ${_.formatted!}",
+                          fontWeight: FontWeight.w600,
                         ),
                       ],
                     ),
@@ -128,9 +128,11 @@ class PortofolioScreen extends StatelessWidget {
                       Expanded(
                           child: CustomRoundButton(
                               text: "Investment by Fund",
+
                               textColor: _.investButton
                                   ? Colors.white
                                   : AppColor.black,
+                              textSize: 14,
                               onPress: () {
 
                                 _.investTrust(0);
@@ -147,6 +149,7 @@ class PortofolioScreen extends StatelessWidget {
                         onPress: () {
                           _.investTrust(1);
                         },
+                            textSize: 14,
                         buttonColor: _.portfolioButton
                             ? AppColor.blueColor
                             : AppColor.whiteColor,
@@ -155,10 +158,20 @@ class PortofolioScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   _.portfolioButton?const SizedBox():Column(
-                    children: [
+                    children: [ Padding(
+                      padding: const EdgeInsets.only(left:5.0),
+                      child: Row(
+                        children: [
+                           RestInvestTitle(text: "PKR (000)",fontSize: 12,fontWeight: FontWeight.w500,),
+                           SizedBox( width: Get.width/4,),
+                           RestInvestTitle(text: _.buttonclick3?"Summery":_.buttonclick4?"Purchase":"Redumption",fontSize: 12,fontWeight: FontWeight.w500,),
+                        ],
+                      ),
+                    ),
+                      SizedBox(height: 10,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -168,125 +181,141 @@ class PortofolioScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 RoundColumnButton(
-                                  icon:const Icon(Icons.cabin),
+                                  icon: Image.asset(MyImages.summery,height: 30,
+                                    width: 30,),
                                   height: 45,
                                   width: 45,
-                                  textColor: AppColor.black,
+                                  // textColor: AppColor.black,
                                   onPress: ()async {
                                     // _.totalInvestment = 0.0;
                                     _.invest(0);
+                                    _.chartDataSummery = [];
                                     _.loadDashboard = await _.onLoadDashboard(_.selectedAccount!.folioNumber,context);
 
                                     _.loadDashboard!.response!.portfolioSummary!.forEach((element) {
                                       print(element.scaleValueYaxis);
-                                      _.chartDataSummery!.add(ChartData('${element.transMonthXaxis}', double.parse('${element.scaleValueYaxis}')),);
+                                      if(double.parse('${element.scaleValueYaxis}') != 0.00){
+                                        _.chartDataSummery!.add(ChartData('${element.transMonthXaxis}', double.parse('${element.scaleValueYaxis}')),);
+                                      }
                                     });
 
                                   },
                                   buttonColor: _.buttonclick3
                                       ? AppColor.blueColor
-                                      : AppColor.whiteColor,
+                                      : AppColor.lightGreyColor,
                                 ),
                                 const SizedBox(
                                   height: 6,
                                 ),
                                 RoundColumnButton(
-                                  icon: Icon(Icons.cabin),
+                                  icon: Image.asset(MyImages.purchase,height: 30,
+                                    width: 30,),
                                   height: 45,
                                   width: 45,
-                                  textColor: AppColor.black,
+                                  // textColor: AppColor.black,
                                   onPress: () {
                                     // _.totalInvestment = 0.0;
                                     _.invest(1);
                                   },
                                   buttonColor: _.buttonclick4
                                       ? AppColor.blueColor
-                                      : AppColor.whiteColor,
+                                      : AppColor.lightGreyColor,
                                 ),
                                 const SizedBox(
                                   height: 6,
                                 ),
                                 RoundColumnButton(
-                                  icon: Icon(Icons.cabin),
+                                  icon: Image.asset(MyImages.redumption,height: 30,
+                                    width: 30,),
                                   height: 45,
                                   width: 45,
-                                  textColor: AppColor.black,
+                                  // textColor: AppColor.black,
                                   onPress: () {
                                     // _.totalInvestment = 0.0;
                                     _.invest(2);
                                   },
                                   buttonColor: _.buttonclick5
                                       ? AppColor.blueColor
-                                      : AppColor.whiteColor,
+                                      : AppColor.lightGreyColor,
                                 ),
                               ],
                             ),
                           ),
+
+                          !_.isSummery?
                           _.loadDashboard==null ?SizedBox() :
                           !_.buttonclick3?SizedBox():double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) == 0.00?Padding(
                             padding:  EdgeInsets.only(left:Get.width/4 ,top:100,),
                             child: RestInvestTitle(text: "No Data Found",textColor: AppColor.blueColor,fontSize: 20,fontWeight: FontWeight.w600,),
                           )  :Expanded(
-                            child: Padding(
-                                padding: const EdgeInsets.only(left:8.0,right:8.0),
-                                //Initialize the spark charts widget
-                                child: SfCartesianChart(
+                            child: Container(
+                                height: Get.height/2.8,
+                              child: Padding(
+                                  padding: const EdgeInsets.only(left:8.0,right:8.0),
+                                  //Initialize the spark charts widget
+                                  child: SfCartesianChart(
 
-                                    primaryXAxis: CategoryAxis(),
-                                    primaryYAxis: NumericAxis(minimum: 0, maximum: double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!)+40, interval:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >1.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <100.0?20 :double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >100.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <200.0?40:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >200.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <300.0?60:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >300.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <500.0?100:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >500.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <1000.0?200:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >1000.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <2000.0?500:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >2000.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <3000.0?700:900,maximumLabels: 12),
-                                    tooltipBehavior: _.tooltipBehavior,
-                                    series: <ChartSeries<ChartData, String>>[
-                                      ColumnSeries<ChartData, String>(
-                                          dataSource: _.chartDataSummery!,
-                                          xValueMapper: (ChartData data, _) => data.x,
-                                          yValueMapper: (ChartData data, _) => data.y,
-                                          name: 'Gold',
-                                  dataLabelSettings: DataLabelSettings(
-                                      textStyle: TextStyle(fontSize: 14,color: AppColor.whiteColor),
-                                      isVisible: true,
-                                      labelAlignment: ChartDataLabelAlignment.top,
-                                      showZeroValue: false,
-                                      // labelPosition: ChartDataLabelPosition.outside
-                                  ),
-                                          gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.topCenter,
-                                          ),
-                                          color: AppColor.blueColor)
-                                    ])
-                            )),
+                                      primaryXAxis: CategoryAxis(),
+                                      primaryYAxis: NumericAxis(minimum: 0, maximum:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >1.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <300.0? double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!)+10:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!)+40, interval:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >1.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <50.0?5 :double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >50.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <100.0?20 :double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >100.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <200.0?40:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >200.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <300.0?60:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >300.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <500.0?100:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >500.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <1000.0?200:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >1000.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <2000.0?500:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >2000.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <3000.0?700:900,maximumLabels: 12),
+                                      tooltipBehavior: _.tooltipBehavior,
+                                      series: <ChartSeries<ChartData, String>>[
+                                        ColumnSeries<ChartData, String>(
+                                            dataSource: _.chartDataSummery!,
+                                            xValueMapper: (ChartData data, _) => data.x,
+                                            yValueMapper: (ChartData data, _) => data.y,
+                                            name: '',
+                                    dataLabelSettings: DataLabelSettings(
+                                        textStyle: TextStyle(fontSize: 10,color: AppColor.whiteColor),
+                                        isVisible: true,
+                                        labelAlignment: ChartDataLabelAlignment.top,
+                                        showZeroValue: false,
+                                        labelIntersectAction: LabelIntersectAction.shift
+                                        // labelPosition: ChartDataLabelPosition.outside
+                                    ),
+
+                                            // gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
+                                            //   begin: Alignment.bottomCenter,
+                                            //   end: Alignment.topCenter,
+                                            // ),
+                                            color: AppColor.blueColor)
+                                      ])
+                              )),
+                          ):Padding(padding: EdgeInsets.only(top:100,left: Get.width/5 ), child: CircularProgressIndicator()),
                           _.selectedAccount == null? SizedBox():
                           _.buttonclick4?
                           double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) == 0.00?Padding(
                             padding:  EdgeInsets.only(left:Get.width/4 ,top:100,),
                             child: RestInvestTitle(text: "No Data Found",textColor: AppColor.blueColor,fontSize: 20,fontWeight: FontWeight.w600,),
                           )  :Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left:8.0,right:8.0),
-                              //Initialize the spark charts widget
-                              child: SfCartesianChart(
+                            child: Container(
+                              height: Get.height/2.8,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left:8.0,right:8.0),
+                                //Initialize the spark charts widget
+                                child: SfCartesianChart(
 
-                                  primaryXAxis: CategoryAxis(),
-                                  primaryYAxis: NumericAxis(minimum: 0, maximum: double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!)+40, interval:40,),
-                                  tooltipBehavior: _.tooltipBehavior,
-                                  series: <ChartSeries<ChartData, String>>[
-                                    ColumnSeries<ChartData, String>(
-                                        dataSource: _.chartDataPurchase!,
-                                        xValueMapper: (ChartData data, _) => data.x,
-                                        yValueMapper: (ChartData data, _) => data.y,
-                                        name: 'Gold',
-                                dataLabelSettings: DataLabelSettings(
-                                    textStyle: TextStyle(fontSize: 14,color: AppColor.whiteColor),
-                                    isVisible: true,
-                                    labelAlignment: ChartDataLabelAlignment.top,
-                                    labelPosition: ChartDataLabelPosition.outside
-                                ),
-                                        gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
-                                          begin: Alignment.bottomCenter,
-                                          end: Alignment.topCenter,
-                                        ),
-                                        color: AppColor.blueColor)
-                                  ])
+                                    primaryXAxis: CategoryAxis(),
+                                    primaryYAxis: NumericAxis(minimum: 0, maximum:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >1.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <300.0? double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!)+10:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!)+40, interval:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >1.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <50.0?5 :double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >50.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <100.0?20 :double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >100.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <200.0?40:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >200.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <300.0?60:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >300.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <500.0?100:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >500.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <1000.0?200:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >1000.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <2000.0?500:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >2000.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <3000.0?700:900,maximumLabels: 12),
+                                    tooltipBehavior: _.tooltipBehavior,
+                                    series: <ChartSeries<ChartData, String>>[
+                                      ColumnSeries<ChartData, String>(
+                                          dataSource: _.chartDataPurchase!,
+                                          xValueMapper: (ChartData data, _) => data.x,
+                                          yValueMapper: (ChartData data, _) => data.y,
+                                          name: '',
+                                  dataLabelSettings: DataLabelSettings(
+                                      textStyle: TextStyle(fontSize: 10,color: AppColor.whiteColor),
+                                      isVisible: true,
+                                      labelAlignment: ChartDataLabelAlignment.top,
+                                      labelPosition: ChartDataLabelPosition.outside
+                                  ),
+                                          // gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
+                                          //   begin: Alignment.bottomCenter,
+                                          //   end: Alignment.topCenter,
+                                          // ),
+                                          color: AppColor.blueColor)
+                                    ])
+                              ),
                             ),
                           ):SizedBox(),
                           _.selectedAccount == null? SizedBox():
@@ -295,33 +324,36 @@ class PortofolioScreen extends StatelessWidget {
                             padding:  EdgeInsets.only(left:Get.width/4 ,top:100,),
                             child: RestInvestTitle(text: "No Data Found",textColor:AppColor.blueColor,fontSize: 20,fontWeight: FontWeight.w600,),
                           )  :Expanded(
-                            child: Padding(
-                                padding: const EdgeInsets.only(left:8.0,right:8.0),
-                                //Initialize the spark charts widget
-                                child: SfCartesianChart(
+                            child: Container(
+                              height: Get.height/2.8,
+                              child: Padding(
+                                  padding: const EdgeInsets.only(left:8.0,right:8.0),
+                                  //Initialize the spark charts widget
+                                  child: SfCartesianChart(
 
-                                    primaryXAxis: CategoryAxis(),
-                                    primaryYAxis: NumericAxis(minimum: 0, maximum: double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!)+40, interval:40,),
-                                    tooltipBehavior: _.tooltipBehavior,
-                                    series: <ChartSeries<ChartData, String>>[
-                                      ColumnSeries<ChartData, String>(
-                                          dataSource: _.chartDataRedumption!,
-                                          xValueMapper: (ChartData data, _) => data.x,
-                                          yValueMapper: (ChartData data, _) => data.y,
-                                          name: 'Gold',
-                                  dataLabelSettings: DataLabelSettings(
+                                      primaryXAxis: CategoryAxis(),
+                                      primaryYAxis: NumericAxis(minimum: 0, maximum:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >1.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <300.0? double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!)+10:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!)+40, interval:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >1.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <50.0?5 :double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >50.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <100.0?20 :double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >100.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <200.0?40:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >200.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <300.0?60:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >300.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <500.0?100:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >500.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <1000.0?200:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >1000.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <2000.0?500:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >2000.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <3000.0?700:900,maximumLabels: 12),
+                                      tooltipBehavior: _.tooltipBehavior,
+                                      series: <ChartSeries<ChartData, String>>[
+                                        ColumnSeries<ChartData, String>(
+                                            dataSource: _.chartDataRedumption!,
+                                            xValueMapper: (ChartData data, _) => data.x,
+                                            yValueMapper: (ChartData data, _) => data.y,
+                                            name: '',
+                                    dataLabelSettings: DataLabelSettings(
 
-                                    textStyle: TextStyle(fontSize: 14,color: AppColor.whiteColor),
-                                      isVisible: true,
-                                    labelAlignment: ChartDataLabelAlignment.top,
-                                    // labelPosition: ChartDataLabelPosition.outside
-                                  ),
-                                          gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.topCenter,
-                                          ),
-                                          color: AppColor.blueColor)
-                                    ])
+                                      textStyle: TextStyle(fontSize: 10,color: AppColor.whiteColor),
+                                        isVisible: true,
+                                      labelAlignment: ChartDataLabelAlignment.top,
+                                      // labelPosition: ChartDataLabelPosition.outside
+                                    ),
+                                            // gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
+                                            //   begin: Alignment.bottomCenter,
+                                            //   end: Alignment.topCenter,
+                                            // ),
+                                            color: AppColor.blueColor)
+                                      ])
+                              ),
                             ),
                           )
                         ],
@@ -334,55 +366,39 @@ class PortofolioScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(top:30.0),
                       child: RestInvestTitle(text: "No Data Found",textColor: AppColor.blueColor,fontSize: 20,fontWeight: FontWeight.w600,)
                   )) :
-                  Column(children: [
-                    SfCircularChart(
+                  Container(
+                    height: Get.height/2.8,
+                    child: SfCircularChart(
                       tooltipBehavior: _.tooltip,
                         legend: Legend(
                             isVisible: true, overflowMode: LegendItemOverflowMode.wrap,
-                            textStyle: TextStyle(fontSize: 20),
-                            iconHeight: 20,iconWidth: 20
+                            textStyle: TextStyle(fontSize: 14),
+                            iconHeight: 14,iconWidth: 14
                             // Border color and bord
                         ),
                         series: <CircularSeries>[
                           // Renders doughnut chart
                           DoughnutSeries<ChartData, String>(
                             enableTooltip: true,
-                            dataLabelMapper:(ChartData data, _) => data.y.toString() ,
+                            dataLabelMapper:(ChartData data, _) => "${data.y}%" ,
                               dataLabelSettings: DataLabelSettings(
                                 // useSeriesColor: true,
 
-                                  textStyle: TextStyle(fontSize: 16,color: AppColor.whiteColor,fontWeight:FontWeight.bold ),
+                                  textStyle: TextStyle(fontSize: 11,color: AppColor.whiteColor,fontWeight:FontWeight.bold ),
                                   isVisible: true,
                                   labelAlignment: ChartDataLabelAlignment.top,
-                                  // labelPosition: ChartDataLabelPosition.outside
                               ),
                               animationDuration: 2000,
                               dataSource: _.data,
+
                               // pointColorMapper:(ChartData data,  _) => data.color,
                               xValueMapper: (ChartData data, _) => data.x,
                               yValueMapper: (ChartData data, _) => data.y,
 
                           )
                         ]
-                    )
-
-                    // SfCircularChart(
-                    //   tooltipBehavior: _.tooltip,
-                    //     title: ChartTitle(text: "sdsd"),
-                    //     series: <CircularSeries>[
-                    //       PieSeries<ChartData, String>(
-                    //           dataSource: _.data,
-                    //
-                    //           xValueMapper: (ChartData data, _) => data.x,
-                    //           yValueMapper: (ChartData data, _) => data.y,
-                    //           explode: true,
-                    //           animationDuration: 1500,
-                    //           // All the segments will be exploded
-                    //           explodeAll: true
-                    //       )
-                    //     ]
-                    // )
-                  ],):SizedBox(),
+                    ),
+                  ):SizedBox(),
                 ],
               ),
             ),
@@ -395,7 +411,7 @@ class PortofolioScreen extends StatelessWidget {
       children: [
         ListTile(
           leading: RestInvestTitle(
-            text: account!.folioNumber ?? '6564',
+            text: account!.folioNumber ?? '',
             textColor: AppColor.dimblack,
           ),
           trailing: RestInvestTitle(

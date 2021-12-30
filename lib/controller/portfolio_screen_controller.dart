@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:investintrust/data/models/load_dashboard.dart';
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/data/repository.dart';
@@ -25,6 +26,7 @@ class PortofolioScreenController extends GetxController {
   bool isLoading = false;
   bool noInternet = false;
   bool isCardView = false;
+  bool isSummery = false;
   final _repository = Repository();
   LoadDashboard? loadDashboard;
   Accounts? selectedAccount;
@@ -35,9 +37,16 @@ class PortofolioScreenController extends GetxController {
   late List<ChartData>? chartDataRedumption = [];
   late List<ChartData> data = [];
   late TooltipBehavior tooltip;
+
   TooltipBehavior? tooltipBehavior;
+  static final DateTime now = DateTime.now();
+  static final DateFormat formatter = DateFormat.yMMMMd();
+   String? formatted ;
+
   @override
   void onInit() async{
+    formatted = formatter.format(now);
+    print(formatted);
     tooltipBehavior = TooltipBehavior(enable: true,);
 
 
@@ -60,20 +69,24 @@ class PortofolioScreenController extends GetxController {
 
   @override
   void onReady() async{
+
     selectedAccount = Constant.loginModel!.response!.accounts![0];
     loadDashboard =  await _repository.onLoadDashBoard(Constant.loginModel!.response!.accounts![0].folioNumber.toString());
 
 
 
     // loadDashboard.response
+    isSummery = true;
+    update();
     loadDashboard!.response!.portfolioSummary!.forEach((element) {
       if(double.parse('${element.scaleValueYaxis}') != 0.0){
         chartDataSummery!.add(
           ChartData('${element.transMonthXaxis}', double.parse('${element.scaleValueYaxis}')),
         );
       }
-
     });
+    isSummery = false;
+    update();
     selectedAccount!.portfolioAnalyPurchases!.forEach((element) {
       if(double.parse('${element.amountYaxis}') != 0.0) {
         chartDataPurchase!.add(
@@ -101,6 +114,7 @@ class PortofolioScreenController extends GetxController {
         );
       }
     });
+    update();
     super.onReady();
   }
 

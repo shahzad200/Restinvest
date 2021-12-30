@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/login_model.dart';
+import 'package:investintrust/utils/constants.dart';
 import '../utils/lists.dart';
 
 import '../controller/redemption_screen_controller.dart';
@@ -62,7 +64,7 @@ class RedemptionScreen extends StatelessWidget {
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
                               child: Center(
-                                child: DropdownButton(
+                                child: DropdownButton<Accounts>(
                                   isExpanded: true,
                                   underline: Container(
                                     color: AppColor.whiteColor,
@@ -73,20 +75,26 @@ class RedemptionScreen extends StatelessWidget {
                                   hint: RestInvestTitle(
                                     text: _.amountvalue == null ||
                                             _.amountvalue == ""
-                                        ? "81656"
+                                        ? "Select account"
                                         : _.amountvalue,
+                                    fontSize: 12,
                                     textColor: AppColor.black,
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
-                                      color: AppColor.blueColor, size: 35),
-                                  items: fromAccountItems
-                                      .map((String? fromAccountItems) {
-                                    return DropdownMenuItem<String>(
+                                      color: AppColor.blueColor, size: 25),
+                                  items: Constant.loginModel!.response!.accounts!
+                                      .map((Accounts? fromAccountItems) {
+                                    return DropdownMenuItem<Accounts>(
                                         value: fromAccountItems,
-                                        child: Text(fromAccountItems!));
+                                        child: Text(fromAccountItems!.folioNumber!));
                                   }).toList(),
-                                  onChanged: (String? value) {
-                                    _.amountvalue = value!;
+                                  onChanged: (Accounts? value) {
+                                    _.amountvalue = value!.folioNumber!;
+                                    _.fundNameListItems = [];
+                                    value.userFundBalances!.forEach((element) {
+                                      _.fundNameListItems.add(element.fundShort!);
+                                    });
+                                      _.fundNamevalue = _.fundNameListItems[0];
                                     _.update();
                                   },
                                 ),
@@ -127,22 +135,23 @@ class RedemptionScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6),
                                   // value: _.dropdownvalue,
                                   hint: RestInvestTitle(
-                                    text: _.dropdownvalue == null ||
-                                            _.dropdownvalue == ""
-                                        ? "NITIEF"
-                                        : _.dropdownvalue,
+                                    text: _.fundNamevalue == null ||
+                                            _.fundNamevalue == ""
+                                        ? "Fund Name"
+                                        : _.fundNamevalue,
+                                    fontSize: 12,
                                     textColor: AppColor.black,
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
-                                      color: AppColor.blueColor, size: 35),
-                                  items: fundNameListItems
+                                      color: AppColor.blueColor, size: 25),
+                                  items: _.fundNameListItems
                                       .map((String? fundNameListItems) {
                                     return DropdownMenuItem<String>(
                                         value: fundNameListItems,
                                         child: Text(fundNameListItems!));
                                   }).toList(),
                                   onChanged: (String? value) {
-                                    _.dropdownvalue = value!;
+                                    _.fundNamevalue = value!;
                                     _.update();
                                   },
                                 ),
@@ -224,7 +233,7 @@ class RedemptionScreen extends StatelessWidget {
                               _.unitButton
                                   ? AppColor.whiteColor
                                   : AppColor.black,
-                              textSize: 14,
+                              textSize: 12,
                               onPress: () {
                                 _.investTrust(0);
                               },
@@ -238,7 +247,7 @@ class RedemptionScreen extends StatelessWidget {
                         textColor: _.percentageButton
                             ? AppColor.whiteColor
                             : AppColor.black,
-                        textSize: 14,
+                        textSize: 12,
                         onPress: () {
                           _.investTrust(1);
                         },
@@ -252,7 +261,7 @@ class RedemptionScreen extends StatelessWidget {
                         textColor: _.allUnitButton
                             ? AppColor.whiteColor
                             : AppColor.black,
-                        textSize: 14,
+                        textSize: 12,
                         onPress: () {
                           _.investTrust(2);
                         },

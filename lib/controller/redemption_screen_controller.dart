@@ -2,22 +2,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/login_model.dart';
+import 'package:investintrust/utils/constants.dart';
 
 class RedemptionScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool isChecked = false;
-  String dropdownvalue = "";
+  String fundNamevalue = "";
   String amountvalue = "";
   String paymentvalue = "";
-  bool unitButton = false;
+  bool unitButton = true;
   bool percentageButton = false;
   bool allUnitButton = false;
+  List<String> fundNameListItems = [];
 
 
   @override
   void onInit() {
-
+    amountvalue = Constant.loginModel!.response!.accounts![0].folioNumber!;
+    Constant.loginModel!.response!.accounts![0].userFundBalances!.forEach((element) {
+      fundNameListItems.add(element.fundShort!);
+    });
+    if(fundNameListItems.isNotEmpty){
+      fundNamevalue = fundNameListItems[0];
+    }
+    update();
     super.onInit();
   }
 
