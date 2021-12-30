@@ -5,11 +5,13 @@ import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-
-import '../data/repository.dart';
-import '../routes/routes.dart';
-import '../utils/constants.dart';
-
+import 'package:investintrust/data/models/login_model.dart';
+import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constants.dart';
+import 'package:investintrust/utils/strings.dart';
+import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:investintrust/widgets/custome_dialog.dart';
 
 class LoginScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -22,6 +24,7 @@ class LoginScreenController extends GetxController {
   bool noInternet = false;
   var userName = "".obs;
   var password = "".obs;
+  LoginModel? loginModel;
   void updateUserName(value) {
     userName(value);
     update();
@@ -44,7 +47,7 @@ class LoginScreenController extends GetxController {
   }
 
 
-  void onLoginPress() async{
+  void onLoginPress(context) async{
     final key = encrypt.Key.fromUtf8('codingaffairscom');
 
     final bytes = utf8.encode('codingaffairscom');
@@ -60,20 +63,25 @@ class LoginScreenController extends GetxController {
 
     try{
       isLoading = true;
+      CustomDialog(context);
       update();
 
-      Constant.loginModel = await _repository.onLogin('MAHESH9',encrypted.base16.toString());
-      // Constant.loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
-      Constant.userId = Constant.loginModel!.response!.user!.userid.toString();
+      // Constant.loginModel = await _repository.onLogin('MAHESH9',encrypted.base16.toString());
+      Constant.loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
+      Get.back();
       Get.toNamed(AppRoute.portofolioRoute);
+      Constant.userId = Constant.loginModel!.response!.user!.userid.toString();
+
       isLoading = false;
       update();
     }catch (e){
+      Get.back();
       if(e.toString() == 'Exception: No Internet'){
         isLoading = false;
         noInternet = true;
         update();
       } else {
+        Get.back();
         isLoading = false;
         noInternet = false;
         update();

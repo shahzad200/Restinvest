@@ -325,7 +325,7 @@ class ApiClient {
       );
       printInfo(info: password);
       if (response.statusCode == 200) {
-        print(response.body);
+        printInfo(info:response.body);
         LoginModel loginModel = LoginModel.fromJson(jsonDecode(response.body));
         if (loginModel.meta!.code.toString() == 200.toString()) {
           return loginModel;
@@ -692,7 +692,7 @@ class ApiClient {
     }
   }
 
-  Future<Common> onGeneratePinCode(String userId, String folioNumber) async {
+  Future<Common> onGeneratePinCode(String userId, String folioNumber,String req) async {
     try {
       final response = await http.post(
         Uri.parse(_epGeneratePinCode),
@@ -702,7 +702,7 @@ class ApiClient {
         body: jsonEncode(<String, String>{
           'pinCodeConfigId': '3',
           'folioNumber': folioNumber,
-          'reqType': 'RED',
+          'reqType': req,
           'userId': userId
         }),
       );

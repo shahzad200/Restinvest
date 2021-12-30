@@ -42,10 +42,10 @@ List<String> paymentModeItems = [
   "Online",
 ];
 
-List<String> fundNameListItems = [
-  "Fund Name",
-  "NITIEF",
-];
+// List<String> fundNameListItems = [
+//   "Fund Name",
+//   "NITIEF",
+// ];
 List<String> titleItems = [
   'Title',
   'Dr',

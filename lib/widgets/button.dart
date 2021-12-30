@@ -83,6 +83,7 @@ class CustomRoundButton extends StatelessWidget {
           onPrimary: textColor,
           textStyle: TextStyle(
             fontSize: textSize,
+            fontWeight: FontWeight.w600
           ),
           minimumSize: Size(width, height),
           shape: RoundedRectangleBorder(borderRadius:
@@ -152,7 +153,9 @@ class RoundColumnButton extends StatelessWidget {
       this.textSize = 18.0,
       this.buttonColor = AppColor.blueColor,
       required this.icon,
+
       this.iconColor = AppColor.whiteColor,
+        // this.textColor = Colors.black,
       this.borderColor = AppColor.blueColor})
       : super(key: key);
 
@@ -161,6 +164,7 @@ class RoundColumnButton extends StatelessWidget {
   final Color buttonColor;
   final Color iconColor;
   final Color borderColor;
+  // final Color? textColor;
   final icon;
   final double width;
   final double height;
@@ -170,12 +174,14 @@ class RoundColumnButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      
       onPressed: onPress,
       style: ElevatedButton.styleFrom(
         primary: buttonColor,
-
+padding: EdgeInsets.all(0),
         textStyle: TextStyle(
           fontSize: textSize,
+          // color: textColor
         ),
         minimumSize: Size(width, height),
         shape: RoundedRectangleBorder(
