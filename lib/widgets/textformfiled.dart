@@ -289,7 +289,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       validator: (val) {
         widget.validations!(val!);
       },
-      onChanged: (val) {},
+      onChanged: widget.onChange,
       onSaved: (val) {},
     );
   }

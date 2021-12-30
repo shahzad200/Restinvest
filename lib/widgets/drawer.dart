@@ -6,6 +6,7 @@ import 'package:investintrust/utils/colors.dart';
 import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/utils/strings.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:investintrust/widgets/custome_dialog.dart';
 import 'package:investintrust/widgets/web_view.dart';
 
 import 'custom_divider.dart';
@@ -81,6 +82,7 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               Get.offAllNamed(AppRoute.redemptionRoute);
+              CustomDialog(context);
             },
             leading: const Redemption(),
             title: const RestInvestTitle(

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/utils/constants.dart';
+import 'package:investintrust/widgets/custome_dialog.dart';
+import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
 import '../utils/lists.dart';
 
 import '../controller/redemption_screen_controller.dart';
@@ -13,6 +15,7 @@ import '../widgets/constant_widget.dart';
 
 import '../widgets/drawer.dart';
 import '../widgets/textformfiled.dart';
+
 
 class RedemptionScreen extends StatelessWidget {
   const RedemptionScreen({Key? key}) : super(key: key);
@@ -88,13 +91,16 @@ class RedemptionScreen extends StatelessWidget {
                                         value: fromAccountItems,
                                         child: Text(fromAccountItems!.folioNumber!));
                                   }).toList(),
-                                  onChanged: (Accounts? value) {
+                                  onChanged: (Accounts? value)async {
                                     _.amountvalue = value!.folioNumber!;
                                     _.fundNameListItems = [];
                                     value.userFundBalances!.forEach((element) {
-                                      _.fundNameListItems.add(element.fundShort!);
+                                      _.fundNameListItems.add(element);
                                     });
-                                      _.fundNamevalue = _.fundNameListItems[0];
+                                      _.fundNamevalue = _.fundNameListItems[0].fundShort!;
+                                    CustomDialog(context);
+                                    _.loadFundsPlans =await  _.api.onLoadFundsPlans(Constant.userId, value.userFundBalances![0].fundCode!, value.folioNumber!, "RED");
+                                    Get.back();
                                     _.update();
                                   },
                                 ),
@@ -126,7 +132,7 @@ class RedemptionScreen extends StatelessWidget {
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
                               child: Center(
-                                child: DropdownButton<String>(
+                                child: DropdownButton<UserFundBalances>(
                                   isExpanded: true,
                                   underline: Container(
                                     color: AppColor.whiteColor,
@@ -145,13 +151,16 @@ class RedemptionScreen extends StatelessWidget {
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 25),
                                   items: _.fundNameListItems
-                                      .map((String? fundNameListItems) {
-                                    return DropdownMenuItem<String>(
+                                      .map((UserFundBalances? fundNameListItems) {
+                                    return DropdownMenuItem<UserFundBalances>(
                                         value: fundNameListItems,
-                                        child: Text(fundNameListItems!));
+                                        child: Text(fundNameListItems!.fundShort!));
                                   }).toList(),
-                                  onChanged: (String? value) {
-                                    _.fundNamevalue = value!;
+                                  onChanged: (UserFundBalances? value) async{
+                                    _.fundNamevalue = value!.fundShort!;
+                                    CustomDialog(context);
+                                    _.loadFundsPlans =await  _.api.onLoadFundsPlans(Constant.userId, value.fundCode!, _.amountvalue, "RED");
+                                    Get.back();
                                     _.update();
                                   },
                                 ),
@@ -196,17 +205,17 @@ class RedemptionScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
-                    children: const [
+                    children:  [
                       Expanded(
                           child: EmptyRowContainer(
                         // fontWeight: FontWeight.w900,
                         fontsize: 14,
                         hintColor: AppColor.black,
-                        hint: "0",
+                        hint: "${_.electronicUnit()}",
                         text: "Electric Units",
                         textColor: AppColor.black,
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
                       Expanded(
@@ -214,7 +223,7 @@ class RedemptionScreen extends StatelessWidget {
                         // fontWeight: FontWeight.w900,
                         fontsize: 14,
                         hintColor: AppColor.black,
-                        hint: "0.00",
+                        hint: "${_.fundAmount()}",
                         text: "Amount",
                         textColor: AppColor.black,
                       )),
@@ -282,6 +291,16 @@ class RedemptionScreen extends StatelessWidget {
                          isRounded: true,
                          hint: "Unit Balance",hintColor: AppColor.black,
                          textInputType: TextInputType.emailAddress,
+                         onChange: (val){
+                           print(val);
+                           if(val.isNotEmpty){
+                             _.calUnitBalanceValue = _.calUnitBalance(val);
+                           }else{
+                             _.calUnitBalanceValue =null;
+                           }
+
+                           _.update();
+                         },
                        ),
                      ),
                      const SizedBox(
@@ -291,7 +310,7 @@ class RedemptionScreen extends StatelessWidget {
                          child: SizedBox(
                            height: 35,
                            child: RoundContainer(
-                             text: "Approx. Amount",
+                             text: _.calUnitBalanceValue == null?"Approx. Amount":_.calUnitBalanceValue!.toStringAsFixed(2),
                              textColor: AppColor.black,
                              isSquare: true,
                              voidcallback: () {},
@@ -322,15 +341,17 @@ class RedemptionScreen extends StatelessWidget {
                              height: 35,
                              child: RestInvestButton(
                                isSquare: true,
-                               onPress: () {},
+                               onPress: () {
+                                 _.onPicCodeGenerate();
+                               },
                                text: "Generate Financial PIN",
                                buttonColor: AppColor.blueColor,
                                textColor: AppColor.whiteColor,
-                               textSize: 16,
+                               textSize: 12,
                              ),
                            ))
                      ],
-                   ),],):SizedBox(),
+                   ),],):const SizedBox(),
                   _.percentageButton?Column(children: [ Row(
                     children: [
                       Expanded(
@@ -453,7 +474,7 @@ class RedemptionScreen extends StatelessWidget {
                                 text: "Generate Financial PIN",
                                 buttonColor: AppColor.blueColor,
                                 textColor: AppColor.whiteColor,
-                                textSize: 16,
+                                textSize: 12,
                               ),
                             ))
                       ],
@@ -470,7 +491,12 @@ class RedemptionScreen extends StatelessWidget {
                     child: RestInvestButton(isSquare:true,
 
                       text: "Submit",
-                      onPress: () {},
+                      onPress: () {
+                      // if(){
+                        trans.showDialog(context,"","","","");
+                      // }
+
+                      },
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
                     ),

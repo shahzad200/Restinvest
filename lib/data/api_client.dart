@@ -462,9 +462,9 @@ class ApiClient {
         },
         body: jsonEncode(<String, String>{
           'userId': userId,
-          'fundCode': '00002',
-          'folioNumber': '69558',
-          'requestType': 'RED'
+          'fundCode': fundCode,
+          'folioNumber': folioNumber,
+          'requestType': requestType
         }),
       );
       if (response.statusCode == 200) {
@@ -692,7 +692,7 @@ class ApiClient {
     }
   }
 
-  Future<Common> onGeneratePinCode(String userId, String folioNumber) async {
+  Future<Common> onGeneratePinCode(String userId, String folioNumber,String req) async {
     try {
       final response = await http.post(
         Uri.parse(_epGeneratePinCode),
@@ -702,7 +702,7 @@ class ApiClient {
         body: jsonEncode(<String, String>{
           'pinCodeConfigId': '3',
           'folioNumber': folioNumber,
-          'reqType': 'RED',
+          'reqType': req,
           'userId': userId
         }),
       );

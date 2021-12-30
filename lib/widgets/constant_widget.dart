@@ -1128,7 +1128,7 @@ class _ContainerCheckBoxTextState extends State<ContainerCheckBoxText> {
 }
 
 class EmptyRowContainer extends StatelessWidget {
-  const EmptyRowContainer({
+   EmptyRowContainer({
     required this.hint,
     required this.textColor,
     required this.fontsize,
