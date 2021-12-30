@@ -527,21 +527,21 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                 text: "I confirm acceptance of",
                 fontSize: 11,fontWeight: FontWeight.w900,
               ),
-              HeadingText(
-                text: "Term & Conditions",
-                underlineColor: AppColor.blueColor,
-                textColor: AppColor.blueColor,
-                fontSize: 11,fontWeight: FontWeight.w900,
-              ),
-              RestInvestTitle(
-                text: "and all charges governing in",
-                fontSize: 11,fontWeight: FontWeight.w900,
-              )
+              // HeadingText(
+              //   text: "Term & Conditions",
+              //   underlineColor: AppColor.blueColor,
+              //   textColor: AppColor.blueColor,
+              //   fontSize: 11,fontWeight: FontWeight.w900,
+              // ),
+              // RestInvestTitle(
+              //   text: "and all charges governing in",
+              //   fontSize: 11,fontWeight: FontWeight.w900,
+              // )
             ],),
-            const RestInvestTitle(
-              text: "in this transaction.",
-              fontSize: 11,fontWeight: FontWeight.w900,
-            )
+            // const RestInvestTitle(
+            //   text: "in this transaction.",
+            //   fontSize: 11,fontWeight: FontWeight.w900,
+            // )
           ],)
         ],
       ),

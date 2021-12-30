@@ -462,9 +462,9 @@ class ApiClient {
         },
         body: jsonEncode(<String, String>{
           'userId': userId,
-          'fundCode': '00002',
-          'folioNumber': '69558',
-          'requestType': 'RED'
+          'fundCode': fundCode,
+          'folioNumber': folioNumber,
+          'requestType': requestType
         }),
       );
       if (response.statusCode == 200) {
