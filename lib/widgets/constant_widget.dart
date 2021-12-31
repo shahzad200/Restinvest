@@ -2468,19 +2468,22 @@ class DialogBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      // title: const Text('AlertDialog Title'),
-      content: Row(
-        children: const [
-          CircularProgressIndicator(),
-          SizedBox(
-            width: 20,
-          ),
-          Text(
-            "Please wait....",
-            style: TextStyle(color: Colors.black),
-          )
-        ],
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: AlertDialog(
+        // title: const Text('AlertDialog Title'),
+        content: Row(
+          children: const [
+            CircularProgressIndicator(),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              "Please wait....",
+              style: TextStyle(color: Colors.black),
+            )
+          ],
+        ),
       ),
     );
   }
