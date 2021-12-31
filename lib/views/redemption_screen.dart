@@ -76,10 +76,10 @@ class RedemptionScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6),
                                   // value: _.dropdownvalue,
                                   hint: RestInvestTitle(
-                                    text: _.amountvalue == null ||
-                                            _.amountvalue == ""
+                                    text: _.accountvalue == null ||
+                                            _.accountvalue == ""
                                         ? "Select account"
-                                        : _.amountvalue,
+                                        : _.accountvalue,
                                     fontSize: 12,
                                     textColor: AppColor.black,
                                   ),
@@ -92,7 +92,7 @@ class RedemptionScreen extends StatelessWidget {
                                         child: Text(fromAccountItems!.folioNumber!));
                                   }).toList(),
                                   onChanged: (Accounts? value)async {
-                                    _.amountvalue = value!.folioNumber!;
+                                    _.accountvalue = value!.folioNumber!;
                                     _.fundNameListItems = [];
                                     value.userFundBalances!.forEach((element) {
                                       _.fundNameListItems.add(element);
@@ -101,6 +101,13 @@ class RedemptionScreen extends StatelessWidget {
                                     CustomDialog(context);
                                     _.loadFundsPlans =await  _.api.onLoadFundsPlans(Constant.userId, value.userFundBalances![0].fundCode!, value.folioNumber!, "RED");
                                     Get.back();
+                                    _.approxUnits = "";
+                                    _.approxAmount = "";
+                                      _.calUnitBalanceValue = 0.0;
+                                    _.unitBalanceController.text = "";
+                                    _.unitButton = true;
+                                    _.percentageEnable = false;
+                                    _.allUnitButton = false;
                                     _.update();
                                   },
                                 ),
@@ -159,8 +166,15 @@ class RedemptionScreen extends StatelessWidget {
                                   onChanged: (UserFundBalances? value) async{
                                     _.fundNamevalue = value!.fundShort!;
                                     CustomDialog(context);
-                                    _.loadFundsPlans =await  _.api.onLoadFundsPlans(Constant.userId, value.fundCode!, _.amountvalue, "RED");
+                                    _.loadFundsPlans =await  _.api.onLoadFundsPlans(Constant.userId, value.fundCode!, _.accountvalue, "RED");
                                     Get.back();
+                                    _.approxUnits = "";
+                                    _.approxAmount = "";
+                                    _.unitBalanceController.text = "";
+                                     _.unitButton = true;
+                                     _.percentageEnable = false;
+                                     _.allUnitButton = false;
+                                    _.calUnitBalanceValue = 0.0;
                                     _.update();
                                   },
                                 ),
@@ -290,7 +304,8 @@ class RedemptionScreen extends StatelessWidget {
                        child: CustomTextFormField(
                          isRounded: true,
                          hint: "Unit Balance",hintColor: AppColor.black,
-                         textInputType: TextInputType.emailAddress,
+                         textInputType: TextInputType.number,
+                         enable:    double.parse(_.electronicUnit()!) > 0?true:false,
                          onChange: (val){
                            print(val);
                            if(val.isNotEmpty){
@@ -310,7 +325,7 @@ class RedemptionScreen extends StatelessWidget {
                          child: SizedBox(
                            height: 35,
                            child: RoundContainer(
-                             text: _.calUnitBalanceValue == null?"Approx. Amount":_.calUnitBalanceValue!.toStringAsFixed(2),
+                             text: _.calUnitBalanceValue == null || _.calUnitBalanceValue == 0.0?"Approx. Amount":_.calUnitBalanceValue!.toStringAsFixed(2),
                              textColor: AppColor.black,
                              isSquare: true,
                              voidcallback: () {},
@@ -321,44 +336,19 @@ class RedemptionScreen extends StatelessWidget {
                    const SizedBox(
                      height: 10,
                    ),
-                   Row(
-                     children: [
-                       Expanded(
-                         child: SizedBox(
-                           height: 35,
-                           child: CustomTextFormField(
-                             isRounded: true,
-                             hint: "Pin Code",hintColor: AppColor.black,
-                             textInputType: TextInputType.emailAddress,
-                           ),
-                         ),
-                       ),
-                       const SizedBox(
-                         width: 6,
-                       ),
-                       Expanded(
-                           child: SizedBox(
-                             height: 35,
-                             child: RestInvestButton(
-                               isSquare: true,
-                               onPress: () {
-                                 _.onPicCodeGenerate();
-                               },
-                               text: "Generate Financial PIN",
-                               buttonColor: AppColor.blueColor,
-                               textColor: AppColor.whiteColor,
-                               textSize: 12,
-                             ),
-                           ))
-                     ],
-                   ),],):const SizedBox(),
+                   ],):const SizedBox(),
                   _.percentageButton?Column(children: [ Row(
                     children: [
                       Expanded(
                         child: CustomTextFormField(
                           isRounded: true,
+                          enable:    double.parse(_.electronicUnit()!) > 0?true:false,
                           hint: "Percentage",hintColor: AppColor.black,
                           textInputType: TextInputType.numberWithOptions(),
+                          onChange: (value){
+                            _.calculateUnits(value);
+                            _.update();
+                          },
                         ),
                       ),
                       const SizedBox(
@@ -368,7 +358,7 @@ class RedemptionScreen extends StatelessWidget {
                           child: SizedBox(
                             height: 35,
                             child: RoundContainer(
-                              text: "Approx. Amount",
+                              text: _.approxAmount == null || _.approxAmount == ""?"Approx. Amount":"${_.approxAmount}",
                               textColor: AppColor.black,
                               isSquare: true,
                               voidcallback: () {},
@@ -382,7 +372,7 @@ class RedemptionScreen extends StatelessWidget {
                     SizedBox(
                       height: 35,
                       child: RoundContainer(
-                        text: "Approx.Units",
+                        text: _.approxUnits == null || _.approxUnits == ""?"Approx.Units":"${_.approxUnits}",
                         textColor: AppColor.blueColor,
                         isSquare: true,
                         voidcallback: () {},
@@ -391,42 +381,14 @@ class RedemptionScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: CustomTextFormField(
-                              isRounded: true,
-                              hint: "Pin Code",hintColor: AppColor.black,
-                              textInputType: TextInputType.numberWithOptions(),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Expanded(
-                            child: SizedBox(
-                              height: 35,
-                              child: RestInvestButton(
-                                isSquare: true,
-                                onPress: () {},
-                                text: "Generate Financial PIN",
-                                buttonColor: AppColor.blueColor,
-                                textColor: AppColor.whiteColor,
-                                textSize: 16,
-                              ),
-                            ))
-                      ],
-                    ),],):SizedBox(),
+                   ],):SizedBox(),
                   _.allUnitButton?Column(children: [ Row(
                     children: [
                       Expanded(
                           child: SizedBox(
                             height: 35,
                             child: RoundContainer(
-                              text: "0",
+                              text: "${_.unitBalanceController.text}",
                               textColor: AppColor.black,
                               isSquare: true,
                               voidcallback: () {},
@@ -439,7 +401,7 @@ class RedemptionScreen extends StatelessWidget {
                           child: SizedBox(
                             height: 35,
                             child: RoundContainer(
-                              text: "0.00",
+                              text: _.approxAmount == null || _.approxAmount =="" ?"0.00":"${_.approxAmount}",
                               textColor: AppColor.black,
                               isSquare: true,
                               voidcallback: () {},
@@ -450,35 +412,38 @@ class RedemptionScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: CustomTextFormField(
-                              isRounded: true,
-                              hint: "Pin Code",hintColor: AppColor.black,
-                              textInputType: TextInputType.numberWithOptions(),
-                            ),
+                  ],):SizedBox(),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 35,
+                          child: CustomTextFormField(
+                            isRounded: true,
+                            hint: "Pin Code",
+                            textInputType: TextInputType.text,
                           ),
                         ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Expanded(
-                            child: SizedBox(
-                              height: 35,
-                              child: RestInvestButton(
-                                isSquare: true,
-                                onPress: () {},
-                                text: "Generate Financial PIN",
-                                buttonColor: AppColor.blueColor,
-                                textColor: AppColor.whiteColor,
-                                textSize: 12,
-                              ),
-                            ))
-                      ],
-                    ),],):SizedBox(),
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Expanded(
+                          child: SizedBox(
+                            height: 35,
+                            child: RestInvestButton(
+                              isSquare: true,
+                              onPress: () {
+                                _.onGeneratePinCode(context);
+                              },
+                              text: "Generate Financial",
+                              buttonColor: AppColor.blueColor,
+                              textColor: AppColor.whiteColor,
+                              textSize: 16,
+                            ),
+                          ))
+                    ],
+                  ),
                   const SizedBox(
                     height: 10,
                   ),

@@ -446,7 +446,6 @@ class F2FTransferScreen extends StatelessWidget {
                           hint: "Percentage",
                           textInputType: TextInputType.number,
                           onChange: (v){
-                            printInfo(info: "jhjghjhHJHGJHGjh"+v);
                             if(v==''){
                               _.calculateUnits('0');
                             }else {
@@ -529,7 +528,7 @@ class F2FTransferScreen extends StatelessWidget {
                           child: CustomTextFormField(
                             isRounded: true,
                             hint: "Pin Code",
-                            textInputType: TextInputType.emailAddress,
+                            textInputType: TextInputType.text,
                           ),
                         ),
                       ),
