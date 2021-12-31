@@ -342,6 +342,7 @@ class RedemptionScreen extends StatelessWidget {
                       Expanded(
                         child: CustomTextFormField(
                           isRounded: true,
+                          controller: _.percentController,
                           enable:    double.parse(_.electronicUnit()!) > 0?true:false,
                           hint: "Percentage",hintColor: AppColor.black,
                           textInputType: TextInputType.numberWithOptions(),

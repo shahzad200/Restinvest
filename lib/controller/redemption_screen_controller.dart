@@ -12,6 +12,7 @@ import 'package:investintrust/data/models/login_model.dart' as login;
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
 
 
 class RedemptionScreenController extends GetxController {
@@ -28,6 +29,7 @@ class RedemptionScreenController extends GetxController {
   bool isLoading = false;
   bool noInternet = false;
   TextEditingController unitBalanceController = TextEditingController();
+  TextEditingController percentController = TextEditingController();
   List<login.UserFundBalances> fundNameListItems = [];
   ApiClient api = ApiClient();
   final _repository = Repository();
@@ -175,9 +177,49 @@ class RedemptionScreenController extends GetxController {
     }
   }
 
-  onSaveRed ()async{
-    Common? response;
-    response =await  api.onSaveRedemption();
+
+  onSubmitPress(BuildContext context){
+    // api.onSaveRedemption(accessCode, authorizationPinCode, folioNumber, fundCode, redTransType, sessionId, sessionStartDate, totalUnits, transactionValue, unitClass, unitPlan, userId, userType)
+    if(unitBalanceController.text != ''){
+      if(calUnitBalanceValue != 0){
+        if(calUnitBalanceValue! > 0 || double.parse(unitBalanceController.text) > 0 || double.parse(percentController.text) >0){
+          trans.showDialog(context,accountvalue,'',fundNamevalue,
+              '','',"${unitButton?calUnitBalanceValue:percentageButton?percentController.text:unitBalanceController.text}",percentageButton ? 'Percentage':'Units','RED',onOkPress);
+        } else {
+          Fluttertoast.showToast(
+              msg: 'Please enter Fund Balance/Percentage',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      } else {
+        Fluttertoast.showToast(
+            msg: 'Please enter Fund Balance/Percentage',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: 'Please enter Fund Balance/Percentage',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
+  onOkPress(){
+    isLoading = true;
+    update();
   }
 
 
