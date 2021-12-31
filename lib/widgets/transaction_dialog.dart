@@ -248,7 +248,7 @@ void showDialog(
                     ),
                     InkWell(
                       onTap: (){
-                        onOk();
+                        onOk(context);
                         Get.back();
                       },
                       child: const RestInvestTitle(

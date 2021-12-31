@@ -16,6 +16,7 @@ class F2FTransferScreenController extends GetxController {
   String accountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
 
   TextEditingController unitBalanceController = TextEditingController();
+  TextEditingController pinCodeController = TextEditingController();
 
   String fundValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundShort ?? '';
   String fundCode = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode ?? '';
@@ -188,14 +189,14 @@ class F2FTransferScreenController extends GetxController {
     try {
       isLoading = true;
       update();
-      common = await _repository.onGeneratePinCode(accountValue, "RED");
+      common = await _repository.onGeneratePinCode(accountValue, "FTF");
       isLoading = false;
       if(noInternet) {
         noInternet = false;
       }
       update();
       if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
-        customDialogPin(context);
+        customDialogPin(context,"Pin Code sent to your email address successfully");
       }
       // update();
     } catch (e) {
@@ -261,7 +262,7 @@ class F2FTransferScreenController extends GetxController {
         if(dataValue != ''){
           if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
             trans.showDialog(context,accountValue,toAccountValue,fundValue,
-                toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',onOkPress);
+                toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',onOkPress(context));
           } else {
             Fluttertoast.showToast(
                 msg: 'Please enter Fund Balance/Percentage',
@@ -294,9 +295,42 @@ class F2FTransferScreenController extends GetxController {
       }
   }
 
-  onOkPress(){
+  onOkPress(BuildContext context) async {
+    try {
       isLoading = true;
       update();
+      common = await _repository.onSaveFundTransfer(
+          pinCodeController.text, accountValue, toAccountValue,
+          fundCode, percentageButton ? "P" : "U", "totalUnits", dataValue, toFundCode);
+      isLoading = false;
+      if(noInternet) {
+        noInternet = false;
+      }
+      update();
+      if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+        customDialogPin(context,"Request Submitted successfully");
+      }
+      // update();
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+
   }
 
 }
