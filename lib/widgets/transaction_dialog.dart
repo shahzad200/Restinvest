@@ -11,7 +11,8 @@ void showDialog(
     String fundName,
     String data,
     String selectedTab,
-    String requestType
+    String requestType,
+    Function onOk
     ) {
   print('KJHHGJH'+data);
   showGeneralDialog(
@@ -246,7 +247,10 @@ void showDialog(
                       width: 30,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: (){
+                        onOk();
+                        Get.back();
+                      },
                       child: const RestInvestTitle(
                         text: "Yes",
                         fontSize: 14,

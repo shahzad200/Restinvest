@@ -7,6 +7,7 @@ import 'package:investintrust/data/models/load_fund_plans.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
 
 class F2FTransferScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -85,21 +86,49 @@ class F2FTransferScreenController extends GetxController {
     calculateUnits(String s){
       if(unitButton){
         dataValue = s;
-        String d = loadFundsPlans!.response!.portfolioAllocationData![index].fundRedPrice ?? '0';
-        double val = double.parse(d) * double.parse(s);
-        approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
-        update();
+        if(double.parse(dataValue) <= double.parse(loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0')) {
+          String d = loadFundsPlans!.response!.portfolioAllocationData![index]
+              .fundRedPrice ?? '0';
+          double val = double.parse(d) * double.parse(s);
+          approxAmount = val == 0 ? '' : val.toStringAsFixed(2);
+          update();
+        } else{
+          unitBalanceController.text = '';
+          update();
+          Fluttertoast.showToast(
+              msg: 'Unit Balance must less or equal to total units',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
       }
       if(percentageButton){
         dataValue = s;
-        String d = loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0';
-        String red = loadFundsPlans!.response!.portfolioAllocationData![index].fundRedPrice ?? '0';
-        double val = double.parse(d) * double.parse(s);
-        double approxUni = val / 100;
-        double approxAmo = approxUni * double.parse(red);
-        approxAmount = approxAmo.toStringAsFixed(2);
-        approxUnits = approxUni.toStringAsFixed(2);
-        update();
+        if(double.parse(dataValue) <= 100)
+          {
+            String d = loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0';
+            String red = loadFundsPlans!.response!.portfolioAllocationData![index].fundRedPrice ?? '0';
+            double val = double.parse(d) * double.parse(s);
+            double approxUni = val / 100;
+            double approxAmo = approxUni * double.parse(red);
+            approxAmount = approxAmo.toStringAsFixed(2);
+            approxUnits = approxUni.toStringAsFixed(2);
+            update();
+          } else {
+          unitBalanceController.text = '';
+          update();
+          Fluttertoast.showToast(
+              msg: 'Percentage must be less than 100',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
       }
       if(allUnitButton){
         if(loadFundsPlans != null) {
@@ -164,6 +193,7 @@ class F2FTransferScreenController extends GetxController {
       if(noInternet) {
         noInternet = false;
       }
+      update();
       if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
         customDialogPin(context);
       }
@@ -224,6 +254,49 @@ class F2FTransferScreenController extends GetxController {
       }
     }
 
+  }
+
+  onSubmitPress(BuildContext context){
+      if(unitBalanceController.text != ''){
+        if(dataValue != ''){
+          if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
+            trans.showDialog(context,accountValue,toAccountValue,fundValue,
+                toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',onOkPress);
+          } else {
+            Fluttertoast.showToast(
+                msg: 'Please enter Fund Balance/Percentage',
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.black,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          }
+        } else {
+          Fluttertoast.showToast(
+              msg: 'Please enter Fund Balance/Percentage',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      } else {
+        Fluttertoast.showToast(
+            msg: 'Please enter Fund Balance/Percentage',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+  }
+
+  onOkPress(){
+      isLoading = true;
+      update();
   }
 
 }

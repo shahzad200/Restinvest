@@ -88,6 +88,23 @@ class Repository {
       sessionStartDate, totalUnits, transactionValue,
       unitClass, unitPlan, userId, userType);
 
-
+  Future<Common> onSaveFundTransfer(
+      String authorizationPinCode,
+      String folioNumber,
+      String toFolioNumber,
+      String fundCode,
+      String redTransType,
+      String totalUnits,
+      String transactionValue,
+      String toFundCode,
+      )
+  => _apiClient.onSaveFundTransfer(Constant.loginModel!.response!.user!.sessionAccessCode ?? '',
+      authorizationPinCode,
+      folioNumber, toFolioNumber,
+      fundCode, redTransType, Constant.loginModel!.response!.user!.sessionId ?? '',
+      Constant.loginModel!.response!.user!.sessionDateTime ?? '', totalUnits,
+      transactionValue, 'XX', '0', Constant.loginModel!.response!.user!.userid ?? '',
+      Constant.loginModel!.response!.user!.userType ?? '',
+      toFundCode, 'XX', '0');
 
 }

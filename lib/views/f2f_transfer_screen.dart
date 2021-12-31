@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/data/models/load_fund_plans.dart' as fund;
+import 'package:investintrust/widgets/no_internet.dart';
 import '../controller/f2f_transfer_screen_controller.dart';
 import '/controller/f2f_transfer_screen_controller.dart';
 import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
@@ -38,7 +39,9 @@ class F2FTransferScreen extends StatelessWidget {
             ),
             drawer: const CustomDrawer(),
             key: _.scaffoldKey,
-            body: SingleChildScrollView(
+            body: Stack(
+                children: [
+            SingleChildScrollView(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
               child: Column(
                 children: [
@@ -86,7 +89,7 @@ class F2FTransferScreen extends StatelessWidget {
                                       child: Text(value!.folioNumber!),
                                     );
                                   }).toList(),
-                                  onChanged: (Accounts? value) {
+                                  onChanged:  _.isLoading || _.noInternet ? null : (Accounts? value) {
                                     _.accountValue = value!.folioNumber!;
                                     _.unitBalanceController.text = '';
                                     _.approxAmount = '';
@@ -147,7 +150,7 @@ class F2FTransferScreen extends StatelessWidget {
                                       child: Text(value!.fundShort!),
                                     );
                                   }).toList(),
-                                  onChanged: (UserFundBalances? value) {
+                                  onChanged: _.isLoading || _.noInternet ? null : (UserFundBalances? value) {
                                     _.fundValue = value!.fundShort!;
                                     _.fundCode = value!.fundCode!;
                                     _.unitBalanceController.text = '';
@@ -279,7 +282,7 @@ class F2FTransferScreen extends StatelessWidget {
                                       child: Text(value!.folioNumber!),
                                     );
                                   }).toList(),
-                                  onChanged: (Accounts? value) {
+                                  onChanged: _.isLoading || _.noInternet ? null : (Accounts? value) {
                                     _.toAccountValue = value!.folioNumber!;
                                     _.update();
                                   },
@@ -335,7 +338,7 @@ class F2FTransferScreen extends StatelessWidget {
                                       child: Text(value!.fundShort!),
                                     );
                                   }).toList(),
-                                  onChanged: (fund.ToFunds? value) {
+                                  onChanged: _.isLoading || _.noInternet ? null : (fund.ToFunds? value) {
                                     _.toFundValue = value!.fundShort!;
                                     _.toFundCode = value!.fundCode!;
                                     _.update();
@@ -397,6 +400,7 @@ class F2FTransferScreen extends StatelessWidget {
                                   : AppColor.black,
                               textSize: 12,
                               onPress: () {
+                                _.isLoading || _.noInternet ? null :
                                 _.investTrust(0);
                               },
                               buttonColor:
@@ -411,6 +415,7 @@ class F2FTransferScreen extends StatelessWidget {
                                 : AppColor.black,
                             textSize: 12,
                             onPress: () {
+                              _.isLoading || _.noInternet ? null :
                               _.investTrust(1);
                             },
                             buttonColor: _.percentageButton
@@ -425,6 +430,7 @@ class F2FTransferScreen extends StatelessWidget {
                                 : AppColor.black,
                             textSize: 12,
                             onPress: () {
+                              _.isLoading || _.noInternet ? null :
                               _.investTrust(2);
                             },
                             buttonColor: _.allUnitButton
@@ -526,6 +532,7 @@ class F2FTransferScreen extends StatelessWidget {
                         child: SizedBox(
                           height: 35,
                           child: CustomTextFormField(
+                            enable: _.isLoading || _.noInternet ? false : true,
                             isRounded: true,
                             hint: "Pin Code",
                             textInputType: TextInputType.text,
@@ -541,6 +548,7 @@ class F2FTransferScreen extends StatelessWidget {
                         child: RestInvestButton(
                           isSquare: true,
                           onPress: () {
+                            _.isLoading || _.noInternet ? null :
                             _.onGeneratePinCode(context);
                           },
                           text: "Generate Financial",
@@ -566,8 +574,10 @@ class F2FTransferScreen extends StatelessWidget {
                       isSquare: true,
                       text: "Submit",
                       onPress: () {
-                        trans.showDialog(context,_.accountValue,_.toAccountValue,_.fundValue,
-                            _.toFundValue,'',_.dataValue,_.percentageButton ? 'Percentage':'Units','FTF');
+                        _.isLoading || _.noInternet ? null :
+                            _.onSubmitPress(context);
+                        // trans.showDialog(context,_.accountValue,_.toAccountValue,_.fundValue,
+                        //     _.toFundValue,'',_.dataValue,_.percentageButton ? 'Percentage':'Units','FTF');
                       },
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
@@ -575,6 +585,31 @@ class F2FTransferScreen extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+                  _.isLoading
+                      ? const Center(
+                    child: DialogBox(),
+                  )
+                      : _.noInternet
+                      ? Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: Container(
+                        height: 180,
+                        width: Get.width,
+                        color: Colors.white,
+                        child: NoInternetWgt(
+                          onTryAgain: (){
+                            _.noInternet = false;
+                            _.update();
+                          },
+                        ),
+                      ),
+                    ),
+                  )
+                      : const SizedBox()
+                ],
             ),
           );
         });
