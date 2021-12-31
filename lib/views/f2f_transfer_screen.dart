@@ -532,6 +532,7 @@ class F2FTransferScreen extends StatelessWidget {
                         child: SizedBox(
                           height: 35,
                           child: CustomTextFormField(
+                            controller: _.pinCodeController,
                             enable: _.isLoading || _.noInternet ? false : true,
                             isRounded: true,
                             hint: "Pin Code",

@@ -2490,7 +2490,7 @@ class DialogBox extends StatelessWidget {
 }
 
 
-Future<void> customDialogPin (context){
+Future<void> customDialogPin (context,text){
   return showGeneralDialog(
     barrierLabel: "Barrier",
     barrierDismissible: true,
@@ -2498,7 +2498,7 @@ Future<void> customDialogPin (context){
     transitionDuration: const Duration(milliseconds: 700),
     context: context,
     pageBuilder: (_, __, ___) {
-      return const DialogPinCode();
+      return DialogPinCode(text);
     },
     // transitionBuilder: (_, anim, __, child) {
     //   return SlideTransition(
@@ -2512,8 +2512,8 @@ Future<void> customDialogPin (context){
 
 
 class DialogPinCode extends StatelessWidget {
-  const DialogPinCode({Key? key}) : super(key: key);
-
+   DialogPinCode(this.text, {Key? key}) : super(key: key);
+String text;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -2525,8 +2525,8 @@ class DialogPinCode extends StatelessWidget {
           children: [
             Center(
                 child: Column(
-                  children: const [
-                    Padding(
+                  children: [
+                    const Padding(
                       padding: EdgeInsets.only(top: 15.0),
                       child: Text(
                         "Invest In Trust",
@@ -2536,7 +2536,7 @@ class DialogPinCode extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                       child: Text(
-                        "Pin Code sent to your email address successfully",
+                        text,
                         maxLines: 3,
                         style: TextStyle(color: Colors.black),
                       ),
