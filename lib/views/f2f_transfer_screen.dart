@@ -452,7 +452,6 @@ class F2FTransferScreen extends StatelessWidget {
                           hint: "Percentage",
                           textInputType: TextInputType.number,
                           onChange: (v){
-                            printInfo(info: "jhjghjhHJHGJHGjh"+v);
                             if(v==''){
                               _.calculateUnits('0');
                             }else {
@@ -537,7 +536,7 @@ class F2FTransferScreen extends StatelessWidget {
                             enable: _.isLoading || _.noInternet ? false : true,
                             isRounded: true,
                             hint: "Pin Code",
-                            textInputType: TextInputType.emailAddress,
+                            textInputType: TextInputType.text,
                           ),
                         ),
                       ),

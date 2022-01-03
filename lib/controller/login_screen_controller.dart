@@ -59,14 +59,15 @@ class LoginScreenController extends GetxController {
     final encrypter = encrypt.Encrypter(encrypt.AES(key,mode: encrypt.AESMode.cbc));
 
     // final encrypted = encrypter.encrypt("${passwordController.text}", iv: iv);
-    final encrypted = encrypter.encrypt("Sneha*12", iv: iv);
+    // final encrypted = encrypter.encrypt("Sneha*12", iv: iv);
+    final encrypted = encrypter.encrypt("SAAD31", iv: iv);
 
     try{
       isLoading = true;
       CustomDialog(context);
       update();
 
-      Constant.loginModel = await _repository.onLogin('MAHESH9',encrypted.base16.toString());
+      Constant.loginModel = await _repository.onLogin('SAAD30',encrypted.base16.toString());
       // Constant.loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
       Get.back();
       Get.toNamed(AppRoute.portofolioRoute);
