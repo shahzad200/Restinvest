@@ -22,8 +22,8 @@ import 'models/view_reports.dart';
 
 class ApiClient {
   static const _baseUrl =
-      // 'http://192.168.0.181:8094/AssetConnectMobilePortal/UserService/';
-  'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      'http://192.168.0.86:8094/AssetConnectMobilePortal/UserService/';
+  // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';

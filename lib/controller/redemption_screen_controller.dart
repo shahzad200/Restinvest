@@ -154,7 +154,7 @@ class RedemptionScreenController extends GetxController {
         noInternet = false;
       }
       if(pinCode!.meta!.message == 'OK' && pinCode!.meta!.code == '200'){
-        customDialogPin(context);
+        customDialogPin(context , "Pin Code sent to your email address successfully");
       }
     } catch (e) {
       if (e.toString() == 'Exception: No Internet') {

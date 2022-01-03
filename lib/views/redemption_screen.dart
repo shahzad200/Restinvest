@@ -458,9 +458,7 @@ class RedemptionScreen extends StatelessWidget {
 
                       text: "Submit",
                       onPress: () {
-                      // if(){
-                      //   trans.showDialog(context,"","","","");
-                      // }
+                      _.onSubmitPress(context);
 
                       },
                       buttonColor: AppColor.blueColor,
