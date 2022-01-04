@@ -236,7 +236,7 @@ class CustomTextFormField extends StatefulWidget {
       this.obscureText = false,
       this.fieldType = 2,
       this.controller,
-
+      this.enable = true,
       this.icon,
       this.color = AppColor.dimblack,
       this.isRounded = true,
@@ -252,7 +252,7 @@ class CustomTextFormField extends StatefulWidget {
   bool obscureText;
   final int fieldType;
   final IconData? icon;
-
+  final bool enable;
   final bool hasIcon;
   final TextEditingController? controller;
   final bool isRounded;
@@ -268,6 +268,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: widget.controller,
       cursorColor: AppColor.blueColor,
       cursorHeight: 20,
+      enabled: widget.enable,
       obscuringCharacter: "*",
       decoration: InputDecoration(
         isDense: true, // Added this

@@ -135,10 +135,3 @@ class DateFormFieldContainer extends StatelessWidget {
     );
   }
 }
-
-
-
-
-// hintText: text,
-// contentPadding: const EdgeInsets.all(8),
-// suffixIcon: isTrue? (Calender()):SizedBox(),

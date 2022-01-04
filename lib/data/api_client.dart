@@ -22,8 +22,8 @@ import 'models/view_reports.dart';
 
 class ApiClient {
   static const _baseUrl =
-      // 'http://192.168.0.181:8094/AssetConnectMobilePortal/UserService/';
-  'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      'http://192.168.0.86:8094/AssetConnectMobilePortal/UserService/';
+  // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
@@ -778,6 +778,7 @@ class ApiClient {
       String accessCode,
       String authorizationPinCode,
       String folioNumber,
+      String toFolioNumber,
       String fundCode,
       String redTransType,
       String sessionId,
@@ -787,7 +788,10 @@ class ApiClient {
       String unitClass,
       String unitPlan,
       String userId,
-      String userType) async {
+      String userType,
+      String toFundCode,
+      String toFundUnitClass,
+      String toFundUnitPlan) async {
     try {
       final response = await http.post(
         Uri.parse(_epSaveFundTransfer),
@@ -798,20 +802,20 @@ class ApiClient {
           'accessCode': accessCode,
           'authorizationPinCode': authorizationPinCode,
           'folioNumber': folioNumber,
-          'toFolioNumber': fundCode,
-          'fundCode': redTransType,
-          'redTransType': sessionId,
-          'sessionId': sessionStartDate,
-          'sessionStartDate': totalUnits,
-          'totalUnits': transactionValue,
-          'transactionValue': unitClass,
-          'unitClass': unitPlan,
-          'unitPlan': userId,
-          'userId': userType,
-          'userType': unitClass,
-          'toFundCode': unitPlan,
-          'toFundUnitClass': userId,
-          'toFundUnitPlan': userType
+          'toFolioNumber': toFolioNumber,
+          'fundCode': fundCode,
+          'redTransType': redTransType,
+          'sessionId': sessionId,
+          'sessionStartDate': sessionStartDate,
+          'totalUnits': totalUnits,
+          'transactionValue': transactionValue,
+          'unitClass': unitClass,
+          'unitPlan': unitPlan,
+          'userId': userId,
+          'userType': userType,
+          'toFundCode': toFundCode,
+          'toFundUnitClass': toFundUnitClass,
+          'toFundUnitPlan': toFundUnitPlan
         }),
       );
       if (response.statusCode == 200) {
