@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-class AccountOpenRequestScreenController extends GetxController{
+class AccountOpenFatcaController extends GetxController{
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var userName = "".obs;
   var password = "".obs;
   var number = "".obs;
   var email = "".obs;
+  String dropdownvalue = "";
+  String amountvalue = "";
+  String paymentvalue = "";
   bool isChecked=false;
   var charactor=0;
   TextEditingController userNameController = TextEditingController();

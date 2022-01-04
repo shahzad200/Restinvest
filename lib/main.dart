@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
-import '../routes/routes.dart';
-
+import 'package:investintrust/views/account_opening_basic_information_screen.dart';
+import 'package:investintrust/views/account_opening_fatca_screen.dart';
+import 'package:investintrust/views/account_opening_request_screen.dart';
+import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
+import '../views/account_opening_bank_detail_screen.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -16,8 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      getPages: AppRoute.navMain,
-      initialRoute: AppRoute.homeRoute,
+        home: const AccountOpenRiskProfileScreen(),
+
+      // getPages: AppRoute.navMain,
+      // initialRoute: AppRoute.homeRoute,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(),
       // getPages: [
       //   GetPage(
       //     name: AppRoute.splashRoute,
@@ -104,8 +109,7 @@ class MyApp extends StatelessWidget {
       //     page: () => const TaxCalculatorScreen(),
       //   ),
       // ],
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+
     );
   }
 }

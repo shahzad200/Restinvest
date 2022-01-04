@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/custome_dialog.dart';
-import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
+import '../data/models/login_model.dart';
+import '../utils/constants.dart';
+import '../widgets/custome_dialog.dart';
+import '../widgets/transaction_dialog.dart' as trans;
 import '../utils/lists.dart';
 
 import '../controller/redemption_screen_controller.dart';

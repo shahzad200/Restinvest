@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 
 import 'package:get/get.dart';
-import 'package:investintrust/routes/routes.dart';
+import '../routes/routes.dart';
 import '../utils/constant.dart';
 
 import '../controller/register_controller.dart';
@@ -23,13 +23,13 @@ class RegisterScreen extends StatelessWidget {
         init: RegisterScreenController(),
         builder: (_) {
           return SafeArea(
-              child: Scaffold(
+              child: Scaffold(backgroundColor: AppColor.lightWhite,
             key: _.scaffoldKey,
             body: SingleChildScrollView(
               padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
               child: Column(
                 children: [
-                  Logo(height: 120, width: 120),
+                const  LogoNit(height: 120, width: 120),
                   const SizedBox(
                     height: 40,
                   ),
@@ -88,6 +88,7 @@ class RegisterScreen extends StatelessWidget {
                       //     textColor: Colors.white,
                       //     fontSize: 16.0);
                     },
+
                   ),
                 ],
               ),

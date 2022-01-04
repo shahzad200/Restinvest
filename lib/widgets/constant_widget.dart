@@ -438,18 +438,23 @@ class Branches extends StatelessWidget {
 }
 
 class LogoNit extends StatelessWidget {
-  const LogoNit({Key? key}) : super(key: key);
+  const LogoNit({
+    required this.height,required this.width,
+    Key? key}) :
+        super(key: key);
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
       Constants.logonit,
-      width: 60,
-      height: 60,
+
+      width: width,
+      height: height,
     );
   }
 }
-
 class IcPurchases extends StatelessWidget {
   const IcPurchases({Key? key}) : super(key: key);
 
@@ -463,7 +468,6 @@ class IcPurchases extends StatelessWidget {
     );
   }
 }
-
 class IcFund extends StatelessWidget {
   const IcFund({Key? key}) : super(key: key);
 
@@ -471,7 +475,7 @@ class IcFund extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       Constants.icfund,
-      color: AppColor.dimblack,
+       color: AppColor.dimblack,
       width: 25,
       height: 25,
     );
@@ -479,12 +483,10 @@ class IcFund extends StatelessWidget {
 }
 
 class CheckBoxContainer extends StatefulWidget {
-  CheckBoxContainer({
-    required this.isChecked,
+  CheckBoxContainer({required this.isChecked,
     Key? key,
   }) : super(key: key);
   bool isChecked;
-
   @override
   State<CheckBoxContainer> createState() => _CheckBoxContainerState();
 }
@@ -995,7 +997,6 @@ class FromFundDropDownContainer extends StatefulWidget {
 
 class _FromFundDropDownContainerState extends State<FromFundDropDownContainer> {
   String fundTitle = "";
-
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -1191,6 +1192,7 @@ class EmptyContainer extends StatelessWidget {
   const EmptyContainer({
     required this.hint,
     required this.textColor,
+    required this.fontWeight,
     required this.hintColor,
     this.text,
     Key? key,
@@ -1199,13 +1201,14 @@ class EmptyContainer extends StatelessWidget {
   final Color textColor;
   final hintColor;
   final text;
+  final fontWeight;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RestInvestTitle(
+        RestInvestTitle(fontWeight: fontWeight,
           text: text,
           textColor: textColor,
         ),
@@ -1245,7 +1248,6 @@ class DropDownAccountValueButton extends StatefulWidget {
 class _DropDownAccountValueButtonState
     extends State<DropDownAccountValueButton> {
   String account = "";
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -1307,7 +1309,6 @@ class AccountDropDownContainer extends StatefulWidget {
 
 class _AccountDropDownContainerState extends State<AccountDropDownContainer> {
   String amount = "";
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -1401,7 +1402,6 @@ class NavDropDownContainer extends StatefulWidget {
 class _NavDropDownContainerState extends State<NavDropDownContainer> {
   String select = "";
   int _value = 0;
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -1962,7 +1962,6 @@ class FundTransferDroDownContainer extends StatefulWidget {
 class _FundTransferDroDownContainerState
     extends State<FundTransferDroDownContainer> {
   String fundTransfer = "";
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -2563,5 +2562,8 @@ String text;
         ),
       ),
     );
+
+
+
   }
 }
