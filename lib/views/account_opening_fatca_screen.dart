@@ -1,10 +1,14 @@
 import 'dart:ui';
 
+import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import '../controller/account_opening_bank_detail_screen_controller.dart';
+import 'package:investintrust/controller/account_opening_fatca_screen_controller.dart';
+import 'package:investintrust/utils/constant.dart';
+import '../widgets/datefield.dart';
+import '../controller/account_opening_basic_information_screen_controller.dart';
 
 import '../widgets/button.dart';
 
@@ -15,13 +19,15 @@ import '../widgets/textformfiled.dart';
 
 import '../widgets/constant_widget.dart';
 
-class AccountOpenBankDetailScreen extends StatelessWidget {
-  const AccountOpenBankDetailScreen({Key? key}) : super(key: key);
+class AccountOpenFatcaScreen extends StatelessWidget {
+  const AccountOpenFatcaScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AccountOpenBankDetailScreenController>(
-        init: AccountOpenBankDetailScreenController(),
+    final width = Get.width;
+    final height = Get.height;
+    return GetBuilder<AccountOpenFatcaController>(
+        init: AccountOpenFatcaController(),
         builder: (_) {
           var space = const SizedBox(
             height: 10,
@@ -31,12 +37,9 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: const Padding(
-                padding: EdgeInsets.only(right: 50),
-                child: Logo(
-                  height: 60,
-                  width: 60,
-                ),
+              title: Logo(
+                height: 50,
+                width: 50,
               ),
               elevation: 0,
             ),
@@ -54,7 +57,7 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                       const CustomTextContainer(
                         fontSize: 16,
                         height: 35,
-                        text: "BANK DETAILS",
+                        text: "FATCA",
                         textAlign: TextAlign.start,
                       ),
                       space,
@@ -79,243 +82,14 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w900,
                                 ),
                                 RestInvestTitle(
-                                  text: " BANK DETAILS > ",
+                                  text: " FATCA > ",
                                   textAlign: TextAlign.start,
                                   textColor: AppColor.blueColor,
                                   fontWeight: FontWeight.w900,
                                 ),
                               ],
                             ),
-                           space,
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const RestInvestTitle(
-                                        text: "BANK NAME*",
-                                        textColor: AppColor.black,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 12,
-                                      ),
-                                      Container(
-                                        // margin: EdgeInsets.all(10.0),
-                                        padding: const EdgeInsets.only(
-                                            left: 10.0, right: 5.0),
-                                        height: 35,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                            color: AppColor.whiteColor,
-                                            border: Border.all(
-                                                width: 1,
-                                                color: AppColor.black)),
-                                        child: Center(
-                                          child: DropdownButton(
-                                            isExpanded: true,
-                                            underline: Container(
-                                              color: AppColor.whiteColor,
-                                            ),
-
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            // value: _.dropdownvalue,
-                                            hint: RestInvestTitle(
-                                              text: _.amountvalue == null ||
-                                                      _.amountvalue == ""
-                                                  ? "Account No."
-                                                  : _.amountvalue,
-                                              textColor: AppColor.black,
-                                            ),
-                                            icon: const Icon(
-                                                Icons.keyboard_arrow_down,
-                                                color: AppColor.blueColor,
-                                                size: 30),
-                                            items: fromAccountItems.map(
-                                                (String? fromAccountItems) {
-                                              return DropdownMenuItem<String>(
-                                                  value: fromAccountItems,
-                                                  child:
-                                                      Text(fromAccountItems!));
-                                            }).toList(),
-                                            onChanged: (String? value) {
-                                              _.amountvalue = value!;
-                                              _.update();
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const RestInvestTitle(
-                                        text: "BRANCH NAME*",
-                                        textColor: AppColor.black,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w900,
-                                      ),
-                                      CustomTextFormField(
-                                        isRounded: true,
-                                        hint: "",
-                                        // textInputType: TextInputType.emailAddress,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                         space,
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const RestInvestTitle(
-                                        text: "BRANCH CITY*",
-                                        textColor: AppColor.black,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 12,
-                                      ),
-                                      Container(
-                                        // margin: EdgeInsets.all(10.0),
-                                        padding: const EdgeInsets.only(
-                                            left: 10.0, right: 5.0),
-                                        height: 35,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                            color: AppColor.whiteColor,
-                                            border: Border.all(
-                                                width: 1,
-                                                color: AppColor.black)),
-                                        child: Center(
-                                          child: DropdownButton(
-                                            isExpanded: true,
-                                            underline: Container(
-                                              color: AppColor.whiteColor,
-                                            ),
-
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            // value: _.dropdownvalue,
-                                            hint: RestInvestTitle(
-                                              text: _.amountvalue == null ||
-                                                      _.amountvalue == ""
-                                                  ? "Account No."
-                                                  : _.amountvalue,
-                                              textColor: AppColor.black,
-                                            ),
-                                            icon: const Icon(
-                                                Icons.keyboard_arrow_down,
-                                                color: AppColor.blueColor,
-                                                size: 30),
-                                            items: fromAccountItems.map(
-                                                (String? fromAccountItems) {
-                                              return DropdownMenuItem<String>(
-                                                  value: fromAccountItems,
-                                                  child:
-                                                      Text(fromAccountItems!));
-                                            }).toList(),
-                                            onChanged: (String? value) {
-                                              _.amountvalue = value!;
-                                              _.update();
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const RestInvestTitle(
-                                        text: "IBAN NUMBER*",
-                                        textColor: AppColor.black,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w900,
-                                      ),
-                                      CustomTextFormField(
-                                        isRounded: true,
-                                        hint: "",
-                                        // textInputType: TextInputType.emailAddress,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
                             space,
-                            const RestInvestTitle(
-                              text: "DIVIDEND MANDATE",
-                              textColor: AppColor.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w900,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Radio(
-                                  value: 0,
-                                  groupValue: _.charactor,
-                                  onChanged: (int? val) {
-                                    _.charactor = val!;
-                                    _.update();
-                                  },
-                                  fillColor: MaterialStateColor.resolveWith(
-                                      (states) => AppColor.blueColor),
-                                ),
-                                const RestInvestTitle(
-                                  text: "Reinvest",
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                Radio(
-                                  value: 1,
-                                  groupValue: _.charactor,
-                                  onChanged: (int? val) {
-                                    _.charactor = val!;
-                                    _.update();
-                                  },
-                                  fillColor: MaterialStateColor.resolveWith(
-                                      (states) => AppColor.blueColor),
-                                ),
-                                const RestInvestTitle(
-                                  text: "Cash Dividend:",
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ],
-                            ),
-                            space,
-                            const RestInvestTitle(
-                              text: "NEXT OF KIN DETAILS*",
-                              textColor: AppColor.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w900,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
                             Row(
                               children: [
                                 Expanded(
@@ -324,7 +98,7 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const RestInvestTitle(
-                                        text: "NAME",
+                                        text: 'TITLE OF ACCOUNT:',
                                         textColor: AppColor.black,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w900,
@@ -347,21 +121,28 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const RestInvestTitle(
-                                        text: "CNIC/NICOP",
+                                        text: "CNIC / NICOP NUMBER",
                                         textColor: AppColor.black,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w900,
                                       ),
                                       CustomTextFormField(
                                         isRounded: true,
-                                        hint: "XXXXX-XXXXXXX-X",
-                                        hintColor: AppColor.dimblack,
+                                        hint: "",
+                                        hintColor: AppColor.black,
                                         // textInputType: TextInputType.emailAddress,
                                       ),
                                     ],
                                   ),
                                 ),
                               ],
+                            ),
+                            space,
+                            const RestInvestTitle(
+                              text: "PLACE OF BIRTH:",
+                              textColor: AppColor.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w900,
                             ),
                             space,
                             Row(
@@ -372,13 +153,12 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const RestInvestTitle(
-                                        text: "BRANCH CITY*",
+                                        text: "COUNTRY:*",
                                         textColor: AppColor.black,
-                                        fontWeight: FontWeight.w900,
                                         fontSize: 12,
+                                        fontWeight: FontWeight.w900,
                                       ),
                                       Container(
-                                        width: Get.width / 2.4,
                                         // margin: EdgeInsets.all(10.0),
                                         padding: const EdgeInsets.only(
                                             left: 10.0, right: 5.0),
@@ -395,8 +175,138 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                             underline: Container(
                                               color: AppColor.whiteColor,
                                             ),
+
                                             borderRadius:
                                                 BorderRadius.circular(6),
+                                            // value: _.dropdownvalue,
+                                            hint: RestInvestTitle(
+                                              text: _.amountvalue == null ||
+                                                      _.amountvalue == ""
+                                                  ? "Account No."
+                                                  : _.amountvalue,
+                                              textColor: AppColor.black,
+                                            ),
+                                            icon: const Icon(
+                                                Icons.keyboard_arrow_down,
+                                                color: AppColor.blueColor,
+                                                size: 30),
+                                            items: fromAccountItems.map(
+                                                (String? fromAccountItems) {
+                                              return DropdownMenuItem<String>(
+                                                  value: fromAccountItems,
+                                                  child:
+                                                      Text(fromAccountItems!));
+                                            }).toList(),
+                                            onChanged: (String? value) {
+                                              _.amountvalue = value!;
+                                              _.update();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 6,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const RestInvestTitle(
+                                        text: "STATE:*",
+                                        textColor: AppColor.black,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                      Container(
+                                        // margin: EdgeInsets.all(10.0),
+                                        padding: const EdgeInsets.only(
+                                            left: 10.0, right: 5.0),
+                                        height: 35,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: AppColor.whiteColor,
+                                            border: Border.all(
+                                                width: 1,
+                                                color: AppColor.black)),
+                                        child: Center(
+                                          child: DropdownButton(
+                                            isExpanded: true,
+                                            underline: Container(
+                                              color: AppColor.whiteColor,
+                                            ),
+
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            // value: _.dropdownvalue,
+                                            hint: RestInvestTitle(
+                                              text: _.amountvalue == null ||
+                                                      _.amountvalue == ""
+                                                  ? "Account No."
+                                                  : _.amountvalue,
+                                              textColor: AppColor.black,
+                                            ),
+                                            icon: const Icon(
+                                                Icons.keyboard_arrow_down,
+                                                color: AppColor.blueColor,
+                                                size: 30),
+                                            items: fromAccountItems.map(
+                                                (String? fromAccountItems) {
+                                              return DropdownMenuItem<String>(
+                                                  value: fromAccountItems,
+                                                  child:
+                                                      Text(fromAccountItems!));
+                                            }).toList(),
+                                            onChanged: (String? value) {
+                                              _.amountvalue = value!;
+                                              _.update();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            space,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const RestInvestTitle(
+                                        text: "CURRENT CITY:*",
+                                        textColor: AppColor.black,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                      Container(
+                                        // margin: EdgeInsets.all(10.0),
+                                        padding: const EdgeInsets.only(
+                                            left: 10.0, right: 5.0),
+                                        height: 35,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: AppColor.whiteColor,
+                                            border: Border.all(
+                                                width: 1,
+                                                color: AppColor.black)),
+                                        child: Center(
+                                          child: DropdownButton(
+                                            isExpanded: true,
+                                            underline: Container(
+                                              color: AppColor.whiteColor,
+                                            ),
+
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
                                               text: _.amountvalue == null ||
                                                       _.amountvalue == ""
@@ -429,7 +339,175 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                             ),
                             space,
                             const RestInvestTitle(
-                              text: "DISCLAIMER:",
+                              text:
+                                  "COUNTRY OF TAX RESIDENCE\nOTHER THAN PAKISTAN:*",
+                              textColor: AppColor.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w900,
+                            ),
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 0,
+                                  groupValue: _.charactor,
+                                  onChanged: (int? val) {
+                                    _.charactor = val!;
+                                    _.update();
+                                  },
+                                  fillColor: MaterialStateColor.resolveWith(
+                                      (states) => AppColor.blueColor),
+                                ),
+                                const RestInvestTitle(
+                                  text: "NONE",
+                                  textColor: AppColor.dimblack,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                                Radio(
+                                  value: 1,
+                                  groupValue: _.charactor,
+                                  onChanged: (int? val) {
+                                    _.charactor = val!;
+                                    _.update();
+                                  },
+                                  fillColor: MaterialStateColor.resolveWith(
+                                      (states) => AppColor.blueColor),
+                                ),
+                                const RestInvestTitle(
+                                  text: "USA",
+                                  textColor: AppColor.dimblack,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                                Radio(
+                                  value: 2,
+                                  groupValue: _.charactor,
+                                  onChanged: (int? val) {
+                                    _.charactor = val!;
+                                    _.update();
+                                  },
+                                  fillColor: MaterialStateColor.resolveWith(
+                                      (states) => AppColor.blueColor),
+                                ),
+                                const RestInvestTitle(
+                                  text: "OTHERS",
+                                  textColor: AppColor.dimblack,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ],
+                            ),
+                            const EmptyContainer(fontWeight: FontWeight.w900,
+                                text: "",
+                                hint: "",
+                                textColor: AppColor.black,
+                                hintColor: AppColor.black),
+                            space,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                    checkColor: AppColor.whiteColor,
+                                    fillColor: MaterialStateColor.resolveWith(
+                                            (states) => AppColor.blueColor),
+                                    value: _.isChecked,
+                                    onChanged: (bool? val) {
+                                      _.isChecked = val!;
+                                      _.update();
+                                    }),
+                                const RestInvestTitle(
+                                  text:
+                                  "I hereby confirm that the information provided abpve is true,accurate and complete,I hereby,\n+indemnify and hold the harmful NITL against any and all losses action,claims,penalities,\ndemagesor liabilities that may arise in case the above information is found to  be incorrect.\nI further agree and undertake to notify NITL within 30 day calender if there is changes in\ninformation provided above.",
+                                  textColor: AppColor.black,
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ],
+                            ),
+                            space,
+                    const RestInvestTitle(
+                      text: "CRS FORM",
+                      textColor: AppColor.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                    ),
+                            space,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      const RestInvestTitle(
+                                        text: "CURRENT CITY:*",
+                                        textColor: AppColor.black,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                      Container(
+                                        // margin: EdgeInsets.all(10.0),
+                                        padding: const EdgeInsets.only(
+                                            left: 10.0, right: 5.0),
+                                        height: 35,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: AppColor.whiteColor,
+                                            border: Border.all(
+                                                width: 1,
+                                                color: AppColor.black)),
+                                        child: Center(
+                                          child: DropdownButton(
+                                            isExpanded: true,
+                                            underline: Container(
+                                              color: AppColor.whiteColor,
+                                            ),
+
+                                            borderRadius:
+                                            BorderRadius.circular(6),
+                                            // value: _.dropdownvalue,
+                                            hint: RestInvestTitle(
+                                              text: _.amountvalue == null ||
+                                                  _.amountvalue == ""
+                                                  ? "Account No."
+                                                  : _.amountvalue,
+                                              textColor: AppColor.black,
+                                            ),
+                                            icon: const Icon(
+                                                Icons.keyboard_arrow_down,
+                                                color: AppColor.blueColor,
+                                                size: 30),
+                                            items: fromAccountItems.map(
+                                                    (String? fromAccountItems) {
+                                                  return DropdownMenuItem<String>(
+                                                      value: fromAccountItems,
+                                                      child:
+                                                      Text(fromAccountItems!));
+                                                }).toList(),
+                                            onChanged: (String? value) {
+                                              _.amountvalue = value!;
+                                              _.update();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                               const SizedBox(width: 6,),
+                                const Expanded(
+                                  child: EmptyContainer(
+                                      text: "TIN NUMBER:",
+                                      hint: "",
+                                      textColor: AppColor.black,fontWeight: FontWeight.w900,
+                                      hintColor: AppColor.black),
+                                ),
+                              ],
+                            ),
+                           space,
+                            const RestInvestTitle(
+                              text: "*DISCLAIMER:",
                               textColor: AppColor.black,
                               fontSize: 12,
                               fontWeight: FontWeight.w900,
@@ -457,28 +535,14 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                               ],
                             ),
                             space,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CustomRoundButton(
-                                    isRound: false,
-                                    text: "BACK",
-                                    width: 120,
-                                    height: 40,
-                                    buttonColor: AppColor.dimBlue,
-                                    textColor: AppColor.whiteColor,
-                                    onPress: () {}),
-                                CustomRoundButton(
-                                    isRound: false,
-                                    text: "SAVE&NEXT",
-                                    width: 120,
-                                    height: 40,
-                                    buttonColor: AppColor.blueColor,
-                                    textColor: AppColor.whiteColor,
-                                    onPress: () {}),
-                              ],
+                            CustomRoundButton(
+                                height: 35,
+                                text: "SAVE&NEXT",
+                                onPress: () {},
+                                isRound: false),
+                            const SizedBox(
+                              height: 10,
                             ),
-                            space,
                           ],
                         ),
                       ),

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utils/lists.dart';
-import '../views/redemption_screen.dart';
+
 
 import '../widgets/datefield.dart';
 import '../controller/purchases_screen_controller.dart';

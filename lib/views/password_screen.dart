@@ -18,15 +18,15 @@ class PasswordScreen extends StatelessWidget {
         init: PasswordScreenController(),
         builder: (_) {
           return SafeArea(
-              child: Scaffold(
+              child: Scaffold(backgroundColor: AppColor.lightWhite,
             key: _.scaffoldKey,
             body: SingleChildScrollView(
               padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
               child: Column(
                 children: [
-                  Logo(
-                    height: 100,
-                    width: 100,
+                  const LogoNit(
+                    height: 120,
+                    width: 120,
                   ),
                   const SizedBox(
                     height: 40,
@@ -34,7 +34,7 @@ class PasswordScreen extends StatelessWidget {
                   const RestInvestTitle(
                       text:
                           "Enter your User ID and CNIC and press Sumbit button.",
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.center,fontWeight: FontWeight.w900,
                       textColor: AppColor.black),
                   const SizedBox(
                     height: 10,

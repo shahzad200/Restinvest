@@ -438,15 +438,20 @@ class Branches extends StatelessWidget {
 }
 
 class LogoNit extends StatelessWidget {
-  const LogoNit({Key? key}) : super(key: key);
+  const LogoNit({
+    required this.height,required this.width,
+    Key? key}) :
+        super(key: key);
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
       Constants.logonit,
 
-      width: 60,
-      height: 60,
+      width: width,
+      height: height,
     );
   }
 }
@@ -1031,7 +1036,7 @@ class DropDownContainer extends StatelessWidget {
   final isSquare;
   final voidcallback;
   final fontSize;
-  final Icon icon;
+  final  icon;
 
   @override
   Widget build(BuildContext context) {
@@ -1181,6 +1186,7 @@ class EmptyContainer extends StatelessWidget {
   const EmptyContainer({
     required this.hint,
     required this.textColor,
+    required this.fontWeight,
     required this.hintColor,
     this.text,
     Key? key,
@@ -1189,13 +1195,14 @@ class EmptyContainer extends StatelessWidget {
   final Color textColor;
   final hintColor;
   final text;
+  final fontWeight;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RestInvestTitle(
+        RestInvestTitle(fontWeight: fontWeight,
           text: text,
           textColor: textColor,
         ),

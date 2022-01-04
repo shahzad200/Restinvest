@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/portfolio_screen_controller.dart';
+import '../controller/portfolio_screen_controller.dart';
 
 
 
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/utils/my_images.dart';
+import '../data/models/login_model.dart';
+import '../utils/constants.dart';
+import '../utils/my_images.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
@@ -38,7 +38,7 @@ class PortofolioScreen extends StatelessWidget {
         builder: (_) {
           return Scaffold(
             appBar: AppBar(
-              title: const LogoNit(),
+              title: const LogoNit(height: 60,width: 60,),
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(

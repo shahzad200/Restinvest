@@ -14,7 +14,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   String amountvalue = "";
   String paymentvalue = "";
   bool isChecked=false;
-
+  var charactor=0;
   TextEditingController userNameController = TextEditingController();
 
   TextEditingController numberController = TextEditingController();

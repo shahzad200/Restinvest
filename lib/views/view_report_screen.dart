@@ -58,7 +58,7 @@ class ViewReportsScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 35,
                                   child:
-                                  DateFormFieldContainer(isRounded:false,
+                                  DateFormFieldContainer(isRounded:false,isTrue:false,
                                     text: 'Selected Date',
                                     mode: DateTimeFieldPickerMode.date,
                                     dateFormatTrue: true,
@@ -83,7 +83,7 @@ class ViewReportsScreen extends StatelessWidget {
                                     text: 'End Date', textColor: AppColor.black),
                                 SizedBox(
                                   height: 35,
-                                  child: DateFormFieldContainer(isRounded:false,
+                                  child: DateFormFieldContainer(isRounded:false,isTrue:false,
                                     text: 'Selected Date',
                                     mode: DateTimeFieldPickerMode.date,
                                     dateFormatTrue: true,

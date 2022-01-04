@@ -81,7 +81,10 @@ class F2FTransferScreen extends StatelessWidget {
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
-                                  items: Constant.loginModel!.response!.accounts!.map<DropdownMenuItem<Accounts>>((Accounts? value){
+                                  items: Constant
+                                      .loginModel!.response!.accounts!
+                                      .map<DropdownMenuItem<Accounts>>(
+                                          (Accounts? value) {
                                     return DropdownMenuItem<Accounts>(
                                       value: value,
                                       child: Text(value!.folioNumber!),
@@ -128,15 +131,21 @@ class F2FTransferScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6),
                                   // value: _.dropdownvalue,
                                   hint: RestInvestTitle(
-                                    text: _.fundValue == null ||
-                                        _.fundValue == ""
-                                        ? ""
-                                        : _.fundValue,
+                                    text:
+                                        _.fundValue == null || _.fundValue == ""
+                                            ? ""
+                                            : _.fundValue,
                                     textColor: AppColor.black,
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
-                                  items: Constant.loginModel!.response!.accounts![_.findIndex()].userFundBalances!.map<DropdownMenuItem<UserFundBalances>>((UserFundBalances? value){
+                                  items: Constant
+                                      .loginModel!
+                                      .response!
+                                      .accounts![_.findIndex()]
+                                      .userFundBalances!
+                                      .map<DropdownMenuItem<UserFundBalances>>(
+                                          (UserFundBalances? value) {
                                     return DropdownMenuItem<UserFundBalances>(
                                       value: value,
                                       child: Text(value!.fundShort!),
@@ -144,7 +153,7 @@ class F2FTransferScreen extends StatelessWidget {
                                   }).toList(),
                                   onChanged: (UserFundBalances? value) {
                                     _.fundValue = value!.fundShort!;
-                                    _.fundCode = value!.fundCode!;
+                                    _.fundCode = value.fundCode!;
                                     _.update();
                                   },
                                 ),
@@ -199,7 +208,7 @@ class F2FTransferScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                       Expanded(
+                      Expanded(
                           child: EmptyRowContainer(
                         fontWeight: FontWeight.w800,
                         fontsize: 14,
