@@ -2526,18 +2526,18 @@ String text;
                 child: Column(
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(top: 15.0),
+                      padding: EdgeInsets.only(top: 10.0),
                       child: Text(
                         "Invest In Trust",
                         style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 20.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: Text(
                         text,
                         maxLines: 3,
-                        style: TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.black),
                       ),
                     )
                   ],
