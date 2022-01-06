@@ -1,14 +1,10 @@
 import 'dart:ui';
 
-import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/controller/account_opening_fatca_screen_controller.dart';
-import 'package:investintrust/utils/constant.dart';
-import '../widgets/datefield.dart';
-import '../controller/account_opening_basic_information_screen_controller.dart';
+import '../controller/account_opening_fatca_screen_controller.dart';
 
 import '../widgets/button.dart';
 
@@ -48,6 +44,14 @@ class AccountOpenFatcaScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
                 children: [
+                  space,
+                  const RestInvestTitle(
+                    text: " NITL DIGITAL ACCOUNT OPENING FORM ",
+                    textAlign: TextAlign.start,
+                    fontSize: 14,
+                    textColor: AppColor.blueColor,
+                    fontWeight: FontWeight.w900,
+                  ),
                   Container(
                     // height: Get.height,
                     decoration: BoxDecoration(
@@ -397,7 +401,8 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const EmptyContainer(fontWeight: FontWeight.w900,
+                            const EmptyContainer(
+                                fontWeight: FontWeight.w900,
                                 text: "",
                                 hint: "",
                                 textColor: AppColor.black,
@@ -410,7 +415,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                 Checkbox(
                                     checkColor: AppColor.whiteColor,
                                     fillColor: MaterialStateColor.resolveWith(
-                                            (states) => AppColor.blueColor),
+                                        (states) => AppColor.blueColor),
                                     value: _.isChecked,
                                     onChanged: (bool? val) {
                                       _.isChecked = val!;
@@ -418,7 +423,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                     }),
                                 const RestInvestTitle(
                                   text:
-                                  "I hereby confirm that the information provided abpve is true,accurate and complete,I hereby,\n+indemnify and hold the harmful NITL against any and all losses action,claims,penalities,\ndemagesor liabilities that may arise in case the above information is found to  be incorrect.\nI further agree and undertake to notify NITL within 30 day calender if there is changes in\ninformation provided above.",
+                                      "I hereby confirm that the information provided abpve is true,accurate and complete,I hereby,\n+indemnify and hold the harmful NITL against any and all losses action,claims,penalities,\ndemagesor liabilities that may arise in case the above information is found to  be incorrect.\nI further agree and undertake to notify NITL within 30 day calender if there is changes in\ninformation provided above.",
                                   textColor: AppColor.black,
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
@@ -426,19 +431,19 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                               ],
                             ),
                             space,
-                    const RestInvestTitle(
-                      text: "CRS FORM",
-                      textColor: AppColor.black,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w900,
-                    ),
+                            const RestInvestTitle(
+                              text: "CRS FORM",
+                              textColor: AppColor.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w900,
+                            ),
                             space,
                             Row(
                               children: [
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const RestInvestTitle(
                                         text: "CURRENT CITY:*",
@@ -465,11 +470,11 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                             ),
 
                                             borderRadius:
-                                            BorderRadius.circular(6),
+                                                BorderRadius.circular(6),
                                             // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
                                               text: _.amountvalue == null ||
-                                                  _.amountvalue == ""
+                                                      _.amountvalue == ""
                                                   ? "Account No."
                                                   : _.amountvalue,
                                               textColor: AppColor.black,
@@ -479,12 +484,12 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 color: AppColor.blueColor,
                                                 size: 30),
                                             items: fromAccountItems.map(
-                                                    (String? fromAccountItems) {
-                                                  return DropdownMenuItem<String>(
-                                                      value: fromAccountItems,
-                                                      child:
+                                                (String? fromAccountItems) {
+                                              return DropdownMenuItem<String>(
+                                                  value: fromAccountItems,
+                                                  child:
                                                       Text(fromAccountItems!));
-                                                }).toList(),
+                                            }).toList(),
                                             onChanged: (String? value) {
                                               _.amountvalue = value!;
                                               _.update();
@@ -495,17 +500,20 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                               const SizedBox(width: 6,),
+                                const SizedBox(
+                                  width: 6,
+                                ),
                                 const Expanded(
                                   child: EmptyContainer(
                                       text: "TIN NUMBER:",
                                       hint: "",
-                                      textColor: AppColor.black,fontWeight: FontWeight.w900,
+                                      textColor: AppColor.black,
+                                      fontWeight: FontWeight.w900,
                                       hintColor: AppColor.black),
                                 ),
                               ],
                             ),
-                           space,
+                            space,
                             const RestInvestTitle(
                               text: "*DISCLAIMER:",
                               textColor: AppColor.black,
