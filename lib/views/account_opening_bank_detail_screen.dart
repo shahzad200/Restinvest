@@ -45,6 +45,14 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
                 children: [
+                  space,
+                  const RestInvestTitle(
+                    text: " NITL DIGITAL ACCOUNT OPENING FORM ",
+                    textAlign: TextAlign.start,
+                    fontSize: 14,
+                    textColor: AppColor.blueColor,
+                    fontWeight: FontWeight.w900,
+                  ),
                   Container(
                     // height: Get.height,
                     decoration: BoxDecoration(
@@ -86,7 +94,7 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                           space,
+                            space,
                             Row(
                               children: [
                                 Expanded(
@@ -173,7 +181,7 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                         space,
+                            space,
                             Row(
                               children: [
                                 Expanded(

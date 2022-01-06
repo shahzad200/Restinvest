@@ -42,6 +42,14 @@ class AccountOpenRequestScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
                 children: [
+                  space,
+                  const RestInvestTitle(
+                    text: " NITL DIGITAL ACCOUNT OPENING FORM ",
+                    textAlign: TextAlign.start,
+                    fontSize: 14,
+                    textColor: AppColor.blueColor,
+                    fontWeight: FontWeight.w900,
+                  ),
                   Container(
                     // height: Get.height,
                     decoration: BoxDecoration(
@@ -143,7 +151,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                         value: transferFundItems,
                                         child: Text(transferFundItems!));
                                   }).toList(),
-                                  onChanged: (int){},
+                                  onChanged: (int) {},
                                 ),
                               ),
                             ),
@@ -157,8 +165,10 @@ class AccountOpenRequestScreen extends StatelessWidget {
                               fontWeight: FontWeight.w900,
                             ),
 
-                            SizedBox(height: 10,),
-                            Row(
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Radio(
                                   value: 0,
@@ -168,7 +178,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "MUTUAL FUND",
@@ -184,7 +194,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "PENSION FUND",
@@ -200,7 +210,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "BOTH",
@@ -213,16 +223,20 @@ class AccountOpenRequestScreen extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            CustomRoundButton(height: 35,
-                                isRound: false, text: "GET VERIFICATION CODE", onPress: () {}),
+                            CustomRoundButton(
+                                height: 35,
+                                isRound: false,
+                                text: "GET VERIFICATION CODE",
+                                onPress: () {}),
                             // const SizedBox(
                             //   height: 10,
                             // ),
-                            CustomRoundButton(height: 35,
-                                isRound: false, text: "RESEND VERIFICATION CODE ", onPress: () {}),
-                            const SizedBox(
-                              height: 10,
-                            ),
+                            CustomRoundButton(
+                                height: 35,
+                                isRound: false,
+                                text: "RESEND VERIFICATION CODE ",
+                                onPress: () {}),
+                           space,space,
                             const RestInvestTitle(
                               text: "VERIFICATION CODE",
                               textAlign: TextAlign.start,
@@ -232,14 +246,19 @@ class AccountOpenRequestScreen extends StatelessWidget {
                             CustomTextFormField(
                               hint:
                                   "Please Enter your (OTP) Verification Code Received Via SMS or Email",
-                              fieldType: Constants.pincode,textInputType: TextInputType.number,
-                              textAlign: TextAlign.start,obscureText: true,
+                              fieldType: Constants.pincode,
+                              textInputType: TextInputType.number,
+                              textAlign: TextAlign.start,
+                              obscureText: true,
                             ),
                             const SizedBox(
                               height: 10,
                             ),
-                            CustomRoundButton(height: 35,
-                                isRound: false, text: "Next", onPress: () {}),
+                            CustomRoundButton(
+                                height: 35,
+                                isRound: false,
+                                text: "Next",
+                                onPress: () {}),
                             const SizedBox(
                               height: 10,
                             ),
