@@ -12,6 +12,9 @@ import 'api_client.dart';
 import 'models/city_data.dart';
 import 'models/city_sector_model.dart';
 import 'models/common_model.dart';
+import 'models/gen_verification_code_for_dig_user.dart';
+import 'models/new_dig_user_reg_data_after_otp.dart';
+import 'models/new_dig_user_reg_data_before_otp.dart';
 import 'models/new_user_pin_gen.dart';
 import 'models/new_user_reg.dart';
 
@@ -107,4 +110,25 @@ class Repository {
       Constant.loginModel!.response!.user!.userType ?? '',
       toFundCode, 'XX', '0');
 
+  Future<NewDigUserRegDataBeforeOTP> onNewDigUserRegDataBeforeOTP()
+  => _apiClient.onNewDigUserRegDataBeforeOTP();
+
+  Future<GenVerificationCodeForDigUser> onGenVerificationCodeForDigUser(
+      String cNic,
+      String email,
+      String mobile,
+      ) => _apiClient.onGenVerificationCodeForDigUser(cNic, email, mobile);
+
+  Future<Common> onValidateVerificationCodeForDigUser(
+      String cNic,
+      String email,
+      String mobile,
+      String mobileRegisteredWith,
+      String accountTypeToBeOpened,
+      String verificationCode,
+      ) => _apiClient.onValidateVerificationCodeForDigUser(
+      cNic, email, mobile, mobileRegisteredWith, accountTypeToBeOpened, verificationCode);
+
+  Future<NewDigUserRegDataAfterOTP> onNewDigUserRegDataAfterOTP()
+  => _apiClient.onNewDigUserRegDataAfterOTP();
 }

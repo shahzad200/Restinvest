@@ -12,9 +12,13 @@ import 'package:investintrust/data/models/new_user_reg_data.dart';
 import 'package:investintrust/data/models/social_media_links.dart';
 
 import 'models/city_sector_model.dart';
+import 'models/gen_verification_code_for_dig_user.dart';
 import 'models/load_dashboard.dart';
 import 'models/load_fund_plans.dart';
 import 'models/login_model.dart';
+import 'models/new_dig_user_reg_data_after_otp.dart';
+import 'models/new_dig_user_reg_data_before_otp.dart';
+import 'models/new_dig_user_reg_data_req_list.dart';
 import 'models/new_notifications.dart';
 import 'models/new_user_reg.dart';
 import 'models/new_user_pin_gen.dart';
@@ -46,6 +50,19 @@ class ApiClient {
   static const _epRegisteredUser = _baseUrl + 'registeredUser';
   static const _epPickFundQuestions = _baseUrl + 'pickFundQuestions';
   static const _epGetExpectedFund = _baseUrl + 'getExpectedFund';
+
+  static const _epNewDigUserRegDataBeforeOTP = _baseUrl + 'NewDigUserRegDataBeforeOTP';
+  static const _epNewDigUserRegDataAfterOTP = _baseUrl + 'NewDigUserRegDataAfterOTP';
+  static const _epNewDigUserRegDataRpqList = _baseUrl + 'NewDigUserRegDataRpqList';
+  static const _epGenVerificationCodeForDigUser = _baseUrl + 'genVerificationCodeForDigUser';
+  static const _epValidateVerificationCodeForDigUser = _baseUrl + 'validateVerificationCodeForDigUser';
+  static const _epPartialSavingForDigUser = _baseUrl + 'partialSavingForDigUser';
+  static const _epSaveDigUser = _baseUrl + 'saveDigUser';
+  static const _epLoadDigUserMissingDetailLinkData = _baseUrl + 'loadDigUserMissingDetailLinkData';
+  static const _epGenVerificationCodeForDigUserMissingDet = _baseUrl + 'genVerificationCodeForDigUserMissingDet';
+  static const _epValidateVerificationCodeForDigUserMissingDet = _baseUrl + 'validateVerificationCodeForDigUserMissingDet';
+  static const _epSaveDigUserMissingDet = _baseUrl + 'saveDigUserMissingDet';
+
 
   Future<ViewReport> onViewReport(
     String fromDate,
@@ -831,6 +848,151 @@ class ApiClient {
       }
     } catch (e) {
       throw Exception('No Internet');
+    }
+  }
+
+  Future<NewDigUserRegDataBeforeOTP> onNewDigUserRegDataBeforeOTP() async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epNewDigUserRegDataBeforeOTP),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        NewDigUserRegDataBeforeOTP newDigUserRegDataBeforeOTP = NewDigUserRegDataBeforeOTP.fromJson(jsonDecode(response.body));
+        if (newDigUserRegDataBeforeOTP.meta!.code.toString() == 200.toString()) {
+          return newDigUserRegDataBeforeOTP;
+        } else {
+          throw Exception(newDigUserRegDataBeforeOTP.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<NewDigUserRegDataAfterOTP> onNewDigUserRegDataAfterOTP() async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epNewDigUserRegDataAfterOTP),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        NewDigUserRegDataAfterOTP newDigUserRegDataAfterOTP = NewDigUserRegDataAfterOTP.fromJson(jsonDecode(response.body));
+        if (newDigUserRegDataAfterOTP.meta!.code.toString() == 200.toString()) {
+          return newDigUserRegDataAfterOTP;
+        } else {
+          throw Exception(newDigUserRegDataAfterOTP.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<NewDigUserRegDataRpqList> onNewDigUserRegDataRpqList() async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epNewDigUserRegDataRpqList),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        NewDigUserRegDataRpqList newDigUserRegDataRpqList = NewDigUserRegDataRpqList.fromJson(jsonDecode(response.body));
+        if (newDigUserRegDataRpqList.meta!.code.toString() == 200.toString()) {
+          return newDigUserRegDataRpqList;
+        } else {
+          throw Exception(newDigUserRegDataRpqList.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<GenVerificationCodeForDigUser> onGenVerificationCodeForDigUser(
+      String cNic,
+      String email,
+      String mobile,
+      ) async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epGenVerificationCodeForDigUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'cnic': cNic,
+          'email': email,
+          'mobile': mobile,
+        }),
+      );
+      if (response.statusCode == 200) {
+        GenVerificationCodeForDigUser genVerificationCodeForDigUser = GenVerificationCodeForDigUser.fromJson(jsonDecode(response.body));
+        if (genVerificationCodeForDigUser.meta!.code.toString() == 200.toString()) {
+          return genVerificationCodeForDigUser;
+        } else {
+          throw Exception(genVerificationCodeForDigUser.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
+  Future<Common> onValidateVerificationCodeForDigUser(
+      String cNic,
+      String email,
+      String mobile,
+      String mobileRegisteredWith,
+      String accountTypeToBeOpened,
+      String verificationCode,
+      ) async {
+    Common? common;
+    try {
+      final response = await http.post(
+        Uri.parse(_epValidateVerificationCodeForDigUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'cnic': cNic,
+          'email': email,
+          'mobile': mobile,
+          'mobileRegisteredWith': mobileRegisteredWith,
+          'accountTypeToBeOpened': accountTypeToBeOpened,
+          'verificationCode': verificationCode
+        }),
+      );
+      if (response.statusCode == 200) {
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.error.toString());
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      if(e.toString() == 'Exception: '+common!.meta!.error.toString()){
+        throw Exception(common!.meta!.error.toString());
+      }else {
+        throw Exception('No Internet');
+      }
     }
   }
 }

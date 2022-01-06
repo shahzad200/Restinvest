@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/controller/account_opening_submit_button_screen_controller.dart';
 import 'package:investintrust/views/account_opening_basic_information_screen.dart';
 import 'package:investintrust/views/account_opening_document_upload_screen.dart';
@@ -22,10 +23,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        home: const AccountOpenKycDetailScreen(),
+        home: const AccountOpenRiskProfileScreen(),
 
-      // getPages: AppRoute.navMain,
-      // initialRoute: AppRoute.homeRoute,
+      getPages: AppRoute.navMain,
+      initialRoute: AppRoute.homeRoute,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
       // getPages: [
