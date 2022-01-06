@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/city_data.dart';
+import 'package:investintrust/data/models/new_dig_user_reg_data_after_otp.dart';
+import 'package:investintrust/data/repository.dart';
 
 
 class AccountOpenBasicInformationScreenController extends GetxController{
@@ -21,9 +25,37 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+  NewDigUserRegDataAfterOTP? newDigUserRegDataAfterOTP;
+  CityData? mailingCityData;
+  bool isLoading = false;
+  bool noInternet = false;
+  String titleValue = "";
+  String titleCode = "";
+  String martialValue = "";
+  String martialCode = "";
+  String nationalityValue = "";
+  String nationalityCode = "";
+  String residentStatusValue = "";
+  String residentStatusCode = "";
+  String religionValue = "";
+  String religionCode = "";
+  String zaKatValue = "";
+  String zaKatCode = "";
+  String retirementValue = "";
+  String retirementCode = "";
+  String currentCountryValue = "";
+  String currentCountryCode = "";
+  String mailingCountryValue = "";
+  String mailingCountryCode = "";
+  String mailingCityValue = "";
+  String mailingCityCode = "";
+
+
+  final _repository = Repository();
   @override
   void onInit() {
     // TODO: implement onInit
+    onNewDigUserRegDataAfterOTP();
     super.onInit();
   }
 
@@ -36,6 +68,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
     password(value);
     update();
   }
+
   void updateEmail(value) {
     email(value);
     update();
@@ -45,4 +78,66 @@ class AccountOpenBasicInformationScreenController extends GetxController{
     number(value);
     update();
   }
+
+  onNewDigUserRegDataAfterOTP() async {
+    try {
+      isLoading = true;
+      update();
+      newDigUserRegDataAfterOTP =
+      await _repository.onNewDigUserRegDataAfterOTP();
+      isLoading = false;
+      if (noInternet) {
+        noInternet = false;
+      }
+      update();
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
+
+
+  onMailingCityData(String countryCode) async {
+    try {
+      isLoading = true;
+      update();
+      mailingCityData = await _repository.onCityData(countryCode);
+      isLoading = false;
+      update();
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
+
 }

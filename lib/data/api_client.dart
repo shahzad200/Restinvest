@@ -26,8 +26,8 @@ import 'models/view_reports.dart';
 
 class ApiClient {
   static const _baseUrl =
-      // 'http://192.168.0.86:8094/AssetConnectMobilePortal/UserService/';
-  'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      'http://192.168.0.86:8094/AssetConnectMobilePortal/UserService/';
+  // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
@@ -960,6 +960,7 @@ class ApiClient {
       String accountTypeToBeOpened,
       String verificationCode,
       ) async {
+    Common? common;
     try {
       final response = await http.post(
         Uri.parse(_epValidateVerificationCodeForDigUser),
@@ -976,17 +977,22 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        Common common = Common.fromJson(jsonDecode(response.body));
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
         } else {
-          throw Exception(common.meta!.message);
+          throw Exception(common.meta!.error.toString());
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if(e.toString() == 'Exception: '+common!.meta!.error.toString()){
+        throw Exception(common!.meta!.error.toString());
+      }else {
+        throw Exception('No Internet');
+      }
     }
   }
 }

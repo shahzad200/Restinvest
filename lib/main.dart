@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/views/account_opening_basic_information_screen.dart';
 import 'package:investintrust/views/account_opening_fatca_screen.dart';
 import 'package:investintrust/views/account_opening_request_screen.dart';
@@ -19,8 +20,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         home: const AccountOpenRiskProfileScreen(),
 
-      // getPages: AppRoute.navMain,
-      // initialRoute: AppRoute.homeRoute,
+      getPages: AppRoute.navMain,
+      initialRoute: AppRoute.homeRoute,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
       // getPages: [

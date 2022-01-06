@@ -143,25 +143,25 @@ class LoginScreen extends StatelessWidget {
                         Get.toNamed(AppRoute.accountopeningrequest);
                       },
                       child: const RestInvestTitle(
-                          text: "Form",
+                          text: "Open Digital Account",
                           textAlign: TextAlign.center,
                           textColor: AppColor.blueColor)),
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed(AppRoute.accountopeningbankdetail);
-                      },
-                      child: const RestInvestTitle(
-                          text: "Form2",
-                          textAlign: TextAlign.center,
-                          textColor: AppColor.blueColor)),
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed(AppRoute.accountopeningbasicinformation);
-                      },
-                      child: const RestInvestTitle(
-                          text: "Form3",
-                          textAlign: TextAlign.center,
-                          textColor: AppColor.blueColor)),
+                  // InkWell(
+                  //     onTap: () {
+                  //       Get.toNamed(AppRoute.accountopeningbankdetail);
+                  //     },
+                  //     child: const RestInvestTitle(
+                  //         text: "Form2",
+                  //         textAlign: TextAlign.center,
+                  //         textColor: AppColor.blueColor)),
+                  // InkWell(
+                  //     onTap: () {
+                  //       Get.toNamed(AppRoute.accountopeningbasicinformation);
+                  //     },
+                  //     child: const RestInvestTitle(
+                  //         text: "Form3",
+                  //         textAlign: TextAlign.center,
+                  //         textColor: AppColor.blueColor)),
                   const SizedBox(
                     height: 10,
                   ),

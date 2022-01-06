@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/new_dig_user_reg_data_before_otp.dart';
+import 'package:investintrust/routes/routes.dart';
 import '../controller/account_opening_request_screen_controller.dart';
 import '../utils/constant.dart';
 import '../widgets/button.dart';
@@ -78,6 +80,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                             ),
                             CustomTextFormField(
                               hint: "Enter Your CNIC/NICOP Numbers",
+                              controller: _.cNicNumberController,
                               fieldType: Constants.cnicNumber,
                               textAlign: TextAlign.start,
                             ),
@@ -92,6 +95,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                             ),
                             CustomTextFormField(
                               hint: "+9234xxxxxxxx",
+                              controller: _.mobileNumberController,
                               fieldType: Constants.phoneNumberField,
                               textAlign: TextAlign.start,
                             ),
@@ -106,6 +110,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                             ),
                             CustomTextFormField(
                               hint: "abc@gamil.com",
+                              controller: _.emailController,
                               fieldType: Constants.emailField,
                               textAlign: TextAlign.start,
                             ),
@@ -129,21 +134,33 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
                               child: Center(
-                                child: DropdownButton<String>(
+                                child: DropdownButton(
                                   isExpanded: true,
                                   underline: Container(
                                     color: AppColor.whiteColor,
                                   ),
                                   borderRadius: BorderRadius.circular(6),
+                                  // value: _.dropdownvalue,
+                                  hint: RestInvestTitle(
+                                    text: _.mobileNumberOwner == null ||
+                                        _.mobileNumberOwner == ""
+                                        ? ""
+                                        : _.mobileNumberOwner,
+                                    textColor: AppColor.black,
+                                  ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
-                                  items: transferFundItems
-                                      .map((String? transferFundItems) {
-                                    return DropdownMenuItem<String>(
-                                        value: transferFundItems,
-                                        child: Text(transferFundItems!));
+                                  items: _.isLoading || _.noInternet ? null : _.newDigUserRegDataBeforeOTP!.response!.mobileRegisteredWithList!.map<DropdownMenuItem<MobileRegisteredWithList>>((MobileRegisteredWithList? value){
+                                    return DropdownMenuItem<MobileRegisteredWithList>(
+                                      value: value,
+                                      child: Text(value!.description!),
+                                    );
                                   }).toList(),
-                                  onChanged: (int){},
+                                  onChanged: _.isLoading || _.noInternet ? null : (MobileRegisteredWithList? value) {
+                                    _.mobileNumberOwner = value!.description!;
+                                    _.mobileNumberOwnerCode = value!.code!;
+                                    _.update();
+                                  },
                                 ),
                               ),
                             ),
@@ -157,69 +174,111 @@ class AccountOpenRequestScreen extends StatelessWidget {
                               fontWeight: FontWeight.w900,
                             ),
 
-                            SizedBox(height: 10,),
-                            Row(
-                              children: [
-                                Radio(
-                                  value: 0,
-                                  groupValue: _.charactor,
-                                  onChanged: (int? val) {
-                                    _.charactor = val!;
-                                    _.update();
-                                  },
-                                  fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                            const SizedBox(height: 10,),
+                            _.isLoading || _.noInternet ? const SizedBox() :Row(
+                              children:
+                              _.newDigUserRegDataBeforeOTP!.response!.accountTypeList!.map((data) =>
+                                  Flexible(
+                                    fit: FlexFit.loose,
+                                    child: RadioListTile<String>(
+                                title: Text("${data.description}",
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold
+                                  ),
+
                                 ),
-                                const RestInvestTitle(
-                                  text: "MUTUAL FUND",
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                Radio(
-                                  value: 1,
-                                  groupValue: _.charactor,
-                                  onChanged: (int? val) {
-                                    _.charactor = val!;
-                                    _.update();
-                                  },
-                                  fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
-                                ),
-                                const RestInvestTitle(
-                                  text: "PENSION FUND",
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                Radio(
-                                  value: 2,
-                                  groupValue: _.charactor,
-                                  onChanged: (int? val) {
-                                    _.charactor = val!;
-                                    _.update();
-                                  },
-                                  fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
-                                ),
-                                const RestInvestTitle(
-                                  text: "BOTH",
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ],
+                                groupValue: _.groupValue,
+                                value: data.code ?? 'I',
+                                // onChanged: (AccountTypeList data) {
+                                    onChanged: (val) { _.handleRadioValueChange(data!.code ?? '0');},
+                                      activeColor: MaterialStateColor.resolveWith(
+                                                          (states) => AppColor.blueColor),
+                                    // setState(() {
+                                    //   radioItem = data.name ;
+                                    //   id = data.index;
+                                    // });
+                                // },
+                              ),
+                                  )
+                              ).toList(),
+                              // List<Widget>.generate(
+                              //   _.newDigUserRegDataBeforeOTP!.response!.accountTypeList!.length,
+                              //       (int i) => Radio<int>(
+                              //         toggleable: true,
+                              //     value: i,
+                              //     groupValue: _.groupValue,
+                              //     onChanged: _.handleRadioValueChange(i),
+                              //         fillColor: MaterialStateColor.resolveWith(
+                              //                     (states) => AppColor.blueColor),
+                              //   ),
+                              // ),
+                              // [
+
+                                // Radio(
+                                //   value: 0,
+                                //   groupValue: _.character,
+                                //   onChanged: (int? val) {
+                                //     _.character = val!;
+                                //     _.update();
+                                //   },
+                                //   fillColor: MaterialStateColor.resolveWith(
+                                //           (states) => AppColor.blueColor),
+                                // ),
+                                // const RestInvestTitle(
+                                //   text: "MUTUAL FUND",
+                                //   textColor: AppColor.dimblack,
+                                //   fontSize: 12,
+                                //   fontWeight: FontWeight.w900,
+                                // ),
+                                // Radio(
+                                //   value: 1,
+                                //   groupValue: _.character,
+                                //   onChanged: (int? val) {
+                                //     _.character = val!;
+                                //     _.update();
+                                //   },
+                                //   fillColor: MaterialStateColor.resolveWith(
+                                //           (states) => AppColor.blueColor),
+                                // ),
+                                // const RestInvestTitle(
+                                //   text: "PENSION FUND",
+                                //   textColor: AppColor.dimblack,
+                                //   fontSize: 12,
+                                //   fontWeight: FontWeight.w900,
+                                // ),
+                                // Radio(
+                                //   value: 2,
+                                //   groupValue: _.character,
+                                //   onChanged: (int? val) {
+                                //     _.character = val!;
+                                //     _.update();
+                                //   },
+                                //   fillColor: MaterialStateColor.resolveWith(
+                                //           (states) => AppColor.blueColor),
+                                // ),
+                                // const RestInvestTitle(
+                                //   text: "BOTH",
+                                //   textColor: AppColor.dimblack,
+                                //   fontSize: 12,
+                                //   fontWeight: FontWeight.w900,
+                                // ),
+                              // ],
                             ),
                             const SizedBox(
                               height: 10,
                             ),
                             CustomRoundButton(height: 35,
-                                isRound: false, text: "GET VERIFICATION CODE", onPress: () {}),
+                                isRound: false, text: "GET VERIFICATION CODE", onPress: () {
+                                  _.onGenVerificationCodeForDigUser(context);
+                                }),
                             // const SizedBox(
                             //   height: 10,
                             // ),
                             CustomRoundButton(height: 35,
-                                isRound: false, text: "RESEND VERIFICATION CODE ", onPress: () {}),
+                                isRound: false, text: "RESEND VERIFICATION CODE ", onPress: () {
+                                  _.onGenVerificationCodeForDigUser(context);
+                                }),
                             const SizedBox(
                               height: 10,
                             ),
@@ -232,6 +291,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                             CustomTextFormField(
                               hint:
                                   "Please Enter your (OTP) Verification Code Received Via SMS or Email",
+                              controller: _.otpVerificationController,
                               fieldType: Constants.pincode,textInputType: TextInputType.number,
                               textAlign: TextAlign.start,obscureText: true,
                             ),
@@ -239,7 +299,10 @@ class AccountOpenRequestScreen extends StatelessWidget {
                               height: 10,
                             ),
                             CustomRoundButton(height: 35,
-                                isRound: false, text: "Next", onPress: () {}),
+                                isRound: false, text: "Next", onPress: () {
+                              // _.onValidateVerificationCodeForDigUser();
+                                  Get.toNamed(AppRoute.accountopeningbasicinformation);
+                                }),
                             const SizedBox(
                               height: 10,
                             ),
