@@ -35,10 +35,8 @@ class BranchesScreen extends StatelessWidget {
               ),
             ),
             body: WebView(
-              javascriptMode: JavascriptMode.unrestricted,
-                initialUrl:
-                    Constant.linkBranches),
-
+                javascriptMode: JavascriptMode.unrestricted,
+                initialUrl: Constant.linkBranches),
           );
         });
   }

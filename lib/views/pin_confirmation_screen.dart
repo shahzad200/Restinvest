@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/pin_confirmation_screen_controller.dart';
-import '../controller/password_controller.dart';
+import '../controller/pin_confirmation_screen_controller.dart';
+
 import '../utils/constant.dart';
 
 import '../utils/colors.dart';

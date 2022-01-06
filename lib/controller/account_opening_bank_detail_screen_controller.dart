@@ -10,7 +10,11 @@ class AccountOpenBankDetailScreenController extends GetxController{
   var password = "".obs;
   var number = "".obs;
   var email = "".obs;
+  String dropdownvalue = "";
+  String amountvalue = "";
+  String paymentvalue = "";
   bool isChecked=false;
+
   var charactor=0;
 
   TextEditingController userNameController = TextEditingController();

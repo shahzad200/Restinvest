@@ -90,7 +90,7 @@ class DateFormFieldContainer extends StatelessWidget {
         required this.onDateSelected,
         this.initialValue,
         this.enable = true,
-        this.isTrue,
+      required  this.isTrue,
         this.dateFormat,
         required this.text,})
       : super(key: key);
@@ -102,7 +102,7 @@ class DateFormFieldContainer extends StatelessWidget {
   final bool isRounded;
   final bool enable;
   final String text;
-  final isTrue;
+  final bool isTrue;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +121,7 @@ class DateFormFieldContainer extends StatelessWidget {
 
         hintText: text,
         contentPadding: const EdgeInsets.all(8),
-        suffixIcon: isTrue? (Calender()):SizedBox(),
+        suffixIcon: isTrue? (const Calender()):const SizedBox(),
 
       ),
       mode: DateTimeFieldPickerMode.date,

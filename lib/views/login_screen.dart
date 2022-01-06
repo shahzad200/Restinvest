@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/utils/constant.dart';
+import '../utils/constant.dart';
 
 
 import '../controller/login_screen_controller.dart';
@@ -22,16 +22,15 @@ class LoginScreen extends StatelessWidget {
         init: LoginScreenController(),
         builder: (_) {
           return SafeArea(
-              child: Scaffold(
+              child: Scaffold(backgroundColor: AppColor.lightWhite,
 
             key: _.scaffoldKey,
             body: SingleChildScrollView(
               padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
               child: Column(
                 children: [
-                  const Logo(
-                    height: 120,
-                    width: 120,
+                  const LogoNit(height: 120,width: 120,
+
                   ),
                   const SizedBox(
                     height: 20,
@@ -50,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                           },
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         CustomFormField(
                           obscureText: true,
@@ -75,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                       child: const RestInvestTitle(
                           text: "Don't remember your password?",
                           textAlign: TextAlign.center,
-                          textColor: AppColor.dimblack,
+                          textColor: AppColor.dimblack,fontWeight: FontWeight.w900,
                           )),
                   const SizedBox(
                     height: 20,
@@ -95,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                     height: 20,
                   ),
                   const HeadingText(
-                    text: "TERM & CONDITION",
+                    text: "TERM & CONDITION",fontWeight: FontWeight.w900,
                     textAlign: TextAlign.center,
                     underlineColor: AppColor.blueColor,
                     textColor: AppColor.darkblue,
@@ -104,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                     height: 20,
                   ),
                   const RestInvestTitle(
-                      text: "Still don't have an account?",
+                      text: "Still don't have an account?",fontWeight: FontWeight.w900,
                       textAlign: TextAlign.center,
                       textColor: AppColor.darkblue),
                   const SizedBox(height: 20),
@@ -122,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                         Get.toNamed(AppRoute.taxcalculatorRoute);
                       },
                       child: const RestInvestTitle(
-                          text: "Tax Calculator",
+                          text: "Tax Calculator",fontWeight: FontWeight.w900,
                           textAlign: TextAlign.center,
                           textColor: AppColor.blueColor)),
                   const SizedBox(
@@ -133,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                         Get.toNamed(AppRoute.dailynavRoute);
                       },
                       child: const RestInvestTitle(
-                          text: "Daily Nav",
+                          text: "Daily Nav",fontWeight: FontWeight.w900,
                           textAlign: TextAlign.center,
                           textColor: AppColor.blueColor)),
                   const SizedBox(
@@ -171,7 +170,7 @@ class LoginScreen extends StatelessWidget {
                         Get.toNamed(AppRoute.userRoute);
                       },
                       child: const RestInvestTitle(
-                          text: "New User",
+                          text: "New User",fontWeight: FontWeight.w900,
                           textAlign: TextAlign.center,
                           textColor: AppColor.blueColor)),
                   const SizedBox(height: 20),
@@ -181,7 +180,7 @@ class LoginScreen extends StatelessWidget {
                       RestInvestTitle(
                         text: "Powered by",
                         textAlign: TextAlign.center,
-                        textColor: AppColor.blueColor,
+                        textColor: AppColor.blueColor,fontWeight: FontWeight.w800,
                         fontSize: 14,
                       ),
                       SizedBox(

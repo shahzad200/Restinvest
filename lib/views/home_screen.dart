@@ -41,10 +41,10 @@ class HomeScreen extends StatelessWidget {
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Image.asset(
-                    'assets/images/logo.png',
+                    'assets/images/logonit.png',
                     fit: BoxFit.contain,
-                    height: 50,
-                    width: 50,
+                    height: 60,
+                    width: 60,
                   )
                 ]),
               ),
@@ -186,12 +186,12 @@ class HomeScreen extends StatelessWidget {
                             text: 'NEWS',
                             voidcallback: () {
                               controller.isLoading == false &&
-                                  controller.noInternet == false
+                                      controller.noInternet == false
                                   ? Get.to(WebView(
-                                title: 'News',
-                                link:
-                                'https://nit.com.pk/newnit/News.aspx',
-                              ))
+                                      title: 'News',
+                                      link:
+                                          'https://nit.com.pk/newnit/News.aspx',
+                                    ))
                                   : printInfo(info: 'Do Nothing');
                             },
                             containerColor: AppColor.whiteColor,
@@ -370,7 +370,7 @@ class HomeScreen extends StatelessWidget {
         });
   }
 
-  void openMail(BuildContext context,String emailAddress) async {
+  void openMail(BuildContext context, String emailAddress) async {
     EmailContent email = EmailContent(
       to: [
         emailAddress,

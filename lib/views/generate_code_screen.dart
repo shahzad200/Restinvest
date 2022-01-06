@@ -471,7 +471,8 @@ class GenerateCodeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
-                    CustomRoundButton(isRound:true,
+                    CustomRoundButton(
+                      isRound: true,
                       text: "Generate Pin Code",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
@@ -486,7 +487,8 @@ class GenerateCodeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 6,
                     ),
-                    CustomRoundButton(isRound:true,
+                    CustomRoundButton(
+                        isRound: true,
                         text: "Submit",
                         buttonColor: AppColor.blueColor,
                         textColor: AppColor.whiteColor,
