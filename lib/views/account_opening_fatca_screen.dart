@@ -33,7 +33,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: Logo(
+              title: const Logo(
                 height: 50,
                 width: 50,
               ),
@@ -59,7 +59,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                             Border.all(width: 1, color: AppColor.blueColor)),
                     child: Column(children: [
                       const CustomTextContainer(
-                        fontSize: 16,
+                        fontSize: 14,
                         height: 35,
                         text: "FATCA",
                         textAlign: TextAlign.start,
@@ -76,19 +76,19 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                 RestInvestTitle(
                                   text: " OTP VERIFY > ",
                                   textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
+                                  textColor: AppColor.dimblack,fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
                                 RestInvestTitle(
                                   text: " BASIC INFORMATION > ",
                                   textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
+                                  textColor: AppColor.dimblack,fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
                                 RestInvestTitle(
                                   text: " FATCA > ",
                                   textAlign: TextAlign.start,
-                                  textColor: AppColor.blueColor,
+                                  textColor: AppColor.blueColor,fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
                               ],

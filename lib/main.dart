@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        home: const AccountOpenKycDetailScreen(),
+        home: const AccountOpenBasicInformationScreen(),
 
       // getPages: AppRoute.navMain,
       // initialRoute: AppRoute.homeRoute,

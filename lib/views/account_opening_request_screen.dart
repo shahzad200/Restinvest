@@ -57,7 +57,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                             Border.all(width: 1, color: AppColor.blueColor)),
                     child: Column(children: [
                       const CustomTextContainer(
-                        fontSize: 16,
+                        fontSize: 14,
                         height: 35,
                         text: "Account Opening Request",
                         textAlign: TextAlign.start,
@@ -72,7 +72,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                             const RestInvestTitle(
                               text: " OTP> VERIFY",
                               textAlign: TextAlign.start,
-                              textColor: AppColor.blueColor,
+                              textColor: AppColor.blueColor,fontSize: 8,
                               fontWeight: FontWeight.w900,
                             ),
                             const SizedBox(

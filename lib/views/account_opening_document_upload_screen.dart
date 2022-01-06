@@ -56,7 +56,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                             Border.all(width: 1, color: AppColor.blueColor)),
                     child: Column(children: [
                       const CustomTextContainer(
-                        fontSize: 16,
+                        fontSize: 14,
                         height: 35,
                         text: "DOCUMENTS UPLOAD",
                         textAlign: TextAlign.start,
@@ -74,21 +74,21 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                   text: " OTP VERIFY > ",
                                   textAlign: TextAlign.start,
                                   textColor: AppColor.dimblack,
-                                  fontSize: 10,
+                                  fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
                                 RestInvestTitle(
                                   text: " BASIC INFORMATION > ",
                                   textAlign: TextAlign.start,
                                   textColor: AppColor.dimblack,
-                                  fontSize: 10,
+                                  fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
                                 RestInvestTitle(
                                   text: "KYC DETAIL > ",
                                   textAlign: TextAlign.start,
                                   textColor: AppColor.dimblack,
-                                  fontSize: 10,
+                                  fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
                                 RestInvestTitle(
@@ -96,14 +96,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                   textAlign: TextAlign.start,
                                   textColor: AppColor.dimblack,
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 10,
+                                  fontSize: 8,
                                 ),
                                 RestInvestTitle(
                                   text: "UPLOAD DOCUMENTS > ",
                                   textAlign: TextAlign.start,
                                   textColor: AppColor.blueColor,
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 10,
+                                  fontSize: 8,
                                 ),
                               ],
                             ),
@@ -450,9 +450,9 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                     }),
                                 const RestInvestTitle(
                                   text:
-                                      "Invester are fully informed and understand thatinvestment in units of Mutual Funds/CIS are not\nbank deposit,not guaranteed and not issued by any person.shareholders of AMCs are not\nresponsible for any loose of investor resulting from the operation of any CIS launched/to be\nlaunched by the AMC unless otherwise mentioned           ",
+                                      "Investor are fully informed and understand that investment in units of Mutual Funds/CIS are not\nbank deposit,not guaranteed and not issued by any person.shareholders of AMCs are not\nresponsible for any loose of investor resulting from the operation of any CIS launched/to be\nlaunched by the AMC unless otherwise mentioned           ",
                                   textColor: AppColor.black,
-                                  fontSize: 8,
+                                  fontSize: 8,textAlign: TextAlign.start,
                                   fontWeight: FontWeight.w900,
                                 ),
                               ],
@@ -468,7 +468,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                     buttonColor: AppColor.dimBlue,
                                     onPress: () {},
                                     isRound: false),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 CustomRoundButton(
