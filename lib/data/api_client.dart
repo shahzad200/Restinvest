@@ -915,6 +915,7 @@ class ApiClient {
     }
   }
 
+
   Future<NewDigUserRegDataRpqList> onNewDigUserRegDataRpqList() async {
     try {
       final response = await http.post(

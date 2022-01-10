@@ -14,6 +14,7 @@ import '../utils/colors.dart';
 import '../widgets/textformfiled.dart';
 
 import '../widgets/constant_widget.dart';
+import 'account_opening_risk_profile_screen.dart';
 
 class AccountOpenKycDetailScreen extends StatelessWidget {
   const AccountOpenKycDetailScreen({Key? key}) : super(key: key);
@@ -683,7 +684,9 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                       height: 35,
                                       width: 50,
                                       text: "SAVE&NEXT",
-                                      onPress: () {},
+                                      onPress: () {
+                                        Get.to(const AccountOpenRiskProfileScreen());
+                                      },
                                       isRound: false),
                                 ],
                               ),

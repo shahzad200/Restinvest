@@ -15,6 +15,7 @@ import 'models/common_model.dart';
 import 'models/gen_verification_code_for_dig_user.dart';
 import 'models/new_dig_user_reg_data_after_otp.dart';
 import 'models/new_dig_user_reg_data_before_otp.dart';
+import 'models/new_dig_user_reg_data_req_list.dart';
 import 'models/new_user_pin_gen.dart';
 import 'models/new_user_reg.dart';
 
@@ -131,4 +132,9 @@ class Repository {
 
   Future<NewDigUserRegDataAfterOTP> onNewDigUserRegDataAfterOTP()
   => _apiClient.onNewDigUserRegDataAfterOTP();
+
+  Future<NewDigUserRegDataRpqList> onNewDigUserRegDataRpqList()
+  => _apiClient.onNewDigUserRegDataRpqList();
+
+
 }
