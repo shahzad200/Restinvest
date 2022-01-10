@@ -183,7 +183,8 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                 ),
 
                                 const SizedBox(height: 10,),
-                                _.isLoading || _.noInternet ? const SizedBox() :Row(
+                                _.isLoading || _.noInternet ? const SizedBox() :
+                                Row(
                                   children:
                                   _.newDigUserRegDataBeforeOTP!.response!.accountTypeList!.map((data) =>
                                       Flexible(

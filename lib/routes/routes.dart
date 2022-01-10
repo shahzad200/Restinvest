@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:investintrust/views/account_opening_kyc_detail_screen.dart';
 import '../views/account_opening_bank_detail_screen.dart';
 import '../views/account_opening_basic_information_screen.dart';
 import '../views/account_opening_request_screen.dart';
@@ -57,6 +58,7 @@ class AppRoute {
   static const String accountopeningrequest='/accountopeningrequest';
   static const String accountopeningbasicinformation='/accountopeningbasicinformation';
   static const String accountopeningbankdetail='/accountopeningbankdetail';
+  static const String accountOpenKycDetailScreen='/accountOpenKycDetailScreen';
 
   AppRoute._();
 
@@ -162,6 +164,11 @@ class AppRoute {
           name: AppRoute.accountopeningbasicinformation,
           page: () =>const  AccountOpenBasicInformationScreen()
       ),
+      GetPage(
+          name: AppRoute.accountOpenKycDetailScreen,
+          page: () =>const  AccountOpenKycDetailScreen()
+      ),
+
       GetPage(
           name: AppRoute.accountopeningbankdetail,
           page: () => const AccountOpenBankDetailScreen()

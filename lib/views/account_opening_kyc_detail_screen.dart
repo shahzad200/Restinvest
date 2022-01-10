@@ -20,8 +20,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = Get.width;
-    final height = Get.height;
     return GetBuilder<AccountOpenKycDetailScreenController>(
         init: AccountOpenKycDetailScreenController(),
         builder: (_) {
@@ -111,140 +109,46 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                 textColor: AppColor.black,
                                 fontWeight: FontWeight.w900,
                               ),
-                              Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Radio(
-                                    value: 0,
-                                    groupValue: _.charactor,
-                                    onChanged: (int? val) {
-                                      _.charactor = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "PRIVATE SERVICES",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 1,
-                                    groupValue: _.charactor,
-                                    onChanged: (int? val) {
-                                      _.charactor = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "GOVERNMENT SERVICES",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Radio(
-                                    value: 2,
-                                    groupValue: _.charactor,
-                                    onChanged: (int? val) {
-                                      _.charactor = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "RETIRED",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 3,
-                                    groupValue: _.charactor,
-                                    onChanged: (int? val) {
-                                      _.charactor = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "BUSSINESS / SELF-EMPLOYED",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                // mainAxisAlignment:
-                                    // MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Radio(
-                                    value: 4,
-                                    groupValue: _.charactor,
-                                    onChanged: (int? val) {
-                                      _.charactor = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "ENEMPLOYED",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 5,
-                                    groupValue: _.charactor,
-                                    onChanged: (int? val) {
-                                      _.charactor = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "HOUSE WIFE",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Radio(
-                                    value: 6,
-                                    groupValue: _.charactor,
-                                    onChanged: (int? val) {
-                                      _.charactor = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "OTHERS",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
+                              _.controller.newDigUserRegDataAfterOTP!.response!
+                                          .occupations ==
+                                      null
+                                  ? const SizedBox()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: _
+                                          .controller
+                                          .newDigUserRegDataAfterOTP!
+                                          .response!
+                                          .occupations!
+                                          .map(
+                                            (data) => RadioListTile<String>(
+                                              title: Text(
+                                                "${data.occupoationName}",
+                                                style: const TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              groupValue:
+                                                  _.occupationGroupValue,
+                                              value:
+                                                  data.occupoationCode ?? '0',
+                                              onChanged: (val) {
+                                                _.occupationGroupValue =
+                                                    data!.occupoationCode ??
+                                                        '0';
+                                                _.update();
+                                              },
+                                              activeColor: MaterialStateColor
+                                                  .resolveWith((states) =>
+                                                      AppColor.blueColor),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
                               space,
                               const RestInvestTitle(
                                 text: " SOURCE (S) OF INCOME:*",
@@ -252,306 +156,43 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                 textColor: AppColor.black,
                                 fontWeight: FontWeight.w900,
                               ),
-                              Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Radio(
-                                    value: 0,
-                                    groupValue: _.income,
-                                    onChanged: (int? val) {
-                                      _.income = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "SALARIED PERSON",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 1,
-                                    groupValue: _.income,
-                                    onChanged: (int? val) {
-                                      _.income = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "BUSINESSMEN",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 2,
-                                    groupValue: _.income,
-                                    onChanged: (int? val) {
-                                      _.income = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Saving Investment",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 3,
-                                    groupValue: _.income,
-                                    onChanged: (int? val) {
-                                      _.income = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Inheritance",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-
-                                ],
-                              ),
-
-                              Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 5,
-                                    groupValue: _.income,
-                                    onChanged: (int? val) {
-                                      _.income = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Home Remittance",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 6,
-                                    groupValue: _.income,
-                                    onChanged: (int? val) {
-                                      _.income = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Landlord/Agriculturist",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-
-                                ],
-                              ),
-                              Row(children: [ Radio(
-                                value: 4,
-                                groupValue: _.income,
-                                onChanged: (int? val) {
-                                  _.income = val!;
-                                  _.update();
-                                },
-                                fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                              ),
-                                const RestInvestTitle(
-                                  text: "Retired",
-                                  textColor: AppColor.black,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w900,
-                                ), Radio(
-                                  value: 7,
-                                  groupValue: _.income,
-                                  onChanged: (int? val) {
-                                    _.income = val!;
-                                    _.update();
-                                  },
-                                  fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
-                                ),
-                                const RestInvestTitle(
-                                  text: "OTHERS",
-                                  textColor: AppColor.black,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w900,
-                                ),],),
-                              space,
-                              const RestInvestTitle(
-                                text: " SOURCE (S) OF INCOME:*",
-                                textAlign: TextAlign.start,
-                                textColor: AppColor.black,
-                                fontWeight: FontWeight.w900,
-                              ),
-                              Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 0,
-                                    groupValue: _.source,
-                                    onChanged: (int? val) {
-                                      _.source = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "SALARIED PERSON",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 1,
-                                    groupValue: _.source,
-                                    onChanged: (int? val) {
-                                      _.source = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "BUSINESSMEN",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 2,
-                                    groupValue: _.source,
-                                    onChanged: (int? val) {
-                                      _.source = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Saving Investment",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 3,
-                                    groupValue: _.source,
-                                    onChanged: (int? val) {
-                                      _.source = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Inheritance",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-
-                                ],
-                              ),
-                              Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 5,
-                                    groupValue: _.source,
-                                    onChanged: (int? val) {
-                                      _.source = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Home Remittance",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 6,
-                                    groupValue: _.source,
-                                    onChanged: (int? val) {
-                                      _.source = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Landlord/Agriculturist",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Radio(
-                                    value: 7,
-                                    groupValue: _.source,
-                                    onChanged: (int? val) {
-                                      _.source = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "OTHERS",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 4,
-                                    groupValue: _.source,
-                                    onChanged: (int? val) {
-                                      _.source = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                            (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Retired",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
+                              _.controller.newDigUserRegDataAfterOTP!.response!
+                                          .incomeSources ==
+                                      null
+                                  ? const SizedBox()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: _
+                                          .controller
+                                          .newDigUserRegDataAfterOTP!
+                                          .response!
+                                          .incomeSources!
+                                          .map(
+                                            (data) => RadioListTile<String>(
+                                              title: Text(
+                                                "${data.incomeSourceName}",
+                                                style: const TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              groupValue: _.inComeGroupValue,
+                                              value: data.incomeSourceId ?? '0',
+                                              onChanged: (val) {
+                                                _.inComeGroupValue =
+                                                    data!.incomeSourceId ?? '0';
+                                                _.update();
+                                              },
+                                              activeColor: MaterialStateColor
+                                                  .resolveWith((states) =>
+                                                      AppColor.blueColor),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
                               space,
                               Row(
                                 children: [
@@ -570,7 +211,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           isRounded: true,
                                           hint: "",
                                           hintColor: AppColor.black,
-                                          // textInputType: TextInputType.emailAddress,
                                         ),
                                       ],
                                     ),
@@ -593,7 +233,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           isRounded: true,
                                           hint: "",
                                           hintColor: AppColor.black,
-                                          // textInputType: TextInputType.emailAddress,
                                         ),
                                       ],
                                     ),
@@ -618,7 +257,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           isRounded: true,
                                           hint: "",
                                           hintColor: AppColor.black,
-                                          // textInputType: TextInputType.emailAddress,
                                         ),
                                       ],
                                     ),
@@ -641,7 +279,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           isRounded: true,
                                           hint: "",
                                           hintColor: AppColor.black,
-                                          // textInputType: TextInputType.emailAddress,
                                         ),
                                       ],
                                     ),
@@ -673,7 +310,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           isRounded: true,
                                           hint: "",
                                           hintColor: AppColor.black,
-                                          // textInputType: TextInputType.emailAddress,
                                         ),
                                       ],
                                     ),
@@ -696,7 +332,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           isRounded: true,
                                           hint: "",
                                           hintColor: AppColor.black,
-                                          // textInputType: TextInputType.emailAddress,
                                         ),
                                       ],
                                     ),
@@ -728,7 +363,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           isRounded: true,
                                           hint: "",
                                           hintColor: AppColor.black,
-                                          // textInputType: TextInputType.emailAddress,
                                         ),
                                       ],
                                     ),
@@ -751,7 +385,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           isRounded: true,
                                           hint: "",
                                           hintColor: AppColor.black,
-                                          // textInputType: TextInputType.emailAddress,
                                         ),
                                       ],
                                     ),
@@ -765,61 +398,44 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                 fontSize: 10,
                                 fontWeight: FontWeight.w900,
                               ),
-                              Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 0,
-                                    groupValue: _.transaction,
-                                    onChanged: (int? val) {
-                                      _.transaction = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "ONLINE",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 1,
-                                    groupValue: _.transaction,
-                                    onChanged: (int? val) {
-                                      _.transaction = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "PHYSICAL",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 2,
-                                    groupValue: _.transaction,
-                                    onChanged: (int? val) {
-                                      _.transaction = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "BOTH",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              space,
+                              _.controller.newDigUserRegDataAfterOTP!.response!
+                                          .transModeList ==
+                                      null
+                                  ? const SizedBox()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: _
+                                          .controller
+                                          .newDigUserRegDataAfterOTP!
+                                          .response!
+                                          .transModeList!
+                                          .map(
+                                            (data) => RadioListTile<String>(
+                                              title: Text(
+                                                "${data.description}",
+                                                style: const TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              groupValue:
+                                                  _.transactionGroupValue,
+                                              value: data.code ?? '0',
+                                              onChanged: (val) {
+                                                _.transactionGroupValue =
+                                                    data!.code ?? '0';
+                                                _.update();
+                                              },
+                                              activeColor: MaterialStateColor
+                                                  .resolveWith((states) =>
+                                                      AppColor.blueColor),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
                               space,
                               const RestInvestTitle(
                                 text:
@@ -828,44 +444,43 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                 fontSize: 10,
                                 fontWeight: FontWeight.w900,
                               ),
-                              Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 0,
-                                    groupValue: _.rupees,
-                                    onChanged: (int? val) {
-                                      _.rupees = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "MONTHLY",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 1,
-                                    groupValue: _.rupees,
-                                    onChanged: (int? val) {
-                                      _.rupees = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "ANNUALLY",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
+                              _.controller.newDigUserRegDataAfterOTP!.response!
+                                          .expectedTurnoverInAccTypeList ==
+                                      null
+                                  ? const SizedBox()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: _
+                                          .controller
+                                          .newDigUserRegDataAfterOTP!
+                                          .response!
+                                          .expectedTurnoverInAccTypeList!
+                                          .map(
+                                            (data) => RadioListTile<String>(
+                                              title: Text(
+                                                "${data.description}",
+                                                style: const TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              groupValue: _.turnoverGroupValue,
+                                              value: data.code ?? '0',
+                                              onChanged: (val) {
+                                                _.turnoverGroupValue =
+                                                    data!.code ?? '0';
+                                                _.update();
+                                              },
+                                              activeColor: MaterialStateColor
+                                                  .resolveWith((states) =>
+                                                      AppColor.blueColor),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
                               const EmptyContainer(
                                 hint: "",
                                 textColor: AppColor.black,
@@ -874,110 +489,50 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                 text: "",
                               ),
                               space,
-                              space,
                               const RestInvestTitle(
                                 text: "EXPECTED INVESTMENT AMMOUNT:*",
                                 textColor: AppColor.black,
                                 fontSize: 10,
                                 fontWeight: FontWeight.w900,
                               ),
-                              Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 0,
-                                    groupValue: _.mode,
-                                    onChanged: (int? val) {
-                                      _.mode = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Up-to RS.1M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 1,
-                                    groupValue: _.mode,
-                                    onChanged: (int? val) {
-                                      _.mode = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Up-to RS.1M to Rs. 2.5M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 2,
-                                    groupValue: _.mode,
-                                    onChanged: (int? val) {
-                                      _.mode = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Upto RS.2.5M to Rs.5M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 3,
-                                    groupValue: _.mode,
-                                    onChanged: (int? val) {
-                                      _.mode = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Upto RS.5M to Rs.10M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Radio(
-                                    value: 4,
-                                    groupValue: _.mode,
-                                    onChanged: (int? val) {
-                                      _.mode = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Above Rs.10M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              space,
+                              _.controller.newDigUserRegDataAfterOTP!.response!
+                                          .expInvestAmountBrackets ==
+                                      null
+                                  ? const SizedBox()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: _
+                                          .controller
+                                          .newDigUserRegDataAfterOTP!
+                                          .response!
+                                          .expInvestAmountBrackets!
+                                          .map(
+                                            (data) => RadioListTile<String>(
+                                              title: Text(
+                                                "${data.description}",
+                                                style: const TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              groupValue:
+                                                  _.expectedIncomeGroupValue,
+                                              value: data.code ?? '0',
+                                              onChanged: (val) {
+                                                _.expectedIncomeGroupValue =
+                                                    data!.code ?? '0';
+                                                _.update();
+                                              },
+                                              activeColor: MaterialStateColor
+                                                  .resolveWith((states) =>
+                                                      AppColor.blueColor),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
                               space,
                               const RestInvestTitle(
                                 text: "ANNUAL INCOME:*",
@@ -985,102 +540,44 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                 fontSize: 10,
                                 fontWeight: FontWeight.w900,
                               ),
-                              Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 0,
-                                    groupValue: _.modetransaction,
-                                    onChanged: (int? val) {
-                                      _.modetransaction = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Up-to RS.1M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 1,
-                                    groupValue: _.modetransaction,
-                                    onChanged: (int? val) {
-                                      _.modetransaction = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Up-to RS.1M to Rs.3M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Radio(
-                                    value: 2,
-                                    groupValue: _.modetransaction,
-                                    onChanged: (int? val) {
-                                      _.modetransaction = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Up-to RS.3M to Rs.6M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  Radio(
-                                    value: 3,
-                                    groupValue: _.modetransaction,
-                                    onChanged: (int? val) {
-                                      _.modetransaction = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Up-to RS.6M to Rs.12M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Radio(
-                                    value: 4,
-                                    groupValue: _.modetransaction,
-                                    onChanged: (int? val) {
-                                      _.modetransaction = val!;
-                                      _.update();
-                                    },
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                  ),
-                                  const RestInvestTitle(
-                                    text: "Above Rs.12M",
-                                    textColor: AppColor.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ],
-                              ),
+                              _.controller.newDigUserRegDataAfterOTP!.response!
+                                          .annualIncomeBrackets ==
+                                      null
+                                  ? const SizedBox()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: _
+                                          .controller
+                                          .newDigUserRegDataAfterOTP!
+                                          .response!
+                                          .annualIncomeBrackets!
+                                          .map(
+                                            (data) => RadioListTile<String>(
+                                              title: Text(
+                                                "${data.description}",
+                                                style: const TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              groupValue:
+                                                  _.annualIncomeGroupValue,
+                                              value: data.code ?? '0',
+                                              onChanged: (val) {
+                                                _.annualIncomeGroupValue =
+                                                    data!.code ?? '0';
+                                                _.update();
+                                              },
+                                              activeColor: MaterialStateColor
+                                                  .resolveWith((states) =>
+                                                      AppColor.blueColor),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
                               space,
                               const RestInvestTitle(
                                 text: "PEP DECLARATION DETAIL*",
@@ -1088,15 +585,64 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                 fontSize: 10,
                                 fontWeight: FontWeight.w900,
                               ),
-                              space,
-                              space,
-                              space,
-                              space,
-                              space,
-                              space,
-                              space,
-                              space,
-                              const RestInvestTitle(
+
+                      ListView.builder(
+                          shrinkWrap: true,
+                          itemCount:_.controller.newDigUserRegDataAfterOTP!.response!.pepsInfoList!.length,
+                          itemBuilder: (context, index) {
+                            bool? groupValue = _.controller.newDigUserRegDataAfterOTP!.
+                            response!.pepsInfoList![index].answer;
+                            return  Column(
+                              children: [
+                                SizedBox(
+                                  width: Get.width,
+                                  child: Text(_.controller.newDigUserRegDataAfterOTP!.
+                                  response!.pepsInfoList![index].questionDesc ?? '',
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Radio(
+                                      value: true,
+                                      groupValue: groupValue,
+                                      onChanged: (bool? val) {
+                                        _.controller.newDigUserRegDataAfterOTP!.
+                                        response!.pepsInfoList![index].answer = val;
+                                        _.update();
+                                      },
+                                      fillColor: MaterialStateColor.resolveWith(
+                                              (states) => AppColor.blueColor),
+                                    ),
+                                    const RestInvestTitle(
+                                      text: "YES",
+                                      textColor: AppColor.dimblack,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                    Radio(
+                                      value: false,
+                                      groupValue: groupValue,
+                                      onChanged: (bool? val) {
+                                        _.controller.newDigUserRegDataAfterOTP!.
+                                        response!.pepsInfoList![index].answer = val;
+                                        _.update();
+                                      },
+                                      fillColor: MaterialStateColor.resolveWith(
+                                              (states) => AppColor.blueColor),
+                                    ),
+                                    const RestInvestTitle(
+                                      text: "NO",
+                                      textColor: AppColor.dimblack,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+
+                                  ],
+                                ),
+                              ],
+                            );
+                          }),
+                    const RestInvestTitle(
                                 text: "*DISCLAIMER:",
                                 textColor: AppColor.black,
                                 fontSize: 10,
@@ -1115,13 +661,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                         _.isChecked = val!;
                                         _.update();
                                       }),
-                                  // const RestInvestTitle(
-                                  //   text:
-                                  //       "I accept that my investments is subject to market risks and a target return / dividend range or\ncapital protection cannot be guaranteed.I clearly understand, agree, acknowledge and accept\nthat my investment is subject to market price fluctuations and other risks inherent in all such\ninvestments. The risks emanate from various factors which include, but are not limited to,\nmarket risks, government regulation risks, credit risks, liquidity risks, settlement risks,\nredemption risks, Shari’ah non-compliance risks, dividend distribution taxation risks, and\nchanges in risks associated with trading volumes, liquidity and settlement systems in equity\nand debt markets. Past performance is not necessarily indicative of future results. Investment\nin mutual funds are not bank deposits and are neither issued by, insured by, obligation of, nor\notherwise supported by SECP, any Government Agency, Trustee (except to the extent\nspecifically stated in the constitutive documents) or any of the shareholders of National\nInvestment Trust Limited or any of the Pre-IPO Investors or any other bank or financial\ninstitution. Returns offered by Funds / Plans can be positive and / or negative and may increase\nor decrease subject to capital market conditions and risk profile of the selected Fund / Plan.\nHence, the value of investment may go below the invested amount. For further details, please\nrefer to the detailed risk disclosures and disclaimers contained in the Offering Documents,\nSupplementary Offering Documents and the latest Fund Manager Report available on our\nwebsite or by calling or writing to us.             ",
-                                  //   textColor: AppColor.black,
-                                  //   fontSize: 8,
-                                  //   fontWeight: FontWeight.w900,
-                                  // ),
                                 ],
                               ),
                               space,
@@ -1132,7 +671,9 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                       height: 35,
                                       width: 50,
                                       text: "BACK",
-                                      onPress: () {},
+                                      onPress: () {
+                                        Get.back();
+                                      },
                                       buttonColor: AppColor.dimBlue,
                                       isRound: false),
                                   const SizedBox(
