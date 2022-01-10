@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:investintrust/views/account_opening_fatca_screen.dart';
 import 'package:investintrust/views/account_opening_kyc_detail_screen.dart';
 import '../views/account_opening_bank_detail_screen.dart';
 import '../views/account_opening_basic_information_screen.dart';
@@ -59,6 +60,7 @@ class AppRoute {
   static const String accountopeningbasicinformation='/accountopeningbasicinformation';
   static const String accountopeningbankdetail='/accountopeningbankdetail';
   static const String accountOpenKycDetailScreen='/accountOpenKycDetailScreen';
+  static const String accountOpenFatcaScreen='/accountOpenFatcaScreen';
 
   AppRoute._();
 
@@ -172,6 +174,10 @@ class AppRoute {
       GetPage(
           name: AppRoute.accountopeningbankdetail,
           page: () => const AccountOpenBankDetailScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountOpenFatcaScreen,
+          page: () => const AccountOpenFatcaScreen()
       ),
     ];
   }

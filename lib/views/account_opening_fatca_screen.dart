@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
 import '../controller/account_opening_fatca_screen_controller.dart';
 
 import '../widgets/button.dart';
@@ -33,9 +34,12 @@ class AccountOpenFatcaScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: Logo(
-                height: 50,
-                width: 50,
+              title: Padding(
+                padding:  EdgeInsets.only(right: Get.width/6),
+                child: Logo(
+                  height: 50,
+                  width: 50,
+                ),
               ),
               elevation: 0,
             ),
@@ -44,6 +48,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
                 children: [
+
                   space,
                   const RestInvestTitle(
                     text: " NITL DIGITAL ACCOUNT OPENING FORM ",
@@ -71,28 +76,6 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(
-                              children: const [
-                                RestInvestTitle(
-                                  text: " OTP VERIFY > ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                RestInvestTitle(
-                                  text: " BASIC INFORMATION > ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                RestInvestTitle(
-                                  text: " FATCA > ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.blueColor,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ],
-                            ),
                             space,
                             Row(
                               children: [
@@ -105,11 +88,14 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                         text: 'TITLE OF ACCOUNT:',
                                         textColor: AppColor.black,
                                         fontSize: 12,
+
                                         fontWeight: FontWeight.w900,
                                       ),
                                       CustomTextFormField(
                                         isRounded: true,
                                         hint: "",
+                                        controller: _.titleController,
+                                        textInputType: TextInputType.text,
                                         hintColor: AppColor.black,
                                         // textInputType: TextInputType.emailAddress,
                                       ),
@@ -133,6 +119,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                       CustomTextFormField(
                                         isRounded: true,
                                         hint: "",
+                                        controller: _.cnicController,
                                         hintColor: AppColor.black,
                                         // textInputType: TextInputType.emailAddress,
                                       ),
@@ -184,10 +171,10 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 BorderRadius.circular(6),
                                             // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
-                                              text: _.amountvalue == null ||
-                                                      _.amountvalue == ""
+                                              text: _.countryValue == null ||
+                                                      _.countryValue == ""
                                                   ? "Account No."
-                                                  : _.amountvalue,
+                                                  : _.countryValue,
                                               textColor: AppColor.black,
                                             ),
                                             icon: const Icon(
@@ -202,7 +189,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                       Text(fromAccountItems!));
                                             }).toList(),
                                             onChanged: (String? value) {
-                                              _.amountvalue = value!;
+                                              _.countryValue = value!;
                                               _.update();
                                             },
                                           ),
@@ -247,10 +234,10 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 BorderRadius.circular(6),
                                             // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
-                                              text: _.amountvalue == null ||
-                                                      _.amountvalue == ""
+                                              text: _.stateValue == null ||
+                                                      _.stateValue == ""
                                                   ? "Account No."
-                                                  : _.amountvalue,
+                                                  : _.stateValue,
                                               textColor: AppColor.black,
                                             ),
                                             icon: const Icon(
@@ -265,7 +252,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                       Text(fromAccountItems!));
                                             }).toList(),
                                             onChanged: (String? value) {
-                                              _.amountvalue = value!;
+                                              _.stateValue = value!;
                                               _.update();
                                             },
                                           ),
@@ -312,10 +299,10 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 BorderRadius.circular(6),
                                             // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
-                                              text: _.amountvalue == null ||
-                                                      _.amountvalue == ""
+                                              text: _.cityValue == null ||
+                                                      _.cityValue == ""
                                                   ? "Account No."
-                                                  : _.amountvalue,
+                                                  : _.cityValue,
                                               textColor: AppColor.black,
                                             ),
                                             icon: const Icon(
@@ -330,7 +317,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                       Text(fromAccountItems!));
                                             }).toList(),
                                             onChanged: (String? value) {
-                                              _.amountvalue = value!;
+                                              _.cityValue = value!;
                                               _.update();
                                             },
                                           ),
@@ -412,21 +399,29 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Checkbox(
-                                    checkColor: AppColor.whiteColor,
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                    value: _.isChecked,
-                                    onChanged: (bool? val) {
-                                      _.isChecked = val!;
-                                      _.update();
-                                    }),
-                                const RestInvestTitle(
-                                  text:
-                                      "I hereby confirm that the information provided abpve is true,accurate and complete,I hereby,\n+indemnify and hold the harmful NITL against any and all losses action,claims,penalities,\ndemagesor liabilities that may arise in case the above information is found to  be incorrect.\nI further agree and undertake to notify NITL within 30 day calender if there is changes in\ninformation provided above.",
-                                  textColor: AppColor.black,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w900,
+                                SizedBox(
+                                  height:15,
+                                  width: 15,
+                                  child: Checkbox(
+                                      checkColor: AppColor.whiteColor,
+                                      fillColor: MaterialStateColor.resolveWith(
+                                          (states) => AppColor.blueColor),
+                                      value: _.termsConditions,
+                                      onChanged: (bool? val) {
+                                        _.termsConditions = val!;
+                                        _.update();
+                                      }),
+                                ),
+                                SizedBox(width: 10,),
+                                Expanded(
+                                  child: const RestInvestTitle(
+                                    text:
+                                        "I hereby confirm that the information provided abpve is true,accurate and complete,I hereby,+indemnify and hold the harmful NITL against any and all losses action,claims,penalities,demagesor liabilities that may arise in case the above information is found to  be incorrect.I further agree and undertake to notify NITL within 30 day calender if there is changes ininformation provided above.",
+                                    textColor: AppColor.black,
+                                    textAlign: TextAlign.justify,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                               ],
                             ),
@@ -473,10 +468,10 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 BorderRadius.circular(6),
                                             // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
-                                              text: _.amountvalue == null ||
-                                                      _.amountvalue == ""
+                                              text: _.cityValue2 == null ||
+                                                      _.cityValue2 == ""
                                                   ? "Account No."
-                                                  : _.amountvalue,
+                                                  : _.cityValue2,
                                               textColor: AppColor.black,
                                             ),
                                             icon: const Icon(
@@ -491,7 +486,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                       Text(fromAccountItems!));
                                             }).toList(),
                                             onChanged: (String? value) {
-                                              _.amountvalue = value!;
+                                              _.cityValue2 = value!;
                                               _.update();
                                             },
                                           ),
@@ -503,10 +498,10 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                 const SizedBox(
                                   width: 6,
                                 ),
-                                const Expanded(
+                                 Expanded(
                                   child: EmptyContainer(
                                       text: "TIN NUMBER:",
-                                      hint: "",
+                                      hint: "${_.tinNumber}",
                                       textColor: AppColor.black,
                                       fontWeight: FontWeight.w900,
                                       hintColor: AppColor.black),
@@ -520,25 +515,34 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w900,
                             ),
+                            SizedBox(height: 5,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Checkbox(
-                                    checkColor: AppColor.whiteColor,
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                    value: _.isChecked,
-                                    onChanged: (bool? val) {
-                                      _.isChecked = val!;
-                                      _.update();
-                                    }),
-                                const RestInvestTitle(
-                                  text:
-                                      "I accept that my investments is subject to market risks and a target return / dividend range or\ncapital protection cannot be guaranteed.I clearly understand, agree, acknowledge and accept\nthat my investment is subject to market price fluctuations and other risks inherent in all such\ninvestments. The risks emanate from various factors which include, but are not limited to,\nmarket risks, government regulation risks, credit risks, liquidity risks, settlement risks,\nredemption risks, Shari’ah non-compliance risks, dividend distribution taxation risks, and\nchanges in risks associated with trading volumes, liquidity and settlement systems in equity\nand debt markets. Past performance is not necessarily indicative of future results. Investment\nin mutual funds are not bank deposits and are neither issued by, insured by, obligation of, nor\notherwise supported by SECP, any Government Agency, Trustee (except to the extent\nspecifically stated in the constitutive documents) or any of the shareholders of National\nInvestment Trust Limited or any of the Pre-IPO Investors or any other bank or financial\ninstitution. Returns offered by Funds / Plans can be positive and / or negative and may increase\nor decrease subject to capital market conditions and risk profile of the selected Fund / Plan.\nHence, the value of investment may go below the invested amount. For further details, please\nrefer to the detailed risk disclosures and disclaimers contained in the Offering Documents,\nSupplementary Offering Documents and the latest Fund Manager Report available on our\nwebsite or by calling or writing to us.             ",
-                                  textColor: AppColor.black,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w900,
+                                SizedBox(
+                                  height:15,
+                                  width: 15,
+                                  child: Checkbox(
+                                      checkColor: AppColor.whiteColor,
+                                      fillColor: MaterialStateColor.resolveWith(
+                                          (states) => AppColor.blueColor),
+                                      value: _.isChecked,
+                                      onChanged: (bool? val) {
+                                        _.isChecked = val!;
+                                        _.update();
+                                      }),
+                                ),
+                                SizedBox(width: 10,),
+                                Expanded(
+                                  child: const RestInvestTitle(
+                                    text:
+                                    "I accept that my investments is subject to market risks and a target return / dividend range or capital protection cannot be guaranteed.I clearly understand, agree, acknowledge and accept that my investment is subject to market price fluctuations and other risks inherent in all such investments. The risks emanate from various factors which include, but are not limited to, market risks, government regulation risks, credit risks, liquidity risks, settlement risks, redemption risks, Shari’ah non-compliance risks, dividend distribution taxation risks, and changes in risks associated with trading volumes, liquidity and settlement systems in equity and debt markets. Past performance is not necessarily indicative of future results. Investment in mutual funds are not bank deposits and are neither issued by, insured by, obligation of, nor otherwise supported by SECP, any Government Agency, Trustee (except to the extentspecifically stated in the constitutive documents) or any of the shareholders of NationalInvestment Trust Limited or any of the Pre-IPO Investors or any other bank or financialinstitution. Returns offered by Funds / Plans can be positive and / or negative and may increaseor decrease subject to capital market conditions and risk profile of the selected Fund / Plan.Hence, the value of investment may go below the invested amount. For further details, pleaserefer to the detailed risk disclosures and disclaimers contained in the Offering Documents,Supplementary Offering Documents and the latest Fund Manager Report available on ourwebsite or by calling or writing to us.",
+                                    textColor: AppColor.black,
+                                    textAlign: TextAlign.justify,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                               ],
                             ),
@@ -546,7 +550,10 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                             CustomRoundButton(
                                 height: 35,
                                 text: "SAVE&NEXT",
-                                onPress: () {},
+                                onPress: () {
+                                  // _.onSave();
+                                  Get.to(AccountOpenRiskProfileScreen());
+                                },
                                 isRound: false),
                             const SizedBox(
                               height: 10,

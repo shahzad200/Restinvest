@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/utils/colors.dart';
 import 'package:investintrust/utils/constant.dart';
+import 'package:investintrust/widgets/web_view.dart';
 
 import 'custom_divider.dart';
 
@@ -483,10 +485,15 @@ class IcFund extends StatelessWidget {
 }
 
 class CheckBoxContainer extends StatefulWidget {
-  CheckBoxContainer({required this.isChecked,
+  CheckBoxContainer({
+    required this.isChecked,
+    required
+    this.onTap,
     Key? key,
   }) : super(key: key);
   bool isChecked;
+  void Function(bool?)? onTap;
+
   @override
   State<CheckBoxContainer> createState() => _CheckBoxContainerState();
 }
@@ -496,43 +503,110 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
   Widget build(BuildContext context) {
     return Container(
       color: AppColor.lightGreyColor,
+      padding: EdgeInsets.all(5.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 15,
-            width: 15,
-            child: Checkbox(
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              tristate: true,
-              splashRadius: 10.0,
-              checkColor: AppColor.whiteColor,
-              activeColor: AppColor.blueColor,
-              value: widget.isChecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  widget.isChecked = value!;
-                });
-              },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 15,
+              width: 15,
+              child: Checkbox(
+
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                tristate: true,
+                splashRadius: 10.0,
+                checkColor: AppColor.whiteColor,
+                activeColor: AppColor.blueColor,
+                value: widget.isChecked,
+                onChanged:widget.onTap,
+
+              ),
             ),
           ),
-          Expanded(
-            child: Column(
-              children: [
-                RichText(
-                    text: const TextSpan(
-                        text:
-                            'I have read understood the guidlines as stated in the',
-                        style: TextStyle(color: Colors.black, fontSize: 12),
-                        children: [
-                      TextSpan(
-                        text:
-                            'offering Documents / truest Deed & Fund Manager Report of',
-                      )
-                    ])),
-              ],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RichText(
+                textAlign: TextAlign.start,
+                  text:  TextSpan(
+                      text:
+                          'I have read understood the guidlines as stated in the\n',
+                      style: TextStyle(color: AppColor.black, fontSize: 12),
+                      children: [
+                    TextSpan(
+                      text:
+                          'offering Documents',
+                      style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
+                      recognizer:  TapGestureRecognizer()..onTap = () {
+                        Get.to(WebView(
+                          title: 'NAV',
+                          link:
+                          '',
+                        ));
+                      },
+                    ),TextSpan(
+                      text:
+                          ' / ',
+                    ),TextSpan(
+                      text:
+                          'Trust Deed',
+                          style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
+                          recognizer: new TapGestureRecognizer()..onTap = () {
+                            Get.to(WebView(
+                              title: 'NAV',
+                              link:
+                              '',
+                            ));
+                          },
+                    ),TextSpan(
+                      text:
+                          ' & ',
+                    ),TextSpan(
+                      text:
+                          'Fund Manager Report\n',
+                          style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
+                          recognizer:  TapGestureRecognizer()..onTap = () {
+                            Get.to(WebView(
+                              title: 'NAV',
+                              link:
+                              '',
+                            ));
+                          },
+                    ),TextSpan(
+                      text:
+                          'of the funds and the risk involved',
+                          style: TextStyle(color: AppColor.black, fontSize: 12),
+                    )
+                  ])),
+              SizedBox(height:5),
+              RichText(
+                  textAlign: TextAlign.start,
+                  text:  TextSpan(
+                      text:
+                      'I confirm acceptance of',
+                      style: TextStyle(color: AppColor.black, fontSize: 12),
+                      children: [
+                        TextSpan(
+                          text:
+                          'Terms & Conditions',
+                          style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
+                          recognizer:  TapGestureRecognizer()..onTap = () {
+                            Get.to(WebView(
+                              title: 'NAV',
+                              link:
+                              '',
+                            ));
+                          },
+                        ),TextSpan(
+                          text:
+                          ' and all\ncharges governing in this transaction.',
+                          style: TextStyle(color: AppColor.black, fontSize: 12, ),
+                        ),
+                      ])),
+            ],
           ),
           // Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,children: [  const RestInvestTitle(
           //   text: "I have read understood the guidlines as stated in the",
@@ -572,7 +646,6 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
           // ],)
         ],
       ),
-      height: 80,
     );
   }
 }
@@ -2562,8 +2635,5 @@ String text;
         ),
       ),
     );
-
-
-
   }
 }

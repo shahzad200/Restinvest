@@ -10,6 +10,7 @@ import 'package:investintrust/data/models/fund_questions.dart';
 import 'package:investintrust/data/models/new_user_reg_data.dart';
 
 import 'package:investintrust/data/models/social_media_links.dart';
+import 'package:investintrust/utils/constants.dart';
 
 import 'models/city_sector_model.dart';
 import 'models/gen_verification_code_for_dig_user.dart';
@@ -154,17 +155,24 @@ class ApiClient {
   }
 
   Future<Common> onSavePurchase(
-      String userId,
-      String unitPlan,
       String fundCode,
-      String unitClass,
       String folioNumber,
       String transactionValue,
       String chequeNo,
       String chequeDate,
       String bankName,
       String bankAccountNo,
-      String paymentMode) async {
+      String pinCode,
+      String paymentMode,
+      String collectionBankAccount,
+      String collectionBankCode,
+      String fundSaleLoad,
+      String paymentProof,
+      String paymentExtension,
+      String depositProof,
+      String depositExtension,
+
+      ) async {
     try {
       final response = await http.post(
         Uri.parse(_epSavePurchase),
@@ -172,19 +180,30 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
-          'userId': userId,
-          'unitPlan': unitPlan,
+          'userId': Constant.loginModel!.response!.user!.userid ?? '',
+          'unitPlan': "0",
           'fundCode': fundCode,
-          'unitClass': unitClass,
+          'unitClass': "XX",
           'folioNumber': folioNumber,
           'transactionValue': transactionValue,
           'chequeNo': chequeNo,
           'chequeDate': chequeDate,
           'bankBranch': bankName,
           'bankAccountNo': bankAccountNo,
-          'paymentMode': paymentMode
-        }),
-      );
+          'paymentMode': paymentMode,
+          'paymentProof': paymentProof ?? "",
+          'paymentExtension': paymentExtension ?? "",
+          'depositProof': depositProof ?? "",
+          'depositExtension': depositExtension ?? "",
+          'accessCode': Constant.loginModel!.response!.user!.sessionAccessCode ?? '',
+          'authorizationPinCode':pinCode,
+          'sessionId': Constant.loginModel!.response!.user!.authorization ?? '',
+          'sessionStartDate': Constant.loginModel!.response!.user!.sessionDateTime ?? '',
+          'userType': Constant.loginModel!.response!.user!.userType ?? '',
+          'collectionBankAccount': collectionBankAccount,
+          'collectionBankCode': collectionBankCode,
+          'fundSaleLoad': fundSaleLoad
+        }));
       if (response.statusCode == 200) {
         print(response.body);
         Common common = Common.fromJson(jsonDecode(response.body));

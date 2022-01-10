@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/utils/colors.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
 void showDialog(
@@ -16,18 +17,24 @@ void showDialog(
     ) {
   print('KJHHGJH'+data);
   showGeneralDialog(
-    barrierLabel: "Barrier",
+    // barrierLabel: "Barrier",
     barrierDismissible: false,
     barrierColor: Colors.black.withOpacity(0.5),
     transitionDuration: const Duration(milliseconds: 700),
     context: context,
     pageBuilder: (_, __, ___) {
-      return Align(
-        alignment: Alignment.center,
-        child: SizedBox(
-          height: requestType == 'FTF' ? 350 : 300,
-          child: AlertDialog(
-            content: Column(
+      bool isColumn = true;
+      // return
+        // StatefulBuilder(builder: (thisLowerContext, innerSetState) {
+        // Future.delayed(Duration(milliseconds: 500),(){
+        //   innerSetState((){
+        //     isColumn = true;
+        //   });
+        // });
+        return AlertDialog(
+          content:!isColumn?SizedBox(): SizedBox(
+            height: requestType == 'FTF' ? 300 : 220,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const RestInvestTitle(
@@ -146,9 +153,79 @@ void showDialog(
                                 fontWeight: FontWeight.w500,
                               ),
                               RestInvestTitle(
-                                text: selectedTab == "Percentage"
+                                text:
+                                selectedTab == "Percentage"
                                     ? data + "%"
-                                    : data + "",
+                                    : data + "23232",
+                                fontSize: 14,
+                                textColor: Colors.green,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                    ])
+                    : requestType == "PUR"?
+                Table(border: TableBorder.all(),
+                    // Allows to add a border decoration around your table
+                    children: [
+                      TableRow(children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const RestInvestTitle(
+                                text: "Account No.",
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              RestInvestTitle(
+                                text: accountNum,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                      TableRow(children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const RestInvestTitle(
+                                text: "Fund Name",
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              RestInvestTitle(
+                                text: fundName,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                      TableRow(children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RestInvestTitle(
+                                text: "Amount",
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              RestInvestTitle(
+                                text: "Rs. $data"+"/-",
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -216,9 +293,9 @@ void showDialog(
                                 fontWeight: FontWeight.w500,
                               ),
                               RestInvestTitle(
-                                text: "$data " + selectedTab == "Percentage"
-                                    ? "%"
-                                    : "",
+                                text:  selectedTab == "Percentage"
+                                    ? "$data " +"%"
+                                    : "$data " +"",
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -227,43 +304,50 @@ void showDialog(
                         ),
                       ]),
                     ]),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: const RestInvestTitle(
-                        text: "No",
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+SizedBox(height: 30,),
+                !isColumn?SizedBox(): Padding(
+                  padding: const EdgeInsets.only(right:0.0,bottom: 0.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          // innerSetState(() {
+                          //   isColumn = false;
+                          // });
+                          Get.back();
+                        },
+                        child: const RestInvestTitle(
+                          text: "No",
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          textColor: AppColor.blueColor,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    InkWell(
-                      onTap: (){
-                        onOk(context);
-                        Get.back();
-                      },
-                      child: const RestInvestTitle(
-                        text: "Yes",
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                      const SizedBox(
+                        width: 30,
                       ),
-                    ),
-                  ],
+                      InkWell(
+                        onTap: (){
+                          onOk(context);
+                          Get.back();
+                        },
+                        child: const RestInvestTitle(
+                          text: "Yes",
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          textColor: AppColor.blueColor,
+                        ),
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
           ),
-        ),
-      );
+        );
+      // });
+
     },
     transitionBuilder: (_, anim, __, child) {
       return SlideTransition(

@@ -28,8 +28,11 @@ class RedemptionScreenController extends GetxController {
   bool allUnitButton = false;
   bool isLoading = false;
   bool noInternet = false;
+  bool isCheckPrivacy = false;
+
   TextEditingController unitBalanceController = TextEditingController();
   TextEditingController percentController = TextEditingController();
+  TextEditingController picCodeController = TextEditingController();
   List<login.UserFundBalances> fundNameListItems = [];
   ApiClient api = ApiClient();
   final _repository = Repository();
@@ -37,6 +40,7 @@ class RedemptionScreenController extends GetxController {
   final map = login.UserFundBalances();
   double? calUnitBalanceValue;
   Common? pinCode;
+  Common? submitResponse;
 
 
 
@@ -137,6 +141,7 @@ class RedemptionScreenController extends GetxController {
           String u = loadFundsPlans!.response!.userFundBalances![index].fundUnits ?? '0';
           double val = double.parse(d) * double.parse(u);
           approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
+          print(approxAmount);
           unitBalanceController.text = u.toString();
           update();
         }
@@ -180,14 +185,34 @@ class RedemptionScreenController extends GetxController {
 
   onSubmitPress(BuildContext context){
     // api.onSaveRedemption(accessCode, authorizationPinCode, folioNumber, fundCode, redTransType, sessionId, sessionStartDate, totalUnits, transactionValue, unitClass, unitPlan, userId, userType)
-    if(unitBalanceController.text != ''){
-      if(calUnitBalanceValue != 0){
-        if(calUnitBalanceValue! > 0 || double.parse(unitBalanceController.text) > 0 || double.parse(percentController.text) >0){
-          trans.showDialog(context,accountvalue,'',fundNamevalue,
-              '','',"${unitButton?calUnitBalanceValue:percentageButton?percentController.text:unitBalanceController.text}",percentageButton ? 'Percentage':'Units','RED',onOkPress);
-        } else {
+    // if(unitBalanceController.text != null){
+    //   if(calUnitBalanceValue != 0){
+    if(picCodeController.text != null && picCodeController.text != "") {
+      if(isCheckPrivacy!){
+
+
+      print("data pin");
+      if (unitButton) {
+        if (unitBalanceController.text != null &&
+            percentController.text != "") {
+          if (calUnitBalanceValue! > 0 ||
+              double.parse(unitBalanceController.text) > 0) {
+            trans.showDialog(
+                context,
+                accountvalue,
+                '',
+                '',
+                '',
+                fundNamevalue,
+                "${calUnitBalanceValue}",
+                percentageButton ? 'Percentage' : 'Units',
+                'RED',
+                onOkPress);
+          }
+        }
+        else {
           Fluttertoast.showToast(
-              msg: 'Please enter Fund Balance/Percentage',
+              msg: 'Please enter Fund Balance',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 1,
@@ -195,9 +220,55 @@ class RedemptionScreenController extends GetxController {
               textColor: Colors.white,
               fontSize: 16.0);
         }
-      } else {
+      }
+
+      if (percentageButton) {
+        if (percentController.text != null && percentController.text != "") {
+          if (double.parse(approxAmount) > 0 ||
+              double.parse(approxUnits) > 0) {
+            trans.showDialog(
+                context,
+                accountvalue,
+                '',
+                '',
+                '',
+                fundNamevalue,
+                percentController.text,
+                percentageButton ? 'Percentage' : 'Units',
+                'RED',
+                onOkPress);
+          }
+        }
+        else {
+          Fluttertoast.showToast(
+              msg: 'Please enter Percentage',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      }
+      if(allUnitButton){
+        print(approxUnits);
+        if (double.parse(approxAmount) > 0 ||
+            double.parse(approxUnits) > 0) {
+          trans.showDialog(
+              context,
+              accountvalue,
+              '',
+              '',
+              '',
+              fundNamevalue,
+              "${unitBalanceController.text}",
+              percentageButton ? 'Percentage' : 'Units',
+              'RED',
+              onOkPress);
+        }
+      }}else{
         Fluttertoast.showToast(
-            msg: 'Please enter Fund Balance/Percentage',
+            msg: 'Please Check Terms & Conditions',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -205,9 +276,10 @@ class RedemptionScreenController extends GetxController {
             textColor: Colors.white,
             fontSize: 16.0);
       }
-    } else {
+    }else{
+      print("empty pin");
       Fluttertoast.showToast(
-          msg: 'Please enter Fund Balance/Percentage',
+          msg: 'Please enter Pin',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
@@ -215,11 +287,86 @@ class RedemptionScreenController extends GetxController {
           textColor: Colors.white,
           fontSize: 16.0);
     }
+        // if(calUnitBalanceValue! > 0 || double.parse(unitBalanceController.text) > 0 || double.parse(percentController.text) >0){
+        //   trans.showDialog(context,accountvalue,'','',
+        //       '',fundNamevalue,"${unitButton?calUnitBalanceValue:percentageButton?percentController.text:unitBalanceController.text}",percentageButton ? 'Percentage':'Units','RED',onOkPress);
+        // } else {
+        //   Fluttertoast.showToast(
+        //       msg: 'Please enter Fund Balance/Percentage',
+        //       toastLength: Toast.LENGTH_SHORT,
+        //       gravity: ToastGravity.CENTER,
+        //       timeInSecForIosWeb: 1,
+        //       backgroundColor: Colors.black,
+        //       textColor: Colors.white,
+        //       fontSize: 16.0);
+        // }
+      // } else {
+      //   Fluttertoast.showToast(
+      //       msg: 'Please enter Fund Balance/Percentagee',
+      //       toastLength: Toast.LENGTH_SHORT,
+      //       gravity: ToastGravity.CENTER,
+      //       timeInSecForIosWeb: 1,
+      //       backgroundColor: Colors.black,
+      //       textColor: Colors.white,
+      //       fontSize: 16.0);
+      // }
+    // } else {
+    //   Fluttertoast.showToast(
+    //       msg: 'Please enter Fund Balance/Percentageee',
+    //       toastLength: Toast.LENGTH_SHORT,
+    //       gravity: ToastGravity.CENTER,
+    //       timeInSecForIosWeb: 1,
+    //       backgroundColor: Colors.black,
+    //       textColor: Colors.white,
+    //       fontSize: 16.0);
+    // }
   }
 
-  onOkPress(){
-    isLoading = true;
-    update();
+  onOkPress(BuildContext context)async{
+    try {
+      isLoading = true;
+      update();
+      if(unitButton){
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNamevalue,  "U", unitBalanceController.text, calUnitBalanceValue.toString());
+
+      }if(percentageButton){
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNamevalue,  "P", percentController.text, approxAmount);
+
+      }if(allUnitButton){
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNamevalue,  "U", unitBalanceController.text, approxAmount);
+
+      }
+      // submitResponse = await _repository.onSaveFundTransfer(
+      //     pinCodeController.text, accountValue, toAccountValue,
+      //     fundCode, percentageButton ? "P" : "U", "totalUnits", dataValue, toFundCode);
+      isLoading = false;
+      if(noInternet) {
+        noInternet = false;
+      }
+      update();
+      if(submitResponse!.meta!.message == 'OK' && submitResponse!.meta!.code == '200'){
+        customDialogPin(context,"Request Submitted successfully");
+      }
+      // update();
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
   }
 
 

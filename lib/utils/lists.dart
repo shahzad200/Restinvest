@@ -36,7 +36,6 @@ List<String> fundNameItems = [
 ];
 
 List<String> paymentModeItems = [
-  "Payment Fund",
   "Cheque",
   "IBFT",
   "Online",

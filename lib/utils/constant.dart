@@ -63,4 +63,5 @@ class Constants {
   static const String icpurchases = 'assets/images/icpurchases.png';
   static const String icfund = 'assets/images/icfund.png';
   static const String iccategory = 'assets/images/iccategory.png';
+  static const String paymentSlip = 'assets/images/payment.jpeg';
 }
