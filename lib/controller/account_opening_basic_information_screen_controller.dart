@@ -18,6 +18,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   String amountvalue = "";
   String paymentvalue = "";
   bool isChecked=false;
+  String groupValue = '-1';
   var charactor=0;
   TextEditingController userNameController = TextEditingController();
 
@@ -27,6 +28,8 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   TextEditingController passwordController = TextEditingController();
   NewDigUserRegDataAfterOTP? newDigUserRegDataAfterOTP;
   CityData? mailingCityData;
+  CityData? currentCityData;
+  bool isMailingCity = false;
   bool isLoading = false;
   bool noInternet = false;
   String titleValue = "";
@@ -49,7 +52,12 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   String mailingCountryCode = "";
   String mailingCityValue = "";
   String mailingCityCode = "";
-
+  String currentCityValue = "";
+  String currentCityCode = "";
+  String bankNameValue = "";
+  String bankNameCode = "";
+  String bankCityValue = "";
+  String bankCityCode = "";
 
   final _repository = Repository();
   @override
@@ -112,11 +120,16 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   }
 
 
-  onMailingCityData(String countryCode) async {
+  onCityData(String countryCode) async {
     try {
       isLoading = true;
       update();
-      mailingCityData = await _repository.onCityData(countryCode);
+      if(isMailingCity) {
+        mailingCityData = await _repository.onCityData(countryCode);
+      }else {
+        currentCityData = await _repository.onCityData(countryCode);
+      }
+
       isLoading = false;
       update();
     } catch (e) {
