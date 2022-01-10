@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/views/account_opening_document_upload_screen.dart';
 
 import '../controller/account_opening_risk_profile_screen_controller.dart';
 
@@ -865,7 +866,9 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                             CustomRoundButton(
                                 height: 35,
                                 text: "SAVE&NEXT",
-                                onPress: () {},
+                                onPress: () {
+                                  Get.to(AccountOpenDocumentUploadScreen());
+                                },
                                 isRound: false),
                             const SizedBox(
                               height: 10,
