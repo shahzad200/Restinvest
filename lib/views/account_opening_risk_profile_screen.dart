@@ -13,6 +13,8 @@ import '../widgets/button.dart';
 import '../utils/colors.dart';
 
 import '../widgets/constant_widget.dart';
+import 'account_opening_document_upload_screen.dart';
+import 'account_opening_fatca_screen.dart';
 
 class AccountOpenRiskProfileScreen extends StatelessWidget {
   const AccountOpenRiskProfileScreen({Key? key}) : super(key: key);
@@ -628,7 +630,9 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     CustomRoundButton(
                                         height: 35,
                                         text: "SAVE&NEXT",
-                                        onPress: () {},
+                                        onPress: () {
+                                          Get.to(const AccountOpenDocumentUploadScreen());
+                                        },
                                         isRound: false),
                                     const SizedBox(
                                       height: 10,

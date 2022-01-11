@@ -691,7 +691,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                     color: Colors.white,
                     child: NoInternetWgt(
                       onTryAgain: (){
-
+                        Get.to(const AccountOpenRiskProfileScreen());
                       },
                     ),
                   ),
