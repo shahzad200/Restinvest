@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../routes/routes.dart';
-
-import '../views/account_opening_risk_profile_screen.dart';
+import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/controller/account_opening_submit_button_screen_controller.dart';
+import 'package:investintrust/views/account_opening_basic_information_screen.dart';
+import 'package:investintrust/views/account_opening_document_upload_screen.dart';
+import 'package:investintrust/views/account_opening_fatca_screen.dart';
+import 'package:investintrust/views/account_opening_kyc_detail_screen.dart';
+import 'package:investintrust/views/account_opening_preview_screen.dart';
+import 'package:investintrust/views/account_opening_request_screen.dart';
+import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
+import 'package:investintrust/views/account_opening_submit_button_screen.dart';
+import '../views/account_opening_bank_detail_screen.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -15,10 +23,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-         // home: const AccountOpenRiskProfileScreen(),
-
+        // home: const AccountOpenRiskProfileScreen(),
       getPages: AppRoute.navMain,
-      initialRoute: AppRoute.splashRoute,
+      initialRoute: AppRoute.homeRoute,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
       // getPages: [

@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                                 controller.isLoading == false &&
                                         controller.noInternet == false
                                     ? Get.to(WebView(
-                                        title: 'NAV',
+                                        title: 'NAV History',
                                         link:
                                             '${Constant.socialMediaLink!.response!.homeLinks!.latestNav}',
                                       ))
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                               },
                               child: IconButtonText(
                                 icon: const Nav(),
-                                text: "NAV History",
+                                text: "Nav History",
                               ),
                             ),
                             InkWell(
@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                                 controller.isLoading == false &&
                                         controller.noInternet == false
                                     ? Get.to(WebView(
-                                        title: 'NAV',
+                                        title: 'Learning',
                                         link:
                                             '${Constant.socialMediaLink!.response!.homeLinks!.learning}',
                                       ))
@@ -123,7 +123,7 @@ class HomeScreen extends StatelessWidget {
                               controller.isLoading == false &&
                                       controller.noInternet == false
                                   ? Get.to(WebView(
-                                      title: 'NAV',
+                                      title: 'Market',
                                       link:
                                           '${Constant.socialMediaLink!.response!.homeLinks!.market}',
                                     ))
@@ -292,11 +292,12 @@ class HomeScreen extends StatelessWidget {
                                   text: "SMS",
                                   textColor: AppColor.whiteColor,
                                   voidcallback: () {
-                                    controller.isLoading == false &&
-                                            controller.noInternet == false
-                                        ? customLaunch(
-                                            'sms: ${Constant.socialMediaLink!.response!.homeLinks!.advisorSms} ')
-                                        : printInfo(info: 'Do Nothing');
+                                    customDialogPin(context,"For SMS subscription please call 0800-00648");
+                                    // controller.isLoading == false &&
+                                    //         controller.noInternet == false
+                                    //     ? customLaunch(
+                                    //         'sms: ${Constant.socialMediaLink!.response!.homeLinks!.advisorSms} ')
+                                    //     : printInfo(info: 'Do Nothing');
                                   },
                                   icon: const Sms())),
                           const SizedBox(
@@ -323,7 +324,7 @@ class HomeScreen extends StatelessWidget {
                               child: RowContainerBox(
                                   containerColor:
                                       AppColor.blueColor.withOpacity(.8),
-                                  text: "ABOUT Us",
+                                  text: "ABOUT US",
                                   textColor: AppColor.whiteColor,
                                   voidcallback: () {
                                     controller.isLoading == false &&

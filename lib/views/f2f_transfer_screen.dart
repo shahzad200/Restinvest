@@ -563,9 +563,16 @@ class F2FTransferScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  // ContainerCheckBoxText(
-                  //   isChecked: false,
-                  // ),
+                  CheckBoxContainer(onTap: (bool? value) {
+                    if(_.isCheckPrivacy){
+                      _.isCheckPrivacy = false;
+                    }else{
+                      _.isCheckPrivacy = true;
+                    }
+                    // _.isCheckPrivacy = value!;
+                    _.update();
+                  },isChecked: _.isCheckPrivacy,
+                  ),
                   const SizedBox(
                     height: 10,
                   ),

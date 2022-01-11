@@ -111,6 +111,7 @@ class DateFormFieldContainer extends StatelessWidget {
       decoration: InputDecoration(fillColor: AppColor.whiteColor,filled: true,alignLabelWithHint: false,
         hintStyle: const TextStyle(color: AppColor.black,),
         errorStyle: const TextStyle(color: Colors.redAccent),
+
         border: OutlineInputBorder(
           borderSide: BorderSide(
               width: isRounded ? 0.1 : 0, color: AppColor.dimblack),

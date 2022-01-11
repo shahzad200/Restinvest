@@ -107,7 +107,10 @@ class RedemptionScreen extends StatelessWidget {
                                     _.unitBalanceController.text = "";
                                     _.unitButton = true;
                                     _.percentageEnable = false;
+                                    _.percentageButton = false;
                                     _.allUnitButton = false;
+                                    _.unitBalanceController.clear();
+                                    _.percentController.clear();
                                     _.update();
                                   },
                                 ),
@@ -174,6 +177,9 @@ class RedemptionScreen extends StatelessWidget {
                                      _.unitButton = true;
                                      _.percentageEnable = false;
                                      _.allUnitButton = false;
+                                    _.percentageButton = false;
+                                    _.unitBalanceController.clear();
+                                    _.percentController.clear();
                                     _.calUnitBalanceValue = 0.0;
                                     _.update();
                                   },
@@ -303,7 +309,7 @@ class RedemptionScreen extends StatelessWidget {
                      Expanded(
                        child: CustomTextFormField(
                          isRounded: true,
-                         hint: "Unit Balance",hintColor: AppColor.black,
+                         hint: "Unit Balance",hintColor:double.parse(_.electronicUnit()!) > 0? AppColor.black:Colors.grey,
                          textInputType: TextInputType.number,
                          enable:    double.parse(_.electronicUnit()!) > 0?true:false,
                          onChange: (val){
@@ -344,7 +350,7 @@ class RedemptionScreen extends StatelessWidget {
                           isRounded: true,
                           controller: _.percentController,
                           enable:    double.parse(_.electronicUnit()!) > 0?true:false,
-                          hint: "Percentage",hintColor: AppColor.black,
+                          hint: "Percentage",hintColor:double.parse(_.electronicUnit()!) > 0? AppColor.black:Colors.grey,
                           textInputType: TextInputType.numberWithOptions(),
                           onChange: (value){
                             _.calculateUnits(value);
@@ -421,6 +427,7 @@ class RedemptionScreen extends StatelessWidget {
                           height: 35,
                           child: CustomTextFormField(
                             isRounded: true,
+                            controller: _.picCodeController,
                             hint: "Pin Code",
                             textInputType: TextInputType.text,
                           ),
@@ -434,6 +441,7 @@ class RedemptionScreen extends StatelessWidget {
                             height: 35,
                             child: RestInvestButton(
                               isSquare: true,
+
                               onPress: () {
                                 _.onGeneratePinCode(context);
                               },
@@ -448,7 +456,16 @@ class RedemptionScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  CheckBoxContainer(isChecked: false,),
+                  CheckBoxContainer(onTap: (bool? value) {
+                    if(_.isCheckPrivacy){
+                      _.isCheckPrivacy = false;
+                    }else{
+                      _.isCheckPrivacy = true;
+                    }
+    // _.isCheckPrivacy = value!;
+    _.update();
+                  },isChecked: _.isCheckPrivacy,
+    ),
                   const SizedBox(
                     height: 10,
                   ),

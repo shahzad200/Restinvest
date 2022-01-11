@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:investintrust/controller/view_report_screen_controller.dart';
-import 'package:investintrust/data/constant_values.dart';
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/utils/constants.dart' as cons;
 import 'package:investintrust/utils/constants.dart';
@@ -165,7 +164,9 @@ class ViewReportsScreen extends StatelessWidget {
                                 text1: "All",
                                 fontsize: 14,
                                 fontWeight: FontWeight.bold,
-                                voidcallback: () {},
+                                voidcallback: () {
+                                  '';
+                                },
                                 text: "Fund Name",
                                 textColor: AppColor.black,
                               ))

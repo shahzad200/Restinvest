@@ -10,6 +10,7 @@ import 'package:investintrust/data/models/fund_questions.dart';
 import 'package:investintrust/data/models/new_user_reg_data.dart';
 
 import 'package:investintrust/data/models/social_media_links.dart';
+import 'package:investintrust/utils/constants.dart';
 
 import 'models/city_sector_model.dart';
 import 'models/gen_verification_code_for_dig_user.dart';
@@ -22,11 +23,13 @@ import 'models/new_dig_user_reg_data_req_list.dart';
 import 'models/new_notifications.dart';
 import 'models/new_user_reg.dart';
 import 'models/new_user_pin_gen.dart';
+import 'models/state_data.dart';
 import 'models/view_reports.dart';
 
 class ApiClient {
   static const _baseUrl =
       'http://192.168.0.86:8094/AssetConnectMobilePortal/UserService/';
+
   // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
@@ -51,18 +54,27 @@ class ApiClient {
   static const _epPickFundQuestions = _baseUrl + 'pickFundQuestions';
   static const _epGetExpectedFund = _baseUrl + 'getExpectedFund';
 
-  static const _epNewDigUserRegDataBeforeOTP = _baseUrl + 'NewDigUserRegDataBeforeOTP';
-  static const _epNewDigUserRegDataAfterOTP = _baseUrl + 'NewDigUserRegDataAfterOTP';
-  static const _epNewDigUserRegDataRpqList = _baseUrl + 'NewDigUserRegDataRpqList';
-  static const _epGenVerificationCodeForDigUser = _baseUrl + 'genVerificationCodeForDigUser';
-  static const _epValidateVerificationCodeForDigUser = _baseUrl + 'validateVerificationCodeForDigUser';
-  static const _epPartialSavingForDigUser = _baseUrl + 'partialSavingForDigUser';
+  static const _epNewDigUserRegDataBeforeOTP =
+      _baseUrl + 'NewDigUserRegDataBeforeOTP';
+  static const _epNewDigUserRegDataAfterOTP =
+      _baseUrl + 'NewDigUserRegDataAfterOTP';
+  static const _epNewDigUserRegDataRpqList =
+      _baseUrl + 'NewDigUserRegDataRpqList';
+  static const _epGenVerificationCodeForDigUser =
+      _baseUrl + 'genVerificationCodeForDigUser';
+  static const _epValidateVerificationCodeForDigUser =
+      _baseUrl + 'validateVerificationCodeForDigUser';
+  static const _epPartialSavingForDigUser =
+      _baseUrl + 'partialSavingForDigUser';
+  static const _epStateData = _baseUrl + 'StateData';
   static const _epSaveDigUser = _baseUrl + 'saveDigUser';
-  static const _epLoadDigUserMissingDetailLinkData = _baseUrl + 'loadDigUserMissingDetailLinkData';
-  static const _epGenVerificationCodeForDigUserMissingDet = _baseUrl + 'genVerificationCodeForDigUserMissingDet';
-  static const _epValidateVerificationCodeForDigUserMissingDet = _baseUrl + 'validateVerificationCodeForDigUserMissingDet';
+  static const _epLoadDigUserMissingDetailLinkData =
+      _baseUrl + 'loadDigUserMissingDetailLinkData';
+  static const _epGenVerificationCodeForDigUserMissingDet =
+      _baseUrl + 'genVerificationCodeForDigUserMissingDet';
+  static const _epValidateVerificationCodeForDigUserMissingDet =
+      _baseUrl + 'validateVerificationCodeForDigUserMissingDet';
   static const _epSaveDigUserMissingDet = _baseUrl + 'saveDigUserMissingDet';
-
 
   Future<ViewReport> onViewReport(
     String fromDate,
@@ -72,7 +84,9 @@ class ApiClient {
     String folioNumber,
     String userId,
   ) async {
-    printInfo(info: fromDate+toDate+fundCode+reportType+folioNumber+userId);
+    printInfo(
+        info: fromDate + toDate + fundCode + reportType + folioNumber + userId);
+    ViewReport? viewReport;
     try {
       final response = await http.post(
         Uri.parse(_epViewReport),
@@ -89,9 +103,8 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-
         printInfo(info: response.body);
-        ViewReport viewReport = ViewReport.fromJson(jsonDecode(response.body));
+        viewReport = ViewReport.fromJson(jsonDecode(response.body));
         if (viewReport.meta!.code.toString() == 200.toString()) {
           return viewReport;
         } else {
@@ -101,7 +114,11 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + viewReport!.meta!.message.toString()) {
+        throw Exception(viewReport!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 
@@ -145,17 +162,24 @@ class ApiClient {
   }
 
   Future<Common> onSavePurchase(
-      String userId,
-      String unitPlan,
       String fundCode,
-      String unitClass,
       String folioNumber,
       String transactionValue,
       String chequeNo,
       String chequeDate,
       String bankName,
       String bankAccountNo,
-      String paymentMode) async {
+      String pinCode,
+      String paymentMode,
+      String collectionBankAccount,
+      String collectionBankCode,
+      String fundSaleLoad,
+      String paymentProof,
+      String paymentExtension,
+      String depositProof,
+      String depositExtension,
+
+      ) async {
     try {
       final response = await http.post(
         Uri.parse(_epSavePurchase),
@@ -163,19 +187,30 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
-          'userId': userId,
-          'unitPlan': unitPlan,
+          'userId': Constant.loginModel!.response!.user!.userid ?? '',
+          'unitPlan': "0",
           'fundCode': fundCode,
-          'unitClass': unitClass,
+          'unitClass': "XX",
           'folioNumber': folioNumber,
           'transactionValue': transactionValue,
           'chequeNo': chequeNo,
           'chequeDate': chequeDate,
           'bankBranch': bankName,
           'bankAccountNo': bankAccountNo,
-          'paymentMode': paymentMode
-        }),
-      );
+          'paymentMode': paymentMode,
+          'paymentProof': paymentProof ?? "",
+          'paymentExtension': paymentExtension ?? "",
+          'depositProof': depositProof ?? "",
+          'depositExtension': depositExtension ?? "",
+          'accessCode': Constant.loginModel!.response!.user!.sessionAccessCode ?? '',
+          'authorizationPinCode':pinCode,
+          'sessionId': Constant.loginModel!.response!.user!.authorization ?? '',
+          'sessionStartDate': Constant.loginModel!.response!.user!.sessionDateTime ?? '',
+          'userType': Constant.loginModel!.response!.user!.userType ?? '',
+          'collectionBankAccount': collectionBankAccount,
+          'collectionBankCode': collectionBankCode,
+          'fundSaleLoad': fundSaleLoad
+        }));
       if (response.statusCode == 200) {
         print(response.body);
         Common common = Common.fromJson(jsonDecode(response.body));
@@ -331,6 +366,7 @@ class ApiClient {
   }
 
   Future<LoginModel> onLogin(String userId, String password) async {
+    LoginModel? loginModel;
     try {
       final response = await http.post(
         Uri.parse(_epLogin),
@@ -342,18 +378,22 @@ class ApiClient {
       );
       printInfo(info: password);
       if (response.statusCode == 200) {
-        printInfo(info:response.body);
-        LoginModel loginModel = LoginModel.fromJson(jsonDecode(response.body));
+        printInfo(info: response.body);
+        loginModel = LoginModel.fromJson(jsonDecode(response.body));
         if (loginModel.meta!.code.toString() == 200.toString()) {
           return loginModel;
         } else {
-          throw Exception(loginModel.meta!.message);
+          throw Exception(loginModel.meta!.error);
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + loginModel!.meta!.error.toString()) {
+        throw Exception(loginModel!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 
@@ -373,7 +413,7 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        printInfo(info:response.body);
+        printInfo(info: response.body);
         LoadDashboard loadDashboard =
             LoadDashboard.fromJson(jsonDecode(response.body));
         if (loadDashboard.meta!.code.toString() == 200.toString()) {
@@ -469,8 +509,10 @@ class ApiClient {
     }
   }
 
-  Future<LoadFundsPlans> onLoadFundsPlans(String userId, String fundCode,String folioNumber,String requestType) async {
-    print(userId + 'nkj' + fundCode+ 'nkj' + folioNumber+ 'nkj' + requestType);
+  Future<LoadFundsPlans> onLoadFundsPlans(String userId, String fundCode,
+      String folioNumber, String requestType) async {
+    print(
+        userId + 'nkj' + fundCode + 'nkj' + folioNumber + 'nkj' + requestType);
     try {
       final response = await http.post(
         Uri.parse(_epLoadFundsPlans),
@@ -485,7 +527,8 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        LoadFundsPlans loadFundsPlans = LoadFundsPlans.fromJson(jsonDecode(response.body));
+        LoadFundsPlans loadFundsPlans =
+            LoadFundsPlans.fromJson(jsonDecode(response.body));
         print(response.body);
         if (loadFundsPlans.meta!.code.toString() == 200.toString()) {
           return loadFundsPlans;
@@ -543,6 +586,32 @@ class ApiClient {
       throw Exception('No Internet');
     }
   }
+
+
+  Future<StateData> onStateData(String countryCode) async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epStateData),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{'countryCode': countryCode}),
+      );
+      if (response.statusCode == 200) {
+        StateData stateData = StateData.fromJson(jsonDecode(response.body));
+        if (stateData.meta!.code.toString() == 200.toString()) {
+          return stateData;
+        } else {
+          throw Exception(stateData.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
 
   Future<CitySector> onCitySectorData(String cityCode) async {
     try {
@@ -709,7 +778,8 @@ class ApiClient {
     }
   }
 
-  Future<Common> onGeneratePinCode(String userId, String folioNumber,String req) async {
+  Future<Common> onGeneratePinCode(
+      String userId, String folioNumber, String req) async {
     try {
       final response = await http.post(
         Uri.parse(_epGeneratePinCode),
@@ -860,8 +930,11 @@ class ApiClient {
         },
       );
       if (response.statusCode == 200) {
-        NewDigUserRegDataBeforeOTP newDigUserRegDataBeforeOTP = NewDigUserRegDataBeforeOTP.fromJson(jsonDecode(response.body));
-        if (newDigUserRegDataBeforeOTP.meta!.code.toString() == 200.toString()) {
+        printInfo(info: response.body);
+        NewDigUserRegDataBeforeOTP newDigUserRegDataBeforeOTP =
+            NewDigUserRegDataBeforeOTP.fromJson(jsonDecode(response.body));
+        if (newDigUserRegDataBeforeOTP.meta!.code.toString() ==
+            200.toString()) {
           return newDigUserRegDataBeforeOTP;
         } else {
           throw Exception(newDigUserRegDataBeforeOTP.meta!.message);
@@ -883,7 +956,9 @@ class ApiClient {
         },
       );
       if (response.statusCode == 200) {
-        NewDigUserRegDataAfterOTP newDigUserRegDataAfterOTP = NewDigUserRegDataAfterOTP.fromJson(jsonDecode(response.body));
+        printInfo(info: response.body);
+        NewDigUserRegDataAfterOTP newDigUserRegDataAfterOTP =
+            NewDigUserRegDataAfterOTP.fromJson(jsonDecode(response.body));
         if (newDigUserRegDataAfterOTP.meta!.code.toString() == 200.toString()) {
           return newDigUserRegDataAfterOTP;
         } else {
@@ -897,6 +972,7 @@ class ApiClient {
     }
   }
 
+
   Future<NewDigUserRegDataRpqList> onNewDigUserRegDataRpqList() async {
     try {
       final response = await http.post(
@@ -906,7 +982,8 @@ class ApiClient {
         },
       );
       if (response.statusCode == 200) {
-        NewDigUserRegDataRpqList newDigUserRegDataRpqList = NewDigUserRegDataRpqList.fromJson(jsonDecode(response.body));
+        NewDigUserRegDataRpqList newDigUserRegDataRpqList =
+            NewDigUserRegDataRpqList.fromJson(jsonDecode(response.body));
         if (newDigUserRegDataRpqList.meta!.code.toString() == 200.toString()) {
           return newDigUserRegDataRpqList;
         } else {
@@ -921,10 +998,10 @@ class ApiClient {
   }
 
   Future<GenVerificationCodeForDigUser> onGenVerificationCodeForDigUser(
-      String cNic,
-      String email,
-      String mobile,
-      ) async {
+    String cNic,
+    String email,
+    String mobile,
+  ) async {
     try {
       final response = await http.post(
         Uri.parse(_epGenVerificationCodeForDigUser),
@@ -938,8 +1015,10 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        GenVerificationCodeForDigUser genVerificationCodeForDigUser = GenVerificationCodeForDigUser.fromJson(jsonDecode(response.body));
-        if (genVerificationCodeForDigUser.meta!.code.toString() == 200.toString()) {
+        GenVerificationCodeForDigUser genVerificationCodeForDigUser =
+            GenVerificationCodeForDigUser.fromJson(jsonDecode(response.body));
+        if (genVerificationCodeForDigUser.meta!.code.toString() ==
+            200.toString()) {
           return genVerificationCodeForDigUser;
         } else {
           throw Exception(genVerificationCodeForDigUser.meta!.message);
@@ -953,13 +1032,13 @@ class ApiClient {
   }
 
   Future<Common> onValidateVerificationCodeForDigUser(
-      String cNic,
-      String email,
-      String mobile,
-      String mobileRegisteredWith,
-      String accountTypeToBeOpened,
-      String verificationCode,
-      ) async {
+    String cNic,
+    String email,
+    String mobile,
+    String mobileRegisteredWith,
+    String accountTypeToBeOpened,
+    String verificationCode,
+  ) async {
     Common? common;
     try {
       final response = await http.post(
@@ -988,10 +1067,222 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
-      if(e.toString() == 'Exception: '+common!.meta!.error.toString()){
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
         throw Exception(common!.meta!.error.toString());
-      }else {
+      } else {
         throw Exception('No Internet');
+      }
+    }
+  }
+
+  Future<Common> onPartialSavingForDigUser(// String cNic,
+      // String email,
+      // String mobile,
+      // String mobileRegisteredWith,
+      // String accountTypeToBeOpened,
+      // String verificationCode,
+      ) async {
+    Common? common;
+    try {
+      final response = await http.post(
+        Uri.parse(_epPartialSavingForDigUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, dynamic>{
+          "cnic": "12776-1734567-3",
+          "email": "talhakhanxada@gmail.com",
+          "mobile": "+923154511100",
+          "mobileRegisteredWith": "4",
+          "accountTypeToBeOpened": "B",
+          "sessionID": "72",
+          "accountTypeToBeOpened": "B",
+          "annualIncome": '3',
+          "bankAccountNo": "123456789",
+          "bankBranchAddress": "abl branch",
+          "bankName": "00091",
+          "basicInfoDisclaimerChecked": 'true',
+          "birthCityCode": "000016",
+          "birthCountryCode": "001",
+          "birthStateCode": "3",
+          "branchCity": "000016",
+          "city": "000043",
+          "cnicBackDoc": {
+            "fileName": "cnicBack.jpg",
+            "fileExtension": ".jpg",
+            "fileContent": []
+          },
+          "cnicExpiryDate": "2075-12-31",
+          "cnicFrontDoc": {
+            "fileName": "cnicFront.jpg",
+            "fileExtension": ".jpg",
+            "fileContent": []
+          },
+          "cnicIssueDate": "2020-12-31",
+          "country": "001",
+          "crsDisclaimerChecked": true,
+          "customerName": "test name",
+          "dateOfBirth": "2000-04-03",
+          "dividendMandate": "C",
+          "docUploadDisclaimerChecked": true,
+          "domesticCounterParties": "1",
+          "domesticGeographies": "2",
+          "employerDesignation": "3",
+          "employerName": "4",
+          "employerNatureOfBusiness": "5",
+          "employerProfession": "6",
+          "expTurnoverInAccAmount": 5555,
+          "expTurnoverInAccType": "A",
+          "expectedInvestmentAmount": 4,
+          "fatcaDisclaimerChecked": true,
+          "fatherSpouseName": "my father",
+          "incomeProofDoc": {
+            "fileName": "income.jpg",
+            "fileExtension": ".jpg",
+            "fileContent": []
+          },
+          "internationalCounterParties": "counter",
+          "internationalGeographies": "abc",
+          "kycDisclaimerChecked": true,
+          "lifetimeCnicExpiry": true,
+          "mailingAddress": "test mailing add",
+          "mailingCountryCode": "001",
+          "mailingCity": "other",
+          "mailingOtherCity": "test mailing city",
+          "maritalStatus": "S",
+          "mobileNoProofDoc": {
+            "fileName": "mobile.jpg",
+            "fileExtension": ".jpg",
+            "fileContent": []
+          },
+          "mothersMaidenName": "test mother maiden name",
+          "nationalityCode": "001",
+          "occupation": "013",
+          "otherCity": "test other city",
+          "otherOccupation": null,
+          "otherSourceOfIncome": "test",
+          "otherTaxResCountry": "test tax res country",
+          "pakResident": "1",
+          "phoneOne": null,
+          "phoneTwo": null,
+          "preferedModeOfTrans": "B",
+          "religion": "02",
+          "residentialAddress": "lahore",
+          "retirementAge": 60,
+          "rpqAge": 3,
+          "rpqDisclaimerChecked": true,
+          "rpqFinacialPosition": 38,
+          "rpqInvestmentHorizon": 31,
+          "rpqInvestmentKnowledge": 35,
+          "rpqInvestmentObjective": 28,
+          "rpqMaritalStatus": 6,
+          "rpqNoOfDependants": 10,
+          "rpqOccupation": 12,
+          "rpqQualification": 18,
+          "rpqRiskAppetite": 23,
+          "rpqTotalScore": 31,
+          "signatureDoc": {
+            "fileName": "sig.jpg",
+            "fileExtension": ".jpg",
+            "fileContent": []
+          },
+          "sourceOfIncome": "5",
+          "taxIdentificationNumber": null,
+          "taxPaidCountry": "001",
+          "taxResCountryOtherThanPak": "004",
+          "title": "Dr",
+          "titleOfAccount": "ABC title",
+          "zakatDeclarationDoc": null,
+          "zakatExempt": false,
+          "requiredDocs": [],
+          "nominees": [
+            {
+              "name": "nom 1",
+              "cnic": "12345-1234567-1",
+              "relation": "Father",
+              "mobile": "+923374879673"
+            },
+            {
+              "name": "nom 2",
+              "cnic": "12345-1234567-3",
+              "relation": "Mother",
+              "mobile": "+923374879673"
+            }
+          ],
+          "fatcaInfo": [
+            {
+              "answer": false,
+              "questionCode": 1
+            },
+            {
+              "answer": false,
+              "questionCode": 2
+            },
+            {
+              "answer": false,
+              "questionCode": 3
+            },
+            {
+              "answer": true,
+              "questionCode": 5
+            },
+            {
+              "answer": false,
+              "questionCode": 6
+            },
+            {
+              "answer": false,
+              "questionCode": 7
+            },
+            {
+              "answer": true,
+              "questionCode": 8
+            }
+          ],
+          "pepsInfo": [
+            {
+              "answer": false,
+              "questionCode": 1
+            },
+            {
+              "answer": false,
+              "questionCode": 2
+            },
+            {
+              "answer": false,
+              "questionCode": 3
+            },
+            {
+              "answer": true,
+              "questionCode": 4
+            },
+            {
+              "answer": false,
+              "questionCode": 5
+            }
+          ]
+        }),
+      );
+      if (response.statusCode == 200) {
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.error.toString());
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+          throw Exception(common!.meta!.error.toString());
+        } else {
+          throw Exception('No Internet');
+        }
       }
     }
   }

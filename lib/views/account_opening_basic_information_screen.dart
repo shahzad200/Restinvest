@@ -5,10 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
-import '../data/models/new_dig_user_reg_data_after_otp.dart';
-
-import '../utils/constant.dart';
+import 'package:investintrust/data/models/new_dig_user_reg_data_after_otp.dart';
+import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constant.dart';
 import '../widgets/datefield.dart';
 import '../controller/account_opening_basic_information_screen_controller.dart';
 
@@ -38,12 +37,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: const Padding(
-                padding: EdgeInsets.only(right: 50),
-                child: Logo(
-                  height: 50,
-                  width: 50,
-                ),
+              title: const Logo(
+                height: 50,
+                width: 50,
               ),
               elevation: 0,
             ),
@@ -85,13 +81,11 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   text: " OTP VERIFY > ",
                                   textAlign: TextAlign.start,
                                   textColor: AppColor.dimblack,
-                                  fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
                                 RestInvestTitle(
                                   text: " BASIC INFORMATION > ",
                                   textAlign: TextAlign.start,
-                                  fontSize: 8,
                                   textColor: AppColor.blueColor,
                                   fontWeight: FontWeight.w900,
                                 ),
@@ -374,7 +368,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
 
                                             borderRadius:
                                                 BorderRadius.circular(6),
-
+                                            // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
                                               text: _.martialValue == null ||
                                                       _.martialValue == ""
@@ -436,7 +430,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         fontSize: 12,
                                       ),
                                       Container(
-
+                                        // margin: EdgeInsets.all(10.0),
                                         padding: const EdgeInsets.only(
                                             left: 10.0, right: 5.0),
                                         height: 35,
@@ -455,9 +449,11 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
 
                                             borderRadius:
                                                 BorderRadius.circular(6),
-
+                                            // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
-                                              text: _.nationalityValue == null || _.nationalityValue == ""
+                                              text: _.nationalityValue ==
+                                                          null ||
+                                                      _.nationalityValue == ""
                                                   ? "Nationality"
                                                   : _.nationalityValue,
                                               textColor: AppColor.black,
@@ -510,7 +506,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         fontSize: 12,
                                       ),
                                       Container(
-
+                                        // margin: EdgeInsets.all(10.0),
                                         padding: const EdgeInsets.only(
                                             left: 10.0, right: 5.0),
                                         height: 35,
@@ -531,7 +527,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                 BorderRadius.circular(6),
                                             // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
-                                              text: _.residentStatusValue ==null || _.residentStatusValue ==
+                                              text: _.residentStatusValue ==
+                                                          null ||
+                                                      _.residentStatusValue ==
                                                           ""
                                                   ? "Residential"
                                                   : _.residentStatusValue,
@@ -610,7 +608,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
 
                                             borderRadius:
                                                 BorderRadius.circular(6),
-
+                                            // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
                                               text: _.religionValue == null ||
                                                       _.religionValue == ""
@@ -665,7 +663,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         fontSize: 12,
                                       ),
                                       Container(
-
+                                        // margin: EdgeInsets.all(10.0),
                                         padding: const EdgeInsets.only(
                                             left: 10.0, right: 5.0),
                                         height: 35,
@@ -684,7 +682,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
 
                                             borderRadius:
                                                 BorderRadius.circular(6),
-
+                                            // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
                                               text: _.zaKatValue == null ||
                                                       _.zaKatValue == ""
@@ -747,7 +745,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         fontSize: 11,
                                       ),
                                       Container(
-
+                                        // margin: EdgeInsets.all(10.0),
                                         padding: const EdgeInsets.only(
                                             left: 10.0, right: 5.0),
                                         height: 35,
@@ -766,7 +764,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
 
                                             borderRadius:
                                                 BorderRadius.circular(6),
-
+                                            // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
                                               text: _.retirementValue == null ||
                                                       _.retirementValue == ""
@@ -1141,7 +1139,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                             value!.countryName!;
                                                         _.mailingCountryCode =
                                                             value!.countryCode!;
-                                                        _.onMailingCityData(
+                                                        _.isMailingCity = true;
+                                                        _.onCityData(
                                                             value.countryCode!);
                                                       },
                                           ),
@@ -1201,7 +1200,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                                     null ||
                                                                 _.mailingCityValue ==
                                                                     ""
-                                                            ? "Select City"
+                                                            ? "Mailing City"
                                                             : _.mailingCityValue,
                                                         textColor:
                                                             AppColor.black,
@@ -1304,16 +1303,20 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                                 .countryName ??
                                                             ''));
                                                   }).toList(),
-                                            onChanged:
-                                                _.isLoading || _.noInternet
-                                                    ? null
-                                                    : (Countries? value) {
-                                                        _.currentCountryValue =
-                                                            value!.countryName!;
-                                                        _.currentCountryCode =
-                                                            value!.countryCode!;
-                                                        _.update();
-                                                      },
+                                            onChanged: _.isLoading ||
+                                                    _.noInternet
+                                                ? null
+                                                : (Countries? value) {
+                                                    _.currentCountryValue =
+                                                        value!.countryName!;
+                                                    _.currentCountryCode =
+                                                        value!.countryCode!;
+                                                    if (_.isMailingCity) {
+                                                      _.isMailingCity = false;
+                                                    }
+                                                    _.onCityData(
+                                                        value.countryCode!);
+                                                  },
                                           ),
                                         ),
                                       ),
@@ -1335,7 +1338,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         fontWeight: FontWeight.w900,
                                       ),
                                       Container(
-
+                                        // margin: EdgeInsets.all(10.0),
                                         padding: const EdgeInsets.only(
                                             left: 10.0, right: 5.0),
                                         height: 35,
@@ -1346,39 +1349,68 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                 width: 1,
                                                 color: AppColor.black)),
                                         child: Center(
-                                          child: DropdownButton(
-                                            isExpanded: true,
-                                            underline: Container(
-                                              color: AppColor.whiteColor,
-                                            ),
+                                            child: _.currentCityData != null
+                                                ? DropdownButton(
+                                                    isExpanded: true,
+                                                    // alignment: Alignment.center,
+                                                    // icon: const Visibility(
+                                                    //   visible: false,
+                                                    //   child: Icon(Icons.arrow_downward),
+                                                    // ),
+                                                    // iconSize: 0,
+                                                    underline: Container(
+                                                      // alignment: Alignment.center,
+                                                      color:
+                                                          AppColor.whiteColor,
+                                                    ),
 
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            // value: _.dropdownvalue,
-                                            hint: RestInvestTitle(
-                                              text: _.amountvalue == null ||
-                                                      _.amountvalue == ""
-                                                  ? "Account No."
-                                                  : _.amountvalue,
-                                              textColor: AppColor.black,
-                                            ),
-                                            icon: const Icon(
-                                                Icons.keyboard_arrow_down,
-                                                color: AppColor.blueColor,
-                                                size: 30),
-                                            items: fromAccountItems.map(
-                                                (String? fromAccountItems) {
-                                              return DropdownMenuItem<String>(
-                                                  value: fromAccountItems,
-                                                  child:
-                                                      Text(fromAccountItems!));
-                                            }).toList(),
-                                            onChanged: (String? value) {
-                                              _.amountvalue = value!;
-                                              _.update();
-                                            },
-                                          ),
-                                        ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    // value: _.dropdownvalue,
+                                                    hint: Center(
+                                                      child: RestInvestTitle(
+                                                        text: _.currentCityValue ==
+                                                                    null ||
+                                                                _.currentCityValue ==
+                                                                    ""
+                                                            ? "Current City"
+                                                            : _.currentCityValue,
+                                                        textColor:
+                                                            AppColor.black,
+                                                      ),
+                                                    ),
+                                                    icon: const Icon(
+                                                        Icons
+                                                            .keyboard_arrow_down,
+                                                        color:
+                                                            AppColor.blueColor,
+                                                        size: 30),
+                                                    items: _.currentCityData!
+                                                        .response!
+                                                        .map<
+                                                                DropdownMenuItem<
+                                                                    res.Response>>(
+                                                            (res.Response?
+                                                                value) {
+                                                      return DropdownMenuItem<
+                                                          res.Response>(
+                                                        value: value,
+                                                        child: Text(
+                                                            value!.cityName!),
+                                                      );
+                                                    }).toList(),
+                                                    onChanged:
+                                                        (res.Response? value) {
+                                                      _.currentCityValue =
+                                                          value!.cityName!;
+                                                      _.currentCityCode =
+                                                          value.cityCode!;
+                                                      _.update();
+                                                      // _.onCitySectorData(value.cityCode!);
+                                                    },
+                                                  )
+                                                : const SizedBox()),
                                       ),
                                     ],
                                   ),
@@ -1421,27 +1453,38 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                 BorderRadius.circular(6),
                                             // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
-                                              text: _.amountvalue == null ||
-                                                      _.amountvalue == ""
-                                                  ? "Account No."
-                                                  : _.amountvalue,
+                                              text: _.bankNameValue == null ||
+                                                      _.bankNameValue == ""
+                                                  ? "Bank"
+                                                  : _.bankNameValue,
                                               textColor: AppColor.black,
                                             ),
                                             icon: const Icon(
                                                 Icons.keyboard_arrow_down,
                                                 color: AppColor.blueColor,
                                                 size: 30),
-                                            items: fromAccountItems.map(
-                                                (String? fromAccountItems) {
-                                              return DropdownMenuItem<String>(
-                                                  value: fromAccountItems,
-                                                  child:
-                                                      Text(fromAccountItems!));
-                                            }).toList(),
-                                            onChanged: (String? value) {
-                                              _.amountvalue = value!;
-                                              _.update();
-                                            },
+                                            items: _.isLoading || _.noInternet
+                                                ? null
+                                                : _.newDigUserRegDataAfterOTP!
+                                                    .response!.banks!
+                                                    .map((Banks banks) {
+                                                    return DropdownMenuItem<
+                                                            Banks>(
+                                                        value: banks,
+                                                        child: Text(banks!
+                                                                .description ??
+                                                            ''));
+                                                  }).toList(),
+                                            onChanged:
+                                                _.isLoading || _.noInternet
+                                                    ? null
+                                                    : (Banks? value) {
+                                                        _.bankNameValue =
+                                                            value!.description!;
+                                                        _.bankNameCode =
+                                                            value!.code!;
+                                                        _.update();
+                                                      },
                                           ),
                                         ),
                                       ),
@@ -1486,27 +1529,38 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                 BorderRadius.circular(6),
                                             // value: _.dropdownvalue,
                                             hint: RestInvestTitle(
-                                              text: _.amountvalue == null ||
-                                                      _.amountvalue == ""
-                                                  ? "Account No."
-                                                  : _.amountvalue,
+                                              text: _.bankCityValue == null ||
+                                                      _.bankCityValue == ""
+                                                  ? "Bank City"
+                                                  : _.bankCityValue,
                                               textColor: AppColor.black,
                                             ),
                                             icon: const Icon(
                                                 Icons.keyboard_arrow_down,
                                                 color: AppColor.blueColor,
                                                 size: 30),
-                                            items: fromAccountItems.map(
-                                                (String? fromAccountItems) {
-                                              return DropdownMenuItem<String>(
-                                                  value: fromAccountItems,
-                                                  child:
-                                                      Text(fromAccountItems!));
-                                            }).toList(),
-                                            onChanged: (String? value) {
-                                              _.amountvalue = value!;
-                                              _.update();
-                                            },
+                                            items: _.isLoading || _.noInternet
+                                                ? null
+                                                : _.newDigUserRegDataAfterOTP!
+                                                    .response!.pakCities!
+                                                    .map((PakCities pakCities) {
+                                                    return DropdownMenuItem<
+                                                            PakCities>(
+                                                        value: pakCities,
+                                                        child: Text(pakCities!
+                                                                .cityName ??
+                                                            ''));
+                                                  }).toList(),
+                                            onChanged:
+                                                _.isLoading || _.noInternet
+                                                    ? null
+                                                    : (PakCities? value) {
+                                                        _.bankCityValue =
+                                                            value!.cityName!;
+                                                        _.bankCityCode =
+                                                            value!.cityCode!;
+                                                        _.update();
+                                                      },
                                           ),
                                         ),
                                       ),
@@ -1570,10 +1624,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Radio(
-                                  value: 0,
-                                  groupValue: _.charactor,
-                                  onChanged: (int? val) {
-                                    _.charactor = val!;
+                                  value: '0',
+                                  groupValue: _.groupValue,
+                                  onChanged: (String? val) {
+                                    _.groupValue = val!;
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
@@ -1586,10 +1640,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w900,
                                 ),
                                 Radio(
-                                  value: 1,
-                                  groupValue: _.charactor,
-                                  onChanged: (int? val) {
-                                    _.charactor = val!;
+                                  value: '1',
+                                  groupValue: _.groupValue,
+                                  onChanged: (String? val) {
+                                    _.groupValue = val!;
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
@@ -1610,13 +1664,14 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w900,
                             ),
+                            SizedBox(height:5),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                  height: 35,
-                                  width: 35,
+                                  height:25,
+                                  width:25,
                                   child: Checkbox(
                                       checkColor: AppColor.whiteColor,
                                       fillColor: MaterialStateColor.resolveWith(
@@ -1627,13 +1682,16 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         _.update();
                                       }),
                                 ),
-                                const RestInvestTitle(
-                                  text:
-                                      "I accept that my investments is subject to market risks and a target return / dividend range or capital protection cannot be guaranteed. I clearly understand, agree, acknowledge and  accept that my investment is subject  to market price fluctuations and  other risks inherent in all such investments. The risks emanate from  various factors which include, but  are not limited to, market risks,  government regulation risks, credit  risks, liquidity risks, settlement risks,  redemption risks, Shari’ah non-compliance  risks, dividend distribution taxation  risks, and changes in risks associated  with trading volumes, liquidity and settlement  systems in equity and debt markets.  Past performance is not necessarily indicative  of future results. Investment  in mutual funds are not bank deposits and are  neither issued by, insured by, obligation of, nor otherwise supported by SECP, any  Government Agency, Trustee (except to the extent specifically stated in the constitutive documents)  or any of the shareholders of National Investment Trust Limited or any of the Pre-IPO  Investors or any other bank or financial institution. Returns offered by Funds /  Plans can be positive and / or negative and  may increase or decrease subject to capital  market conditions and risk profile  of the selected Fund / Plan. Hence, the value of investment  may go below the invested amount.  For further details, please refer to the detailed risk disclosures  and disclaimers contained  in the Offering Documents, Supplementary Offering Documents and the  latest Fund Manager Report available on our website or by calling or writing to us.",
-                                  textColor: AppColor.black,
-                                  fontSize: 8,
-                                  textAlign: TextAlign.justify,
-                                  fontWeight: FontWeight.w900,
+                                SizedBox(width: 5,),
+                                Expanded(
+                                  child: const RestInvestTitle(
+                                    text:
+                                        "I accept that my investments is subject to market risks and a target return / dividend range orcapital protection cannot be guaranteed.I clearly understand, agree, acknowledge and accept that my investment is subject to market price fluctuations and other risks inherent in all such investments. The risks emanate from various factors which include, but are not limited to, market risks, government regulation risks, credit risks, liquidity risks, settlement risks, redemption risks, Shari’ah non-compliance risks, dividend distribution taxation risks, and changes in risks associated with trading volumes, liquidity and settlement systems in equity and debt markets. Past performance is not necessarily indicative of future results. Investment in mutual funds are not bank deposits and are neither issued by, insured by, obligation of, nor otherwise supported by SECP, any Government Agency, Trustee (except to the extent specifically stated in the constitutive documents) or any of the shareholders of National Investment Trust Limited or any of the Pre-IPO Investors or any other bank or financial institution. Returns offered by Funds / Plans can be positive and / or negative and may increase or decrease subject to capital market conditions and risk profile of the selected Fund / Plan. Hence, the value of investment may go below the invested amount. For further details, please refer to the detailed risk disclosures and disclaimers contained in the Offering Documents, Supplementary Offering Documents and the latest Fund Manager Report available on our website or by calling or writing to us.",
+                                    textColor: AppColor.black,
+                                    textAlign: TextAlign.justify,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                               ],
                             ),
@@ -1641,7 +1699,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                             CustomRoundButton(
                                 height: 35,
                                 text: "SAVE&NEXT",
-                                onPress: () {},
+                                onPress: () {
+                                  Get.toNamed(
+                                      AppRoute.accountOpenKycDetailScreen);
+                                },
                                 isRound: false),
                             const SizedBox(
                               height: 10,

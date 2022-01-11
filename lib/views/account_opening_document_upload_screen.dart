@@ -17,8 +17,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final width = Get.width;
-    // final height = Get.height;
+    final width = Get.width;
+    final height = Get.height;
     return GetBuilder<AccountOpenDocumentUploadScreenController>(
         init: AccountOpenDocumentUploadScreenController(),
         builder: (_) {
@@ -30,9 +30,12 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: const Logo(
-                height: 50,
-                width: 50,
+              title: Padding(
+                padding:  EdgeInsets.only(right:Get.width/6),
+                child: Logo(
+                  height: 50,
+                  width: 50,
+                ),
               ),
               elevation: 0,
             ),
@@ -56,7 +59,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                             Border.all(width: 1, color: AppColor.blueColor)),
                     child: Column(children: [
                       const CustomTextContainer(
-                        fontSize: 14,
+                        fontSize: 16,
                         height: 35,
                         text: "DOCUMENTS UPLOAD",
                         textAlign: TextAlign.start,
@@ -68,45 +71,45 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(
-                              children: const [
-                                RestInvestTitle(
-                                  text: " OTP VERIFY > ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                RestInvestTitle(
-                                  text: " BASIC INFORMATION > ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                RestInvestTitle(
-                                  text: "KYC DETAIL > ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                RestInvestTitle(
-                                  text: " FATCA > ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 8,
-                                ),
-                                RestInvestTitle(
-                                  text: "UPLOAD DOCUMENTS > ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.blueColor,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 8,
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: const [
+                            //     RestInvestTitle(
+                            //       text: " OTP VERIFY > ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontSize: 10,
+                            //       fontWeight: FontWeight.w900,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: " BASIC INFORMATION > ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontSize: 10,
+                            //       fontWeight: FontWeight.w900,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: "KYC DETAIL > ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontSize: 10,
+                            //       fontWeight: FontWeight.w900,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: " FATCA > ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontWeight: FontWeight.w900,
+                            //       fontSize: 10,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: "UPLOAD DOCUMENTS > ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.blueColor,
+                            //       fontWeight: FontWeight.w900,
+                            //       fontSize: 10,
+                            //     ),
+                            //   ],
+                            // ),
                             space,
                             const RestInvestTitle(
                               text: "CNIC/NICOP FRONT:*",
@@ -132,7 +135,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  color: AppColor.greyColor,
+                                  color: AppColor.greyColor.withOpacity(0.5),
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
                             ),
@@ -196,7 +199,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  color: AppColor.greyColor,
+                                  color: AppColor.greyColor.withOpacity(0.5),
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
                             ),
@@ -260,7 +263,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  color: AppColor.greyColor,
+                                  color: AppColor.greyColor.withOpacity(0.5),
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
                             ),
@@ -324,7 +327,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  color: AppColor.greyColor,
+                                  color: AppColor.greyColor.withOpacity(0.5),
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
                             ),
@@ -388,7 +391,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  color: AppColor.greyColor,
+                                  color: AppColor.greyColor.withOpacity(0.5),
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
                             ),
@@ -435,27 +438,35 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w900,
                             ),
+                            SizedBox(height: 5,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Checkbox(
-                                    checkColor: AppColor.whiteColor,
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                    value: _.isChecked,
-                                    onChanged: (bool? val) {
-                                      _.isChecked = val!;
-                                      _.update();
-                                    }),
-                                const RestInvestTitle(
-                                  text:
-                                      "Investor are fully informed and understand that investment in units of Mutual Funds/CIS are not\nbank deposit,not guaranteed and not issued by any person.shareholders of AMCs are not\nresponsible for any loose of investor resulting from the operation of any CIS launched/to be\nlaunched by the AMC unless otherwise mentioned           ",
-                                  textColor: AppColor.black,
-                                  fontSize: 8,
-                                  textAlign: TextAlign.start,
-                                  fontWeight: FontWeight.w900,
+                                SizedBox(
+                                  height:25,
+                                  width:25,
+                                  child: Checkbox(
+                                      checkColor: AppColor.whiteColor,
+                                      fillColor: MaterialStateColor.resolveWith(
+                                          (states) => AppColor.blueColor),
+                                      value: _.isChecked,
+                                      onChanged: (bool? val) {
+                                        _.isChecked = val!;
+                                        _.update();
+                                      }),
                                 ),
+                                 SizedBox(width: 5,),
+                                 Expanded(
+                                   child: RestInvestTitle(
+                                    text:
+                                        "Invester are fully informed and understand thatinvestment in units of Mutual Funds/CIS are not bank deposit,not guaranteed and not issued by any person.shareholders of AMCs are not responsible for any loose of investor resulting from the operation of any CIS launched/to be launched by the AMC unless otherwise mentioned",
+                                    textColor: AppColor.black,
+                                    fontSize: 8,
+                                    textAlign: TextAlign.justify,
+                                    fontWeight: FontWeight.w900,
+                                ),
+                                 ),
                               ],
                             ),
                             space,
@@ -469,7 +480,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                     buttonColor: AppColor.dimBlue,
                                     onPress: () {},
                                     isRound: false),
-                                const SizedBox(
+                                SizedBox(
                                   width: 10,
                                 ),
                                 CustomRoundButton(

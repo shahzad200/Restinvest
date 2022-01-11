@@ -26,6 +26,7 @@ class F2FTransferScreenController extends GetxController {
   bool unitButton = true;
   bool percentageButton = false;
   bool allUnitButton = false;
+  bool isCheckPrivacy = false;
 
 
   bool investButton = false;

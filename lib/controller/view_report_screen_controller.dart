@@ -64,7 +64,7 @@ class ViewReportsScreenController extends GetxController {
               noInternet = false;
               update();
               Fluttertoast.showToast(
-                  msg: e.toString(),
+                  msg: e.toString().replaceAll('Exception: ', ''),
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.CENTER,
                   timeInSecForIosWeb: 1,
