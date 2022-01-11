@@ -23,8 +23,8 @@ class DailyNavScreen extends StatelessWidget {
                 appBar: AppBar(
                   centerTitle: true,
                   backgroundColor: AppColor.whiteColor,
-                  title: Padding(
-                    padding: const EdgeInsets.only(right: 50),
+                  title: const Padding(
+                    padding: EdgeInsets.only(right: 50),
                     child: Logo(
                       height: 80,
                       width: 80,
@@ -44,7 +44,7 @@ class DailyNavScreen extends StatelessWidget {
                               Border.all(width: 1, color: AppColor.blueColor)),
                       child: Column(
                         children: [
-                           CustomTextContainer(fontSize: 14,
+                           const CustomTextContainer(fontSize: 14,
                             height: 40,
                             text: "DAILY FUND PRICES",
                             textAlign: TextAlign.end,
@@ -54,7 +54,7 @@ class DailyNavScreen extends StatelessWidget {
                           SingleChildScrollView(
                             child: Column(
                               children: [
-                                 CustomTextContainer(fontSize: 14,
+                                 const CustomTextContainer(fontSize: 14,
                                   height: 25,
                                   text: "MUTUAL FUNDS",
                                   textAlign: TextAlign.start,
@@ -110,7 +110,7 @@ class DailyNavScreen extends StatelessWidget {
     ),
 
                                 space,
-                                 CustomTextContainer(fontSize: 14,
+                                 const CustomTextContainer(fontSize: 14,
                                   height: 25,
                                   text: "PENSION ",
                                   textAlign: TextAlign.start,
@@ -163,7 +163,7 @@ class DailyNavScreen extends StatelessWidget {
                                 );
                               }),),
                                 space,
-                                 CustomTextContainer(fontSize: 14,
+                                 const CustomTextContainer(fontSize: 14,
                                   height: 25,
                                   text: "EXCHANGE TRADED FUND",
                                   textAlign: TextAlign.left,

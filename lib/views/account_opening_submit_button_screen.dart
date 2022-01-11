@@ -1,21 +1,13 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../controller/account_opening_submit_button_screen_controller.dart';
-
 import '../widgets/button.dart';
-
 import '../utils/colors.dart';
-
 import '../widgets/constant_widget.dart';
-
 class AccountOpenSubmitButtonScreen extends StatelessWidget {
   const AccountOpenSubmitButtonScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final width = Get.width;

@@ -17,8 +17,8 @@ class AccountOpenPreviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = Get.width;
-    final height = Get.height;
+    // final width = Get.width;
+    // final height = Get.height;
     return GetBuilder<AccountOpenPreviewScreenController>(
         init: AccountOpenPreviewScreenController(),
         builder: (_) {

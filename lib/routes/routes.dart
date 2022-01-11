@@ -1,5 +1,11 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:investintrust/views/account_opening_document_upload_screen.dart';
+import 'package:investintrust/views/account_opening_fatca_screen.dart';
+import 'package:investintrust/views/account_opening_kyc_detail_screen.dart';
+import 'package:investintrust/views/account_opening_preview_screen.dart';
+import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
+import 'package:investintrust/views/account_opening_submit_button_screen.dart';
 import '../views/account_opening_bank_detail_screen.dart';
 import '../views/account_opening_basic_information_screen.dart';
 import '../views/account_opening_request_screen.dart';
@@ -56,7 +62,15 @@ class AppRoute {
 
   static const String accountopeningrequest='/accountopeningrequest';
   static const String accountopeningbasicinformation='/accountopeningbasicinformation';
+
   static const String accountopeningbankdetail='/accountopeningbankdetail';
+  static const String accountopeningkycdetail='/accountopeningbankkycdetail';
+  static const String accountopeningfatca='/accountopeningfatca';
+  static const String accountopeningdocumentupload='/accountopeningdocumentupload';
+  static const String accountopeningpreview='/accountopeningpreview';
+  static const String accountopeningsubmit='/accountopeningsubmit';
+  static const String accountopeningriskprofile='/accountopeningriskprofile';
+
 
   AppRoute._();
 
@@ -165,6 +179,30 @@ class AppRoute {
       GetPage(
           name: AppRoute.accountopeningbankdetail,
           page: () => const AccountOpenBankDetailScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountopeningdocumentupload,
+          page: () => const AccountOpenDocumentUploadScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountopeningriskprofile,
+          page: () => const AccountOpenRiskProfileScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountopeningpreview,
+          page: () => const AccountOpenPreviewScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountopeningfatca,
+          page: () => const AccountOpenFatcaScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountopeningsubmit,
+          page: () => const AccountOpenSubmitButtonScreen()
+      ),
+      GetPage(
+          name: AppRoute.accountopeningkycdetail,
+          page: () => const AccountOpenKycDetailScreen()
       ),
     ];
   }

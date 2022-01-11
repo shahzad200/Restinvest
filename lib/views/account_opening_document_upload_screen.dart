@@ -17,8 +17,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = Get.width;
-    final height = Get.height;
+    // final width = Get.width;
+    // final height = Get.height;
     return GetBuilder<AccountOpenDocumentUploadScreenController>(
         init: AccountOpenDocumentUploadScreenController(),
         builder: (_) {
@@ -30,7 +30,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: Logo(
+              title: const Logo(
                 height: 50,
                 width: 50,
               ),
@@ -452,7 +452,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                   text:
                                       "Investor are fully informed and understand that investment in units of Mutual Funds/CIS are not\nbank deposit,not guaranteed and not issued by any person.shareholders of AMCs are not\nresponsible for any loose of investor resulting from the operation of any CIS launched/to be\nlaunched by the AMC unless otherwise mentioned           ",
                                   textColor: AppColor.black,
-                                  fontSize: 8,textAlign: TextAlign.start,
+                                  fontSize: 8,
+                                  textAlign: TextAlign.start,
                                   fontWeight: FontWeight.w900,
                                 ),
                               ],

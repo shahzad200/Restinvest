@@ -78,17 +78,17 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                   text: " OTP VERIFY > ",
                                   textAlign: TextAlign.start,
                                   textColor: AppColor.dimblack,
-                                  fontWeight: FontWeight.w900,
+                                  fontWeight: FontWeight.w900,fontSize: 8,
                                 ),
                                 RestInvestTitle(
                                   text: " BASIC INFORMATION > ",
-                                  textAlign: TextAlign.start,
+                                  textAlign: TextAlign.start,fontSize: 8,
                                   textColor: AppColor.dimblack,
                                   fontWeight: FontWeight.w900,
                                 ),
                                 RestInvestTitle(
                                   text: " BANK DETAILS > ",
-                                  textAlign: TextAlign.start,
+                                  textAlign: TextAlign.start,fontSize: 8,
                                   textColor: AppColor.blueColor,
                                   fontWeight: FontWeight.w900,
                                 ),
@@ -206,6 +206,7 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                             border: Border.all(
                                                 width: 1,
                                                 color: AppColor.black)),
+
                                         child: Center(
                                           child: DropdownButton(
                                             isExpanded: true,
@@ -446,19 +447,22 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Checkbox(
-                                    checkColor: AppColor.whiteColor,
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                                    value: _.isChecked,
-                                    onChanged: (bool? val) {
-                                      _.isChecked = val!;
-                                      _.update();
-                                    }),
+                                SizedBox(height:35,width: 35,
+                                  child: Checkbox(
+                                      checkColor: AppColor.whiteColor,
+                                      fillColor: MaterialStateColor.resolveWith(
+                                          (states) => AppColor.blueColor),
+                                      value: _.isChecked,
+                                      onChanged: (bool? val) {
+                                        _.isChecked = val!;
+                                        _.update();
+                                      }),
+                                ),
                                 const RestInvestTitle(
                                   text:
-                                      "I accept that my investments is subject to market risks and a target return / dividend range or\ncapital protection cannot be guaranteed.I clearly understand, agree, acknowledge and accept\nthat my investment is subject to market price fluctuations and other risks inherent in all such\ninvestments. The risks emanate from various factors which include, but are not limited to,\nmarket risks, government regulation risks, credit risks, liquidity risks, settlement risks,\nredemption risks, Shari’ah non-compliance risks, dividend distribution taxation risks, and\nchanges in risks associated with trading volumes, liquidity and settlement systems in equity\nand debt markets. Past performance is not necessarily indicative of future results. Investment\nin mutual funds are not bank deposits and are neither issued by, insured by, obligation of, nor\notherwise supported by SECP, any Government Agency, Trustee (except to the extent\nspecifically stated in the constitutive documents) or any of the shareholders of National\nInvestment Trust Limited or any of the Pre-IPO Investors or any other bank or financial\ninstitution. Returns offered by Funds / Plans can be positive and / or negative and may increase\nor decrease subject to capital market conditions and risk profile of the selected Fund / Plan.\nHence, the value of investment may go below the invested amount. For further details, please\nrefer to the detailed risk disclosures and disclaimers contained in the Offering Documents,\nSupplementary Offering Documents and the latest Fund Manager Report available on our\nwebsite or by calling or writing to us.             ",
+                                      "I accept that my investments is subject to market risks and a target return / dividend range or capital protection cannot be guaranteed.I clearly understand, agree, acknowledge and accept that my investment is subject to market price fluctuations and other risks inherent in all such investments. The risks emanate from various factors which include, but are not limited to, market risks, government regulation risks, credit risks, liquidity risks, settlement risks,redemption risks, Shari’ah non-compliance risks, dividend distribution taxation risks, and changes in risks associated with trading volumes, liquidity and settlement systems in equity and debt markets. Past performance is not necessarily indicative of future results. Investment in mutual funds are not bank deposits and are neither issued by, insured by, obligation of, nor otherwise supported by SECP, any Government Agency, Trustee (except to the extent specifically stated in the constitutive documents) or any of the shareholders of National Investment Trust Limited or any of the Pre-IPO Investors or any other bank or financial\ninstitution. Returns offered by Funds / Plans can be positive and / or negative and may increase or decrease subject to capital market conditions and risk profile of the selected Fund / Plan.Hence, the value of investment may go below the invested amount. For further details, please refer to the detailed risk disclosures and disclaimers contained in the Offering Documents, Supplementary Offering Documents and the latest Fund Manager Report available on our website or by calling or writing to us.",
                                   textColor: AppColor.black,
+                                  textAlign: TextAlign.justify,
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),

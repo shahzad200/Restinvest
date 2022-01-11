@@ -18,8 +18,8 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = Get.width;
-    final height = Get.height;
+    // final width = Get.width;
+    // final height = Get.height;
     return GetBuilder<AccountOpenRiskProfileScreenController>(
         init: AccountOpenRiskProfileScreenController(),
         builder: (_) {
@@ -161,7 +161,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "51-60",
@@ -169,26 +169,28 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
-
                               ],
                             ),
-                            Row(children: [
-                              Radio(
-                                value: 3,
-                                groupValue: _.charactor,
-                                onChanged: (int? val) {
-                                  _.charactor = val!;
-                                  _.update();
-                                },
-                                fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                              ),
-                              const RestInvestTitle(
-                                text: "Above 60",
-                                textColor: AppColor.black,
-                                fontSize: 8,
-                                fontWeight: FontWeight.w900,
-                              ),],),
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 3,
+                                  groupValue: _.charactor,
+                                  onChanged: (int? val) {
+                                    _.charactor = val!;
+                                    _.update();
+                                  },
+                                  fillColor: MaterialStateColor.resolveWith(
+                                      (states) => AppColor.blueColor),
+                                ),
+                                const RestInvestTitle(
+                                  text: "Above 60",
+                                  textColor: AppColor.black,
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ],
+                            ),
                             space,
                             const RestInvestTitle(
                               text: "Martial Status:*",
@@ -239,7 +241,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "Divorced / Widow",
@@ -247,10 +249,9 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
-
                               ],
                             ),
-                            Row(children: [ ],),
+
                             space,
                             const RestInvestTitle(
                               text: "No. Of Dependent:*",
@@ -301,7 +302,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "Four Seven",
@@ -309,26 +310,28 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
-
                               ],
                             ),
-                            Row(children: [
-                              Radio(
-                                value: 3,
-                                groupValue: _.dependent,
-                                onChanged: (int? val) {
-                                  _.dependent = val!;
-                                  _.update();
-                                },
-                                fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                              ),
-                              const RestInvestTitle(
-                                text: "Above Seven",
-                                textColor: AppColor.black,
-                                fontSize: 8,
-                                fontWeight: FontWeight.w900,
-                              ),],),
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 3,
+                                  groupValue: _.dependent,
+                                  onChanged: (int? val) {
+                                    _.dependent = val!;
+                                    _.update();
+                                  },
+                                  fillColor: MaterialStateColor.resolveWith(
+                                      (states) => AppColor.blueColor),
+                                ),
+                                const RestInvestTitle(
+                                  text: "Above Seven",
+                                  textColor: AppColor.black,
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ],
+                            ),
                             space,
                             const RestInvestTitle(
                               text: "Occupation:*",
@@ -379,7 +382,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "Salaried",
@@ -387,26 +390,28 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
-
                               ],
                             ),
-                            Row(children: [
-                              Radio(
-                                value: 3,
-                                groupValue: _.occupation,
-                                onChanged: (int? val) {
-                                  _.occupation = val!;
-                                  _.update();
-                                },
-                                fillColor: MaterialStateColor.resolveWith(
-                                        (states) => AppColor.blueColor),
-                              ),
-                              const RestInvestTitle(
-                                text: "Bussiness",
-                                textColor: AppColor.black,
-                                fontSize: 8,
-                                fontWeight: FontWeight.w900,
-                              ),],),
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 3,
+                                  groupValue: _.occupation,
+                                  onChanged: (int? val) {
+                                    _.occupation = val!;
+                                    _.update();
+                                  },
+                                  fillColor: MaterialStateColor.resolveWith(
+                                      (states) => AppColor.blueColor),
+                                ),
+                                const RestInvestTitle(
+                                  text: "Bussiness",
+                                  textColor: AppColor.black,
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ],
+                            ),
                             space,
                             const RestInvestTitle(
                               text: "Qualification:*",
@@ -449,7 +454,6 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
-
                               ],
                             ),
                             Row(
@@ -489,22 +493,26 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Row(children: [  Radio(
-                              value: 2,
-                              groupValue: _.qualification,
-                              onChanged: (int? val) {
-                                _.qualification = val!;
-                                _.update();
-                              },
-                              fillColor: MaterialStateColor.resolveWith(
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 2,
+                                  groupValue: _.qualification,
+                                  onChanged: (int? val) {
+                                    _.qualification = val!;
+                                    _.update();
+                                  },
+                                  fillColor: MaterialStateColor.resolveWith(
                                       (states) => AppColor.blueColor),
+                                ),
+                                const RestInvestTitle(
+                                  text: "Graduate",
+                                  textColor: AppColor.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ],
                             ),
-                              const RestInvestTitle(
-                                text: "Graduate",
-                                textColor: AppColor.black,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w900,
-                              ),],),
                             space,
                             const RestInvestTitle(
                               text: "Your Investment Objective:*",
@@ -555,7 +563,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "Low",
@@ -563,13 +571,11 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
-
                               ],
                             ),
                             Row(
                               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-
                                 Radio(
                                   value: 4,
                                   groupValue: _.object,
@@ -594,7 +600,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "Moderate",
@@ -604,7 +610,6 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-
                             space,
                             const RestInvestTitle(
                               text: "Your Investment Horizon:*",
@@ -647,7 +652,6 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
-
                               ],
                             ),
                             Row(
@@ -667,7 +671,8 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   textColor: AppColor.black,
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
-                                ),Radio(
+                                ),
+                                Radio(
                                   value: 2,
                                   groupValue: _.horzon,
                                   onChanged: (int? val) {
@@ -675,7 +680,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "5 to 10 year",
@@ -685,8 +690,6 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-
-
                             space,
                             const RestInvestTitle(
                               text:
@@ -796,7 +799,6 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
                                 ),
-
                               ],
                             ),
                             Row(
@@ -809,7 +811,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   fillColor: MaterialStateColor.resolveWith(
-                                          (states) => AppColor.blueColor),
+                                      (states) => AppColor.blueColor),
                                 ),
                                 const RestInvestTitle(
                                   text: "Not Sure",
@@ -853,6 +855,8 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                               textColor: AppColor.black,
                               fontWeight: FontWeight.w900,
                             ),
+                            space,
+
                             space,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
