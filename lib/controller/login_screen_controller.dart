@@ -48,54 +48,77 @@ class LoginScreenController extends GetxController {
 
 
   void onLoginPress(context) async{
-    final key = encrypt.Key.fromUtf8('codingaffairscom');
+    if(userNameController.text == '' || userNameController.text == null){
+      Fluttertoast.showToast(
+          msg: 'Please Enter User Name',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else if(passwordController.text == '' || passwordController.text == null){
+      Fluttertoast.showToast(
+          msg: 'Please Enter Password',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
+      final key = encrypt.Key.fromUtf8('codingaffairscom');
 
-    final bytes = utf8.encode('codingaffairscom');
-    // final base64Str = base64.encode(bytes);
+      final bytes = utf8.encode('codingaffairscom');
+      // final base64Str = base64.encode(bytes);
 
 
-    final iv = encrypt.IV.fromLength(16);
+      final iv = encrypt.IV.fromLength(16);
 
-    final encrypter = encrypt.Encrypter(encrypt.AES(key,mode: encrypt.AESMode.cbc));
+      final encrypter = encrypt.Encrypter(
+          encrypt.AES(key, mode: encrypt.AESMode.cbc));
 
-    final encrypted = encrypter.encrypt("${passwordController.text}", iv: iv);
-    // final encrypted = encrypter.encrypt("Sneha*12", iv: iv);
-    // final encrypted = encrypter.encrypt("SAAD31", iv: iv);
+      final encrypted = encrypter.encrypt("${passwordController.text}", iv: iv);
+      // final encrypted = encrypter.encrypt("Sneha*12", iv: iv);
+      // final encrypted = encrypter.encrypt("SAAD31", iv: iv);
 
-    try{
-      isLoading = true;
-      CustomDialog(context);
-      update();
-
-      // Constant.loginModel = await _repository.onLogin('MAHESH9',encrypted.base16.toString());
-      Constant.loginModel = await _repository.onLogin(userNameController.text,encrypted.base16.toString());
-      Get.back();
-      Get.toNamed(AppRoute.portofolioRoute);
-      Constant.userId = Constant.loginModel!.response!.user!.userid.toString();
-
-      isLoading = false;
-      update();
-    }catch (e){
-      Get.back();
-      if(e.toString() == 'Exception: No Internet'){
-        isLoading = false;
-        noInternet = true;
+      try {
+        isLoading = true;
+        CustomDialog(context);
         update();
-      } else {
+
+        // Constant.loginModel = await _repository.onLogin('MAHESH9',encrypted.base16.toString());
+        Constant.loginModel = await _repository.onLogin(
+            userNameController.text, encrypted.base16.toString());
         Get.back();
+        Get.toNamed(AppRoute.portofolioRoute);
+        Constant.userId =
+            Constant.loginModel!.response!.user!.userid.toString();
+
         isLoading = false;
-        noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+      } catch (e) {
+        if (e.toString() == 'Exception: No Internet') {
+          Get.back();
+          isLoading = false;
+          noInternet = true;
+          update();
+        } else {
+          Get.back();
+          isLoading = false;
+          noInternet = false;
+          update();
+          Fluttertoast.showToast(
+              msg: e.toString().replaceAll('Exception: ', ''),
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
       }
+      print("keyyyy encrypted  ${encrypted.base16}");
     }
-    print("keyyyy encrypted  ${encrypted.base16}");
   }
 }

@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/city_data.dart';
+import 'package:investintrust/data/models/state_data.dart';
+import 'package:investintrust/data/repository.dart';
+
+import 'account_opening_basic_information_screen_controller.dart';
 
 
 class AccountOpenFatcaController extends GetxController{
@@ -12,9 +17,7 @@ class AccountOpenFatcaController extends GetxController{
   // var number = "".obs;
   // var email = "".obs;
 
-  String countryValue = "";
-  String stateValue = "";
-  String cityValue = "";
+
   String cityValue2 = "";
   String tinNumber = "xzcxzc";
   bool isChecked=false;
@@ -26,6 +29,23 @@ class AccountOpenFatcaController extends GetxController{
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+  AccountOpenBasicInformationScreenController controller = Get.find<AccountOpenBasicInformationScreenController>();
+
+
+  bool isLoading = false;
+  bool noInternet = false;
+  String countryValue = "";
+  String countryCode = "";
+  String stateValue = "";
+  String stateCode = "";
+  String cityValue = "";
+  String cityCode = "";
+  String birthCityValue = "";
+  String birthCityCode = "";
+  String taxResCountriesOtherThanPakGroupValue = '0';
+  CityData? cityData;
+  StateData? stateData;
+  final _repository = Repository();
   @override
   void onInit() {
     // TODO: implement onInit
@@ -144,22 +164,58 @@ class AccountOpenFatcaController extends GetxController{
     }
   }
 
-  // void updateUserName(value) {
-  //   userName(value);
-  //   update();
-  // }
-  //
-  // void updatePassword(value) {
-  //   password(value);
-  //   update();
-  // }
-  // void updateEmail(value) {
-  //   email(value);
-  //   update();
-  // }
-  //
-  // void updateNumber(value) {
-  //   number(value);
-  //   update();
-  // }
+  onCityData(String countryCode) async {
+    try {
+      isLoading = true;
+      update();
+      cityData = await _repository.onCityData(countryCode);
+      isLoading = false;
+      update();
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
+  onStateData(String countryCode) async {
+    try {
+      isLoading = true;
+      update();
+      stateData = await _repository.onStateData(countryCode);
+      isLoading = false;
+      update();
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
 }

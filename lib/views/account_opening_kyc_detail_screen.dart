@@ -593,6 +593,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
 
                                   ListView.builder(
                                       shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount:_.controller.newDigUserRegDataAfterOTP!.response!.pepsInfoList!.length,
                                       itemBuilder: (context, index) {
                                         bool? groupValue = _.controller.newDigUserRegDataAfterOTP!.
@@ -641,7 +642,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w900,
                                                 ),
-
                                               ],
                                             ),
                                           ],

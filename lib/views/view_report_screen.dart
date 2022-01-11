@@ -164,7 +164,9 @@ class ViewReportsScreen extends StatelessWidget {
                                 text1: "All",
                                 fontsize: 14,
                                 fontWeight: FontWeight.bold,
-                                voidcallback: () {},
+                                voidcallback: () {
+                                  '';
+                                },
                                 text: "Fund Name",
                                 textColor: AppColor.black,
                               ))

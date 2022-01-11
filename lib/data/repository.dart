@@ -18,6 +18,7 @@ import 'models/new_dig_user_reg_data_before_otp.dart';
 import 'models/new_dig_user_reg_data_req_list.dart';
 import 'models/new_user_pin_gen.dart';
 import 'models/new_user_reg.dart';
+import 'models/state_data.dart';
 
 class Repository {
   final _apiClient = ApiClient();
@@ -49,6 +50,8 @@ class Repository {
   Future<CityData> onCityData(String countryCode) =>
       _apiClient.onCityData(countryCode);
 
+  Future<StateData> onStateData(String countryCode)
+  => _apiClient.onStateData(countryCode);
   Future<CitySector> onCitySectorData(String cityCode) =>
       _apiClient.onCitySectorData(cityCode);
 

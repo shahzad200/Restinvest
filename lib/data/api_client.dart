@@ -23,6 +23,7 @@ import 'models/new_dig_user_reg_data_req_list.dart';
 import 'models/new_notifications.dart';
 import 'models/new_user_reg.dart';
 import 'models/new_user_pin_gen.dart';
+import 'models/state_data.dart';
 import 'models/view_reports.dart';
 
 class ApiClient {
@@ -65,6 +66,7 @@ class ApiClient {
       _baseUrl + 'validateVerificationCodeForDigUser';
   static const _epPartialSavingForDigUser =
       _baseUrl + 'partialSavingForDigUser';
+  static const _epStateData = _baseUrl + 'StateData';
   static const _epSaveDigUser = _baseUrl + 'saveDigUser';
   static const _epLoadDigUserMissingDetailLinkData =
       _baseUrl + 'loadDigUserMissingDetailLinkData';
@@ -84,6 +86,7 @@ class ApiClient {
   ) async {
     printInfo(
         info: fromDate + toDate + fundCode + reportType + folioNumber + userId);
+    ViewReport? viewReport;
     try {
       final response = await http.post(
         Uri.parse(_epViewReport),
@@ -101,7 +104,7 @@ class ApiClient {
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body);
-        ViewReport viewReport = ViewReport.fromJson(jsonDecode(response.body));
+        viewReport = ViewReport.fromJson(jsonDecode(response.body));
         if (viewReport.meta!.code.toString() == 200.toString()) {
           return viewReport;
         } else {
@@ -111,7 +114,11 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + viewReport!.meta!.message.toString()) {
+        throw Exception(viewReport!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 
@@ -359,6 +366,7 @@ class ApiClient {
   }
 
   Future<LoginModel> onLogin(String userId, String password) async {
+    LoginModel? loginModel;
     try {
       final response = await http.post(
         Uri.parse(_epLogin),
@@ -371,17 +379,21 @@ class ApiClient {
       printInfo(info: password);
       if (response.statusCode == 200) {
         printInfo(info: response.body);
-        LoginModel loginModel = LoginModel.fromJson(jsonDecode(response.body));
+        loginModel = LoginModel.fromJson(jsonDecode(response.body));
         if (loginModel.meta!.code.toString() == 200.toString()) {
           return loginModel;
         } else {
-          throw Exception(loginModel.meta!.message);
+          throw Exception(loginModel.meta!.error);
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + loginModel!.meta!.error.toString()) {
+        throw Exception(loginModel!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 
@@ -574,6 +586,32 @@ class ApiClient {
       throw Exception('No Internet');
     }
   }
+
+
+  Future<StateData> onStateData(String countryCode) async {
+    try {
+      final response = await http.post(
+        Uri.parse(_epStateData),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{'countryCode': countryCode}),
+      );
+      if (response.statusCode == 200) {
+        StateData stateData = StateData.fromJson(jsonDecode(response.body));
+        if (stateData.meta!.code.toString() == 200.toString()) {
+          return stateData;
+        } else {
+          throw Exception(stateData.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
 
   Future<CitySector> onCitySectorData(String cityCode) async {
     try {
@@ -1240,7 +1278,11 @@ class ApiClient {
       if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
         throw Exception(common!.meta!.error.toString());
       } else {
-        throw Exception('No Internet');
+        if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+          throw Exception(common!.meta!.error.toString());
+        } else {
+          throw Exception('No Internet');
+        }
       }
     }
   }
