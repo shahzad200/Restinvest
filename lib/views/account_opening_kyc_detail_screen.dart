@@ -75,39 +75,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  // Row(
-                                  //   children: const [
-                                  //     RestInvestTitle(
-                                  //       text: " OTP VERIFY > ",
-                                  //       textAlign: TextAlign.start,
-                                  //       fontSize: 8,
-                                  //       textColor: AppColor.dimblack,
-                                  //       fontWeight: FontWeight.w900,
-                                  //     ),
-                                  //     RestInvestTitle(
-                                  //       text: " BASIC INFORMATION > ",
-                                  //       textAlign: TextAlign.start,
-                                  //       textColor: AppColor.dimblack,
-                                  //       fontSize: 8,
-                                  //       fontWeight: FontWeight.w900,
-                                  //     ),
-                                  //     RestInvestTitle(
-                                  //       text: " KYC DETAIL > ",
-                                  //       textAlign: TextAlign.start,
-                                  //       textColor: AppColor.blueColor,
-                                  //       fontSize: 8,
-                                  //       fontWeight: FontWeight.w900,
-                                  //     ),
-                                  //     RestInvestTitle(
-                                  //       text: " FATCA > ",
-                                  //       textAlign: TextAlign.start,
-                                  //       textColor: AppColor.dimblack,
-                                  //       fontSize: 8,
-                                  //       fontWeight: FontWeight.w900,
-                                  //     ),
-                                  //   ],
-                                  // ),
-                                  space,
                                   const RestInvestTitle(
                                     text: " OCCUPTION / PROFESSION:*",
                                     textAlign: TextAlign.start,
@@ -140,11 +107,11 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                         groupValue:
                                         _.occupationGroupValue,
                                         value:
-                                        data.occupoationCode ?? '0',
+                                        data.occupoationCode ?? '00',
                                         onChanged: (val) {
                                           _.occupationGroupValue =
                                               data!.occupoationCode ??
-                                                  '0';
+                                                  '00';
                                           _.update();
                                         },
                                         activeColor: MaterialStateColor
@@ -185,10 +152,10 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                               FontWeight.bold),
                                         ),
                                         groupValue: _.inComeGroupValue,
-                                        value: data.incomeSourceId ?? '0',
+                                        value: data.incomeSourceId ?? '00',
                                         onChanged: (val) {
                                           _.inComeGroupValue =
-                                              data!.incomeSourceId ?? '0';
+                                              data!.incomeSourceId ?? '00';
                                           _.update();
                                         },
                                         activeColor: MaterialStateColor
@@ -207,14 +174,15 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                           children: [
                                             const RestInvestTitle(
-                                              text: 'NAME OF EMPLOYED?BUSSINESS:',
+                                              text: 'NAME OF EMPLOYER?BUSINESS:',
                                               textColor: AppColor.black,
                                               fontSize: 10,
                                               fontWeight: FontWeight.w900,
                                             ),
                                             CustomTextFormField(
+                                              controller: _.employerController,
                                               isRounded: true,
-                                              hint: "",
+                                              hint: "Softech Systems",
                                               hintColor: AppColor.black,
                                             ),
                                           ],
@@ -235,8 +203,9 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w900,
                                             ),
                                             CustomTextFormField(
+                                              controller: _.designationController,
                                               isRounded: true,
-                                              hint: "",
+                                              hint: "Sr. Analyst and TL ACS",
                                               hintColor: AppColor.black,
                                             ),
                                           ],
@@ -259,8 +228,9 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w900,
                                             ),
                                             CustomTextFormField(
+                                              controller: _.natureOfBusinessController,
                                               isRounded: true,
-                                              hint: "",
+                                              hint: "Software Development",
                                               hintColor: AppColor.black,
                                             ),
                                           ],
@@ -281,8 +251,9 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w900,
                                             ),
                                             CustomTextFormField(
+                                              controller: _.professionController,
                                               isRounded: true,
-                                              hint: "",
+                                              hint: "IT",
                                               hintColor: AppColor.black,
                                             ),
                                           ],
@@ -312,6 +283,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w900,
                                             ),
                                             CustomTextFormField(
+                                              controller: _.geoDomesticController,
                                               isRounded: true,
                                               hint: "",
                                               hintColor: AppColor.black,
@@ -334,6 +306,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w900,
                                             ),
                                             CustomTextFormField(
+                                              controller: _.geoInternationalController,
                                               isRounded: true,
                                               hint: "",
                                               hintColor: AppColor.black,
@@ -365,6 +338,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w900,
                                             ),
                                             CustomTextFormField(
+                                              controller: _.counterDomesticController,
                                               isRounded: true,
                                               hint: "",
                                               hintColor: AppColor.black,
@@ -387,6 +361,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w900,
                                             ),
                                             CustomTextFormField(
+                                              controller: _.counterInternationalController,
                                               isRounded: true,
                                               hint: "",
                                               hintColor: AppColor.black,
@@ -428,10 +403,10 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                         ),
                                         groupValue:
                                         _.transactionGroupValue,
-                                        value: data.code ?? '0',
+                                        value: data.code ?? '00',
                                         onChanged: (val) {
                                           _.transactionGroupValue =
-                                              data!.code ?? '0';
+                                              data!.code ?? '00';
                                           _.update();
                                         },
                                         activeColor: MaterialStateColor
@@ -473,10 +448,10 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                               FontWeight.bold),
                                         ),
                                         groupValue: _.turnoverGroupValue,
-                                        value: data.code ?? '0',
+                                        value: data.code ?? '00',
                                         onChanged: (val) {
                                           _.turnoverGroupValue =
-                                              data!.code ?? '0';
+                                              data!.code ?? '00';
                                           _.update();
                                         },
                                         activeColor: MaterialStateColor
@@ -525,10 +500,10 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                         ),
                                         groupValue:
                                         _.expectedIncomeGroupValue,
-                                        value: data.code ?? '0',
+                                        value: data.code ?? '00',
                                         onChanged: (val) {
                                           _.expectedIncomeGroupValue =
-                                              data!.code ?? '0';
+                                              data!.code ?? '00';
                                           _.update();
                                         },
                                         activeColor: MaterialStateColor
@@ -570,10 +545,10 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                         ),
                                         groupValue:
                                         _.annualIncomeGroupValue,
-                                        value: data.code ?? '0',
+                                        value: data.code ?? '00',
                                         onChanged: (val) {
                                           _.annualIncomeGroupValue =
-                                              data!.code ?? '0';
+                                              data!.code ?? '00';
                                           _.update();
                                         },
                                         activeColor: MaterialStateColor

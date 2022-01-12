@@ -100,8 +100,8 @@ class AccountOpenRequestScreenController extends GetxController {
   }
 
   onGenVerificationCodeForDigUser(BuildContext context) async {
-      if (cNicNumberController.text.isNotEmpty &&
-          cNicNumberController.text == '' &&
+      if (cNicNumberController.text.isEmpty ||
+          cNicNumberController.text == '' ||
           cNicNumberController.text == null) {
         Fluttertoast.showToast(
             msg: 'Please Enter cNic Number',
@@ -112,8 +112,8 @@ class AccountOpenRequestScreenController extends GetxController {
             textColor: Colors.white,
             fontSize: 16.0);
       }
-      else if (mobileNumberController.text.isNotEmpty &&
-          mobileNumberController.text == '' &&
+      else if (mobileNumberController.text.isEmpty ||
+          mobileNumberController.text == '' ||
           mobileNumberController.text == null) {
         Fluttertoast.showToast(
             msg: 'Please Enter Mobile Number',
@@ -124,7 +124,7 @@ class AccountOpenRequestScreenController extends GetxController {
             textColor: Colors.white,
             fontSize: 16.0);
       }
-      else if (emailController.text.isNotEmpty && emailController.text == '' &&
+      else if (emailController.text.isEmpty || emailController.text == '' ||
           emailController.text == null) {
         Fluttertoast.showToast(
             msg: 'Please Enter Email Address',
@@ -175,8 +175,8 @@ class AccountOpenRequestScreenController extends GetxController {
 
 
   onValidateVerificationCodeForDigUser() async {
-    if (cNicNumberController.text.isNotEmpty &&
-        cNicNumberController.text == '' &&
+    if (cNicNumberController.text.isEmpty ||
+        cNicNumberController.text == '' ||
         cNicNumberController.text == null) {
       Fluttertoast.showToast(
           msg: 'Please Enter cNic Number',
@@ -187,8 +187,8 @@ class AccountOpenRequestScreenController extends GetxController {
           textColor: Colors.white,
           fontSize: 16.0);
     }
-    else if (mobileNumberController.text.isNotEmpty &&
-        mobileNumberController.text == '' &&
+    else if (mobileNumberController.text.isEmpty ||
+        mobileNumberController.text == '' ||
         mobileNumberController.text == null) {
       Fluttertoast.showToast(
           msg: 'Please Enter Mobile Number',
@@ -199,7 +199,7 @@ class AccountOpenRequestScreenController extends GetxController {
           textColor: Colors.white,
           fontSize: 16.0);
     }
-    else if (emailController.text.isNotEmpty && emailController.text == '' &&
+    else if (emailController.text.isEmpty || emailController.text == '' ||
         emailController.text == null) {
       Fluttertoast.showToast(
           msg: 'Please Enter Email Address',
@@ -254,7 +254,7 @@ class AccountOpenRequestScreenController extends GetxController {
           noInternet = false;
           update();
           Fluttertoast.showToast(
-              msg: e.toString(),
+              msg: e.toString().replaceAll('Exception:', ''),
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 1,

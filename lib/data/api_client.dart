@@ -28,7 +28,7 @@ import 'models/view_reports.dart';
 
 class ApiClient {
   static const _baseUrl =
-      'http://192.168.0.86:8094/AssetConnectMobilePortal/UserService/';
+      'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
 
   // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
@@ -1015,6 +1015,7 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
+        printInfo(info: response.body);
         GenVerificationCodeForDigUser genVerificationCodeForDigUser =
             GenVerificationCodeForDigUser.fromJson(jsonDecode(response.body));
         if (genVerificationCodeForDigUser.meta!.code.toString() ==
