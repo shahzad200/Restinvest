@@ -80,22 +80,22 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: const [
-                                    RestInvestTitle(
-                                      text: " OTP VERIFY > ",
-                                      textAlign: TextAlign.start,
-                                      textColor: AppColor.dimblack,
-                                      fontWeight: FontWeight.w900,
-                                    ),
-                                    RestInvestTitle(
-                                      text: " BASIC INFORMATION > ",
-                                      textAlign: TextAlign.start,
-                                      textColor: AppColor.blueColor,
-                                      fontWeight: FontWeight.w900,
-                                    ),
-                                  ],
-                                ),
+                                // Row(
+                                //   children: const [
+                                //     RestInvestTitle(
+                                //       text: " OTP VERIFY > ",
+                                //       textAlign: TextAlign.start,
+                                //       textColor: AppColor.dimblack,
+                                //       fontWeight: FontWeight.w900,
+                                //     ),
+                                //     RestInvestTitle(
+                                //       text: " BASIC INFORMATION > ",
+                                //       textAlign: TextAlign.start,
+                                //       textColor: AppColor.blueColor,
+                                //       fontWeight: FontWeight.w900,
+                                //     ),
+                                //   ],
+                                // ),
                                 space,
                                 const RestInvestTitle(
                                   text: "Title",
@@ -107,7 +107,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   // margin: EdgeInsets.all(10.0),
                                   padding:
                                   const EdgeInsets.only(left: 10.0, right: 5.0),
-                                  height: 35,
+                                  height: 37,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                       color: AppColor.whiteColor,
@@ -129,9 +129,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             ? "Title"
                                             : _.titleValue,
                                         textColor: AppColor.black,
+                                        fontSize: 12,
                                       ),
                                       icon: const Icon(Icons.keyboard_arrow_down,
-                                          color: AppColor.blueColor, size: 30),
+                                          color: AppColor.blueColor, size: 25),
                                       items: _.isLoading || _.noInternet
                                           ? null
                                           : _.newDigUserRegDataAfterOTP!.response!
@@ -154,7 +155,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 space,
-                                Row(
+                                Row(                                  crossAxisAlignment: CrossAxisAlignment.end,
+
                                   children: [
                                     Expanded(
                                       child: Column(
@@ -170,8 +172,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.nameController,
                                             isRounded: true,
-                                            hint: "M ALi Tahir",
-                                            hintColor: AppColor.black,
+                                            hint: "Name",
+                                            hintColor: AppColor.dimblack,
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                         ],
@@ -194,8 +196,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.fNameController,
                                             isRounded: true,
-                                            hint: "M Rafique",
-                                            hintColor: AppColor.black,
+                                            hint: "Father's/husband name",
+                                            hintColor: AppColor.dimblack,
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                         ],
@@ -220,8 +222,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.mNameController,
                                             isRounded: true,
-                                            hint: "Shamim",
-                                            hintColor: AppColor.black,
+                                            hint: "Mother Name",
+                                            hintColor: AppColor.dimblack,
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                         ],
@@ -245,7 +247,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             controller: _.cNicController,
                                             isRounded: true,
                                             hint: "1111-111111111-1",
-                                            hintColor: AppColor.black,
+                                            hintColor: AppColor.dimblack,
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                         ],
@@ -254,7 +256,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   ],
                                 ),
                                 space,
-                                Row(
+                                Row(                                  crossAxisAlignment: CrossAxisAlignment.end,
+
                                   children: [
                                     Expanded(
                                       child: Column(
@@ -268,7 +271,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w900,
                                           ),
                                           SizedBox(
-                                            height: 35,
+                                            height: 37,
                                             child: DateFormFieldContainer(
                                               isRounded: false,
                                               isTrue: true,
@@ -290,7 +293,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.end,
                                         children: [
                                           const RestInvestTitle(
                                             text:
@@ -300,7 +303,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w900,
                                           ),
                                           SizedBox(
-                                            height: 35,
+                                            height: 37,
                                             child: DateFormFieldContainer(
                                               isRounded: false,
                                               text: '31/01/2022',
@@ -320,6 +323,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                 ),
                                 space,
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Expanded(
                                       child: Column(
@@ -333,7 +337,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w900,
                                           ),
                                           SizedBox(
-                                            height: 35,
+                                            height: 37,
                                             child: DateFormFieldContainer(
                                               isRounded: false,
                                               isTrue: true,
@@ -367,7 +371,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -389,11 +393,12 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       ? "Status"
                                                       : _.martialValue,
                                                   textColor: AppColor.black,
+                                                    fontSize: 12,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 30),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _
@@ -447,7 +452,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -471,11 +476,12 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       ? "Nationality"
                                                       : _.nationalityValue,
                                                   textColor: AppColor.black,
+                                                  fontSize: 12,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 30),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _.newDigUserRegDataAfterOTP!
@@ -523,7 +529,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -547,12 +553,13 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                           ""
                                                       ? "Residential"
                                                       : _.residentStatusValue,
+                                                  fontSize: 12,
                                                   textColor: AppColor.black,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 35),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _
@@ -606,7 +613,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -629,11 +636,12 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       ? "Religion"
                                                       : _.religionValue,
                                                   textColor: AppColor.black,
+                                                  fontSize: 12,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 30),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _.newDigUserRegDataAfterOTP!
@@ -680,7 +688,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -703,11 +711,12 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       ? "Zakat Ex"
                                                       : _.zaKatValue,
                                                   textColor: AppColor.black,
+                                                  fontSize: 12,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 35),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _
@@ -745,6 +754,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                 ),
                                 space,
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Expanded(
                                       child: Column(
@@ -762,7 +772,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -784,12 +794,12 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       _.retirementValue == ""
                                                       ? "Retirement Age"
                                                       : _.retirementValue,
-                                                  textColor: AppColor.black,
+                                                  textColor: AppColor.black,fontSize: 12,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 30),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _
@@ -842,7 +852,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             fieldType: Constants.phoneNumberField,
                                             isRounded: true,
                                             hint: "+92xxxxxxxxx",
-                                            hintColor: AppColor.black,
+                                            hintColor: AppColor.dimblack,
+
                                           ),
                                         ],
                                       ),
@@ -868,7 +879,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             fieldType: Constants.phoneNumberField,
                                             isRounded: true,
                                             hint: "+92xxxxxxxxx",
-                                            hintColor: AppColor.black,
+                                            hintColor: AppColor.dimblack,
                                           ),
                                         ],
                                       ),
@@ -892,7 +903,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             controller: _.officePhoneController,
                                             isRounded: true,
                                             hint: "+92xxxxxxxxx",
-                                            hintColor: AppColor.black,
+                                            hintColor: AppColor.dimblack,
                                           ),
                                         ],
                                       ),
@@ -918,7 +929,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.currentAddressController,
                                             isRounded: true,
-                                            hint: "Johar Town Lahore",
+                                            hint: "address",
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                         ],
@@ -1011,7 +1022,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.mailingAddressController,
                                             isRounded: true,
-                                            hint: "Johar Town Lahore",
+                                            hint: "address",
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                         ],
@@ -1036,8 +1047,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.eMailAddressController,
                                             isRounded: true,
-                                            hint: "ali.tahir@softech.com.pk",
-                                            hintColor: AppColor.black,
+                                            hint: "abc@gmail.com",
+                                            hintColor: AppColor.dimblack,
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                           // Container(
@@ -1109,7 +1120,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -1133,12 +1144,13 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                           ""
                                                       ? "Mailing Country"
                                                       : _.mailingCountryValue,
+                                                  fontSize: 12,
                                                   textColor: AppColor.black,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 30),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _.newDigUserRegDataAfterOTP!
@@ -1187,7 +1199,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -1224,6 +1236,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                           : _.mailingCityValue,
                                                       textColor:
                                                       AppColor.black,
+                                                      fontSize: 12,
                                                     ),
                                                   ),
                                                   icon: const Icon(
@@ -1231,7 +1244,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                           .keyboard_arrow_down,
                                                       color:
                                                       AppColor.blueColor,
-                                                      size: 30),
+                                                      size: 25),
                                                   items: _.mailingCityData!
                                                       .response!
                                                       .map<
@@ -1281,7 +1294,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -1306,11 +1319,12 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       ? "Current Country"
                                                       : _.currentCountryValue,
                                                   textColor: AppColor.black,
+                                                    fontSize: 12,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 30),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _.newDigUserRegDataAfterOTP!
@@ -1361,7 +1375,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -1396,6 +1410,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                               ""
                                                           ? "Current City"
                                                           : _.currentCityValue,
+                                                      fontSize: 12,
                                                       textColor:
                                                       AppColor.black,
                                                     ),
@@ -1405,7 +1420,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                           .keyboard_arrow_down,
                                                       color:
                                                       AppColor.blueColor,
-                                                      size: 30),
+                                                      size: 25),
                                                   items: _.currentCityData!
                                                       .response!
                                                       .map<
@@ -1455,7 +1470,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -1477,12 +1492,13 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       _.bankNameValue == ""
                                                       ? "Bank"
                                                       : _.bankNameValue,
+                                                  fontSize: 12,
                                                   textColor: AppColor.black,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 30),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _.newDigUserRegDataAfterOTP!
@@ -1531,7 +1547,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             // margin: EdgeInsets.all(10.0),
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 5.0),
-                                            height: 35,
+                                            height: 37,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 color: AppColor.whiteColor,
@@ -1554,11 +1570,12 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       ? "Bank City"
                                                       : _.bankCityValue,
                                                   textColor: AppColor.black,
+                                                    fontSize: 12,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
                                                     color: AppColor.blueColor,
-                                                    size: 30),
+                                                    size: 25),
                                                 items: _.isLoading || _.noInternet
                                                     ? null
                                                     : _.newDigUserRegDataAfterOTP!
@@ -1604,7 +1621,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.bankBranchController,
                                             isRounded: true,
-                                            hint: "", hintColor: AppColor.black,
+                                            hint: "", hintColor: AppColor.dimblack,
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                         ],
@@ -1628,7 +1645,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                     CustomTextFormField(
                                       controller: _.iBanNumberController,
                                       isRounded: true,
-                                      hint: "", hintColor: AppColor.black,
+                                      hint: "ibn number", hintColor: AppColor.dimblack,
                                       // textInputType: TextInputType.emailAddress,
                                     ),
                                   ],

@@ -53,10 +53,12 @@ class HomeScreen extends StatelessWidget {
             key: controller.scaffoldKey,
             body: Stack(
               children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex:2,
+                      child: Container(
                         color: AppColor.blueColor,
                         height: 50,
                         child: Row(
@@ -66,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 controller.isLoading == false &&
                                         controller.noInternet == false
-                                    ? Get.to(WebView(
+                                    ? Get.to(WebViewScreen(
                                         title: 'NAV History',
                                         link:
                                             '${Constant.socialMediaLink!.response!.homeLinks!.latestNav}',
@@ -82,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 controller.isLoading == false &&
                                         controller.noInternet == false
-                                    ? Get.to(WebView(
+                                    ? Get.to(WebViewScreen(
                                         title: 'Branches',
                                         link:
                                             '${Constant.socialMediaLink!.response!.homeLinks!.branchLocator}',
@@ -99,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 controller.isLoading == false &&
                                         controller.noInternet == false
-                                    ? Get.to(WebView(
+                                    ? Get.to(WebViewScreen(
                                         title: 'Learning',
                                         link:
                                             '${Constant.socialMediaLink!.response!.homeLinks!.learning}',
@@ -112,7 +114,10 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Row(
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Row(
                         children: [
                           Expanded(
                               child: ContainerBox(
@@ -122,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebView(
+                                  ? Get.to(WebViewScreen(
                                       title: 'Market',
                                       link:
                                           '${Constant.socialMediaLink!.response!.homeLinks!.market}',
@@ -160,7 +165,10 @@ class HomeScreen extends StatelessWidget {
                                 ))
                         ],
                       ),
-                      Row(
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Row(
                         children: [
                           Expanded(
                               child: ContainerBox(
@@ -170,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebView(
+                                  ? Get.to(WebViewScreen(
                                       title: 'Fund Manager Reports',
                                       link:
                                           'https://nit.com.pk/newnit/ConsolidatedFMR.aspx',
@@ -187,7 +195,7 @@ class HomeScreen extends StatelessWidget {
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebView(
+                                  ? Get.to(WebViewScreen(
                                       title: 'News',
                                       link:
                                           'https://nit.com.pk/newnit/News.aspx',
@@ -198,7 +206,10 @@ class HomeScreen extends StatelessWidget {
                           )),
                         ],
                       ),
-                      Row(
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Row(
                         children: [
                           Expanded(
                               child: ContainerBox(
@@ -208,7 +219,7 @@ class HomeScreen extends StatelessWidget {
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebView(
+                                  ? Get.to(WebViewScreen(
                                       title: 'Products',
                                       link:
                                           '${Constant.socialMediaLink!.response!.homeLinks!.products}',
@@ -221,12 +232,12 @@ class HomeScreen extends StatelessWidget {
                               child: ContainerBox(
                             icon: const PicFund(),
                             textColor: AppColor.blueColor,
-                            text: 'PIC YOUR FUND',
+                            text: 'PICK YOUR FUND',
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebView(
-                                      title: 'Pic Your Fund',
+                                  ? Get.to(WebViewScreen(
+                                      title: 'Pick Your Fund',
                                       link:
                                           'https://nit.com.pk/newnit/Pickyourfunds.aspx',
                                     ))
@@ -236,7 +247,10 @@ class HomeScreen extends StatelessWidget {
                           )),
                         ],
                       ),
-                      Row(
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Row(
                         children: [
                           Expanded(
                               child: ContainerBox(
@@ -265,7 +279,10 @@ class HomeScreen extends StatelessWidget {
                                   containerColor: AppColor.whiteColor)),
                         ],
                       ),
-                      Row(
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
@@ -329,7 +346,7 @@ class HomeScreen extends StatelessWidget {
                                   voidcallback: () {
                                     controller.isLoading == false &&
                                             controller.noInternet == false
-                                        ? Get.to(WebView(
+                                        ? Get.to(WebViewScreen(
                                             title: 'About Us',
                                             link: Constant.linkAboutUs,
                                           ))
@@ -337,9 +354,9 @@ class HomeScreen extends StatelessWidget {
                                   },
                                   icon: const Chat()))
                         ],
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
                 controller.isLoading
                     ? const Center(

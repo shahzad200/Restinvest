@@ -5,15 +5,15 @@ import 'package:webview_flutter/webview_flutter.dart' as web;
 import 'constant_widget.dart';
 
 
-class WebView extends StatefulWidget {
-  WebView({Key? key, required this.title, required this.link}) : super(key: key);
+class WebViewScreen extends StatefulWidget {
+  WebViewScreen({Key? key, required this.title, required this.link}) : super(key: key);
   String link;
   String title;
   @override
-  _WebViewState createState() => _WebViewState();
+  _WebViewScreenState createState() => _WebViewScreenState();
 }
 
-class _WebViewState extends State<WebView> {
+class _WebViewScreenState extends State<WebViewScreen> {
   bool isLoading = true;
   @override
   Widget build(BuildContext context) {

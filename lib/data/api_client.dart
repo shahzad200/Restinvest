@@ -211,6 +211,7 @@ class ApiClient {
           'collectionBankCode': collectionBankCode,
           'fundSaleLoad': fundSaleLoad
         }));
+      print(response.body.toString());
       if (response.statusCode == 200) {
         print(response.body);
         Common common = Common.fromJson(jsonDecode(response.body));
@@ -223,6 +224,7 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
+      print(e.toString());
       throw Exception('No Internet');
     }
   }
@@ -793,6 +795,8 @@ class ApiClient {
           'userId': userId
         }),
       );
+      print("response");
+      print("${response.body}");
       if (response.statusCode == 200) {
         Common common = Common.fromJson(jsonDecode(response.body));
         print(response.body);

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/controller/home_screen_controller.dart';
 import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/utils/colors.dart';
 import 'package:investintrust/utils/constants.dart';
@@ -26,7 +27,9 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               // Navigator.pop(context);
-              Get.offAllNamed(AppRoute.homeRoute);
+              Get.back();
+
+              // Get.back();
             },
             leading: const Home(),
             title: const RestInvestTitle(
@@ -53,7 +56,11 @@ class CustomDrawer extends StatelessWidget {
          : ListView(children: [
           ListTile(
             onTap: () {
+              // Get.put(HomeScreenController()).update();
+              Get.back();
               Get.offAllNamed(AppRoute.homeRoute);
+
+              // Get.toNamed(AppRoute.homeRoute);
             },
             leading: const Home(),
             title: const RestInvestTitle(
@@ -67,7 +74,8 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.offAllNamed(AppRoute.portofolioRoute);
+              Get.back();
+              Get.toNamed(AppRoute.portofolioRoute);
             },
             leading: const Portofolio(),
             title: const RestInvestTitle(
@@ -81,7 +89,8 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.offAllNamed(AppRoute.redemptionRoute);
+              Get.back();
+              Get.toNamed(AppRoute.redemptionRoute);
               CustomDialog(context);
             },
             leading: const Redemption(),
@@ -96,11 +105,12 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.offAllNamed(AppRoute.purchasesRoute);
+              Get.back();
+              Get.toNamed(AppRoute.purchasesRoute);
             },
             leading: const Purchase(),
             title: const RestInvestTitle(
-              text: "Purchases",
+              text: "Purchase",
               textColor: AppColor.black,
               fontWeight: FontWeight.w700,
             ),
@@ -110,7 +120,8 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.offAllNamed(AppRoute.f2ftransferRoute);
+              Get.back();
+              Get.toNamed(AppRoute.f2ftransferRoute);
             },
             leading: const F2F(),
             title: const RestInvestTitle(
@@ -124,7 +135,8 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.offAllNamed(AppRoute.reportsRoute);
+              Get.back();
+              Get.toNamed(AppRoute.reportsRoute);
             },
             leading: const Report(),
             title: const RestInvestTitle(
@@ -138,7 +150,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Get.to(WebView(title: 'Complains',
+              Get.to(WebViewScreen(title: 'Complains',
                 link: 'https://nit.com.pk/NewNit/Complains.aspx',
               ));
             },
@@ -156,7 +168,7 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               Constant.userId = '-0456';
               Constant.loginModel = null;
-              Get.offAllNamed(AppRoute.homeRoute);
+              Get.offAllNamed(AppRoute.loginRoute);
             },
             leading: const Logout(),
             title: const RestInvestTitle(

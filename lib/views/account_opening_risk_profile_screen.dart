@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/widgets/no_internet.dart';
 
 import '../controller/account_opening_risk_profile_screen_controller.dart';
@@ -634,7 +635,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                         height: 35,
                                         text: "SAVE&NEXT",
                                         onPress: () {
-                                          Get.to(const AccountOpenDocumentUploadScreen());
+                                          Get.toNamed(AppRoute.accountOpenUploadScreen);
                                         },
                                         isRound: false),
                                     const SizedBox(

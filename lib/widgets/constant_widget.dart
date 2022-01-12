@@ -506,7 +506,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
       padding: EdgeInsets.all(5.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        // crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -541,7 +541,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                           'offering Documents',
                       style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                       recognizer:  TapGestureRecognizer()..onTap = () {
-                        Get.to(WebView(
+                        Get.to(WebViewScreen(
                           title: 'NAV',
                           link:
                           '',
@@ -555,7 +555,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                           'Trust Deed',
                           style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                           recognizer: new TapGestureRecognizer()..onTap = () {
-                            Get.to(WebView(
+                            Get.to(WebViewScreen(
                               title: 'NAV',
                               link:
                               '',
@@ -569,7 +569,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                           'Fund Manager Report\n',
                           style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                           recognizer:  TapGestureRecognizer()..onTap = () {
-                            Get.to(WebView(
+                            Get.to(WebViewScreen(
                               title: 'NAV',
                               link:
                               '',
@@ -594,7 +594,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                           'Terms & Conditions',
                           style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                           recognizer:  TapGestureRecognizer()..onTap = () {
-                            Get.to(WebView(
+                            Get.to(WebViewScreen(
                               title: 'NAV',
                               link:
                               '',
@@ -930,7 +930,7 @@ class ContainerBox extends StatelessWidget {
           onTap: voidcallback,
           child: Container(
             width: Get.width,
-            height: Get.height / 5.6,
+            // height: Get.height ,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -1040,10 +1040,12 @@ class RoundContainer extends StatelessWidget {
                 : BorderRadius.circular(8),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 8, left: 6),
+            padding: const EdgeInsets.only(top: 8, left: 3),
             child: Text(
               text,
-              style: TextStyle(color: textColor),
+              // overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(color: textColor,fontSize: 12),
               textAlign: TextAlign.start,
             ),
           ),

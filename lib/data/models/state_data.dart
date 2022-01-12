@@ -6,7 +6,7 @@ class StateData {
   });
    String? action;
    Meta? meta;
-   List<Response>? response;
+   List<Response>? response = [];
 
   StateData.fromJson(Map<String, dynamic> json){
     action = json['action'];

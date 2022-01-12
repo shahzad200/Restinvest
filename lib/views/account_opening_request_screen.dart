@@ -76,12 +76,12 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const RestInvestTitle(
-                                      text: " OTP> VERIFY",
-                                      textAlign: TextAlign.start,
-                                      textColor: AppColor.blueColor,
-                                      fontWeight: FontWeight.w900,
-                                    ),
+                                    // const RestInvestTitle(
+                                    //   text: " OTP> VERIFY",
+                                    //   textAlign: TextAlign.start,
+                                    //   textColor: AppColor.blueColor,
+                                    //   fontWeight: FontWeight.w900,
+                                    // ),
                                     const SizedBox(
                                       height: 10,
                                     ),
@@ -189,12 +189,13 @@ class AccountOpenRequestScreen extends StatelessWidget {
 
                                     const SizedBox(height: 10,),
                                     _.isLoading || _.noInternet ? const SizedBox() :
-                                    Row(
+                                    Column(
                                       children:
                                       _.newDigUserRegDataBeforeOTP!.response!.accountTypeList!.map((data) =>
-                                          Flexible(
-                                            fit: FlexFit.loose,
-                                            child: RadioListTile<String>(
+                                          // Flexible(
+                                          //   fit: FlexFit.loose,
+                                          //   child:
+                                            RadioListTile<String>(
                                               title: Text("${data.description}",
                                                 style: const TextStyle(
                                                     fontSize: 10,
@@ -214,7 +215,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                               // });
                                               // },
                                             ),
-                                          )
+                                          // )
                                       ).toList(),
                                       // List<Widget>.generate(
                                       //   _.newDigUserRegDataBeforeOTP!.response!.accountTypeList!.length,

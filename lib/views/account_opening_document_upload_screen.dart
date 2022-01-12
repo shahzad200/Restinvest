@@ -11,6 +11,7 @@ import '../widgets/button.dart';
 import '../utils/colors.dart';
 
 import '../widgets/constant_widget.dart';
+import 'package:path/path.dart' as p;
 
 class AccountOpenDocumentUploadScreen extends StatelessWidget {
   const AccountOpenDocumentUploadScreen({Key? key}) : super(key: key);
@@ -130,7 +131,54 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       text: "+ Choose",
                                       buttonColor: AppColor.whiteColor,
                                       textColor: AppColor.black,
-                                      onPress: () {},
+                                      onPress: () {
+                                        showModalBottomSheet(
+                                            backgroundColor: Colors.transparent,
+                                            elevation: 0,
+                                            context: context,
+                                            builder: (BuildContext bc) {
+                                              return SafeArea(
+                                                child: Container(
+                                                  decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),color: Colors.white),
+
+                                                  child: new Wrap(
+                                                    children: <Widget>[
+                                                      new ListTile(
+                                                          leading: new Icon(Icons.photo_library),
+                                                          title: new Text('Photo Library'),
+                                                          onTap: ()async {
+                                                            _.cnicFront =await _.getImageFromGallery();
+                                                            _.cnicFrontName = p.basename(_.cnicFront!.path);
+                                                            // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                            // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                            // _.paymentSlip!.readAsBytes().then((value) {
+                                                            //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                            // print("Extention${_.paymentSlipExt}");
+                                                            _.update();
+                                                            Navigator.of(context).pop();
+                                                          }),
+                                                      new ListTile(
+                                                        leading: new Icon(Icons.photo_camera),
+                                                        title: new Text('Camera'),
+                                                        onTap: ()async {
+                                                          _.cnicFront = await _.getImageFromCamera();
+                                                          _.cnicFrontName = p.basename(_.cnicFront!.path);
+                                                          // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                          // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                          // _.paymentSlip!.readAsBytes().then((value) {
+                                                          //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                          // print("Extention${_.paymentSlipExt}");
+                                                          _.update();
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                        );
+                                      },
                                       isRound: false),
                                 ],
                               ),
@@ -194,7 +242,55 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       text: "+ Choose",
                                       buttonColor: AppColor.whiteColor,
                                       textColor: AppColor.black,
-                                      onPress: () {},
+                                      onPress: () {
+                                        showModalBottomSheet(
+                                            backgroundColor: Colors.transparent,
+                                            elevation: 0,
+                                            context: context,
+                                            builder: (BuildContext bc) {
+                                          return SafeArea(
+                                            child: Container(
+                                              decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),color: Colors.white),
+
+                                              child: new Wrap(
+                                                children: <Widget>[
+                                                  new ListTile(
+                                                      leading: new Icon(Icons.photo_library),
+                                                      title: new Text('Photo Library'),
+                                                      onTap: ()async {
+                                                        _.cnicBack =await _.getImageFromGallery();
+                                                        _.cnicBackName = p.basename(_.cnicBack!.path);
+                                                        print("base name${_.cnicBackName}");
+                                                        // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                        // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                        // _.paymentSlip!.readAsBytes().then((value) {
+                                                        //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                        // print("Extention${_.paymentSlipExt}");
+                                                        _.update();
+                                                        Navigator.of(context).pop();
+                                                      }),
+                                                  new ListTile(
+                                                    leading: new Icon(Icons.photo_camera),
+                                                    title: new Text('Camera'),
+                                                    onTap: ()async {
+                                                      _.cnicBack = await _.getImageFromCamera();
+                                                      _.cnicBackName = p.basename(_.cnicBack!.path);
+                                                      print("base name${_.cnicBackName}");
+                                                      // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                      // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                      // _.paymentSlip!.readAsBytes().then((value) {
+                                                      //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                      // print("Extention${_.paymentSlipExt}");
+                                                      _.update();
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        });
+                                      },
                                       isRound: false),
                                 ],
                               ),
@@ -258,7 +354,54 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       text: "+ Choose",
                                       buttonColor: AppColor.whiteColor,
                                       textColor: AppColor.black,
-                                      onPress: () {},
+                                      onPress: () {
+                                        showModalBottomSheet(
+                                            backgroundColor: Colors.transparent,
+                                            elevation: 0,
+                                            context: context,
+                                            builder: (BuildContext bc) {
+                                              return SafeArea(
+                                                child: Container(
+                                                  decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),color: Colors.white),
+
+                                                  child: new Wrap(
+                                                    children: <Widget>[
+                                                      new ListTile(
+                                                          leading: new Icon(Icons.photo_library),
+                                                          title: new Text('Photo Library'),
+                                                          onTap: ()async {
+                                                            _.srcIncome =await _.getImageFromGallery();
+                                                            _.srcIncomeName = p.basename(_.srcIncome!.path);
+                                                            // print("base name${_.baseName}");
+                                                            // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                            // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                            // _.paymentSlip!.readAsBytes().then((value) {
+                                                            //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                            // print("Extention${_.paymentSlipExt}");
+                                                            _.update();
+                                                            Navigator.of(context).pop();
+                                                          }),
+                                                      new ListTile(
+                                                        leading: new Icon(Icons.photo_camera),
+                                                        title: new Text('Camera'),
+                                                        onTap: ()async {
+                                                          _.srcIncome = await _.getImageFromCamera();
+                                                          _.srcIncomeName = p.basename(_.srcIncome!.path);
+                                                          // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                          // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                          // _.paymentSlip!.readAsBytes().then((value) {
+                                                          //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                          // print("Extention${_.paymentSlipExt}");
+                                                          _.update();
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            });
+                                      },
                                       isRound: false),
                                 ],
                               ),
@@ -322,7 +465,54 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       text: "+ Choose",
                                       buttonColor: AppColor.whiteColor,
                                       textColor: AppColor.black,
-                                      onPress: () {},
+                                      onPress: () {
+                                        showModalBottomSheet(
+                                            backgroundColor: Colors.transparent,
+                                            elevation: 0,
+                                            context: context,
+                                            builder: (BuildContext bc) {
+                                              return SafeArea(
+                                                child: Container(
+                                                  decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),color: Colors.white),
+
+                                                  child: new Wrap(
+                                                    children: <Widget>[
+                                                      new ListTile(
+                                                          leading: new Icon(Icons.photo_library),
+                                                          title: new Text('Photo Library'),
+                                                          onTap: ()async {
+                                                            _.plainImage =await _.getImageFromGallery();
+                                                            _.plainImageName = p.basename(_.plainImage!.path);
+                                                            // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                            // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                            // _.paymentSlip!.readAsBytes().then((value) {
+                                                            //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                            // print("Extention${_.paymentSlipExt}");
+                                                            _.update();
+                                                            Navigator.of(context).pop();
+                                                          }),
+                                                      new ListTile(
+                                                        leading: new Icon(Icons.photo_camera),
+                                                        title: new Text('Camera'),
+                                                        onTap: ()async {
+                                                          _.plainImage = await _.getImageFromCamera();
+                                                          _.plainImageName = p.basename(_.plainImage!.path);
+                                                          // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                          // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                          // _.paymentSlip!.readAsBytes().then((value) {
+                                                          //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                          // print("Extention${_.paymentSlipExt}");
+                                                          _.update();
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                        );
+                                      },
                                       isRound: false),
                                 ],
                               ),
@@ -386,7 +576,54 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       text: "+ Choose",
                                       buttonColor: AppColor.whiteColor,
                                       textColor: AppColor.black,
-                                      onPress: () {},
+                                      onPress: () {
+                                        showModalBottomSheet(
+                                            backgroundColor: Colors.transparent,
+                                            elevation: 0,
+                                            context: context,
+                                            builder: (BuildContext bc) {
+                                              return SafeArea(
+                                                child: Container(
+                                                  decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),color: Colors.white),
+
+                                                  child: new Wrap(
+                                                    children: <Widget>[
+                                                      new ListTile(
+                                                          leading: new Icon(Icons.photo_library),
+                                                          title: new Text('Photo Library'),
+                                                          onTap: ()async {
+                                                            _.otherImage =await _.getImageFromGallery();
+                                                            _.otherImageName = p.basename(_.otherImage!.path);
+                                                            // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                            // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                            // _.paymentSlip!.readAsBytes().then((value) {
+                                                            //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                            // print("Extention${_.paymentSlipExt}");
+                                                            _.update();
+                                                            Navigator.of(context).pop();
+                                                          }),
+                                                      new ListTile(
+                                                        leading: new Icon(Icons.photo_camera),
+                                                        title: new Text('Camera'),
+                                                        onTap: ()async {
+                                                          _.otherImage = await _.getImageFromCamera();
+                                                          _.otherImageName = p.basename(_.otherImage!.path);
+                                                          // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
+                                                          // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                          // _.paymentSlip!.readAsBytes().then((value) {
+                                                          //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                          // print("Extention${_.paymentSlipExt}");
+                                                          _.update();
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                        );
+                                      },
                                       isRound: false),
                                 ],
                               ),

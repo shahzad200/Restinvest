@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -21,7 +22,7 @@ class PurchasesScreenController extends GetxController {
   bool isChecked = false;
   String fundNamevalue = "";
   String accountvalue = "";
-  String paymentvalue = "";
+  String paymentvalue = "Cheque";
   String paymentvalueCode = "";
 
   bool unitButton = true;
@@ -36,8 +37,8 @@ class PurchasesScreenController extends GetxController {
   String? paymentProofExt;
   File? paymentSlip;
   String? paymentSlipExt;
-  Uint8List? paymentProofBytes;
-  Uint8List? paymentSlipBytes;
+  List<int> paymentProofBytes = [];
+  List<int> paymentSlipBytes = [];
   final picker = ImagePicker();
   DateTime? date ;
   String collectionBankAccount = "";
@@ -105,7 +106,7 @@ class PurchasesScreenController extends GetxController {
     try {
       isLoading = true;
       update();
-      pinCode = await _repository.onGeneratePinCode(accountvalue, "RED");
+      pinCode = await _repository.onGeneratePinCode(accountvalue, "SALE");
       isLoading = false;
       if (noInternet) {
         noInternet = false;
@@ -138,6 +139,7 @@ class PurchasesScreenController extends GetxController {
   //Image Picker function to get image from gallery
   Future<File?> getImageFromGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
 
     // if (pickedFile != null) {
     //   paymentProof = File(pickedFile.path);
@@ -214,7 +216,7 @@ class PurchasesScreenController extends GetxController {
                         fundNamevalue,
                         "${amountController.text}",
                         "",
-                        'PUR',
+                        'SALE',
                         onOkPress);
                   }
                 } else {
@@ -290,7 +292,7 @@ class PurchasesScreenController extends GetxController {
   }
 
   onOkPress(BuildContext context)async{
-    try {
+    // try {
       isLoading = true;
       update();
      submitResponse  =await api.onSavePurchase(
@@ -306,10 +308,12 @@ class PurchasesScreenController extends GetxController {
        collectionBankAccount,
        collectionBankCode,
        fundSale,
-       paymentProofBytes.toString(),
+       "${paymentProofBytes == null || paymentProofBytes.isEmpty?null :base64Encode(paymentProofBytes)}",
+       // base64Encode(paymentProofBytes),
        paymentProofExt!,
-       paymentSlipBytes.toString(),
-       paymentSlipExt!,
+       "${paymentSlipBytes == null || paymentSlipBytes.isEmpty?null :base64Encode(paymentSlipBytes)}",
+
+       "${paymentSlipExt}",
      );
       // submitResponse = await _repository.onSaveFundTransfer(
       //     pinCodeController.text, accountValue, toAccountValue,
@@ -323,25 +327,25 @@ class PurchasesScreenController extends GetxController {
         customDialogPin(context,"Request Submitted successfully");
       }
       // update();
-    } catch (e) {
-      if (e.toString() == 'Exception: No Internet') {
-        isLoading = false;
-        noInternet = true;
-        update();
-      } else {
-        isLoading = false;
-        noInternet = false;
-        update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      }
-    }
+    // } catch (e) {
+    //   if (e.toString() == 'Exception: No Internet') {
+    //     isLoading = false;
+    //     noInternet = true;
+    //     update();
+    //   } else {
+    //     isLoading = false;
+    //     noInternet = false;
+    //     update();
+    //     Fluttertoast.showToast(
+    //         msg: e.toString(),
+    //         toastLength: Toast.LENGTH_SHORT,
+    //         gravity: ToastGravity.CENTER,
+    //         timeInSecForIosWeb: 1,
+    //         backgroundColor: Colors.black,
+    //         textColor: Colors.white,
+    //         fontSize: 16.0);
+    //   }
+    // }
   }
 
   displayDialog(BuildContext context, Widget body) async {

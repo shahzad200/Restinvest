@@ -179,6 +179,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                     ? "Country"
                                                     : _.countryValue,
                                                 textColor: AppColor.black,
+                                                fontSize: 12,
                                               ),
                                               icon: const Icon(
                                                   Icons.keyboard_arrow_down,
@@ -205,9 +206,11 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 value!.countryName!;
                                                 _.countryCode =
                                                 value!.countryCode!;
-                                                _.update();
+
+
                                                 _.onStateData(_.countryCode);
                                                 _.onCityData(_.countryCode);
+                                                _.update();
                                               },
                                             )
                                           ),
@@ -241,8 +244,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                   width: 1,
                                                   color: AppColor.black)),
                                           child: Center(
-                                            child: _.stateData != null
-                                                ? DropdownButton(
+                                            child:  DropdownButton(
                                               isExpanded: true,
                                               underline: Container(
                                                 color:
@@ -251,17 +253,18 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                               borderRadius:
                                               BorderRadius.circular(
                                                   10),
-                                              hint: Center(
-                                                child: RestInvestTitle(
-                                                  text: _.stateValue ==
-                                                      null ||
-                                                      _.stateValue ==
-                                                          ""
-                                                      ? "State"
-                                                      : _.stateValue,
-                                                  textColor:
-                                                  AppColor.black,
-                                                ),
+                                              hint: RestInvestTitle(
+                                                text:
+                                                _.stateValue ==
+                                                    null ||
+                                                    _.stateValue ==
+                                                        "" || _.stateData == null
+
+                                                    ? "State"
+                                                    : _.stateValue,
+                                                textColor:
+                                                AppColor.black,
+                                                fontSize: 12,
                                               ),
                                               icon: const Icon(
                                                   Icons
@@ -269,8 +272,9 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                   color:
                                                   AppColor.blueColor,
                                                   size: 30),
-                                              items: _.stateData!
-                                                  .response!
+
+                                              items:
+                                               _.stateList
                                                   .map<
                                                   DropdownMenuItem<
                                                       state_res.Response>>(
@@ -293,7 +297,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 // _.onCitySectorData(value.cityCode!);
                                               },
                                             )
-                                                : const SizedBox()),
+                                                ),
                                           ),
                                       ],
                                     ),
@@ -333,20 +337,20 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                   color:
                                                   AppColor.whiteColor,
                                                 ),
+
                                                 borderRadius:
                                                 BorderRadius.circular(
                                                     10),
-                                                hint: Center(
-                                                  child: RestInvestTitle(
-                                                    text: _.birthCityValue ==
-                                                        null ||
-                                                        _.birthCityValue ==
-                                                            ""
-                                                        ? "City"
-                                                        : _.birthCityValue,
-                                                    textColor:
-                                                    AppColor.black,
-                                                  ),
+                                                hint: RestInvestTitle(
+                                                  text: _.birthCityValue ==
+                                                      null ||
+                                                      _.birthCityValue ==
+                                                          ""
+                                                      ? "City"
+                                                      : _.birthCityValue,
+                                                  textColor:
+                                                  AppColor.black,
+                                                  fontSize: 12,
                                                 ),
                                                 icon: const Icon(
                                                     Icons
@@ -354,8 +358,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                     color:
                                                     AppColor.blueColor,
                                                     size: 30),
-                                                items: _.cityData!
-                                                    .response!
+                                                items: _.cityList
                                                     .map<
                                                     DropdownMenuItem<
                                                         city_res.Response>>(
@@ -559,60 +562,56 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                               border: Border.all(
                                                   width: 1,
                                                   color: AppColor.black)),
-                                          child: Center(
-                                              child: _.cityData != null
-                                                  ? DropdownButton(
-                                                isExpanded: true,
-                                                underline: Container(
-                                                  color:
-                                                  AppColor.whiteColor,
-                                                ),
-                                                borderRadius:
-                                                BorderRadius.circular(
-                                                    10),
-                                                hint: Center(
-                                                  child: RestInvestTitle(
-                                                    text: _.cityValue ==
-                                                        null ||
-                                                        _.cityValue ==
-                                                            ""
-                                                        ? "City"
-                                                        : _.cityValue,
-                                                    textColor:
-                                                    AppColor.black,
-                                                  ),
-                                                ),
-                                                icon: const Icon(
-                                                    Icons
-                                                        .keyboard_arrow_down,
-                                                    color:
-                                                    AppColor.blueColor,
-                                                    size: 30),
-                                                items: _.cityData!
-                                                    .response!
-                                                    .map<
-                                                    DropdownMenuItem<
-                                                        city_res.Response>>(
-                                                        (city_res.Response?
-                                                    value) {
-                                                      return DropdownMenuItem<
-                                                          city_res.Response>(
-                                                        value: value,
-                                                        child: Text(
-                                                            value!.cityName!),
-                                                      );
-                                                    }).toList(),
-                                                onChanged:
-                                                    (city_res.Response? value) {
-                                                  _.cityValue =
-                                                  value!.cityName!;
-                                                  _.cityCode =
-                                                  value.cityCode!;
-                                                  _.update();
-                                                  // _.onCitySectorData(value.cityCode!);
-                                                },
-                                              )
-                                                  : const SizedBox()),
+                                          child: _.cityData != null
+                                              ? DropdownButton(
+                                            isExpanded: true,
+                                            underline: Container(
+                                              color:
+                                              AppColor.whiteColor,
+                                            ),
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                10),
+                                            hint: RestInvestTitle(
+                                              text: _.cityValue ==
+                                                  null ||
+                                                  _.cityValue ==
+                                                      ""
+                                                  ? "City"
+                                                  : _.cityValue,
+                                              textColor:
+                                              AppColor.black,
+                                            ),
+                                            icon: const Icon(
+                                                Icons
+                                                    .keyboard_arrow_down,
+                                                color:
+                                                AppColor.blueColor,
+                                                size: 30),
+                                            items: _.cityList
+                                                .map<
+                                                DropdownMenuItem<
+                                                    city_res.Response>>(
+                                                    (city_res.Response?
+                                                value) {
+                                                  return DropdownMenuItem<
+                                                      city_res.Response>(
+                                                    value: value,
+                                                    child: Text(
+                                                        value!.cityName!),
+                                                  );
+                                                }).toList(),
+                                            onChanged:
+                                                (city_res.Response? value) {
+                                              _.cityValue =
+                                              value!.cityName!;
+                                              _.cityCode =
+                                              value.cityCode!;
+                                              _.update();
+                                              // _.onCitySectorData(value.cityCode!);
+                                            },
+                                          )
+                                              : const SizedBox(),
                                         ),
                                       ],
                                     ),

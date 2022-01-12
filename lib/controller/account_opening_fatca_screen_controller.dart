@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/city_data.dart';
-import 'package:investintrust/data/models/state_data.dart';
+import 'package:investintrust/data/models/city_data.dart' as city;
+import 'package:investintrust/data/models/state_data.dart' as state;
 import 'package:investintrust/data/repository.dart';
 
 import 'account_opening_basic_information_screen_controller.dart';
@@ -43,8 +43,10 @@ class AccountOpenFatcaController extends GetxController{
   String birthCityValue = "";
   String birthCityCode = "";
   String taxResCountriesOtherThanPakGroupValue = '0';
-  CityData? cityData;
-  StateData? stateData;
+  city.CityData? cityData;
+  List<state.Response> stateList = [];
+  List<city.Response> cityList = [];
+  state.StateData? stateData;
   final _repository = Repository();
   @override
   void onInit() {
@@ -166,9 +168,14 @@ class AccountOpenFatcaController extends GetxController{
 
   onCityData(String countryCode) async {
     try {
+      cityList = [];
+      birthCityValue = "";
       isLoading = true;
       update();
       cityData = await _repository.onCityData(countryCode);
+      cityData!.response!.forEach((element) {
+        cityList.add(element);
+      });
       isLoading = false;
       update();
     } catch (e) {
@@ -193,9 +200,14 @@ class AccountOpenFatcaController extends GetxController{
   }
   onStateData(String countryCode) async {
     try {
+      stateList = [];
+      stateValue = "";
       isLoading = true;
       update();
       stateData = await _repository.onStateData(countryCode);
+      stateData!.response!.forEach((element) {
+        stateList.add(element);
+      });
       isLoading = false;
       update();
     } catch (e) {

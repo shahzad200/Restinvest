@@ -520,8 +520,12 @@ _.update();
                                             onTap: ()async {
                                               _.paymentProof =await _.getImageFromGallery();
                                               _.paymentProofExt = p.extension(_.paymentProof!.path);
-                                              _.paymentProof!.readAsBytes().then((value) {
-                                                _.paymentProofBytes = Uint8List.fromList(value);});
+
+                                              _.paymentProofBytes = _.paymentProof!.readAsBytesSync();
+
+                                              // then((value) {
+
+                                            // });
                                               print("Extention${_.paymentProofExt}");
                                               _.update();
                                               Navigator.of(context).pop();
@@ -532,8 +536,7 @@ _.update();
                                           onTap: ()async {
                                             _.paymentProof = await _.getImageFromCamera();
                                             _.paymentProofExt = p.extension(_.paymentProof!.path);
-                                            _.paymentProof!.readAsBytes().then((value) {
-                                              _.paymentProofBytes = Uint8List.fromList(value);});
+                                            _.paymentProofBytes = _.paymentProof!.readAsBytesSync();
                                             print("Extention${_.paymentProofExt}");
                                             _.update();
                                             Navigator.of(context).pop();
@@ -572,8 +575,9 @@ _.update();
                                             onTap: ()async {
                                               _.paymentSlip =await _.getImageFromGallery();
                                               _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                              _.paymentSlip!.readAsBytes().then((value) {
-                                                _.paymentSlipBytes = Uint8List.fromList(value);});
+                                              _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                              // _.paymentSlip!.readAsBytes().then((value) {
+                                              //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                               print("Extention${_.paymentSlipExt}");
                                               _.update();
                                               Navigator.of(context).pop();
@@ -584,8 +588,9 @@ _.update();
                                           onTap: ()async {
                                             _.paymentSlip = await _.getImageFromCamera();
                                             _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                            _.paymentSlip!.readAsBytes().then((value) {
-                                              _.paymentSlipBytes = Uint8List.fromList(value);});
+                                            _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                            // _.paymentSlip!.readAsBytes().then((value) {
+                                            //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                             print("Extention${_.paymentSlipExt}");
                                             _.update();
                                             Navigator.of(context).pop();

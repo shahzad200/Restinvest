@@ -72,28 +72,28 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(
-                              children: const [
-                                RestInvestTitle(
-                                  text: " OTP VERIFY > ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontWeight: FontWeight.w900,fontSize: 8,
-                                ),
-                                RestInvestTitle(
-                                  text: " BASIC INFORMATION > ",
-                                  textAlign: TextAlign.start,fontSize: 8,
-                                  textColor: AppColor.dimblack,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                RestInvestTitle(
-                                  text: " BANK DETAILS > ",
-                                  textAlign: TextAlign.start,fontSize: 8,
-                                  textColor: AppColor.blueColor,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: const [
+                            //     RestInvestTitle(
+                            //       text: " OTP VERIFY > ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontWeight: FontWeight.w900,fontSize: 8,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: " BASIC INFORMATION > ",
+                            //       textAlign: TextAlign.start,fontSize: 8,
+                            //       textColor: AppColor.dimblack,
+                            //       fontWeight: FontWeight.w900,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: " BANK DETAILS > ",
+                            //       textAlign: TextAlign.start,fontSize: 8,
+                            //       textColor: AppColor.blueColor,
+                            //       fontWeight: FontWeight.w900,
+                            //     ),
+                            //   ],
+                            // ),
                             space,
                             Row(
                               children: [

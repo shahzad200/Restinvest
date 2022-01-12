@@ -23,11 +23,11 @@ class DailyNavScreen extends StatelessWidget {
                 appBar: AppBar(
                   centerTitle: true,
                   backgroundColor: AppColor.whiteColor,
-                  title: const Padding(
-                    padding: EdgeInsets.only(right: 50),
+                  title: Padding(
+                    padding:  EdgeInsets.only(right: Get.width/6),
                     child: Logo(
-                      height: 80,
-                      width: 80,
+                      height: 55,
+                      width: 55,
                     ),
                   ),
                   elevation: 0,
@@ -67,7 +67,7 @@ class DailyNavScreen extends StatelessWidget {
                                   saleText: "Sale",
                                   purchaseText: "Repurchase",
 
-                                  textSize: 12.0,
+                                  textSize: 11.0,
                                 ),
                                 _.dailyNavPrices == null ? const CircularProgressIndicator() :Column(
                                   children: List.generate(
@@ -104,7 +104,7 @@ class DailyNavScreen extends StatelessWidget {
                                             .dailyMutualFundNavList![index]
                                             .fundRepurchase!
                                              .toString(),
-                                        textSize: 12.0
+                                        textSize: 10.0
                                     );
                                   }),
     ),
@@ -122,7 +122,7 @@ class DailyNavScreen extends StatelessWidget {
                                   dateText: "Date",
                                   saleText: "Sale",
                                   purchaseText: "Repurchase",
-                                  textSize: 12.0,
+                                  textSize: 11.0,
                                 ),
                                 _.dailyNavPrices == null ? const CircularProgressIndicator() :    Column(
                               children: List.generate(
@@ -159,7 +159,7 @@ class DailyNavScreen extends StatelessWidget {
                                         .dailyPensionFundNavList![index]
                                         .fundRepurchase!
                                         .toString(),
-                                    textSize: 12.0
+                                    textSize: 10.0
                                 );
                               }),),
                                 space,
@@ -175,7 +175,7 @@ class DailyNavScreen extends StatelessWidget {
                                   dateText: "Date",
                                   saleText: "Sale",
                                   purchaseText: "Repurchase",
-                                  textSize: 12.0,
+                                  textSize: 11.0,
                                 ),
                                 _.dailyNavPrices == null ? const CircularProgressIndicator() :    Column(
                                   children: List.generate(
@@ -212,7 +212,7 @@ class DailyNavScreen extends StatelessWidget {
                                             .dailyExchangeFundNavList![index]
                                             .fundRepurchase!
                                             .toString(),
-                                        textSize: 12.0
+                                        textSize: 10.0
                                     );
                                   }),),
                                 space,
