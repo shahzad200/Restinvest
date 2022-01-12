@@ -34,9 +34,12 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                 appBar: AppBar(
                   centerTitle: true,
                   backgroundColor: AppColor.whiteColor,
-                  title: const Logo(
-                    height: 50,
-                    width: 50,
+                  title: Padding(
+                    padding:  EdgeInsets.only(right:Get.width/6),
+                    child: const Logo(
+                      height: 50,
+                      width: 50,
+                    ),
                   ),
                   elevation: 0,
                 ),
@@ -73,41 +76,41 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: const [
-                                        RestInvestTitle(
-                                          text: " OTP VERIFY > ",
-                                          fontSize: 12,
-                                          textAlign: TextAlign.start,
-                                          textColor: AppColor.dimblack,
-                                          fontWeight: FontWeight.w900,
-                                        ),
-                                        RestInvestTitle(
-                                          text: " BASIC INFORMATION > ",
-                                          textAlign: TextAlign.start,
-                                          fontSize: 12,
-                                          textColor: AppColor.dimblack,
-                                          fontWeight: FontWeight.w900,
-                                        ),
-                                        RestInvestTitle(
-                                          text: " FATCA > ",
-                                          textAlign: TextAlign.start,
-                                          textColor: AppColor.dimblack,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w900,
-                                        ),
-                                        Expanded(
-                                          child: RestInvestTitle(
-                                            text: "RISK PROFILE >",
-                                            textAlign: TextAlign.start,
-                                            textColor: AppColor.blueColor,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w900,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.start,
+                                    //   children: const [
+                                    //     RestInvestTitle(
+                                    //       text: " OTP VERIFY > ",
+                                    //       fontSize: 12,
+                                    //       textAlign: TextAlign.start,
+                                    //       textColor: AppColor.dimblack,
+                                    //       fontWeight: FontWeight.w900,
+                                    //     ),
+                                    //     RestInvestTitle(
+                                    //       text: " BASIC INFORMATION > ",
+                                    //       textAlign: TextAlign.start,
+                                    //       fontSize: 12,
+                                    //       textColor: AppColor.dimblack,
+                                    //       fontWeight: FontWeight.w900,
+                                    //     ),
+                                    //     RestInvestTitle(
+                                    //       text: " FATCA > ",
+                                    //       textAlign: TextAlign.start,
+                                    //       textColor: AppColor.dimblack,
+                                    //       fontSize: 12,
+                                    //       fontWeight: FontWeight.w900,
+                                    //     ),
+                                    //     Expanded(
+                                    //       child: RestInvestTitle(
+                                    //         text: "RISK PROFILE >",
+                                    //         textAlign: TextAlign.start,
+                                    //         textColor: AppColor.blueColor,
+                                    //         fontSize: 12,
+                                    //         fontWeight: FontWeight.w900,
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
                                     space,
                                     const RestInvestTitle(
                                       text: " RISK PROFILE FORM ",
@@ -118,7 +121,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     ),
                                     space,
                                     const RestInvestTitle(
-                                      text: "Age In Year:*",
+                                      text: "Age (in Yrs.):*",
                                       textColor: AppColor.black,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w900,
@@ -589,9 +592,9 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                           },
                                           isRound: false),
                                     ),
-                                    space,
+
                                     _.isCalculate ?
-                                    Text('Your Score is' + _.calculateValue.toString()) :
+                                    Center(child: RestInvestTitle(textAlign: TextAlign.center,fontWeight: FontWeight.w900,text:'Your Score is' + _.calculateValue.toString())) :
                                     const SizedBox(),
                                     const RestInvestTitle(
                                       text:

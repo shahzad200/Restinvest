@@ -17,8 +17,8 @@ class AccountOpenPreviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = Get.width;
-    final height = Get.height;
+    // final width = Get.width;
+    // final height = Get.height;
     return GetBuilder<AccountOpenPreviewScreenController>(
         init: AccountOpenPreviewScreenController(),
         builder: (_) {
@@ -30,9 +30,12 @@ class AccountOpenPreviewScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: const Logo(
-                height: 50,
-                width: 50,
+              title: Padding(
+                padding:  EdgeInsets.only(right:Get.width/6),
+                child: const Logo(
+                  height: 50,
+                  width: 50,
+                ),
               ),
               elevation: 0,
             ),
@@ -56,7 +59,7 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                             Border.all(width: 1, color: AppColor.blueColor)),
                     child: Column(children: [
                       const CustomTextContainer(
-                        fontSize: 16,
+                        fontSize: 14,
                         height: 35,
                         text: "PREVIEW",
                         textAlign: TextAlign.start,
@@ -68,52 +71,52 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(
-                              children: const [
-                                RestInvestTitle(
-                                  text: " OTP VERIFY> ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                RestInvestTitle(
-                                  text: " BASIC INFORMATION> ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                RestInvestTitle(
-                                  text: "KYC DETAIL> ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                RestInvestTitle(
-                                  text: " FATCA> ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 9,
-                                ),
-                                RestInvestTitle(
-                                  text: "UPLOAD DOCUMENTS> ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.dimblack,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 9,
-                                ),
-                                RestInvestTitle(
-                                  text: " PREVIEW> ",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.blueColor,
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: const [
+                            //     RestInvestTitle(
+                            //       text: " OTP VERIFY> ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontSize: 8,
+                            //       fontWeight: FontWeight.w900,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: " BASIC INFORMATION> ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontSize: 8,
+                            //       fontWeight: FontWeight.w900,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: "KYC DETAIL> ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontSize: 8,
+                            //       fontWeight: FontWeight.w900,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: " FATCA> ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontWeight: FontWeight.w900,
+                            //       fontSize: 8,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: "UPLOAD DOCUMENTS> ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.dimblack,
+                            //       fontWeight: FontWeight.w900,
+                            //       fontSize: 8,
+                            //     ),
+                            //     RestInvestTitle(
+                            //       text: " PREVIEW> ",
+                            //       textAlign: TextAlign.start,
+                            //       textColor: AppColor.blueColor,
+                            //       fontSize: 8,
+                            //       fontWeight: FontWeight.w900,
+                            //     ),
+                            //   ],
+                            // ),
                             space,
                             const RestInvestTitle(
                               text: "1: Upload Image ",

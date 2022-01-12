@@ -487,6 +487,14 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                       ],
                                     );
                                   }),
+                              space,
+                              const RestInvestTitle(
+                                text: "*DISCLAIMER:",
+                                textColor: AppColor.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w900,
+                              ),
+                              const SizedBox(height: 5,),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -504,9 +512,11 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                           _.update();
                                         }),
                                   ),
-                                  SizedBox(width: 10,),
-                                  Expanded(
-                                    child: const RestInvestTitle(
+
+
+                                  const SizedBox(width: 10,),
+                                  const Expanded(
+                                    child: RestInvestTitle(
                                       text:
                                           "I hereby confirm that the information provided abpve is true,accurate and complete,I hereby,+indemnify and hold the harmful NITL against any and all losses action,claims,penalities,demagesor liabilities that may arise in case the above information is found to  be incorrect.I further agree and undertake to notify NITL within 30 day calender if there is changes ininformation provided above.",
                                       textColor: AppColor.black,
@@ -533,7 +543,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         const RestInvestTitle(
-                                          text: "CURRENT CITY:*",
+                                          text: "COUNTRY OF TAX RESIDENCE:*",
                                           textColor: AppColor.black,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w900,
@@ -611,12 +621,12 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                     width: 6,
                                   ),
                                    Expanded(
-                                    child: EmptyContainer(
+                                    child: EmptyContainer(hintColor: AppColor.black,
                                         text: "TIN NUMBER:",
                                         hint: "${_.tinNumber}",
                                         textColor: AppColor.black,
                                         fontWeight: FontWeight.w900,
-                                        hintColor: AppColor.black),
+                                       ),
                                   ),
                                 ],
                               ),

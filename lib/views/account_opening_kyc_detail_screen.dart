@@ -15,8 +15,6 @@ import '../utils/colors.dart';
 import '../widgets/textformfiled.dart';
 
 import '../widgets/constant_widget.dart';
-import 'account_opening_risk_profile_screen.dart';
-
 class AccountOpenKycDetailScreen extends StatelessWidget {
   const AccountOpenKycDetailScreen({Key? key}) : super(key: key);
 
@@ -261,13 +259,14 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  space,
+                                  space,  space,
                                   const RestInvestTitle(
                                     text: "GEOGRAPHIES INVOLVED:",
                                     textColor: AppColor.black,
-                                    fontSize: 10,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w900,
                                   ),
+                                  space,
                                   space,
                                   Row(
                                     children: [
@@ -375,7 +374,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                   const RestInvestTitle(
                                     text: "PREFERRED MODE OF TRANSACTION:*",
                                     textColor: AppColor.black,
-                                    fontSize: 10,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w900,
                                   ),
                                   _.controller.newDigUserRegDataAfterOTP!.response!
@@ -421,7 +420,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                     text:
                                     "EXPECTED TURNOVER IN ACCOUNT IN \nRUPEES:*",
                                     textColor: AppColor.black,
-                                    fontSize: 10,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w900,
                                   ),
                                   _.controller.newDigUserRegDataAfterOTP!.response!
@@ -472,7 +471,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                   const RestInvestTitle(
                                     text: "EXPECTED INVESTMENT AMMOUNT:*",
                                     textColor: AppColor.black,
-                                    fontSize: 10,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w900,
                                   ),
                                   _.controller.newDigUserRegDataAfterOTP!.response!
@@ -517,7 +516,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                   const RestInvestTitle(
                                     text: "ANNUAL INCOME:*",
                                     textColor: AppColor.black,
-                                    fontSize: 10,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w900,
                                   ),
                                   _.controller.newDigUserRegDataAfterOTP!.response!
@@ -562,9 +561,10 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                   const RestInvestTitle(
                                     text: "PEP DECLARATION DETAIL*",
                                     textColor: AppColor.black,
-                                    fontSize: 10,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w900,
                                   ),
+                                  space,
 
                                   ListView.builder(
                                       shrinkWrap: true,

@@ -1267,13 +1267,17 @@ class EmptyContainer extends StatelessWidget {
     required this.textColor,
     required this.fontWeight,
     required this.hintColor,
+
+
     this.text,
     Key? key,
   }) : super(key: key);
   final hint;
   final Color textColor;
   final hintColor;
+
   final text;
+
   final fontWeight;
 
   @override
@@ -1283,7 +1287,7 @@ class EmptyContainer extends StatelessWidget {
       children: [
         RestInvestTitle(fontWeight: fontWeight,
           text: text,
-          textColor: textColor,
+          textColor: textColor,fontSize: 12,
         ),
         SizedBox(
           height: 35,

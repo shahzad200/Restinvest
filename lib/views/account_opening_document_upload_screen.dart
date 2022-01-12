@@ -32,7 +32,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
               backgroundColor: AppColor.whiteColor,
               title: Padding(
                 padding:  EdgeInsets.only(right:Get.width/6),
-                child: Logo(
+                child: const Logo(
                   height: 50,
                   width: 50,
                 ),
