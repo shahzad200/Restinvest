@@ -31,11 +31,11 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: const Padding(
-                padding: EdgeInsets.only(right: 50),
-                child: Logo(
-                  height: 60,
-                  width: 60,
+              title:  Padding(
+                padding:  EdgeInsets.only(right:Get.width/6),
+                child: const Logo(
+                  height: 50,
+                  width: 50,
                 ),
               ),
               elevation: 0,

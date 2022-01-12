@@ -144,7 +144,7 @@ class LoginScreen extends StatelessWidget {
                       },
                       child: const RestInvestTitle(
                           text: "Open Digital Account",
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.center,fontWeight: FontWeight.w900,
                           textColor: AppColor.blueColor)),
                   // InkWell(
                   //     onTap: () {
@@ -191,7 +191,7 @@ class LoginScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                         underlineColor: AppColor.blueColor,
                         textColor: AppColor.blueColor,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w900,
                         fontSize: 14,
                       ),
                     ],

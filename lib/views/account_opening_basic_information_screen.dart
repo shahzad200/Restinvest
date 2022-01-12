@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/new_dig_user_reg_data_after_otp.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/utils/constant.dart';
+import '../data/models/new_dig_user_reg_data_after_otp.dart';
+import '../routes/routes.dart';
+import '../utils/constant.dart';
 import '../widgets/datefield.dart';
 import '../controller/account_opening_basic_information_screen_controller.dart';
 
@@ -37,9 +37,12 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
-              title: const Logo(
-                height: 50,
-                width: 50,
+              title: Padding(
+                padding:  EdgeInsets.only(right:Get.width/6),
+                child: const Logo(
+                  height: 50,
+                  width: 50,
+                ),
               ),
               elevation: 0,
             ),

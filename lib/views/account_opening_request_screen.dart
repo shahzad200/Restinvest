@@ -33,9 +33,12 @@ class AccountOpenRequestScreen extends StatelessWidget {
                 appBar: AppBar(
                   centerTitle: true,
                   backgroundColor: AppColor.whiteColor,
-                  title: Logo(
-                    height: 50,
-                    width: 50,
+                  title: Padding(
+                    padding:  EdgeInsets.only(right:Get.width/6),
+                    child: const Logo(
+                      height: 50,
+                      width: 50,
+                    ),
                   ),
                   elevation: 0,
                 ),
@@ -192,8 +195,8 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                         child: RadioListTile<String>(
                                           title: Text("${data.description}",
                                             style: const TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.bold
+                                                fontSize: 8,
+                                                fontWeight: FontWeight.w900
                                             ),
 
                                           ),
