@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/city_data.dart';
+import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_after_otp.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
+
+import 'account_opening_request_screen_controller.dart';
 
 
 class AccountOpenBasicInformationScreenController extends GetxController{
@@ -22,6 +25,9 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   bool isChecked=false;
   String groupValue = '-1';
   var charactor=0;
+
+  AccountOpenRequestScreenController controller = Get.find<AccountOpenRequestScreenController>();
+
   TextEditingController nameController = TextEditingController();
   TextEditingController fNameController = TextEditingController();
   TextEditingController mNameController = TextEditingController();
@@ -34,6 +40,10 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   TextEditingController eMailAddressController = TextEditingController();
   TextEditingController bankBranchController = TextEditingController();
   TextEditingController iBanNumberController = TextEditingController();
+  TextEditingController kinNameController = TextEditingController();
+  TextEditingController kiNcNicController = TextEditingController();
+  TextEditingController kinRelationController = TextEditingController();
+  TextEditingController kinMobileNumberController = TextEditingController();
   NewDigUserRegDataAfterOTP? newDigUserRegDataAfterOTP;
   CityData? mailingCityData;
   CityData? currentCityData;
@@ -54,7 +64,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   String religionValue = "";
   String religionCode = "";
   String zaKatValue = "";
-  String zaKatCode = "";
+  bool zaKatCode = false;
   String retirementValue = "";
   String retirementCode = "";
   String currentCountryValue = "";
@@ -71,6 +81,9 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   String bankCityCode = "";
   String dividendMandateGroupValue = "00";
   final _repository = Repository();
+
+  Common? common;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -149,10 +162,10 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   }
 
   String dateTime(DateTime date){
-    return date.day.toString()+'/'+date.month.toString()+'/'+date.year.toString();
+    return date.year.toString()+'-'+date.month.toString()+'-'+date.day.toString();
   }
 
-  onSaveDataAccountOpeningBasicInfo(){
+  onSaveDataAccountOpeningBasicInfo() async {
     if(titleValue == "" && titleCode == ""){
       showToast('Please select title');
     } else if(nameController.text == "" || nameController.text.isEmpty || nameController.text == null){
@@ -214,8 +227,48 @@ class AccountOpenBasicInformationScreenController extends GetxController{
     } else if(!isChecked){
       showToast('Please check disclaimer');
     } else {
-      Get.toNamed(
-          AppRoute.accountOpenKycDetailScreen);
+      try {
+        isLoading = true;
+        update();
+        common = await _repository.onPartialSavingForDigUser(controller.cNicNumberController.text,
+            controller.emailController.text, controller.mobileNumberController.text,
+            controller.mobileNumberOwnerCode, controller.groupValue, iBanNumberController.text,
+            bankBranchController.text, bankNameCode, isChecked,
+            mailingCityCode, currentCityCode, cNicExpDate, cNicIssueDate, currentCountryCode,
+            nameController.text, dObDate, dividendMandateGroupValue, fNameController.text,
+            mailingAddressController.text, mailingCountryCode, mailingCityCode, martialCode,
+            mNameController.text, nationalityCode,residentStatusCode,religionCode, currentAddressController.text,
+            int.parse(retirementCode), titleCode, zaKatCode, kinNameController.text,
+            kiNcNicController.text, kinRelationController.text, kinMobileNumberController.text);
+
+        isLoading = false;
+        if (noInternet) {
+          noInternet = false;
+        }
+        update();
+        if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+          Get.toNamed(
+              AppRoute.accountOpenKycDetailScreen);
+        }
+      } catch (e) {
+        if (e.toString() == 'Exception: No Internet') {
+          isLoading = false;
+          noInternet = true;
+          update();
+        } else {
+          isLoading = false;
+          noInternet = false;
+          update();
+          Fluttertoast.showToast(
+              msg: e.toString().replaceAll('Exception:', ''),
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      }
     }
   }
 

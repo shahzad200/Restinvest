@@ -468,6 +468,13 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                   //   text: "",
                                   // ),
                                   space,
+                                  CustomTextFormField(
+                                    controller: _.expTurnoverAmountController,
+                                    isRounded: true,
+                                    hint: "",
+                                    hintColor: AppColor.black,
+                                  ),
+                                  space,
                                   const RestInvestTitle(
                                     text: "EXPECTED INVESTMENT AMMOUNT:*",
                                     textColor: AppColor.black,

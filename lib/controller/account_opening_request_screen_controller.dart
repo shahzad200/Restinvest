@@ -8,6 +8,7 @@ import 'package:investintrust/data/models/new_dig_user_reg_data_before_otp.dart'
 import 'package:investintrust/data/models/validate_verification_code_for_dig_user.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
 
@@ -151,6 +152,8 @@ class AccountOpenRequestScreenController extends GetxController {
           update();
           if(genVerificationCodeForDigUser!.meta!.message == 'OK' && genVerificationCodeForDigUser!.meta!.code == '200'){
             customDialogPin(context,"Please check your provided email address and mobile number for verification code");
+          }else {
+            customDialogPin(context,common!.meta!.error.toString());
           }
         } catch (e) {
           if (e.toString() == 'Exception: No Internet') {
@@ -176,7 +179,7 @@ class AccountOpenRequestScreenController extends GetxController {
 
 
 
-  onValidateVerificationCodeForDigUser(BuildContext context) async {
+  onValidateVerificationCodeForDigUser() async {
     if (cNicNumberController.text.isEmpty ||
         cNicNumberController.text == '' ||
         cNicNumberController.text == null) {
@@ -243,10 +246,9 @@ class AccountOpenRequestScreenController extends GetxController {
           noInternet = false;
         }
         update();
-        if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+        if(validateVerificationCodeForDigUser!.meta!.message == 'OK' && validateVerificationCodeForDigUser!.meta!.code == '200'){
+          Constant.sessionID = validateVerificationCodeForDigUser!.response!.sessionID;
           Get.toNamed(AppRoute.accountopeningbasicinformation);
-        }else {
-          customDialogPin(context,common!.meta!.error.toString());
         }
       } catch (e) {
         if (e.toString() == 'Exception: No Internet') {

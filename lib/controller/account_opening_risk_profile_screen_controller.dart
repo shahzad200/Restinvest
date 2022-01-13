@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_req_list.dart';
 import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/widgets/constant_widget.dart';
 
 
 class AccountOpenRiskProfileScreenController extends GetxController{
@@ -61,6 +64,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
   bool isCalculate = false;
   int calculateValue = 0;
 
+  Common? common;
   @override
   void onInit() {
     // TODO: implement onInit
@@ -223,5 +227,55 @@ class AccountOpenRiskProfileScreenController extends GetxController{
     }
 
   }
+
+
+  onSaveData() async {
+    if(!isCalculate){
+      showToast('Please calculate risk');
+    }else if(!isChecked){
+      showToast('Please check disclaimer');
+    } else{
+      try {
+        isLoading = true;
+        update();
+        common = await _repository.onPartialSavingForDigUserScreen5('cNic',
+            ageGroupValue, isChecked, financialPositionGroupValue,
+            investHorizonGroupValue, investKnowledgeGroupValue,
+            investObjGroupValue, maritalStatusGroupValue,
+            noOfDependentsGroupValue, occupationGroupValue, qualificationGroupValue,
+            riskAppetiteGroupValue, calculateValue);
+        isLoading = false;
+        if (noInternet) {
+          noInternet = false;
+        }
+        update();
+        if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+          Get.toNamed(AppRoute.accountOpenUploadScreen);
+        }
+      } catch (e) {
+        if (e.toString() == 'Exception: No Internet') {
+          isLoading = false;
+          noInternet = true;
+          update();
+        } else {
+          isLoading = false;
+          noInternet = false;
+          update();
+          Fluttertoast.showToast(
+              msg: e.toString().replaceAll('Exception:', ''),
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      }
+
+
+
+    }
+  }
+
 
 }
