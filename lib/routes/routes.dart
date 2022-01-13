@@ -3,6 +3,7 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:investintrust/views/account_opening_document_upload_screen.dart';
 import 'package:investintrust/views/account_opening_fatca_screen.dart';
 import 'package:investintrust/views/account_opening_kyc_detail_screen.dart';
+import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
 import '../views/account_opening_bank_detail_screen.dart';
 import '../views/account_opening_basic_information_screen.dart';
 import '../views/account_opening_request_screen.dart';
@@ -31,7 +32,7 @@ import '../views/user_screen.dart';
 import '../views/view_report_screen.dart';
 
 class AppRoute {
-  static const String splashRoute = '/';
+  // static const String splashRoute = '/';
   static const String loginRoute = '/login';
   static const String signUpRoute = '/signUp';
   static const String passwordRoute = '/password';
@@ -63,14 +64,15 @@ class AppRoute {
   static const String accountOpenKycDetailScreen='/accountOpenKycDetailScreen';
   static const String accountOpenFatcaScreen='/accountOpenFatcaScreen';
   static const String accountOpenUploadScreen='/accountOpenUploadScreen';
+  static const String accountOpenURiskScreen='/accountOpenRickScreen';
 
   AppRoute._();
 
   static List<GetPage> get navMain {
     return [
       GetPage(
-        name: AppRoute.splashRoute,
-        page: () => const SplashScreen(),
+        name: AppRoute.accountOpenURiskScreen,
+        page: () => const AccountOpenRiskProfileScreen(),
       ),
       GetPage(
         name: AppRoute.loginRoute,

@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_before_otp.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/views/account_opening_basic_information_screen.dart';
 import '../controller/account_opening_request_screen_controller.dart';
 import '../utils/constant.dart';
 import '../widgets/button.dart';
@@ -95,6 +97,15 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                       hint: "Enter Your CNIC/NICOP Numbers",
                                       controller: _.cNicNumberController,
                                       fieldType: Constants.cnicNumber,
+                                      inputFormator: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        new LengthLimitingTextInputFormatter(13),
+                                        new NumberFormatter()
+                                      ],
+                                      onChange: (va){
+                                        print(va);
+                                        print(_.cNicNumberController.text);
+                                      },
                                       textAlign: TextAlign.start,
                                     ),
                                     const SizedBox(
@@ -140,7 +151,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                       // margin: EdgeInsets.all(10.0),
                                       padding:
                                       const EdgeInsets.only(left: 10.0, right: 5.0),
-                                      height: 35,
+                                      height: 37,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           color: AppColor.whiteColor,
@@ -160,9 +171,10 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                                 ? ""
                                                 : _.mobileNumberOwner,
                                             textColor: AppColor.black,
+                                            fontSize: 12,
                                           ),
                                           icon: const Icon(Icons.keyboard_arrow_down,
-                                              color: AppColor.blueColor, size: 35),
+                                              color: AppColor.blueColor, size: 25),
                                           items: _.isLoading || _.noInternet ? null : _.newDigUserRegDataBeforeOTP!.response!.mobileRegisteredWithList!.map<DropdownMenuItem<MobileRegisteredWithList>>((MobileRegisteredWithList? value){
                                             return DropdownMenuItem<MobileRegisteredWithList>(
                                               value: value,

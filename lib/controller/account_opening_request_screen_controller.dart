@@ -233,6 +233,8 @@ class AccountOpenRequestScreenController extends GetxController {
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
+
+
       try {
         isLoading = true;
         update();

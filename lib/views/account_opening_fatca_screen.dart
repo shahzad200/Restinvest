@@ -92,7 +92,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                         ),
                                         CustomTextFormField(
                                           isRounded: true,
-                                          hint: "",
+                                          hint: "Title",
                                           controller: _.titleController,
                                           textInputType: TextInputType.text,
                                           hintColor: AppColor.black,
@@ -113,11 +113,13 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                           text: "CNIC / NICOP NUMBER",
                                           textColor: AppColor.black,
                                           fontSize: 12,
+
                                           fontWeight: FontWeight.w900,
                                         ),
                                         CustomTextFormField(
                                           isRounded: true,
-                                          hint: "",
+                                          hint: "11111-1111111-1",
+                                          textInputType: TextInputType.numberWithOptions(),
                                           controller: _.cnicController,
                                           hintColor: AppColor.black,
                                           // textInputType: TextInputType.emailAddress,
@@ -131,7 +133,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                               const RestInvestTitle(
                                 text: "PLACE OF BIRTH:",
                                 textColor: AppColor.black,
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w900,
                               ),
                               space,
@@ -438,6 +440,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     bool? groupValue = _.controller.newDigUserRegDataAfterOTP!.
                                     response!.fatcaInfoList![index].answer;
+                                    _.list[index]["answer"] = groupValue;
                                     return  Column(
                                       children: [
                                         SizedBox(
@@ -454,6 +457,12 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                               onChanged: (bool? val) {
                                                 _.controller.newDigUserRegDataAfterOTP!.
                                                 response!.fatcaInfoList![index].answer = val;
+                                                _.list[index]["answer"] = _.controller.newDigUserRegDataAfterOTP!.
+                                                response!.fatcaInfoList![index].answer;
+                                                _.list.forEach((element) {
+                                                  print(element["answer"].toString());
+                                                });
+                                                print("sadaddsad$val");
                                                 _.update();
                                               },
                                               fillColor: MaterialStateColor.resolveWith(
@@ -471,6 +480,12 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                               onChanged: (bool? val) {
                                                 _.controller.newDigUserRegDataAfterOTP!.
                                                 response!.fatcaInfoList![index].answer = val;
+                                                _.list[index]["answer"] = _.controller.newDigUserRegDataAfterOTP!.
+                                                response!.fatcaInfoList![index].answer;
+                                                _.list.forEach((element) {
+                                                  print(element["answer"].toString());
+                                                });
+                                                print("kjnlkn$val");
                                                 _.update();
                                               },
                                               fillColor: MaterialStateColor.resolveWith(
@@ -531,11 +546,12 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                               const RestInvestTitle(
                                 text: "CRS FORM",
                                 textColor: AppColor.black,
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w900,
                               ),
                               space,
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Expanded(
                                     child: Column(
@@ -600,6 +616,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 }).toList(),
                                             onChanged:
                                                 (city_res.Response? value) {
+                                              print(value!.cityName);
                                               _.cityValue =
                                               value!.cityName!;
                                               _.cityCode =
@@ -645,9 +662,9 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                         checkColor: AppColor.whiteColor,
                                         fillColor: MaterialStateColor.resolveWith(
                                             (states) => AppColor.blueColor),
-                                        value: _.isChecked,
+                                        value: _.disclaimerIsChecked,
                                         onChanged: (bool? val) {
-                                          _.isChecked = val!;
+                                          _.disclaimerIsChecked = val!;
                                           _.update();
                                         }),
                                   ),
@@ -669,8 +686,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                   height: 35,
                                   text: "SAVE&NEXT",
                                   onPress: () {
-                                    // _.onSave();
-                                    Get.to(const AccountOpenRiskProfileScreen());
+                                    _.onSave(context);
                                   },
                                   isRound: false),
                               const SizedBox(
