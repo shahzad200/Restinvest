@@ -19,6 +19,7 @@ import 'models/new_dig_user_reg_data_req_list.dart';
 import 'models/new_user_pin_gen.dart';
 import 'models/new_user_reg.dart';
 import 'models/state_data.dart';
+import 'models/validate_verification_code_for_dig_user.dart';
 
 class Repository {
   final _apiClient = ApiClient();
@@ -198,7 +199,7 @@ class Repository {
       String mobile,
       ) => _apiClient.onGenVerificationCodeForDigUser(cNic, email, mobile);
 
-  Future<Common> onValidateVerificationCodeForDigUser(
+  Future<ValidateVerificationCodeForDigUser> onValidateVerificationCodeForDigUser(
       String cNic,
       String email,
       String mobile,

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:investintrust/data/models/city_data.dart' as city;
 import 'package:investintrust/data/models/state_data.dart' as state;
 import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/widgets/constant_widget.dart';
 
 import 'account_opening_basic_information_screen_controller.dart';
 
@@ -73,96 +74,32 @@ class AccountOpenFatcaController extends GetxController{
                     print("tin number");
                     if(isChecked != null && isChecked != false){
 
-                        print("success");
                     }else{
-                      Fluttertoast.showToast(
-                          msg: "Please check disclaimer",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.black,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
+                      showToast('Please check disclaimer');
                     }
                   }else{
-                    Fluttertoast.showToast(
-                        msg: "Tin Number should not empty",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.black,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
+                    showToast('Tin Number should not empty');
                   }
                 }else{
-                  Fluttertoast.showToast(
-                      msg: "Select city",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.black,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
+                  showToast('Select city');
                 }
               }else{
-                Fluttertoast.showToast(
-                    msg: "Please check term & condition",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.black,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
+                showToast('Please check term & condition');
               }
             }else{
-              Fluttertoast.showToast(
-                  msg: "Select city",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.black,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+              showToast('Select city');
             }
           }else{
-            Fluttertoast.showToast(
-                msg: "Select state",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.black,
-                textColor: Colors.white,
-                fontSize: 16.0);
+            showToast('Select state');
           }
         }else{
-          Fluttertoast.showToast(
-              msg: "Select country",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0);
+          showToast('Select country');
         }
       }else{
-        Fluttertoast.showToast(
-            msg: "Give cnic/nicop",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showToast('Give cnic/nicop');
       }
     }else{
-      Fluttertoast.showToast(
-          msg: "Give account Title",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Give account Title');
     }
   }
 
@@ -187,14 +124,7 @@ class AccountOpenFatcaController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showToast(e.toString());
       }
     }
   }
@@ -219,14 +149,7 @@ class AccountOpenFatcaController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showToast(e.toString());
       }
     }
   }

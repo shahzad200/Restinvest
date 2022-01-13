@@ -160,16 +160,42 @@ class ViewReportsScreen extends StatelessWidget {
                             width: 6,
                           ),
                           Expanded(
-                              child: DropDownContainerIcon(
-                                text1: "All",
-                                fontsize: 14,
-                                fontWeight: FontWeight.bold,
-                                voidcallback: () {
-                                  '';
-                                },
-                                text: "Fund Name",
-                                textColor: AppColor.black,
-                              ))
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const RestInvestTitle(
+                                  text: "Fund Name",
+                                  textColor: AppColor.black,
+                                ),
+                                Container(
+                                  // margin: EdgeInsets.all(10.0),
+                                  padding:
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
+                                  height: 35,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: AppColor.whiteColor,
+                                      border: Border.all(
+                                          width: 1, color: AppColor.dimblack)),
+                                  child: const Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('All')),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Expanded(
+                          //     child: DropDownContainerIcon(
+                          //       text1: "All",
+                          //       fontsize: 14,
+                          //       fontWeight: FontWeight.bold,
+                          //       voidcallback: () {
+                          //         '';
+                          //       },
+                          //       text: "Fund Name",
+                          //       textColor: AppColor.black,
+                          //     )
+                          // )
                         ],
                       ),
                       const SizedBox(height: 25),

@@ -24,6 +24,7 @@ import 'models/new_notifications.dart';
 import 'models/new_user_reg.dart';
 import 'models/new_user_pin_gen.dart';
 import 'models/state_data.dart';
+import 'models/validate_verification_code_for_dig_user.dart';
 import 'models/view_reports.dart';
 
 class ApiClient {
@@ -1006,6 +1007,7 @@ class ApiClient {
     String email,
     String mobile,
   ) async {
+    GenVerificationCodeForDigUser? genVerificationCodeForDigUser;
     try {
       final response = await http.post(
         Uri.parse(_epGenVerificationCodeForDigUser),
@@ -1020,23 +1022,27 @@ class ApiClient {
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body);
-        GenVerificationCodeForDigUser genVerificationCodeForDigUser =
+         genVerificationCodeForDigUser =
             GenVerificationCodeForDigUser.fromJson(jsonDecode(response.body));
         if (genVerificationCodeForDigUser.meta!.code.toString() ==
             200.toString()) {
           return genVerificationCodeForDigUser;
         } else {
-          throw Exception(genVerificationCodeForDigUser.meta!.message);
+          throw Exception(genVerificationCodeForDigUser.meta!.error.toString());
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + genVerificationCodeForDigUser!.meta!.error.toString()) {
+        throw Exception(genVerificationCodeForDigUser!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 
-  Future<Common> onValidateVerificationCodeForDigUser(
+  Future<ValidateVerificationCodeForDigUser> onValidateVerificationCodeForDigUser(
     String cNic,
     String email,
     String mobile,
@@ -1044,7 +1050,7 @@ class ApiClient {
     String accountTypeToBeOpened,
     String verificationCode,
   ) async {
-    Common? common;
+    ValidateVerificationCodeForDigUser? common;
     try {
       final response = await http.post(
         Uri.parse(_epValidateVerificationCodeForDigUser),
@@ -1062,8 +1068,8 @@ class ApiClient {
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body);
-        common = Common.fromJson(jsonDecode(response.body));
-        if (common.meta!.code.toString() == 200.toString()) {
+        common = ValidateVerificationCodeForDigUser.fromJson(jsonDecode(response.body));
+        if (common.meta!.code == 200.toString()) {
           return common;
         } else {
           throw Exception(common.meta!.error.toString());

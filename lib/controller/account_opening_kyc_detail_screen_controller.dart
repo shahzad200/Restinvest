@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/widgets/constant_widget.dart';
 
 import 'account_opening_basic_information_screen_controller.dart';
 import 'account_opening_request_screen_controller.dart';
@@ -71,101 +73,33 @@ class AccountOpenKycDetailScreenController extends GetxController{
 
   onSaveDataKycDetail(){
     if(occupationGroupValue == '00'){
-      Fluttertoast.showToast(
-          msg: 'Please select occupation/profession',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select occupation/profession');
     } else if(inComeGroupValue == '00'){
-      Fluttertoast.showToast(
-          msg: 'Please select source of income',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select source of income');
     } else if(employerController.text == "" || employerController.text.isEmpty || employerController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter name of employer',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter name of employer');
     } else if(designationController.text == "" || designationController.text.isEmpty || designationController.text == null) {
-      Fluttertoast.showToast(
-          msg: 'Please enter designation',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter designation');
     }else if(geoDomesticController.text == "" || geoDomesticController.text.isEmpty || geoDomesticController.text == null) {
-      Fluttertoast.showToast(
-          msg: 'Please enter geographic involved domestic',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter geographic involved domestic');
     }else if(geoInternationalController.text == "" || geoInternationalController.text.isEmpty || geoInternationalController.text == null) {
-      Fluttertoast.showToast(
-          msg: 'Please enter geographic involved international',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter geographic involved international');
     }else if(counterDomesticController.text == "" || counterDomesticController.text.isEmpty || counterDomesticController.text == null) {
-      Fluttertoast.showToast(
-          msg: 'Please enter counter parties domestic',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter counter parties domestic');
     }else if(counterInternationalController.text == "" || counterInternationalController.text.isEmpty || counterInternationalController.text == null) {
-      Fluttertoast.showToast(
-          msg: 'Please enter counter parties international',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter counter parties international');
     }else if(transactionGroupValue == "00") {
-      Fluttertoast.showToast(
-          msg: 'Please select preferred mood of transaction',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select preferred mood of transaction');
     }else if(turnoverGroupValue == "00") {
-      Fluttertoast.showToast(
-          msg: 'Please select expected turnover',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select expected turnover');
     }else if(expectedIncomeGroupValue == "00") {
-
+      showToast('Please select expected investment amount');
     }else if(annualIncomeGroupValue == "00") {
-
+      showToast('Please select annual income');
     }else if(!isChecked){
-
+      showToast('Please check disclaimer');
+    } else {
+      Get.toNamed(AppRoute.accountOpenFatcaScreen);
     }
 
     }

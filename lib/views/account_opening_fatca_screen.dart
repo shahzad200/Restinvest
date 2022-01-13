@@ -50,8 +50,6 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Column(
                   children: [
-
-                    space,
                     const RestInvestTitle(
                       text: " NITL DIGITAL ACCOUNT OPENING FORM ",
                       textAlign: TextAlign.start,
@@ -90,7 +88,6 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                           text: 'TITLE OF ACCOUNT:',
                                           textColor: AppColor.black,
                                           fontSize: 12,
-
                                           fontWeight: FontWeight.w900,
                                         ),
                                         CustomTextFormField(

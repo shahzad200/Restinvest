@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/gen_verification_code_for_dig_user.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_before_otp.dart';
+import 'package:investintrust/data/models/validate_verification_code_for_dig_user.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
@@ -30,6 +31,7 @@ class AccountOpenRequestScreenController extends GetxController {
   NewDigUserRegDataBeforeOTP? newDigUserRegDataBeforeOTP;
   GenVerificationCodeForDigUser? genVerificationCodeForDigUser;
   Common? common;
+  ValidateVerificationCodeForDigUser? validateVerificationCodeForDigUser;
   bool isLoading = false;
   bool noInternet = false;
   final _repository = Repository();
@@ -174,7 +176,7 @@ class AccountOpenRequestScreenController extends GetxController {
 
 
 
-  onValidateVerificationCodeForDigUser() async {
+  onValidateVerificationCodeForDigUser(BuildContext context) async {
     if (cNicNumberController.text.isEmpty ||
         cNicNumberController.text == '' ||
         cNicNumberController.text == null) {
@@ -231,7 +233,7 @@ class AccountOpenRequestScreenController extends GetxController {
       try {
         isLoading = true;
         update();
-        common =
+        validateVerificationCodeForDigUser =
         await _repository.onValidateVerificationCodeForDigUser(
             cNicNumberController.text, emailController.text, mobileNumberController.text,
             mobileNumberOwnerCode,groupValue,otpVerificationController.text
@@ -243,6 +245,8 @@ class AccountOpenRequestScreenController extends GetxController {
         update();
         if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
           Get.toNamed(AppRoute.accountopeningbasicinformation);
+        }else {
+          customDialogPin(context,common!.meta!.error.toString());
         }
       } catch (e) {
         if (e.toString() == 'Exception: No Internet') {

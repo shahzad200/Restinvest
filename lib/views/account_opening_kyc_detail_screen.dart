@@ -460,13 +460,13 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                     )
                                         .toList(),
                                   ),
-                                  const EmptyContainer(
-                                    hint: "",
-                                    textColor: AppColor.black,
-                                    fontWeight: FontWeight.w900,
-                                    hintColor: AppColor.black,
-                                    text: "",
-                                  ),
+                                  // const EmptyContainer(
+                                  //   hint: "",
+                                  //   textColor: AppColor.black,
+                                  //   fontWeight: FontWeight.w900,
+                                  //   hintColor: AppColor.black,
+                                  //   text: "",
+                                  // ),
                                   space,
                                   const RestInvestTitle(
                                     text: "EXPECTED INVESTMENT AMMOUNT:*",
@@ -664,7 +664,8 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           width: 50,
                                           text: "SAVE&NEXT",
                                           onPress: () {
-                                            Get.toNamed(AppRoute.accountOpenFatcaScreen);
+                                            _.onSaveDataKycDetail();
+                                            // Get.toNamed(AppRoute.accountOpenFatcaScreen);
                                           },
                                           isRound: false),
                                     ],

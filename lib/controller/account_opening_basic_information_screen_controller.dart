@@ -6,6 +6,7 @@ import 'package:investintrust/data/models/city_data.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_after_otp.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/widgets/constant_widget.dart';
 
 
 class AccountOpenBasicInformationScreenController extends GetxController{
@@ -117,19 +118,10 @@ class AccountOpenBasicInformationScreenController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showToast(e.toString());
       }
     }
   }
-
-
   onCityData(String countryCode) async {
     try {
       isLoading = true;
@@ -151,14 +143,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showToast(e.toString());
       }
     }
   }
@@ -169,282 +154,69 @@ class AccountOpenBasicInformationScreenController extends GetxController{
 
   onSaveDataAccountOpeningBasicInfo(){
     if(titleValue == "" && titleCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select title',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select title');
     } else if(nameController.text == "" || nameController.text.isEmpty || nameController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter full name',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter full name');
     } else if(fNameController.text == "" || fNameController.text.isEmpty || fNameController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter father/husband name',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter father/husband name');
     } else if(mNameController.text == "" || mNameController.text.isEmpty || mNameController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter mother name',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter mother name');
     } else if(cNicController.text == "" || cNicController.text.isEmpty || cNicController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter cnic name',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter cnic name');
     } else if(cNicIssueDate == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select cnic issue date',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select cnic issue date');
     } else if(cNicExpDate == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select cnic expire date',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select cnic expire date');
     } else if(dObDate == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select date of birth date',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select date of birth date');
     } else if(martialValue == "" && martialCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select martial status',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select martial status');
     } else if(nationalityValue == "" && nationalityCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select Nationality',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select Nationality');
     } else if(residentStatusValue == "" && residentStatusCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select residential status',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select residential status');
     } else if(religionValue == "" && religionCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select religion',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select religion');
     } else if(zaKatValue == "" && zaKatCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select zakat exemption',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select zakat exemption');
     } else if(retirementValue == "" && retirementCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select retirement age',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select retirement age');
     }  else if(mobileController.text == "" || mobileController.text.isEmpty || mobileController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter mobile number',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter mobile number');
     } else if(phoneController.text == "" || phoneController.text.isEmpty || phoneController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter phone number',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter phone number');
     } else if(officePhoneController.text == "" || officePhoneController.text.isEmpty || officePhoneController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter office phone number',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter office phone number');
     } else if(currentAddressController.text == "" || currentAddressController.text.isEmpty || currentAddressController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter current address',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter current address');
     } else if(mailingAddressController.text == "" || mailingAddressController.text.isEmpty || mailingAddressController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter mailing address',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter mailing address');
     } else if(eMailAddressController.text == "" || eMailAddressController.text.isEmpty || eMailAddressController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter email address',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter email address');
     } else if(mailingCountryValue == "" && mailingCountryCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select mailing country',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select mailing country');
     } else if(mailingCityValue == "" && mailingCityCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select mailing city',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select mailing city');
     } else if(currentCountryValue == "" && currentCountryCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select current country',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select current country');
     } else if(currentCityValue == "" && currentCityCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select current city',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select current city');
     } else if(bankNameValue == "" && bankNameCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select bank name',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select bank name');
     } else if(bankCityValue == "" && bankCityCode == ""){
-      Fluttertoast.showToast(
-          msg: 'Please select bank city',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select bank city');
     } else if(bankBranchController.text == "" || bankBranchController.text.isEmpty || bankBranchController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter bank branch name',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter bank branch name');
     } else if(iBanNumberController.text == "" || iBanNumberController.text.isEmpty || iBanNumberController.text == null){
-      Fluttertoast.showToast(
-          msg: 'Please enter IBAN number',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please enter IBAN number');
     } else if(dividendMandateGroupValue == '00'){
-      Fluttertoast.showToast(
-          msg: 'Please select dividend mandate',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please select dividend mandate');
     } else if(!isChecked){
-      Fluttertoast.showToast(
-          msg: 'Please check disclaimer',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast('Please check disclaimer');
     } else {
       Get.toNamed(
           AppRoute.accountOpenKycDetailScreen);
     }
-
-
-
   }
 
 
