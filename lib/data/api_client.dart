@@ -1086,6 +1086,68 @@ class ApiClient {
     }
   }
 
+
+
+  Future<Common> onFatcaScreenForDigUser(
+    String cNic,
+    String birthCitycode,
+    String birthCountrycode,
+    String birthStatecode,
+    bool disclamierCheck,
+    bool fatcaDisclamierCheck,
+    String otherTaxResCountry,
+    String taxPaidCountry,
+    String taxResCountryOtherThanPak,
+    String titleOfAccount,
+      list
+  ) async {
+    Common? common;
+    try {
+      final response = await http.post(
+        Uri.parse(_epValidateVerificationCodeForDigUser+"4"),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, dynamic>
+        {
+          "requestFromScreenNo":4,
+          "cnic":"$cNic",
+          "sessionID":"94",
+          "birthCityCode":"$birthCitycode",
+          "birthCountryCode":"$birthCountrycode",
+          "birthStateCode":"$birthStatecode",
+          "crsDisclaimerChecked":disclamierCheck,
+          "fatcaDisclaimerChecked":fatcaDisclamierCheck,
+          "otherTaxResCountry":"$otherTaxResCountry",
+          "taxIdentificationNumber":null,
+          "taxPaidCountry":"$taxPaidCountry",
+          "taxResCountryOtherThanPak":"$taxResCountryOtherThanPak",
+          "titleOfAccount":"$titleOfAccount",
+          "fatcaInfo":list
+        }
+        ),
+      );
+      print(response.body.toString());
+      if (response.statusCode == 200) {
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.error.toString());
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
+    }
+  }
+
   Future<Common> onPartialSavingForDigUser(// String cNic,
       // String email,
       // String mobile,

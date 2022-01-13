@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:investintrust/utils/colors.dart';
 import 'package:investintrust/utils/constant.dart';
@@ -238,9 +239,10 @@ class CustomTextFormField extends StatefulWidget {
       this.controller,
       this.enable = true,
       this.icon,
+
       this.color = AppColor.dimblack,
       this.isRounded = true,
-      this.hasIcon = true})
+      this.hasIcon = true,this.inputFormator =const [],})
       : super(key: key);
   final String? label;
   final String? hint;
@@ -257,6 +259,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final bool isRounded;
   final Color color;
+  final List<TextInputFormatter> inputFormator;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -269,6 +272,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       cursorColor: AppColor.blueColor,
       cursorHeight: 20,
       enabled: widget.enable,
+      inputFormatters: widget.inputFormator,
       obscuringCharacter: "*",
       decoration: InputDecoration(
         isDense: true, // Added this

@@ -51,8 +51,8 @@ class Repository {
   Future<CityData> onCityData(String countryCode) =>
       _apiClient.onCityData(countryCode);
 
-  Future<StateData> onStateData(String countryCode)
-  => _apiClient.onStateData(countryCode);
+  Future<StateData> onStateData(String countryCode) =>
+      _apiClient.onStateData(countryCode);
   Future<CitySector> onCitySectorData(String cityCode) =>
       _apiClient.onCitySectorData(cityCode);
 
@@ -190,30 +190,56 @@ class Repository {
           Constant.loginModel!.response!.user!.userid ?? '',
           Constant.loginModel!.response!.user!.userType ?? '');
 
-  Future<NewDigUserRegDataBeforeOTP> onNewDigUserRegDataBeforeOTP()
-  => _apiClient.onNewDigUserRegDataBeforeOTP();
+  Future<NewDigUserRegDataBeforeOTP> onNewDigUserRegDataBeforeOTP() =>
+      _apiClient.onNewDigUserRegDataBeforeOTP();
 
   Future<GenVerificationCodeForDigUser> onGenVerificationCodeForDigUser(
-      String cNic,
-      String email,
-      String mobile,
-      ) => _apiClient.onGenVerificationCodeForDigUser(cNic, email, mobile);
+    String cNic,
+    String email,
+    String mobile,
+  ) =>
+      _apiClient.onGenVerificationCodeForDigUser(cNic, email, mobile);
 
-  Future<ValidateVerificationCodeForDigUser> onValidateVerificationCodeForDigUser(
-      String cNic,
-      String email,
-      String mobile,
-      String mobileRegisteredWith,
-      String accountTypeToBeOpened,
-      String verificationCode,
-      ) => _apiClient.onValidateVerificationCodeForDigUser(
-      cNic, email, mobile, mobileRegisteredWith, accountTypeToBeOpened, verificationCode);
+  Future<ValidateVerificationCodeForDigUser>
+      onValidateVerificationCodeForDigUser(
+    String cNic,
+    String email,
+    String mobile,
+    String mobileRegisteredWith,
+    String accountTypeToBeOpened,
+    String verificationCode,
+  ) =>
+          _apiClient.onValidateVerificationCodeForDigUser(cNic, email, mobile,
+              mobileRegisteredWith, accountTypeToBeOpened, verificationCode);
 
-  Future<NewDigUserRegDataAfterOTP> onNewDigUserRegDataAfterOTP()
-  => _apiClient.onNewDigUserRegDataAfterOTP();
+  Future<Common> onFatcaScreenForDigUser(
+          String cNic,
+          String birthCitycode,
+          String birthCountrycode,
+          String birthStatecode,
+          bool disclamierCheck,
+          bool fatcaDisclamierCheck,
+          String otherTaxResCountry,
+          String taxPaidCountry,
+          String taxResCountryOtherThanPak,
+          String titleOfAccount,
+          list) =>
+      _apiClient.onFatcaScreenForDigUser(
+          cNic,
+          birthCitycode,
+          birthCountrycode,
+          birthStatecode,
+          disclamierCheck,
+          fatcaDisclamierCheck,
+          otherTaxResCountry,
+          taxPaidCountry,
+          taxResCountryOtherThanPak,
+          titleOfAccount,
+          list);
 
-  Future<NewDigUserRegDataRpqList> onNewDigUserRegDataRpqList()
-  => _apiClient.onNewDigUserRegDataRpqList();
+  Future<NewDigUserRegDataAfterOTP> onNewDigUserRegDataAfterOTP() =>
+      _apiClient.onNewDigUserRegDataAfterOTP();
 
-
+  Future<NewDigUserRegDataRpqList> onNewDigUserRegDataRpqList() =>
+      _apiClient.onNewDigUserRegDataRpqList();
 }

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         // home: const AccountOpenRiskProfileScreen(),
       getPages: AppRoute.navMain,
-      initialRoute: AppRoute.splashRoute,
+      initialRoute: AppRoute.homeRoute,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
       // getPages: [
