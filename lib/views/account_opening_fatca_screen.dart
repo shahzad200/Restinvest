@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_after_otp.dart';
+import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
 import 'package:investintrust/widgets/no_internet.dart';
 import '../controller/account_opening_fatca_screen_controller.dart';
@@ -686,7 +687,8 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                   height: 35,
                                   text: "SAVE&NEXT",
                                   onPress: () {
-                                    _.onSave(context);
+                                    Get.toNamed(AppRoute.accountOpenURiskScreen);
+                                    // _.onSave(context);
                                   },
                                   isRound: false),
                               const SizedBox(

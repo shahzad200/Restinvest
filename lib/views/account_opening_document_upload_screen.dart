@@ -724,7 +724,9 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                     height: 35,
                                     width: 50,
                                     text: "SAVE&NEXT",
-                                    onPress: () {},
+                                    onPress: () {
+                                      _.onSaveDoc();
+                                    },
                                     isRound: false),
                               ],
                             ),

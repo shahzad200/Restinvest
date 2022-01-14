@@ -1,9 +1,13 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:investintrust/data/models/common_model.dart';
+import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/widgets/constant_widget.dart';
 import 'package:path/path.dart' as p;
 
 
@@ -22,7 +26,10 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
   String? srcIncomeName;
   String? plainImageName;
   String? otherImageName;
-
+  Common? common;
+  bool isLoading = false;
+  bool noInternet = false;
+  final _repository = Repository();
 
   Future<File?> getImageFromGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -45,5 +52,56 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
 
     return File(pickedFile!.path);
   }
+
+
+  onSaveDoc()async{
+      if(cnicFront == null){
+        showToast('Please select cnic front image');
+      }else if(cnicBack == null){
+        showToast('Please select cnic back image');
+      } else if(srcIncome == null){
+        showToast('Please select cnic source of income image');
+      } else if(plainImage == null){
+        showToast('Please select plane image');
+      } else{
+        try {
+          isLoading = true;
+          update();
+          Uint8List cNicB =  cnicBack!.readAsBytesSync();
+          Uint8List cNicF =  cnicFront!.readAsBytesSync();
+          Uint8List srcIn =  srcIncome!.readAsBytesSync();
+          Uint8List planImg =  plainImage!.readAsBytesSync();
+          common = await _repository.onPartialSavingForDigUserScreen6(cNicB, cNicF,
+              srcIn, planImg);
+          isLoading = false;
+          if (noInternet) {
+            noInternet = false;
+          }
+          update();
+          if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+
+          }
+        } catch (e) {
+          if (e.toString() == 'Exception: No Internet') {
+            isLoading = false;
+            noInternet = true;
+            update();
+          } else {
+            isLoading = false;
+            noInternet = false;
+            update();
+            showToast(e.toString().replaceAll('Exception:', ''));
+          }
+        }
+      }
+
+
+
+
+
+
+  }
+
+
 
 }

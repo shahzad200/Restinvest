@@ -1774,9 +1774,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                     height: 35,
                                     text: "SAVE&NEXT",
                                     onPress: () {
+                                      Get.toNamed(AppRoute.accountOpenUploadScreen);
                                       // Get.toNamed(
                                           // AppRoute.accountOpenKycDetailScreen);
-                                      _.onSaveDataAccountOpeningBasicInfo();
+                                      // _.onSaveDataAccountOpeningBasicInfo();
                                     },
                                     isRound: false),
                                 const SizedBox(

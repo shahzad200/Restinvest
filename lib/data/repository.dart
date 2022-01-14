@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:investintrust/data/models/calculate_tax.dart';
 import 'package:investintrust/data/models/daily_nav_prices.dart';
 import 'package:investintrust/data/models/load_dashboard.dart';
@@ -299,4 +301,16 @@ class Repository {
 
   Future<NewDigUserRegDataRpqList> onNewDigUserRegDataRpqList() =>
       _apiClient.onNewDigUserRegDataRpqList();
+
+
+  Future<Common> onPartialSavingForDigUserScreen6(
+      Uint8List? cNicBack,
+      Uint8List? cNicFront,
+      Uint8List? incomeProof,
+      Uint8List? sigPaper,
+      ) =>
+      _apiClient.onPartialSavingForDigUserScreen6(cNicBack,
+          cNicFront, incomeProof,
+          sigPaper);
+
 }

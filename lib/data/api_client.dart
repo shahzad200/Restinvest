@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:get/get_utils/src/extensions/dynamic_extensions.dart';
 import 'package:http/http.dart' as http;
@@ -1475,6 +1476,107 @@ class ApiClient {
   }
 
 
+  Future<Common> onPartialSavingForDigUserScreen6(
+  Uint8List? cNicBack,
+      Uint8List? cNicFront,
+      Uint8List? incomeProof,
+      Uint8List? sigPaper,
+      ) async {
+    Common? common;
+    try {
+      printInfo(info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo":6,
+        "cnic":"99999-9999999-9",
+        "sessionID":"94",
+        "cnicBackDoc":{
+          "fileName":"cnicBack.jpg",
+          "fileExtension":".jpg",
+          "fileContent":cNicBack
+        },
+        "cnicFrontDoc":{
+          "fileName":"cnicFront.jpg",
+          "fileExtension":".jpg",
+          "fileContent":cNicFront
+        },
+        "incomeProofDoc":{
+          "fileName":"income.jpg",
+          "fileExtension":".jpg",
+          "fileContent":incomeProof
+        },
+        "mobileNoProofDoc":{
+          "fileName":"mobile.jpg",
+          "fileExtension":".jpg",
+          "fileContent":[]
+        },
+        "signatureDoc":{
+          "fileName":"sig.jpg",
+          "fileExtension":".jpg",
+          "fileContent":sigPaper
+        },
+        "zakatDeclarationDoc":null,
+        "requiredDocs":[]
+      }.toString()));
+      final response = await http.post(
+        Uri.parse(_epPartialSavingForDigUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, dynamic>{
+          "requestFromScreenNo":6,
+          "cnic":"99999-9999999-9",
+          "sessionID":"94",
+          "cnicBackDoc":{
+            "fileName":"cnicBack.jpg",
+            "fileExtension":".jpg",
+            "fileContent":cNicBack
+          },
+          "cnicFrontDoc":{
+            "fileName":"cnicFront.jpg",
+            "fileExtension":".jpg",
+            "fileContent":cNicFront
+          },
+          "incomeProofDoc":{
+            "fileName":"income.jpg",
+            "fileExtension":".jpg",
+            "fileContent":incomeProof
+          },
+          "mobileNoProofDoc":{
+            "fileName":"mobile.jpg",
+            "fileExtension":".jpg",
+            "fileContent":[]
+          },
+          "signatureDoc":{
+            "fileName":"sig.jpg",
+            "fileExtension":".jpg",
+            "fileContent":sigPaper
+          },
+          "zakatDeclarationDoc":null,
+          "requiredDocs":[]
+        }),
+      );
+      if (response.statusCode == 200) {
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.error.toString());
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+          throw Exception(common!.meta!.error.toString());
+        } else {
+          throw Exception('No Internet');
+        }
+      }
+    }
+  }
 
 
 

@@ -271,9 +271,6 @@ class AccountOpenRiskProfileScreenController extends GetxController{
               fontSize: 16.0);
         }
       }
-
-
-
     }
   }
 
