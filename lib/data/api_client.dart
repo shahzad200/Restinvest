@@ -1089,7 +1089,6 @@ class ApiClient {
 
 
   Future<Common> onFatcaScreenForDigUser(
-      String cNic,
       String birthCitycode,
       String birthCountrycode,
       String birthStatecode,
@@ -1099,7 +1098,8 @@ class ApiClient {
       String taxPaidCountry,
       String taxResCountryOtherThanPak,
       String titleOfAccount,
-      list
+      list,
+      String cNic, String sessionID
       ) async {
     Common? common;
     try {
@@ -1111,8 +1111,8 @@ class ApiClient {
         body: jsonEncode(<String, dynamic>
         {
           "requestFromScreenNo":4,
-          "cnic":"$cNic",
-          "sessionID":"94",
+          "cnic":cNic,
+          "sessionID":sessionID,
           "birthCityCode":"$birthCitycode",
           "birthCountryCode":"$birthCountrycode",
           "birthStateCode":"$birthStatecode",
@@ -1592,6 +1592,8 @@ class ApiClient {
     Common? common;
     try {
       printInfo(info: jsonEncode(<String, dynamic>{
+        "cnic":cNic,
+        "sessionID":sessionID
       }.toString()));
       final response = await http.post(
         Uri.parse(_epSaveDigUser),
@@ -1599,7 +1601,7 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, dynamic>{
-          "cnic":'99999-9999999-9',
+          "cnic":cNic,
           "sessionID":sessionID
         }),
       );

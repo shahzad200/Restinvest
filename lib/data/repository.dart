@@ -215,7 +215,6 @@ class Repository {
               mobileRegisteredWith, accountTypeToBeOpened, verificationCode);
 
   Future<Common> onFatcaScreenForDigUser(
-          String cNic,
           String birthCitycode,
           String birthCountrycode,
           String birthStatecode,
@@ -227,7 +226,6 @@ class Repository {
           String titleOfAccount,
           list) =>
       _apiClient.onFatcaScreenForDigUser(
-          cNic,
           birthCitycode,
           birthCountrycode,
           birthStatecode,
@@ -237,7 +235,7 @@ class Repository {
           taxPaidCountry,
           taxResCountryOtherThanPak,
           titleOfAccount,
-          list);
+          list,Constant.cNic,Constant.sessionID);
 
   Future<NewDigUserRegDataAfterOTP> onNewDigUserRegDataAfterOTP() =>
       _apiClient.onNewDigUserRegDataAfterOTP();

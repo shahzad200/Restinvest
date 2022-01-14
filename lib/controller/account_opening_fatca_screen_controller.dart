@@ -117,7 +117,6 @@ class AccountOpenFatcaController extends GetxController {
                         print("list${list}");
                          common =
                         await _repository.onFatcaScreenForDigUser(
-                            cnicController.text,
                             birthCityCode,
                             countryCode,
                             stateCode,

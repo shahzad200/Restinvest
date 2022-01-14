@@ -140,8 +140,8 @@ class LoginScreen extends StatelessWidget {
                   ),
                   InkWell(
                       onTap: () {
-                        // Get.toNamed(AppRoute.accountopeningrequest);
-                        Get.toNamed(AppRoute.accountOpenUploadScreen);
+                        Get.toNamed(AppRoute.accountopeningrequest);
+                        // Get.toNamed(AppRoute.accountOpenUploadScreen);
                       },
                       child: const RestInvestTitle(
                           text: "Open Digital Account",
