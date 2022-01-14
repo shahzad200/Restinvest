@@ -249,7 +249,7 @@ class AccountOpenRequestScreenController extends GetxController {
         }
         update();
         if(validateVerificationCodeForDigUser!.meta!.message == 'OK' && validateVerificationCodeForDigUser!.meta!.code == '200'){
-          Constant.sessionID = validateVerificationCodeForDigUser!.response!.sessionID;
+          Constant.sessionID = validateVerificationCodeForDigUser!.response!.sessionID!;
           Get.toNamed(AppRoute.accountopeningbasicinformation);
         }
       } catch (e) {

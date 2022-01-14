@@ -327,8 +327,8 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                     ),
                                     CustomRoundButton(height: 35,
                                         isRound: false, text: "Next", onPress: () {
-                                          // _.onValidateVerificationCodeForDigUser();
-                                          Get.toNamed(AppRoute.accountopeningbasicinformation);
+                                          _.onValidateVerificationCodeForDigUser();
+                                          // Get.toNamed(AppRoute.accountopeningbasicinformation);
                                         }),
                                     const SizedBox(
                                       height: 10,

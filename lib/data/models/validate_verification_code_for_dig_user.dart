@@ -1,12 +1,12 @@
 class ValidateVerificationCodeForDigUser {
   ValidateVerificationCodeForDigUser({
-     this.action,
-     this.meta,
-     this.response,
+    this.action,
+    this.meta,
+    this.response,
   });
-   String? action;
-   Meta?meta;
-   Response? response;
+  String? action;
+  Meta?meta;
+  Response? response;
 
   ValidateVerificationCodeForDigUser.fromJson(Map<String, dynamic> json){
     action = json['action'];
@@ -25,13 +25,13 @@ class ValidateVerificationCodeForDigUser {
 
 class Meta {
   Meta({
-     this.code,
-     this.error,
-     this.message,
+    this.code,
+    this.error,
+    this.message,
   });
-   String? code;
-   String? error;
-   String? message;
+  String? code;
+  String? error;
+  String? message;
 
   Meta.fromJson(Map<String, dynamic> json){
     code = json['code'].toString();
@@ -50,21 +50,21 @@ class Meta {
 
 class Response {
   Response({
-     this.accountTypeToBeOpened,
-     this.cnic,
-     this.email,
-     this.mobile,
-     this.mobileRegisteredWith,
-     this.sessionID,
-     this.verificationCode,
+    this.accountTypeToBeOpened,
+    this.cnic,
+    this.email,
+    this.mobile,
+    this.mobileRegisteredWith,
+    this.sessionID,
+    this.verificationCode,
   });
-   String? accountTypeToBeOpened;
-   String? cnic;
-   String? email;
-   String? mobile;
-   String? mobileRegisteredWith;
-   dynamic sessionID;
-   String? verificationCode;
+  String? accountTypeToBeOpened;
+  String? cnic;
+  String? email;
+  String? mobile;
+  String? mobileRegisteredWith;
+  String? sessionID;
+  String? verificationCode;
 
   Response.fromJson(Map<String, dynamic> json){
     accountTypeToBeOpened = json['accountTypeToBeOpened'];
