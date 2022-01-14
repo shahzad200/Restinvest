@@ -635,7 +635,8 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                         height: 35,
                                         text: "SAVE&NEXT",
                                         onPress: () {
-                                          Get.toNamed(AppRoute.accountOpenUploadScreen);
+                                          _.onSaveData();
+                                          // Get.toNamed(AppRoute.accountOpenUploadScreen);
                                         },
                                         isRound: false),
                                     const SizedBox(

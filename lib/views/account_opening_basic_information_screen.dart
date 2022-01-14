@@ -747,7 +747,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                   _.zaKatValue =
                                                   value!.description!;
                                                   _.zaKatCode =
-                                                  value!.code.toString()!;
+                                                  value!.code!;
                                                   _.update();
                                                 },
                                               ),
@@ -1702,6 +1702,37 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                 ),
                                 space,
                                 const RestInvestTitle(
+                                  text: "NAME OF KIN DETAILS",
+                                  textColor: AppColor.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                                space,
+                                CustomTextFormField(
+                                  controller: _.kinNameController,
+                                  isRounded: true,
+                                  hint: "NAME",
+                                  // textInputType: TextInputType.emailAddress,
+                                ),
+                                CustomTextFormField(
+                                  controller: _.kiNcNicController,
+                                  isRounded: true,
+                                  hint: "CNIC/NICP",
+                                  // textInputType: TextInputType.emailAddress,
+                                ),
+                                CustomTextFormField(
+                                  controller: _.kinRelationController,
+                                  isRounded: true,
+                                  hint: "RELATIONSHIP",
+                                  // textInputType: TextInputType.emailAddress,
+                                ),
+                                CustomTextFormField(
+                                  controller: _.kinMobileNumberController,
+                                  isRounded: true,
+                                  hint: "MOBILE",
+                                  // textInputType: TextInputType.emailAddress,
+                                ),
+                                const RestInvestTitle(
                                   text: "*DISCLAIMER:",
                                   textColor: AppColor.black,
                                   fontSize: 12,
@@ -1743,8 +1774,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                     height: 35,
                                     text: "SAVE&NEXT",
                                     onPress: () {
-                                      Get.toNamed(
-                                          AppRoute.accountOpenKycDetailScreen);
+                                      Get.toNamed(AppRoute.accountOpenUploadScreen);
+                                      // Get.toNamed(
+                                          // AppRoute.accountOpenKycDetailScreen);
                                       // _.onSaveDataAccountOpeningBasicInfo();
                                     },
                                     isRound: false),

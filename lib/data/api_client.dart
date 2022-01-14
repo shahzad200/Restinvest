@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:get/get_utils/src/extensions/dynamic_extensions.dart';
 import 'package:http/http.dart' as http;
@@ -1087,20 +1088,19 @@ class ApiClient {
   }
 
 
-
   Future<Common> onFatcaScreenForDigUser(
-    String cNic,
-    String birthCitycode,
-    String birthCountrycode,
-    String birthStatecode,
-    bool disclamierCheck,
-    bool fatcaDisclamierCheck,
-    String otherTaxResCountry,
-    String taxPaidCountry,
-    String taxResCountryOtherThanPak,
-    String titleOfAccount,
+      String cNic,
+      String birthCitycode,
+      String birthCountrycode,
+      String birthStatecode,
+      bool disclamierCheck,
+      bool fatcaDisclamierCheck,
+      String otherTaxResCountry,
+      String taxPaidCountry,
+      String taxResCountryOtherThanPak,
+      String titleOfAccount,
       list
-  ) async {
+      ) async {
     Common? common;
     try {
       final response = await http.post(
@@ -1148,192 +1148,230 @@ class ApiClient {
     }
   }
 
-  Future<Common> onPartialSavingForDigUser(// String cNic,
-      // String email,
-      // String mobile,
-      // String mobileRegisteredWith,
-      // String accountTypeToBeOpened,
-      // String verificationCode,
+
+
+  Future<Common> onPartialSavingForDigUser(
+      String cNic,String email,String mobile,String mobileRegWith,String accountTypeOpened,
+      String bankAccountNo,String bankBranchAddress,String bankName,bool basicInfoDisclaimerChecked,
+      String birthCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
+      String customerName,String dateOfBirth,String dividendMandate,String fatherSpouseName,
+      String mailingAddress,String mailingCountryCode,String mailingCity,String maritalStatus,
+      String mothersMaidenName,String nationalityCode,String pakResident,String religion,String residentialAddress,
+      int retirementAge,String title,bool zaKatExempt,String noMName,String noMcNic,
+      String noMRelation,String noMMobile,
       ) async {
     Common? common;
     try {
+      printInfo(info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo":2,
+        "cnic":cNic,
+        "email":email,
+        "mobile":mobile,
+        "mobileRegisteredWith":mobileRegWith,
+        "accountTypeToBeOpened":accountTypeOpened,
+        "sessionID":"94",
+        "bankAccountNo":bankAccountNo,
+        "bankBranchAddress":bankBranchAddress,
+        "bankName":bankName,
+        "basicInfoDisclaimerChecked":basicInfoDisclaimerChecked,
+        "birthCityCode":birthCityCode,
+        "city":city,
+        "cnicExpiryDate":cNicExpiryDate,
+        "cnicIssueDate":cNicIssueDate,
+        "country":country,
+        "customerName":customerName,
+        "dateOfBirth":dateOfBirth,
+        "dividendMandate":dividendMandate,
+        "fatherSpouseName":fatherSpouseName,
+        "lifetimeCnicExpiry":false,
+        "mailingAddress":mailingAddress,
+        "mailingCountryCode":mailingCountryCode,
+        "mailingCity":mailingCity,
+        "mailingOtherCity":"test mailing city",
+        "maritalStatus":maritalStatus,
+        "mothersMaidenName":mothersMaidenName,
+        "nationalityCode":nationalityCode,
+        "otherCity":"test other city",
+        "pakResident":pakResident,
+        "phoneOne":null,
+        "phoneTwo":null,
+        "religion":religion,
+        "residentialAddress":residentialAddress,
+        "retirementAge":retirementAge,
+        "title":title,
+        "zakatExempt":zaKatExempt,
+        "nominees": [
+          {
+            "name": noMName,
+            "cnic": noMcNic,
+            "relation": noMRelation,
+            "mobile": noMMobile
+          },
+        ],
+      }.toString()));
+      final response = await http.post(
+        Uri.parse(_epPartialSavingForDigUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+
+        body: jsonEncode(<String, dynamic>{
+          "requestFromScreenNo":2,
+          "cnic":cNic,
+          "email":email,
+          "mobile":mobile,
+          "mobileRegisteredWith":mobileRegWith,
+          "accountTypeToBeOpened":accountTypeOpened,
+          "sessionID":"94",
+          "bankAccountNo":bankAccountNo,
+          "bankBranchAddress":bankBranchAddress,
+          "bankName":bankName,
+          "basicInfoDisclaimerChecked":basicInfoDisclaimerChecked,
+          "birthCityCode":birthCityCode,
+          "city":city,
+          "cnicExpiryDate":cNicExpiryDate,
+          "cnicIssueDate":cNicIssueDate,
+          "country":country,
+          "customerName":customerName,
+          "dateOfBirth":dateOfBirth,
+          "dividendMandate":dividendMandate,
+          "fatherSpouseName":fatherSpouseName,
+          "lifetimeCnicExpiry":false,
+          "mailingAddress":mailingAddress,
+          "mailingCountryCode":mailingCountryCode,
+          "mailingCity":mailingCity,
+          "mailingOtherCity":"test mailing city",
+          "maritalStatus":maritalStatus,
+          "mothersMaidenName":mothersMaidenName,
+          "nationalityCode":nationalityCode,
+          "otherCity":"test other city",
+          "pakResident":pakResident,
+          "phoneOne":null,
+          "phoneTwo":null,
+          "religion":religion,
+          "residentialAddress":residentialAddress,
+          "retirementAge":retirementAge,
+          "title":title,
+          "zakatExempt":zaKatExempt,
+          "nominees": [
+            {
+              "name": noMName,
+              "cnic": noMcNic,
+              "relation": noMRelation,
+              "mobile": noMMobile
+            },
+          ],
+        }),
+
+      );
+
+      if (response.statusCode == 200) {
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.error.toString());
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+          throw Exception(common!.meta!.error.toString());
+        } else {
+          throw Exception('No Internet');
+        }
+      }
+    }
+  }
+
+
+  Future<Common> onPartialSavingForDigUserScreen3(
+      String cNic,String domesticCounterParties,String domesticGeographies,String internationalCounterParties,String internationalGeographies,
+      String employerDesignation,
+      String employerName,
+      String employerNatureOfBusiness,String employerProfession,
+      String preferedModeOfTrans,int expTurnoverInAccAmount,String expTurnoverInAccType,int expectedInvestmentAmount,
+      int annualIncome,
+      bool kycDisclaimerChecked,String occupation,String sourceOfIncome,
+      bool oneAns,int qOne,bool twoAns,int qTwo,bool threeAns,int qThree,bool fourAns,int qFour,bool fiveAns,int qFive
+      ) async {
+    Common? common;
+    try {
+      printInfo(info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo":3,
+        "cnic":'99999-9999999-9',
+        "sessionID":"94",
+        "domesticCounterParties":domesticCounterParties,
+        "domesticGeographies":domesticGeographies,
+        "internationalCounterParties":internationalCounterParties,
+        "internationalGeographies":internationalGeographies,
+        "employerDesignation":employerDesignation,
+        "employerName":employerName,
+        "employerNatureOfBusiness":employerNatureOfBusiness,
+        "employerProfession":employerProfession,
+        "preferedModeOfTrans":preferedModeOfTrans,
+        "expTurnoverInAccAmount":expTurnoverInAccAmount,
+        "expTurnoverInAccType":expTurnoverInAccType,
+        "expectedInvestmentAmount":expectedInvestmentAmount,
+        "annualIncome":annualIncome,
+        "kycDisclaimerChecked":kycDisclaimerChecked,
+        "occupation":occupation,
+        "otherOccupation":null,
+        "otherSourceOfIncome":"test",
+        "sourceOfIncome":sourceOfIncome,
+        "pepsInfo":[{"answer"	:	oneAns,
+          "questionCode"	:	qOne},
+          {"answer"	:	twoAns,
+            "questionCode"	:	qTwo},
+          {"answer"	:	threeAns,
+            "questionCode"	:	qThree},
+          {"answer"	:	fourAns,
+            "questionCode"	:	qFour},
+          {"answer"	:	fiveAns,
+            "questionCode"	:	qFive}]
+      }.toString()));
       final response = await http.post(
         Uri.parse(_epPartialSavingForDigUser),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, dynamic>{
-          "cnic": "12776-1734567-3",
-          "email": "talhakhanxada@gmail.com",
-          "mobile": "+923154511100",
-          "mobileRegisteredWith": "4",
-          "accountTypeToBeOpened": "B",
-          "sessionID": "72",
-          "accountTypeToBeOpened": "B",
-          "annualIncome": '3',
-          "bankAccountNo": "123456789",
-          "bankBranchAddress": "abl branch",
-          "bankName": "00091",
-          "basicInfoDisclaimerChecked": 'true',
-          "birthCityCode": "000016",
-          "birthCountryCode": "001",
-          "birthStateCode": "3",
-          "branchCity": "000016",
-          "city": "000043",
-          "cnicBackDoc": {
-            "fileName": "cnicBack.jpg",
-            "fileExtension": ".jpg",
-            "fileContent": []
-          },
-          "cnicExpiryDate": "2075-12-31",
-          "cnicFrontDoc": {
-            "fileName": "cnicFront.jpg",
-            "fileExtension": ".jpg",
-            "fileContent": []
-          },
-          "cnicIssueDate": "2020-12-31",
-          "country": "001",
-          "crsDisclaimerChecked": true,
-          "customerName": "test name",
-          "dateOfBirth": "2000-04-03",
-          "dividendMandate": "C",
-          "docUploadDisclaimerChecked": true,
-          "domesticCounterParties": "1",
-          "domesticGeographies": "2",
-          "employerDesignation": "3",
-          "employerName": "4",
-          "employerNatureOfBusiness": "5",
-          "employerProfession": "6",
-          "expTurnoverInAccAmount": 5555,
-          "expTurnoverInAccType": "A",
-          "expectedInvestmentAmount": 4,
-          "fatcaDisclaimerChecked": true,
-          "fatherSpouseName": "my father",
-          "incomeProofDoc": {
-            "fileName": "income.jpg",
-            "fileExtension": ".jpg",
-            "fileContent": []
-          },
-          "internationalCounterParties": "counter",
-          "internationalGeographies": "abc",
-          "kycDisclaimerChecked": true,
-          "lifetimeCnicExpiry": true,
-          "mailingAddress": "test mailing add",
-          "mailingCountryCode": "001",
-          "mailingCity": "other",
-          "mailingOtherCity": "test mailing city",
-          "maritalStatus": "S",
-          "mobileNoProofDoc": {
-            "fileName": "mobile.jpg",
-            "fileExtension": ".jpg",
-            "fileContent": []
-          },
-          "mothersMaidenName": "test mother maiden name",
-          "nationalityCode": "001",
-          "occupation": "013",
-          "otherCity": "test other city",
-          "otherOccupation": null,
-          "otherSourceOfIncome": "test",
-          "otherTaxResCountry": "test tax res country",
-          "pakResident": "1",
-          "phoneOne": null,
-          "phoneTwo": null,
-          "preferedModeOfTrans": "B",
-          "religion": "02",
-          "residentialAddress": "lahore",
-          "retirementAge": 60,
-          "rpqAge": 3,
-          "rpqDisclaimerChecked": true,
-          "rpqFinacialPosition": 38,
-          "rpqInvestmentHorizon": 31,
-          "rpqInvestmentKnowledge": 35,
-          "rpqInvestmentObjective": 28,
-          "rpqMaritalStatus": 6,
-          "rpqNoOfDependants": 10,
-          "rpqOccupation": 12,
-          "rpqQualification": 18,
-          "rpqRiskAppetite": 23,
-          "rpqTotalScore": 31,
-          "signatureDoc": {
-            "fileName": "sig.jpg",
-            "fileExtension": ".jpg",
-            "fileContent": []
-          },
-          "sourceOfIncome": "5",
-          "taxIdentificationNumber": null,
-          "taxPaidCountry": "001",
-          "taxResCountryOtherThanPak": "004",
-          "title": "Dr",
-          "titleOfAccount": "ABC title",
-          "zakatDeclarationDoc": null,
-          "zakatExempt": false,
-          "requiredDocs": [],
-          "nominees": [
-            {
-              "name": "nom 1",
-              "cnic": "12345-1234567-1",
-              "relation": "Father",
-              "mobile": "+923374879673"
-            },
-            {
-              "name": "nom 2",
-              "cnic": "12345-1234567-3",
-              "relation": "Mother",
-              "mobile": "+923374879673"
-            }
-          ],
-          "fatcaInfo": [
-            {
-              "answer": false,
-              "questionCode": 1
-            },
-            {
-              "answer": false,
-              "questionCode": 2
-            },
-            {
-              "answer": false,
-              "questionCode": 3
-            },
-            {
-              "answer": true,
-              "questionCode": 5
-            },
-            {
-              "answer": false,
-              "questionCode": 6
-            },
-            {
-              "answer": false,
-              "questionCode": 7
-            },
-            {
-              "answer": true,
-              "questionCode": 8
-            }
-          ],
-          "pepsInfo": [
-            {
-              "answer": false,
-              "questionCode": 1
-            },
-            {
-              "answer": false,
-              "questionCode": 2
-            },
-            {
-              "answer": false,
-              "questionCode": 3
-            },
-            {
-              "answer": true,
-              "questionCode": 4
-            },
-            {
-              "answer": false,
-              "questionCode": 5
-            }
-          ]
+          "requestFromScreenNo":3,
+          "cnic":'99999-9999999-9',
+          "sessionID":"94",
+          "domesticCounterParties":domesticCounterParties,
+          "domesticGeographies":domesticGeographies,
+          "internationalCounterParties":internationalCounterParties,
+          "internationalGeographies":internationalGeographies,
+          "employerDesignation":employerDesignation,
+          "employerName":employerName,
+          "employerNatureOfBusiness":employerNatureOfBusiness,
+          "employerProfession":employerProfession,
+          "preferedModeOfTrans":preferedModeOfTrans,
+          "expTurnoverInAccAmount":expTurnoverInAccAmount,
+          "expTurnoverInAccType":expTurnoverInAccType,
+          "expectedInvestmentAmount":expectedInvestmentAmount,
+          "annualIncome":annualIncome,
+          "kycDisclaimerChecked":kycDisclaimerChecked,
+          "occupation":occupation,
+          "otherOccupation":null,
+          "otherSourceOfIncome":"test",
+          "sourceOfIncome":sourceOfIncome,
+          "pepsInfo":[{"answer"	:	oneAns,
+            "questionCode"	:	qOne},
+            {"answer"	:	twoAns,
+            "questionCode"	:	qTwo},
+            {"answer"	:	threeAns,
+              "questionCode"	:	qThree},
+            {"answer"	:	fourAns,
+              "questionCode"	:	qFour},
+            {"answer"	:	fiveAns,
+              "questionCode"	:	qFive}]
         }),
       );
       if (response.statusCode == 200) {
@@ -1359,4 +1397,189 @@ class ApiClient {
       }
     }
   }
+
+
+
+  Future<Common> onPartialSavingForDigUserScreen5(
+      String cNic,int rpqAge,
+      bool rpqDisclaimerChecked, int rpqFinacialPosition,
+      int rpqInvestmentHorizon,int rpqInvestmentKnowledge,
+      int rpqInvestmentObjective, int rpqMaritalStatus,
+      int rpqNoOfDependants,int rpqOccupation,
+      int rpqQualification,int rpqRiskAppetite,
+      int rpqTotalScore,
+      ) async {
+    Common? common;
+    try {
+      printInfo(info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo":5,
+        "cnic":"99999-9999999-9",
+        "sessionID":"94",
+        "rpqAge":rpqAge,
+        "rpqDisclaimerChecked":rpqDisclaimerChecked,
+        "rpqFinacialPosition":rpqFinacialPosition,
+        "rpqInvestmentHorizon":rpqInvestmentHorizon,
+        "rpqInvestmentKnowledge":rpqInvestmentKnowledge,
+        "rpqInvestmentObjective":rpqInvestmentObjective,
+        "rpqMaritalStatus":rpqMaritalStatus,
+        "rpqNoOfDependants":rpqNoOfDependants,
+        "rpqOccupation":rpqOccupation,
+        "rpqQualification":rpqQualification,
+        "rpqRiskAppetite":rpqRiskAppetite,
+        "rpqTotalScore":rpqTotalScore
+      }.toString()));
+      final response = await http.post(
+        Uri.parse(_epPartialSavingForDigUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, dynamic>{
+          "requestFromScreenNo":5,
+          "cnic":"99999-9999999-9",
+          "sessionID":"94",
+          "rpqAge":rpqAge,
+          "rpqDisclaimerChecked":rpqDisclaimerChecked,
+          "rpqFinacialPosition":rpqFinacialPosition,
+          "rpqInvestmentHorizon":rpqInvestmentHorizon,
+          "rpqInvestmentKnowledge":rpqInvestmentKnowledge,
+          "rpqInvestmentObjective":rpqInvestmentObjective,
+          "rpqMaritalStatus":rpqMaritalStatus,
+          "rpqNoOfDependants":rpqNoOfDependants,
+          "rpqOccupation":rpqOccupation,
+          "rpqQualification":rpqQualification,
+          "rpqRiskAppetite":rpqRiskAppetite,
+          "rpqTotalScore":rpqTotalScore
+        }),
+      );
+      if (response.statusCode == 200) {
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.error.toString());
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+          throw Exception(common!.meta!.error.toString());
+        } else {
+          throw Exception('No Internet');
+        }
+      }
+    }
+  }
+
+
+  Future<Common> onPartialSavingForDigUserScreen6(
+  Uint8List? cNicBack,
+      Uint8List? cNicFront,
+      Uint8List? incomeProof,
+      Uint8List? sigPaper,
+      ) async {
+    Common? common;
+    try {
+      printInfo(info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo":6,
+        "cnic":"99999-9999999-9",
+        "sessionID":"94",
+        "cnicBackDoc":{
+          "fileName":"cnicBack.jpg",
+          "fileExtension":".jpg",
+          "fileContent":cNicBack
+        },
+        "cnicFrontDoc":{
+          "fileName":"cnicFront.jpg",
+          "fileExtension":".jpg",
+          "fileContent":cNicFront
+        },
+        "incomeProofDoc":{
+          "fileName":"income.jpg",
+          "fileExtension":".jpg",
+          "fileContent":incomeProof
+        },
+        "mobileNoProofDoc":{
+          "fileName":"mobile.jpg",
+          "fileExtension":".jpg",
+          "fileContent":[]
+        },
+        "signatureDoc":{
+          "fileName":"sig.jpg",
+          "fileExtension":".jpg",
+          "fileContent":sigPaper
+        },
+        "zakatDeclarationDoc":null,
+        "requiredDocs":[]
+      }.toString()));
+      final response = await http.post(
+        Uri.parse(_epPartialSavingForDigUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, dynamic>{
+          "requestFromScreenNo":6,
+          "cnic":"99999-9999999-9",
+          "sessionID":"94",
+          "cnicBackDoc":{
+            "fileName":"cnicBack.jpg",
+            "fileExtension":".jpg",
+            "fileContent":cNicBack
+          },
+          "cnicFrontDoc":{
+            "fileName":"cnicFront.jpg",
+            "fileExtension":".jpg",
+            "fileContent":cNicFront
+          },
+          "incomeProofDoc":{
+            "fileName":"income.jpg",
+            "fileExtension":".jpg",
+            "fileContent":incomeProof
+          },
+          "mobileNoProofDoc":{
+            "fileName":"mobile.jpg",
+            "fileExtension":".jpg",
+            "fileContent":[]
+          },
+          "signatureDoc":{
+            "fileName":"sig.jpg",
+            "fileExtension":".jpg",
+            "fileContent":sigPaper
+          },
+          "zakatDeclarationDoc":null,
+          "requiredDocs":[]
+        }),
+      );
+      if (response.statusCode == 200) {
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.error.toString());
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+          throw Exception(common!.meta!.error.toString());
+        } else {
+          throw Exception('No Internet');
+        }
+      }
+    }
+  }
+
+
+
 }
+
+

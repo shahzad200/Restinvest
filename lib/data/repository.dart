@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:investintrust/data/models/calculate_tax.dart';
 import 'package:investintrust/data/models/daily_nav_prices.dart';
 import 'package:investintrust/data/models/load_dashboard.dart';
@@ -240,6 +242,75 @@ class Repository {
   Future<NewDigUserRegDataAfterOTP> onNewDigUserRegDataAfterOTP() =>
       _apiClient.onNewDigUserRegDataAfterOTP();
 
+
+  Future<Common> onPartialSavingForDigUser(
+      String cNic,String email,String mobile,String mobileRegWith,String accountTypeOpened,
+      String bankAccountNo,String bankBranchAddress,String bankName,bool basicInfoDisclaimerChecked,
+      String birthCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
+      String customerName,String dateOfBirth,String dividendMandate,String fatherSpouseName,
+      String mailingAddress,String mailingCountryCode,String mailingCity,String maritalStatus,
+      String mothersMaidenName,String nationalityCode,String pakResident,String religion,String residentialAddress,
+      int retirementAge,String title,bool zaKatExempt,String noMName,String noMcNic,
+      String noMRelation,String noMMobile,
+      ) =>
+      _apiClient.onPartialSavingForDigUser(cNic, email, mobile,
+          mobileRegWith, accountTypeOpened, bankAccountNo,
+          bankBranchAddress, bankName, basicInfoDisclaimerChecked,
+          birthCityCode, city, cNicExpiryDate, cNicIssueDate, country,
+          customerName, dateOfBirth, dividendMandate, fatherSpouseName,
+          mailingAddress, mailingCountryCode, mailingCity, maritalStatus,
+          mothersMaidenName, nationalityCode, pakResident, religion ,residentialAddress,
+          retirementAge, title, zaKatExempt, noMName, noMcNic, noMRelation, noMMobile);
+
+
+
+
+  Future<Common> onPartialSavingForDigUserScreen3(
+      String cNic,String domesticCounterParties,String domesticGeographies,String internationalCounterParties,String internationalGeographies,
+      String employerDesignation,
+      String employerName,
+      String employerNatureOfBusiness,String employerProfession,
+      String preferedModeOfTrans,int expTurnoverInAccAmount,String expTurnoverInAccType,int expectedInvestmentAmount,
+      int annualIncome,
+      bool kycDisclaimerChecked,String occupation,String sourceOfIncome,
+      bool oneAns,int qOne,bool twoAns,int qTwo,bool threeAns,int qThree,bool fourAns,int qFour,bool fiveAns,int qFive
+      ) =>
+      _apiClient.onPartialSavingForDigUserScreen3(cNic, domesticCounterParties, domesticGeographies,
+          internationalCounterParties, internationalGeographies, employerDesignation, employerName,
+          employerNatureOfBusiness, employerProfession, preferedModeOfTrans, expTurnoverInAccAmount,
+          expTurnoverInAccType, expectedInvestmentAmount, annualIncome, kycDisclaimerChecked, occupation,
+          sourceOfIncome, oneAns, qOne, twoAns, qTwo, threeAns, qThree, fourAns, qFour, fiveAns, qFive);
+
+
+  Future<Common> onPartialSavingForDigUserScreen5(
+      String cNic,int rpqAge,
+      bool rpqDisclaimerChecked, int rpqFinacialPosition,
+      int rpqInvestmentHorizon,int rpqInvestmentKnowledge,
+      int rpqInvestmentObjective, int rpqMaritalStatus,
+      int rpqNoOfDependants,int rpqOccupation,
+      int rpqQualification,int rpqRiskAppetite,
+      int rpqTotalScore,
+      ) =>
+      _apiClient.onPartialSavingForDigUserScreen5(cNic, rpqAge,
+          rpqDisclaimerChecked, rpqFinacialPosition, rpqInvestmentHorizon,
+          rpqInvestmentKnowledge, rpqInvestmentObjective, rpqMaritalStatus,
+          rpqNoOfDependants, rpqOccupation, rpqQualification,
+          rpqRiskAppetite, rpqTotalScore);
+
+
+
   Future<NewDigUserRegDataRpqList> onNewDigUserRegDataRpqList() =>
       _apiClient.onNewDigUserRegDataRpqList();
+
+
+  Future<Common> onPartialSavingForDigUserScreen6(
+      Uint8List? cNicBack,
+      Uint8List? cNicFront,
+      Uint8List? incomeProof,
+      Uint8List? sigPaper,
+      ) =>
+      _apiClient.onPartialSavingForDigUserScreen6(cNicBack,
+          cNicFront, incomeProof,
+          sigPaper);
+
 }

@@ -218,7 +218,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                               groupValue: _.groupValue,
                                               value: data.code ?? 'I',
                                               // onChanged: (AccountTypeList data) {
-                                              onChanged: (val) { _.handleRadioValueChange(data!.code ?? '0');},
+                                              onChanged: (val) { _.handleRadioValueChange(data!.code ?? 'I');},
                                               activeColor: MaterialStateColor.resolveWith(
                                                       (states) => AppColor.blueColor),
                                               // setState(() {
@@ -327,8 +327,8 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                     ),
                                     CustomRoundButton(height: 35,
                                         isRound: false, text: "Next", onPress: () {
-                                          Get.toNamed(AppRoute.accountopeningbasicinformation);
-                                          // _.onValidateVerificationCodeForDigUser(context);
+                                          _.onValidateVerificationCodeForDigUser();
+                                          // Get.toNamed(AppRoute.accountopeningbasicinformation);
                                         }),
                                     const SizedBox(
                                       height: 10,

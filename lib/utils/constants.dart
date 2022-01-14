@@ -2,6 +2,7 @@ import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/data/models/social_media_links.dart';
 
 class Constant{
+  static String sessionID = '0';
   static String userId = '-0456';
   static LoginModel? loginModel;
   static SocialMediaLink? socialMediaLink;

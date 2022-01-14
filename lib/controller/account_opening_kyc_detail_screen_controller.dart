@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/data/models/common_model.dart';
+import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
@@ -17,6 +19,8 @@ class AccountOpenKycDetailScreenController extends GetxController{
   var number = "".obs;
   var email = "".obs;
   AccountOpenBasicInformationScreenController controller = Get.find<AccountOpenBasicInformationScreenController>();
+  AccountOpenRequestScreenController con = Get.find<AccountOpenRequestScreenController>();
+
   String dropdownvalue = "";
   String amountvalue = "";
   String paymentvalue = "";
@@ -45,6 +49,14 @@ class AccountOpenKycDetailScreenController extends GetxController{
   TextEditingController geoInternationalController = TextEditingController();
   TextEditingController counterDomesticController = TextEditingController();
   TextEditingController counterInternationalController = TextEditingController();
+  TextEditingController expTurnoverAmountController = TextEditingController();
+
+
+  bool isLoading = false;
+  bool noInternet = false;
+
+  Common? common;
+  final _repository = Repository();
   @override
   void onInit() {
     // TODO: implement onInit
@@ -71,7 +83,7 @@ class AccountOpenKycDetailScreenController extends GetxController{
   }
 
 
-  onSaveDataKycDetail(){
+  onSaveDataKycDetail() async {
     if(occupationGroupValue == '00'){
       showToast('Please select occupation/profession');
     } else if(inComeGroupValue == '00'){
@@ -99,7 +111,65 @@ class AccountOpenKycDetailScreenController extends GetxController{
     }else if(!isChecked){
       showToast('Please check disclaimer');
     } else {
-      Get.toNamed(AppRoute.accountOpenFatcaScreen);
+      try {
+        isLoading = true;
+        update();
+        common = await _repository.onPartialSavingForDigUserScreen3(con.cNicNumberController.text,
+            counterDomesticController.text, geoDomesticController.text,
+            counterInternationalController.text, geoInternationalController.text, designationController.text,
+            employerController.text, natureOfBusinessController.text,
+            professionController.text, transactionGroupValue,
+            int.parse(expTurnoverAmountController.text), turnoverGroupValue, int.parse(expectedIncomeGroupValue), int.parse(annualIncomeGroupValue),
+            isChecked, occupationGroupValue, inComeGroupValue,
+            controller.newDigUserRegDataAfterOTP!.
+            response!.pepsInfoList![0].answer ?? false,
+            int.parse(controller.newDigUserRegDataAfterOTP!.
+            response!.pepsInfoList![0].questionCode!),
+            controller.newDigUserRegDataAfterOTP!.
+            response!.pepsInfoList![1].answer ?? false,
+            int.parse(controller.newDigUserRegDataAfterOTP!.
+            response!.pepsInfoList![1].questionCode!),
+            controller.newDigUserRegDataAfterOTP!.
+            response!.pepsInfoList![2].answer ?? false,
+            int.parse(controller.newDigUserRegDataAfterOTP!.
+            response!.pepsInfoList![2].questionCode!),
+            controller.newDigUserRegDataAfterOTP!.
+            response!.pepsInfoList![3].answer ?? false,
+            int.parse(controller.newDigUserRegDataAfterOTP!.
+            response!.pepsInfoList![3].questionCode!),
+          controller.newDigUserRegDataAfterOTP!.
+          response!.pepsInfoList![4].answer ?? false,
+          int.parse(controller.newDigUserRegDataAfterOTP!.
+          response!.pepsInfoList![4].questionCode!),
+        );
+
+        isLoading = false;
+        if (noInternet) {
+          noInternet = false;
+        }
+        update();
+        if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+          Get.toNamed(AppRoute.accountOpenFatcaScreen);
+        }
+      } catch (e) {
+        if (e.toString() == 'Exception: No Internet') {
+          isLoading = false;
+          noInternet = true;
+          update();
+        } else {
+          isLoading = false;
+          noInternet = false;
+          update();
+          Fluttertoast.showToast(
+              msg: e.toString().replaceAll('Exception:', ''),
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      }
     }
 
     }

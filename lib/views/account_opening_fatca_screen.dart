@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_after_otp.dart';
+import 'package:investintrust/routes/routes.dart';
 import 'package:investintrust/views/account_opening_basic_information_screen.dart';
 import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
 import 'package:investintrust/widgets/no_internet.dart';
@@ -422,7 +423,6 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                     _.taxResCountriesOtherThanPakGroupValue,
                                     value: data.code ?? '0',
                                     onChanged: (val) {
-                                      print("radio code${data.code}");
                                       _.taxResCountriesOtherThanPakGroupValue =
                                           data!.code ?? '0';
                                       _.update();
