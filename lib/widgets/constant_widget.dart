@@ -2541,6 +2541,83 @@ class CustomFundList extends StatelessWidget {
     );
   }
 }
+class RiskProfileResult extends StatelessWidget {
+  const RiskProfileResult({
+    required this.scoreText,
+    required this.investorText,
+    required this.riskText,
+    required this.schemeText,
+    required this.fontWeight,
+    this.textSize = 12,
+    Key? key,
+  }) : super(key: key);
+  final String scoreText;
+  final String investorText;
+  final String riskText;
+  final String schemeText;
+  final double textSize;
+  final fontWeight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+      alignment: Alignment.center,
+      child: Table(
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        columnWidths: const {
+          0: FlexColumnWidth(.8),
+          1: FlexColumnWidth(.8),
+        },
+        border: TableBorder.all(),
+        children: [
+          TableRow(children: [
+            SizedBox(
+              height: 35,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: RestInvestTitle(
+                  margin: const EdgeInsets.only(top: 10),
+                  textAlign: TextAlign.center,
+                  text: scoreText,
+                  fontSize: textSize,
+                  fontWeight: fontWeight,
+                  textColor: AppColor.black,
+                ),
+              ),
+            ),
+            RestInvestTitle(
+                margin: const EdgeInsets.only(top: 10),
+                textAlign: TextAlign.center,
+                text: investorText,
+                fontSize: textSize,
+                textColor: AppColor.black,
+                fontWeight: fontWeight),
+            RestInvestTitle(
+                margin: const EdgeInsets.only(top: 10),
+                textAlign: TextAlign.center,
+                text: riskText,
+                fontSize: textSize,
+                textColor: AppColor.black,
+                fontWeight: fontWeight),
+            RestInvestTitle(
+                margin: const EdgeInsets.only(top: 10),
+                textAlign: TextAlign.center,
+                text: schemeText,
+                fontSize: textSize,
+                textColor: AppColor.black,
+                fontWeight: fontWeight),
+          ]),
+          // TableRow(
+          //     children: List.generate(3, (index) {
+          //   return Text("data");
+
+          // }))
+        ],
+      ),
+    );
+  }
+}
 
 class DialogBox extends StatelessWidget {
   const DialogBox({Key? key}) : super(key: key);
