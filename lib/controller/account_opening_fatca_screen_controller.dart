@@ -123,7 +123,7 @@ class AccountOpenFatcaController extends GetxController {
                             disclaimerIsChecked,
                             termsConditions,
                             taxCountryValue,
-                            cityCode,
+                            taxCountryCode,
                             taxResCountriesOtherThanPakGroupValue,
                             titleController.text,
                             list);
