@@ -40,8 +40,9 @@ class AccountOpenFatcaController extends GetxController {
   String countryCode = "";
   String stateValue = "";
   String stateCode = "";
-  String cityValue = "";
+  String taxCountryValue = "";
   String cityCode = "";
+  String taxCountryCode = "";
   String birthCityValue = "";
   String birthCityCode = "";
   String taxResCountriesOtherThanPakGroupValue = '0';
@@ -90,7 +91,7 @@ class AccountOpenFatcaController extends GetxController {
           print("country value");
           if (stateValue != null && stateValue != "") {
             print("state");
-            if (cityValue != null && cityValue != "") {
+            if (taxCountryValue != null && taxCountryValue != "") {
               print("city");
               if ( termsConditions != false) {
                 print("terms conditions");
@@ -105,7 +106,7 @@ class AccountOpenFatcaController extends GetxController {
                         update();
                         print("cnic${cnicController.text}");
                         print("citycode${cityCode}");
-                        print("cityvalue${cityValue}");
+                        print("cityvalue${taxCountryValue}");
                         print("counrty${countryCode}");
                         print("state${stateCode}");
                         print("disclaim${disclaimerIsChecked}");
@@ -122,7 +123,7 @@ class AccountOpenFatcaController extends GetxController {
                             stateCode,
                             disclaimerIsChecked,
                             termsConditions,
-                            cityValue,
+                            taxCountryValue,
                             cityCode,
                             taxResCountriesOtherThanPakGroupValue,
                             titleController.text,
@@ -135,7 +136,7 @@ class AccountOpenFatcaController extends GetxController {
                         update();
                         if (common!.meta!.message == 'OK' &&
                             common!.meta!.code == '200') {
-                          Get.back();
+                          // Get.back();
                           Get.toNamed(AppRoute.accountOpenURiskScreen);
                         } else {
                           Get.back();
@@ -143,7 +144,7 @@ class AccountOpenFatcaController extends GetxController {
                               context, common!.meta!.error.toString());
                         }
                       } catch (e) {
-                        Get.back();
+                        // Get.back();
                         if (e.toString() == 'Exception: No Internet') {
                           isLoading = false;
                           noInternet = true;

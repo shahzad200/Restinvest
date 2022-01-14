@@ -30,6 +30,11 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
   Common? common;
   bool isLoading = false;
   bool noInternet = false;
+  bool cnicFrontUpload = false;
+  bool cnicBackUpload = false;
+  bool cnicProofUpload = false;
+  bool cnicSignUpload = false;
+  bool cnicOtherUpload = false;
   final _repository = Repository();
 
   Future<File?> getImageFromGallery() async {
