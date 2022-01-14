@@ -72,7 +72,7 @@ class Response {
     email = json['email'];
     mobile = json['mobile'];
     mobileRegisteredWith = json['mobileRegisteredWith'];
-    sessionID = null;
+    sessionID = json['sessionID'];
     verificationCode = json['verificationCode'];
   }
 

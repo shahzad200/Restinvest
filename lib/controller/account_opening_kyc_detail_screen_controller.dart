@@ -114,7 +114,7 @@ class AccountOpenKycDetailScreenController extends GetxController{
       try {
         isLoading = true;
         update();
-        common = await _repository.onPartialSavingForDigUserScreen3(con.cNicNumberController.text,
+        common = await _repository.onPartialSavingForDigUserScreen3(
             counterDomesticController.text, geoDomesticController.text,
             counterInternationalController.text, geoInternationalController.text, designationController.text,
             employerController.text, natureOfBusinessController.text,

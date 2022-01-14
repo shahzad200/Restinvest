@@ -141,7 +141,7 @@ class AccountOpenRequestScreenController extends GetxController {
         try {
           isLoading = true;
           update();
-          genVerificationCodeForDigUser =
+          common =
           await _repository.onGenVerificationCodeForDigUser(
               cNicNumberController.text, emailController.text, mobileNumberController.text
           );
@@ -150,10 +150,10 @@ class AccountOpenRequestScreenController extends GetxController {
             noInternet = false;
           }
           update();
-          if(genVerificationCodeForDigUser!.meta!.message == 'OK' && genVerificationCodeForDigUser!.meta!.code == '200'){
+          if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
             customDialogPin(context,"Please check your provided email address and mobile number for verification code");
           }else {
-            customDialogPin(context,common!.meta!.error.toString());
+
           }
         } catch (e) {
           if (e.toString() == 'Exception: No Internet') {
@@ -164,14 +164,15 @@ class AccountOpenRequestScreenController extends GetxController {
             isLoading = false;
             noInternet = false;
             update();
-            Fluttertoast.showToast(
-                msg: e.toString(),
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.black,
-                textColor: Colors.white,
-                fontSize: 16.0);
+            customDialogPin(context,e.toString().replaceAll('Exception: ', ''));
+            // Fluttertoast.showToast(
+            //     msg: e.toString().replaceAll('Exception: ', ''),
+            //     toastLength: Toast.LENGTH_SHORT,
+            //     gravity: ToastGravity.CENTER,
+            //     timeInSecForIosWeb: 1,
+            //     backgroundColor: Colors.black,
+            //     textColor: Colors.white,
+            //     fontSize: 16.0);
           }
         }
       }
@@ -250,6 +251,7 @@ class AccountOpenRequestScreenController extends GetxController {
         update();
         if(validateVerificationCodeForDigUser!.meta!.message == 'OK' && validateVerificationCodeForDigUser!.meta!.code == '200'){
           Constant.sessionID = validateVerificationCodeForDigUser!.response!.sessionID!;
+          Constant.cNic = validateVerificationCodeForDigUser!.response!.cnic!;
           Get.toNamed(AppRoute.accountopeningbasicinformation);
         }
       } catch (e) {

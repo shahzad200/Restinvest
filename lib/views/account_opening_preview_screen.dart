@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -13,8 +14,16 @@ import '../utils/colors.dart';
 import '../widgets/constant_widget.dart';
 
 class AccountOpenPreviewScreen extends StatelessWidget {
-  const AccountOpenPreviewScreen({Key? key}) : super(key: key);
+  const AccountOpenPreviewScreen({Key? key, required this.cNicFront,
+    required this.cNicBack,
+    required this.sourceIncome,
+    required this.sigPage}
+  ) : super(key: key);
 
+  final Uint8List cNicFront;
+  final Uint8List cNicBack;
+  final Uint8List sourceIncome;
+  final Uint8List sigPage;
   @override
   Widget build(BuildContext context) {
     // final width = Get.width;
@@ -177,7 +186,9 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                     height: 35,
                                     width: 80,
                                     text: "Submit",
-                                    onPress: () {},
+                                    onPress: () {
+                                      _.onSubmit();
+                                    },
                                     isRound: false),
                               ],
                             ),

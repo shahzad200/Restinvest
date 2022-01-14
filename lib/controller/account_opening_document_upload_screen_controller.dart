@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/repository.dart';
+import 'package:investintrust/views/account_opening_preview_screen.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 import 'package:path/path.dart' as p;
 
@@ -79,7 +80,9 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
           }
           update();
           if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
-
+            Get.to(AccountOpenPreviewScreen(cNicFront: cNicF,
+                cNicBack: cNicB, sourceIncome: srcIn,
+                sigPage: planImg));
           }
         } catch (e) {
           if (e.toString() == 'Exception: No Internet') {

@@ -230,7 +230,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
       try {
         isLoading = true;
         update();
-        common = await _repository.onPartialSavingForDigUser(controller.cNicNumberController.text,
+        common = await _repository.onPartialSavingForDigUser(
             controller.emailController.text, controller.mobileNumberController.text,
             controller.mobileNumberOwnerCode, controller.groupValue, iBanNumberController.text,
             bankBranchController.text, bankNameCode, isChecked,

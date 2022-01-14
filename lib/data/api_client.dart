@@ -1003,12 +1003,12 @@ class ApiClient {
     }
   }
 
-  Future<GenVerificationCodeForDigUser> onGenVerificationCodeForDigUser(
+  Future<Common> onGenVerificationCodeForDigUser(
     String cNic,
     String email,
     String mobile,
   ) async {
-    GenVerificationCodeForDigUser? genVerificationCodeForDigUser;
+    Common? genVerificationCodeForDigUser;
     try {
       final response = await http.post(
         Uri.parse(_epGenVerificationCodeForDigUser),
@@ -1024,7 +1024,7 @@ class ApiClient {
       if (response.statusCode == 200) {
         printInfo(info: response.body);
          genVerificationCodeForDigUser =
-            GenVerificationCodeForDigUser.fromJson(jsonDecode(response.body));
+             Common.fromJson(jsonDecode(response.body));
         if (genVerificationCodeForDigUser.meta!.code.toString() ==
             200.toString()) {
           return genVerificationCodeForDigUser;
@@ -1151,14 +1151,14 @@ class ApiClient {
 
 
   Future<Common> onPartialSavingForDigUser(
-      String cNic,String email,String mobile,String mobileRegWith,String accountTypeOpened,
+      String email,String mobile,String mobileRegWith,String accountTypeOpened,
       String bankAccountNo,String bankBranchAddress,String bankName,bool basicInfoDisclaimerChecked,
       String birthCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
       String customerName,String dateOfBirth,String dividendMandate,String fatherSpouseName,
       String mailingAddress,String mailingCountryCode,String mailingCity,String maritalStatus,
       String mothersMaidenName,String nationalityCode,String pakResident,String religion,String residentialAddress,
       int retirementAge,String title,bool zaKatExempt,String noMName,String noMcNic,
-      String noMRelation,String noMMobile,
+      String noMRelation,String noMMobile,String cNic, String sessionID
       ) async {
     Common? common;
     try {
@@ -1222,7 +1222,7 @@ class ApiClient {
           "mobile":mobile,
           "mobileRegisteredWith":mobileRegWith,
           "accountTypeToBeOpened":accountTypeOpened,
-          "sessionID":"94",
+          "sessionID":sessionID,
           "bankAccountNo":bankAccountNo,
           "bankBranchAddress":bankBranchAddress,
           "bankName":bankName,
@@ -1291,21 +1291,23 @@ class ApiClient {
 
 
   Future<Common> onPartialSavingForDigUserScreen3(
-      String cNic,String domesticCounterParties,String domesticGeographies,String internationalCounterParties,String internationalGeographies,
+      String domesticCounterParties,String domesticGeographies,String internationalCounterParties,String internationalGeographies,
       String employerDesignation,
       String employerName,
       String employerNatureOfBusiness,String employerProfession,
       String preferedModeOfTrans,int expTurnoverInAccAmount,String expTurnoverInAccType,int expectedInvestmentAmount,
       int annualIncome,
       bool kycDisclaimerChecked,String occupation,String sourceOfIncome,
-      bool oneAns,int qOne,bool twoAns,int qTwo,bool threeAns,int qThree,bool fourAns,int qFour,bool fiveAns,int qFive
+      bool oneAns,int qOne,bool twoAns,int qTwo,bool threeAns,int qThree,bool fourAns,int qFour,bool fiveAns,int qFive,
+      String cNic,
+      String sessionID
       ) async {
     Common? common;
     try {
       printInfo(info: jsonEncode(<String, dynamic>{
         "requestFromScreenNo":3,
-        "cnic":'99999-9999999-9',
-        "sessionID":"94",
+        "cnic":cNic,
+        "sessionID":sessionID,
         "domesticCounterParties":domesticCounterParties,
         "domesticGeographies":domesticGeographies,
         "internationalCounterParties":internationalCounterParties,
@@ -1342,8 +1344,8 @@ class ApiClient {
         },
         body: jsonEncode(<String, dynamic>{
           "requestFromScreenNo":3,
-          "cnic":'99999-9999999-9',
-          "sessionID":"94",
+          "cnic":cNic,
+          "sessionID":sessionID,
           "domesticCounterParties":domesticCounterParties,
           "domesticGeographies":domesticGeographies,
           "internationalCounterParties":internationalCounterParties,
@@ -1401,20 +1403,22 @@ class ApiClient {
 
 
   Future<Common> onPartialSavingForDigUserScreen5(
-      String cNic,int rpqAge,
+      int rpqAge,
       bool rpqDisclaimerChecked, int rpqFinacialPosition,
       int rpqInvestmentHorizon,int rpqInvestmentKnowledge,
       int rpqInvestmentObjective, int rpqMaritalStatus,
       int rpqNoOfDependants,int rpqOccupation,
       int rpqQualification,int rpqRiskAppetite,
       int rpqTotalScore,
+      String cNic,
+      String sessionID
       ) async {
     Common? common;
     try {
       printInfo(info: jsonEncode(<String, dynamic>{
         "requestFromScreenNo":5,
-        "cnic":"99999-9999999-9",
-        "sessionID":"94",
+        "cnic":cNic,
+        "sessionID":sessionID,
         "rpqAge":rpqAge,
         "rpqDisclaimerChecked":rpqDisclaimerChecked,
         "rpqFinacialPosition":rpqFinacialPosition,
@@ -1435,8 +1439,8 @@ class ApiClient {
         },
         body: jsonEncode(<String, dynamic>{
           "requestFromScreenNo":5,
-          "cnic":"99999-9999999-9",
-          "sessionID":"94",
+          "cnic":cNic,
+          "sessionID":sessionID,
           "rpqAge":rpqAge,
           "rpqDisclaimerChecked":rpqDisclaimerChecked,
           "rpqFinacialPosition":rpqFinacialPosition,
@@ -1481,13 +1485,15 @@ class ApiClient {
       Uint8List? cNicFront,
       Uint8List? incomeProof,
       Uint8List? sigPaper,
+      String cNic,
+      String sessionID
       ) async {
     Common? common;
     try {
       printInfo(info: jsonEncode(<String, dynamic>{
         "requestFromScreenNo":6,
-        "cnic":"99999-9999999-9",
-        "sessionID":"94",
+        "cnic":cNic,
+        "sessionID":sessionID,
         "cnicBackDoc":{
           "fileName":"cnicBack.jpg",
           "fileExtension":".jpg",
@@ -1523,8 +1529,8 @@ class ApiClient {
         },
         body: jsonEncode(<String, dynamic>{
           "requestFromScreenNo":6,
-          "cnic":"99999-9999999-9",
-          "sessionID":"94",
+          "cnic":cNic,
+          "sessionID":sessionID,
           "cnicBackDoc":{
             "fileName":"cnicBack.jpg",
             "fileExtension":".jpg",
@@ -1579,6 +1585,47 @@ class ApiClient {
   }
 
 
+  Future<Common> onSaveDigUser(
+      String cNic,
+      String sessionID
+      ) async {
+    Common? common;
+    try {
+      printInfo(info: jsonEncode(<String, dynamic>{
+      }.toString()));
+      final response = await http.post(
+        Uri.parse(_epSaveDigUser),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, dynamic>{
+          "cnic":'99999-9999999-9',
+          "sessionID":sessionID
+        }),
+      );
+      if (response.statusCode == 200) {
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
+        if (common.meta!.code.toString() == 200.toString()) {
+          return common;
+        } else {
+          throw Exception(common.meta!.error.toString());
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+          throw Exception(common!.meta!.error.toString());
+        } else {
+          throw Exception('No Internet');
+        }
+      }
+    }
+  }
 
 }
 

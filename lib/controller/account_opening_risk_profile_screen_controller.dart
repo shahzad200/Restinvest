@@ -238,7 +238,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
       try {
         isLoading = true;
         update();
-        common = await _repository.onPartialSavingForDigUserScreen5('cNic',
+        common = await _repository.onPartialSavingForDigUserScreen5(
             ageGroupValue, isChecked, financialPositionGroupValue,
             investHorizonGroupValue, investKnowledgeGroupValue,
             investObjGroupValue, maritalStatusGroupValue,

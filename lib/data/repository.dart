@@ -195,7 +195,7 @@ class Repository {
   Future<NewDigUserRegDataBeforeOTP> onNewDigUserRegDataBeforeOTP() =>
       _apiClient.onNewDigUserRegDataBeforeOTP();
 
-  Future<GenVerificationCodeForDigUser> onGenVerificationCodeForDigUser(
+  Future<Common> onGenVerificationCodeForDigUser(
     String cNic,
     String email,
     String mobile,
@@ -244,7 +244,7 @@ class Repository {
 
 
   Future<Common> onPartialSavingForDigUser(
-      String cNic,String email,String mobile,String mobileRegWith,String accountTypeOpened,
+      String email,String mobile,String mobileRegWith,String accountTypeOpened,
       String bankAccountNo,String bankBranchAddress,String bankName,bool basicInfoDisclaimerChecked,
       String birthCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
       String customerName,String dateOfBirth,String dividendMandate,String fatherSpouseName,
@@ -253,20 +253,22 @@ class Repository {
       int retirementAge,String title,bool zaKatExempt,String noMName,String noMcNic,
       String noMRelation,String noMMobile,
       ) =>
-      _apiClient.onPartialSavingForDigUser(cNic, email, mobile,
+      _apiClient.onPartialSavingForDigUser(email, mobile,
           mobileRegWith, accountTypeOpened, bankAccountNo,
           bankBranchAddress, bankName, basicInfoDisclaimerChecked,
           birthCityCode, city, cNicExpiryDate, cNicIssueDate, country,
           customerName, dateOfBirth, dividendMandate, fatherSpouseName,
           mailingAddress, mailingCountryCode, mailingCity, maritalStatus,
           mothersMaidenName, nationalityCode, pakResident, religion ,residentialAddress,
-          retirementAge, title, zaKatExempt, noMName, noMcNic, noMRelation, noMMobile);
+          retirementAge, title, zaKatExempt, noMName, noMcNic, noMRelation, noMMobile,
+          Constant.cNic,Constant.sessionID
+      );
 
 
 
 
   Future<Common> onPartialSavingForDigUserScreen3(
-      String cNic,String domesticCounterParties,String domesticGeographies,String internationalCounterParties,String internationalGeographies,
+      String domesticCounterParties,String domesticGeographies,String internationalCounterParties,String internationalGeographies,
       String employerDesignation,
       String employerName,
       String employerNatureOfBusiness,String employerProfession,
@@ -275,15 +277,17 @@ class Repository {
       bool kycDisclaimerChecked,String occupation,String sourceOfIncome,
       bool oneAns,int qOne,bool twoAns,int qTwo,bool threeAns,int qThree,bool fourAns,int qFour,bool fiveAns,int qFive
       ) =>
-      _apiClient.onPartialSavingForDigUserScreen3(cNic, domesticCounterParties, domesticGeographies,
+      _apiClient.onPartialSavingForDigUserScreen3(domesticCounterParties, domesticGeographies,
           internationalCounterParties, internationalGeographies, employerDesignation, employerName,
           employerNatureOfBusiness, employerProfession, preferedModeOfTrans, expTurnoverInAccAmount,
           expTurnoverInAccType, expectedInvestmentAmount, annualIncome, kycDisclaimerChecked, occupation,
-          sourceOfIncome, oneAns, qOne, twoAns, qTwo, threeAns, qThree, fourAns, qFour, fiveAns, qFive);
+          sourceOfIncome, oneAns, qOne, twoAns, qTwo, threeAns, qThree, fourAns, qFour, fiveAns, qFive,
+          Constant.cNic,Constant.sessionID
+      );
 
 
   Future<Common> onPartialSavingForDigUserScreen5(
-      String cNic,int rpqAge,
+      int rpqAge,
       bool rpqDisclaimerChecked, int rpqFinacialPosition,
       int rpqInvestmentHorizon,int rpqInvestmentKnowledge,
       int rpqInvestmentObjective, int rpqMaritalStatus,
@@ -291,11 +295,11 @@ class Repository {
       int rpqQualification,int rpqRiskAppetite,
       int rpqTotalScore,
       ) =>
-      _apiClient.onPartialSavingForDigUserScreen5(cNic, rpqAge,
+      _apiClient.onPartialSavingForDigUserScreen5(rpqAge,
           rpqDisclaimerChecked, rpqFinacialPosition, rpqInvestmentHorizon,
           rpqInvestmentKnowledge, rpqInvestmentObjective, rpqMaritalStatus,
           rpqNoOfDependants, rpqOccupation, rpqQualification,
-          rpqRiskAppetite, rpqTotalScore);
+          rpqRiskAppetite, rpqTotalScore,Constant.cNic,Constant.sessionID);
 
 
 
@@ -311,6 +315,11 @@ class Repository {
       ) =>
       _apiClient.onPartialSavingForDigUserScreen6(cNicBack,
           cNicFront, incomeProof,
-          sigPaper);
+          sigPaper,Constant.cNic,Constant.sessionID);
+
+
+  Future<Common> onSaveDigUser(
+      ) =>
+      _apiClient.onSaveDigUser(Constant.cNic, Constant.sessionID);
 
 }
