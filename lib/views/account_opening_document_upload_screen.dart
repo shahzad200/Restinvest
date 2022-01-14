@@ -132,6 +132,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       buttonColor: AppColor.whiteColor,
                                       textColor: AppColor.black,
                                       onPress: () {
+                                        _.cnicFrontUpload = false;
+                                        _.update();
                                         showModalBottomSheet(
                                             backgroundColor: Colors.transparent,
                                             elevation: 0,
@@ -188,12 +190,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       width: 1, color: AppColor.black)),
                             ),
                             Container(
-                              height: 35,
+                              // height: 35,
+                              width: Get.width,
                               // height: Get.height,
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
+                              child:_.cnicFrontUpload && _.cnicFront!=null ? Center(child: Image.file(_.cnicFront!,height: 80,width: 120,)):SizedBox() ,
                             ),
                             const RestInvestTitle(
                               text:
@@ -207,12 +211,21 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                const RestInvestTitle(
-                                  text: "upload image",
-                                  textAlign: TextAlign.start,
-                                  textColor: AppColor.black,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 10,
+                                InkWell(
+                                  onTap:(){
+                                    if(_.cnicFront != null){
+                                      _.cnicFrontUpload = true;
+                                    }
+                                    _.update();
+
+                                  },
+                                  child: const RestInvestTitle(
+                                    text: "upload image",
+                                    textAlign: TextAlign.start,
+                                    textColor: AppColor.black,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 10,
+                                  ),
                                 ),
                                 CustomRoundButton(
                                     height: 35,
