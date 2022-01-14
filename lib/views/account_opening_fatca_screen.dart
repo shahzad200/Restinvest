@@ -2,9 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_after_otp.dart';
+import 'package:investintrust/views/account_opening_basic_information_screen.dart';
 import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
 import 'package:investintrust/widgets/no_internet.dart';
 import '../controller/account_opening_fatca_screen_controller.dart';
@@ -120,6 +122,11 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                           isRounded: true,
                                           hint: "11111-1111111-1",
                                           textInputType: TextInputType.numberWithOptions(),
+                                          inputFormator: [
+                                            FilteringTextInputFormatter.digitsOnly,
+                                            new LengthLimitingTextInputFormatter(13),
+                                            new NumberFormatter()
+                                          ],
                                           controller: _.cnicController,
                                           hintColor: AppColor.black,
                                           // textInputType: TextInputType.emailAddress,
@@ -415,6 +422,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                     _.taxResCountriesOtherThanPakGroupValue,
                                     value: data.code ?? '0',
                                     onChanged: (val) {
+                                      print("radio code${data.code}");
                                       _.taxResCountriesOtherThanPakGroupValue =
                                           data!.code ?? '0';
                                       _.update();
@@ -575,58 +583,122 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                               border: Border.all(
                                                   width: 1,
                                                   color: AppColor.black)),
-                                          child: _.cityData != null
-                                              ? DropdownButton(
-                                            isExpanded: true,
-                                            underline: Container(
-                                              color:
-                                              AppColor.whiteColor,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(
-                                                10),
-                                            hint: RestInvestTitle(
-                                              text: _.cityValue ==
-                                                  null ||
-                                                  _.cityValue ==
-                                                      ""
-                                                  ? "City"
-                                                  : _.cityValue,
-                                              textColor:
-                                              AppColor.black,
-                                            ),
-                                            icon: const Icon(
-                                                Icons
-                                                    .keyboard_arrow_down,
-                                                color:
-                                                AppColor.blueColor,
-                                                size: 30),
-                                            items: _.cityList
-                                                .map<
-                                                DropdownMenuItem<
-                                                    city_res.Response>>(
-                                                    (city_res.Response?
-                                                value) {
+                                          child: Center(
+                                              child: DropdownButton(
+                                                isExpanded: true,
+                                                underline: Container(
+                                                  color: AppColor.whiteColor,
+                                                ),
+
+                                                borderRadius:
+                                                BorderRadius.circular(6),
+                                                // value: _.dropdownvalue,
+                                                hint: RestInvestTitle(
+                                                  text: _.taxCountryValue ==
+                                                      null ||
+                                                      _.taxCountryValue == ""
+                                                      ? "Country"
+                                                      : _.taxCountryValue,
+                                                  textColor: AppColor.black,
+                                                  fontSize: 12,
+                                                ),
+                                                icon: const Icon(
+                                                    Icons.keyboard_arrow_down,
+                                                    color: AppColor.blueColor,
+                                                    size: 30),
+                                                items: _.isLoading || _.noInternet
+                                                    ? null
+                                                    : _.controller.newDigUserRegDataAfterOTP!
+                                                    .response!.nationalities!
+                                                    .map((Nationalities
+                                                nationality) {
                                                   return DropdownMenuItem<
-                                                      city_res.Response>(
-                                                    value: value,
-                                                    child: Text(
-                                                        value!.cityName!),
-                                                  );
+                                                      Nationalities>(
+                                                      value: nationality,
+                                                      child: Text(nationality!
+                                                          .countryName ??
+                                                          ''));
                                                 }).toList(),
-                                            onChanged:
-                                                (city_res.Response? value) {
-                                              print(value!.cityName);
-                                              _.cityValue =
-                                              value!.cityName!;
-                                              _.cityCode =
-                                              value.cityCode!;
-                                              _.update();
-                                              // _.onCitySectorData(value.cityCode!);
-                                            },
-                                          )
-                                              : const SizedBox(),
+                                                onChanged:
+                                                _.isLoading || _.noInternet
+                                                    ? null
+                                                    : (Nationalities? value) {
+                                                  _.taxCountryValue =
+                                                  value!.countryName!;
+                                                  _.taxCountryCode =
+                                                  value!.countryCode!;
+
+
+                                                  // _.onStateData(_.countryCode);
+                                                  // _.onCityData(_.countryCode);
+                                                  _.update();
+                                                },
+                                              )
+                                          ),
                                         ),
+                                        // Container(
+                                        //   // margin: EdgeInsets.all(10.0),
+                                        //   padding: const EdgeInsets.only(
+                                        //       left: 10.0, right: 5.0),
+                                        //   height: 35,
+                                        //   alignment: Alignment.center,
+                                        //   decoration: BoxDecoration(
+                                        //       color: AppColor.whiteColor,
+                                        //       border: Border.all(
+                                        //           width: 1,
+                                        //           color: AppColor.black)),
+                                        //   child: _.cityData != null
+                                        //       ? DropdownButton(
+                                        //     isExpanded: true,
+                                        //     underline: Container(
+                                        //       color:
+                                        //       AppColor.whiteColor,
+                                        //     ),
+                                        //     borderRadius:
+                                        //     BorderRadius.circular(
+                                        //         10),
+                                        //     hint: RestInvestTitle(
+                                        //       text: _.cityValue ==
+                                        //           null ||
+                                        //           _.cityValue ==
+                                        //               ""
+                                        //           ? "City"
+                                        //           : _.cityValue,
+                                        //       textColor:
+                                        //       AppColor.black,
+                                        //     ),
+                                        //     icon: const Icon(
+                                        //         Icons
+                                        //             .keyboard_arrow_down,
+                                        //         color:
+                                        //         AppColor.blueColor,
+                                        //         size: 30),
+                                        //     items: _.cityList
+                                        //         .map<
+                                        //         DropdownMenuItem<
+                                        //             city_res.Response>>(
+                                        //             (city_res.Response?
+                                        //         value) {
+                                        //           return DropdownMenuItem<
+                                        //               city_res.Response>(
+                                        //             value: value,
+                                        //             child: Text(
+                                        //                 value!.cityName!),
+                                        //           );
+                                        //         }).toList(),
+                                        //     onChanged:
+                                        //         (city_res.Response? value) {
+                                        //       print(value!.cityName);
+                                        //       _.cityValue =
+                                        //       value!.cityName!;
+                                        //       _.cityCode =
+                                        //       value.cityCode!;
+                                        //       _.update();
+                                        //       // _.onCitySectorData(value.cityCode!);
+                                        //     },
+                                        //   )
+                                        //       : const SizedBox(),
+                                        // ),
                                       ],
                                     ),
                                   ),

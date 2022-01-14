@@ -1104,7 +1104,7 @@ class ApiClient {
     Common? common;
     try {
       final response = await http.post(
-        Uri.parse(_epValidateVerificationCodeForDigUser+"4"),
+        Uri.parse(_epPartialSavingForDigUser),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -1118,7 +1118,7 @@ class ApiClient {
           "birthStateCode":"$birthStatecode",
           "crsDisclaimerChecked":disclamierCheck,
           "fatcaDisclaimerChecked":fatcaDisclamierCheck,
-          "otherTaxResCountry":"$otherTaxResCountry",
+          "otherTaxResCountry":"test tax res country",
           "taxIdentificationNumber":null,
           "taxPaidCountry":"$taxPaidCountry",
           "taxResCountryOtherThanPak":"$taxResCountryOtherThanPak",
@@ -1127,7 +1127,7 @@ class ApiClient {
         }
         ),
       );
-      print(response.body.toString());
+      print(jsonDecode(response.body));
       if (response.statusCode == 200) {
         printInfo(info: response.body);
         common = Common.fromJson(jsonDecode(response.body));
