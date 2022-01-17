@@ -244,7 +244,7 @@ class Repository {
   Future<Common> onPartialSavingForDigUser(
       String email,String mobile,String mobileRegWith,String accountTypeOpened,
       String bankAccountNo,String bankBranchAddress,String bankName,bool basicInfoDisclaimerChecked,
-      String birthCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
+      String bankCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
       String customerName,String dateOfBirth,String dividendMandate,String fatherSpouseName,
       String mailingAddress,String mailingCountryCode,String mailingCity,String maritalStatus,
       String mothersMaidenName,String nationalityCode,String pakResident,String religion,String residentialAddress,
@@ -254,7 +254,7 @@ class Repository {
       _apiClient.onPartialSavingForDigUser(email, mobile,
           mobileRegWith, accountTypeOpened, bankAccountNo,
           bankBranchAddress, bankName, basicInfoDisclaimerChecked,
-          birthCityCode, city, cNicExpiryDate, cNicIssueDate, country,
+          bankCityCode, city, cNicExpiryDate, cNicIssueDate, country,
           customerName, dateOfBirth, dividendMandate, fatherSpouseName,
           mailingAddress, mailingCountryCode, mailingCity, maritalStatus,
           mothersMaidenName, nationalityCode, pakResident, religion ,residentialAddress,

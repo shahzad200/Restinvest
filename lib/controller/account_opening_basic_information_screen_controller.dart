@@ -234,7 +234,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
             controller.emailController.text, controller.mobileNumberController.text,
             controller.mobileNumberOwnerCode, controller.groupValue, iBanNumberController.text,
             bankBranchController.text, bankNameCode, isChecked,
-            mailingCityCode, currentCityCode, cNicExpDate, cNicIssueDate, currentCountryCode,
+            bankCityCode, currentCityCode, cNicExpDate, cNicIssueDate, currentCountryCode,
             nameController.text, dObDate, dividendMandateGroupValue, fNameController.text,
             mailingAddressController.text, mailingCountryCode, mailingCityCode, martialCode,
             mNameController.text, nationalityCode,residentStatusCode,religionCode, currentAddressController.text,

@@ -1102,7 +1102,24 @@ class ApiClient {
       String cNic, String sessionID
       ) async {
     Common? common;
+
     try {
+      printInfo(info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo":4,
+        "cnic":cNic,
+        "sessionID":sessionID,
+        "birthCityCode":"$birthCitycode",
+        "birthCountryCode":"$birthCountrycode",
+        "birthStateCode":"$birthStatecode",
+        "crsDisclaimerChecked":disclamierCheck,
+        "fatcaDisclaimerChecked":fatcaDisclamierCheck,
+        "otherTaxResCountry":"test tax res country",
+        "taxIdentificationNumber":null,
+        "taxPaidCountry":"$taxPaidCountry",
+        "taxResCountryOtherThanPak":"$taxResCountryOtherThanPak",
+        "titleOfAccount":"$titleOfAccount",
+        "fatcaInfo":list
+      }.toString()));
       final response = await http.post(
         Uri.parse(_epPartialSavingForDigUser),
         headers: <String, String>{
@@ -1153,7 +1170,7 @@ class ApiClient {
   Future<Common> onPartialSavingForDigUser(
       String email,String mobile,String mobileRegWith,String accountTypeOpened,
       String bankAccountNo,String bankBranchAddress,String bankName,bool basicInfoDisclaimerChecked,
-      String birthCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
+      String bankCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
       String customerName,String dateOfBirth,String dividendMandate,String fatherSpouseName,
       String mailingAddress,String mailingCountryCode,String mailingCity,String maritalStatus,
       String mothersMaidenName,String nationalityCode,String pakResident,String religion,String residentialAddress,
@@ -1174,7 +1191,7 @@ class ApiClient {
         "bankBranchAddress":bankBranchAddress,
         "bankName":bankName,
         "basicInfoDisclaimerChecked":basicInfoDisclaimerChecked,
-        "birthCityCode":birthCityCode,
+        "branchCity":bankCityCode,
         "city":city,
         "cnicExpiryDate":cNicExpiryDate,
         "cnicIssueDate":cNicIssueDate,
@@ -1227,7 +1244,7 @@ class ApiClient {
           "bankBranchAddress":bankBranchAddress,
           "bankName":bankName,
           "basicInfoDisclaimerChecked":basicInfoDisclaimerChecked,
-          "birthCityCode":birthCityCode,
+          "branchCity":bankCityCode,
           "city":city,
           "cnicExpiryDate":cNicExpiryDate,
           "cnicIssueDate":cNicIssueDate,

@@ -196,7 +196,9 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.black)),
+                                      width: 1, color: AppColor.black
+                                  )
+                              ),
                               child:_.cnicFrontUpload && _.cnicFront!=null ? Center(child: Image.file(_.cnicFront!,height: 80,width: 120,)):SizedBox() ,
                             ),
                             const RestInvestTitle(
@@ -217,7 +219,6 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       _.cnicFrontUpload = true;
                                     }
                                     _.update();
-
                                   },
                                   child: const RestInvestTitle(
                                     text: "upload image",
