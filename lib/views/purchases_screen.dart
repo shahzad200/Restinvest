@@ -4,14 +4,13 @@ import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:investintrust/data/models/load_fund_plans.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/utils/constant.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/custome_dialog.dart';
+
+import '../data/models/login_model.dart';
+import '../utils/constant.dart';
+import '../utils/constants.dart';
+import '../widgets/custome_dialog.dart';
 import 'package:path/path.dart' as p;
 import '../utils/lists.dart';
-
 
 import '../widgets/datefield.dart';
 import '../controller/purchases_screen_controller.dart';
@@ -67,7 +66,7 @@ class PurchasesScreen extends StatelessWidget {
                             Container(
                               // margin: EdgeInsets.all(10.0),
                               padding:
-                              const EdgeInsets.only(left: 10.0, right: 5.0),
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
                               height: 35,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
@@ -85,7 +84,7 @@ class PurchasesScreen extends StatelessWidget {
                                   // value: _.dropdownvalue,
                                   hint: RestInvestTitle(
                                     text: _.accountvalue == null ||
-                                        _.accountvalue == ""
+                                            _.accountvalue == ""
                                         ? "Select account"
                                         : _.accountvalue,
                                     fontSize: 12,
@@ -93,28 +92,43 @@ class PurchasesScreen extends StatelessWidget {
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 25),
-                                  items: Constant.loginModel!.response!.accounts!
+                                  items: Constant
+                                      .loginModel!.response!.accounts!
                                       .map((Accounts? fromAccountItems) {
                                     return DropdownMenuItem<Accounts>(
                                         value: fromAccountItems,
-                                        child: Text(fromAccountItems!.folioNumber!));
+                                        child: Text(
+                                            fromAccountItems!.folioNumber!));
                                   }).toList(),
-                                  onChanged: (Accounts? value)async {
+                                  onChanged: (Accounts? value) async {
                                     _.accountvalue = value!.folioNumber!;
                                     _.fundNameListItems = [];
                                     value.userFundBalances!.forEach((element) {
                                       _.fundNameListItems.add(element);
                                     });
-                                    _.fundNamevalue = _.fundNameListItems[0].fundShort!;
-                                    _.fundSale = _.fundNameListItems[0].fundSaleLoad!;
+                                    _.fundNamevalue =
+                                        _.fundNameListItems[0].fundShort!;
+                                    _.fundSale =
+                                        _.fundNameListItems[0].fundSaleLoad!;
                                     CustomDialog(context);
-                                    _.loadFundsPlans =await  _.api.onLoadFundsPlans(Constant.userId, value.userFundBalances![0].fundCode!, value.folioNumber!, "F2F");
-                                    if(_.loadFundsPlans != null){
-                                      _.loadFundsPlans!.response!.toFunds!.forEach((element) {
-                                        if(element!.fundCode == value!.folioNumber!){
-                                          _.selectedFund = element.fundBankAccountDetails![0];
-                                          _.collectionBankAccount = _.selectedFund!.accountNo!;
-                                          _.collectionBankCode = _.selectedFund!.bankCode! ;
+                                    _.loadFundsPlans = await _.api
+                                        .onLoadFundsPlans(
+                                            Constant.userId,
+                                            value
+                                                .userFundBalances![0].fundCode!,
+                                            value.folioNumber!,
+                                            "F2F");
+                                    if (_.loadFundsPlans != null) {
+                                      _.loadFundsPlans!.response!.toFunds!
+                                          .forEach((element) {
+                                        if (element!.fundCode ==
+                                            value!.folioNumber!) {
+                                          _.selectedFund = element
+                                              .fundBankAccountDetails![0];
+                                          _.collectionBankAccount =
+                                              _.selectedFund!.accountNo!;
+                                          _.collectionBankCode =
+                                              _.selectedFund!.bankCode!;
                                         }
                                       });
                                     }
@@ -165,7 +179,7 @@ class PurchasesScreen extends StatelessWidget {
                             Container(
                               // margin: EdgeInsets.all(10.0),
                               padding:
-                              const EdgeInsets.only(left: 10.0, right: 5.0),
+                                  const EdgeInsets.only(left: 10.0, right: 5.0),
                               height: 35,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
@@ -183,7 +197,7 @@ class PurchasesScreen extends StatelessWidget {
                                   // value: _.dropdownvalue,
                                   hint: RestInvestTitle(
                                     text: _.fundNamevalue == null ||
-                                        _.fundNamevalue == ""
+                                            _.fundNamevalue == ""
                                         ? "Fund Name"
                                         : _.fundNamevalue,
                                     fontSize: 12,
@@ -191,24 +205,35 @@ class PurchasesScreen extends StatelessWidget {
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 25),
-                                  items: _.fundNameListItems
-                                      .map((UserFundBalances? fundNameListItems) {
+                                  items: _.fundNameListItems.map(
+                                      (UserFundBalances? fundNameListItems) {
                                     return DropdownMenuItem<UserFundBalances>(
                                         value: fundNameListItems,
-                                        child: Text(fundNameListItems!.fundShort!));
+                                        child: Text(
+                                            fundNameListItems!.fundShort!));
                                   }).toList(),
-                                  onChanged: (UserFundBalances? value) async{
+                                  onChanged: (UserFundBalances? value) async {
                                     _.fundNamevalue = value!.fundShort!;
                                     _.fundSale = value!.fundSaleLoad!;
 
                                     CustomDialog(context);
-                                    _.loadFundsPlans =await  _.api.onLoadFundsPlans(Constant.userId, value.fundCode!, _.accountvalue, "F2F");
-                                    if(_.loadFundsPlans != null){
-                                      _.loadFundsPlans!.response!.toFunds!.forEach((element) {
-                                        if(element!.fundCode == value!.fundCode!){
-                                          _.selectedFund = element.fundBankAccountDetails![0];
-                                          _.collectionBankAccount = _.selectedFund!.accountNo!;
-                                          _.collectionBankCode = _.selectedFund!.bankCode! ;
+                                    _.loadFundsPlans = await _.api
+                                        .onLoadFundsPlans(
+                                            Constant.userId,
+                                            value.fundCode!,
+                                            _.accountvalue,
+                                            "F2F");
+                                    if (_.loadFundsPlans != null) {
+                                      _.loadFundsPlans!.response!.toFunds!
+                                          .forEach((element) {
+                                        if (element!.fundCode ==
+                                            value!.fundCode!) {
+                                          _.selectedFund = element
+                                              .fundBankAccountDetails![0];
+                                          _.collectionBankAccount =
+                                              _.selectedFund!.accountNo!;
+                                          _.collectionBankCode =
+                                              _.selectedFund!.bankCode!;
                                         }
                                       });
                                     }
@@ -258,17 +283,19 @@ class PurchasesScreen extends StatelessWidget {
                   ),
                   space,
                   Row(
-                    children:  [
+                    children: [
                       Expanded(
                           child: EmptyRowContainer(
                         fontWeight: FontWeight.w800,
                         fontsize: 14,
                         hintColor: AppColor.black,
-                        hint: _.selectedFund == null?"":"${_.selectedFund!.bankName}",
+                        hint: _.selectedFund == null
+                            ? ""
+                            : "${_.selectedFund!.bankName}",
                         text: "Fund Bank Deposit",
                         textColor: AppColor.blueColor,
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
                       Expanded(
@@ -276,7 +303,9 @@ class PurchasesScreen extends StatelessWidget {
                         fontWeight: FontWeight.w800,
                         fontsize: 14,
                         hintColor: AppColor.black,
-                        hint: _.selectedFund == null?"":"${_.selectedFund!.accountNo}",
+                        hint: _.selectedFund == null
+                            ? ""
+                            : "${_.selectedFund!.accountNo}",
                         text: "Fund Account Deposit",
                         textColor: AppColor.blueColor,
                       ))
@@ -329,11 +358,11 @@ class PurchasesScreen extends StatelessWidget {
                                   }).toList(),
                                   onChanged: (String? value) {
                                     _.paymentvalue = value!;
-                                    if(value == "Cheque"){
+                                    if (value == "Cheque") {
                                       _.paymentvalueCode = "CH";
-                                    }else if(value == "IBFT"){
+                                    } else if (value == "IBFT") {
                                       _.paymentvalueCode = "IB";
-                                    }else if(value == "Online"){
+                                    } else if (value == "Online") {
                                       _.paymentvalueCode = "ON";
                                     }
                                     _.update();
@@ -356,7 +385,7 @@ class PurchasesScreen extends StatelessWidget {
                             CustomTextFormField(
                               controller: _.amountController,
                               isRounded: true,
-                              textInputType: TextInputType.numberWithOptions(),
+                              textInputType: const TextInputType.numberWithOptions(),
                               hint: "",
                               //  textInputType: TextInputType.emailAddress,
                             ),
@@ -374,7 +403,6 @@ class PurchasesScreen extends StatelessWidget {
                           children: [
                             const RestInvestTitle(
                                 text: 'Bank Name',
-
                                 textColor: AppColor.blueColor),
                             CustomTextFormField(
                               controller: _.bankNameController,
@@ -398,7 +426,7 @@ class PurchasesScreen extends StatelessWidget {
                                 textColor: AppColor.blueColor),
                             CustomTextFormField(
                               isRounded: true,
-                              textInputType: TextInputType.numberWithOptions(),
+                              textInputType: const TextInputType.numberWithOptions(),
                               controller: _.bankAccountController,
                               hint: "",
                               // textInputType: TextInputType.emailAddress,
@@ -421,7 +449,7 @@ class PurchasesScreen extends StatelessWidget {
                             CustomTextFormField(
                               color: AppColor.dimblack,
                               isRounded: true,
-                              textInputType: TextInputType.numberWithOptions(),
+                              textInputType: const TextInputType.numberWithOptions(),
                               controller: _.installmentController,
                               hint: "",
                               // textInputType: TextInputType.emailAddress,
@@ -441,14 +469,16 @@ class PurchasesScreen extends StatelessWidget {
                                 textColor: AppColor.blueColor),
                             SizedBox(
                               height: 35,
-                              child: DateFormFieldContainer(isRounded:false,isTrue:true,
+                              child: DateFormFieldContainer(
+                                isRounded: false,
+                                isTrue: true,
                                 text: '',
                                 mode: DateTimeFieldPickerMode.date,
                                 dateFormatTrue: true,
                                 initialValue: DateTime.now(),
-                                onDateSelected: (value){
-_.date = value;
-_.update();
+                                onDateSelected: (value) {
+                                  _.date = value;
+                                  _.update();
                                 },
                               ),
                             ),
@@ -467,6 +497,7 @@ _.update();
                             isRounded: true,
                             controller: _.picCodeController,
                             hint: "Pin Code",
+                            hintColor: AppColor.black,
                             textInputType: TextInputType.text,
                           ),
                         ),
@@ -476,146 +507,232 @@ _.update();
                       ),
                       Expanded(
                           child: SizedBox(
-                            height: 35,
-                            child: RestInvestButton(
-                              isSquare: true,
-
-                              onPress: () {
-                                _.onGeneratePinCode(context);
-                              },
-                              text: "Generate Financial",
-
-                              buttonColor: AppColor.blueColor,
-                              textColor: AppColor.whiteColor,
-                              textSize: 16,
-                            ),
-                          ))
+                        height: 35,
+                        child: RestInvestButton(
+                          isSquare: true,
+                          onPress: () {
+                            _.onGeneratePinCode(context);
+                          },
+                          text: "Generate Financial",
+                          buttonColor: AppColor.blueColor,
+                          textColor: AppColor.whiteColor,
+                          textSize: 16,
+                        ),
+                      ))
                     ],
                   ),
-                  SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: _.paymentProof == null ? 20.0 : 0.0),
+                        child: Column(
+                          children: [
+                            const RestInvestTitle(
+                              text: "Payment Proof",
+                              textColor: AppColor.blueColor,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                      context: context,
+                                      backgroundColor: Colors.transparent,
+                                      elevation: 0,
+                                      builder: (BuildContext bc) {
+                                        return SafeArea(
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(20),
+                                                    topLeft:
+                                                        Radius.circular(20)),
+                                                color: Colors.white),
+                                            child: Wrap(
+                                              children: <Widget>[
+                                                ListTile(
+                                                    leading: const Icon(
+                                                        Icons.photo_library),
+                                                    title: const Text(
+                                                        'Photo Library'),
+                                                    onTap: () async {
+                                                      _.paymentProof = await _
+                                                          .getImageFromGallery();
+                                                      _.paymentProofExt =
+                                                          p.extension(_
+                                                              .paymentProof!
+                                                              .path);
 
-                    Padding(
-                      padding:  EdgeInsets.only(left:_.paymentProof == null? 20.0:0.0),
-                      child: Column(children: [
+                                                      _.paymentProofBytes = _
+                                                          .paymentProof!
+                                                          .readAsBytesSync();
 
-                        RestInvestTitle(text: "Payment Proof",textColor: AppColor.blueColor,),
-                        SizedBox(height: 5,),
-                        GestureDetector(onTap: (){
-                          showModalBottomSheet(
-                              context: context,
-                              backgroundColor: Colors.transparent,
-                              elevation: 0,
-                              builder: (BuildContext bc) {
-                                return SafeArea(
-                                  child: Container(
-                                    decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),color: Colors.white),
-                                    child: new Wrap(
-                                      children: <Widget>[
-                                        new ListTile(
-                                            leading: new Icon(Icons.photo_library),
-                                            title: new Text('Photo Library'),
-                                            onTap: ()async {
-                                              _.paymentProof =await _.getImageFromGallery();
-                                              _.paymentProofExt = p.extension(_.paymentProof!.path);
+                                                      // then((value) {
 
-                                              _.paymentProofBytes = _.paymentProof!.readAsBytesSync();
-
-                                              // then((value) {
-
-                                            // });
-                                              print("Extention${_.paymentProofExt}");
-                                              _.update();
-                                              Navigator.of(context).pop();
-                                            }),
-                                        new ListTile(
-                                          leading: new Icon(Icons.photo_camera),
-                                          title: new Text('Camera'),
-                                          onTap: ()async {
-                                            _.paymentProof = await _.getImageFromCamera();
-                                            _.paymentProofExt = p.extension(_.paymentProof!.path);
-                                            _.paymentProofBytes = _.paymentProof!.readAsBytesSync();
-                                            print("Extention${_.paymentProofExt}");
-                                            _.update();
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }
-                          );
-                        }, child:_.paymentProof == null ? Image.asset(Constants.paymentSlip,height: 100,width: 50,fit: BoxFit.contain,):Image.file(_.paymentProof!,width: Get.width/2.6,height: Get.width/3,fit: BoxFit.fill))
-                      ],),
-                    ),
-                    Padding(
-                      padding:  EdgeInsets.only(right:_.paymentSlip == null? 20.0:0.0),
-                      child: Column(children: [
-
-                        RestInvestTitle(text: "Payment Slip",textColor: AppColor.blueColor,),
-                        SizedBox(height: 5,),
-                        GestureDetector( onTap: (){
-                          showModalBottomSheet(
-                              backgroundColor: Colors.transparent,
-                              elevation: 0,
-                              context: context,
-                              builder: (BuildContext bc) {
-                                return SafeArea(
-                                  child: Container(
-                                    decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),color: Colors.white),
-
-                                    child: new Wrap(
-                                      children: <Widget>[
-                                        new ListTile(
-                                            leading: new Icon(Icons.photo_library),
-                                            title: new Text('Photo Library'),
-                                            onTap: ()async {
-                                              _.paymentSlip =await _.getImageFromGallery();
-                                              _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                              _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
-                                              // _.paymentSlip!.readAsBytes().then((value) {
-                                              //   _.paymentSlipBytes = Uint8List.fromList(value);});
-                                              print("Extention${_.paymentSlipExt}");
-                                              _.update();
-                                              Navigator.of(context).pop();
-                                            }),
-                                        new ListTile(
-                                          leading: new Icon(Icons.photo_camera),
-                                          title: new Text('Camera'),
-                                          onTap: ()async {
-                                            _.paymentSlip = await _.getImageFromCamera();
-                                            _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                            _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
-                                            // _.paymentSlip!.readAsBytes().then((value) {
-                                            //   _.paymentSlipBytes = Uint8List.fromList(value);});
-                                            print("Extention${_.paymentSlipExt}");
-                                            _.update();
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }
-                          );
-                        },child:_.paymentSlip == null ? Image.asset(Constants.paymentSlip,height: 100,width: 50,fit: BoxFit.contain,):Image.file(_.paymentSlip!,width: Get.width/2.6,height: Get.width/3,fit: BoxFit.fill,))
-                      ],),
-                    )
-                  ],),
+                                                      // });
+                                                      print(
+                                                          "Extention${_.paymentProofExt}");
+                                                      _.update();
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    }),
+                                                ListTile(
+                                                  leading: const Icon(
+                                                      Icons.photo_camera),
+                                                  title: const Text('Camera'),
+                                                  onTap: () async {
+                                                    _.paymentProof = await _
+                                                        .getImageFromCamera();
+                                                    _.paymentProofExt =
+                                                        p.extension(_
+                                                            .paymentProof!
+                                                            .path);
+                                                    _.paymentProofBytes = _
+                                                        .paymentProof!
+                                                        .readAsBytesSync();
+                                                    print(
+                                                        "Extention${_.paymentProofExt}");
+                                                    _.update();
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                },
+                                child: _.paymentProof == null
+                                    ? Image.asset(
+                                        Constants.paymentSlip,
+                                        height: 100,
+                                        width: 50,
+                                        fit: BoxFit.contain,
+                                      )
+                                    : Image.file(_.paymentProof!,
+                                        width: Get.width / 2.6,
+                                        height: Get.width / 3,
+                                        fit: BoxFit.fill))
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: _.paymentSlip == null ? 20.0 : 0.0),
+                        child: Column(
+                          children: [
+                            const RestInvestTitle(
+                              text: "Payment Slip",
+                              textColor: AppColor.blueColor,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      elevation: 0,
+                                      context: context,
+                                      builder: (BuildContext bc) {
+                                        return SafeArea(
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(20),
+                                                    topLeft:
+                                                        Radius.circular(20)),
+                                                color: Colors.white),
+                                            child: Wrap(
+                                              children: <Widget>[
+                                                ListTile(
+                                                    leading: const Icon(
+                                                        Icons.photo_library),
+                                                    title: const Text(
+                                                        'Photo Library'),
+                                                    onTap: () async {
+                                                      _.paymentSlip = await _
+                                                          .getImageFromGallery();
+                                                      _.paymentSlipExt =
+                                                          p.extension(_
+                                                              .paymentSlip!
+                                                              .path);
+                                                      _.paymentSlipBytes = _
+                                                          .paymentSlip!
+                                                          .readAsBytesSync();
+                                                      // _.paymentSlip!.readAsBytes().then((value) {
+                                                      //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                      print(
+                                                          "Extention${_.paymentSlipExt}");
+                                                      _.update();
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    }),
+                                                ListTile(
+                                                  leading: const Icon(
+                                                      Icons.photo_camera),
+                                                  title: const Text('Camera'),
+                                                  onTap: () async {
+                                                    _.paymentSlip = await _
+                                                        .getImageFromCamera();
+                                                    _.paymentSlipExt =
+                                                        p.extension(_
+                                                            .paymentSlip!.path);
+                                                    _.paymentSlipBytes = _
+                                                        .paymentSlip!
+                                                        .readAsBytesSync();
+                                                    // _.paymentSlip!.readAsBytes().then((value) {
+                                                    //   _.paymentSlipBytes = Uint8List.fromList(value);});
+                                                    print(
+                                                        "Extention${_.paymentSlipExt}");
+                                                    _.update();
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                },
+                                child: _.paymentSlip == null
+                                    ? Image.asset(
+                                        Constants.paymentSlip,
+                                        height: 100,
+                                        width: 50,
+                                        fit: BoxFit.contain,
+                                      )
+                                    : Image.file(
+                                        _.paymentSlip!,
+                                        width: Get.width / 2.6,
+                                        height: Get.width / 3,
+                                        fit: BoxFit.fill,
+                                      ))
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                   const SizedBox(height: 10),
-                  CheckBoxContainer(onTap: (bool? value) {
-                    if(_.isCheckPrivacy){
-                      _.isCheckPrivacy = false;
-                    }else{
-                      _.isCheckPrivacy = true;
-                    }
-                    // _.isCheckPrivacy = value!;
-                    _.update();
-                  },isChecked: _.isCheckPrivacy,
+                  CheckBoxContainer(
+                    onTap: (bool? value) {
+                      if (_.isCheckPrivacy) {
+                        _.isCheckPrivacy = false;
+                      } else {
+                        _.isCheckPrivacy = true;
+                      }
+                      // _.isCheckPrivacy = value!;
+                      _.update();
+                    },
+                    isChecked: _.isCheckPrivacy,
                   ),
                   space,
                   SizedBox(

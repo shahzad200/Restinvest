@@ -2,9 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/utils/colors.dart';
-import 'package:investintrust/utils/constant.dart';
-import 'package:investintrust/widgets/web_view.dart';
+import '../utils/colors.dart';
+import '../utils/constant.dart';
+import '../widgets/web_view.dart';
 
 import 'custom_divider.dart';
 
@@ -784,53 +784,53 @@ class DailyNav extends StatelessWidget {
   }
 }
 
-class DropDownContainerIcon extends StatelessWidget {
-  const DropDownContainerIcon({
-    required this.text1,
-    required this.text,
-    required this.textColor,
-    required this.voidcallback,
-    this.color = AppColor.dimblack,
-    required this.fontsize,
-    required this.fontWeight,
-    Key? key,
-  }) : super(key: key);
-  final String text1;
-  final Color textColor;
-  final fontWeight;
-  final Color color;
-  final String text;
-  final voidcallback;
-  final double fontsize;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          text,
-          style: TextStyle(color: AppColor.black, fontWeight: fontWeight),
-        ),
-        SizedBox(
-          height: 35,
-          child: DropDownContainer(
-            text: text1,
-            color: color,
-            icon: const Icon(
-              Icons.keyboard_arrow_down,
-              size: 35,
-              color: AppColor.blueColor,
-            ),
-            voidcallback: voidcallback,
-            isSquare: true,
-            height: 35,
-          ),
-        ),
-      ],
-    );
-  }
-}
+// class DropDownContainerIcon extends StatelessWidget {
+//   const DropDownContainerIcon({
+//     required this.text1,
+//     required this.text,
+//     required this.textColor,
+//     required this.voidcallback,
+//     this.color = AppColor.dimblack,
+//     required this.fontsize,
+//     required this.fontWeight,
+//     Key? key,
+//   }) : super(key: key);
+//   final String text1;
+//   final Color textColor;
+//   final fontWeight;
+//   final Color color;
+//   final String text;
+//   final voidcallback;
+//   final double fontsize;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text(
+//           text,
+//           style: TextStyle(color: AppColor.black, fontWeight: fontWeight),
+//         ),
+//         SizedBox(
+//           height: 35,
+//           child: DropDownContainer(
+//             text: text1,
+//             color: color,
+//             icon: const Icon(
+//               Icons.keyboard_arrow_down,
+//               size: 35,
+//               color: AppColor.blueColor,
+//             ),
+//             voidcallback: voidcallback,
+//             isSquare: true,
+//             height: 35,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 class CustomCreditContainer extends StatelessWidget {
   const CustomCreditContainer({
@@ -1057,113 +1057,113 @@ class RoundContainer extends StatelessWidget {
   }
 }
 
-class FromFundDropDownContainer extends StatefulWidget {
-  const FromFundDropDownContainer({
-    required this.nitText,
-    required this.fundText,
-    Key? key,
-  }) : super(key: key);
-  final String? nitText;
-  final String? fundText;
+// class FromFundDropDownContainer extends StatefulWidget {
+//   const FromFundDropDownContainer({
+//     required this.nitText,
+//     required this.fundText,
+//     Key? key,
+//   }) : super(key: key);
+//   final String? nitText;
+//   final String? fundText;
+//
+//   @override
+//   State<FromFundDropDownContainer> createState() =>
+//       _FromFundDropDownContainerState();
+// }
+//
+// class _FromFundDropDownContainerState extends State<FromFundDropDownContainer> {
+//   String fundTitle = "";
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+//       RestInvestTitle(
+//         text: widget.fundText!,
+//         fontWeight: FontWeight.bold,
+//         fontSize: 20,
+//       ),
+//       const SizedBox(
+//         height: 30,
+//       ),
+//       InkWell(
+//         onTap: () {
+//           setState(() {
+//             fundTitle = widget.nitText!;
+//             Navigator.pop(context);
+//           });
+//         },
+//         child: RestInvestTitle(
+//           text: widget.nitText!,
+//           fontSize: 18,
+//         ),
+//       ),
+//     ]);
+//   }
+// }
 
-  @override
-  State<FromFundDropDownContainer> createState() =>
-      _FromFundDropDownContainerState();
-}
-
-class _FromFundDropDownContainerState extends State<FromFundDropDownContainer> {
-  String fundTitle = "";
-  @override
-  Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      RestInvestTitle(
-        text: widget.fundText!,
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-      ),
-      const SizedBox(
-        height: 30,
-      ),
-      InkWell(
-        onTap: () {
-          setState(() {
-            fundTitle = widget.nitText!;
-            Navigator.pop(context);
-          });
-        },
-        child: RestInvestTitle(
-          text: widget.nitText!,
-          fontSize: 18,
-        ),
-      ),
-    ]);
-  }
-}
-
-class DropDownContainer extends StatelessWidget {
-  const DropDownContainer({
-    Key? key,
-    this.height = 70,
-    this.text,
-    required this.voidcallback,
-    required this.isSquare,
-    this.color = AppColor.dimblack,
-    this.fontSize,
-    required this.icon,
-  }) : super(key: key);
-
-  final double height;
-  final Color color;
-  final text;
-  final isSquare;
-  final voidcallback;
-  final fontSize;
-  final Icon icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Expanded(
-        child: Material(
-          child: InkWell(
-            onTap: voidcallback,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColor.whiteColor,
-                border: Border.all(
-                  width: 1,
-                  color: color,
-                ),
-                borderRadius: isSquare
-                    ? BorderRadius.vertical(
-                        top: Radius.circular(0),
-                        bottom: Radius.circular(0),
-                      )
-                    : BorderRadius.circular(8),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Text(text,),
-                  ),
-                  Center(
-                    child: icon,
-                  ),
-                  fontSize,
-                ],
-              ),
-              height: 45,
-            ),
-          ),
-          color: Colors.transparent,
-        ),
-      ),
-    ]);
-  }
-}
+// class DropDownContainer extends StatelessWidget {
+//   const DropDownContainer({
+//     Key? key,
+//     this.height = 70,
+//     this.text,
+//     required this.voidcallback,
+//     required this.isSquare,
+//     this.color = AppColor.dimblack,
+//     this.fontSize,
+//     required this.icon,
+//   }) : super(key: key);
+//
+//   final double height;
+//   final Color color;
+//   final text;
+//   final isSquare;
+//   final voidcallback;
+//   final fontSize;
+//   final Icon icon;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+//       Expanded(
+//         child: Material(
+//           child: InkWell(
+//             onTap: voidcallback,
+//             child: Container(
+//               decoration: BoxDecoration(
+//                 color: AppColor.whiteColor,
+//                 border: Border.all(
+//                   width: 1,
+//                   color: color,
+//                 ),
+//                 borderRadius: isSquare
+//                     ? BorderRadius.vertical(
+//                         top: Radius.circular(0),
+//                         bottom: Radius.circular(0),
+//                       )
+//                     : BorderRadius.circular(8),
+//               ),
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 // ignore: prefer_const_literals_to_create_immutables
+//                 children: [
+//                   Padding(
+//                     padding: const EdgeInsets.only(left: 8),
+//                     child: Text(text,),
+//                   ),
+//                   Center(
+//                     child: icon,
+//                   ),
+//                   fontSize,
+//                 ],
+//               ),
+//               height: 45,
+//             ),
+//           ),
+//           color: Colors.transparent,
+//         ),
+//       ),
+//     ]);
+//   }
+// }
 
 class ContainerCheckBoxText extends StatefulWidget {
   ContainerCheckBoxText({
@@ -1309,69 +1309,69 @@ class EmptyContainer extends StatelessWidget {
   }
 }
 
-class DropDownAccountValueButton extends StatefulWidget {
-  const DropDownAccountValueButton({
-    required this.accountText,
-    required this.hintText,
-    required this.titleText,
-    Key? key,
-  }) : super(key: key);
-  final String? accountText;
-  final String? hintText;
-  final String? titleText;
-
-  @override
-  State<DropDownAccountValueButton> createState() =>
-      _DropDownAccountValueButtonState();
-}
-
-class _DropDownAccountValueButtonState
-    extends State<DropDownAccountValueButton> {
-  String account = "";
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RestInvestTitle(
-          text: widget.accountText!,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              account = widget.hintText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.hintText!,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              account = widget.titleText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.titleText!,
-            fontSize: 16,
-          ),
-        )
-      ],
-    );
-  }
-}
+// class DropDownAccountValueButton extends StatefulWidget {
+//   const DropDownAccountValueButton({
+//     required this.accountText,
+//     required this.hintText,
+//     required this.titleText,
+//     Key? key,
+//   }) : super(key: key);
+//   final String? accountText;
+//   final String? hintText;
+//   final String? titleText;
+//
+//   @override
+//   State<DropDownAccountValueButton> createState() =>
+//       _DropDownAccountValueButtonState();
+// }
+//
+// class _DropDownAccountValueButtonState
+//     extends State<DropDownAccountValueButton> {
+//   String account = "";
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         RestInvestTitle(
+//           text: widget.accountText!,
+//           fontSize: 20,
+//           fontWeight: FontWeight.bold,
+//         ),
+//         const SizedBox(
+//           height: 30,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               account = widget.hintText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.hintText!,
+//             fontSize: 16,
+//           ),
+//         ),
+//         const SizedBox(
+//           height: 20,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               account = widget.titleText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.titleText!,
+//             fontSize: 16,
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }
 
 class AccountDropDownContainer extends StatefulWidget {
   const AccountDropDownContainer({
@@ -1428,1038 +1428,1038 @@ class _AccountDropDownContainerState extends State<AccountDropDownContainer> {
   }
 }
 
-class NavDropDownContainer extends StatefulWidget {
-  const NavDropDownContainer({
-    required this.selectText,
-    required this.nitText,
-    required this.nitiifText,
-    required this.niutText,
-    required this.nitgbfText,
-    required this.nitifText,
-    required this.nitmmfText,
-    required this.nitsefText,
-    required this.nitemofText,
-    required this.nitpfText,
-    required this.nitipfText,
-    required this.nitpfsefText,
-    required this.nitpfmsfText,
-    required this.nitpfdsText,
-    required this.nitpfcsText,
-    required this.nitipfesText,
-    required this.nitipfmsfText,
-    required this.nitipfdsfText,
-    required this.nitaaafText,
-    required this.nitpgtText,
-    required this.nitimmfText,
-    Key? key,
-  }) : super(key: key);
-  final String? selectText;
-  final String? nitText;
-  final String? nitiifText;
-  final String? niutText;
-  final String? nitgbfText;
-  final String? nitifText;
-  final String? nitmmfText;
-  final String? nitsefText;
-  final String? nitemofText;
-  final String? nitpfText;
-  final String? nitipfText;
-  final String? nitpfsefText;
-  final String? nitpfmsfText;
-  final String? nitpfdsText;
-  final String? nitpfcsText;
-  final String? nitipfesText;
-  final String? nitipfmsfText;
-  final String? nitipfdsfText;
-  final String? nitaaafText;
-  final String? nitpgtText;
-  final String? nitimmfText;
+// class NavDropDownContainer extends StatefulWidget {
+//   const NavDropDownContainer({
+//     required this.selectText,
+//     required this.nitText,
+//     required this.nitiifText,
+//     required this.niutText,
+//     required this.nitgbfText,
+//     required this.nitifText,
+//     required this.nitmmfText,
+//     required this.nitsefText,
+//     required this.nitemofText,
+//     required this.nitpfText,
+//     required this.nitipfText,
+//     required this.nitpfsefText,
+//     required this.nitpfmsfText,
+//     required this.nitpfdsText,
+//     required this.nitpfcsText,
+//     required this.nitipfesText,
+//     required this.nitipfmsfText,
+//     required this.nitipfdsfText,
+//     required this.nitaaafText,
+//     required this.nitpgtText,
+//     required this.nitimmfText,
+//     Key? key,
+//   }) : super(key: key);
+//   final String? selectText;
+//   final String? nitText;
+//   final String? nitiifText;
+//   final String? niutText;
+//   final String? nitgbfText;
+//   final String? nitifText;
+//   final String? nitmmfText;
+//   final String? nitsefText;
+//   final String? nitemofText;
+//   final String? nitpfText;
+//   final String? nitipfText;
+//   final String? nitpfsefText;
+//   final String? nitpfmsfText;
+//   final String? nitpfdsText;
+//   final String? nitpfcsText;
+//   final String? nitipfesText;
+//   final String? nitipfmsfText;
+//   final String? nitipfdsfText;
+//   final String? nitaaafText;
+//   final String? nitpgtText;
+//   final String? nitimmfText;
+//
+//   @override
+//   State<NavDropDownContainer> createState() => _NavDropDownContainerState();
+// }
+//
+// class _NavDropDownContainerState extends State<NavDropDownContainer> {
+//   String select = "";
+//   int _value = 0;
+//   @override
+//   Widget build(BuildContext context) {
+//     return SingleChildScrollView(
+//       scrollDirection: Axis.vertical,
+//       child: Column(
+//         children: <Widget>[
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.selectText!;
+//
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.selectText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 1,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 2,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitiifText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitiifText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 3,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.niutText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.niutText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 4,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitgbfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitgbfText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 5,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitifText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitifText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 6,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitmmfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitmmfText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 7,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitsefText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitsefText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 8,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitemofText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitemofText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 9,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitpfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitpfText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 10,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitipfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitipfText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 11,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitpfsefText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitpfsefText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 12,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitpfmsfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitpfmsfText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 13,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitpfdsText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitpfdsText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 14,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitpfcsText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitpfcsText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 15,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitipfmsfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitipfmsfText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 16,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitipfdsfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitipfdsfText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 17,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitaaafText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitaaafText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 18,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitpgtText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitpgtText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 19,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//           const CustomDivider(),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 select = widget.nitimmfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     widget.nitimmfText!,
+//                     style: const TextStyle(fontSize: 18),
+//                   ),
+//                   Radio(
+//                     value: 20,
+//                     groupValue: _value,
+//                     onChanged: (int? value) {
+//                       setState(() {
+//                         _value = value!;
+//                       });
+//                     },
+//                   ),
+//                 ]),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-  @override
-  State<NavDropDownContainer> createState() => _NavDropDownContainerState();
-}
+// class FundTransferDroDownContainer extends StatefulWidget {
+//   const FundTransferDroDownContainer({
+//     required this.niutText,
+//     required this.nitgbText,
+//     required this.nitifText,
+//     required this.nitmmfText,
+//     required this.nitiifText,
+//     required this.nitaafText,
+//     required this.nitimmffText,
+//     Key? key,
+//   }) : super(key: key);
+//
+//   final String? niutText;
+//   final String? nitgbText;
+//   final String? nitifText;
+//   final String? nitmmfText;
+//   final String? nitiifText;
+//   final String? nitaafText;
+//   final String? nitimmffText;
+//
+//   @override
+//   State<FundTransferDroDownContainer> createState() =>
+//       _FundTransferDroDownContainerState();
+// }
+//
+// class _FundTransferDroDownContainerState
+//     extends State<FundTransferDroDownContainer> {
+//   String fundTransfer = "";
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               fundTransfer = widget.niutText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.niutText!,
+//           ),
+//         ),
+//         const SizedBox(height: 15),
+//         const CustomDivider(),
+//         const SizedBox(
+//           height: 15,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               fundTransfer = widget.nitgbText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.nitgbText!,
+//           ),
+//         ),
+//         const SizedBox(height: 15),
+//         const CustomDivider(),
+//         const SizedBox(
+//           height: 15,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               fundTransfer = widget.nitifText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.nitifText!,
+//           ),
+//         ),
+//         const SizedBox(height: 15),
+//         const CustomDivider(),
+//         const SizedBox(
+//           height: 15,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               fundTransfer = widget.nitmmfText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.nitmmfText!,
+//           ),
+//         ),
+//         const SizedBox(height: 15),
+//         const CustomDivider(),
+//         const SizedBox(
+//           height: 15,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               fundTransfer = widget.nitiifText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.nitiifText!,
+//           ),
+//         ),
+//         const SizedBox(height: 15),
+//         const CustomDivider(),
+//         const SizedBox(
+//           height: 15,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               fundTransfer = widget.nitaafText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.nitaafText!,
+//           ),
+//         ),
+//         const SizedBox(height: 15),
+//         const CustomDivider(),
+//         const SizedBox(
+//           height: 15,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               fundTransfer = widget.nitimmffText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.nitimmffText!,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
-class _NavDropDownContainerState extends State<NavDropDownContainer> {
-  String select = "";
-  int _value = 0;
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: <Widget>[
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.selectText!;
+// class DropDownSelectValueContainer extends StatefulWidget {
+//   DropDownSelectValueContainer({
+//     required this.fundText,
+//     required this.niText,
+//     required this.nitText,
+//     required this.nitfText,
+//     required this.niefText,
+//     required this.nimmText,
+//     required this.nifiText,
+//     required this.niaaText,
+//     required this.nitmfText,
+//     this.onTap,
+//     this.fontSize,
+//     Key? key,
+//     required this.space,
+//   }) : super(key: key);
+//   final String? fundText;
+//   final String? nitText;
+//   final String? nitfText;
+//   final String? niefText;
+//   final String? nimmText;
+//   final String? nifiText;
+//   final String? niaaText;
+//   final String? nitmfText;
+//
+//   final String? niText;
+//   final onTap;
+//   final fontSize;
+//
+//   final SizedBox space;
+//
+//   @override
+//   State<DropDownSelectValueContainer> createState() =>
+//       _DropDownSelectValueContainerState();
+// }
 
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.selectText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 1,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 2,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitiifText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitiifText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 3,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.niutText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.niutText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 4,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitgbfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitgbfText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 5,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitifText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitifText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 6,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitmmfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitmmfText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 7,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitsefText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitsefText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 8,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitemofText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitemofText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 9,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitpfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitpfText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 10,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitipfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitipfText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 11,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitpfsefText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitpfsefText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 12,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitpfmsfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitpfmsfText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 13,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitpfdsText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitpfdsText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 14,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitpfcsText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitpfcsText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 15,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitipfmsfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitipfmsfText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 16,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitipfdsfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitipfdsfText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 17,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitaaafText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitaaafText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 18,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitpgtText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitpgtText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 19,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-          const CustomDivider(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                select = widget.nitimmfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.nitimmfText!,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Radio(
-                    value: 20,
-                    groupValue: _value,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ]),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// class _DropDownSelectValueContainerState
+//     extends State<DropDownSelectValueContainer> {
+//   String fundName = "";
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SingleChildScrollView(
+//       scrollDirection: Axis.vertical,
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           InkWell(
+//             onTap: () {},
+//             child: RestInvestTitle(
+//               text: widget.fundText!,
+//               fontSize: 20,
+//               fontWeight: FontWeight.w900,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 30,
+//           ),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 fundName = widget.niText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: RestInvestTitle(
+//               text: widget.niText!,
+//               fontSize: 16,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 30,
+//           ),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 fundName = widget.nitText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: RestInvestTitle(
+//               text: widget.nitText!,
+//               fontSize: 16,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 30,
+//           ),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 fundName = widget.nitfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: RestInvestTitle(
+//               text: widget.nitfText!,
+//               fontSize: 16,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 30,
+//           ),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 fundName = widget.niefText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: RestInvestTitle(
+//               text: widget.niefText!,
+//               fontSize: 16,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 30,
+//           ),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 fundName = widget.nimmText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: RestInvestTitle(
+//               text: widget.nimmText!,
+//               fontSize: 16,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 30,
+//           ),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 fundName = widget.nifiText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: RestInvestTitle(
+//               text: widget.nifiText!,
+//               fontSize: 16,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 30,
+//           ),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 fundName = widget.niaaText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: RestInvestTitle(
+//               text: widget.niaaText!,
+//               fontSize: 16,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 30,
+//           ),
+//           InkWell(
+//             onTap: () {
+//               setState(() {
+//                 fundName = widget.nitmfText!;
+//                 Navigator.pop(context);
+//               });
+//             },
+//             child: RestInvestTitle(
+//               text: widget.nitmfText!,
+//               fontSize: 16,
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-class FundTransferDroDownContainer extends StatefulWidget {
-  const FundTransferDroDownContainer({
-    required this.niutText,
-    required this.nitgbText,
-    required this.nitifText,
-    required this.nitmmfText,
-    required this.nitiifText,
-    required this.nitaafText,
-    required this.nitimmffText,
-    Key? key,
-  }) : super(key: key);
+// class PaymentDropDownContainer extends StatefulWidget {
+//   PaymentDropDownContainer({
+//     required this.payText,
+//     required this.chequeText,
+//     required this.ibfText,
+//     required this.onlineText,
+//     Key? key,
+//   }) : super(key: key);
+//   final String? payText;
+//   final String? chequeText;
+//   final String? ibfText;
+//   final String? onlineText;
+//
+//   @override
+//   State<PaymentDropDownContainer> createState() =>
+//       _PaymentDropDownContainerState();
+// }
+//
+// class _PaymentDropDownContainerState extends State<PaymentDropDownContainer> {
+//   String payment = "";
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         RestInvestTitle(
+//           text: widget.payText!,
+//           fontWeight: FontWeight.bold,
+//           fontSize: 20,
+//         ),
+//         const SizedBox(
+//           height: 30,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               payment = widget.chequeText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.chequeText!,
+//             fontSize: 18,
+//           ),
+//         ),
+//         const SizedBox(
+//           height: 30,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               payment = widget.ibfText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.ibfText!,
+//             fontSize: 18,
+//           ),
+//         ),
+//         const SizedBox(
+//           height: 30,
+//         ),
+//         InkWell(
+//           onTap: () {
+//             setState(() {
+//               payment = widget.onlineText!;
+//               Navigator.pop(context);
+//             });
+//           },
+//           child: RestInvestTitle(
+//             text: widget.onlineText!,
+//             fontSize: 18,
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }
 
-  final String? niutText;
-  final String? nitgbText;
-  final String? nitifText;
-  final String? nitmmfText;
-  final String? nitiifText;
-  final String? nitaafText;
-  final String? nitimmffText;
-
-  @override
-  State<FundTransferDroDownContainer> createState() =>
-      _FundTransferDroDownContainerState();
-}
-
-class _FundTransferDroDownContainerState
-    extends State<FundTransferDroDownContainer> {
-  String fundTransfer = "";
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        InkWell(
-          onTap: () {
-            setState(() {
-              fundTransfer = widget.niutText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.niutText!,
-          ),
-        ),
-        const SizedBox(height: 15),
-        const CustomDivider(),
-        const SizedBox(
-          height: 15,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              fundTransfer = widget.nitgbText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.nitgbText!,
-          ),
-        ),
-        const SizedBox(height: 15),
-        const CustomDivider(),
-        const SizedBox(
-          height: 15,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              fundTransfer = widget.nitifText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.nitifText!,
-          ),
-        ),
-        const SizedBox(height: 15),
-        const CustomDivider(),
-        const SizedBox(
-          height: 15,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              fundTransfer = widget.nitmmfText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.nitmmfText!,
-          ),
-        ),
-        const SizedBox(height: 15),
-        const CustomDivider(),
-        const SizedBox(
-          height: 15,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              fundTransfer = widget.nitiifText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.nitiifText!,
-          ),
-        ),
-        const SizedBox(height: 15),
-        const CustomDivider(),
-        const SizedBox(
-          height: 15,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              fundTransfer = widget.nitaafText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.nitaafText!,
-          ),
-        ),
-        const SizedBox(height: 15),
-        const CustomDivider(),
-        const SizedBox(
-          height: 15,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              fundTransfer = widget.nitimmffText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.nitimmffText!,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class DropDownSelectValueContainer extends StatefulWidget {
-  DropDownSelectValueContainer({
-    required this.fundText,
-    required this.niText,
-    required this.nitText,
-    required this.nitfText,
-    required this.niefText,
-    required this.nimmText,
-    required this.nifiText,
-    required this.niaaText,
-    required this.nitmfText,
-    this.onTap,
-    this.fontSize,
-    Key? key,
-    required this.space,
-  }) : super(key: key);
-  final String? fundText;
-  final String? nitText;
-  final String? nitfText;
-  final String? niefText;
-  final String? nimmText;
-  final String? nifiText;
-  final String? niaaText;
-  final String? nitmfText;
-
-  final String? niText;
-  final onTap;
-  final fontSize;
-
-  final SizedBox space;
-
-  @override
-  State<DropDownSelectValueContainer> createState() =>
-      _DropDownSelectValueContainerState();
-}
-
-class _DropDownSelectValueContainerState
-    extends State<DropDownSelectValueContainer> {
-  String fundName = "";
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InkWell(
-            onTap: () {},
-            child: RestInvestTitle(
-              text: widget.fundText!,
-              fontSize: 20,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          InkWell(
-            onTap: () {
-              setState(() {
-                fundName = widget.niText!;
-                Navigator.pop(context);
-              });
-            },
-            child: RestInvestTitle(
-              text: widget.niText!,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          InkWell(
-            onTap: () {
-              setState(() {
-                fundName = widget.nitText!;
-                Navigator.pop(context);
-              });
-            },
-            child: RestInvestTitle(
-              text: widget.nitText!,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          InkWell(
-            onTap: () {
-              setState(() {
-                fundName = widget.nitfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: RestInvestTitle(
-              text: widget.nitfText!,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          InkWell(
-            onTap: () {
-              setState(() {
-                fundName = widget.niefText!;
-                Navigator.pop(context);
-              });
-            },
-            child: RestInvestTitle(
-              text: widget.niefText!,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          InkWell(
-            onTap: () {
-              setState(() {
-                fundName = widget.nimmText!;
-                Navigator.pop(context);
-              });
-            },
-            child: RestInvestTitle(
-              text: widget.nimmText!,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          InkWell(
-            onTap: () {
-              setState(() {
-                fundName = widget.nifiText!;
-                Navigator.pop(context);
-              });
-            },
-            child: RestInvestTitle(
-              text: widget.nifiText!,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          InkWell(
-            onTap: () {
-              setState(() {
-                fundName = widget.niaaText!;
-                Navigator.pop(context);
-              });
-            },
-            child: RestInvestTitle(
-              text: widget.niaaText!,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          InkWell(
-            onTap: () {
-              setState(() {
-                fundName = widget.nitmfText!;
-                Navigator.pop(context);
-              });
-            },
-            child: RestInvestTitle(
-              text: widget.nitmfText!,
-              fontSize: 16,
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class PaymentDropDownContainer extends StatefulWidget {
-  PaymentDropDownContainer({
-    required this.payText,
-    required this.chequeText,
-    required this.ibfText,
-    required this.onlineText,
-    Key? key,
-  }) : super(key: key);
-  final String? payText;
-  final String? chequeText;
-  final String? ibfText;
-  final String? onlineText;
-
-  @override
-  State<PaymentDropDownContainer> createState() =>
-      _PaymentDropDownContainerState();
-}
-
-class _PaymentDropDownContainerState extends State<PaymentDropDownContainer> {
-  String payment = "";
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RestInvestTitle(
-          text: widget.payText!,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              payment = widget.chequeText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.chequeText!,
-            fontSize: 18,
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              payment = widget.ibfText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.ibfText!,
-            fontSize: 18,
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              payment = widget.onlineText!;
-              Navigator.pop(context);
-            });
-          },
-          child: RestInvestTitle(
-            text: widget.onlineText!,
-            fontSize: 18,
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-/// This is the private State class that goes with MyStatefulWidget.
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  String dropdownValue = 'One';
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
-      iconSize: 24,
-      isExpanded: true,
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
-      onChanged: (String? newValue) {
-        setState(() {
-          dropdownValue = newValue!;
-        });
-      },
-      items: <String>['One', 'Two', 'Free', 'Four']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );
-  }
-}
+// class MyStatefulWidget extends StatefulWidget {
+//   const MyStatefulWidget({Key? key}) : super(key: key);
+//
+//   @override
+//   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+// }
+//
+// /// This is the private State class that goes with MyStatefulWidget.
+// class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+//   String dropdownValue = 'One';
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return DropdownButton<String>(
+//       value: dropdownValue,
+//       icon: const Icon(Icons.arrow_downward),
+//       iconSize: 24,
+//       isExpanded: true,
+//       elevation: 16,
+//       style: const TextStyle(color: Colors.deepPurple),
+//       underline: Container(
+//         height: 2,
+//         color: Colors.deepPurpleAccent,
+//       ),
+//       onChanged: (String? newValue) {
+//         setState(() {
+//           dropdownValue = newValue!;
+//         });
+//       },
+//       items: <String>['One', 'Two', 'Free', 'Four']
+//           .map<DropdownMenuItem<String>>((String value) {
+//         return DropdownMenuItem<String>(
+//           value: value,
+//           child: Text(value),
+//         );
+//       }).toList(),
+//     );
+//   }
+// }
 
 class CustomFundList extends StatelessWidget {
   const CustomFundList({

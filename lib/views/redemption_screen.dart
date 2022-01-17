@@ -5,7 +5,7 @@ import '../data/models/login_model.dart';
 import '../utils/constants.dart';
 import '../widgets/custome_dialog.dart';
 import '../widgets/transaction_dialog.dart' as trans;
-import '../utils/lists.dart';
+
 
 import '../controller/redemption_screen_controller.dart';
 
@@ -15,7 +15,6 @@ import '../widgets/constant_widget.dart';
 
 import '../widgets/drawer.dart';
 import '../widgets/textformfiled.dart';
-
 
 class RedemptionScreen extends StatelessWidget {
   const RedemptionScreen({Key? key}) : super(key: key);
@@ -85,25 +84,34 @@ class RedemptionScreen extends StatelessWidget {
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 25),
-                                  items: Constant.loginModel!.response!.accounts!
+                                  items: Constant
+                                      .loginModel!.response!.accounts!
                                       .map((Accounts? fromAccountItems) {
                                     return DropdownMenuItem<Accounts>(
                                         value: fromAccountItems,
-                                        child: Text(fromAccountItems!.folioNumber!));
+                                        child: Text(
+                                            fromAccountItems!.folioNumber!));
                                   }).toList(),
-                                  onChanged: (Accounts? value)async {
+                                  onChanged: (Accounts? value) async {
                                     _.accountvalue = value!.folioNumber!;
                                     _.fundNameListItems = [];
                                     value.userFundBalances!.forEach((element) {
                                       _.fundNameListItems.add(element);
                                     });
-                                      _.fundNamevalue = _.fundNameListItems[0].fundShort!;
+                                    _.fundNamevalue =
+                                        _.fundNameListItems[0].fundShort!;
                                     CustomDialog(context);
-                                    _.loadFundsPlans =await  _.api.onLoadFundsPlans(Constant.userId, value.userFundBalances![0].fundCode!, value.folioNumber!, "RED");
+                                    _.loadFundsPlans = await _.api
+                                        .onLoadFundsPlans(
+                                            Constant.userId,
+                                            value
+                                                .userFundBalances![0].fundCode!,
+                                            value.folioNumber!,
+                                            "RED");
                                     Get.back();
                                     _.approxUnits = "";
                                     _.approxAmount = "";
-                                      _.calUnitBalanceValue = 0.0;
+                                    _.calUnitBalanceValue = 0.0;
                                     _.unitBalanceController.text = "";
                                     _.unitButton = true;
                                     _.percentageEnable = false;
@@ -149,7 +157,7 @@ class RedemptionScreen extends StatelessWidget {
                                   ),
 
                                   borderRadius: BorderRadius.circular(6),
-                                  // value: _.dropdownvalue,
+
                                   hint: RestInvestTitle(
                                     text: _.fundNamevalue == null ||
                                             _.fundNamevalue == ""
@@ -160,23 +168,29 @@ class RedemptionScreen extends StatelessWidget {
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 25),
-                                  items: _.fundNameListItems
-                                      .map((UserFundBalances? fundNameListItems) {
+                                  items: _.fundNameListItems.map(
+                                      (UserFundBalances? fundNameListItems) {
                                     return DropdownMenuItem<UserFundBalances>(
                                         value: fundNameListItems,
-                                        child: Text(fundNameListItems!.fundShort!));
+                                        child: Text(
+                                            fundNameListItems!.fundShort!));
                                   }).toList(),
-                                  onChanged: (UserFundBalances? value) async{
+                                  onChanged: (UserFundBalances? value) async {
                                     _.fundNamevalue = value!.fundShort!;
                                     CustomDialog(context);
-                                    _.loadFundsPlans =await  _.api.onLoadFundsPlans(Constant.userId, value.fundCode!, _.accountvalue, "RED");
+                                    _.loadFundsPlans = await _.api
+                                        .onLoadFundsPlans(
+                                            Constant.userId,
+                                            value.fundCode!,
+                                            _.accountvalue,
+                                            "RED");
                                     Get.back();
                                     _.approxUnits = "";
                                     _.approxAmount = "";
                                     _.unitBalanceController.text = "";
-                                     _.unitButton = true;
-                                     _.percentageEnable = false;
-                                     _.allUnitButton = false;
+                                    _.unitButton = true;
+                                    _.percentageEnable = false;
+                                    _.allUnitButton = false;
                                     _.percentageButton = false;
                                     _.unitBalanceController.clear();
                                     _.percentController.clear();
@@ -225,7 +239,7 @@ class RedemptionScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
-                    children:  [
+                    children: [
                       Expanded(
                           child: EmptyRowContainer(
                         // fontWeight: FontWeight.w900,
@@ -258,16 +272,14 @@ class RedemptionScreen extends StatelessWidget {
                       Expanded(
                           child: CustomRowButton(
                               text: "Units",
-                              textColor:
-                              _.unitButton
+                              textColor: _.unitButton
                                   ? AppColor.whiteColor
                                   : AppColor.black,
                               textSize: 12,
                               onPress: () {
                                 _.investTrust(0);
                               },
-                              buttonColor:
-                              _.unitButton
+                              buttonColor: _.unitButton
                                   ? AppColor.blueColor
                                   : AppColor.whiteColor)),
                       Expanded(
@@ -304,122 +316,166 @@ class RedemptionScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  _.unitButton?Column(children: [ Row(
-                   children: [
-                     Expanded(
-                       child: CustomTextFormField(
-                         isRounded: true,
-                         hint: "Unit Balance",hintColor:double.parse(_.electronicUnit()!) > 0? AppColor.black:Colors.grey,
-                         textInputType: TextInputType.number,
-                         enable:    double.parse(_.electronicUnit()!) > 0?true:false,
-                         onChange: (val){
-                           print(val);
-                           if(val.isNotEmpty){
-                             _.calUnitBalanceValue = _.calUnitBalance(val);
-                           }else{
-                             _.calUnitBalanceValue =null;
-                           }
+                  _.unitButton
+                      ? Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CustomTextFormField(
+                                    isRounded: true,
+                                    hint: "Unit Balance",
+                                    hintColor:
+                                        double.parse(_.electronicUnit()!) > 0
+                                            ? AppColor.black
+                                            : Colors.black,
+                                    textInputType: TextInputType.number,
+                                    enable:
+                                        double.parse(_.electronicUnit()!) > 0
+                                            ? true
+                                            : false,
+                                    onChange: (val) {
+                                      print(val);
+                                      if (val.isNotEmpty) {
+                                        _.calUnitBalanceValue =
+                                            _.calUnitBalance(val);
+                                      } else {
+                                        _.calUnitBalanceValue = null;
+                                      }
 
-                           _.update();
-                         },
-                       ),
-                     ),
-                     const SizedBox(
-                       width: 6,
-                     ),
-                     Expanded(
-                         child: SizedBox(
-                           height: 35,
-                           child: RoundContainer(
-                             text: _.calUnitBalanceValue == null || _.calUnitBalanceValue == 0.0?"Approx. Amount":_.calUnitBalanceValue!.toStringAsFixed(2),
-                             textColor: AppColor.black,
-                             isSquare: true,
-                             voidcallback: () {},
-                           ),
-                         ))
-                   ],
-                 ),
-                   const SizedBox(
-                     height: 10,
-                   ),
-                   ],):const SizedBox(),
-                  _.percentageButton?Column(children: [ Row(
-                    children: [
-                      Expanded(
-                        child: CustomTextFormField(
-                          isRounded: true,
-                          controller: _.percentController,
-                          enable:    double.parse(_.electronicUnit()!) > 0?true:false,
-                          hint: "Percentage",hintColor:double.parse(_.electronicUnit()!) > 0? AppColor.black:Colors.grey,
-                          textInputType: TextInputType.numberWithOptions(),
-                          onChange: (value){
-                            _.calculateUnits(value);
-                            _.update();
-                          },
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: RoundContainer(
-                              text: _.approxAmount == null || _.approxAmount == ""?"Approx. Amount":"${_.approxAmount}",
-                              textColor: AppColor.black,
-                              isSquare: true,
-                              voidcallback: () {},
+                                      _.update();
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 6,
+                                ),
+                                Expanded(
+                                    child: SizedBox(
+                                  height: 35,
+                                  child: RoundContainer(
+                                    text: _.calUnitBalanceValue == null ||
+                                            _.calUnitBalanceValue == 0.0
+                                        ? "Approx. Amount"
+                                        : _.calUnitBalanceValue!
+                                            .toStringAsFixed(2),
+                                    textColor: AppColor.black,
+                                    isSquare: true,
+                                    voidcallback: () {},
+                                  ),
+                                ))
+                              ],
                             ),
-                          ))
-                    ],
-                  ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 35,
-                      child: RoundContainer(
-                        text: _.approxUnits == null || _.approxUnits == ""?"Approx.Units":"${_.approxUnits}",
-                        textColor: AppColor.blueColor,
-                        isSquare: true,
-                        voidcallback: () {},
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                   ],):SizedBox(),
-                  _.allUnitButton?Column(children: [ Row(
-                    children: [
-                      Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: RoundContainer(
-                              text: "${_.unitBalanceController.text}",
-                              textColor: AppColor.black,
-                              isSquare: true,
-                              voidcallback: () {},
+                            const SizedBox(
+                              height: 10,
                             ),
-                          )),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Expanded(
-                          child: SizedBox(
-                            height: 35,
-                            child: RoundContainer(
-                              text: _.approxAmount == null || _.approxAmount =="" ?"0.00":"${_.approxAmount}",
-                              textColor: AppColor.black,
-                              isSquare: true,
-                              voidcallback: () {},
+                          ],
+                        )
+                      : const SizedBox(),
+                  _.percentageButton
+                      ? Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CustomTextFormField(
+                                    isRounded: true,
+                                    controller: _.percentController,
+                                    enable:
+                                        double.parse(_.electronicUnit()!) > 0
+                                            ? true
+                                            : false,
+                                    hint: "Percentage",
+                                    hintColor:
+                                        double.parse(_.electronicUnit()!) > 0
+                                            ? AppColor.black
+                                            : Colors.black,
+                                    textInputType:
+                                        const TextInputType.numberWithOptions(),
+                                    onChange: (value) {
+                                      _.calculateUnits(value);
+                                      _.update();
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 6,
+                                ),
+                                Expanded(
+                                    child: SizedBox(
+                                  height: 35,
+                                  child: RoundContainer(
+                                    text: _.approxAmount == null ||
+                                            _.approxAmount == ""
+                                        ? "Approx. Amount"
+                                        : "${_.approxAmount}",
+                                    textColor: AppColor.black,
+                                    isSquare: true,
+                                    voidcallback: () {},
+                                  ),
+                                ))
+                              ],
                             ),
-                          ))
-                    ],
-                  ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],):SizedBox(),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              height: 35,
+                              child: RoundContainer(
+                                text:
+                                    _.approxUnits == null || _.approxUnits == ""
+                                        ? "Approx.Units"
+                                        : "${_.approxUnits}",
+                                textColor: AppColor.blueColor,
+                                isSquare: true,
+                                voidcallback: () {},
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
+                  _.allUnitButton
+                      ? Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: SizedBox(
+                                  height: 35,
+                                  child: RoundContainer(
+                                    text: "${_.unitBalanceController.text}",
+                                    textColor: AppColor.black,
+                                    isSquare: true,
+                                    voidcallback: () {},
+                                  ),
+                                )),
+                                const SizedBox(
+                                  width: 6,
+                                ),
+                                Expanded(
+                                    child: SizedBox(
+                                  height: 35,
+                                  child: RoundContainer(
+                                    text: _.approxAmount == null ||
+                                            _.approxAmount == ""
+                                        ? "0.00"
+                                        : "${_.approxAmount}",
+                                    textColor: AppColor.black,
+                                    isSquare: true,
+                                    voidcallback: () {},
+                                  ),
+                                ))
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
                   Row(
                     children: [
                       Expanded(
@@ -429,6 +485,7 @@ class RedemptionScreen extends StatelessWidget {
                             isRounded: true,
                             controller: _.picCodeController,
                             hint: "Pin Code",
+                            hintColor: AppColor.black,
                             textInputType: TextInputType.text,
                           ),
                         ),
@@ -438,45 +495,45 @@ class RedemptionScreen extends StatelessWidget {
                       ),
                       Expanded(
                           child: SizedBox(
-                            height: 35,
-                            child: RestInvestButton(
-                              isSquare: true,
-
-                              onPress: () {
-                                _.onGeneratePinCode(context);
-                              },
-                              text: "Generate Financial",
-                              buttonColor: AppColor.blueColor,
-                              textColor: AppColor.whiteColor,
-                              textSize: 16,
-                            ),
-                          ))
+                        height: 35,
+                        child: RestInvestButton(
+                          isSquare: true,
+                          onPress: () {
+                            _.onGeneratePinCode(context);
+                          },
+                          text: "Generate Financial",
+                          buttonColor: AppColor.blueColor,
+                          textColor: AppColor.whiteColor,
+                          textSize: 16,
+                        ),
+                      ))
                     ],
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  CheckBoxContainer(onTap: (bool? value) {
-                    if(_.isCheckPrivacy){
-                      _.isCheckPrivacy = false;
-                    }else{
-                      _.isCheckPrivacy = true;
-                    }
-    // _.isCheckPrivacy = value!;
-    _.update();
-                  },isChecked: _.isCheckPrivacy,
-    ),
+                  CheckBoxContainer(
+                    onTap: (bool? value) {
+                      if (_.isCheckPrivacy) {
+                        _.isCheckPrivacy = false;
+                      } else {
+                        _.isCheckPrivacy = true;
+                      }
+                      // _.isCheckPrivacy = value!;
+                      _.update();
+                    },
+                    isChecked: _.isCheckPrivacy,
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     height: 40,
-                    child: RestInvestButton(isSquare:true,
-
+                    child: RestInvestButton(
+                      isSquare: true,
                       text: "Submit",
                       onPress: () {
-                      _.onSubmitPress(context);
-
+                        _.onSubmitPress(context);
                       },
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,

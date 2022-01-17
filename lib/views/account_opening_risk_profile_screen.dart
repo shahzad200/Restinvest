@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/widgets/no_internet.dart';
+
+import '../widgets/no_internet.dart';
 
 import '../controller/account_opening_risk_profile_screen_controller.dart';
 
@@ -14,8 +14,6 @@ import '../widgets/button.dart';
 import '../utils/colors.dart';
 
 import '../widgets/constant_widget.dart';
-import 'account_opening_document_upload_screen.dart';
-import 'account_opening_fatca_screen.dart';
 
 class AccountOpenRiskProfileScreen extends StatelessWidget {
   const AccountOpenRiskProfileScreen({Key? key}) : super(key: key);

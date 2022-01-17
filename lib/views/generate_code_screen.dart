@@ -287,26 +287,34 @@ class GenerateCodeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    CustomFormField(
-                      controller: _.emailController,
-                      onTextChange: (val) {},
-                      hint: "Email",
-                      textAlign: TextAlign.center,
-                      fieldType: Constants.emailField,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    DateFormFieldContainer(
-                      isTrue: false,
-                      isRounded: true,
-                      text: 'Date of Birth',
-                      mode: DateTimeFieldPickerMode.date,
-                      dateFormatTrue: true,
-                      initialValue: DateTime.now(),
-                      onDateSelected: (value) {
-                        _.dateOfBirth = controller.dateTime(value);
-                      },
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomFormField(
+                            controller: _.emailController,
+                            onTextChange: (val) {},
+                            hint: "Email",
+                            textAlign: TextAlign.center,
+                            fieldType: Constants.emailField,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        Expanded(
+                          child: DateFormFieldContainer(
+                            isTrue: false,
+                            isRounded: true,
+                            text: 'Date of Birth',
+                            mode: DateTimeFieldPickerMode.date,
+                            dateFormatTrue: true,
+                            initialValue: DateTime.now(),
+                            onDateSelected: (value) {
+                              _.dateOfBirth = controller.dateTime(value);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(
                       height: 6,

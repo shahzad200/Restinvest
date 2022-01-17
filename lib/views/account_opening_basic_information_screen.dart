@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import '../data/models/new_dig_user_reg_data_after_otp.dart';
-import '../routes/routes.dart';
+
 import '../utils/constant.dart';
 import '../widgets/datefield.dart';
 import '../controller/account_opening_basic_information_screen_controller.dart';
@@ -15,7 +15,7 @@ import '../controller/account_opening_basic_information_screen_controller.dart';
 import '../widgets/button.dart';
 
 import '../utils/colors.dart';
-import '../utils/lists.dart';
+
 
 import '../widgets/textformfiled.dart';
 

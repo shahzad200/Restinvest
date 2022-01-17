@@ -14,7 +14,7 @@ import 'api_client.dart';
 import 'models/city_data.dart';
 import 'models/city_sector_model.dart';
 import 'models/common_model.dart';
-import 'models/gen_verification_code_for_dig_user.dart';
+
 import 'models/new_dig_user_reg_data_after_otp.dart';
 import 'models/new_dig_user_reg_data_before_otp.dart';
 import 'models/new_dig_user_reg_data_req_list.dart';

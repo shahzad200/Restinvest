@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_utils/src/get_utils/get_utils.dart';
-import 'package:investintrust/utils/colors.dart';
-import 'package:investintrust/utils/constant.dart';
+
+import '../utils/colors.dart';
+import '../utils/constant.dart';
 
 class CustomFormField extends StatefulWidget {
   CustomFormField(
@@ -49,7 +49,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
           focusedBorder: _inputBorder(widget.isRounded),
           focusedErrorBorder: _inputBorder(widget.isRounded),
           filled: true,
-          hintText: widget.hint,hintStyle:const TextStyle(color: AppColor.dimblack,fontWeight: FontWeight.bold),
+          hintText: widget.hint,hintStyle:const TextStyle(color: AppColor.black,fontWeight: FontWeight.bold),
           fillColor: Colors.white),
       keyboardType: widget.textInputType,
       obscureText: widget.obscureText,
