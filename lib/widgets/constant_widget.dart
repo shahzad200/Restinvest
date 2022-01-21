@@ -229,9 +229,9 @@ class Chat extends StatelessWidget {
     return Align(
         child: Image.asset(
       Constants.chat,
-      width: 20,
-      height: 20,
-      color: AppColor.whiteColor,
+      width: 25,
+      height: 25,
+      color: AppColor.black,
     ));
   }
 }

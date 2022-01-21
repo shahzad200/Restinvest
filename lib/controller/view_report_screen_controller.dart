@@ -1,13 +1,11 @@
-import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/view_reports.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/widgets/pdf_view.dart';
+import '../data/models/view_reports.dart';
+import '../data/repository.dart';
+import '../widgets/pdf_view.dart';
 
 class ViewReportsScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -50,8 +48,10 @@ class ViewReportsScreenController extends GetxController {
                 startDate, endDate, fundCode, reportType, selectedAccount);
             unit8list = Uint8List.fromList(viewReport.response ?? [0, 9, 8]);
             // printInfo(info: unit8list.toString());
+
             isLoading = false;
             update();
+
             Get.to(PdfView(
               uint8list: unit8list,
             ));
