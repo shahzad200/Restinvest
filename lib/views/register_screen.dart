@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import '../routes/routes.dart';
+
 import '../utils/constant.dart';
 
 import '../controller/register_controller.dart';

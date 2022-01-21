@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/home_screen_controller.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/utils/colors.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/utils/strings.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/custome_dialog.dart';
-import 'package:investintrust/widgets/web_view.dart';
+
+import '../routes/routes.dart';
+import '../utils/colors.dart';
+import '../utils/constants.dart';
+
+import '../widgets/constant_widget.dart';
+import '../widgets/custome_dialog.dart';
+import '../widgets/web_view.dart';
 
 import 'custom_divider.dart';
 

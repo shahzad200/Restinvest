@@ -64,7 +64,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.black)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -126,7 +126,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.black)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -257,7 +257,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.black)),
                               child: Center(
                                 child: DropdownButton(
                                   isExpanded: true,
@@ -313,7 +313,7 @@ class F2FTransferScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: AppColor.whiteColor,
                                   border: Border.all(
-                                      width: 1, color: AppColor.dimblack)),
+                                      width: 1, color: AppColor.black)),
                               child: Center(
                                 child: _.isLoading ? const SizedBox() :DropdownButton(
                                   isExpanded: true,
@@ -449,7 +449,7 @@ class F2FTransferScreen extends StatelessWidget {
                           enable: _.isLoading ? false : _.loadFundsPlans!.response!.portfolioAllocationData!.isNotEmpty &&
                               double.parse(_.loadFundsPlans!.response!.portfolioAllocationData![_.index].fundUnits!) > 0 ? true : false,
                           isRounded: true,
-                          hint: "Percentage",
+                          hint: "Percentage",hintColor: AppColor.black,
                           textInputType: TextInputType.number,
                           onChange: (v){
                             if(v==''){
@@ -483,7 +483,7 @@ class F2FTransferScreen extends StatelessWidget {
                           enable: _.isLoading || _.allUnitButton || _.noInternet ? false : _.loadFundsPlans!.response!.portfolioAllocationData!.isNotEmpty &&
                               double.parse(_.loadFundsPlans!.response!.portfolioAllocationData![_.index].fundUnits!) > 0 ? true : false,
                           isRounded: true,
-                          hint: "Unit Balance",
+                          hint: "Unit Balance",hintColor: AppColor.black,
                           textInputType: TextInputType.number,
                           onChange: (v){
                             printInfo(info: "jhjghjhHJHGJHGjh"+v);
@@ -535,7 +535,7 @@ class F2FTransferScreen extends StatelessWidget {
                             controller: _.pinCodeController,
                             enable: _.isLoading || _.noInternet ? false : true,
                             isRounded: true,
-                            hint: "Pin Code",
+                            hint: "Pin Code",hintColor: AppColor.black,
                             textInputType: TextInputType.text,
                           ),
                         ),

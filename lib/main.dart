@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        // home: const AccountOpenRiskProfileScreen(),
+         // home: const AccountOpenRiskProfileScreen(),
       getPages: AppRoute.navMain,
       initialRoute: AppRoute.homeRoute,
       debugShowCheckedModeBanner: false,

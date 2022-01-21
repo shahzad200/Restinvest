@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/new_dig_user_reg_data_before_otp.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/views/account_opening_basic_information_screen.dart';
+import '../data/models/new_dig_user_reg_data_before_otp.dart';
+
+import '../views/account_opening_basic_information_screen.dart';
 import '../controller/account_opening_request_screen_controller.dart';
 import '../utils/constant.dart';
 import '../widgets/button.dart';
 
 import '../utils/colors.dart';
-import '../utils/lists.dart';
+
 
 import '../widgets/textformfiled.dart';
 
@@ -99,8 +99,8 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                       fieldType: Constants.cnicNumber,
                                       inputFormator: [
                                         FilteringTextInputFormatter.digitsOnly,
-                                        new LengthLimitingTextInputFormatter(13),
-                                        new NumberFormatter()
+                                         LengthLimitingTextInputFormatter(13),
+                                         NumberFormatter()
                                       ],
                                       onChange: (va){
                                         print(va);
