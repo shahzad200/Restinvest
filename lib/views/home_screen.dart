@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      flex:2,
+                      flex: 2,
                       child: Container(
                         color: AppColor.blueColor,
                         height: 50,
@@ -121,17 +121,16 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: ContainerBox(
-                            icon: const Market(),
+                            icon: const Icon(
+                              Icons.account_circle_outlined,
+                              color: Colors.black,
+                            ),
                             textColor: AppColor.blueColor,
-                            text: 'Market',
+                            text: 'OPEN  DIGITAL\n   ACCOUNT',
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebViewScreen(
-                                      title: 'Market',
-                                      link:
-                                          '${Constant.socialMediaLink!.response!.homeLinks!.market}',
-                                    ))
+                                  ? Get.toNamed(AppRoute.accountopeningrequest)
                                   : printInfo(info: 'Do Nothing');
                             },
                             containerColor: AppColor.whiteColor,
@@ -254,16 +253,70 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: ContainerBox(
+                            icon: const Market(),
+                            textColor: AppColor.blueColor,
+                            text: 'Market',
+                            voidcallback: () {
+                              controller.isLoading == false &&
+                                      controller.noInternet == false
+                                  ? Get.to(WebViewScreen(
+                                      title: 'Market',
+                                      link:
+                                          '${Constant.socialMediaLink!.response!.homeLinks!.market}',
+                                    ))
+                                  : printInfo(info: 'Do Nothing');
+                            },
+                            containerColor: AppColor.liteblue,
+                          )),
+                          Constant.userId == '-0456'
+                              ? Expanded(
+                                  child: ContainerBox(
+                                  icon: const Chat(),
+                                  textColor: AppColor.blueColor,
+                                  text: 'ABOUT',
+                                  voidcallback: () {
+                                    controller.isLoading == false &&
+                                            controller.noInternet == false
+                                        ? Get.to(WebViewScreen(
+                                            title: 'About Us',
+                                            link: Constant.linkAboutUs,
+                                          ))
+                                        : printInfo(info: 'Do Nothing');
+                                  },
+                                  containerColor: AppColor.whiteColor,
+                                ))
+                              : Expanded(
+                                  child: ContainerBox(
+                                  icon: const Portofol(),
+                                  textColor: AppColor.whiteColor,
+                                  text: 'DashBoard',
+                                  voidcallback: () {
+                                    controller.isLoading == false &&
+                                            controller.noInternet == false
+                                        ? Get.toNamed(AppRoute.portofolioRoute)
+                                        : printInfo(info: 'Do Nothing');
+                                  },
+                                  containerColor: AppColor.liteblue,
+                                ))
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: ContainerBox(
                             icon: const Calculator(),
                             textColor: AppColor.blueColor,
-                            text: 'TEXT CALCULATOR',
+                            text: 'TAX CALCULATOR',
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
                                   ? Get.toNamed(AppRoute.taxcalculatorRoute)
                                   : printInfo(info: 'Do Nothing');
                             },
-                            containerColor: AppColor.liteblue,
+                            containerColor: AppColor.whiteColor,
                           )),
                           Expanded(
                               child: ContainerBox(
@@ -276,7 +329,7 @@ class HomeScreen extends StatelessWidget {
                                         ? Get.toNamed(AppRoute.dailynavRoute)
                                         : printInfo(info: 'Do Nothing');
                                   },
-                                  containerColor: AppColor.whiteColor)),
+                                  containerColor: AppColor.liteblue)),
                         ],
                       ),
                     ),
@@ -309,7 +362,8 @@ class HomeScreen extends StatelessWidget {
                                   text: "SMS",
                                   textColor: AppColor.whiteColor,
                                   voidcallback: () {
-                                    customDialogPin(context,"For SMS subscription please call 0800-00648");
+                                    customDialogPin(context,
+                                        "For SMS subscription please call 0800-00648");
                                     // controller.isLoading == false &&
                                     //         controller.noInternet == false
                                     //     ? customLaunch(
@@ -337,22 +391,23 @@ class HomeScreen extends StatelessWidget {
                           const SizedBox(
                             width: 2,
                           ),
-                          Expanded(
-                              child: RowContainerBox(
-                                  containerColor:
-                                      AppColor.blueColor.withOpacity(.8),
-                                  text: "ABOUT US",
-                                  textColor: AppColor.whiteColor,
-                                  voidcallback: () {
-                                    controller.isLoading == false &&
-                                            controller.noInternet == false
-                                        ? Get.to(WebViewScreen(
-                                            title: 'About Us',
-                                            link: Constant.linkAboutUs,
-                                          ))
-                                        : printInfo(info: 'Do Nothing');
-                                  },
-                                  icon: const Chat()))
+                          // Expanded(
+                          //     child: RowContainerBox(
+                          //         containerColor:
+                          //             AppColor.blueColor.withOpacity(.8),
+                          //         text: "ABOUT US",
+                          //         textColor: AppColor.whiteColor,
+                          //         voidcallback: () {
+                          //           controller.isLoading == false &&
+                          //                   controller.noInternet == false
+                          //               ? Get.to(WebViewScreen(
+                          //                   title: 'About Us',
+                          //                   link: Constant.linkAboutUs,
+                          //                 ))
+                          //               : printInfo(info: 'Do Nothing');
+                          //         },
+                          //         icon: const Chat()
+                          //     ))
                         ],
                       ),
                     )

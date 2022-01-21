@@ -116,17 +116,7 @@ class LoginScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 20),
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed(AppRoute.taxcalculatorRoute);
-                      },
-                      child: const RestInvestTitle(
-                          text: "Tax Calculator",fontWeight: FontWeight.w900,
-                          textAlign: TextAlign.center,
-                          textColor: AppColor.blueColor)),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
                   InkWell(
                       onTap: () {
                         Get.toNamed(AppRoute.dailynavRoute);
@@ -135,18 +125,28 @@ class LoginScreen extends StatelessWidget {
                           text: "Daily Nav",fontWeight: FontWeight.w900,
                           textAlign: TextAlign.center,
                           textColor: AppColor.blueColor)),
+                  const SizedBox(height: 10),
+                  InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoute.taxcalculatorRoute);
+                      },
+                      child: const RestInvestTitle(
+                          text: "Tax Calculator",fontWeight: FontWeight.w900,
+                          textAlign: TextAlign.center,
+                          textColor: AppColor.blueColor)),
+
                   const SizedBox(
                     height: 10,
                   ),
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed(AppRoute.accountopeningrequest);
-                        // Get.toNamed(AppRoute.accountOpenUploadScreen);
-                      },
-                      child: const RestInvestTitle(
-                          text: "Open Digital Account",
-                          textAlign: TextAlign.center,fontWeight: FontWeight.w900,
-                          textColor: AppColor.blueColor)),
+                  // InkWell(
+                  //     onTap: () {
+                  //       Get.toNamed(AppRoute.accountopeningrequest);
+                  //       // Get.toNamed(AppRoute.accountOpenUploadScreen);
+                  //     },
+                  //     child: const RestInvestTitle(
+                  //         text: "Open Digital Account",
+                  //         textAlign: TextAlign.center,fontWeight: FontWeight.w900,
+                  //         textColor: AppColor.blueColor)),
                   // InkWell(
                   //     onTap: () {
                   //       Get.toNamed(AppRoute.accountopeningbankdetail);
@@ -163,17 +163,17 @@ class LoginScreen extends StatelessWidget {
                   //         text: "Form3",
                   //         textAlign: TextAlign.center,
                   //         textColor: AppColor.blueColor)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed(AppRoute.userRoute);
-                      },
-                      child: const RestInvestTitle(
-                          text: "New User",fontWeight: FontWeight.w900,
-                          textAlign: TextAlign.center,
-                          textColor: AppColor.blueColor)),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  // InkWell(
+                  //     onTap: () {
+                  //       Get.toNamed(AppRoute.userRoute);
+                  //     },
+                  //     child: const RestInvestTitle(
+                  //         text: "New User",fontWeight: FontWeight.w900,
+                  //         textAlign: TextAlign.center,
+                  //         textColor: AppColor.blueColor)),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

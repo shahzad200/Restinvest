@@ -3,14 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:investintrust/controller/view_report_screen_controller.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/utils/constants.dart' as cons;
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/button.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/datefield.dart';
-import 'package:investintrust/widgets/no_internet.dart';
+import '../controller/view_report_screen_controller.dart';
+import '../data/models/login_model.dart';
+import '../utils/constants.dart' as cons;
+import '../widgets/button.dart';
+import '../widgets/constant_widget.dart';
+import '../widgets/datefield.dart';
+import '../widgets/no_internet.dart';
 
 import '../utils/colors.dart';
 

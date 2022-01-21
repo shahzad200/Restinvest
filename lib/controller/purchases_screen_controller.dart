@@ -370,38 +370,38 @@ class PurchasesScreenController extends GetxController {
 
 
 
-     // api.onSavePurchase(
-     //   fundValue,
-     //   accountValue,
-     //   amountController.text,
-     //   installmentController.text,
-     //   date.toString(),
-     //   bankNameController.text,
-     //   bankAccountController.text,
-     //   picCodeController.text,
-     //   paymentvalueCode,
-     //   collectionBankAccount,
-     //   collectionBankCode,
-     //   fundSale,
-     //   "${paymentProofBytes == null || paymentProofBytes.isEmpty?null :base64Encode(paymentProofBytes)}",
-     //   // base64Encode(paymentProofBytes),
-     //   paymentProofExt!,
-     //   "${paymentSlipBytes == null || paymentSlipBytes.isEmpty?null :base64Encode(paymentSlipBytes)}",
-     //
-     //   "${paymentSlipExt}",
-     // );
-      // submitResponse = await _repository.onSaveFundTransfer(
-      //     pinCodeController.text, accountValue, toAccountValue,
-      //     fundCode, percentageButton ? "P" : "U", "totalUnits", dataValue, toFundCode);
-      isLoading = false;
-      if(noInternet) {
-        noInternet = false;
-      }
-      update();
-      if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
-        customDialogPin(context,"Request Submitted successfully");
-      }
-      // update();
+    // api.onSavePurchase(
+    //   fundValue,
+    //   accountValue,
+    //   amountController.text,
+    //   installmentController.text,
+    //   date.toString(),
+    //   bankNameController.text,
+    //   bankAccountController.text,
+    //   picCodeController.text,
+    //   paymentvalueCode,
+    //   collectionBankAccount,
+    //   collectionBankCode,
+    //   fundSale,
+    //   "${paymentProofBytes == null || paymentProofBytes.isEmpty?null :base64Encode(paymentProofBytes)}",
+    //   // base64Encode(paymentProofBytes),
+    //   paymentProofExt!,
+    //   "${paymentSlipBytes == null || paymentSlipBytes.isEmpty?null :base64Encode(paymentSlipBytes)}",
+    //
+    //   "${paymentSlipExt}",
+    // );
+    // submitResponse = await _repository.onSaveFundTransfer(
+    //     pinCodeController.text, accountValue, toAccountValue,
+    //     fundCode, percentageButton ? "P" : "U", "totalUnits", dataValue, toFundCode);
+    isLoading = false;
+    if(noInternet) {
+      noInternet = false;
+    }
+    update();
+    if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+      customDialogPin(context,"Request Submitted successfully");
+    }
+    // update();
     // } catch (e) {
     //   if (e.toString() == 'Exception: No Internet') {
     //     isLoading = false;

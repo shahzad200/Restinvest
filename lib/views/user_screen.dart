@@ -29,7 +29,7 @@ class UserScreen extends StatelessWidget {
         init: UserScreenController(),
         builder: (_) {
           return SafeArea(
-              child: Scaffold(
+              child: Scaffold(backgroundColor: AppColor.lightWhite,
                 key: _.scaffoldKey,
                 body: _.isLoading ?
                 const Center(child: CircularProgressIndicator()) : SingleChildScrollView(
