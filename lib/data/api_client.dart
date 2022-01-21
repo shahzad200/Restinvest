@@ -182,19 +182,44 @@ class ApiClient {
       String collectionBankAccount,
       String collectionBankCode,
       String fundSaleLoad,
-      String paymentProof,
+      Uint8List paymentProof,
       String paymentExtension,
-      String depositProof,
+      Uint8List depositProof,
       String depositExtension,
       ) async {
     Common? common;
     try {
+      printInfo(info: jsonEncode(<String, dynamic>{
+            'userId': userId,
+            'unitPlan': "0",
+            'fundCode': fundCode,
+            'unitClass': "XX",
+            'folioNumber': folioNumber,
+            'transactionValue': transactionValue,
+            'chequeNo': chequeNo,
+            'chequeDate': chequeDate,
+            'bankBranch': bankName,
+            'bankAccountNo': bankAccountNo,
+            'paymentMode': paymentMode,
+            'paymentProof': paymentProof ?? "",
+            'paymentExtension': paymentExtension ?? "",
+            'depositProof': depositProof ?? "",
+            'depositExtension': depositExtension ?? "",
+            'accessCode': accessCode,
+            'authorizationPinCode':pinCode,
+            'sessionId': sessionId,
+            'sessionStartDate': sessionStartDate,
+            'userType': userType,
+            'collectionBankAccount': collectionBankAccount,
+            'collectionBankCode': collectionBankCode,
+            'fundSaleLoad': fundSaleLoad
+          }.toString()));
       final response = await http.post(
         Uri.parse(_epSavePurchase),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        body: jsonEncode(<String, String>{
+        body: jsonEncode(<String, dynamic>{
           'userId': userId,
           'unitPlan': "0",
           'fundCode': fundCode,
@@ -210,11 +235,11 @@ class ApiClient {
           'paymentExtension': paymentExtension ?? "",
           'depositProof': depositProof ?? "",
           'depositExtension': depositExtension ?? "",
-          'accessCode': Constant.loginModel!.response!.user!.sessionAccessCode ?? '',
+          'accessCode': accessCode,
           'authorizationPinCode':pinCode,
-          'sessionId': Constant.loginModel!.response!.user!.authorization ?? '',
-          'sessionStartDate': Constant.loginModel!.response!.user!.sessionDateTime ?? '',
-          'userType': Constant.loginModel!.response!.user!.userType ?? '',
+          'sessionId': sessionId,
+          'sessionStartDate': sessionStartDate,
+          'userType': userType,
           'collectionBankAccount': collectionBankAccount,
           'collectionBankCode': collectionBankCode,
           'fundSaleLoad': fundSaleLoad
@@ -852,8 +877,6 @@ class ApiClient {
           'userId': userId
         }),
       );
-      print("response");
-      print("${response.body}");
       if (response.statusCode == 200) {
         Common common = Common.fromJson(jsonDecode(response.body));
         print(response.body);
@@ -884,7 +907,23 @@ class ApiClient {
       String unitPlan,
       String userId,
       String userType) async {
+    Common? common;
     try {
+      printInfo(info: jsonEncode(<String, String>{
+        'accessCode': accessCode,
+        'authorizationPinCode': authorizationPinCode,
+        'folioNumber': folioNumber,
+        'fundCode': fundCode,
+        'redTransType': redTransType,
+        'sessionId': sessionId,
+        'sessionStartDate': sessionStartDate,
+        'totalUnits': totalUnits,
+        'transactionValue': transactionValue,
+        'unitClass': unitClass,
+        'unitPlan': unitPlan,
+        'userId': userId,
+        'userType': userType
+      }.toString()));
       final response = await http.post(
         Uri.parse(_epSaveRedemption),
         headers: <String, String>{
@@ -907,18 +946,22 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        Common common = Common.fromJson(jsonDecode(response.body));
-        print(response.body);
+        printInfo(info:response.body);
+        common = Common.fromJson(jsonDecode(response.body));
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
         } else {
-          throw Exception(common.meta!.message);
+          throw Exception(common.meta!.error);
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 
@@ -940,7 +983,27 @@ class ApiClient {
       String toFundCode,
       String toFundUnitClass,
       String toFundUnitPlan) async {
+    Common? common;
     try {
+      printInfo(info: jsonEncode(<String, String>{
+        'accessCode': accessCode,
+        'authorizationPinCode': authorizationPinCode,
+        'folioNumber': folioNumber,
+        'toFolioNumber': toFolioNumber,
+        'fundCode': fundCode,
+        'redTransType': redTransType,
+        'sessionId': sessionId,
+        'sessionStartDate': sessionStartDate,
+        'totalUnits': totalUnits,
+        'transactionValue': transactionValue,
+        'unitClass': unitClass,
+        'unitPlan': unitPlan,
+        'userId': userId,
+        'userType': userType,
+        'toFundCode': toFundCode,
+        'toFundUnitClass': toFundUnitClass,
+        'toFundUnitPlan': toFundUnitPlan
+      }.toString()) );
       final response = await http.post(
         Uri.parse(_epSaveFundTransfer),
         headers: <String, String>{
@@ -967,18 +1030,22 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        Common common = Common.fromJson(jsonDecode(response.body));
-        print(response.body);
+        printInfo(info: response.body);
+        common = Common.fromJson(jsonDecode(response.body));
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
         } else {
-          throw Exception(common.meta!.message);
+          throw Exception(common.meta!.error);
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 

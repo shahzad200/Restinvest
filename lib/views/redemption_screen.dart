@@ -100,6 +100,8 @@ class RedemptionScreen extends StatelessWidget {
                                     });
                                     _.fundNamevalue =
                                         _.fundNameListItems[0].fundShort!;
+                                    _.fundNameCode =
+                                    _.fundNameListItems[0].fundCode!;
                                     CustomDialog(context);
                                     _.loadFundsPlans = await _.api
                                         .onLoadFundsPlans(
@@ -177,6 +179,7 @@ class RedemptionScreen extends StatelessWidget {
                                   }).toList(),
                                   onChanged: (UserFundBalances? value) async {
                                     _.fundNamevalue = value!.fundShort!;
+                                    _.fundNameCode = value!.fundCode!;
                                     CustomDialog(context);
                                     _.loadFundsPlans = await _.api
                                         .onLoadFundsPlans(
@@ -323,6 +326,7 @@ class RedemptionScreen extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: CustomTextFormField(
+                                    controller: _.unitBalanceController,
                                     isRounded: true,
                                     hint: "Unit Balance",
                                     hintColor:

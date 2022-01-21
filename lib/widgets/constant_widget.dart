@@ -567,7 +567,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                           ' & ',
                     ),TextSpan(
                       text:
-                          'Fund Manager Report\n',
+                          'Fund Manager\nReport ',
                           style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                           recognizer:  TapGestureRecognizer()..onTap = () {
                             Get.to(WebViewScreen(
@@ -592,7 +592,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                       children: [
                         TextSpan(
                           text:
-                          'Terms & Conditions',
+                          ' Terms & Conditions',
                           style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                           recognizer:  TapGestureRecognizer()..onTap = () {
                             Get.to(WebViewScreen(

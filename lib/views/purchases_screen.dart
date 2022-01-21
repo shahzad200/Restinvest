@@ -374,8 +374,15 @@ class PurchasesScreen extends StatelessWidget {
                                 CustomTextFormField(
                                   controller: _.amountController,
                                   isRounded: true,
-                                  textInputType: TextInputType.numberWithOptions(),
+                                  textInputType: TextInputType.number,
                                   hint: "",
+                                  onChange: (value){
+                                    if(int.parse(value.toString()) >= 1000000 ){
+                                      _.amountController.text = '1000000';
+                                      _.update();
+                                      showToast('The amount cannot exceed 1000000 (1 million)');
+                                    }
+                                  },
                                   //  textInputType: TextInputType.emailAddress,
                                 ),
                               ],

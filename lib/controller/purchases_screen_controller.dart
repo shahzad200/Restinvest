@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:path/path.dart' as p;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,7 +24,7 @@ class PurchasesScreenController extends GetxController {
   String fundNamevalue = "";
   // String accountvalue = "";
   String paymentvalue = "Cheque";
-  String paymentvalueCode = "";
+  String paymentvalueCode = "CH";
 
   bool unitButton = true;
   bool percentageButton = false;
@@ -321,6 +321,14 @@ class PurchasesScreenController extends GetxController {
   }
 
   onOkPress(BuildContext context)async{
+    Uint8List? payProf;
+    Uint8List? paySlip;
+    if(paymentvalue != '1-Link'){
+      payProf = paymentProof!.readAsBytesSync();
+      paySlip = paymentSlip!.readAsBytesSync();
+    }
+
+
     try {
       isLoading = true;
       update();
@@ -330,24 +338,29 @@ class PurchasesScreenController extends GetxController {
         accountValue,
         amountController.text,
         paymentvalue != '1-Link' ? installmentController.text : '',
-        paymentvalue != '1-Link' ? date.toString() : '',
+        paymentvalue != '1-Link' ? date!.day.toString()+'/'+date!.month.toString()+'/'+date!.year.toString() : '',
         bankNameController.text,
         bankAccountController.text,
         picCodeController.text,
         paymentvalueCode,
-        collectionBankAccount,
-        collectionBankCode,
+        fundBankAccountNumber,
+        fundBankCode,
         fundSaleValue,
-        paymentvalue != '1-Link'
-            ? paymentProofBytes == null || paymentProofBytes.isEmpty
-            ? ''
-            : base64Encode(paymentProofBytes)
-            : '',
-        paymentvalue != '1-Link' ? paymentProofExt! : '',
-        paymentvalue != '1-Link' ? paymentSlipBytes == null ||
-            paymentSlipBytes.isEmpty ? '' : base64Encode(paymentSlipBytes) : '',
-        paymentvalue != '1-Link' ? paymentSlipExt! : '',
+        payProf!,
+        paymentvalue != '1-Link' ? p.extension(paymentProof!
+            .path) : '',
+        paySlip!,
+        paymentvalue != '1-Link' ? p.extension(paymentSlip!
+            .path)! : '',
       );
+      isLoading = false;
+      if(noInternet) {
+        noInternet = false;
+      }
+      update();
+      if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+        customDialogPin(context,"Request Submitted successfully");
+      }
     } catch(e){
       if (e.toString() == 'Exception: No Internet') {
         isLoading = false;
@@ -393,14 +406,7 @@ class PurchasesScreenController extends GetxController {
       // submitResponse = await _repository.onSaveFundTransfer(
       //     pinCodeController.text, accountValue, toAccountValue,
       //     fundCode, percentageButton ? "P" : "U", "totalUnits", dataValue, toFundCode);
-      isLoading = false;
-      if(noInternet) {
-        noInternet = false;
-      }
-      update();
-      if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
-        customDialogPin(context,"Request Submitted successfully");
-      }
+
       // update();
     // } catch (e) {
     //   if (e.toString() == 'Exception: No Internet') {

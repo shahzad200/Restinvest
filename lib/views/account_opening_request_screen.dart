@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
 import '../data/models/new_dig_user_reg_data_before_otp.dart';
 
 import '../views/account_opening_basic_information_screen.dart';

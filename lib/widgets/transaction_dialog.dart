@@ -156,7 +156,7 @@ void showDialog(
                                 text:
                                 selectedTab == "Percentage"
                                     ? data + "%"
-                                    : data + "23232",
+                                    : data,
                                 fontSize: 14,
                                 textColor: Colors.green,
                                 fontWeight: FontWeight.w500,

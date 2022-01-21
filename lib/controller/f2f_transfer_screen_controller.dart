@@ -70,9 +70,11 @@ class F2FTransferScreenController extends GetxController {
     }
   }
 
+  String fundVolume = '0';
   String? fundAmount(){
     if(loadFundsPlans != null) {
       if(loadFundsPlans!.response!.portfolioAllocationData!.isNotEmpty){
+        fundVolume = loadFundsPlans!.response!.portfolioAllocationData![index ?? 0].fundvolume!;
         return loadFundsPlans!.response!.portfolioAllocationData![index ?? 0].fundvolume;
       }else {
         return "0";
@@ -263,7 +265,8 @@ class F2FTransferScreenController extends GetxController {
         if(dataValue != ''){
           if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
             trans.showDialog(context,accountValue,toAccountValue,fundValue,
-                toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',onOkPress(context));
+                toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',
+                onOkPress);
           } else {
             Fluttertoast.showToast(
                 msg: 'Please enter Fund Balance/Percentage',
@@ -302,7 +305,7 @@ class F2FTransferScreenController extends GetxController {
       update();
       common = await _repository.onSaveFundTransfer(
           pinCodeController.text, accountValue, toAccountValue,
-          fundCode, percentageButton ? "P" : "U", "totalUnits", dataValue, toFundCode);
+          fundCode, percentageButton ? "P" : "U", percentageButton ? fundVolume :dataValue , dataValue, toFundCode);
       isLoading = false;
       if(noInternet) {
         noInternet = false;
@@ -322,7 +325,7 @@ class F2FTransferScreenController extends GetxController {
         noInternet = false;
         update();
         Fluttertoast.showToast(
-            msg: e.toString(),
+            msg: e.toString().replaceAll('Exception:', ''),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
