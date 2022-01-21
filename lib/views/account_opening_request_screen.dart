@@ -319,7 +319,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                       hint:
                                       "Please Enter your (OTP) Verification Code Received Via SMS or Email",
                                       controller: _.otpVerificationController,
-                                      fieldType: Constants.pincode,textInputType: TextInputType.number,
+                                      fieldType: Constants.pincode,
                                       textAlign: TextAlign.start,obscureText: true,
                                     ),
                                     const SizedBox(
@@ -327,8 +327,8 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                     ),
                                     CustomRoundButton(height: 35,
                                         isRound: false, text: "Next", onPress: () {
-                                          _.onValidateVerificationCodeForDigUser();
-                                          // Get.toNamed(AppRoute.accountopeningbasicinformation);
+                                          // _.onValidateVerificationCodeForDigUser();
+                                          Get.toNamed(AppRoute.accountopeningbasicinformation);
                                         }),
                                     const SizedBox(
                                       height: 10,

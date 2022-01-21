@@ -77,7 +77,7 @@ class PasswordScreen extends StatelessWidget {
                       onPress: () {
                         if (_.formKey.currentState!.validate()) {
                           _.formKey.currentState!.save();
-                           (_.onSubmit());
+                           (_.onSubmit(context));
                         }
                       }),
                   const SizedBox(

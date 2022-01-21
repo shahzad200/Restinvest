@@ -247,6 +247,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.cNicController,
                                             isRounded: true,
+                                          enable: false,
                                           inputFormator: [
                                             FilteringTextInputFormatter.digitsOnly,
                                             new LengthLimitingTextInputFormatter(13),
@@ -856,6 +857,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.mobileController,
                                             fieldType: Constants.phoneNumberField,
+                                            enable: false,
                                             isRounded: true,
                                             hint: "+92xxxxxxxxx",
                                             hintColor: AppColor.dimblack,
@@ -1053,6 +1055,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.eMailAddressController,
                                             isRounded: true,
+                                            enable: false,
                                             hint: "abc@gmail.com",
                                             hintColor: AppColor.dimblack,
                                             // textInputType: TextInputType.emailAddress,
@@ -1651,6 +1654,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                     CustomTextFormField(
                                       controller: _.iBanNumberController,
                                       isRounded: true,
+                                      length: 24,
                                       hint: "ibn number", hintColor: AppColor.dimblack,
                                       // textInputType: TextInputType.emailAddress,
                                     ),
@@ -1720,11 +1724,70 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   hint: "CNIC/NICP",
                                   // textInputType: TextInputType.emailAddress,
                                 ),
-                                CustomTextFormField(
-                                  controller: _.kinRelationController,
-                                  isRounded: true,
-                                  hint: "RELATIONSHIP",
-                                  // textInputType: TextInputType.emailAddress,
+                                Container(
+                                  // margin: EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, right: 5.0),
+                                  height: 37,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: AppColor.whiteColor,
+                                      border: Border.all(
+                                          width: 1,
+                                          color: AppColor.black)),
+                                  child: Center(
+                                    child: DropdownButton(
+                                      isExpanded: true,
+                                      underline: Container(
+                                        color: AppColor.whiteColor,
+                                      ),
+
+                                      borderRadius:
+                                      BorderRadius.circular(6),
+                                      // value: _.dropdownvalue,
+                                      hint: RestInvestTitle(
+                                        text: _.kinRelationValue ==
+                                            null ||
+                                            _.kinRelationValue ==
+                                                ""
+                                            ? "Relationship"
+                                            : _.kinRelationValue,
+                                        fontSize: 12,
+                                        textColor: AppColor.black,
+                                      ),
+                                      icon: const Icon(
+                                          Icons.keyboard_arrow_down,
+                                          color: AppColor.blueColor,
+                                          size: 25),
+                                      items: _.isLoading || _.noInternet
+                                          ? null
+                                          : _
+                                          .newDigUserRegDataAfterOTP!
+                                          .response!
+                                          .relationWithPrincipleList!
+                                          .map((RelationWithPrincipleList
+                                      residentStatusList) {
+                                        return DropdownMenuItem<
+                                            RelationWithPrincipleList>(
+                                            value:
+                                            residentStatusList,
+                                            child: Text(
+                                                residentStatusList!
+                                                    .description ??
+                                                    ''));
+                                      }).toList(),
+                                      onChanged: _.isLoading ||
+                                          _.noInternet
+                                          ? null
+                                          : (RelationWithPrincipleList? value) {
+                                        _.kinRelationValue =
+                                        value!.description!;
+                                        _.kinRelationCode =
+                                        value!.code!;
+                                        _.update();
+                                      },
+                                    ),
+                                  ),
                                 ),
                                 CustomTextFormField(
                                   controller: _.kinMobileNumberController,

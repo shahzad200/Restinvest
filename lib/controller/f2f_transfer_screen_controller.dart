@@ -230,7 +230,7 @@ class F2FTransferScreenController extends GetxController {
       printInfo(info: accountValue+'jjgjgj'+fundCode+'hhghgh');
       loadFundsPlans = await _repository.onLoadFundsPlans(fundCode, accountValue, "FTF");
       toFundValue = loadFundsPlans!.response!.toFunds![0].fundShort!;
-      toFundCode = loadFundsPlans!.response!.toFunds![0].fundShort!;
+      toFundCode = loadFundsPlans!.response!.toFunds![0].fundCode!;
       isLoading = false;
       if(noInternet) {
         noInternet = false;

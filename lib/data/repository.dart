@@ -15,6 +15,7 @@ import 'models/city_data.dart';
 import 'models/city_sector_model.dart';
 import 'models/common_model.dart';
 import 'models/gen_verification_code_for_dig_user.dart';
+import 'models/load_fund_plans_p.dart';
 import 'models/new_dig_user_reg_data_after_otp.dart';
 import 'models/new_dig_user_reg_data_before_otp.dart';
 import 'models/new_dig_user_reg_data_req_list.dart';
@@ -38,6 +39,12 @@ class Repository {
           String fundCode, String folioNumber, String requestType) =>
       _apiClient.onLoadFundsPlans(
           Constant.userId, fundCode, folioNumber, requestType);
+
+
+  Future<LoadFundsPlansP> onLoadFundsPlansP(
+      String fundCode, String folioNumber, String requestType,String classCode) =>
+      _apiClient.onLoadFundsPlansP(
+          Constant.userId, fundCode, folioNumber, requestType,classCode);
 
   Future<LoadDashboard> onLoadDashBoard(String folioNumber) =>
       _apiClient.onLoadDashBoard(Strings.userId, folioNumber);
@@ -319,5 +326,34 @@ class Repository {
   Future<Common> onSaveDigUser(
       ) =>
       _apiClient.onSaveDigUser(Constant.cNic, Constant.sessionID);
+
+
+  Future<Common> onSavePurchase(
+      String fundCode,
+      String folioNumber,
+      String transactionValue,
+      String chequeNo,
+      String chequeDate,
+      String bankName,
+      String bankAccountNo,
+      String pinCode,
+      String paymentMode,
+      String collectionBankAccount,
+      String collectionBankCode,
+      String fundSaleLoad,
+      String paymentProof,
+      String paymentExtension,
+      String depositProof,
+      String depositExtension,
+      ) => _apiClient.onSavePurchase(Constant.loginModel!.response!.user!.userid ?? '',
+      fundCode, folioNumber,
+      transactionValue, chequeNo, chequeDate, bankName, bankAccountNo,
+      Constant.loginModel!.response!.user!.sessionAccessCode ?? '',
+      pinCode, Constant.loginModel!.response!.user!.authorization ?? '',
+      Constant.loginModel!.response!.user!.sessionDateTime ?? '',
+      Constant.loginModel!.response!.user!.userType ?? '',
+      paymentMode, collectionBankAccount, collectionBankCode, fundSaleLoad,
+      paymentProof, paymentExtension, depositProof, depositExtension);
+
 
 }

@@ -61,6 +61,8 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   String nationalityCode = "";
   String residentStatusValue = "";
   String residentStatusCode = "";
+  String kinRelationValue = "";
+  String kinRelationCode = "";
   String religionValue = "";
   String religionCode = "";
   String zaKatValue = "";
@@ -88,6 +90,9 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     onNewDigUserRegDataAfterOTP();
+    cNicController.text = controller.cNicNumberController.text;
+    eMailAddressController.text = controller.emailController.text;
+    mobileController.text = controller.mobileNumberController.text;
     super.onInit();
   }
 
@@ -196,11 +201,13 @@ class AccountOpenBasicInformationScreenController extends GetxController{
       showToast('Please select retirement age');
     }  else if(mobileController.text == "" || mobileController.text.isEmpty || mobileController.text == null){
       showToast('Please enter mobile number');
-    } else if(phoneController.text == "" || phoneController.text.isEmpty || phoneController.text == null){
-      showToast('Please enter phone number');
-    } else if(officePhoneController.text == "" || officePhoneController.text.isEmpty || officePhoneController.text == null){
-      showToast('Please enter office phone number');
-    } else if(currentAddressController.text == "" || currentAddressController.text.isEmpty || currentAddressController.text == null){
+    }
+    // else if(phoneController.text == "" || phoneController.text.isEmpty || phoneController.text == null){
+    //   showToast('Please enter phone number');
+    // } else if(officePhoneController.text == "" || officePhoneController.text.isEmpty || officePhoneController.text == null){
+    //   showToast('Please enter office phone number');
+    // }
+    else if(currentAddressController.text == "" || currentAddressController.text.isEmpty || currentAddressController.text == null){
       showToast('Please enter current address');
     } else if(mailingAddressController.text == "" || mailingAddressController.text.isEmpty || mailingAddressController.text == null){
       showToast('Please enter mailing address');
@@ -239,7 +246,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
             mailingAddressController.text, mailingCountryCode, mailingCityCode, martialCode,
             mNameController.text, nationalityCode,residentStatusCode,religionCode, currentAddressController.text,
             int.parse(retirementCode), titleCode, zaKatCode, kinNameController.text,
-            kiNcNicController.text, kinRelationController.text, kinMobileNumberController.text);
+            kiNcNicController.text, kinRelationCode, kinMobileNumberController.text);
 
         isLoading = false;
         if (noInternet) {

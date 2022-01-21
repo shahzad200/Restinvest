@@ -17,6 +17,7 @@ import 'models/city_sector_model.dart';
 import 'models/gen_verification_code_for_dig_user.dart';
 import 'models/load_dashboard.dart';
 import 'models/load_fund_plans.dart';
+import 'models/load_fund_plans_p.dart';
 import 'models/login_model.dart';
 import 'models/new_dig_user_reg_data_after_otp.dart';
 import 'models/new_dig_user_reg_data_before_otp.dart';
@@ -30,8 +31,8 @@ import 'models/view_reports.dart';
 
 class ApiClient {
   static const _baseUrl =
-      'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
-
+      // 'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
+      'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
   // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
@@ -164,6 +165,7 @@ class ApiClient {
   }
 
   Future<Common> onSavePurchase(
+      String userId,
       String fundCode,
       String folioNumber,
       String transactionValue,
@@ -171,7 +173,11 @@ class ApiClient {
       String chequeDate,
       String bankName,
       String bankAccountNo,
+      String accessCode,
       String pinCode,
+      String sessionId,
+      String sessionStartDate,
+      String userType,
       String paymentMode,
       String collectionBankAccount,
       String collectionBankCode,
@@ -180,8 +186,8 @@ class ApiClient {
       String paymentExtension,
       String depositProof,
       String depositExtension,
-
       ) async {
+    Common? common;
     try {
       final response = await http.post(
         Uri.parse(_epSavePurchase),
@@ -189,7 +195,7 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
-          'userId': Constant.loginModel!.response!.user!.userid ?? '',
+          'userId': userId,
           'unitPlan': "0",
           'fundCode': fundCode,
           'unitClass': "XX",
@@ -216,23 +222,27 @@ class ApiClient {
       print(response.body.toString());
       if (response.statusCode == 200) {
         print(response.body);
-        Common common = Common.fromJson(jsonDecode(response.body));
+        common = Common.fromJson(jsonDecode(response.body));
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
         } else {
-          throw Exception(common.meta!.message);
+          throw Exception(common.meta!.error);
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
-      print(e.toString());
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 
   Future<Common> onRegisteredUser(
       String accountNo, String cnic, String email, String cell) async {
+    Common? common;
     try {
       final response = await http.post(
         Uri.parse(_epRegisteredUser),
@@ -248,17 +258,21 @@ class ApiClient {
       );
       if (response.statusCode == 200) {
         print(response.body);
-        Common common = Common.fromJson(jsonDecode(response.body));
+        common = Common.fromJson(jsonDecode(response.body));
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
         } else {
-          throw Exception(common.meta!.message);
+          throw Exception(common.meta!.error);
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 
@@ -484,7 +498,8 @@ class ApiClient {
   }
 
   Future<Common> onResetPassword(String userId, String cNic) async {
-    print(userId + 'nkj' + cNic);
+    print(userId+cNic);
+    Common? common;
     try {
       final response = await http.post(
         Uri.parse(_epChangePassword),
@@ -498,18 +513,22 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        Common common = Common.fromJson(jsonDecode(response.body));
+        common = Common.fromJson(jsonDecode(response.body));
         print(response.body);
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
         } else {
-          throw Exception(common.meta!.message);
+          throw Exception(common.meta!.error.toString());
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
-      throw Exception('No Internet');
+      if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
+        throw Exception(common!.meta!.error.toString());
+      } else {
+        throw Exception('No Internet');
+      }
     }
   }
 
@@ -546,6 +565,42 @@ class ApiClient {
       throw Exception('No Internet');
     }
   }
+
+
+  Future<LoadFundsPlansP> onLoadFundsPlansP(String userId, String fundCode,
+      String folioNumber, String requestType,String classCode) async {
+    print(userId + 'nkj' + fundCode + 'nkj' + folioNumber + 'nkj' + requestType);
+    try {
+      final response = await http.post(
+        Uri.parse(_epLoadFundsPlans),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'userId': userId,
+          'fundCode': fundCode,
+          'folioNumber': folioNumber,
+          'classCode' : classCode,
+          'requestType': requestType
+        }),
+      );
+      if (response.statusCode == 200) {
+        LoadFundsPlansP loadFundsPlans =
+        LoadFundsPlansP.fromJson(jsonDecode(response.body));
+        print(response.body);
+        if (loadFundsPlans.meta!.code.toString() == 200.toString()) {
+          return loadFundsPlans;
+        } else {
+          throw Exception(loadFundsPlans.meta!.message);
+        }
+      } else {
+        throw Exception('No Internet');
+      }
+    } catch (e) {
+      throw Exception('No Internet');
+    }
+  }
+
 
   Future<NewUserRegData> onNewUserRegData() async {
     try {

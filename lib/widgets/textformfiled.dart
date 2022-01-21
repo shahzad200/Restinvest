@@ -238,8 +238,8 @@ class CustomTextFormField extends StatefulWidget {
       this.fieldType = 2,
       this.controller,
       this.enable = true,
+        this.length,
       this.icon,
-
       this.color = AppColor.dimblack,
       this.isRounded = true,
       this.hasIcon = true,this.inputFormator =const [],})
@@ -255,6 +255,7 @@ class CustomTextFormField extends StatefulWidget {
   final int fieldType;
   final IconData? icon;
   final bool enable;
+  final int? length;
   final bool hasIcon;
   final TextEditingController? controller;
   final bool isRounded;
@@ -270,6 +271,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return TextFormField(
       controller: widget.controller,
       cursorColor: AppColor.blueColor,
+      maxLength: widget.length,
       cursorHeight: 20,
       enabled: widget.enable,
       inputFormatters: widget.inputFormator,

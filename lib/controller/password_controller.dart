@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/widgets/constant_widget.dart';
 import '../data/models/common_model.dart';
 import '../data/repository.dart';
 class PasswordScreenController extends GetxController{
@@ -35,12 +36,14 @@ class PasswordScreenController extends GetxController{
   }
 
 
-  onSubmit() async {
+  onSubmit(BuildContext context) async {
     try{
       isLoading = true;
       common = await _repository.onResetPassword(userIdController.value.text,
           cNicController.value.text);
-
+      if(common.meta!.message.toString() == "OK") {
+        customDialogPin(context,"Visit your registered email ID to proceed");
+      }
       isLoading = false;
       update();
     }catch (e){
@@ -53,7 +56,7 @@ class PasswordScreenController extends GetxController{
         noInternet = false;
         update();
         Fluttertoast.showToast(
-            msg: e.toString(),
+            msg: e.toString().replaceAll('Exception:', ''),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
