@@ -84,95 +84,116 @@ class AccountOpenKycDetailScreenController extends GetxController{
 
 
   onSaveDataKycDetail() async {
-    if(occupationGroupValue == '00'){
+    if (occupationGroupValue == '00') {
       showToast('Please select occupation/profession');
-    } else if(inComeGroupValue == '00'){
+    } else if (inComeGroupValue == '00') {
       showToast('Please select source of income');
-    } else if(employerController.text == "" || employerController.text.isEmpty || employerController.text == null){
+    } else
+    if (employerController.text == "" || employerController.text.isEmpty ||
+        employerController.text == null) {
       showToast('Please enter name of employer');
-    } else if(designationController.text == "" || designationController.text.isEmpty || designationController.text == null) {
+    } else if (designationController.text == "" ||
+        designationController.text.isEmpty ||
+        designationController.text == null) {
       showToast('Please enter designation');
-    }else if(geoDomesticController.text == "" || geoDomesticController.text.isEmpty || geoDomesticController.text == null) {
-      showToast('Please enter geographic involved domestic');
-    }else if(geoInternationalController.text == "" || geoInternationalController.text.isEmpty || geoInternationalController.text == null) {
-      showToast('Please enter geographic involved international');
-    }else if(counterDomesticController.text == "" || counterDomesticController.text.isEmpty || counterDomesticController.text == null) {
-      showToast('Please enter counter parties domestic');
-    }else if(counterInternationalController.text == "" || counterInternationalController.text.isEmpty || counterInternationalController.text == null) {
-      showToast('Please enter counter parties international');
-    }else if(transactionGroupValue == "00") {
+    } else if (transactionGroupValue == "00") {
       showToast('Please select preferred mood of transaction');
-    }else if(turnoverGroupValue == "00") {
+    } else if (turnoverGroupValue == "00") {
       showToast('Please select expected turnover');
-    }else if(expectedIncomeGroupValue == "00") {
+    } else if (expectedIncomeGroupValue == "00") {
       showToast('Please select expected investment amount');
-    }else if(annualIncomeGroupValue == "00") {
+    } else if (annualIncomeGroupValue == "00") {
       showToast('Please select annual income');
-    }else if(!isChecked){
+    } else if (!isChecked) {
       showToast('Please check disclaimer');
+    } else if (occupationGroupValue == '015' || occupationGroupValue == '013') {
+      onSaveData();
     } else {
-      try {
-        isLoading = true;
-        update();
-        common = await _repository.onPartialSavingForDigUserScreen3(
-            counterDomesticController.text, geoDomesticController.text,
-            counterInternationalController.text, geoInternationalController.text, designationController.text,
-            employerController.text, natureOfBusinessController.text,
-            professionController.text, transactionGroupValue,
-            int.parse(expTurnoverAmountController.text), turnoverGroupValue, int.parse(expectedIncomeGroupValue), int.parse(annualIncomeGroupValue),
-            isChecked, occupationGroupValue, inComeGroupValue,
-            controller.newDigUserRegDataAfterOTP!.
-            response!.pepsInfoList![0].answer ?? false,
-            int.parse(controller.newDigUserRegDataAfterOTP!.
-            response!.pepsInfoList![0].questionCode!),
-            controller.newDigUserRegDataAfterOTP!.
-            response!.pepsInfoList![1].answer ?? false,
-            int.parse(controller.newDigUserRegDataAfterOTP!.
-            response!.pepsInfoList![1].questionCode!),
-            controller.newDigUserRegDataAfterOTP!.
-            response!.pepsInfoList![2].answer ?? false,
-            int.parse(controller.newDigUserRegDataAfterOTP!.
-            response!.pepsInfoList![2].questionCode!),
-            controller.newDigUserRegDataAfterOTP!.
-            response!.pepsInfoList![3].answer ?? false,
-            int.parse(controller.newDigUserRegDataAfterOTP!.
-            response!.pepsInfoList![3].questionCode!),
-          controller.newDigUserRegDataAfterOTP!.
-          response!.pepsInfoList![4].answer ?? false,
-          int.parse(controller.newDigUserRegDataAfterOTP!.
-          response!.pepsInfoList![4].questionCode!),
-        );
-
-        isLoading = false;
-        if (noInternet) {
-          noInternet = false;
-        }
-        update();
-        if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
-          Get.toNamed(AppRoute.accountOpenFatcaScreen);
-        }
-      } catch (e) {
-        if (e.toString() == 'Exception: No Internet') {
-          isLoading = false;
-          noInternet = true;
-          update();
-        } else {
-          isLoading = false;
-          noInternet = false;
-          update();
-          Fluttertoast.showToast(
-              msg: e.toString().replaceAll('Exception:', ''),
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }
+      if (geoDomesticController.text == "" ||
+          geoDomesticController.text.isEmpty ||
+          geoDomesticController.text == null) {
+        showToast('Please enter geographic involved domestic');
+      } else if (geoInternationalController.text == "" ||
+          geoInternationalController.text.isEmpty ||
+          geoInternationalController.text == null) {
+        showToast('Please enter geographic involved international');
+      } else if (counterDomesticController.text == "" ||
+          counterDomesticController.text.isEmpty ||
+          counterDomesticController.text == null) {
+        showToast('Please enter counter parties domestic');
+      } else if (counterInternationalController.text == "" ||
+          counterInternationalController.text.isEmpty ||
+          counterInternationalController.text == null) {
+        showToast('Please enter counter parties international');
+      } else {
+        onSaveData();
       }
     }
+  }
+  onSaveData() async {
+    try {
+      isLoading = true;
+      update();
+      common = await _repository.onPartialSavingForDigUserScreen3(
+        counterDomesticController.text, geoDomesticController.text,
+        counterInternationalController.text, geoInternationalController.text, designationController.text,
+        employerController.text, natureOfBusinessController.text,
+        professionController.text, transactionGroupValue,
+        int.parse(expTurnoverAmountController.text), turnoverGroupValue, int.parse(expectedIncomeGroupValue), int.parse(annualIncomeGroupValue),
+        isChecked, occupationGroupValue, inComeGroupValue,
+        controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![0].answer ?? false,
+        int.parse(controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![0].questionCode!),
+        controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![1].answer ?? false,
+        int.parse(controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![1].questionCode!),
+        controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![2].answer ?? false,
+        int.parse(controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![2].questionCode!),
+        controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![3].answer ?? false,
+        int.parse(controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![3].questionCode!),
+        controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![4].answer ?? false,
+        int.parse(controller.newDigUserRegDataAfterOTP!.
+        response!.pepsInfoList![4].questionCode!),
+      );
 
+      isLoading = false;
+      if (noInternet) {
+        noInternet = false;
+      }
+      update();
+      if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+        Get.toNamed(AppRoute.accountOpenFatcaScreen);
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString().replaceAll('Exception:', ''),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
     }
+  }
+
+
+
 
 
 }
