@@ -231,7 +231,8 @@ class Repository {
           String taxPaidCountry,
           String taxResCountryOtherThanPak,
           String titleOfAccount,
-          list) =>
+          list,String taxIdNumber,
+      ) =>
       _apiClient.onFatcaScreenForDigUser(
           birthCitycode,
           birthCountrycode,
@@ -242,7 +243,7 @@ class Repository {
           taxPaidCountry,
           taxResCountryOtherThanPak,
           titleOfAccount,
-          list,Constant.cNic,Constant.sessionID);
+          list,taxIdNumber,Constant.cNic,Constant.sessionID);
 
   Future<NewDigUserRegDataAfterOTP> onNewDigUserRegDataAfterOTP() =>
       _apiClient.onNewDigUserRegDataAfterOTP();
@@ -317,10 +318,11 @@ class Repository {
       Uint8List? cNicFront,
       Uint8List? incomeProof,
       Uint8List? sigPaper,
+      Uint8List? zaKat,
       ) =>
       _apiClient.onPartialSavingForDigUserScreen6(cNicBack,
           cNicFront, incomeProof,
-          sigPaper,Constant.cNic,Constant.sessionID);
+          sigPaper,zaKat,Constant.cNic,Constant.sessionID);
 
 
   Future<Common> onSaveDigUser(

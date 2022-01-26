@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
 
 import '../widgets/no_internet.dart';
 
@@ -580,7 +581,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                       child: RestInvestTitle(
                                           textAlign: TextAlign.center,
                                           fontWeight: FontWeight.w900,
-                                          text: 'Your Score is' +
+                                          text: 'Your Score is ' +
                                               _.calculateValue.toString()))
                                   : const SizedBox(),
                               const RestInvestTitle(
@@ -666,14 +667,32 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                 ],
                               ),
                               space,
-                              CustomRoundButton(
-                                  height: 35,
-                                  text: "SAVE&NEXT",
-                                  onPress: () {
-                                    _.onSaveData();
-                                    // Get.toNamed(AppRoute.accountOpenUploadScreen);
-                                  },
-                                  isRound: false),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomRoundButton(
+                                      height: 35,
+                                      width: 50,
+                                      text: "BACK",
+                                      onPress: () {
+                                        Get.back();
+                                      },
+                                      buttonColor: AppColor.backBlueColor,
+                                      isRound: false),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  CustomRoundButton(
+                                      height: 35,
+                                      width: 50,
+                                      text: "SAVE&NEXT",
+                                      onPress: () {
+                                        // _.onSaveData();
+                                        Get.toNamed(AppRoute.accountOpenUploadScreen);
+                                      },
+                                      isRound: false),
+                                ],
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),

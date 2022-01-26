@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
 
 
 import '../controller/account_opening_kyc_detail_screen_controller.dart';
@@ -180,7 +181,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                             CustomTextFormField(
                                               controller: _.employerController,
                                               isRounded: true,
-                                              hint: "Softech Systems",
+                                              hint: '',
                                               hintColor: AppColor.black,
                                             ),
                                           ],
@@ -203,7 +204,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                             CustomTextFormField(
                                               controller: _.designationController,
                                               isRounded: true,
-                                              hint: "Sr. Analyst and TL ACS",
+                                              hint: "",
                                               hintColor: AppColor.black,
                                             ),
                                           ],
@@ -228,7 +229,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                             CustomTextFormField(
                                               controller: _.natureOfBusinessController,
                                               isRounded: true,
-                                              hint: "Software Development",
+                                              hint: "",
                                               hintColor: AppColor.black,
                                             ),
                                           ],
@@ -243,7 +244,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                           children: [
                                             const RestInvestTitle(
-                                              text: "PROFESSION:",
+                                              text: "",
                                               textColor: AppColor.black,
                                               fontSize: 10,
                                               fontWeight: FontWeight.w900,
@@ -251,62 +252,6 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                             CustomTextFormField(
                                               controller: _.professionController,
                                               isRounded: true,
-                                              hint: "IT",
-                                              hintColor: AppColor.black,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  space,  space,
-                                  const RestInvestTitle(
-                                    text: "GEOGRAPHIES INVOLVED:",
-                                    textColor: AppColor.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  space,
-                                  space,
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            const RestInvestTitle(
-                                              text: 'DOMESTIC:',
-                                              textColor: AppColor.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w900,
-                                            ),
-                                            CustomTextFormField(
-                                              controller: _.geoDomesticController,
-                                              isRounded: true,
-                                              hint: "",
-                                              hintColor: AppColor.black,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 6,
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            const RestInvestTitle(
-                                              text: "INTERNATIONAL:",
-                                              textColor: AppColor.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w900,
-                                            ),
-                                            CustomTextFormField(
-                                              controller: _.geoInternationalController,
-                                              isRounded: true,
                                               hint: "",
                                               hintColor: AppColor.black,
                                             ),
@@ -315,58 +260,119 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  space,
-                                  const RestInvestTitle(
-                                    text: "TYPE OF COUNTER PARTIES:",
-                                    textColor: AppColor.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                  space,
-                                  Row(
+                                  _.occupationGroupValue ==  '015' || _.occupationGroupValue ==  '013'
+                                     ? const SizedBox() : Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            const RestInvestTitle(
-                                              text: 'DOMESTIC:',
-                                              textColor: AppColor.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w900,
-                                            ),
-                                            CustomTextFormField(
-                                              controller: _.counterDomesticController,
-                                              isRounded: true,
-                                              hint: "",
-                                              hintColor: AppColor.black,
-                                            ),
-                                          ],
-                                        ),
+                                      space,
+                                      const RestInvestTitle(
+                                        text: "GEOGRAPHIES INVOLVED:",
+                                        textColor: AppColor.black,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
                                       ),
-                                      const SizedBox(
-                                        width: 6,
+                                      space,
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                const RestInvestTitle(
+                                                  text: 'DOMESTIC:',
+                                                  textColor: AppColor.black,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w900,
+                                                ),
+                                                CustomTextFormField(
+                                                  controller: _.geoDomesticController,
+                                                  isRounded: true,
+                                                  hint: "",
+                                                  hintColor: AppColor.black,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 6,
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                const RestInvestTitle(
+                                                  text: "INTERNATIONAL:",
+                                                  textColor: AppColor.black,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w900,
+                                                ),
+                                                CustomTextFormField(
+                                                  controller: _.geoInternationalController,
+                                                  isRounded: true,
+                                                  hint: "",
+                                                  hintColor: AppColor.black,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            const RestInvestTitle(
-                                              text: "INTERNATIONAL:",
-                                              textColor: AppColor.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w900,
+                                      space,
+                                      const RestInvestTitle(
+                                        text: "TYPE OF COUNTER PARTIES:",
+                                        textColor: AppColor.black,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                      space,
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                const RestInvestTitle(
+                                                  text: 'DOMESTIC:',
+                                                  textColor: AppColor.black,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w900,
+                                                ),
+                                                CustomTextFormField(
+                                                  controller: _.counterDomesticController,
+                                                  isRounded: true,
+                                                  hint: "",
+                                                  hintColor: AppColor.black,
+                                                ),
+                                              ],
                                             ),
-                                            CustomTextFormField(
-                                              controller: _.counterInternationalController,
-                                              isRounded: true,
-                                              hint: "",
-                                              hintColor: AppColor.black,
+                                          ),
+                                          const SizedBox(
+                                            width: 6,
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                const RestInvestTitle(
+                                                  text: "INTERNATIONAL:",
+                                                  textColor: AppColor.black,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w900,
+                                                ),
+                                                CustomTextFormField(
+                                                  controller: _.counterInternationalController,
+                                                  isRounded: true,
+                                                  hint: "",
+                                                  hintColor: AppColor.black,
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -639,15 +645,31 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Checkbox(
-                                          checkColor: AppColor.whiteColor,
-                                          fillColor: MaterialStateColor.resolveWith(
-                                                  (states) => AppColor.blueColor),
-                                          value: _.isChecked,
-                                          onChanged: (bool? val) {
-                                            _.isChecked = val!;
-                                            _.update();
-                                          }),
+                                      SizedBox(
+                                        height: 25,
+                                        width: 25,
+                                        child: Checkbox(
+                                            checkColor: AppColor.whiteColor,
+                                            fillColor: MaterialStateColor.resolveWith(
+                                                    (states) => AppColor.blueColor),
+                                            value: _.isChecked,
+                                            onChanged: (bool? val) {
+                                              _.isChecked = val!;
+                                              _.update();
+                                            }
+                                            ),
+                                      ),
+                                      const SizedBox(width: 5,),
+                                      const Expanded(
+                                        child: RestInvestTitle(
+                                          text:
+                                          "I hereby confirm that I have read and understood the instructions mentioned herein which apply to National Investment Trust Limited (NIT) and its funds National Investment (Unit) Trust Fund, NIT Government Bond Fund, NIT Income Fund, NIT Social Impact Fund, NIT Islamic Equity Fund, NIT Islamic Money Market Fund, NIT Money Market Fund, NIT Islamic Income Fund, NIT Asset Allocation Fund, NIT Pension Fund, NIT Islamic Pension Fund and any other fund(s) offered by NIT from time to time, for compliance of Customer Due Diligence (CDD) and Know Your Client (KYC) procedures for transaction in Funds units issued by NIT. I agree to abide by the terms, conditions, rules, regulations and other statutory requirements applicable to NIT and respective Funds. I hereby declare that the particulars given herein are true, correct and complete to the best of my/ our knowledge and belief; the relevant documents submitted along with this application are genuine. I hereby undertake to promptly inform NIT of any changes to the information provided herein and agree and accept that NIT is not liable or responsible for any losses, costs, damages arising out of any actions undertaken or activities performed by NIT on the basis of the information provided by me and also due to my not intimating/delay in intimating such changes. I hereby authorize NIT to disclose, share, remit in any form, mode or manner, all/any of the information provided by me relating to the respective Funds in which I may transact/have transacted including all changes, updates to such information as and when provided by me if such required to be submitted under the laws. I hereby agree to provide any additional information/Documentation that may be required by the NIT, in connection with this Application Form. I further confirm to have read the Trust Deed and Offering Documents of the Fund I wish to invest in and I hereby bind ourselves and agree to the contents of the same.",
+                                          textColor: AppColor.black,
+                                          textAlign: TextAlign.justify,
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   space,
@@ -661,7 +683,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           onPress: () {
                                             Get.back();
                                           },
-                                          buttonColor: AppColor.dimBlue,
+                                          buttonColor: AppColor.backBlueColor,
                                           isRound: false),
                                       const SizedBox(
                                         width: 10,

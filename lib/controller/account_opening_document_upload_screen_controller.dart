@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:investintrust/utils/constants.dart';
+import 'package:path/path.dart' as p;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,20 +22,23 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
   File? cnicBack;
   File? srcIncome;
   File? plainImage;
+  File? zaKatImage;
   File? otherImage;
   String? cnicFrontName;
   String? cnicBackName;
   String? srcIncomeName;
   String? plainImageName;
   String? otherImageName;
+  String? zaKatImageName;
   Common? common;
   bool isLoading = false;
   bool noInternet = false;
   bool cnicFrontUpload = false;
   bool cnicBackUpload = false;
-  bool cnicProofUpload = false;
-  bool cnicSignUpload = false;
-  bool cnicOtherUpload = false;
+  bool incomeProofUpload = false;
+  bool signUpload = false;
+  bool zaKatUpload = false;
+  bool otherUpload = false;
   final _repository = Repository();
 
   Future<File?> getImageFromGallery() async {
@@ -69,47 +73,52 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
         showToast('Please select cnic source of income image');
       } else if(plainImage == null){
         showToast('Please select plane image');
-      } else{
-        try {
-          isLoading = true;
-          update();
-          Uint8List cNicB =  cnicBack!.readAsBytesSync();
-          Uint8List cNicF =  cnicFront!.readAsBytesSync();
-          Uint8List srcIn =  srcIncome!.readAsBytesSync();
-          Uint8List planImg =  plainImage!.readAsBytesSync();
-          common = await _repository.onPartialSavingForDigUserScreen6(cNicB, cNicF,
-              srcIn, planImg);
-          isLoading = false;
-          if (noInternet) {
-            noInternet = false;
-          }
-          update();
-          if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
-            Get.to(AccountOpenPreviewScreen(cNicFront: cNicF,
-                cNicBack: cNicB, sourceIncome: srcIn,
-                sigPage: planImg));
-          }
-        } catch (e) {
-          if (e.toString() == 'Exception: No Internet') {
-            isLoading = false;
-            noInternet = true;
-            update();
-          } else {
-            isLoading = false;
-            noInternet = false;
-            update();
-            showToast(e.toString().replaceAll('Exception:', ''));
-          }
+      } else if(Constant.zakValue == 'YES'){
+        if(plainImage == null){
+          showToast('Please select zakat image');
+        } else {
+          onUploadDoc();
         }
+      } else{
+        onUploadDoc();
       }
-
-
-
-
-
-
   }
 
+  onUploadDoc() async {
+    try {
+      isLoading = true;
+      update();
+      Uint8List cNicB =  cnicBack!.readAsBytesSync();
+      Uint8List cNicF =  cnicFront!.readAsBytesSync();
+      Uint8List srcIn =  srcIncome!.readAsBytesSync();
+      Uint8List planImg =  plainImage!.readAsBytesSync();
+      Uint8List? zaKat;
+      if(zaKatImage != null){
+        zaKat = zaKatImage!.readAsBytesSync();
+      }
+      common = await _repository.onPartialSavingForDigUserScreen6(cNicB, cNicF,
+          srcIn, planImg,zaKat);
+      isLoading = false;
+      if (noInternet) {
+        noInternet = false;
+      }
+      update();
+      if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+        Get.to(const AccountOpenPreviewScreen());
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        showToast(e.toString().replaceAll('Exception:', ''));
+      }
+    }
+  }
 
 
 }

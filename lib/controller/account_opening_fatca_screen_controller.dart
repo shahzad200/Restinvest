@@ -7,6 +7,7 @@ import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/state_data.dart' as state;
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 import 'package:investintrust/widgets/custome_dialog.dart';
 
@@ -26,7 +27,7 @@ class AccountOpenFatcaController extends GetxController {
   bool termsConditions = false;
   var charactor = 0;
   TextEditingController titleController = TextEditingController();
-
+  TextEditingController tinNumberController = TextEditingController();
   TextEditingController cnicController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
@@ -40,9 +41,9 @@ class AccountOpenFatcaController extends GetxController {
   String countryCode = "";
   String stateValue = "";
   String stateCode = "";
-  String taxCountryValue = "";
+  String taxCountryValue = "PAKISTAN";
   String cityCode = "";
-  String taxCountryCode = "";
+  String taxCountryCode = "001";
   String birthCityValue = "";
   String birthCityCode = "";
   String taxResCountriesOtherThanPakGroupValue = '0';
@@ -79,6 +80,8 @@ class AccountOpenFatcaController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
+    titleController.text = Constant.uTitle;
+    cnicController.text = Constant.cNic;
     super.onInit();
   }
 
@@ -97,78 +100,20 @@ class AccountOpenFatcaController extends GetxController {
                 print("terms conditions");
                 if (birthCityValue != null && birthCityValue != "") {
                   print("city2");
-                  if (tinNumber != null && tinNumber != "") {
-                    print("tin number");
                     if (disclaimerIsChecked != false) {
-                      try {
-                        CustomDialog(context);
-                        isLoading = true;
-                        update();
-                        print("cnic${cnicController.text}");
-                        print("citycode${cityCode}");
-                        print("cityvalue${taxCountryValue}");
-                        print("counrty${countryCode}");
-                        print("state${stateCode}");
-                        print("disclaim${disclaimerIsChecked}");
-                        print("term${termsConditions}");
-                        print("birthcity${birthCityCode}");
-                        print("then${taxResCountriesOtherThanPakGroupValue}");
-                        print("title${titleController.text}");
-                        print("list${list}");
-                         common =
-                        await _repository.onFatcaScreenForDigUser(
-                            birthCityCode,
-                            countryCode,
-                            stateCode,
-                            disclaimerIsChecked,
-                            termsConditions,
-                            taxCountryValue,
-                            taxCountryCode,
-                            taxResCountriesOtherThanPakGroupValue,
-                            titleController.text,
-                            list);
-                         print(common.toString());
-                        isLoading = false;
-                        if (noInternet) {
-                          noInternet = false;
+                      if(taxCountryCode != '001'){
+                        if(tinNumberController.text != null && tinNumberController.text != "")
+                        {
+                          onSaveData(context);
+                        }else{
+                          showToast('Please enter Tin Number');
                         }
-                        update();
-                        if (common!.meta!.message == 'OK' &&
-                            common!.meta!.code == '200') {
-                          // Get.back();
-                          Get.toNamed(AppRoute.accountOpenURiskScreen);
-                        } else {
-                          Get.back();
-                          customDialogPin(
-                              context, common!.meta!.error.toString());
-                        }
-                      } catch (e) {
-                        // Get.back();
-                        if (e.toString() == 'Exception: No Internet') {
-                          isLoading = false;
-                          noInternet = true;
-                          update();
-                        } else {
-                          Get.back();
-                          isLoading = false;
-                          noInternet = false;
-                          update();
-                          Fluttertoast.showToast(
-                              msg: e.toString().replaceAll('Exception:', ''),
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.black,
-                              textColor: Colors.white,
-                              fontSize: 16.0);
-                        }
+                      }else{
+                        onSaveData(context);
                       }
                     } else {
                       showToast('Please check disclaimer');
                     }
-                  } else {
-                    showToast('Tin Number should not empty');
-                  }
                 } else {
                   showToast('Select city');
                 }
@@ -191,6 +136,73 @@ class AccountOpenFatcaController extends GetxController {
       showToast('Give account Title');
     }
   }
+
+  onSaveData(BuildContext context) async{
+    try {
+      // CustomDialog(context);
+      isLoading = true;
+      update();
+      print("cnic${cnicController.text}");
+      print("citycode${cityCode}");
+      print("cityvalue${taxCountryValue}");
+      print("counrty${countryCode}");
+      print("state${stateCode}");
+      print("disclaim${disclaimerIsChecked}");
+      print("term${termsConditions}");
+      print("birthcity${birthCityCode}");
+      print("then${taxResCountriesOtherThanPakGroupValue}");
+      print("title${titleController.text}");
+      print("list${list}");
+      common =
+          await _repository.onFatcaScreenForDigUser(
+          birthCityCode,
+          countryCode,
+          stateCode,
+          disclaimerIsChecked,
+          termsConditions,
+          taxCountryValue,
+          taxCountryCode,
+          taxResCountriesOtherThanPakGroupValue,
+          titleController.text,
+          list,taxCountryCode == '001' ? '' : tinNumberController.text);
+      print(common.toString());
+      isLoading = false;
+      if (noInternet) {
+        noInternet = false;
+      }
+      update();
+      if (common!.meta!.message == 'OK' &&
+          common!.meta!.code == '200') {
+        // Get.back();
+        Get.toNamed(AppRoute.accountOpenURiskScreen);
+      } else {
+        Get.back();
+        customDialogPin(
+            context, common!.meta!.error.toString());
+      }
+    } catch (e) {
+      // Get.back();
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        Get.back();
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString().replaceAll('Exception:', ''),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
+
 
   onCityData(String countryCode) async {
     try {

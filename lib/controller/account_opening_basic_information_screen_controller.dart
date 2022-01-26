@@ -7,6 +7,7 @@ import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_after_otp.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
 import 'account_opening_request_screen_controller.dart';
@@ -197,9 +198,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
       showToast('Please select religion');
     } else if(zaKatValue == "" && zaKatCode == ""){
       showToast('Please select zakat exemption');
-    } else if(retirementValue == "" && retirementCode == ""){
-      showToast('Please select retirement age');
-    }  else if(mobileController.text == "" || mobileController.text.isEmpty || mobileController.text == null){
+    } else if(mobileController.text == "" || mobileController.text.isEmpty || mobileController.text == null){
       showToast('Please enter mobile number');
     }
     // else if(phoneController.text == "" || phoneController.text.isEmpty || phoneController.text == null){
@@ -233,51 +232,62 @@ class AccountOpenBasicInformationScreenController extends GetxController{
       showToast('Please select dividend mandate');
     } else if(!isChecked){
       showToast('Please check disclaimer');
-    } else {
-      try {
-        isLoading = true;
-        update();
-        common = await _repository.onPartialSavingForDigUser(
-            controller.emailController.text, controller.mobileNumberController.text,
-            controller.mobileNumberOwnerCode, controller.groupValue, iBanNumberController.text,
-            bankBranchController.text, bankNameCode, isChecked,
-            bankCityCode, currentCityCode, cNicExpDate, cNicIssueDate, currentCountryCode,
-            nameController.text, dObDate, dividendMandateGroupValue, fNameController.text,
-            mailingAddressController.text, mailingCountryCode, mailingCityCode, martialCode,
-            mNameController.text, nationalityCode,residentStatusCode,religionCode, currentAddressController.text,
-            int.parse(retirementCode), titleCode, zaKatCode, kinNameController.text,
-            kiNcNicController.text, kinRelationCode, kinMobileNumberController.text);
-
-        isLoading = false;
-        if (noInternet) {
-          noInternet = false;
-        }
-        update();
-        if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
-          Get.toNamed(
-              AppRoute.accountOpenKycDetailScreen);
-        }
-      } catch (e) {
-        if (e.toString() == 'Exception: No Internet') {
-          isLoading = false;
-          noInternet = true;
-          update();
-        } else {
-          isLoading = false;
-          noInternet = false;
-          update();
-          Fluttertoast.showToast(
-              msg: e.toString().replaceAll('Exception:', ''),
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }
-      }
+    } else if(Constant.accType == 'I') {
+      onSave();
+    } else if(retirementValue == "" && retirementCode == ""){
+      showToast('Please select retirement age');
+  }  else {
+      onSave();
     }
   }
 
+  onSave() async {
+    try {
+      isLoading = true;
+      update();
+      common = await _repository.onPartialSavingForDigUser(
+          controller.emailController.text, controller.mobileNumberController.text,
+          controller.mobileNumberOwnerCode, controller.groupValue, iBanNumberController.text,
+          bankBranchController.text, bankNameCode, isChecked,
+          bankCityCode, currentCityCode, cNicExpDate, cNicIssueDate, currentCountryCode,
+          nameController.text, dObDate, dividendMandateGroupValue, fNameController.text,
+          mailingAddressController.text, mailingCountryCode, mailingCityCode, martialCode,
+          mNameController.text, nationalityCode,residentStatusCode,religionCode, currentAddressController.text,
+          Constant.accType == 'I' ? 0 : int.parse(retirementCode), titleCode, zaKatCode, kinNameController.text,
+          kiNcNicController.text, kinRelationCode, kinMobileNumberController.text);
+
+      isLoading = false;
+      if (noInternet) {
+        noInternet = false;
+      }
+      update();
+      if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
+        if(zaKatValue == 'YES') {
+          Constant.zakValue = zaKatValue;
+        }
+        Constant.uTitle = titleValue;
+        Get.toNamed(
+            AppRoute.accountOpenKycDetailScreen);
+      }
+    } catch (e) {
+      if (e.toString() == 'Exception: No Internet') {
+        isLoading = false;
+        noInternet = true;
+        update();
+      } else {
+        isLoading = false;
+        noInternet = false;
+        update();
+        Fluttertoast.showToast(
+            msg: e.toString().replaceAll('Exception:', ''),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
 
 }

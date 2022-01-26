@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
 import '../data/models/new_dig_user_reg_data_after_otp.dart';
 
 import '../views/account_opening_basic_information_screen.dart';
@@ -95,7 +96,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                         ),
                                         CustomTextFormField(
                                           isRounded: true,
-                                          hint: "Title",
+                                          hint: "",
                                           controller: _.titleController,
                                           textInputType: TextInputType.text,
                                           hintColor: AppColor.black,
@@ -120,7 +121,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                         ),
                                         CustomTextFormField(
                                           isRounded: true,
-                                          hint: "11111-1111111-1",
+                                          hint: "",
                                           textInputType: const TextInputType
                                               .numberWithOptions(),
                                           inputFormator: [
@@ -186,7 +187,9 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                       _.countryValue == ""
                                                   ? "Country"
                                                   : _.countryValue,
-                                              textColor: AppColor.black,
+                                              textColor: _.countryValue == null ||
+                                                  _.countryValue == ""
+                                                  ? AppColor.dimblack : AppColor.black,
                                               fontSize: 12,
                                             ),
                                             icon: const Icon(
@@ -267,7 +270,9 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                       _.stateData == null
                                                   ? "State"
                                                   : _.stateValue,
-                                              textColor: AppColor.black,
+                                              textColor: _.stateValue == null ||
+                                                  _.stateValue == ""
+                                                  ? AppColor.dimblack : AppColor.black,
                                               fontSize: 12,
                                             ),
                                             icon: const Icon(
@@ -343,8 +348,9 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                                     ""
                                                             ? "City"
                                                             : _.birthCityValue,
-                                                        textColor:
-                                                            AppColor.black,
+                                                        textColor:_.birthCityValue == null ||
+                                                            _.birthCityValue == ""
+                                                            ? AppColor.dimblack : AppColor.black,
                                                         fontSize: 12,
                                                       ),
                                                       icon: const Icon(
@@ -733,14 +739,38 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                     width: 6,
                                   ),
                                   Expanded(
-                                    child: EmptyContainer(
-                                      hintColor: AppColor.black,
-                                      text: "TIN NUMBER:",
-                                      hint: "${_.tinNumber}",
-                                      textColor: AppColor.black,
-                                      fontWeight: FontWeight.w900,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                         RestInvestTitle(
+                                          text: 'TIN NUMBER:',
+                                          textColor: _.taxCountryCode == '001' ?
+                                          AppColor.dimblack :
+                                          AppColor.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                        CustomTextFormField(
+                                          controller: _.tinNumberController,
+                                          isRounded: true,
+                                          enable: _.taxCountryCode == '001' ? false :
+                                              true,
+                                          hint: "",
+                                          hintColor: AppColor.black,
+                                        ),
+                                      ],
                                     ),
                                   ),
+                                  // Expanded(
+                                  //   child: EmptyContainer(
+                                  //     hintColor: AppColor.black,
+                                  //     text: "TIN NUMBER:",
+                                  //     hint: "${_.tinNumber}",
+                                  //     textColor: AppColor.black,
+                                  //     fontWeight: FontWeight.w900,
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                               space,
@@ -787,13 +817,32 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                 ],
                               ),
                               space,
-                              CustomRoundButton(
-                                  height: 35,
-                                  text: "SAVE&NEXT",
-                                  onPress: () {
-                                    _.onSave(context);
-                                  },
-                                  isRound: false),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomRoundButton(
+                                      height: 35,
+                                      width: 50,
+                                      text: "BACK",
+                                      onPress: () {
+                                        Get.back();
+                                      },
+                                      buttonColor: AppColor.backBlueColor,
+                                      isRound: false),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  CustomRoundButton(
+                                      height: 35,
+                                      width: 50,
+                                      text: "SAVE&NEXT",
+                                      onPress: () {
+                                        _.onSave(context);
+                                        // Get.toNamed(AppRoute.accountOpenURiskScreen);
+                                      },
+                                      isRound: false),
+                                ],
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),

@@ -31,8 +31,8 @@ import 'models/view_reports.dart';
 
 class ApiClient {
   static const _baseUrl =
-      // 'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
-      'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
+      'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
+      // 'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
   // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
@@ -1221,6 +1221,7 @@ class ApiClient {
       String taxResCountryOtherThanPak,
       String titleOfAccount,
       list,
+      String taxIdNumber,
       String cNic, String sessionID
       ) async {
     Common? common;
@@ -1236,7 +1237,7 @@ class ApiClient {
         "crsDisclaimerChecked":disclamierCheck,
         "fatcaDisclaimerChecked":fatcaDisclamierCheck,
         "otherTaxResCountry":"test tax res country",
-        "taxIdentificationNumber":null,
+        "taxIdentificationNumber":taxIdNumber,
         "taxPaidCountry":"$taxPaidCountry",
         "taxResCountryOtherThanPak":"$taxResCountryOtherThanPak",
         "titleOfAccount":"$titleOfAccount",
@@ -1624,6 +1625,7 @@ class ApiClient {
       Uint8List? cNicFront,
       Uint8List? incomeProof,
       Uint8List? sigPaper,
+      Uint8List? zaKat,
       String cNic,
       String sessionID
       ) async {
@@ -1658,7 +1660,11 @@ class ApiClient {
           "fileExtension":".jpg",
           "fileContent":sigPaper
         },
-        "zakatDeclarationDoc":null,
+        "zakatDeclarationDoc":zaKat != null ?{
+          "fileName":"zakat.jpg",
+          "fileExtension":".jpg",
+          "fileContent":zaKat
+        } : null,
         "requiredDocs":[]
       }.toString()));
       final response = await http.post(

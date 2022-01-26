@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/utils/constants.dart';
 import '../controller/account_opening_preview_screen_controller.dart';
 
 import '../widgets/button.dart';
@@ -14,16 +15,14 @@ import '../utils/colors.dart';
 import '../widgets/constant_widget.dart';
 
 class AccountOpenPreviewScreen extends StatelessWidget {
-  const AccountOpenPreviewScreen({Key? key, required this.cNicFront,
-    required this.cNicBack,
-    required this.sourceIncome,
-    required this.sigPage}
+  const AccountOpenPreviewScreen({Key? key}
   ) : super(key: key);
 
-  final Uint8List cNicFront;
-  final Uint8List cNicBack;
-  final Uint8List sourceIncome;
-  final Uint8List sigPage;
+   // Uint8List? cNicFront;
+   // Uint8List? cNicBack;
+   // Uint8List? sourceIncome;
+   // Uint8List? sigPage;
+   // Uint8List? zktPaper;
   @override
   Widget build(BuildContext context) {
     // final width = Get.width;
@@ -77,97 +76,129 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                       SingleChildScrollView(
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            // Row(
-                            //   children: const [
-                            //     RestInvestTitle(
-                            //       text: " OTP VERIFY> ",
-                            //       textAlign: TextAlign.start,
-                            //       textColor: AppColor.dimblack,
-                            //       fontSize: 8,
-                            //       fontWeight: FontWeight.w900,
-                            //     ),
-                            //     RestInvestTitle(
-                            //       text: " BASIC INFORMATION> ",
-                            //       textAlign: TextAlign.start,
-                            //       textColor: AppColor.dimblack,
-                            //       fontSize: 8,
-                            //       fontWeight: FontWeight.w900,
-                            //     ),
-                            //     RestInvestTitle(
-                            //       text: "KYC DETAIL> ",
-                            //       textAlign: TextAlign.start,
-                            //       textColor: AppColor.dimblack,
-                            //       fontSize: 8,
-                            //       fontWeight: FontWeight.w900,
-                            //     ),
-                            //     RestInvestTitle(
-                            //       text: " FATCA> ",
-                            //       textAlign: TextAlign.start,
-                            //       textColor: AppColor.dimblack,
-                            //       fontWeight: FontWeight.w900,
-                            //       fontSize: 8,
-                            //     ),
-                            //     RestInvestTitle(
-                            //       text: "UPLOAD DOCUMENTS> ",
-                            //       textAlign: TextAlign.start,
-                            //       textColor: AppColor.dimblack,
-                            //       fontWeight: FontWeight.w900,
-                            //       fontSize: 8,
-                            //     ),
-                            //     RestInvestTitle(
-                            //       text: " PREVIEW> ",
-                            //       textAlign: TextAlign.start,
-                            //       textColor: AppColor.blueColor,
-                            //       fontSize: 8,
-                            //       fontWeight: FontWeight.w900,
-                            //     ),
-                            //   ],
-                            // ),
-                            space,
-                            const RestInvestTitle(
-                              text: "1: Upload Image ",
-                              textAlign: TextAlign.start,
-                              textColor: AppColor.blueColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w900,
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    space,
+                                    InkWell(
+                                      onTap: (){
+                                        _.sigPage = false;
+                                        _.zaKat = false;
+                                        _.cNicFront = true;
+                                        _.cNicBack = false;
+                                        _.srcIncome = false;
+                                        _.update();
+                                      },
+                                      child: const RestInvestTitle(
+                                        text: "1: Cnic Front",
+                                        textAlign: TextAlign.start,
+                                        textColor: AppColor.blueColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    space,
+                                    InkWell(
+                                      onTap: (){
+                                        _.sigPage = false;
+                                        _.zaKat = false;
+                                        _.cNicFront = false;
+                                        _.cNicBack = true;
+                                        _.srcIncome = false;
+                                        _.update();
+                                      },
+                                      child: const RestInvestTitle(
+                                        text: "2: Cnic Back",
+                                        textAlign: TextAlign.start,
+                                        textColor: AppColor.blueColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    space,
+                                    InkWell(
+                                      onTap: (){
+                                        _.sigPage = false;
+                                        _.zaKat = false;
+                                        _.cNicFront = false;
+                                        _.cNicBack = false;
+                                        _.srcIncome = true;
+                                        _.update();
+                                      },
+                                      child: const RestInvestTitle(
+                                        text: "3: Source of Income",
+                                        textAlign: TextAlign.start,
+                                        textColor: AppColor.blueColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    space,
+                                    InkWell(
+                                      onTap: (){
+                                        _.sigPage = true;
+                                        _.zaKat = false;
+                                        _.cNicFront = false;
+                                        _.cNicBack = false;
+                                        _.srcIncome = false;
+                                        _.update();
+                                      },
+                                      child: const RestInvestTitle(
+                                        text: "4: Signature",
+                                        textAlign: TextAlign.start,
+                                        textColor: AppColor.blueColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    Constant.zakValue == 'YES' ? space : const SizedBox(),
+                                    Constant.zakValue == 'YES' ? InkWell(
+                                      onTap: (){
+                                        _.zaKat = true;
+                                        _.cNicFront = false;
+                                        _.cNicBack = false;
+                                        _.srcIncome = false;
+                                        _.sigPage = false;
+                                        _.update();
+                                      },
+                                      child:  const RestInvestTitle(
+                                        text: "5: Zakat Paper",
+                                        textAlign: TextAlign.start,
+                                        textColor: AppColor.blueColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    )
+                                    :const SizedBox(),
+                                  ],
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    // mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      SizedBox(
+                                        height: 100,
+                                        width: 200,
+                                        child:
+                                        Image.memory(
+                                            _.cNicFront ? _.con.cnicFront!.readAsBytesSync()
+                                        : _.cNicBack ? _.con.cnicBack!.readAsBytesSync()
+                                        : _.srcIncome ? _.con.srcIncome!.readAsBytesSync()
+                                        : _.sigPage ? _.con.plainImage!.readAsBytesSync()
+                                        : _.zaKat ? _.con.zaKatImage!.readAsBytesSync()
+                                                : _.con.cnicFront!.readAsBytesSync()
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
-                            space,
-                            const RestInvestTitle(
-                              text: "2: Upload Image ",
-                              textAlign: TextAlign.start,
-                              textColor: AppColor.blueColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w900,
-                            ),
-                            space,
-                            const RestInvestTitle(
-                              text: "3: Upload Image ",
-                              textAlign: TextAlign.start,
-                              textColor: AppColor.blueColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w900,
-                            ),
-                            space,
-                            const RestInvestTitle(
-                              text: "4: Upload Image ",
-                              textAlign: TextAlign.start,
-                              textColor: AppColor.blueColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w900,
-                            ),
-                            space,
-                            const RestInvestTitle(
-                              text: "5: Upload Image ",
-                              textAlign: TextAlign.start,
-                              textColor: AppColor.blueColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w900,
-                            ),
-                            space,
-                            space,
                             space,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -176,8 +207,10 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                     height: 35,
                                     width: 80,
                                     text: "BACK",
-                                    buttonColor: AppColor.dimBlue,
-                                    onPress: () {},
+                                    buttonColor: AppColor.backBlueColor,
+                                    onPress: () {
+                                      Get.back();
+                                    },
                                     isRound: false),
                                 const SizedBox(
                                   width: 10,
@@ -192,7 +225,6 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                     isRound: false),
                               ],
                             ),
-                            space,
                           ],
                         ),
                       ),

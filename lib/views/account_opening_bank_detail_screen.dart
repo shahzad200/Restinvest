@@ -479,7 +479,9 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                     height: 40,
                                     buttonColor: AppColor.dimBlue,
                                     textColor: AppColor.whiteColor,
-                                    onPress: () {}),
+                                    onPress: () {
+                                      Get.back();
+                                    }),
                                 CustomRoundButton(
                                     isRound: false,
                                     text: "SAVE&NEXT",

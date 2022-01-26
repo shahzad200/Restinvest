@@ -326,11 +326,37 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    CustomRoundButton(height: 35,
-                                        isRound: false, text: "Next", onPress: () {
-                                          _.onValidateVerificationCodeForDigUser();
-                                          // Get.toNamed(AppRoute.accountopeningbasicinformation);
-                                        }),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        CustomRoundButton(
+                                            isRound: false,
+                                            text: "BACK",
+                                            width: 120,
+                                            height: 40,
+                                            buttonColor: AppColor.backBlueColor,
+                                            textColor: AppColor.whiteColor,
+                                            onPress: () {
+                                              Get.back();
+                                            }),
+                                        CustomRoundButton(
+                                            isRound: false,
+                                            text: "NEXT",
+                                            width: 120,
+                                            height: 40,
+                                            buttonColor: AppColor.blueColor,
+                                            textColor: AppColor.whiteColor,
+                                            onPress: () {
+                                              _.onValidateVerificationCodeForDigUser();
+                                              // Get.toNamed(AppRoute.accountopeningbasicinformation);
+                                            }),
+                                      ],
+                                    ),
+                                    // CustomRoundButton(height: 35,
+                                    //     isRound: false, text: "Next", onPress: () {
+                                    //       _.onValidateVerificationCodeForDigUser();
+                                    //       // Get.toNamed(AppRoute.accountopeningbasicinformation);
+                                    //     }),
                                     const SizedBox(
                                       height: 10,
                                     ),

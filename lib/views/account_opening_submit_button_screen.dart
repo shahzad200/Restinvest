@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
 import '../controller/account_opening_submit_button_screen_controller.dart';
 import '../widgets/button.dart';
 import '../utils/colors.dart';
@@ -150,7 +151,9 @@ class AccountOpenSubmitButtonScreen extends StatelessWidget {
                                   height: 35,
                                   width: 80,
                                   text: "OK",
-                                  onPress: () {},
+                                  onPress: () {
+                                    Get.offAllNamed(AppRoute.homeRoute);
+                                  },
                                   isRound: false),
                             ),
                             const SizedBox(

@@ -109,7 +109,7 @@ class DateFormFieldContainer extends StatelessWidget {
     return DateTimeFormField(
       enabled: enable,
       decoration: InputDecoration(fillColor: AppColor.whiteColor,filled: true,alignLabelWithHint: false,
-        hintStyle: const TextStyle(color: AppColor.black,),
+        hintStyle: const TextStyle(color: AppColor.dimblack,),
         errorStyle: const TextStyle(color: Colors.redAccent),
 
         border: OutlineInputBorder(

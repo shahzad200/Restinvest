@@ -252,6 +252,9 @@ class AccountOpenRequestScreenController extends GetxController {
         if(validateVerificationCodeForDigUser!.meta!.message == 'OK' && validateVerificationCodeForDigUser!.meta!.code == '200'){
           Constant.sessionID = validateVerificationCodeForDigUser!.response!.sessionID!;
           Constant.cNic = validateVerificationCodeForDigUser!.response!.cnic!;
+          if(groupValue == 'I'){
+            Constant.accType = 'I';
+          }
           Get.toNamed(AppRoute.accountopeningbasicinformation);
         }
       } catch (e) {

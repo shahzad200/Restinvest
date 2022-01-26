@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constants.dart';
 import '../data/models/new_dig_user_reg_data_after_otp.dart';
 
 import '../utils/constant.dart';
@@ -129,7 +131,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             _.titleValue == ""
                                             ? "Title"
                                             : _.titleValue,
-                                        textColor: AppColor.black,
+                                        textColor: _.titleValue == null ||
+                                            _.titleValue == ""
+                                            ? AppColor.dimblack : AppColor.black,
                                         fontSize: 12,
                                       ),
                                       icon: const Icon(Icons.keyboard_arrow_down,
@@ -282,7 +286,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             child: DateFormFieldContainer(
                                               isRounded: false,
                                               isTrue: true,
-                                              text: '01/01/2022',
+                                              text: DateTime.now().day.toString()+'/'+DateTime.now().month.toString()+'/'+DateTime.now().year.toString(),
                                               mode: DateTimeFieldPickerMode.date,
                                               dateFormatTrue: true,
                                               initialValue: DateTime.now(),
@@ -313,7 +317,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             height: 37,
                                             child: DateFormFieldContainer(
                                               isRounded: false,
-                                              text: '31/01/2022',
+                                              text: DateTime.now().day.toString()+'/'+DateTime.now().month.toString()+'/'+DateTime.now().year.toString(),
                                               mode: DateTimeFieldPickerMode.date,
                                               dateFormatTrue: true,
                                               isTrue: true,
@@ -348,7 +352,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             child: DateFormFieldContainer(
                                               isRounded: false,
                                               isTrue: true,
-                                              text: '15/01/2013',
+                                              text: DateTime.now().day.toString()+'/'+DateTime.now().month.toString()+'/'+DateTime.now().year.toString(),
                                               mode: DateTimeFieldPickerMode.date,
                                               dateFormatTrue: true,
                                               initialValue: DateTime.now(),
@@ -399,7 +403,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       _.martialValue == ""
                                                       ? "Status"
                                                       : _.martialValue,
-                                                  textColor: AppColor.black,
+                                                  textColor: _.martialValue == null ||
+                                                      _.martialValue == ""
+                                                      ? AppColor.dimblack : AppColor.black,
                                                     fontSize: 12,
                                                 ),
                                                 icon: const Icon(
@@ -482,7 +488,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       _.nationalityValue == ""
                                                       ? "Nationality"
                                                       : _.nationalityValue,
-                                                  textColor: AppColor.black,
+                                                  textColor: _.nationalityValue == null ||
+                                                      _.nationalityValue == ""
+                                                      ? AppColor.dimblack : AppColor.black,
                                                   fontSize: 12,
                                                 ),
                                                 icon: const Icon(
@@ -561,7 +569,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       ? "Residential"
                                                       : _.residentStatusValue,
                                                   fontSize: 12,
-                                                  textColor: AppColor.black,
+                                                  textColor: _.residentStatusValue == null ||
+                                                      _.residentStatusValue == ""
+                                                      ? AppColor.dimblack : AppColor.black,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
@@ -642,7 +652,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       _.religionValue == ""
                                                       ? "Religion"
                                                       : _.religionValue,
-                                                  textColor: AppColor.black,
+                                                  textColor:_.religionValue == null ||
+                                                      _.religionValue == ""
+                                                      ? AppColor.dimblack : AppColor.black,
                                                   fontSize: 12,
                                                 ),
                                                 icon: const Icon(
@@ -717,7 +729,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       _.zaKatValue == ""
                                                       ? "Zakat Ex"
                                                       : _.zaKatValue,
-                                                  textColor: AppColor.black,
+                                                  textColor:_.zaKatValue == null ||
+                                                      _.zaKatValue == ""
+                                                      ? AppColor.dimblack : AppColor.black,
                                                   fontSize: 12,
                                                 ),
                                                 icon: const Icon(
@@ -763,7 +777,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Expanded(
+                                    Constant.accType != 'I' ?  Expanded(
                                       child: Column(
                                         crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -839,10 +853,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    const SizedBox(
+                                    ) : const SizedBox(),
+                                    Constant.accType == 'I' ? const SizedBox(
                                       width: 6,
-                                    ),
+                                    ) : const SizedBox(),
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
@@ -1154,7 +1168,11 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       ? "Mailing Country"
                                                       : _.mailingCountryValue,
                                                   fontSize: 12,
-                                                  textColor: AppColor.black,
+                                                  textColor: _.mailingCountryValue ==
+                                                      null ||
+                                                      _.mailingCountryValue ==
+                                                          ""
+                                                      ? AppColor.dimblack :AppColor.black,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
@@ -1327,7 +1345,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                           ""
                                                       ? "Current Country"
                                                       : _.currentCountryValue,
-                                                  textColor: AppColor.black,
+                                                  textColor: _.currentCountryValue ==
+                                                      null ||
+                                                      _.currentCountryValue ==
+                                                          "" ? AppColor.dimblack : AppColor.black,
                                                     fontSize: 12,
                                                 ),
                                                 icon: const Icon(
@@ -1502,7 +1523,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       ? "Bank"
                                                       : _.bankNameValue,
                                                   fontSize: 12,
-                                                  textColor: AppColor.black,
+                                                  textColor: _.bankNameValue ==
+                                                      null ||
+                                                      _.bankNameValue ==
+                                                          "" ? AppColor.dimblack : AppColor.black,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
@@ -1578,7 +1602,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       _.bankCityValue == ""
                                                       ? "Bank City"
                                                       : _.bankCityValue,
-                                                  textColor: AppColor.black,
+                                                  textColor: _.bankCityValue ==
+                                                      null ||
+                                                      _.bankCityValue ==
+                                                          "" ? AppColor.dimblack : AppColor.black,
                                                     fontSize: 12,
                                                 ),
                                                 icon: const Icon(
@@ -1722,7 +1749,15 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   controller: _.kiNcNicController,
                                   isRounded: true,
                                   hint: "CNIC/NICP",
-                                  // textInputType: TextInputType.emailAddress,
+                                  inputFormator: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(13),
+                                    NumberFormatter()
+                                  ],
+                                  onChange: (va){
+                                    // print(va);
+                                    // print(_.cNicNumberController.text);
+                                  },
                                 ),
                                 Container(
                                   // margin: EdgeInsets.all(10.0),
@@ -1746,6 +1781,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                       BorderRadius.circular(6),
                                       // value: _.dropdownvalue,
                                       hint: RestInvestTitle(
+
                                         text: _.kinRelationValue ==
                                             null ||
                                             _.kinRelationValue ==
@@ -1753,7 +1789,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             ? "Relationship"
                                             : _.kinRelationValue,
                                         fontSize: 12,
-                                        textColor: AppColor.black,
+                                        textColor: _.kinRelationValue ==
+                                            null ||
+                                            _.kinRelationValue ==
+                                                "" ? AppColor.dimblack : AppColor.black,
                                       ),
                                       icon: const Icon(
                                           Icons.keyboard_arrow_down,
@@ -1833,16 +1872,42 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   ],
                                 ),
                                 space,
-                                CustomRoundButton(
-                                    height: 35,
-                                    text: "SAVE&NEXT",
-                                    onPress: () {
-                                      // Get.toNamed(AppRoute.accountOpenUploadScreen);
-                                      // Get.toNamed(
-                                          // AppRoute.accountOpenKycDetailScreen);
-                                      _.onSaveDataAccountOpeningBasicInfo();
-                                    },
-                                    isRound: false),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CustomRoundButton(
+                                        height: 35,
+                                        width: 50,
+                                        text: "BACK",
+                                        onPress: () {
+                                          Get.back();
+                                        },
+                                        buttonColor: AppColor.backBlueColor,
+                                        isRound: false),
+                                     const SizedBox(
+                                      width: 10,
+                                    ),
+                                    CustomRoundButton(
+                                        height: 35,
+                                        width: 50,
+                                        text: "SAVE&NEXT",
+                                        onPress: () {
+                                          // Get.toNamed(
+                                              // AppRoute.accountOpenKycDetailScreen);
+                                          _.onSaveDataAccountOpeningBasicInfo();
+                                        },
+                                        isRound: false),
+                                  ],
+                                ),
+                                // CustomRoundButton(
+                                //     height: 35,
+                                //     text: "SAVE&NEXT",
+                                //     onPress: () {
+                                //       Get.toNamed(
+                                //           AppRoute.accountOpenKycDetailScreen);
+                                //       // _.onSaveDataAccountOpeningBasicInfo();
+                                //     },
+                                //     isRound: false),
                                 const SizedBox(
                                   height: 10,
                                 ),
