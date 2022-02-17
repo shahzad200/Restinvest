@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/widgets/no_internet.dart';
 import '../data/models/login_model.dart';
 import '../utils/constants.dart';
 import '../widgets/custome_dialog.dart';
@@ -27,6 +28,7 @@ class RedemptionScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
+              title: const LogoNit(height: 60,width: 60,),
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
                 onTap: () {
@@ -40,7 +42,9 @@ class RedemptionScreen extends StatelessWidget {
             ),
             drawer: const CustomDrawer(),
             key: _.scaffoldKey,
-            body: SingleChildScrollView(
+            body: Stack(
+              children: [
+                SingleChildScrollView(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
               child: Column(
                 children: [
@@ -249,7 +253,7 @@ class RedemptionScreen extends StatelessWidget {
                         fontsize: 14,
                         hintColor: AppColor.black,
                         hint: "${_.electronicUnit()}",
-                        text: "Electric Units",
+                        text: "Electronic Units",
                         textColor: AppColor.black,
                       )),
                       const SizedBox(
@@ -328,7 +332,7 @@ class RedemptionScreen extends StatelessWidget {
                                   child: CustomTextFormField(
                                     controller: _.unitBalanceController,
                                     isRounded: true,
-                                    hint: "Unit Balance",
+                                    hint: "Enter Units",
                                     hintColor:
                                         double.parse(_.electronicUnit()!) > 0
                                             ? AppColor.black
@@ -346,7 +350,11 @@ class RedemptionScreen extends StatelessWidget {
                                       } else {
                                         _.calUnitBalanceValue = null;
                                       }
-
+                                      if(val==''){
+                                        _.calculateUnits('0');
+                                      }else {
+                                        _.calculateUnits(val);
+                                      }
                                       _.update();
                                     },
                                   ),
@@ -397,7 +405,11 @@ class RedemptionScreen extends StatelessWidget {
                                     textInputType:
                                         const TextInputType.numberWithOptions(),
                                     onChange: (value) {
-                                      _.calculateUnits(value);
+                                      if(value==''){
+                                        _.calculateUnits('0');
+                                      }else {
+                                        _.calculateUnits(value);
+                                      }
                                       _.update();
                                     },
                                   ),
@@ -546,6 +558,31 @@ class RedemptionScreen extends StatelessWidget {
                 ],
               ),
             ),
+            _.isLoading
+                ? const Center(
+              child: DialogBox(),
+            )
+                : _.noInternet
+                ? Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Container(
+                  height: 180,
+                  width: Get.width,
+                  color: Colors.white,
+                  child: NoInternetWgt(
+                    onTryAgain: (){
+                      _.noInternet = false;
+                      _.update();
+                    },
+                  ),
+                ),
+              ),
+            )
+                : const SizedBox()
+            ],
+          ),
           );
         });
   }

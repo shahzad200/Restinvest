@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constants.dart';
 import '../controller/account_opening_submit_button_screen_controller.dart';
 import '../widgets/button.dart';
 import '../utils/colors.dart';
@@ -111,14 +112,14 @@ class AccountOpenSubmitButtonScreen extends StatelessWidget {
                             //     ),
                             //   ],
                             // ),
-                            const RestInvestTitle(
-                              text: " SUBMIT ",
-                              textAlign: TextAlign.start,
-                              textColor: AppColor.blueColor,
-                              fontSize: 8,
-                              fontWeight: FontWeight.w900,
-                            ),
-                            space,
+                            // const RestInvestTitle(
+                            //   text: " SUBMIT ",
+                            //   textAlign: TextAlign.start,
+                            //   textColor: AppColor.blueColor,
+                            //   fontSize: 8,
+                            //   fontWeight: FontWeight.w900,
+                            // ),
+                            // space,
                             const RestInvestTitle(
                               text: " DEAR CUSTOMER, ",
                               textAlign: TextAlign.start,
@@ -147,14 +148,23 @@ class AccountOpenSubmitButtonScreen extends StatelessWidget {
                             ),
                             space,
                             Center(
-                              child: CustomRoundButton(
-                                  height: 35,
-                                  width: 80,
-                                  text: "OK",
-                                  onPress: () {
-                                    Get.offAllNamed(AppRoute.homeRoute);
-                                  },
-                                  isRound: false),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomRoundButton(
+                                      height: 35,
+                                      width: 80,
+                                      text: "OK",
+                                      onPress: () {
+                                        Constant.drawerIndex = 1;
+                                        Get.offAllNamed(AppRoute.homeRoute);
+                                      },
+                                      isRound: false),
+
+                                  const SizedBox(width: 20,),
+                                  const Text('8/8')
+                                ],
+                              ),
                             ),
                             const SizedBox(
                               height: 10,

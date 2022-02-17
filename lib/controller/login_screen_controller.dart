@@ -14,7 +14,6 @@ import 'package:investintrust/widgets/constant_widget.dart';
 import 'package:investintrust/widgets/custome_dialog.dart';
 
 class LoginScreenController extends GetxController {
-  var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -90,6 +89,7 @@ class LoginScreenController extends GetxController {
         // Constant.loginModel = await _repository.onLogin('MAHESH9',encrypted.base16.toString());
         Constant.loginModel = await _repository.onLogin(
             userNameController.text, encrypted.base16.toString());
+        Constant.drawerIndex = 3;
         Get.back();
         Get.offAllNamed(AppRoute.portofolioRoute);
         Constant.userId =

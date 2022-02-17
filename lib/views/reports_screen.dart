@@ -22,6 +22,7 @@ class ReportsScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
+              title: const LogoNit(height: 60,width: 60,),
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
                 onTap: () {

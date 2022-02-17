@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:investintrust/utils/constants.dart';
+import 'package:investintrust/widgets/no_internet.dart';
 import '../controller/account_opening_document_upload_screen_controller.dart';
 
 import '../widgets/button.dart';
@@ -44,7 +45,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
               elevation: 0,
             ),
             key: _.scaffoldKey,
-            body: SingleChildScrollView(
+            body: Stack(children: [
+            SingleChildScrollView(
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
                 children: [
@@ -144,7 +146,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                             builder: (BuildContext bc) {
                                               return SafeArea(
                                                 child: Container(
-                                                  decoration: BoxDecoration(
+                                                  decoration: const BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.only(
                                                               topRight: Radius
@@ -153,12 +155,12 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                   .circular(
                                                                       20)),
                                                       color: Colors.white),
-                                                  child: new Wrap(
+                                                  child: Wrap(
                                                     children: <Widget>[
-                                                      new ListTile(
-                                                          leading: new Icon(Icons
+                                                      ListTile(
+                                                          leading: const Icon(Icons
                                                               .photo_library),
-                                                          title: new Text(
+                                                          title: const Text(
                                                               'Photo Library'),
                                                           onTap: () async {
                                                             _.cnicFront = await _
@@ -168,7 +170,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                     .cnicFront!
                                                                     .path);
                                                             // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                            // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                            _.cNicF = _.cnicFront!.readAsBytesSync();
                                                             // _.paymentSlip!.readAsBytes().then((value) {
                                                             //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                                             // print("Extention${_.paymentSlipExt}");
@@ -176,12 +178,13 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                             Navigator.of(
                                                                     context)
                                                                 .pop();
+                                                            showToast('Uploaded');
                                                           }),
-                                                      new ListTile(
-                                                        leading: new Icon(
+                                                      ListTile(
+                                                        leading: const Icon(
                                                             Icons.photo_camera),
                                                         title:
-                                                            new Text('Camera'),
+                                                            const Text('Camera'),
                                                         onTap: () async {
                                                           _.cnicFront = await _
                                                               .getImageFromCamera();
@@ -190,13 +193,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                   .cnicFront!
                                                                   .path);
                                                           // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                          // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                            _.cNicF = _.cnicFront!.readAsBytesSync();
                                                           // _.paymentSlip!.readAsBytes().then((value) {
                                                           //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                                           // print("Extention${_.paymentSlipExt}");
                                                           _.update();
                                                           Navigator.of(context)
                                                               .pop();
+                                                          showToast('Uploaded');
                                                         },
                                                       ),
                                                     ],
@@ -221,10 +225,10 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                   color: AppColor.whiteColor,
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
-                              child: _.cnicFrontUpload && _.cnicFront != null
+                              child: _.cnicFrontUpload && _.cNicF != null
                                   ? Center(
-                                      child: Image.file(
-                                      _.cnicFront!,
+                                      child: Image.memory(
+                                      _.cNicF!,
                                       height: 80,
                                       width: 120,
                                     ))
@@ -244,13 +248,13 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    if (_.cnicFront != null) {
+                                    if (_.cNicF != null) {
                                       _.cnicFrontUpload = true;
                                     }
                                     _.update();
                                   },
                                   child: const RestInvestTitle(
-                                    text: "upload image",
+                                    text: "view uploaded image",
                                     textAlign: TextAlign.start,
                                     textColor: AppColor.black,
                                     fontWeight: FontWeight.w900,
@@ -265,8 +269,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       if (_.cnicFrontUpload) {
                                         _.cnicFrontUpload = false;
                                       }
-                                      if (_.cnicFront != null) {
-                                        _.cnicFront = null;
+                                      if (_.cNicF != null) {
+                                        _.cNicF = null;
                                       }
                                       _.update();
                                     },
@@ -303,7 +307,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                             builder: (BuildContext bc) {
                                               return SafeArea(
                                                 child: Container(
-                                                  decoration: BoxDecoration(
+                                                  decoration: const BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.only(
                                                               topRight: Radius
@@ -312,12 +316,12 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                   .circular(
                                                                       20)),
                                                       color: Colors.white),
-                                                  child: new Wrap(
+                                                  child:  Wrap(
                                                     children: <Widget>[
-                                                      new ListTile(
-                                                          leading: new Icon(Icons
+                                                       ListTile(
+                                                          leading:  const Icon(Icons
                                                               .photo_library),
-                                                          title: new Text(
+                                                          title:  const Text(
                                                               'Photo Library'),
                                                           onTap: () async {
                                                             _.cnicBack = await _
@@ -329,7 +333,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                             print(
                                                                 "base name${_.cnicBackName}");
                                                             // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                            // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                            _.cNicB = _.cnicBack!.readAsBytesSync();
                                                             // _.paymentSlip!.readAsBytes().then((value) {
                                                             //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                                             // print("Extention${_.paymentSlipExt}");
@@ -337,12 +341,13 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                             Navigator.of(
                                                                     context)
                                                                 .pop();
+                                                            showToast('Uploaded');
                                                           }),
-                                                      new ListTile(
-                                                        leading: new Icon(
+                                                       ListTile(
+                                                        leading:  const Icon(
                                                             Icons.photo_camera),
                                                         title:
-                                                            new Text('Camera'),
+                                                             const Text('Camera'),
                                                         onTap: () async {
                                                           _.cnicBack = await _
                                                               .getImageFromCamera();
@@ -353,13 +358,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                           print(
                                                               "base name${_.cnicBackName}");
                                                           // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                          // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                          _.cNicB = _.cnicBack!.readAsBytesSync();
                                                           // _.paymentSlip!.readAsBytes().then((value) {
                                                           //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                                           // print("Extention${_.paymentSlipExt}");
                                                           _.update();
                                                           Navigator.of(context)
                                                               .pop();
+                                                          showToast('Uploaded');
                                                         },
                                                       ),
                                                     ],
@@ -383,14 +389,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                   color: AppColor.whiteColor,
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
-                              child: _.cnicBackUpload && _.cnicBack != null
+                              child: _.cnicBackUpload && _.cNicB != null
                                   ? Center(
-                                      child: Image.file(
-                                      _.cnicBack!,
+                                      child: Image.memory(
+                                      _.cNicB!,
                                       height: 80,
                                       width: 120,
                                     ))
-                                  : SizedBox(),
+                                  : const SizedBox(),
                             ),
                             const RestInvestTitle(
                               text:
@@ -406,13 +412,13 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    if (_.cnicBack != null) {
+                                    if (_.cNicB != null) {
                                       _.cnicBackUpload = true;
                                     }
                                     _.update();
                                   },
                                   child: const RestInvestTitle(
-                                    text: "upload image",
+                                    text: "view uploaded image",
                                     textAlign: TextAlign.start,
                                     textColor: AppColor.black,
                                     fontWeight: FontWeight.w900,
@@ -427,8 +433,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       if (_.cnicBackUpload) {
                                         _.cnicBackUpload = false;
                                       }
-                                      if (_.cnicBack != null) {
-                                        _.cnicBack = null;
+                                      if (_.cNicB != null) {
+                                        _.cNicB = null;
                                       }
                                       _.update();
                                     },
@@ -465,7 +471,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                             builder: (BuildContext bc) {
                                               return SafeArea(
                                                 child: Container(
-                                                  decoration: BoxDecoration(
+                                                  decoration: const BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.only(
                                                               topRight: Radius
@@ -474,12 +480,12 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                   .circular(
                                                                       20)),
                                                       color: Colors.white),
-                                                  child: new Wrap(
+                                                  child:  Wrap(
                                                     children: <Widget>[
-                                                      new ListTile(
-                                                          leading: new Icon(Icons
+                                                       ListTile(
+                                                          leading:  const Icon(Icons
                                                               .photo_library),
-                                                          title: new Text(
+                                                          title:  const Text(
                                                               'Photo Library'),
                                                           onTap: () async {
                                                             _.srcIncome = await _
@@ -490,7 +496,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                     .path);
                                                             // print("base name${_.baseName}");
                                                             // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                            // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                            _.srcIn = _.srcIncome!.readAsBytesSync();
                                                             // _.paymentSlip!.readAsBytes().then((value) {
                                                             //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                                             // print("Extention${_.paymentSlipExt}");
@@ -498,12 +504,13 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                             Navigator.of(
                                                                     context)
                                                                 .pop();
+                                                            showToast('Uploaded');
                                                           }),
-                                                      new ListTile(
-                                                        leading: new Icon(
+                                                       ListTile(
+                                                        leading:  const Icon(
                                                             Icons.photo_camera),
                                                         title:
-                                                            new Text('Camera'),
+                                                             const Text('Camera'),
                                                         onTap: () async {
                                                           _.srcIncome = await _
                                                               .getImageFromCamera();
@@ -512,13 +519,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                   .srcIncome!
                                                                   .path);
                                                           // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                          // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                          _.srcIn = _.srcIncome!.readAsBytesSync();
                                                           // _.paymentSlip!.readAsBytes().then((value) {
                                                           //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                                           // print("Extention${_.paymentSlipExt}");
                                                           _.update();
                                                           Navigator.of(context)
                                                               .pop();
+                                                          showToast('Uploaded');
                                                         },
                                                       ),
                                                     ],
@@ -543,14 +551,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                 border:
                                     Border.all(width: 1, color: AppColor.black),
                               ),
-                              child: _.incomeProofUpload && _.srcIncome != null
+                              child: _.incomeProofUpload && _.srcIn != null
                                   ? Center(
-                                      child: Image.file(
-                                      _.srcIncome!,
+                                      child: Image.memory(
+                                      _.srcIn!,
                                       height: 80,
                                       width: 120,
                                     ))
-                                  : SizedBox(),
+                                  : const SizedBox(),
                             ),
                             const RestInvestTitle(
                               text:
@@ -566,13 +574,13 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    if (_.srcIncome != null) {
+                                    if (_.srcIn != null) {
                                       _.incomeProofUpload = true;
                                     }
                                     _.update();
                                   },
                                   child: const RestInvestTitle(
-                                    text: "upload image",
+                                    text: "view uploaded image",
                                     textAlign: TextAlign.start,
                                     textColor: AppColor.black,
                                     fontWeight: FontWeight.w900,
@@ -587,8 +595,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       if (_.incomeProofUpload) {
                                         _.incomeProofUpload = false;
                                       }
-                                      if (_.srcIncome != null) {
-                                        _.srcIncome = null;
+                                      if (_.srcIn != null) {
+                                        _.srcIn = null;
                                       }
                                       _.update();
                                     },
@@ -625,7 +633,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                             builder: (BuildContext bc) {
                                               return SafeArea(
                                                 child: Container(
-                                                  decoration: BoxDecoration(
+                                                  decoration: const BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.only(
                                                               topRight: Radius
@@ -634,12 +642,12 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                   .circular(
                                                                       20)),
                                                       color: Colors.white),
-                                                  child: new Wrap(
+                                                  child:  Wrap(
                                                     children: <Widget>[
-                                                      new ListTile(
-                                                          leading: new Icon(Icons
+                                                       ListTile(
+                                                          leading:  const Icon(Icons
                                                               .photo_library),
-                                                          title: new Text(
+                                                          title:  const Text(
                                                               'Photo Library'),
                                                           onTap: () async {
                                                             _.plainImage = await _
@@ -649,7 +657,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                     .plainImage!
                                                                     .path);
                                                             // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                            // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                            _.planImg = _.plainImage!.readAsBytesSync();
                                                             // _.paymentSlip!.readAsBytes().then((value) {
                                                             //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                                             // print("Extention${_.paymentSlipExt}");
@@ -657,12 +665,13 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                             Navigator.of(
                                                                     context)
                                                                 .pop();
+                                                            showToast('Uploaded');
                                                           }),
-                                                      new ListTile(
-                                                        leading: new Icon(
+                                                       ListTile(
+                                                        leading:  const Icon(
                                                             Icons.photo_camera),
                                                         title:
-                                                            new Text('Camera'),
+                                                             const Text('Camera'),
                                                         onTap: () async {
                                                           _.plainImage = await _
                                                               .getImageFromCamera();
@@ -671,13 +680,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                   .plainImage!
                                                                   .path);
                                                           // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                          // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
+                                                          _.planImg = _.plainImage!.readAsBytesSync();
                                                           // _.paymentSlip!.readAsBytes().then((value) {
                                                           //   _.paymentSlipBytes = Uint8List.fromList(value);});
                                                           // print("Extention${_.paymentSlipExt}");
                                                           _.update();
                                                           Navigator.of(context)
                                                               .pop();
+                                                          showToast('Uploaded');
                                                         },
                                                       ),
                                                     ],
@@ -701,14 +711,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                   color: AppColor.whiteColor,
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
-                              child: _.signUpload && _.plainImage != null
+                              child: _.signUpload && _.planImg != null
                                   ? Center(
-                                      child: Image.file(
-                                      _.plainImage!,
+                                      child: Image.memory(
+                                      _.planImg!,
                                       height: 80,
                                       width: 120,
                                     ))
-                                  : SizedBox(),
+                                  : const SizedBox(),
                             ),
                             const RestInvestTitle(
                               text:
@@ -724,13 +734,13 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    if (_.plainImage != null) {
+                                    if (_.planImg != null) {
                                       _.signUpload = true;
                                     }
                                     _.update();
                                   },
                                   child: const RestInvestTitle(
-                                    text: "upload image",
+                                    text: "view uploaded image",
                                     textAlign: TextAlign.start,
                                     textColor: AppColor.black,
                                     fontWeight: FontWeight.w900,
@@ -745,14 +755,192 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       if (_.signUpload) {
                                         _.signUpload = false;
                                       }
-                                      if (_.plainImage != null) {
-                                        _.plainImage = null;
+                                      if (_.planImg != null) {
+                                        _.planImg = null;
                                       }
                                       _.update();
                                     },
                                     isRound: false),
                               ],
                             ),
+                            Constant.mobileReg != '4'
+                                ? Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                space,
+                                const RestInvestTitle(
+                                  text: "MOBILE NUMBER PROOF:*",
+                                  textAlign: TextAlign.start,
+                                  textColor: AppColor.black,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 12,
+                                ),
+                                Container(
+                                  height: 35,
+                                  // height: Get.height,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      CustomRoundButton(
+                                          height: 25,
+                                          width: 40,
+                                          text: "+ Choose",
+                                          buttonColor:
+                                          AppColor.whiteColor,
+                                          textColor: AppColor.black,
+                                          onPress: () {
+                                            _.mobileUpload = false;
+                                            _.update();
+                                            showModalBottomSheet(
+                                                backgroundColor:
+                                                Colors.transparent,
+                                                elevation: 0,
+                                                context: context,
+                                                builder:
+                                                    (BuildContext bc) {
+                                                  return SafeArea(
+                                                    child: Container(
+                                                      decoration: const BoxDecoration(
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                  20),
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                  20)),
+                                                          color: Colors
+                                                              .white),
+                                                      child: Wrap(
+                                                        children: <
+                                                            Widget>[
+                                                          ListTile(
+                                                              leading: const Icon(
+                                                                  Icons
+                                                                      .photo_library),
+                                                              title: const Text(
+                                                                  'Photo Library'),
+                                                              onTap:
+                                                                  () async {
+                                                                _.mobileImage =
+                                                                await _
+                                                                    .getImageFromGallery();
+                                                                _.mobileImageName = p.basename(_
+                                                                    .mobileImage!
+                                                                    .path);
+                                                                _.mobile = _.mobileImage!.readAsBytesSync();
+                                                                _.update();
+                                                                Navigator.of(
+                                                                    context)
+                                                                    .pop();
+                                                                showToast('Uploaded');
+                                                              }),
+                                                          ListTile(
+                                                            leading:
+                                                            const Icon(
+                                                                Icons
+                                                                    .photo_camera),
+                                                            title: const Text(
+                                                                'Camera'),
+                                                            onTap:
+                                                                () async {
+                                                              _.mobileImage =
+                                                              await _
+                                                                  .getImageFromCamera();
+                                                              _.mobileImageName =
+                                                                  p.basename(_
+                                                                      .zaKatImage!
+                                                                      .path);
+                                                              _.mobile = _.mobileImage!.readAsBytesSync();
+                                                              _.update();
+                                                              Navigator.of(
+                                                                  context)
+                                                                  .pop();
+                                                              showToast('Uploaded');
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                });
+                                          },
+                                          isRound: false),
+                                    ],
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: AppColor.greyColor
+                                          .withOpacity(0.5),
+                                      border: Border.all(
+                                          width: 1,
+                                          color: AppColor.black)),
+                                ),
+                                Container(
+                                  // height: 35,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                      color: AppColor.whiteColor,
+                                      border: Border.all(
+                                          width: 1,
+                                          color: AppColor.black)),
+                                  child: _.mobileUpload &&
+                                      _.mobile != null
+                                      ? Center(
+                                      child: Image.memory(
+                                        _.mobile!,
+                                        height: 80,
+                                        width: 120,
+                                      ))
+                                      : SizedBox(),
+                                ),
+                                const RestInvestTitle(
+                                  text:
+                                  "Allowed Type:(gif,jpg,jpeg,png,pdf,doc,docx)/,Max file size: 5MB,No of files\nallowed:1",
+                                  textAlign: TextAlign.start,
+                                  textColor: AppColor.black,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 10,
+                                ),
+                                space,
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        if (_.mobile != null) {
+                                          _.mobileUpload = true;
+                                        }
+                                        _.update();
+                                      },
+                                      child: const RestInvestTitle(
+                                        text: "view uploaded image",
+                                        textAlign: TextAlign.start,
+                                        textColor: AppColor.black,
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                    CustomRoundButton(
+                                        height: 35,
+                                        width: 50,
+                                        text: "Remove",
+                                        onPress: () {
+                                          if (_.mobileUpload) {
+                                            _.mobileUpload = false;
+                                          }
+                                          if (_.mobile != null) {
+                                            _.mobile = null;
+                                          }
+                                          _.update();
+                                        },
+                                        isRound: false),
+                                  ],
+                                ),
+                              ],
+                            )
+                                : const SizedBox(),
                             Constant.zakValue == 'YES'
                                 ? Column(
                                     crossAxisAlignment:
@@ -760,7 +948,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                     children: [
                                       space,
                                       const RestInvestTitle(
-                                        text: "ZAKAT PROOF",
+                                        text: "ZAKAT PROOF:*",
                                         textAlign: TextAlign.start,
                                         textColor: AppColor.black,
                                         fontWeight: FontWeight.w900,
@@ -819,10 +1007,12 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                       _.zaKatImageName = p.basename(_
                                                                           .zaKatImage!
                                                                           .path);
+                                                                      _.zaKat = _.zaKatImage!.readAsBytesSync();
                                                                       _.update();
                                                                       Navigator.of(
                                                                               context)
                                                                           .pop();
+                                                                      showToast('Uploaded');
                                                                     }),
                                                                 ListTile(
                                                                   leading:
@@ -840,10 +1030,12 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                                         p.basename(_
                                                                             .zaKatImage!
                                                                             .path);
+                                                                    _.zaKat = _.zaKatImage!.readAsBytesSync();
                                                                     _.update();
                                                                     Navigator.of(
                                                                             context)
                                                                         .pop();
+                                                                    showToast('Uploaded');
                                                                   },
                                                                 ),
                                                               ],
@@ -871,14 +1063,14 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                 width: 1,
                                                 color: AppColor.black)),
                                         child: _.zaKatUpload &&
-                                                _.zaKatImage != null
+                                                _.zaKat != null
                                             ? Center(
-                                                child: Image.file(
-                                                _.zaKatImage!,
+                                                child: Image.memory(
+                                                _.zaKat!,
                                                 height: 80,
                                                 width: 120,
                                               ))
-                                            : SizedBox(),
+                                            : const SizedBox(),
                                       ),
                                       const RestInvestTitle(
                                         text:
@@ -895,13 +1087,13 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                         children: [
                                           InkWell(
                                             onTap: () {
-                                              if (_.zaKatImage != null) {
+                                              if (_.zaKat != null) {
                                                 _.zaKatUpload = true;
                                               }
                                               _.update();
                                             },
                                             child: const RestInvestTitle(
-                                              text: "upload image",
+                                              text: "view uploaded image",
                                               textAlign: TextAlign.start,
                                               textColor: AppColor.black,
                                               fontWeight: FontWeight.w900,
@@ -916,8 +1108,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                 if (_.zaKatUpload) {
                                                   _.zaKatUpload = false;
                                                 }
-                                                if (_.zaKatImage != null) {
-                                                  _.zaKatImage = null;
+                                                if (_.zaKat != null) {
+                                                  _.zaKat = null;
                                                 }
                                                 _.update();
                                               },
@@ -930,7 +1122,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
 
                             space,
                             const RestInvestTitle(
-                              text: "OTHER:",
+                              text: "NOMINEE CNIC:",
                               textAlign: TextAlign.start,
                               textColor: AppColor.black,
                               fontWeight: FontWeight.w900,
@@ -990,6 +1182,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                             Navigator.of(
                                                                     context)
                                                                 .pop();
+                                                            showToast('Uploaded');
                                                           }),
                                                        ListTile(
                                                         leading:  const Icon(
@@ -1011,6 +1204,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                           _.update();
                                                           Navigator.of(context)
                                                               .pop();
+                                                          showToast('Uploaded');
                                                         },
                                                       ),
                                                     ],
@@ -1063,7 +1257,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                     _.update();
                                   },
                                   child: const RestInvestTitle(
-                                    text: "upload image",
+                                    text: "view uploaded image",
                                     textAlign: TextAlign.start,
                                     textColor: AppColor.black,
                                     fontWeight: FontWeight.w900,
@@ -1150,10 +1344,16 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                     width: 50,
                                     text: "SAVE&NEXT",
                                     onPress: () {
-                                      _.onSaveDoc();
+                                      if(_.isLoading){
+                                        printInfo(info: 'jhjh');
+                                      }else {
+                                        _.onSaveDoc();
+                                      }
                                       // Get.to(const AccountOpenPreviewScreen());
                                     },
                                     isRound: false),
+                                const SizedBox(width: 20,),
+                                const Text('6/8')
                               ],
                             ),
                             space
@@ -1165,6 +1365,27 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                 ],
               ),
             ),
+              _.isLoading
+                  ? const Center(
+                child: DialogBox(),
+              )
+                  : _.noInternet
+                  ? Positioned(
+                bottom: 0,
+                child: Container(
+                  height: 180,
+                  width: Get.width,
+                  color: Colors.white,
+                  child: NoInternetWgt(
+                    onTryAgain: (){
+                      _.noInternet = false;
+                      _.update();
+                    },
+                  ),
+                ),
+              )
+                  : const SizedBox()
+            ]),
           ));
         });
   }

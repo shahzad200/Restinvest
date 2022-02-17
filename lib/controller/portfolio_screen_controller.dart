@@ -40,12 +40,15 @@ class PortofolioScreenController extends GetxController {
 
   TooltipBehavior? tooltipBehavior;
   static final DateTime now = DateTime.now();
+  
   static final DateFormat formatter = DateFormat.yMMMMd();
    String? formatted ;
 
+   String accNumber = Constant.loginModel!.response!.accounts![0].folioNumber.toString();
+  var f = NumberFormat("###,###.0#", "en_US");
   @override
   void onInit() async{
-    formatted = formatter.format(now);
+    formatted = formatter.format(now.subtract(const Duration(days: 1)));
     print(formatted);
     tooltipBehavior = TooltipBehavior(enable: true,);
 
@@ -176,9 +179,8 @@ class PortofolioScreenController extends GetxController {
     try {
 
       isLoading = true;
-      CustomDialog(context);
+      update();
       dashboad =  await _repository.onLoadDashBoard(folioNumber);
-      Get.back();
       isLoading = false;
       update();
 

@@ -4,6 +4,7 @@ import 'package:investintrust/views/account_opening_document_upload_screen.dart'
 import 'package:investintrust/views/account_opening_fatca_screen.dart';
 import 'package:investintrust/views/account_opening_kyc_detail_screen.dart';
 import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
+import 'package:investintrust/views/user_profile.dart';
 import '../views/account_opening_bank_detail_screen.dart';
 import '../views/account_opening_basic_information_screen.dart';
 import '../views/account_opening_request_screen.dart';
@@ -50,6 +51,7 @@ class AppRoute {
   static const String redemptionRoute = '/redemption';
   static const String fundManagerRoute = '/fundManager';
   static const String portofolioRoute = '/portofolio';
+  static const String profileRoute = '/profile';
   static const String purchasesRoute = '/purchases';
   static const String f2ftransferRoute = '/f2ftransfer';
   static const String reportsRoute = '/reports';
@@ -129,6 +131,10 @@ class AppRoute {
       GetPage(
         name: AppRoute.portofolioRoute,
         page: () => const PortofolioScreen(),
+      ),
+      GetPage(
+        name: AppRoute.profileRoute,
+        page: () => const UserProfile(),
       ),
       GetPage(
         name: AppRoute.purchasesRoute,

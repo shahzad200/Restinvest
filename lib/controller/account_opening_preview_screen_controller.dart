@@ -18,11 +18,12 @@ class AccountOpenPreviewScreenController extends GetxController{
   bool isLoading = false;
   bool noInternet = false;
   final _repository = Repository();
-  bool cNicFront = false;
+  bool cNicFront = true;
   bool cNicBack = false;
   bool srcIncome = false;
   bool sigPage = false;
   bool zaKat = false;
+  bool mobileReg = false;
   AccountOpenDocumentUploadScreenController con = Get.find<AccountOpenDocumentUploadScreenController>();
 
   onSubmit() async {
@@ -40,7 +41,9 @@ class AccountOpenPreviewScreenController extends GetxController{
         Constant.cNic = '0';
         Constant.uTitle = '0';
         Constant.accType = '0';
-        Constant.zakValue = 'YES';
+        Constant.zakValue = '0';
+        Constant.mobileReg = '0';
+
         Get.offAll(const AccountOpenSubmitButtonScreen());
       }
     } catch (e) {

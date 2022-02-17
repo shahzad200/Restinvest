@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/widgets/no_internet.dart';
 import '../controller/portfolio_screen_controller.dart';
-
 
 
 import '../data/models/login_model.dart';
@@ -38,7 +38,7 @@ class PortofolioScreen extends StatelessWidget {
         builder: (_) {
           return Scaffold(
             appBar: AppBar(
-              title: const LogoNit(height: 60,width: 60,),
+              title: const LogoNit(height: 60, width: 60,),
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
@@ -53,7 +53,9 @@ class PortofolioScreen extends StatelessWidget {
             ),
             drawer: const CustomDrawer(),
             key: _.scaffoldKey,
-            body: SingleChildScrollView(
+            body: Stack(
+              children: [
+            SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -62,7 +64,7 @@ class PortofolioScreen extends StatelessWidget {
                     height: 50,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
+                      children: [
                         RestInvestTitle(
                           fontSize: 16,
                           textColor: AppColor.greyColor,
@@ -72,41 +74,71 @@ class PortofolioScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-              Container(
-                height: Get.height/4,
-                child:
-                // SingleChildScrollView(
-                //   child: Column(children: List.generate(_.loginController.loginModel!.response!.accounts!.length, (index){
-                //     _.totalInvestment = _.totalInvestment + double.parse(_.loginController.loginModel!.response!.accounts![index]!.portfolioInvestmentValue!);
-                //     var userfund = 0.0;
-                //     for(int i = 0; i < _.loginController.loginModel!.response!.accounts![index].userFundBalances!.length; i++){
-                //       userfund = userfund + double.parse(_.loginController.loginModel!.response!.accounts![index].userFundBalances![i].fundvolume!);
-                //     }
-                //     return InkWell( child: listItem(_.loginController.loginModel!.response!.accounts![index].folioNumber, userfund.toStringAsFixed(2)),onTap: (){
-                //       print("pressed");
-                //       _.selectedAccount = _.loginController.loginModel!.response!.accounts![index];
-                //       print(_.selectedAccount!.portfolioAnalyPurchasesMaxValue);
-                //       _.update();
-                //     },);
-                //   })),
-                // )
+                  Container(
+                    color: AppColor.blueColor,
+                    height: 40,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          RestInvestTitle(
+                            fontSize: 14,
+                            textColor: AppColor.whiteColor,
+                            text: "Folio No.",
+                            fontWeight: FontWeight.w600,
+                          ),
+                          Spacer(),
+                          RestInvestTitle(
+                            fontSize: 14,
+                            textColor: AppColor.whiteColor,
+                            text: "Amount (Rs)",
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: Get.height / 4,
+                    child:
+                    // SingleChildScrollView(
+                    //   child: Column(children: List.generate(_.loginController.loginModel!.response!.accounts!.length, (index){
+                    //     _.totalInvestment = _.totalInvestment + double.parse(_.loginController.loginModel!.response!.accounts![index]!.portfolioInvestmentValue!);
+                    //     var userfund = 0.0;
+                    //     for(int i = 0; i < _.loginController.loginModel!.response!.accounts![index].userFundBalances!.length; i++){
+                    //       userfund = userfund + double.parse(_.loginController.loginModel!.response!.accounts![index].userFundBalances![i].fundvolume!);
+                    //     }
+                    //     return InkWell( child: listItem(_.loginController.loginModel!.response!.accounts![index].folioNumber, userfund.toStringAsFixed(2)),onTap: (){
+                    //       print("pressed");
+                    //       _.selectedAccount = _.loginController.loginModel!.response!.accounts![index];
+                    //       print(_.selectedAccount!.portfolioAnalyPurchasesMaxValue);
+                    //       _.update();
+                    //     },);
+                    //   })),
+                    // )
 
 
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: Constant.loginModel!.response!.accounts!
+                            .length,
+                        itemBuilder: (context, index) {
+                          // RemoteMessage message = _messages[index];
+                          // _.totalInvestment = 0.0;
 
-                ListView.builder(
-                    shrinkWrap: true,
-                    itemCount:Constant.loginModel!.response!.accounts!.length,
-                    itemBuilder: (context, index) {
-                      // RemoteMessage message = _messages[index];
-                      // _.totalInvestment = 0.0;
-
-                      var userfund = 0.0;
-                      for(int i = 0; i < Constant.loginModel!.response!.accounts![index].userFundBalances!.length; i++){
-                        userfund = userfund + double.parse(Constant.loginModel!.response!.accounts![index].userFundBalances![i].fundvolume!);
-                      }
-                      return listItem(Constant.loginModel!.response!.accounts![index], userfund.toStringAsFixed(2),_,context);
-                    }),
-              ),
+                          var userfund = 0.0;
+                          for (int i = 0; i < Constant.loginModel!.response!
+                              .accounts![index].userFundBalances!.length; i++) {
+                            userfund = userfund + double.parse(Constant
+                                .loginModel!.response!.accounts![index]
+                                .userFundBalances![i].fundvolume!);
+                          }
+                          return listItem(Constant.loginModel!.response!
+                              .accounts![index], userfund.toStringAsFixed(2), _,
+                              context);
+                        }),
+                  ),
 
                   const SizedBox(
                     height: 10,
@@ -116,8 +148,10 @@ class PortofolioScreen extends StatelessWidget {
                       text: "Total Investment Value",
                       fontWeight: FontWeight.w900,
                     ),
-                    trailing:  RestInvestTitle(
-                      text: "PKR "+ _.totalInvestment.toStringAsFixed(2),
+                    trailing: RestInvestTitle(
+                      text: "${_.f.format(double.parse(_.totalInvestment!
+                          .toStringAsFixed(2) ?? '0.0') ?? 0.0)}",
+                      // text: "PKR "+ _.totalInvestment.toStringAsFixed(2),
                       fontWeight: FontWeight.w900,
                     ),
                     onTap: () {},
@@ -126,48 +160,52 @@ class PortofolioScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                          child: CustomRoundButton(isRound:false,
+                          child: CustomRoundButton(isRound: false,
                               text: "Investment by Fund",
-
                               textColor: _.investButton
                                   ? Colors.white
                                   : AppColor.black,
                               textSize: 14,
                               onPress: () {
-
                                 _.investTrust(0);
                               },
                               buttonColor: _.investButton
                                   ? AppColor.blueColor
                                   : AppColor.whiteColor)),
                       Expanded(
-                          child: CustomRoundButton(isRound:false,
-                        text: "Portfolio Allocation",
-                        textColor: _.portfolioButton
-                            ? Colors.white
-                            : AppColor.black,
-                        onPress: () {
-                          _.investTrust(1);
-                        },
+                          child: CustomRoundButton(
+                            isRound: false,
+                            text: "Portfolio Allocation",
+                            textColor: _.portfolioButton
+                                ? Colors.white
+                                : AppColor.black,
+                            onPress: () {
+                              _.investTrust(1);
+                            },
                             textSize: 14,
-                        buttonColor: _.portfolioButton
-                            ? AppColor.blueColor
-                            : AppColor.whiteColor,
-                      )),
+                            buttonColor: _.portfolioButton
+                                ? AppColor.blueColor
+                                : AppColor.whiteColor,
+                          )),
                       const SizedBox(),
                     ],
                   ),
                   const SizedBox(
                     height: 5,
                   ),
-                  _.portfolioButton?const SizedBox():Column(
+                  _.portfolioButton ? const SizedBox() : Column(
                     children: [ Padding(
-                      padding: const EdgeInsets.only(left:5.0),
+                      padding: const EdgeInsets.only(left: 5.0),
                       child: Row(
                         children: [
-                           RestInvestTitle(text: "PKR (000)",fontSize: 12,fontWeight: FontWeight.w500,),
-                           SizedBox( width: Get.width/4,),
-                           RestInvestTitle(text: _.buttonclick3?"Summery":_.buttonclick4?"Purchase":"Redumption",fontSize: 12,fontWeight: FontWeight.w500,),
+                          RestInvestTitle(text: "PKR (000)",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,),
+                          SizedBox(width: Get.width / 4,),
+                          RestInvestTitle(text: _.buttonclick3 ? "Summary" : _
+                              .buttonclick4 ? "Purchase" : "Redumption",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,),
                         ],
                       ),
                     ),
@@ -176,29 +214,37 @@ class PortofolioScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top:30.0),
+                            padding: const EdgeInsets.only(top: 30.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 RoundColumnButton(
-                                  icon: Image.asset(MyImages.summery,height: 30,
+                                  icon: Image.asset(
+                                    MyImages.summery, height: 30,
                                     width: 30,),
                                   height: 45,
                                   width: 45,
                                   // textColor: AppColor.black,
-                                  onPress: ()async {
+                                  onPress: () async {
                                     // _.totalInvestment = 0.0;
                                     _.invest(0);
                                     _.chartDataSummery = [];
-                                    _.loadDashboard = await _.onLoadDashboard(_.selectedAccount!.folioNumber,context);
+                                    _.loadDashboard = await _.onLoadDashboard(
+                                        _.selectedAccount!.folioNumber,
+                                        context);
 
-                                    _.loadDashboard!.response!.portfolioSummary!.forEach((element) {
+                                    _.loadDashboard!.response!.portfolioSummary!
+                                        .forEach((element) {
                                       print(element.scaleValueYaxis);
-                                      if(double.parse('${element.scaleValueYaxis}') != 0.00){
-                                        _.chartDataSummery!.add(ChartData('${element.transMonthXaxis}', double.parse('${element.scaleValueYaxis}')),);
+                                      if (double.parse(
+                                          '${element.scaleValueYaxis}') !=
+                                          0.00) {
+                                        _.chartDataSummery!.add(ChartData(
+                                            '${element.transMonthXaxis}',
+                                            double.parse('${element
+                                                .scaleValueYaxis}')),);
                                       }
                                     });
-
                                   },
                                   buttonColor: _.buttonclick3
                                       ? AppColor.blueColor
@@ -208,7 +254,8 @@ class PortofolioScreen extends StatelessWidget {
                                   height: 6,
                                 ),
                                 RoundColumnButton(
-                                  icon: Image.asset(MyImages.purchase,height: 30,
+                                  icon: Image.asset(
+                                    MyImages.purchase, height: 30,
                                     width: 30,),
                                   height: 45,
                                   width: 45,
@@ -225,7 +272,8 @@ class PortofolioScreen extends StatelessWidget {
                                   height: 6,
                                 ),
                                 RoundColumnButton(
-                                  icon: Image.asset(MyImages.redumption,height: 30,
+                                  icon: Image.asset(
+                                    MyImages.redumption, height: 30,
                                     width: 30,),
                                   height: 45,
                                   width: 45,
@@ -241,112 +289,400 @@ class PortofolioScreen extends StatelessWidget {
                               ],
                             ),
                           ),
+                          !_.isSummery ?
+                          _.loadDashboard == null ? SizedBox() :
+                          !_.buttonclick3 ? SizedBox() : double.parse(
+                              _.loadDashboard!.response!
+                                  .portfolioSummaryMaxValue!) == 0.00 ? Padding(
+                            padding: EdgeInsets.only(
+                              left: Get.width / 4, top: 100,),
+                            child: RestInvestTitle(text: "No Data Found",
+                              textColor: AppColor.blueColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,),
+                          ) :
+                          Expanded(
+                            child: Row(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 12.0),
+                                  child: RotatedBox(
+                                      quarterTurns: 3,
+                                      child: Text("Rupees in PKR",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w900
+                                        ),
+                                      )
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                        height: Get.height / 2.8,
+                                        width: Get.width / 1.3,
+                                        child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0),
+                                            //Initialize the spark charts widget
+                                            child: SfCartesianChart(
 
-                          !_.isSummery?
-                          _.loadDashboard==null ?SizedBox() :
-                          !_.buttonclick3?SizedBox():double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) == 0.00?Padding(
-                            padding:  EdgeInsets.only(left:Get.width/4 ,top:100,),
-                            child: RestInvestTitle(text: "No Data Found",textColor: AppColor.blueColor,fontSize: 20,fontWeight: FontWeight.w600,),
-                          )  :Expanded(
+                                                primaryXAxis: CategoryAxis(),
+                                                primaryYAxis: NumericAxis(
+                                                    minimum: 0,
+                                                    maximum: double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) >
+                                                        1.0 && double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) <
+                                                        300.0 ? double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) +
+                                                        10 : double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) +
+                                                        40,
+                                                    interval: double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) >
+                                                        1.0 && double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) <
+                                                        50.0 ? 5 : double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) >
+                                                        50.0 && double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) <
+                                                        100.0 ? 20 : double
+                                                        .parse(_.loadDashboard!
+                                                        .response!
+                                                        .portfolioSummaryMaxValue!) >
+                                                        100.0 && double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) <
+                                                        200.0 ? 40 : double
+                                                        .parse(_.loadDashboard!
+                                                        .response!
+                                                        .portfolioSummaryMaxValue!) >
+                                                        200.0 && double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) <
+                                                        300.0 ? 60 : double
+                                                        .parse(_.loadDashboard!
+                                                        .response!
+                                                        .portfolioSummaryMaxValue!) >
+                                                        300.0 && double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) <
+                                                        500.0 ? 100 : double
+                                                        .parse(_.loadDashboard!
+                                                        .response!
+                                                        .portfolioSummaryMaxValue!) >
+                                                        500.0 && double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) <
+                                                        1000.0 ? 200 : double
+                                                        .parse(_.loadDashboard!
+                                                        .response!
+                                                        .portfolioSummaryMaxValue!) >
+                                                        1000.0 && double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) <
+                                                        2000.0 ? 500 : double
+                                                        .parse(_.loadDashboard!
+                                                        .response!
+                                                        .portfolioSummaryMaxValue!) >
+                                                        2000.0 && double.parse(
+                                                        _.loadDashboard!
+                                                            .response!
+                                                            .portfolioSummaryMaxValue!) <
+                                                        3000.0 ? 700 : 900,
+                                                    maximumLabels: 12),
+                                                tooltipBehavior: _
+                                                    .tooltipBehavior,
+                                                series: <ChartSeries<
+                                                    ChartData,
+                                                    String>>[
+                                                  ColumnSeries<ChartData,
+                                                      String>(
+                                                      dataSource: _
+                                                          .chartDataSummery!,
+                                                      xValueMapper: (
+                                                          ChartData data,
+                                                          _) => data.x,
+                                                      yValueMapper: (
+                                                          ChartData data,
+                                                          _) => data.y,
+                                                      name: '',
+                                                      dataLabelSettings: const DataLabelSettings(
+                                                          textStyle: TextStyle(
+                                                              fontSize: 10,
+                                                              color: AppColor
+                                                                  .whiteColor),
+                                                          isVisible: true,
+                                                          labelAlignment: ChartDataLabelAlignment
+                                                              .top,
+                                                          showZeroValue: false,
+                                                          labelIntersectAction: LabelIntersectAction
+                                                              .shift
+                                                        // labelPosition: ChartDataLabelPosition.outside
+                                                      ),
+
+                                                      // gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
+                                                      //   begin: Alignment.bottomCenter,
+                                                      //   end: Alignment.topCenter,
+                                                      // ),
+                                                      color: AppColor.blueColor)
+                                                ])
+                                        )),
+                                    const Padding(
+                                      padding: EdgeInsets.only(bottom: 12.0),
+                                      child: Text("Months",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w900
+                                        ),),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                              :
+                          Padding(padding: EdgeInsets.only(
+                              top: 100, left: Get.width / 5),
+                              child: CircularProgressIndicator()),
+                          _.selectedAccount == null ? SizedBox() :
+                          _.buttonclick4 ?
+                          double.parse(_.selectedAccount!
+                              .portfolioAnalyPurchasesMaxValue!) == 0.00
+                              ? Padding(
+                            padding: EdgeInsets.only(
+                              left: Get.width / 4, top: 100,),
+                            child: RestInvestTitle(text: "No Data Found",
+                              textColor: AppColor.blueColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,),
+                          )
+                              : Expanded(
                             child: Container(
-                                height: Get.height/2.8,
+                              height: Get.height / 2.8,
                               child: Padding(
-                                  padding: const EdgeInsets.only(left:8.0,right:8.0),
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, right: 8.0),
                                   //Initialize the spark charts widget
                                   child: SfCartesianChart(
 
                                       primaryXAxis: CategoryAxis(),
-                                      primaryYAxis: NumericAxis(minimum: 0, maximum:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >1.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <300.0? double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!)+10:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!)+40, interval:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >1.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <50.0?5 :double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >50.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <100.0?20 :double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >100.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <200.0?40:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >200.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <300.0?60:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >300.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <500.0?100:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >500.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <1000.0?200:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >1000.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <2000.0?500:double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) >2000.0 &&double.parse(_.loadDashboard!.response!.portfolioSummaryMaxValue!) <3000.0?700:900,maximumLabels: 12),
+                                      primaryYAxis: NumericAxis(minimum: 0,
+                                          maximum: double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) >
+                                              1.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) <
+                                              300.0 ? double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) +
+                                              10 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) +
+                                              40,
+                                          interval: double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) >
+                                              1.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) <
+                                              50.0 ? 5 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) >
+                                              50.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) <
+                                              100.0 ? 20 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) >
+                                              100.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) <
+                                              200.0 ? 40 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) >
+                                              200.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) <
+                                              300.0 ? 60 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) >
+                                              300.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) <
+                                              500.0 ? 100 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) >
+                                              500.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) <
+                                              1000.0 ? 200 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) >
+                                              1000.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) <
+                                              2000.0 ? 500 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) >
+                                              2000.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyPurchasesMaxValue!) <
+                                              3000.0 ? 700 : 900,
+                                          maximumLabels: 12),
                                       tooltipBehavior: _.tooltipBehavior,
                                       series: <ChartSeries<ChartData, String>>[
                                         ColumnSeries<ChartData, String>(
-                                            dataSource: _.chartDataSummery!,
-                                            xValueMapper: (ChartData data, _) => data.x,
-                                            yValueMapper: (ChartData data, _) => data.y,
+                                            dataSource: _.chartDataPurchase!,
+                                            xValueMapper: (ChartData data,
+                                                _) => data.x,
+                                            yValueMapper: (ChartData data,
+                                                _) => data.y,
                                             name: '',
-                                    dataLabelSettings: DataLabelSettings(
-                                        textStyle: TextStyle(fontSize: 10,color: AppColor.whiteColor),
-                                        isVisible: true,
-                                        labelAlignment: ChartDataLabelAlignment.top,
-                                        showZeroValue: false,
-                                        labelIntersectAction: LabelIntersectAction.shift
-                                        // labelPosition: ChartDataLabelPosition.outside
-                                    ),
-
+                                            dataLabelSettings: DataLabelSettings(
+                                                textStyle: TextStyle(
+                                                    fontSize: 10,
+                                                    color: AppColor.whiteColor),
+                                                isVisible: true,
+                                                labelAlignment: ChartDataLabelAlignment
+                                                    .top,
+                                                labelPosition: ChartDataLabelPosition
+                                                    .outside
+                                            ),
                                             // gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
                                             //   begin: Alignment.bottomCenter,
                                             //   end: Alignment.topCenter,
                                             // ),
                                             color: AppColor.blueColor)
                                       ])
-                              )),
-                          ):Padding(padding: EdgeInsets.only(top:100,left: Get.width/5 ), child: CircularProgressIndicator()),
-                          _.selectedAccount == null? SizedBox():
-                          _.buttonclick4?
-                          double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) == 0.00?Padding(
-                            padding:  EdgeInsets.only(left:Get.width/4 ,top:100,),
-                            child: RestInvestTitle(text: "No Data Found",textColor: AppColor.blueColor,fontSize: 20,fontWeight: FontWeight.w600,),
-                          )  :Expanded(
-                            child: Container(
-                              height: Get.height/2.8,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left:8.0,right:8.0),
-                                //Initialize the spark charts widget
-                                child: SfCartesianChart(
-
-                                    primaryXAxis: CategoryAxis(),
-                                    primaryYAxis: NumericAxis(minimum: 0, maximum:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >1.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <300.0? double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!)+10:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!)+40, interval:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >1.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <50.0?5 :double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >50.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <100.0?20 :double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >100.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <200.0?40:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >200.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <300.0?60:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >300.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <500.0?100:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >500.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <1000.0?200:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >1000.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <2000.0?500:double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) >2000.0 &&double.parse(_.selectedAccount!.portfolioAnalyPurchasesMaxValue!) <3000.0?700:900,maximumLabels: 12),
-                                    tooltipBehavior: _.tooltipBehavior,
-                                    series: <ChartSeries<ChartData, String>>[
-                                      ColumnSeries<ChartData, String>(
-                                          dataSource: _.chartDataPurchase!,
-                                          xValueMapper: (ChartData data, _) => data.x,
-                                          yValueMapper: (ChartData data, _) => data.y,
-                                          name: '',
-                                  dataLabelSettings: DataLabelSettings(
-                                      textStyle: TextStyle(fontSize: 10,color: AppColor.whiteColor),
-                                      isVisible: true,
-                                      labelAlignment: ChartDataLabelAlignment.top,
-                                      labelPosition: ChartDataLabelPosition.outside
-                                  ),
-                                          // gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
-                                          //   begin: Alignment.bottomCenter,
-                                          //   end: Alignment.topCenter,
-                                          // ),
-                                          color: AppColor.blueColor)
-                                    ])
                               ),
                             ),
-                          ):SizedBox(),
-                          _.selectedAccount == null? SizedBox():
-                          !_.buttonclick5?SizedBox() :
-                          double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) == 0.00?Padding(
-                            padding:  EdgeInsets.only(left:Get.width/4 ,top:100,),
-                            child: RestInvestTitle(text: "No Data Found",textColor:AppColor.blueColor,fontSize: 20,fontWeight: FontWeight.w600,),
-                          )  :Expanded(
+                          ) : SizedBox(),
+                          _.selectedAccount == null ? SizedBox() :
+                          !_.buttonclick5 ? const SizedBox() :
+                          double.parse(_.selectedAccount!
+                              .portfolioAnalyRedemptionsMaxValue!) == 0.00
+                              ? Padding(
+                            padding: EdgeInsets.only(
+                              left: Get.width / 4, top: 100,),
+                            child: const RestInvestTitle(text: "No Data Found",
+                              textColor: AppColor.blueColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,),
+                          )
+                              : Expanded(
                             child: Container(
-                              height: Get.height/2.8,
+                              height: Get.height / 2.8,
                               child: Padding(
-                                  padding: const EdgeInsets.only(left:8.0,right:8.0),
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, right: 8.0),
                                   //Initialize the spark charts widget
                                   child: SfCartesianChart(
 
                                       primaryXAxis: CategoryAxis(),
-                                      primaryYAxis: NumericAxis(minimum: 0, maximum:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >1.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <300.0? double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!)+10:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!)+40, interval:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >1.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <50.0?5 :double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >50.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <100.0?20 :double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >100.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <200.0?40:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >200.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <300.0?60:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >300.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <500.0?100:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >500.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <1000.0?200:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >1000.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <2000.0?500:double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) >2000.0 &&double.parse(_.selectedAccount!.portfolioAnalyRedemptionsMaxValue!) <3000.0?700:900,maximumLabels: 12),
+                                      primaryYAxis: NumericAxis(minimum: 0,
+                                          maximum: double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) >
+                                              1.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) <
+                                              300.0 ? double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) +
+                                              10 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) +
+                                              40,
+                                          interval: double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) >
+                                              1.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) <
+                                              50.0 ? 5 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) >
+                                              50.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) <
+                                              100.0 ? 20 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) >
+                                              100.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) <
+                                              200.0 ? 40 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) >
+                                              200.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) <
+                                              300.0 ? 60 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) >
+                                              300.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) <
+                                              500.0 ? 100 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) >
+                                              500.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) <
+                                              1000.0 ? 200 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) >
+                                              1000.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) <
+                                              2000.0 ? 500 : double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) >
+                                              2000.0 && double.parse(
+                                              _.selectedAccount!
+                                                  .portfolioAnalyRedemptionsMaxValue!) <
+                                              3000.0 ? 700 : 900,
+                                          maximumLabels: 12),
                                       tooltipBehavior: _.tooltipBehavior,
                                       series: <ChartSeries<ChartData, String>>[
                                         ColumnSeries<ChartData, String>(
                                             dataSource: _.chartDataRedumption!,
-                                            xValueMapper: (ChartData data, _) => data.x,
-                                            yValueMapper: (ChartData data, _) => data.y,
+                                            xValueMapper: (ChartData data,
+                                                _) => data.x,
+                                            yValueMapper: (ChartData data,
+                                                _) => data.y,
                                             name: '',
-                                    dataLabelSettings: DataLabelSettings(
+                                            dataLabelSettings: DataLabelSettings(
 
-                                      textStyle: TextStyle(fontSize: 10,color: AppColor.whiteColor),
-                                        isVisible: true,
-                                      labelAlignment: ChartDataLabelAlignment.top,
-                                      // labelPosition: ChartDataLabelPosition.outside
-                                    ),
+                                              textStyle: TextStyle(fontSize: 10,
+                                                  color: AppColor.whiteColor),
+                                              isVisible: true,
+                                              labelAlignment: ChartDataLabelAlignment
+                                                  .top,
+                                              // labelPosition: ChartDataLabelPosition.outside
+                                            ),
                                             // gradient: LinearGradient(colors: [Colors.red,AppColor.blueColor],
                                             //   begin: Alignment.bottomCenter,
                                             //   end: Alignment.topCenter,
@@ -360,87 +696,130 @@ class PortofolioScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-
-                  _.portfolioButton?
-                  _.data.isEmpty?Center(child:Padding(
-                      padding: const EdgeInsets.only(top:30.0),
-                      child: RestInvestTitle(text: "No Data Found",textColor: AppColor.blueColor,fontSize: 20,fontWeight: FontWeight.w600,)
+                  _.portfolioButton ?
+                  _.data.isEmpty ? Center(child: Padding(
+                      padding: const EdgeInsets.only(top: 30.0),
+                      child: RestInvestTitle(text: "No Data Found",
+                        textColor: AppColor.blueColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,)
                   )) :
                   Container(
-                    height: Get.height/2.8,
+                    height: Get.height / 2.8,
                     child: SfCircularChart(
-                      tooltipBehavior: _.tooltip,
+                        tooltipBehavior: _.tooltip,
                         legend: Legend(
-                            isVisible: true, overflowMode: LegendItemOverflowMode.wrap,
+                            isVisible: true,
+                            overflowMode: LegendItemOverflowMode.wrap,
                             textStyle: TextStyle(fontSize: 14),
-                            iconHeight: 14,iconWidth: 14
-                            // Border color and bord
+                            iconHeight: 14,
+                            iconWidth: 14
+                          // Border color and bord
                         ),
                         series: <CircularSeries>[
                           // Renders doughnut chart
                           DoughnutSeries<ChartData, String>(
                             enableTooltip: true,
-                            dataLabelMapper:(ChartData data, _) => "${data.y}%" ,
-                              dataLabelSettings: DataLabelSettings(
-                                // useSeriesColor: true,
+                            dataLabelMapper: (ChartData data, _) => "${data
+                                .y}%",
+                            dataLabelSettings: DataLabelSettings(
+                              // useSeriesColor: true,
 
-                                  textStyle: TextStyle(fontSize: 11,color: AppColor.whiteColor,fontWeight:FontWeight.bold ),
-                                  isVisible: true,
-                                  labelAlignment: ChartDataLabelAlignment.top,
-                              ),
-                              animationDuration: 2000,
-                              dataSource: _.data,
+                              textStyle: TextStyle(fontSize: 11,
+                                  color: AppColor.whiteColor,
+                                  fontWeight: FontWeight.bold),
+                              isVisible: true,
+                              labelAlignment: ChartDataLabelAlignment.top,
+                            ),
+                            animationDuration: 2000,
+                            dataSource: _.data,
 
-                              // pointColorMapper:(ChartData data,  _) => data.color,
-                              xValueMapper: (ChartData data, _) => data.x,
-                              yValueMapper: (ChartData data, _) => data.y,
+                            // pointColorMapper:(ChartData data,  _) => data.color,
+                            xValueMapper: (ChartData data, _) => data.x,
+                            yValueMapper: (ChartData data, _) => data.y,
 
                           )
                         ]
                     ),
-                  ):SizedBox(),
+                  ) : SizedBox(),
                 ],
               ),
             ),
+            _.isLoading
+                ? const Center(
+              child: DialogBox(),
+            )
+                : _.noInternet
+                ? Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Container(
+                  height: 180,
+                  width: Get.width,
+                  color: Colors.white,
+                  child: NoInternetWgt(
+                    onTryAgain: (){
+                      _.noInternet = false;
+                      _.update();
+                    },
+                  ),
+                ),
+              ),
+            )
+                : const SizedBox()
+            ],
+          ),
           );
         });
   }
 
-  Widget listItem(Accounts? account, String? amount,PortofolioScreenController controller,context){
+  Widget listItem(Accounts? account, String? amount,
+      PortofolioScreenController controller, context) {
     return Column(
       children: [
         ListTile(
           leading: RestInvestTitle(
             text: account!.folioNumber ?? '',
-            textColor: AppColor.dimblack,
+            fontWeight: FontWeight.bold,
+            textColor: controller.accNumber == account!.folioNumber ? AppColor
+                .black : AppColor.dimblack,
           ),
           trailing: RestInvestTitle(
-            text: 'PKR '+ amount! ?? '0.0',
+            // ${_.f.format(_.taxCredit ?? 0)}
+            text: "${controller.f.format(
+                double.parse(amount! ?? '0.0') ?? 0.0)}",
+
             fontWeight: FontWeight.w900,
             textColor: AppColor.black,
           ),
-          onTap: () async{
+          onTap: () async {
             print("pressed");
             controller.selectedAccount = account;
             controller.chartDataSummery = [];
             controller.chartDataPurchase = [];
             controller.chartDataRedumption = [];
-            controller.loadDashboard = await controller.onLoadDashboard(account.folioNumber,context);
-            controller.loadDashboard!.response!.portfolioSummary!.forEach((element) {
-              controller.chartDataSummery!.add(ChartData('${element.transMonthXaxis}', double.parse('${element.scaleValueYaxis}')),);
+            controller.accNumber = account.folioNumber.toString();
+            controller.loadDashboard =
+            await controller.onLoadDashboard(account.folioNumber, context);
+            controller.loadDashboard!.response!.portfolioSummary!.forEach((
+                element) {
+              controller.chartDataSummery!.add(ChartData(
+                  '${element.transMonthXaxis}',
+                  double.parse('${element.scaleValueYaxis}')),);
             });
-            controller.selectedAccount!.portfolioAnalyPurchases!.forEach((element) {
-
-              if(double.parse('${element.amountYaxis}') != 0.00){
+            controller.selectedAccount!.portfolioAnalyPurchases!.forEach((
+                element) {
+              if (double.parse('${element.amountYaxis}') != 0.00) {
                 controller.chartDataPurchase!.add(
-                  ChartData('${element.fundShortXaxis}', double.parse('${element.amountYaxis}')),
+                  ChartData('${element.fundShortXaxis}',
+                      double.parse('${element.amountYaxis}')),
                 );
               }
-
             });
-            controller.selectedAccount!.portfolioAnalyRedemptions!.forEach((element) {
-
-              if(double.parse('${element.amountYaxis}') != 0.00) {
+            controller.selectedAccount!.portfolioAnalyRedemptions!.forEach((
+                element) {
+              if (double.parse('${element.amountYaxis}') != 0.00) {
                 print(element.fundShortXaxis);
                 controller.chartDataRedumption!.add(
                   ChartData('${element.fundShortXaxis}',
@@ -449,10 +828,11 @@ class PortofolioScreen extends StatelessWidget {
               }
             });
             controller.data = [];
-            controller.selectedAccount!.portfolioAllocationData!.forEach((element) {
+            controller.selectedAccount!.portfolioAllocationData!.forEach((
+                element) {
               print("pie value");
               print("pie value");
-              if(double.parse('${element["fundPercent"]}') != 0.0) {
+              if (double.parse('${element["fundPercent"]}') != 0.0) {
                 controller.data.add(
                   ChartData('${element["fundShort"]}',
                       double.parse('${element["fundPercent"]}')),

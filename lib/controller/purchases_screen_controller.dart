@@ -41,7 +41,7 @@ class PurchasesScreenController extends GetxController {
   List<int> paymentProofBytes = [];
   List<int> paymentSlipBytes = [];
   final picker = ImagePicker();
-  DateTime? date ;
+  DateTime? date;
   String collectionBankAccount = "";
   String collectionBankCode = "";
   String fundSale = "";
@@ -220,7 +220,7 @@ class PurchasesScreenController extends GetxController {
       if (common!.meta!.message == 'OK' && common!.meta!.code == '200') {
         update();
         customDialogPin(
-            context, "Pin Code sent to your email address successfully");
+            context, "Pin Code sent to your registered email address and mobile number successfully");
       }
     } catch (e) {
       if (e.toString() == 'Exception: No Internet') {
@@ -275,10 +275,10 @@ class PurchasesScreenController extends GetxController {
       showToast('Please enter bank name');
     } else if(bankAccountController.text == null || bankAccountController.text == ""){
       showToast('Please enter bank account number');
-    } else if(paymentvalue != '1-Link'){
+    } else if(paymentvalue == 'Cheque'){
       if(installmentController.text == null || installmentController.text == "" ){
         showToast('Please enter cheque/instrument No.');
-      }else if(date == null || date == ""){
+      }else if(date == null){
         showToast('Please enter cheque/instrument Date.');
       } else if(picCodeController.text == null || picCodeController.text == ''){
         showToast('Please enter pin code');
@@ -301,8 +301,28 @@ class PurchasesScreenController extends GetxController {
             'PUR',
             onOkPress);
       }
+    } else if(paymentvalue == '1-Link'){
+      if(picCodeController.text == null || picCodeController.text == ''){
+        showToast('Please enter pin code');
+      } else if(!isCheckPrivacy){
+        showToast('Please accept terms and conditions');
+      } else {
+        trans.showDialog(
+            context,
+            accountValue,
+            '',
+            '',
+            '',
+            fundValue,
+            "${amountController.text}",
+            percentageButton ? 'Percentage' : 'Units',
+            'PUR',
+            onOkPress);
+      }
     } else if(picCodeController.text == null || picCodeController.text == ''){
       showToast('Please enter pin code');
+    } else if (paymentProof == null) {
+      showToast('Please add payment proof');
     }  else if(!isCheckPrivacy){
       showToast('Please accept terms and conditions');
     } else {
@@ -321,14 +341,15 @@ class PurchasesScreenController extends GetxController {
   }
 
   onOkPress(BuildContext context)async{
-    Uint8List? payProf;
-    Uint8List? paySlip;
-    if(paymentvalue != '1-Link'){
+    Uint8List? payProf = null;
+    Uint8List? paySlip = null;
+    if(paymentvalue == 'IBFT'){
       payProf = paymentProof!.readAsBytesSync();
-      paySlip = paymentSlip!.readAsBytesSync();
     }
-
-
+    if(paymentvalue == 'Cheque'){
+      paySlip = paymentSlip!.readAsBytesSync();
+      payProf = paymentProof!.readAsBytesSync();
+    }
     try {
       isLoading = true;
       update();
@@ -337,8 +358,8 @@ class PurchasesScreenController extends GetxController {
         fundCode,
         accountValue,
         amountController.text,
-        paymentvalue != '1-Link' ? installmentController.text : '',
-        paymentvalue != '1-Link' ? date!.day.toString()+'/'+date!.month.toString()+'/'+date!.year.toString() : '',
+        paymentvalue == 'Cheque' ? installmentController.text : '',
+        paymentvalue == 'Cheque' ? date!.day.toString()+'/'+date!.month.toString()+'/'+date!.year.toString() : '',
         bankNameController.text,
         bankAccountController.text,
         picCodeController.text,
@@ -346,11 +367,11 @@ class PurchasesScreenController extends GetxController {
         fundBankAccountNumber,
         fundBankCode,
         fundSaleValue,
-        payProf!,
-        paymentvalue != '1-Link' ? p.extension(paymentProof!
+        payProf ?? null,
+        paymentvalue == 'Cheque' || paymentvalue == 'IBFT' ? p.extension(paymentProof!
             .path) : '',
-        paySlip!,
-        paymentvalue != '1-Link' ? p.extension(paymentSlip!
+        paySlip ?? null,
+        paymentvalue == 'Cheque' ? p.extension(paymentSlip!
             .path)! : '',
       );
       isLoading = false;

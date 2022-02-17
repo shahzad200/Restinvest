@@ -31,9 +31,11 @@ import 'models/view_reports.dart';
 
 class ApiClient {
   static const _baseUrl =
-      'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
+      // 'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
       // 'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
+
   // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+  'http://192.168.0.174:8094/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
@@ -56,7 +58,6 @@ class ApiClient {
   static const _epRegisteredUser = _baseUrl + 'registeredUser';
   static const _epPickFundQuestions = _baseUrl + 'pickFundQuestions';
   static const _epGetExpectedFund = _baseUrl + 'getExpectedFund';
-
   static const _epNewDigUserRegDataBeforeOTP =
       _baseUrl + 'NewDigUserRegDataBeforeOTP';
   static const _epNewDigUserRegDataAfterOTP =
@@ -117,7 +118,8 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
-      if (e.toString() == 'Exception: ' + viewReport!.meta!.message.toString()) {
+      if (e.toString() ==
+          'Exception: ' + viewReport!.meta!.message.toString()) {
         throw Exception(viewReport!.meta!.error.toString());
       } else {
         throw Exception('No Internet');
@@ -165,31 +167,61 @@ class ApiClient {
   }
 
   Future<Common> onSavePurchase(
-      String userId,
-      String fundCode,
-      String folioNumber,
-      String transactionValue,
-      String chequeNo,
-      String chequeDate,
-      String bankName,
-      String bankAccountNo,
-      String accessCode,
-      String pinCode,
-      String sessionId,
-      String sessionStartDate,
-      String userType,
-      String paymentMode,
-      String collectionBankAccount,
-      String collectionBankCode,
-      String fundSaleLoad,
-      Uint8List paymentProof,
-      String paymentExtension,
-      Uint8List depositProof,
-      String depositExtension,
-      ) async {
+    String userId,
+    String fundCode,
+    String folioNumber,
+    String transactionValue,
+    String chequeNo,
+    String chequeDate,
+    String bankName,
+    String bankAccountNo,
+    String accessCode,
+    String pinCode,
+    String sessionId,
+    String sessionStartDate,
+    String userType,
+    String paymentMode,
+    String collectionBankAccount,
+    String collectionBankCode,
+    String fundSaleLoad,
+    Uint8List? paymentProof,
+    String paymentExtension,
+    Uint8List? depositProof,
+    String depositExtension,
+  ) async {
     Common? common;
     try {
-      printInfo(info: jsonEncode(<String, dynamic>{
+      printInfo(
+          info: jsonEncode(<String, dynamic>{
+        'userId': userId,
+        'unitPlan': "0",
+        'fundCode': fundCode,
+        'unitClass': "XX",
+        'folioNumber': folioNumber,
+        'transactionValue': transactionValue,
+        'chequeNo': chequeNo,
+        'chequeDate': chequeDate,
+        'bankBranch': bankName,
+        'bankAccountNo': bankAccountNo,
+        'paymentMode': paymentMode,
+        'paymentProof': paymentProof ?? "",
+        'paymentExtension': paymentExtension ?? "",
+        'depositProof': depositProof ?? "",
+        'depositExtension': depositExtension ?? "",
+        'accessCode': accessCode,
+        'authorizationPinCode': pinCode,
+        'sessionId': sessionId,
+        'sessionStartDate': sessionStartDate,
+        'userType': userType,
+        'collectionBankAccount': collectionBankAccount,
+        'collectionBankCode': collectionBankCode,
+        'fundSaleLoad': fundSaleLoad
+      }.toString()));
+      final response = await http.post(Uri.parse(_epSavePurchase),
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+          body: jsonEncode(<String, dynamic>{
             'userId': userId,
             'unitPlan': "0",
             'fundCode': fundCode,
@@ -206,47 +238,17 @@ class ApiClient {
             'depositProof': depositProof ?? "",
             'depositExtension': depositExtension ?? "",
             'accessCode': accessCode,
-            'authorizationPinCode':pinCode,
+            'authorizationPinCode': pinCode,
             'sessionId': sessionId,
             'sessionStartDate': sessionStartDate,
             'userType': userType,
             'collectionBankAccount': collectionBankAccount,
             'collectionBankCode': collectionBankCode,
             'fundSaleLoad': fundSaleLoad
-          }.toString()));
-      final response = await http.post(
-        Uri.parse(_epSavePurchase),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(<String, dynamic>{
-          'userId': userId,
-          'unitPlan': "0",
-          'fundCode': fundCode,
-          'unitClass': "XX",
-          'folioNumber': folioNumber,
-          'transactionValue': transactionValue,
-          'chequeNo': chequeNo,
-          'chequeDate': chequeDate,
-          'bankBranch': bankName,
-          'bankAccountNo': bankAccountNo,
-          'paymentMode': paymentMode,
-          'paymentProof': paymentProof ?? "",
-          'paymentExtension': paymentExtension ?? "",
-          'depositProof': depositProof ?? "",
-          'depositExtension': depositExtension ?? "",
-          'accessCode': accessCode,
-          'authorizationPinCode':pinCode,
-          'sessionId': sessionId,
-          'sessionStartDate': sessionStartDate,
-          'userType': userType,
-          'collectionBankAccount': collectionBankAccount,
-          'collectionBankCode': collectionBankCode,
-          'fundSaleLoad': fundSaleLoad
-        }));
+          }));
       print(response.body.toString());
       if (response.statusCode == 200) {
-        print(response.body);
+        // print(response.body);
         common = Common.fromJson(jsonDecode(response.body));
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
@@ -523,7 +525,7 @@ class ApiClient {
   }
 
   Future<Common> onResetPassword(String userId, String cNic) async {
-    print(userId+cNic);
+    print(userId + cNic);
     Common? common;
     try {
       final response = await http.post(
@@ -559,8 +561,12 @@ class ApiClient {
 
   Future<LoadFundsPlans> onLoadFundsPlans(String userId, String fundCode,
       String folioNumber, String requestType) async {
-    print(
-        userId + 'nkj' + fundCode + 'nkj' + folioNumber + 'nkj' + requestType);
+    printInfo(info: jsonEncode(<String, String>{
+      'userId': userId,
+      'fundCode': fundCode,
+      'folioNumber': folioNumber,
+      'requestType': requestType
+    }).toString());
     try {
       final response = await http.post(
         Uri.parse(_epLoadFundsPlans),
@@ -591,10 +597,10 @@ class ApiClient {
     }
   }
 
-
   Future<LoadFundsPlansP> onLoadFundsPlansP(String userId, String fundCode,
-      String folioNumber, String requestType,String classCode) async {
-    print(userId + 'nkj' + fundCode + 'nkj' + folioNumber + 'nkj' + requestType);
+      String folioNumber, String requestType, String classCode) async {
+    print(
+        userId + 'nkj' + fundCode + 'nkj' + folioNumber + 'nkj' + requestType);
     try {
       final response = await http.post(
         Uri.parse(_epLoadFundsPlans),
@@ -605,13 +611,13 @@ class ApiClient {
           'userId': userId,
           'fundCode': fundCode,
           'folioNumber': folioNumber,
-          'classCode' : classCode,
+          'classCode': classCode,
           'requestType': requestType
         }),
       );
       if (response.statusCode == 200) {
         LoadFundsPlansP loadFundsPlans =
-        LoadFundsPlansP.fromJson(jsonDecode(response.body));
+            LoadFundsPlansP.fromJson(jsonDecode(response.body));
         print(response.body);
         if (loadFundsPlans.meta!.code.toString() == 200.toString()) {
           return loadFundsPlans;
@@ -625,7 +631,6 @@ class ApiClient {
       throw Exception('No Internet');
     }
   }
-
 
   Future<NewUserRegData> onNewUserRegData() async {
     try {
@@ -671,7 +676,6 @@ class ApiClient {
     }
   }
 
-
   Future<StateData> onStateData(String countryCode) async {
     try {
       final response = await http.post(
@@ -695,7 +699,6 @@ class ApiClient {
       throw Exception('No Internet');
     }
   }
-
 
   Future<CitySector> onCitySectorData(String cityCode) async {
     try {
@@ -909,7 +912,8 @@ class ApiClient {
       String userType) async {
     Common? common;
     try {
-      printInfo(info: jsonEncode(<String, String>{
+      printInfo(
+          info: jsonEncode(<String, String>{
         'accessCode': accessCode,
         'authorizationPinCode': authorizationPinCode,
         'folioNumber': folioNumber,
@@ -946,7 +950,7 @@ class ApiClient {
         }),
       );
       if (response.statusCode == 200) {
-        printInfo(info:response.body);
+        printInfo(info: response.body);
         common = Common.fromJson(jsonDecode(response.body));
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
@@ -985,7 +989,8 @@ class ApiClient {
       String toFundUnitPlan) async {
     Common? common;
     try {
-      printInfo(info: jsonEncode(<String, String>{
+      printInfo(
+          info: jsonEncode(<String, String>{
         'accessCode': accessCode,
         'authorizationPinCode': authorizationPinCode,
         'folioNumber': folioNumber,
@@ -1003,7 +1008,7 @@ class ApiClient {
         'toFundCode': toFundCode,
         'toFundUnitClass': toFundUnitClass,
         'toFundUnitPlan': toFundUnitPlan
-      }.toString()) );
+      }.toString()));
       final response = await http.post(
         Uri.parse(_epSaveFundTransfer),
         headers: <String, String>{
@@ -1100,7 +1105,6 @@ class ApiClient {
     }
   }
 
-
   Future<NewDigUserRegDataRpqList> onNewDigUserRegDataRpqList() async {
     try {
       final response = await http.post(
@@ -1145,8 +1149,8 @@ class ApiClient {
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body);
-         genVerificationCodeForDigUser =
-             Common.fromJson(jsonDecode(response.body));
+        genVerificationCodeForDigUser =
+            Common.fromJson(jsonDecode(response.body));
         if (genVerificationCodeForDigUser.meta!.code.toString() ==
             200.toString()) {
           return genVerificationCodeForDigUser;
@@ -1157,7 +1161,9 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
-      if (e.toString() == 'Exception: ' + genVerificationCodeForDigUser!.meta!.error.toString()) {
+      if (e.toString() ==
+          'Exception: ' +
+              genVerificationCodeForDigUser!.meta!.error.toString()) {
         throw Exception(genVerificationCodeForDigUser!.meta!.error.toString());
       } else {
         throw Exception('No Internet');
@@ -1165,7 +1171,8 @@ class ApiClient {
     }
   }
 
-  Future<ValidateVerificationCodeForDigUser> onValidateVerificationCodeForDigUser(
+  Future<ValidateVerificationCodeForDigUser>
+      onValidateVerificationCodeForDigUser(
     String cNic,
     String email,
     String mobile,
@@ -1189,10 +1196,16 @@ class ApiClient {
           'verificationCode': verificationCode
         }),
       );
+      printInfo(info: response.body);
       if (response.statusCode == 200) {
-        printInfo(info: response.body);
-        common = ValidateVerificationCodeForDigUser.fromJson(jsonDecode(response.body));
-        if (common.meta!.code == 200.toString()) {
+        // printInfo(info: response.body);
+        try {
+          common = ValidateVerificationCodeForDigUser.fromJson(
+              jsonDecode(response.body));
+        } catch (e) {
+          printInfo(info: e.toString());
+        }
+        if (common!.meta!.code == 200.toString()) {
           return common;
         } else {
           throw Exception(common.meta!.error.toString());
@@ -1209,7 +1222,6 @@ class ApiClient {
     }
   }
 
-
   Future<Common> onFatcaScreenForDigUser(
       String birthCitycode,
       String birthCountrycode,
@@ -1222,52 +1234,50 @@ class ApiClient {
       String titleOfAccount,
       list,
       String taxIdNumber,
-      String cNic, String sessionID
-      ) async {
+      String cNic,
+      String sessionID) async {
     Common? common;
 
     try {
-      printInfo(info: jsonEncode(<String, dynamic>{
-        "requestFromScreenNo":4,
-        "cnic":cNic,
-        "sessionID":sessionID,
-        "birthCityCode":"$birthCitycode",
-        "birthCountryCode":"$birthCountrycode",
-        "birthStateCode":"$birthStatecode",
-        "crsDisclaimerChecked":disclamierCheck,
-        "fatcaDisclaimerChecked":fatcaDisclamierCheck,
-        "otherTaxResCountry":"test tax res country",
-        "taxIdentificationNumber":taxIdNumber,
-        "taxPaidCountry":"$taxPaidCountry",
-        "taxResCountryOtherThanPak":"$taxResCountryOtherThanPak",
-        "titleOfAccount":"$titleOfAccount",
-        "fatcaInfo":list
+      printInfo(
+          info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo": 4,
+        "cnic": cNic,
+        "sessionID": sessionID,
+        "birthCityCode": "$birthCitycode",
+        "birthCountryCode": "$birthCountrycode",
+        "birthStateCode": "$birthStatecode",
+        "crsDisclaimerChecked": disclamierCheck,
+        "fatcaDisclaimerChecked": fatcaDisclamierCheck,
+        "otherTaxResCountry": "test tax res country",
+        "taxIdentificationNumber": taxIdNumber,
+        "taxPaidCountry": "$taxPaidCountry",
+        "taxResCountryOtherThanPak": "$taxResCountryOtherThanPak",
+        "titleOfAccount": "$titleOfAccount",
+        "fatcaInfo": list
       }.toString()));
       final response = await http.post(
         Uri.parse(_epPartialSavingForDigUser),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        body: jsonEncode(<String, dynamic>
-        {
-          "requestFromScreenNo":4,
-          "cnic":cNic,
-          "sessionID":sessionID,
-          "birthCityCode":"$birthCitycode",
-          "birthCountryCode":"$birthCountrycode",
-          "birthStateCode":"$birthStatecode",
-          "crsDisclaimerChecked":disclamierCheck,
-          "fatcaDisclaimerChecked":fatcaDisclamierCheck,
-          "otherTaxResCountry":"test tax res country",
-          "taxIdentificationNumber":null,
-          "taxPaidCountry":"$taxPaidCountry",
-          "taxResCountryOtherThanPak":"$taxResCountryOtherThanPak",
-          "titleOfAccount":"$titleOfAccount",
-          "fatcaInfo":list
-        }
-        ),
+        body: jsonEncode(<String, dynamic>{
+          "requestFromScreenNo": 4,
+          "cnic": cNic,
+          "sessionID": sessionID,
+          "birthCityCode": "$birthCitycode",
+          "birthCountryCode": "$birthCountrycode",
+          "birthStateCode": "$birthStatecode",
+          "crsDisclaimerChecked": disclamierCheck,
+          "fatcaDisclaimerChecked": fatcaDisclamierCheck,
+          "otherTaxResCountry": "test tax res country",
+          "taxIdentificationNumber": null,
+          "taxPaidCountry": "$taxPaidCountry",
+          "taxResCountryOtherThanPak": "$taxResCountryOtherThanPak",
+          "titleOfAccount": "$titleOfAccount",
+          "fatcaInfo": list
+        }),
       );
-      print(jsonDecode(response.body));
       if (response.statusCode == 200) {
         printInfo(info: response.body);
         common = Common.fromJson(jsonDecode(response.body));
@@ -1288,58 +1298,85 @@ class ApiClient {
     }
   }
 
-
-
   Future<Common> onPartialSavingForDigUser(
-      String email,String mobile,String mobileRegWith,String accountTypeOpened,
-      String bankAccountNo,String bankBranchAddress,String bankName,bool basicInfoDisclaimerChecked,
-      String bankCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
-      String customerName,String dateOfBirth,String dividendMandate,String fatherSpouseName,
-      String mailingAddress,String mailingCountryCode,String mailingCity,String maritalStatus,
-      String mothersMaidenName,String nationalityCode,String pakResident,String religion,String residentialAddress,
-      int retirementAge,String title,bool zaKatExempt,String noMName,String noMcNic,
-      String noMRelation,String noMMobile,String cNic, String sessionID
-      ) async {
+      String email,
+      String mobile,
+      String mobileRegWith,
+      String accountTypeOpened,
+      String bankAccountNo,
+      String bankBranchAddress,
+      String bankName,
+      String branchName,
+      bool basicInfoDisclaimerChecked,
+      bool lifeTimeCheck,
+      String bankCityCode,
+      String city,
+      String cNicExpiryDate,
+      String cNicIssueDate,
+      String country,
+      String customerName,
+      String dateOfBirth,
+      String dividendMandate,
+      String fatherSpouseName,
+      String mailingAddress,
+      String mailingCountryCode,
+      String mailingCity,
+      String maritalStatus,
+      String mothersMaidenName,
+      String nationalityCode,
+      String pakResident,
+      String religion,
+      String residentialAddress,
+      int retirementAge,
+      String title,
+      bool zaKatExempt,
+      String noMName,
+      String noMcNic,
+      String noMRelation,
+      String noMMobile,
+      String cNic,
+      String sessionID) async {
     Common? common;
     try {
-      printInfo(info: jsonEncode(<String, dynamic>{
-        "requestFromScreenNo":2,
-        "cnic":cNic,
-        "email":email,
-        "mobile":mobile,
-        "mobileRegisteredWith":mobileRegWith,
-        "accountTypeToBeOpened":accountTypeOpened,
-        "sessionID":"94",
-        "bankAccountNo":bankAccountNo,
-        "bankBranchAddress":bankBranchAddress,
-        "bankName":bankName,
-        "basicInfoDisclaimerChecked":basicInfoDisclaimerChecked,
-        "branchCity":bankCityCode,
-        "city":city,
-        "cnicExpiryDate":cNicExpiryDate,
-        "cnicIssueDate":cNicIssueDate,
-        "country":country,
-        "customerName":customerName,
-        "dateOfBirth":dateOfBirth,
-        "dividendMandate":dividendMandate,
-        "fatherSpouseName":fatherSpouseName,
-        "lifetimeCnicExpiry":false,
-        "mailingAddress":mailingAddress,
-        "mailingCountryCode":mailingCountryCode,
-        "mailingCity":mailingCity,
-        "mailingOtherCity":"test mailing city",
-        "maritalStatus":maritalStatus,
-        "mothersMaidenName":mothersMaidenName,
-        "nationalityCode":nationalityCode,
-        "otherCity":"test other city",
-        "pakResident":pakResident,
-        "phoneOne":null,
-        "phoneTwo":null,
-        "religion":religion,
-        "residentialAddress":residentialAddress,
-        "retirementAge":retirementAge,
-        "title":title,
-        "zakatExempt":zaKatExempt,
+      printInfo(
+          info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo": 2,
+        "cnic": cNic,
+        "email": email,
+        "mobile": mobile,
+        "mobileRegisteredWith": mobileRegWith,
+        "accountTypeToBeOpened": accountTypeOpened,
+        "sessionID": "94",
+        "bankAccountNo": bankAccountNo,
+        "bankBranchAddress": bankBranchAddress,
+        "bankName": bankName,
+        "basicInfoDisclaimerChecked": basicInfoDisclaimerChecked,
+        "branchCity": bankCityCode,
+        "city": city,
+        "cnicExpiryDate": cNicExpiryDate,
+        "cnicIssueDate": cNicIssueDate,
+        "country": country,
+        "customerName": customerName,
+        "dateOfBirth": dateOfBirth,
+        "dividendMandate": dividendMandate,
+        "fatherSpouseName": fatherSpouseName,
+        "lifetimeCnicExpiry": lifeTimeCheck,
+        "mailingAddress": mailingAddress,
+        "mailingCountryCode": mailingCountryCode,
+        "mailingCity": mailingCity,
+        "mailingOtherCity": "test mailing city",
+        "maritalStatus": maritalStatus,
+        "mothersMaidenName": mothersMaidenName,
+        "nationalityCode": nationalityCode,
+        "otherCity": "test other city",
+        "pakResident": pakResident,
+        "phoneOne": null,
+        "phoneTwo": null,
+        "religion": religion,
+        "residentialAddress": residentialAddress,
+        "retirementAge": retirementAge,
+        "title": title,
+        "zakatExempt": zaKatExempt,
         "nominees": [
           {
             "name": noMName,
@@ -1354,45 +1391,45 @@ class ApiClient {
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-
         body: jsonEncode(<String, dynamic>{
-          "requestFromScreenNo":2,
-          "cnic":cNic,
-          "email":email,
-          "mobile":mobile,
-          "mobileRegisteredWith":mobileRegWith,
-          "accountTypeToBeOpened":accountTypeOpened,
-          "sessionID":sessionID,
-          "bankAccountNo":bankAccountNo,
-          "bankBranchAddress":bankBranchAddress,
-          "bankName":bankName,
-          "basicInfoDisclaimerChecked":basicInfoDisclaimerChecked,
-          "branchCity":bankCityCode,
-          "city":city,
-          "cnicExpiryDate":cNicExpiryDate,
-          "cnicIssueDate":cNicIssueDate,
-          "country":country,
-          "customerName":customerName,
-          "dateOfBirth":dateOfBirth,
-          "dividendMandate":dividendMandate,
-          "fatherSpouseName":fatherSpouseName,
-          "lifetimeCnicExpiry":false,
-          "mailingAddress":mailingAddress,
-          "mailingCountryCode":mailingCountryCode,
-          "mailingCity":mailingCity,
-          "mailingOtherCity":"test mailing city",
-          "maritalStatus":maritalStatus,
-          "mothersMaidenName":mothersMaidenName,
-          "nationalityCode":nationalityCode,
-          "otherCity":"test other city",
-          "pakResident":pakResident,
-          "phoneOne":null,
-          "phoneTwo":null,
-          "religion":religion,
-          "residentialAddress":residentialAddress,
-          "retirementAge":retirementAge,
-          "title":title,
-          "zakatExempt":zaKatExempt,
+          "requestFromScreenNo": 2,
+          "cnic": cNic,
+          "email": email,
+          "mobile": mobile,
+          "mobileRegisteredWith": mobileRegWith,
+          "accountTypeToBeOpened": accountTypeOpened,
+          "sessionID": sessionID,
+          "bankAccountNo": bankAccountNo,
+          "bankBranchAddress": bankBranchAddress,
+          "bankName": bankName,
+          "branchName": branchName,
+          "basicInfoDisclaimerChecked": basicInfoDisclaimerChecked,
+          "branchCity": bankCityCode,
+          "city": city,
+          "cnicExpiryDate": cNicExpiryDate,
+          "cnicIssueDate": cNicIssueDate,
+          "country": country,
+          "customerName": customerName,
+          "dateOfBirth": dateOfBirth,
+          "dividendMandate": dividendMandate,
+          "fatherSpouseName": fatherSpouseName,
+          "lifetimeCnicExpiry": lifeTimeCheck,
+          "mailingAddress": mailingAddress,
+          "mailingCountryCode": mailingCountryCode,
+          "mailingCity": mailingCity,
+          "mailingOtherCity": "test mailing city",
+          "maritalStatus": maritalStatus,
+          "mothersMaidenName": mothersMaidenName,
+          "nationalityCode": nationalityCode,
+          "otherCity": "test other city",
+          "pakResident": pakResident,
+          "phoneOne": null,
+          "phoneTwo": null,
+          "religion": religion,
+          "residentialAddress": residentialAddress,
+          "retirementAge": retirementAge,
+          "title": title,
+          "zakatExempt": zaKatExempt,
           "nominees": [
             {
               "name": noMName,
@@ -1402,7 +1439,6 @@ class ApiClient {
             },
           ],
         }),
-
       );
 
       if (response.statusCode == 200) {
@@ -1429,53 +1465,67 @@ class ApiClient {
     }
   }
 
-
   Future<Common> onPartialSavingForDigUserScreen3(
-      String domesticCounterParties,String domesticGeographies,String internationalCounterParties,String internationalGeographies,
+      String domesticCounterParties,
+      String domesticGeographies,
+      String internationalCounterParties,
+      String internationalGeographies,
       String employerDesignation,
       String employerName,
-      String employerNatureOfBusiness,String employerProfession,
-      String preferedModeOfTrans,int expTurnoverInAccAmount,String expTurnoverInAccType,int expectedInvestmentAmount,
+      String employerNatureOfBusiness,
+      String employerProfession,
+      String preferedModeOfTrans,
+      int expTurnoverInAccAmount,
+      String expTurnoverInAccType,
+      int expectedInvestmentAmount,
       int annualIncome,
-      bool kycDisclaimerChecked,String occupation,String sourceOfIncome,
-      bool oneAns,int qOne,bool twoAns,int qTwo,bool threeAns,int qThree,bool fourAns,int qFour,bool fiveAns,int qFive,
+      bool kycDisclaimerChecked,
+      String occupation,
+      String sourceOfIncome,
+      bool oneAns,
+      int qOne,
+      bool twoAns,
+      int qTwo,
+      bool threeAns,
+      int qThree,
+      bool fourAns,
+      int qFour,
+      bool fiveAns,
+      int qFive,
       String cNic,
-      String sessionID
-      ) async {
+      String sessionID) async {
     Common? common;
     try {
-      printInfo(info: jsonEncode(<String, dynamic>{
-        "requestFromScreenNo":3,
-        "cnic":cNic,
-        "sessionID":sessionID,
-        "domesticCounterParties":domesticCounterParties,
-        "domesticGeographies":domesticGeographies,
-        "internationalCounterParties":internationalCounterParties,
-        "internationalGeographies":internationalGeographies,
-        "employerDesignation":employerDesignation,
-        "employerName":employerName,
-        "employerNatureOfBusiness":employerNatureOfBusiness,
-        "employerProfession":employerProfession,
-        "preferedModeOfTrans":preferedModeOfTrans,
-        "expTurnoverInAccAmount":expTurnoverInAccAmount,
-        "expTurnoverInAccType":expTurnoverInAccType,
-        "expectedInvestmentAmount":expectedInvestmentAmount,
-        "annualIncome":annualIncome,
-        "kycDisclaimerChecked":kycDisclaimerChecked,
-        "occupation":occupation,
-        "otherOccupation":null,
-        "otherSourceOfIncome":"test",
-        "sourceOfIncome":sourceOfIncome,
-        "pepsInfo":[{"answer"	:	oneAns,
-          "questionCode"	:	qOne},
-          {"answer"	:	twoAns,
-            "questionCode"	:	qTwo},
-          {"answer"	:	threeAns,
-            "questionCode"	:	qThree},
-          {"answer"	:	fourAns,
-            "questionCode"	:	qFour},
-          {"answer"	:	fiveAns,
-            "questionCode"	:	qFive}]
+      printInfo(
+          info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo": 3,
+        "cnic": cNic,
+        "sessionID": sessionID,
+        "domesticCounterParties": domesticCounterParties,
+        "domesticGeographies": domesticGeographies,
+        "internationalCounterParties": internationalCounterParties,
+        "internationalGeographies": internationalGeographies,
+        "employerDesignation": employerDesignation,
+        "employerName": employerName,
+        "employerNatureOfBusiness": employerNatureOfBusiness,
+        "employerProfession": employerProfession,
+        "preferedModeOfTrans": preferedModeOfTrans,
+        "expTurnoverInAccAmount": expTurnoverInAccAmount,
+        "expTurnoverInAccType": expTurnoverInAccType,
+        "expectedInvestmentAmount": expectedInvestmentAmount,
+        "annualIncome": annualIncome,
+        "kycDisclaimerChecked": kycDisclaimerChecked,
+        "occupation": occupation,
+        "otherOccupation": null,
+        "otherSourceOfIncome": "test",
+        "sourceOfIncome": sourceOfIncome,
+        "pepsInfo": [
+          {"answer": oneAns, "questionCode": qOne},
+          {"answer": twoAns, "questionCode": qTwo},
+          {"answer": threeAns, "questionCode": qThree},
+          {"answer": fourAns, "questionCode": qFour},
+          {"answer": fiveAns, "questionCode": qFive}
+        ]
       }.toString()));
       final response = await http.post(
         Uri.parse(_epPartialSavingForDigUser),
@@ -1483,37 +1533,34 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, dynamic>{
-          "requestFromScreenNo":3,
-          "cnic":cNic,
-          "sessionID":sessionID,
-          "domesticCounterParties":domesticCounterParties,
-          "domesticGeographies":domesticGeographies,
-          "internationalCounterParties":internationalCounterParties,
-          "internationalGeographies":internationalGeographies,
-          "employerDesignation":employerDesignation,
-          "employerName":employerName,
-          "employerNatureOfBusiness":employerNatureOfBusiness,
-          "employerProfession":employerProfession,
-          "preferedModeOfTrans":preferedModeOfTrans,
-          "expTurnoverInAccAmount":expTurnoverInAccAmount,
-          "expTurnoverInAccType":expTurnoverInAccType,
-          "expectedInvestmentAmount":expectedInvestmentAmount,
-          "annualIncome":annualIncome,
-          "kycDisclaimerChecked":kycDisclaimerChecked,
-          "occupation":occupation,
-          "otherOccupation":null,
-          "otherSourceOfIncome":"test",
-          "sourceOfIncome":sourceOfIncome,
-          "pepsInfo":[{"answer"	:	oneAns,
-            "questionCode"	:	qOne},
-            {"answer"	:	twoAns,
-            "questionCode"	:	qTwo},
-            {"answer"	:	threeAns,
-              "questionCode"	:	qThree},
-            {"answer"	:	fourAns,
-              "questionCode"	:	qFour},
-            {"answer"	:	fiveAns,
-              "questionCode"	:	qFive}]
+          "requestFromScreenNo": 3,
+          "cnic": cNic,
+          "sessionID": sessionID,
+          "domesticCounterParties": domesticCounterParties,
+          "domesticGeographies": domesticGeographies,
+          "internationalCounterParties": internationalCounterParties,
+          "internationalGeographies": internationalGeographies,
+          "employerDesignation": employerDesignation,
+          "employerName": employerName,
+          "employerNatureOfBusiness": employerNatureOfBusiness,
+          "employerProfession": employerProfession,
+          "preferedModeOfTrans": preferedModeOfTrans,
+          "expTurnoverInAccAmount": expTurnoverInAccAmount,
+          "expTurnoverInAccType": expTurnoverInAccType,
+          "expectedInvestmentAmount": expectedInvestmentAmount,
+          "annualIncome": annualIncome,
+          "kycDisclaimerChecked": kycDisclaimerChecked,
+          "occupation": occupation,
+          "otherOccupation": null,
+          "otherSourceOfIncome": "test",
+          "sourceOfIncome": sourceOfIncome,
+          "pepsInfo": [
+            {"answer": oneAns, "questionCode": qOne},
+            {"answer": twoAns, "questionCode": qTwo},
+            {"answer": threeAns, "questionCode": qThree},
+            {"answer": fourAns, "questionCode": qFour},
+            {"answer": fiveAns, "questionCode": qFive}
+          ]
         }),
       );
       if (response.statusCode == 200) {
@@ -1539,38 +1586,41 @@ class ApiClient {
       }
     }
   }
-
-
 
   Future<Common> onPartialSavingForDigUserScreen5(
       int rpqAge,
-      bool rpqDisclaimerChecked, int rpqFinacialPosition,
-      int rpqInvestmentHorizon,int rpqInvestmentKnowledge,
-      int rpqInvestmentObjective, int rpqMaritalStatus,
-      int rpqNoOfDependants,int rpqOccupation,
-      int rpqQualification,int rpqRiskAppetite,
+      bool rpqDisclaimerChecked,
+      int rpqFinacialPosition,
+      int rpqInvestmentHorizon,
+      int rpqInvestmentKnowledge,
+      int rpqInvestmentObjective,
+      int rpqMaritalStatus,
+      int rpqNoOfDependants,
+      int rpqOccupation,
+      int rpqQualification,
+      int rpqRiskAppetite,
       int rpqTotalScore,
       String cNic,
-      String sessionID
-      ) async {
+      String sessionID) async {
     Common? common;
     try {
-      printInfo(info: jsonEncode(<String, dynamic>{
-        "requestFromScreenNo":5,
-        "cnic":cNic,
-        "sessionID":sessionID,
-        "rpqAge":rpqAge,
-        "rpqDisclaimerChecked":rpqDisclaimerChecked,
-        "rpqFinacialPosition":rpqFinacialPosition,
-        "rpqInvestmentHorizon":rpqInvestmentHorizon,
-        "rpqInvestmentKnowledge":rpqInvestmentKnowledge,
-        "rpqInvestmentObjective":rpqInvestmentObjective,
-        "rpqMaritalStatus":rpqMaritalStatus,
-        "rpqNoOfDependants":rpqNoOfDependants,
-        "rpqOccupation":rpqOccupation,
-        "rpqQualification":rpqQualification,
-        "rpqRiskAppetite":rpqRiskAppetite,
-        "rpqTotalScore":rpqTotalScore
+      printInfo(
+          info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo": 5,
+        "cnic": cNic,
+        "sessionID": sessionID,
+        "rpqAge": rpqAge,
+        "rpqDisclaimerChecked": rpqDisclaimerChecked,
+        "rpqFinacialPosition": rpqFinacialPosition,
+        "rpqInvestmentHorizon": rpqInvestmentHorizon,
+        "rpqInvestmentKnowledge": rpqInvestmentKnowledge,
+        "rpqInvestmentObjective": rpqInvestmentObjective,
+        "rpqMaritalStatus": rpqMaritalStatus,
+        "rpqNoOfDependants": rpqNoOfDependants,
+        "rpqOccupation": rpqOccupation,
+        "rpqQualification": rpqQualification,
+        "rpqRiskAppetite": rpqRiskAppetite,
+        "rpqTotalScore": rpqTotalScore
       }.toString()));
       final response = await http.post(
         Uri.parse(_epPartialSavingForDigUser),
@@ -1578,21 +1628,21 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, dynamic>{
-          "requestFromScreenNo":5,
-          "cnic":cNic,
-          "sessionID":sessionID,
-          "rpqAge":rpqAge,
-          "rpqDisclaimerChecked":rpqDisclaimerChecked,
-          "rpqFinacialPosition":rpqFinacialPosition,
-          "rpqInvestmentHorizon":rpqInvestmentHorizon,
-          "rpqInvestmentKnowledge":rpqInvestmentKnowledge,
-          "rpqInvestmentObjective":rpqInvestmentObjective,
-          "rpqMaritalStatus":rpqMaritalStatus,
-          "rpqNoOfDependants":rpqNoOfDependants,
-          "rpqOccupation":rpqOccupation,
-          "rpqQualification":rpqQualification,
-          "rpqRiskAppetite":rpqRiskAppetite,
-          "rpqTotalScore":rpqTotalScore
+          "requestFromScreenNo": 5,
+          "cnic": cNic,
+          "sessionID": sessionID,
+          "rpqAge": rpqAge,
+          "rpqDisclaimerChecked": rpqDisclaimerChecked,
+          "rpqFinacialPosition": rpqFinacialPosition,
+          "rpqInvestmentHorizon": rpqInvestmentHorizon,
+          "rpqInvestmentKnowledge": rpqInvestmentKnowledge,
+          "rpqInvestmentObjective": rpqInvestmentObjective,
+          "rpqMaritalStatus": rpqMaritalStatus,
+          "rpqNoOfDependants": rpqNoOfDependants,
+          "rpqOccupation": rpqOccupation,
+          "rpqQualification": rpqQualification,
+          "rpqRiskAppetite": rpqRiskAppetite,
+          "rpqTotalScore": rpqTotalScore
         }),
       );
       if (response.statusCode == 200) {
@@ -1619,53 +1669,56 @@ class ApiClient {
     }
   }
 
-
   Future<Common> onPartialSavingForDigUserScreen6(
-  Uint8List? cNicBack,
+      Uint8List? cNicBack,
       Uint8List? cNicFront,
       Uint8List? incomeProof,
       Uint8List? sigPaper,
       Uint8List? zaKat,
+      Uint8List? mobileProof,
+      bool disClaimer,
       String cNic,
-      String sessionID
-      ) async {
+      String sessionID) async {
     Common? common;
     try {
-      printInfo(info: jsonEncode(<String, dynamic>{
-        "requestFromScreenNo":6,
-        "cnic":cNic,
-        "sessionID":sessionID,
-        "cnicBackDoc":{
-          "fileName":"cnicBack.jpg",
-          "fileExtension":".jpg",
-          "fileContent":cNicBack
+      printInfo(
+          info: jsonEncode(<String, dynamic>{
+        "requestFromScreenNo": 6,
+        "cnic": cNic,
+        "sessionID": sessionID,
+        "cnicBackDoc": {
+          "fileName": "cnicBack.jpg",
+          "fileExtension": ".jpg",
+          "fileContent": cNicBack
         },
-        "cnicFrontDoc":{
-          "fileName":"cnicFront.jpg",
-          "fileExtension":".jpg",
-          "fileContent":cNicFront
+        "cnicFrontDoc": {
+          "fileName": "cnicFront.jpg",
+          "fileExtension": ".jpg",
+          "fileContent": cNicFront
         },
-        "incomeProofDoc":{
-          "fileName":"income.jpg",
-          "fileExtension":".jpg",
-          "fileContent":incomeProof
+        "incomeProofDoc": {
+          "fileName": "income.jpg",
+          "fileExtension": ".jpg",
+          "fileContent": incomeProof
         },
-        "mobileNoProofDoc":{
-          "fileName":"mobile.jpg",
-          "fileExtension":".jpg",
-          "fileContent":[]
+        "mobileNoProofDoc": {
+          "fileName": "mobile.jpg",
+          "fileExtension": ".jpg",
+          "fileContent": mobileProof
         },
-        "signatureDoc":{
-          "fileName":"sig.jpg",
-          "fileExtension":".jpg",
-          "fileContent":sigPaper
+        "signatureDoc": {
+          "fileName": "sig.jpg",
+          "fileExtension": ".jpg",
+          "fileContent": sigPaper
         },
-        "zakatDeclarationDoc":zaKat != null ?{
-          "fileName":"zakat.jpg",
-          "fileExtension":".jpg",
-          "fileContent":zaKat
-        } : null,
-        "requiredDocs":[]
+        "zakatDeclarationDoc": zaKat != null
+            ? {
+                "fileName": "zakat.jpg",
+                "fileExtension": ".jpg",
+                "fileContent": zaKat
+              }
+            : null,
+        "requiredDocs": []
       }.toString()));
       final response = await http.post(
         Uri.parse(_epPartialSavingForDigUser),
@@ -1673,36 +1726,45 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, dynamic>{
-          "requestFromScreenNo":6,
-          "cnic":cNic,
-          "sessionID":sessionID,
-          "cnicBackDoc":{
-            "fileName":"cnicBack.jpg",
-            "fileExtension":".jpg",
-            "fileContent":cNicBack
+          "requestFromScreenNo": 6,
+          "cnic": cNic,
+          "sessionID": sessionID,
+          "cnicBackDoc": {
+            "fileName": "cnicBack.jpg",
+            "fileExtension": ".jpg",
+            "fileContent": cNicBack
           },
-          "cnicFrontDoc":{
-            "fileName":"cnicFront.jpg",
-            "fileExtension":".jpg",
-            "fileContent":cNicFront
+          "cnicFrontDoc": {
+            "fileName": "cnicFront.jpg",
+            "fileExtension": ".jpg",
+            "fileContent": cNicFront
           },
-          "incomeProofDoc":{
-            "fileName":"income.jpg",
-            "fileExtension":".jpg",
-            "fileContent":incomeProof
+          "incomeProofDoc": {
+            "fileName": "income.jpg",
+            "fileExtension": ".jpg",
+            "fileContent": incomeProof
           },
-          "mobileNoProofDoc":{
-            "fileName":"mobile.jpg",
-            "fileExtension":".jpg",
-            "fileContent":[]
+          "mobileNoProofDoc": mobileProof != null
+              ? {
+                  "fileName": "mobile.jpg",
+                  "fileExtension": ".jpg",
+                  "fileContent": mobileProof
+                }
+              : null,
+          "signatureDoc": {
+            "fileName": "sig.jpg",
+            "fileExtension": ".jpg",
+            "fileContent": sigPaper
           },
-          "signatureDoc":{
-            "fileName":"sig.jpg",
-            "fileExtension":".jpg",
-            "fileContent":sigPaper
-          },
-          "zakatDeclarationDoc":null,
-          "requiredDocs":[]
+          "zakatDeclarationDoc": zaKat != null
+              ? {
+                  "fileName": "zakat.jpg",
+                  "fileExtension": ".jpg",
+                  "fileContent": zaKat
+                }
+              : null,
+          "docUploadDisclaimerChecked": disClaimer,
+          "requiredDocs": []
         }),
       );
       if (response.statusCode == 200) {
@@ -1729,26 +1791,21 @@ class ApiClient {
     }
   }
 
-
-  Future<Common> onSaveDigUser(
-      String cNic,
-      String sessionID
-      ) async {
+  Future<Common> onSaveDigUser(String cNic, String sessionID) async {
     Common? common;
     try {
-      printInfo(info: jsonEncode(<String, dynamic>{
-        "cnic":cNic,
-        "sessionID":sessionID
+      printInfo(
+          info: jsonEncode(<String, dynamic>{
+        "cnic": cNic,
+        "sessionID": sessionID
       }.toString()));
       final response = await http.post(
         Uri.parse(_epSaveDigUser),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        body: jsonEncode(<String, dynamic>{
-          "cnic":cNic,
-          "sessionID":sessionID
-        }),
+        body:
+            jsonEncode(<String, dynamic>{"cnic": cNic, "sessionID": sessionID}),
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body);
@@ -1773,7 +1830,4 @@ class ApiClient {
       }
     }
   }
-
 }
-
-

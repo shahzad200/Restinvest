@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:investintrust/routes/routes.dart';
@@ -42,7 +43,9 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                   elevation: 0,
                 ),
                 key: _.scaffoldKey,
-                body: SingleChildScrollView(
+                body: Stack(
+                    children: [
+                SingleChildScrollView(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: Container(
                     child: Column(
@@ -173,7 +176,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                           children: [
                                             const RestInvestTitle(
-                                              text: 'NAME OF EMPLOYER?BUSINESS:',
+                                              text: 'NAME OF EMPLOYER BUSINESS:',
                                               textColor: AppColor.black,
                                               fontSize: 10,
                                               fontWeight: FontWeight.w900,
@@ -191,23 +194,26 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                         width: 6,
                                       ),
                                       Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            const RestInvestTitle(
-                                              text: "DESIGNATION:",
-                                              textColor: AppColor.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w900,
-                                            ),
-                                            CustomTextFormField(
-                                              controller: _.designationController,
-                                              isRounded: true,
-                                              hint: "",
-                                              hintColor: AppColor.black,
-                                            ),
-                                          ],
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(top: 0.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              const RestInvestTitle(
+                                                text: "DESIGNATION:",
+                                                textColor: AppColor.black,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w900,
+                                              ),
+                                              CustomTextFormField(
+                                                controller: _.designationController,
+                                                isRounded: true,
+                                                hint: "",
+                                                hintColor: AppColor.black,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -244,7 +250,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                           children: [
                                             const RestInvestTitle(
-                                              text: "",
+                                              text: "PROFESSION:",
                                               textColor: AppColor.black,
                                               fontSize: 10,
                                               fontWeight: FontWeight.w900,
@@ -260,8 +266,8 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  _.occupationGroupValue ==  '015' || _.occupationGroupValue ==  '013'
-                                     ? const SizedBox() : Column(
+                                  _.occupationGroupValue ==  '013'
+                                     ? Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       space,
@@ -375,7 +381,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                         ],
                                       ),
                                     ],
-                                  ),
+                                  ) : const SizedBox(),
                                   space,
                                   const RestInvestTitle(
                                     text: "PREFERRED MODE OF TRANSACTION:*",
@@ -477,12 +483,17 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                   CustomTextFormField(
                                     controller: _.expTurnoverAmountController,
                                     isRounded: true,
-                                    hint: "",
-                                    hintColor: AppColor.black,
+                                    hint: "Enter Amount",
+                                    textInputType: TextInputType.number,
+                                    hintColor: AppColor.dimblack,
+                                    inputFormator: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      NumberForm()
+                                    ],
                                   ),
                                   space,
                                   const RestInvestTitle(
-                                    text: "EXPECTED INVESTMENT AMMOUNT:*",
+                                    text: "EXPECTED INVESTMENT AMOUNT:*",
                                     textColor: AppColor.black,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w900,
@@ -697,6 +708,8 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                             // Get.toNamed(AppRoute.accountOpenFatcaScreen);
                                           },
                                           isRound: false),
+                                      const SizedBox(width: 20,),
+                                      const Text('3/8')
                                     ],
                                   ),
                                   const SizedBox(
@@ -711,6 +724,10 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+          _.isLoading ?  const Center(
+          child: DialogBox(),
+          ) : const SizedBox()
+          ])
               ));
         });
   }

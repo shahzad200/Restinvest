@@ -47,6 +47,8 @@ class RedemptionScreenController extends GetxController {
 
   @override
   void onInit() async{
+    isLoading = true;
+    update();
     accountvalue = Constant.loginModel!.response!.accounts![0].folioNumber!;
     Constant.loginModel!.response!.accounts![0].userFundBalances!.forEach((element) {
       map.fundShort =element.fundShort;
@@ -69,7 +71,9 @@ class RedemptionScreenController extends GetxController {
     }
     loadFundsPlans =await  api.onLoadFundsPlans(Constant.userId, Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode!, accountvalue, "RED");
     print(loadFundsPlans!.response!);
-
+    if(isLoading) {
+      isLoading = false;
+    }
     update();
     super.onInit();
   }
@@ -120,21 +124,53 @@ class RedemptionScreenController extends GetxController {
   String approxUnits = '';
   calculateUnits(String s){
     if(unitButton){
-      String d = loadFundsPlans!.response!.userFundBalances![index].fundRedPrice ?? '0';
-      double val = double.parse(d) * double.parse(s);
-      approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
-      update();
+      print("KJHKJH"+loadFundsPlans!.response!.userFundBalances![index].fundUnits!);
+      if(double.parse(s) <= double.parse(loadFundsPlans!.response!.userFundBalances![index].fundUnits ?? '0')){
+        String d = loadFundsPlans!.response!.userFundBalances![index].fundRedPrice ?? '0';
+        double val = double.parse(d) * double.parse(s);
+        approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
+        update();
+      } else{
+        unitBalanceController.text = '';
+        calUnitBalanceValue = 0.0;
+        update();
+        Fluttertoast.showToast(
+            msg: 'Unit Balance must less than or equal to available units',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+
     }
     if(percentageButton){
-      String d = loadFundsPlans!.response!.userFundBalances![index].fundUnits ?? '0';
-      String red = loadFundsPlans!.response!.userFundBalances![index].fundRedPrice ?? '0';
-      percentageEnable = d == null || d == null? false:true;
-      double val = double.parse(d) * double.parse(s);
-      double approxUni = val / 100;
-      double approxAmo = approxUni * double.parse(red);
-      approxAmount = approxAmo.toStringAsFixed(2);
-      approxUnits = approxUni.toStringAsFixed(2);
-      update();
+      if(double.parse(s)<=100){
+        String d = loadFundsPlans!.response!.userFundBalances![index].fundUnits ?? '0';
+        String red = loadFundsPlans!.response!.userFundBalances![index].fundRedPrice ?? '0';
+        percentageEnable = d == null || d == null? false:true;
+        double val = double.parse(d) * double.parse(s);
+        double approxUni = val / 100;
+        double approxAmo = approxUni * double.parse(red);
+        approxAmount = approxAmo.toStringAsFixed(2);
+        approxUnits = approxUni.toStringAsFixed(2);
+        update();
+      } else{
+        percentController.text = '';
+        approxAmount = '';
+        approxUnits = '';
+        update();
+        Fluttertoast.showToast(
+            msg: 'Percentage must less than or equal to 100',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+
     }
     if(allUnitButton){
       if(loadFundsPlans != null) {
@@ -161,8 +197,9 @@ class RedemptionScreenController extends GetxController {
         noInternet = false;
       }
       if(pinCode!.meta!.message == 'OK' && pinCode!.meta!.code == '200'){
-        customDialogPin(context , "Pin Code sent to your email address successfully");
+        customDialogPin(context , "Pin Code sent to your registered email address and mobile number successfully");
       }
+      update();
     } catch (e) {
       if (e.toString() == 'Exception: No Internet') {
         isLoading = false;
@@ -206,7 +243,8 @@ class RedemptionScreenController extends GetxController {
                 '',
                 '',
                 fundNamevalue,
-                "${calUnitBalanceValue}",
+                "${unitBalanceController.text}",
+                // "${calUnitBalanceValue}",
                 percentageButton ? 'Percentage' : 'Units',
                 'RED',
                 onOkPress);
@@ -295,7 +333,7 @@ class RedemptionScreenController extends GetxController {
       isLoading = true;
       update();
       if(unitButton){
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, calUnitBalanceValue.toString());
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, unitBalanceController.text.toString());
 
       }if(percentageButton){
         submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "P", percentController.text, approxAmount);
@@ -345,7 +383,8 @@ class RedemptionScreenController extends GetxController {
           unitButton = true;
           percentageButton = false;
           allUnitButton = false;
-
+          unitBalanceController.text = '';
+          calUnitBalanceValue = 0.0;
           update();
           break;
         }
@@ -354,7 +393,9 @@ class RedemptionScreenController extends GetxController {
           unitButton = false;
           percentageButton = true;
           allUnitButton = false;
-
+          percentController.text = '';
+          approxAmount = '';
+          approxUnits = '';
           update();
           break;
         }

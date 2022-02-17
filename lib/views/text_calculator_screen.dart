@@ -205,67 +205,77 @@ class TaxCalculatorScreen extends StatelessWidget {
                                   hintColor: AppColor.black,
                                   fontWeight: FontWeight.w900,
                                   fontsize: 12,
-                                  hint: "${_.income??0.0}",
+                                  hint: "${_.f.format(_.income ??0)}",
                                   text: "INCOME TAX AMOUNT:",
                                   textColor: AppColor.black,
                                 ))
                               ],
                             ),
                             space,
-                            space,
+                            // space,
                             Row(
                               children: const [
-                                RestInvestTitle(
-                                  text: "TAX CREDIT IN MUTUAL FUND:",
-                                  textColor: AppColor.blueColor,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 18,
+                                Expanded(
+                                  child:
+                                  RestInvestTitle(
+                                    text: "TAX CREDIT IN MUTUAL FUND ",
+                                    textColor: AppColor.blueColor,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 16,
+                                  ),
                                 ),
-                                RestInvestTitle(
+                                Expanded(
+                                  child: RestInvestTitle(
                                   // text: "(SECTION 62 OF ITO)",
-                                  text: "(SE)",
+                                  text: "(SECTION 62 OF ITO*)",
                                   fontSize: 12,
                                   textColor: AppColor.blueColor,
                                   fontWeight: FontWeight.w900,
                                 ),
+                            ),
                               ],
                             ),
                             const CustomDivider(color: AppColor.blueColor),
                             space,
-                            space,
+                            // space,
                             CustomCreditContainer(
-                              text1: "${_.pension??0.0}",
-                              investtext: "INVESTMENT IN PENSION FUND:",
-                              credittext: "TAX CREDIT IN PENSION FUND:",
-                              text2: "${_.creditPension??0.0}",
-                            ),
-                            space,
-                            space,
-                            Row(
-                              children: const [
-                                RestInvestTitle(
-                                  text: "TAX CREDIT IN PENSION FUND:",
-                                  textColor: AppColor.blueColor,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 18,
-                                ),
-                                RestInvestTitle(
-                                  // text: "(SECTION 63 OF ITO)",
-                                  text: "(SE)",
-                                  fontSize: 12,
-                                  textColor: AppColor.blueColor,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ],
-                            ),
-                            const CustomDivider(color: AppColor.blueColor),
-                            space,
-                            space,
-                            CustomCreditContainer(
-                              text1: "${_.mutual??0.0}",
+                              text1: "${_.f.format(_.mutual ??0)}",
                               investtext: "INVESTMENT IN MUTUAL FUND:",
                               credittext: "TAX CREDIT IN MUTUAL FUND:",
-                              text2: "${_.creditMutual ?? 0.0}",
+                              text2: "${_.f.format(_.creditMutual ?? 0) }",
+                            ),
+                            space,
+                            // space,
+                            Row(
+                              children: const [
+                                Expanded(
+                                  child: RestInvestTitle(
+                                    text: "TAX CREDIT IN PENSION FUND",
+                                    textColor: AppColor.blueColor,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Expanded(
+                                  child:
+                                RestInvestTitle(
+                                  // text: "(SECTION 63 OF ITO)",
+                                  text: "(SECTION 63 OF ITO**)",
+                                  fontSize: 12,
+                                  textColor: AppColor.blueColor,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                            )
+                              ],
+                            ),
+                            const CustomDivider(color: AppColor.blueColor),
+                            space,
+                            // space,
+                            CustomCreditContainer(
+                              text1: "${_.f.format(_.pension ??0)}",
+                              investtext: "INVESTMENT IN PENSION FUND:",
+                              credittext: "TAX CREDIT IN PENSION FUND:",
+                              text2: "${_.f.format(_.creditPension ??0)}",
                             ),
                             space,
                             Container(
@@ -275,7 +285,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   RestInvestTitle(
-                                    text: "TOTAL TAX CREDIT:Rs ${_.taxCredit??0.0}",
+                                    text: "TOTAL TAX CREDIT:Rs ${_.f.format(_.taxCredit ?? 0)}",
                                     textColor: AppColor.whiteColor,
                                     fontWeight: FontWeight.w900,
                                   ),
@@ -283,7 +293,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                               ),
                             ),
                             space,
-                            space,
+                            // space,
                             const RestInvestTitle(
                               text: "DISCLAIMER:",
                               textColor: AppColor.black,

@@ -35,6 +35,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
           var space = const SizedBox(
             height: 10,
           );
+          // printInfo(info: 'HGGHFHG'+Constant.validateVerificationCodeForDigUser!.response!.cnicIssueDate!['day'].toString());
           return SafeArea(
               child: Scaffold(
             appBar: AppBar(
@@ -286,7 +287,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             child: DateFormFieldContainer(
                                               isRounded: false,
                                               isTrue: true,
-                                              text: DateTime.now().day.toString()+'/'+DateTime.now().month.toString()+'/'+DateTime.now().year.toString(),
+                                              text: _.cNicIssueDate,
+                                              // DateTime.now().day.toString()+'/'+DateTime.now().month.toString()+'/'+DateTime.now().year.toString(),
                                               mode: DateTimeFieldPickerMode.date,
                                               dateFormatTrue: true,
                                               initialValue: DateTime.now(),
@@ -304,20 +306,52 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.end,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           const RestInvestTitle(
                                             text:
-                                            'CNIC/NICOP EXPIRY DATE* LIFETIME',
+                                            'CNIC/NICOP EXPIRY DATE*',
                                             textColor: AppColor.black,
                                             fontSize: 12,
                                             fontWeight: FontWeight.w900,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              const RestInvestTitle(
+                                                text:
+                                                'LIFETIME',
+                                                textColor: AppColor.black,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w900,
+                                              ),
+                                             const SizedBox(
+                                                width:10,
+                                              ),
+                                              SizedBox(
+                                                height:15,
+                                                width:15,
+                                                child: Checkbox(
+                                                    checkColor: AppColor.whiteColor,
+                                                    fillColor: MaterialStateColor.resolveWith(
+                                                            (states) => AppColor.blueColor),
+                                                    value: _.isLifTime,
+                                                    onChanged: (bool? val) {
+                                                      _.isLifTime = val!;
+                                                      if(_.isLifTime){
+                                                        _.cNicExpDate = '9999-12-30';
+                                                      }
+                                                      _.update();
+                                                    }),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(
                                             height: 37,
                                             child: DateFormFieldContainer(
                                               isRounded: false,
-                                              text: DateTime.now().day.toString()+'/'+DateTime.now().month.toString()+'/'+DateTime.now().year.toString(),
+                                              enable: _.isLifTime ? false : true,
+                                              text: _.cNicExpDate,
                                               mode: DateTimeFieldPickerMode.date,
                                               dateFormatTrue: true,
                                               isTrue: true,
@@ -352,12 +386,14 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             child: DateFormFieldContainer(
                                               isRounded: false,
                                               isTrue: true,
-                                              text: DateTime.now().day.toString()+'/'+DateTime.now().month.toString()+'/'+DateTime.now().year.toString(),
+                                              text: _.dObDate,
+                                              // DateTime.now().day.toString()+'/'+DateTime.now().month.toString()+'/'+DateTime.now().year.toString(),
                                               mode: DateTimeFieldPickerMode.date,
                                               dateFormatTrue: true,
                                               initialValue: DateTime.now(),
                                               onDateSelected: (value) {
                                                 _.dObDate = _.dateTime(value);
+                                                printInfo(info: 'JKHKJHKJH'+_.dObDate);
                                               },
                                             ),
                                           ),
@@ -777,7 +813,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Constant.accType != 'I' ?  Expanded(
+                                    Constant.accType != 'I' ?
+                                    Expanded(
                                       child: Column(
                                         crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -815,7 +852,10 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                                       _.retirementValue == ""
                                                       ? "Retirement Age"
                                                       : _.retirementValue,
-                                                  textColor: AppColor.black,fontSize: 12,
+                                                  textColor: _.retirementValue == null ||
+                                                      _.retirementValue == ""
+                                                      ? AppColor.dimblack :AppColor.black
+                                                  ,fontSize: 12,
                                                 ),
                                                 icon: const Icon(
                                                     Icons.keyboard_arrow_down,
@@ -854,7 +894,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         ],
                                       ),
                                     ) : const SizedBox(),
-                                    Constant.accType == 'I' ? const SizedBox(
+                                    Constant.accType != 'I' ? const SizedBox(
                                       width: 6,
                                     ) : const SizedBox(),
                                     Expanded(
@@ -891,7 +931,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                         children: [
                                           const RestInvestTitle(
-                                            text: "PHONE NUMBER*",
+                                            text: "PHONE NUMBER",
                                             textColor: AppColor.black,
                                             fontWeight: FontWeight.w900,
                                             fontSize: 12,
@@ -900,7 +940,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             controller: _.phoneController,
                                             fieldType: Constants.phoneNumberField,
                                             isRounded: true,
-                                            hint: "+92xxxxxxxxx",
+                                            hint: "Enter Phone No.",
                                             hintColor: AppColor.dimblack,
                                           ),
                                         ],
@@ -915,7 +955,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                         children: [
                                           const RestInvestTitle(
-                                            text: "OFFICE PHONE NUMBER*",
+                                            text: "OFFICE PHONE NUMBER",
                                             textAlign: TextAlign.start,
                                             textColor: AppColor.black,
                                             fontWeight: FontWeight.w900,
@@ -924,7 +964,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.officePhoneController,
                                             isRounded: true,
-                                            hint: "+92xxxxxxxxx",
+                                            hint: "Enter Office Phone No.",
                                             hintColor: AppColor.dimblack,
                                           ),
                                         ],
@@ -951,7 +991,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.currentAddressController,
                                             isRounded: true,
-                                            hint: "address",
+                                            hint: "Enter current address",
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                         ],
@@ -1044,7 +1084,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           CustomTextFormField(
                                             controller: _.mailingAddressController,
                                             isRounded: true,
-                                            hint: "address",
+                                            hint: "Enter mailing address",
                                             // textInputType: TextInputType.emailAddress,
                                           ),
                                         ],
@@ -1682,7 +1722,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                       controller: _.iBanNumberController,
                                       isRounded: true,
                                       length: 24,
-                                      hint: "ibn number", hintColor: AppColor.dimblack,
+                                      hint: _.iBanNumberController.text == null || _.iBanNumberController.text == '' ? "ibn number" : _.iBanNumberController.text , hintColor: AppColor.dimblack,
                                       // textInputType: TextInputType.emailAddress,
                                     ),
                                   ],
@@ -1733,7 +1773,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                 ),
                                 space,
                                 const RestInvestTitle(
-                                  text: "NAME OF KIN DETAILS",
+                                  text: "NEXT OF KIN DETAILS",
                                   textColor: AppColor.black,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w900,
@@ -1749,6 +1789,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   controller: _.kiNcNicController,
                                   isRounded: true,
                                   hint: "CNIC/NICP",
+                                  textInputType: TextInputType.number,
                                   inputFormator: [
                                     FilteringTextInputFormatter.digitsOnly,
                                     LengthLimitingTextInputFormatter(13),
@@ -1831,7 +1872,8 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                 CustomTextFormField(
                                   controller: _.kinMobileNumberController,
                                   isRounded: true,
-                                  hint: "MOBILE",
+                                  hint: "ENTER MOBILE No.",
+                                  length: 13,
                                   // textInputType: TextInputType.emailAddress,
                                 ),
                                 const RestInvestTitle(
@@ -1892,11 +1934,12 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         width: 50,
                                         text: "SAVE&NEXT",
                                         onPress: () {
-                                          // Get.toNamed(
-                                              // AppRoute.accountOpenKycDetailScreen);
+                                          // Get.toNamed(AppRoute.accountOpenKycDetailScreen);
                                           _.onSaveDataAccountOpeningBasicInfo();
                                         },
                                         isRound: false),
+                                    const SizedBox(width: 20,),
+                                    const Text('2/8')
                                   ],
                                 ),
                                 // CustomRoundButton(

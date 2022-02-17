@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/load_fund_plans.dart';
 import 'package:investintrust/data/repository.dart';
@@ -27,7 +28,7 @@ class F2FTransferScreenController extends GetxController {
   bool percentageButton = false;
   bool allUnitButton = false;
   bool isCheckPrivacy = false;
-
+  var f = NumberFormat("###,###.0#", "en_US");
 
   bool investButton = false;
   bool portfolioButton = false;
@@ -61,7 +62,7 @@ class F2FTransferScreenController extends GetxController {
         index = loadFundsPlans!.response!.portfolioAllocationData!.indexWhere((
             element) => element.fundShort == fundValue);
         return loadFundsPlans!.response!.portfolioAllocationData![index ?? 0]
-            .fundUnits;
+            .fundUnits ?? '0';
       }else{
         return '0';
       }
@@ -75,7 +76,7 @@ class F2FTransferScreenController extends GetxController {
     if(loadFundsPlans != null) {
       if(loadFundsPlans!.response!.portfolioAllocationData!.isNotEmpty){
         fundVolume = loadFundsPlans!.response!.portfolioAllocationData![index ?? 0].fundvolume!;
-        return loadFundsPlans!.response!.portfolioAllocationData![index ?? 0].fundvolume;
+        return loadFundsPlans!.response!.portfolioAllocationData![index ?? 0].fundvolume ?? '0';
       }else {
         return "0";
       }
@@ -100,7 +101,7 @@ class F2FTransferScreenController extends GetxController {
           unitBalanceController.text = '';
           update();
           Fluttertoast.showToast(
-              msg: 'Unit Balance must less or equal to total units',
+              msg: 'Unit Balance must less than or equal to available units',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 1,
@@ -125,7 +126,7 @@ class F2FTransferScreenController extends GetxController {
           unitBalanceController.text = '';
           update();
           Fluttertoast.showToast(
-              msg: 'Percentage must be less than 100',
+              msg: 'Percentage must be less than or equal to 100',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 1,
@@ -199,7 +200,7 @@ class F2FTransferScreenController extends GetxController {
       }
       update();
       if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
-        customDialogPin(context,"Pin Code sent to your email address successfully");
+        customDialogPin(context,"Pin Code sent to your registered email address and mobile number successfully");
       }
       // update();
     } catch (e) {
@@ -264,9 +265,13 @@ class F2FTransferScreenController extends GetxController {
       if(unitBalanceController.text != ''){
         if(dataValue != ''){
           if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
-            trans.showDialog(context,accountValue,toAccountValue,fundValue,
-                toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',
-                onOkPress);
+            if(isCheckPrivacy){
+              trans.showDialog(context,accountValue,toAccountValue,fundValue,
+                  toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',
+                  onOkPress);
+            }else{
+              showToast("Please accept Terms & Conditions.");
+            }
           } else {
             Fluttertoast.showToast(
                 msg: 'Please enter Fund Balance/Percentage',

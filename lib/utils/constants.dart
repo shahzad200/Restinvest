@@ -1,13 +1,17 @@
 import 'package:investintrust/data/models/login_model.dart';
 import 'package:investintrust/data/models/social_media_links.dart';
+import 'package:investintrust/data/models/validate_verification_code_for_dig_user.dart';
 
 class Constant{
+  static ValidateVerificationCodeForDigUser? validateVerificationCodeForDigUser;
   static String sessionID = '0';
   static String cNic = '0';
   static String uTitle = '0';
   static String accType = '0';
-  static String zakValue = 'YES';
+  static String zakValue = 'NO';
+  static String mobileReg = '0';
   static String userId = '-0456';
+  static int drawerIndex = 1;
   static LoginModel? loginModel;
   static SocialMediaLink? socialMediaLink;
   static String linkComplains = 'https://nit.com.pk/NewNit/Complains.aspx';

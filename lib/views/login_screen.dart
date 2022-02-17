@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:investintrust/widgets/drawer.dart';
 import '../utils/constant.dart';
 
 
@@ -18,13 +19,27 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var formKey = GlobalKey<FormState>();
     return GetBuilder<LoginScreenController>(
         init: LoginScreenController(),
         builder: (_) {
-          return SafeArea(
-              child: Scaffold(backgroundColor: AppColor.lightWhite,
-
-            key: _.scaffoldKey,
+          return Scaffold(backgroundColor: AppColor.lightWhite,
+                appBar: AppBar(
+                  centerTitle: true,
+                  title: const LogoNit(height: 60,width: 60,),
+                  backgroundColor: AppColor.whiteColor,
+                  leading: InkWell(
+                    onTap: () {
+                      _.scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: const Icon(
+                      Icons.menu,
+                      color: AppColor.blueColor,
+                    ),
+                  ),
+                ),
+                drawer: const CustomDrawer(),
+                key: _.scaffoldKey,
             body: SingleChildScrollView(
               padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
               child: Column(
@@ -36,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                     height: 20,
                   ),
                   Form(
-                    key: _.formKey,
+                    key: formKey,
                     child: Column(
                       children: [
                         CustomFormField(
@@ -200,7 +215,7 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ));
+          );
         });
   }
 }

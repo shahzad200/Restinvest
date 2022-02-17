@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../data/models/calculate_tax.dart';
 import '../data/repository.dart';
 
@@ -16,7 +17,7 @@ class TaxCalculatorScreenController extends GetxController {
   var mutual;
   var creditMutual;
   var taxCredit;
-
+  var f = NumberFormat("###,###.0#", "en_US");
   TextEditingController textEditingController = TextEditingController();
   String categoryValue = "";
   String bracketValue = "";

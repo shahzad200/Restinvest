@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:investintrust/utils/constants.dart';
+import 'package:investintrust/widgets/no_internet.dart';
 import '../controller/account_opening_preview_screen_controller.dart';
 
 import '../widgets/button.dart';
@@ -48,7 +49,8 @@ class AccountOpenPreviewScreen extends StatelessWidget {
               elevation: 0,
             ),
             key: _.scaffoldKey,
-            body: SingleChildScrollView(
+            body: Stack(children: [
+            SingleChildScrollView(
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
                 children: [
@@ -91,14 +93,16 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.cNicFront = true;
                                         _.cNicBack = false;
                                         _.srcIncome = false;
+                                        _.mobileReg = false;
                                         _.update();
                                       },
-                                      child: const RestInvestTitle(
-                                        text: "1: Cnic Front",
+                                      child:  RestInvestTitle(
+                                        text: "1: CNIC Front",
                                         textAlign: TextAlign.start,
                                         textColor: AppColor.blueColor,
                                         fontSize: 12,
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: _.cNicFront == true ?
+                                        FontWeight.w900 : FontWeight.w500,
                                       ),
                                     ),
                                     space,
@@ -109,14 +113,16 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.cNicFront = false;
                                         _.cNicBack = true;
                                         _.srcIncome = false;
+                                        _.mobileReg = false;
                                         _.update();
                                       },
-                                      child: const RestInvestTitle(
-                                        text: "2: Cnic Back",
+                                      child:  RestInvestTitle(
+                                        text: "2: CNIC Back",
                                         textAlign: TextAlign.start,
                                         textColor: AppColor.blueColor,
                                         fontSize: 12,
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: _.cNicBack == true ?
+                                        FontWeight.w900 : FontWeight.w500,
                                       ),
                                     ),
                                     space,
@@ -127,14 +133,16 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.cNicFront = false;
                                         _.cNicBack = false;
                                         _.srcIncome = true;
+                                        _.mobileReg = false;
                                         _.update();
                                       },
-                                      child: const RestInvestTitle(
+                                      child: RestInvestTitle(
                                         text: "3: Source of Income",
                                         textAlign: TextAlign.start,
                                         textColor: AppColor.blueColor,
                                         fontSize: 12,
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: _.srcIncome == true ?
+                                        FontWeight.w900 : FontWeight.w500,
                                       ),
                                     ),
                                     space,
@@ -145,14 +153,16 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.cNicFront = false;
                                         _.cNicBack = false;
                                         _.srcIncome = false;
+                                        _.mobileReg = false;
                                         _.update();
                                       },
-                                      child: const RestInvestTitle(
+                                      child: RestInvestTitle(
                                         text: "4: Signature",
                                         textAlign: TextAlign.start,
                                         textColor: AppColor.blueColor,
                                         fontSize: 12,
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: _.sigPage == true ?
+                                        FontWeight.w900 : FontWeight.w500,
                                       ),
                                     ),
                                     Constant.zakValue == 'YES' ? space : const SizedBox(),
@@ -163,17 +173,40 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.cNicBack = false;
                                         _.srcIncome = false;
                                         _.sigPage = false;
+                                        _.mobileReg = false;
                                         _.update();
                                       },
-                                      child:  const RestInvestTitle(
+                                      child:   RestInvestTitle(
                                         text: "5: Zakat Paper",
                                         textAlign: TextAlign.start,
                                         textColor: AppColor.blueColor,
                                         fontSize: 12,
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: _.zaKat == true ?
+                                        FontWeight.w900 : FontWeight.w500,
                                       ),
                                     )
                                     :const SizedBox(),
+                                    Constant.mobileReg != '4' ? space : const SizedBox(),
+                                    Constant.mobileReg != '4' ? InkWell(
+                                      onTap: (){
+                                        _.zaKat = false;
+                                        _.cNicFront = false;
+                                        _.cNicBack = false;
+                                        _.srcIncome = false;
+                                        _.sigPage = false;
+                                        _.mobileReg = true;
+                                        _.update();
+                                      },
+                                      child:   RestInvestTitle(
+                                        text: "6: Mobile Doc",
+                                        textAlign: TextAlign.start,
+                                        textColor: AppColor.blueColor,
+                                        fontSize: 12,
+                                        fontWeight: _.mobileReg == true ?
+                                        FontWeight.w900 : FontWeight.w500,
+                                      ),
+                                    )
+                                        :const SizedBox(),
                                   ],
                                 ),
                                 Expanded(
@@ -186,12 +219,13 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         width: 200,
                                         child:
                                         Image.memory(
-                                            _.cNicFront ? _.con.cnicFront!.readAsBytesSync()
-                                        : _.cNicBack ? _.con.cnicBack!.readAsBytesSync()
-                                        : _.srcIncome ? _.con.srcIncome!.readAsBytesSync()
-                                        : _.sigPage ? _.con.plainImage!.readAsBytesSync()
-                                        : _.zaKat ? _.con.zaKatImage!.readAsBytesSync()
-                                                : _.con.cnicFront!.readAsBytesSync()
+                                            _.cNicFront ? _.con.cNicF!
+                                        : _.cNicBack ? _.con.cNicB!
+                                        : _.srcIncome ? _.con.srcIn!
+                                        : _.sigPage ? _.con.planImg!
+                                        : _.zaKat ? _.con.zaKat!
+                                        : _.mobileReg ? _.con.mobile!
+                                                :_.con.cNicF!
                                         ),
                                       )
                                     ],
@@ -220,9 +254,13 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                     width: 80,
                                     text: "Submit",
                                     onPress: () {
-                                      _.onSubmit();
+                                      if(_.isLoading == false) {
+                                        _.onSubmit();
+                                      }
                                     },
                                     isRound: false),
+                                const SizedBox(width: 20,),
+                                const Text('7/8')
                               ],
                             ),
                           ],
@@ -233,6 +271,27 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                 ],
               ),
             ),
+              _.isLoading
+                  ? const Center(
+                child: DialogBox(),
+              )
+                  : _.noInternet
+                  ? Positioned(
+                bottom: 0,
+                child: Container(
+                  height: 180,
+                  width: Get.width,
+                  color: Colors.white,
+                  child: NoInternetWgt(
+                    onTryAgain: (){
+                      _.noInternet = false;
+                      _.update();
+                    },
+                  ),
+                ),
+              )
+                  : const SizedBox()
+            ]),
           ));
         });
   }

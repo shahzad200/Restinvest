@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
 import 'account_opening_basic_information_screen_controller.dart';
@@ -18,6 +21,7 @@ class AccountOpenKycDetailScreenController extends GetxController{
   var password = "".obs;
   var number = "".obs;
   var email = "".obs;
+  var f = NumberFormat("###,###.0#", "en_US");
   AccountOpenBasicInformationScreenController controller = Get.find<AccountOpenBasicInformationScreenController>();
   AccountOpenRequestScreenController con = Get.find<AccountOpenRequestScreenController>();
 
@@ -59,7 +63,39 @@ class AccountOpenKycDetailScreenController extends GetxController{
   final _repository = Repository();
   @override
   void onInit() {
-    // TODO: implement onInit
+    if(Constant.validateVerificationCodeForDigUser!.response!.kycDisclaimerChecked == true &&
+        Constant.validateVerificationCodeForDigUser!.response!.occupation != '' &&
+    Constant.validateVerificationCodeForDigUser!.response!.sourceOfIncome != ''){
+      occupationGroupValue = Constant.validateVerificationCodeForDigUser!.response!.occupation ?? '00';
+      inComeGroupValue = Constant.validateVerificationCodeForDigUser!.response!.sourceOfIncome ?? '00';
+      transactionGroupValue = Constant.validateVerificationCodeForDigUser!.response!.preferedModeOfTrans ?? '00';
+      turnoverGroupValue = Constant.validateVerificationCodeForDigUser!.response!.expTurnoverInAccType ?? '00';
+      annualIncomeGroupValue = Constant.validateVerificationCodeForDigUser!.response!.annualIncome ?? '00';
+      expectedIncomeGroupValue = Constant.validateVerificationCodeForDigUser!.response!.expectedInvestmentAmount ?? '00';
+      employerController.text = Constant.validateVerificationCodeForDigUser!.response!.employerName ?? '';
+      designationController.text = Constant.validateVerificationCodeForDigUser!.response!.employerDesignation ?? '';
+      natureOfBusinessController.text = Constant.validateVerificationCodeForDigUser!.response!.employerNatureOfBusiness ?? '';
+      professionController.text = Constant.validateVerificationCodeForDigUser!.response!.employerProfession ?? '';
+      if(occupationGroupValue == '013'){
+      geoDomesticController.text = Constant.validateVerificationCodeForDigUser!.response!.domesticGeographies ?? '';
+      geoInternationalController.text = Constant.validateVerificationCodeForDigUser!.response!.internationalGeographies ?? '';
+      counterDomesticController.text = Constant.validateVerificationCodeForDigUser!.response!.domesticCounterParties ?? '';
+      counterInternationalController.text = Constant.validateVerificationCodeForDigUser!.response!.internationalCounterParties ?? '';
+      }
+      expTurnoverAmountController.text = Constant.validateVerificationCodeForDigUser!.response!.expTurnoverInAccAmount.toString() ?? '';
+
+
+      if(controller.newDigUserRegDataAfterOTP!.response!.pepsInfoList!.length == Constant.validateVerificationCodeForDigUser!.response!.pepsInfo!.length )
+        {
+          for(int k = 0 ; k < controller.newDigUserRegDataAfterOTP!.response!.pepsInfoList!.length ; k++)
+          {
+            controller.newDigUserRegDataAfterOTP!.response!.pepsInfoList![k].answer =
+                Constant.validateVerificationCodeForDigUser!.response!.pepsInfo![k].answer;
+          }
+        }
+      isChecked = Constant.validateVerificationCodeForDigUser!.response!.kycDisclaimerChecked ?? false;
+
+    }
     super.onInit();
   }
 
@@ -88,10 +124,6 @@ class AccountOpenKycDetailScreenController extends GetxController{
       showToast('Please select occupation/profession');
     } else if (inComeGroupValue == '00') {
       showToast('Please select source of income');
-    } else
-    if (employerController.text == "" || employerController.text.isEmpty ||
-        employerController.text == null) {
-      showToast('Please enter name of employer');
     } else if (designationController.text == "" ||
         designationController.text.isEmpty ||
         designationController.text == null) {
@@ -105,10 +137,8 @@ class AccountOpenKycDetailScreenController extends GetxController{
     } else if (annualIncomeGroupValue == "00") {
       showToast('Please select annual income');
     } else if (!isChecked) {
-      showToast('Please check disclaimer');
-    } else if (occupationGroupValue == '015' || occupationGroupValue == '013') {
-      onSaveData();
-    } else {
+      showToast('Please checked disclaimer');
+    } else if (occupationGroupValue == '013') {
       if (geoDomesticController.text == "" ||
           geoDomesticController.text.isEmpty ||
           geoDomesticController.text == null) {
@@ -125,9 +155,22 @@ class AccountOpenKycDetailScreenController extends GetxController{
           counterInternationalController.text.isEmpty ||
           counterInternationalController.text == null) {
         showToast('Please enter counter parties international');
+      } else if(expTurnoverAmountController.text == '' ||
+          expTurnoverAmountController.text.isEmpty ||
+          expTurnoverAmountController.text == null){
+        showToast('Please enter expected turnover amount');
       } else {
         onSaveData();
       }
+    } else if (employerController.text == "" || employerController.text.isEmpty ||
+        employerController.text == null) {
+      showToast('Please enter name of employer');
+    } else if(expTurnoverAmountController.text == '' ||
+        expTurnoverAmountController.text.isEmpty ||
+        expTurnoverAmountController.text == null){
+      showToast('Please enter expected turnover amount');
+    } else {
+      onSaveData();
     }
   }
   onSaveData() async {
@@ -139,7 +182,7 @@ class AccountOpenKycDetailScreenController extends GetxController{
         counterInternationalController.text, geoInternationalController.text, designationController.text,
         employerController.text, natureOfBusinessController.text,
         professionController.text, transactionGroupValue,
-        int.parse(expTurnoverAmountController.text), turnoverGroupValue, int.parse(expectedIncomeGroupValue), int.parse(annualIncomeGroupValue),
+        int.parse(expTurnoverAmountController.text.replaceAll(',', '')), turnoverGroupValue, int.parse(expectedIncomeGroupValue), int.parse(annualIncomeGroupValue),
         isChecked, occupationGroupValue, inComeGroupValue,
         controller.newDigUserRegDataAfterOTP!.
         response!.pepsInfoList![0].answer ?? false,
@@ -192,8 +235,52 @@ class AccountOpenKycDetailScreenController extends GetxController{
     }
   }
 
+}
 
 
+var f = NumberFormat("###,###.0#", "en_US");
+class NumberForm extends TextInputFormatter {
+  static const separator = ','; // Change this to '.' for other locales
 
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    // Short-circuit if the new value is empty
+    if (newValue.text.length == 0) {
+      return newValue.copyWith(text: '');
+    }
 
+    // Handle "deletion" of separator character
+    String oldValueText = oldValue.text.replaceAll(separator, '');
+    String newValueText = newValue.text.replaceAll(separator, '');
+
+    if (oldValue.text.endsWith(separator) &&
+        oldValue.text.length == newValue.text.length + 1) {
+      newValueText = newValueText.substring(0, newValueText.length - 1);
+    }
+
+    // Only process if the old value and new value are different
+    if (oldValueText != newValueText) {
+      int selectionIndex =
+          newValue.text.length - newValue.selection.extentOffset;
+      final chars = newValueText.split('');
+
+      String newString = '';
+      for (int i = chars.length - 1; i >= 0; i--) {
+        if ((chars.length - 1 - i) % 3 == 0 && i != chars.length - 1)
+          newString = separator + newString;
+        newString = chars[i] + newString;
+      }
+
+      return TextEditingValue(
+        text: newString.toString(),
+        selection: TextSelection.collapsed(
+          offset: newString.length - selectionIndex,
+        ),
+      );
+    }
+
+    // If the new value and old value are the same, just return as-is
+    return newValue;
+  }
 }

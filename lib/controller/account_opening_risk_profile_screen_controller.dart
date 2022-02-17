@@ -6,6 +6,7 @@ import 'package:investintrust/data/models/common_model.dart';
 import 'package:investintrust/data/models/new_dig_user_reg_data_req_list.dart';
 import 'package:investintrust/data/repository.dart';
 import 'package:investintrust/routes/routes.dart';
+import 'package:investintrust/utils/constants.dart';
 import 'package:investintrust/widgets/constant_widget.dart';
 
 
@@ -60,15 +61,33 @@ class AccountOpenRiskProfileScreenController extends GetxController{
   int investHorizonScore = 0;
   int investKnowledgeScore = 0;
   int financialPositionScore = 0;
-
   bool isCalculate = false;
   int calculateValue = 0;
-
   Common? common;
+
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
-    onNewDigUserRegDataRpqList();
+   await onNewDigUserRegDataRpqList().then((value) {
+     if(value){
+       if(Constant.validateVerificationCodeForDigUser!.response!.rpqDisclaimerChecked! == true &&
+           Constant.validateVerificationCodeForDigUser!.response!.rpqTotalScore! != 0){
+         ageGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqAge ?? 00;
+         maritalStatusGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqMaritalStatus ?? 00;
+         noOfDependentsGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqNoOfDependants ?? 00;
+         occupationGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqOccupation ?? 00;
+         qualificationGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqQualification ?? 00;
+         riskAppetiteGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqRiskAppetite ?? 00;
+         investObjGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqInvestmentObjective ?? 00;
+         investHorizonGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqInvestmentHorizon ?? 00;
+         investKnowledgeGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqInvestmentKnowledge ?? 00;
+         financialPositionGroupValue = Constant.validateVerificationCodeForDigUser!.response!.rpqFinacialPosition ?? 00;
+         calculateValue = Constant.validateVerificationCodeForDigUser!.response!.rpqTotalScore ?? 00;
+         isCalculate = true;
+         isChecked = Constant.validateVerificationCodeForDigUser!.response!.rpqDisclaimerChecked ?? false;
+       }
+     }
+   });
     super.onInit();
   }
 
@@ -92,7 +111,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
   }
 
 
-  onNewDigUserRegDataRpqList() async {
+  Future<bool> onNewDigUserRegDataRpqList() async {
     try {
       isLoading = true;
       update();
@@ -103,11 +122,13 @@ class AccountOpenRiskProfileScreenController extends GetxController{
         noInternet = false;
       }
       update();
+      return true;
     } catch (e) {
       if (e.toString() == 'Exception: No Internet') {
         isLoading = false;
         noInternet = true;
         update();
+        return false;
       } else {
         isLoading = false;
         noInternet = false;
@@ -120,6 +141,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
+        return false;
       }
     }
   }

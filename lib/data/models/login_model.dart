@@ -85,6 +85,7 @@ class Response {
 
 class Accounts {
   Accounts({
+    this.bankDetails,
     this.folioNumber,
     this.fundNavPriceData,
     this.pensionFundList,
@@ -100,7 +101,7 @@ class Accounts {
     this.userFundBalances,
     this.vpsAccount,
   });
-
+  Bank? bankDetails;
   String? folioNumber;
   List<FundNavPriceData>? fundNavPriceData;
   List<dynamic>? pensionFundList;
@@ -115,8 +116,8 @@ class Accounts {
   bool? umsAccount;
   List<UserFundBalances>? userFundBalances;
   bool? vpsAccount;
-
   Accounts.fromJson(Map<String, dynamic> json) {
+    bankDetails = Bank.fromJson(json['bankDetails']);
     folioNumber = json['folioNumber'];
     fundNavPriceData = List.from(json['fundNavPriceData'])
         .map((e) => FundNavPriceData.fromJson(e))
@@ -146,6 +147,7 @@ class Accounts {
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
+    _data['bankDetails'] = bankDetails!.toJson();
     _data['folioNumber'] = folioNumber;
     _data['fundNavPriceData'] =
         fundNavPriceData!.map((e) => e.toJson()).toList();
@@ -326,6 +328,34 @@ class UserFundBalances {
   }
 }
 
+
+class Bank{
+  String? accountNumber;
+  String? bankAccTitle;
+  String? bankAddress;
+  String? bankName;
+  Bank({
+    this.accountNumber,
+    this.bankAccTitle,
+    this.bankAddress,
+    this.bankName,
+  });
+  Bank.fromJson(Map<String, dynamic> json) {
+    accountNumber = json['accountNumber'];
+    bankAccTitle = json['bankAccTitle'];
+    bankAddress = json['bankAddress'];
+    bankName = json['bankName'];
+  }
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['accountNumber'] = accountNumber;
+    _data['bankAccTitle'] = bankAccTitle;
+    _data['bankAddress'] = bankAddress;
+    _data['bankName'] = bankName;
+    return _data;
+  }
+}
+
 class User {
   User({
     this.authorization,
@@ -347,8 +377,11 @@ class User {
     this.title,
     this.userType,
     this.userid,
+    this.accountType,
+    this.fatherName,
+    this.wht,
+    this.zakatStatus
   });
-
   String? authorization;
   String? cell;
   String? clientCode;
@@ -368,7 +401,10 @@ class User {
   String? title;
   String? userType;
   String? userid;
-
+  String? accountType;
+  String? fatherName;
+  String? wht;
+  String? zakatStatus;
   User.fromJson(Map<String, dynamic> json) {
     authorization = json['authorization'];
     cell = json['cell'];
@@ -389,6 +425,10 @@ class User {
     title = json['title'];
     userType = json['userType'];
     userid = json['userid'];
+    accountType = json['accountType'];
+    fatherName = json['fatherName'];
+    wht = json['wht'];
+    zakatStatus = json['zakatStatus'];
   }
 
   Map<String, dynamic> toJson() {
@@ -412,6 +452,12 @@ class User {
     _data['title'] = title;
     _data['userType'] = userType;
     _data['userid'] = userid;
+    _data['zakatStatus'] = zakatStatus;
+
+    // "accountType": "INDIVIDUAL",
+    // "fatherName": "SAJID MUQEEM ANSARI",
+    // "wht": "APPLICABLE",
+    // "zakatStatus": "EXEMPT"
     return _data;
   }
 }

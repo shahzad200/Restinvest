@@ -22,7 +22,7 @@ class AccountOpenRequestScreenController extends GetxController {
   String mobileNumberOwner = 'Select';
   String mobileNumberOwnerCode = '';
   bool isChecked = false;
-  String groupValue = '0';
+  String groupValue = 'I';
   var character = 0;
   TextEditingController cNicNumberController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
@@ -102,6 +102,9 @@ class AccountOpenRequestScreenController extends GetxController {
     update();
   }
 
+  // 675765765
+  // 65757-5675765-6
+  // hfghfg@gmail.com
   onGenVerificationCodeForDigUser(BuildContext context) async {
       if (cNicNumberController.text.isEmpty ||
           cNicNumberController.text == '' ||
@@ -250,11 +253,11 @@ class AccountOpenRequestScreenController extends GetxController {
         }
         update();
         if(validateVerificationCodeForDigUser!.meta!.message == 'OK' && validateVerificationCodeForDigUser!.meta!.code == '200'){
+          Constant.validateVerificationCodeForDigUser = validateVerificationCodeForDigUser;
           Constant.sessionID = validateVerificationCodeForDigUser!.response!.sessionID!;
           Constant.cNic = validateVerificationCodeForDigUser!.response!.cnic!;
-          if(groupValue == 'I'){
-            Constant.accType = 'I';
-          }
+            Constant.accType = groupValue;
+            Constant.mobileReg = mobileNumberOwnerCode;
           Get.toNamed(AppRoute.accountopeningbasicinformation);
         }
       } catch (e) {

@@ -251,8 +251,9 @@ class Repository {
 
   Future<Common> onPartialSavingForDigUser(
       String email,String mobile,String mobileRegWith,String accountTypeOpened,
-      String bankAccountNo,String bankBranchAddress,String bankName,bool basicInfoDisclaimerChecked,
-      String bankCityCode,String city,String cNicExpiryDate,String cNicIssueDate,String country,
+      String bankAccountNo,String bankBranchAddress,String bankName,String branchName,bool basicInfoDisclaimerChecked,
+      bool lifeTimeCheck,String bankCityCode,String city,String cNicExpiryDate,
+      String cNicIssueDate,String country,
       String customerName,String dateOfBirth,String dividendMandate,String fatherSpouseName,
       String mailingAddress,String mailingCountryCode,String mailingCity,String maritalStatus,
       String mothersMaidenName,String nationalityCode,String pakResident,String religion,String residentialAddress,
@@ -260,8 +261,8 @@ class Repository {
       String noMRelation,String noMMobile,
       ) =>
       _apiClient.onPartialSavingForDigUser(email, mobile,
-          mobileRegWith, accountTypeOpened, bankAccountNo,
-          bankBranchAddress, bankName, basicInfoDisclaimerChecked,
+          mobileRegWith,accountTypeOpened,bankAccountNo,
+          bankBranchAddress,bankName,branchName,basicInfoDisclaimerChecked,lifeTimeCheck,
           bankCityCode, city, cNicExpiryDate, cNicIssueDate, country,
           customerName, dateOfBirth, dividendMandate, fatherSpouseName,
           mailingAddress, mailingCountryCode, mailingCity, maritalStatus,
@@ -319,10 +320,12 @@ class Repository {
       Uint8List? incomeProof,
       Uint8List? sigPaper,
       Uint8List? zaKat,
+      Uint8List? mobileProof,
+      bool disClaimer,
       ) =>
       _apiClient.onPartialSavingForDigUserScreen6(cNicBack,
           cNicFront, incomeProof,
-          sigPaper,zaKat,Constant.cNic,Constant.sessionID);
+          sigPaper,zaKat,mobileProof,disClaimer,Constant.cNic,Constant.sessionID);
 
 
   Future<Common> onSaveDigUser(
@@ -343,9 +346,9 @@ class Repository {
       String collectionBankAccount,
       String collectionBankCode,
       String fundSaleLoad,
-      Uint8List paymentProof,
+      Uint8List? paymentProof,
       String paymentExtension,
-      Uint8List depositProof,
+      Uint8List? depositProof,
       String depositExtension,
       ) => _apiClient.onSavePurchase(Constant.loginModel!.response!.user!.userid ?? '',
       fundCode, folioNumber,

@@ -38,6 +38,7 @@ class PurchasesScreen extends StatelessWidget {
           );
           return Scaffold(
             appBar: AppBar(
+              title: const LogoNit(height: 60,width: 60,),
               centerTitle: true,
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
@@ -277,8 +278,8 @@ class PurchasesScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: EmptyRowContainer(
-                                fontWeight: FontWeight.w800,
-                                fontsize: 14,
+                                fontWeight: FontWeight.w600,
+                                fontsize: 12,
                                 hintColor: AppColor.black,
                                 hint: _.fundBankName == null && _.fundBankName == ''
                                     ? '' : _.fundBankName,
@@ -290,8 +291,8 @@ class PurchasesScreen extends StatelessWidget {
                           ),
                           Expanded(
                               child: EmptyRowContainer(
-                                fontWeight: FontWeight.w800,
-                                fontsize: 14,
+                                fontWeight: FontWeight.w600,
+                                fontsize: 12,
                                 hintColor: AppColor.black,
                                 hint: _.fundBankAccountNumber == null && _.fundBankAccountNumber == ''
                                     ? '' : _.fundBankAccountNumber,
@@ -349,10 +350,13 @@ class PurchasesScreen extends StatelessWidget {
                                         _.paymentvalue = value!;
                                         if (value == "Cheque") {
                                           _.paymentvalueCode = "CH";
+                                          // _.date = null;
                                         } else if (value == "IBFT") {
                                           _.paymentvalueCode = "IB";
+                                          _.installmentController.text = '';
                                         } else if (value == "1-Link") {
                                           _.paymentvalueCode = "ON";
+                                          _.installmentController.text = '';
                                         }
                                         _.update();
                                       },
@@ -421,7 +425,7 @@ class PurchasesScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const RestInvestTitle(
-                                    text: 'Bank Account No.',
+                                    text: 'Bank Account No. / IBAN',
                                     textColor: AppColor.blueColor),
                                 CustomTextFormField(
                                   isRounded: true,
@@ -448,7 +452,7 @@ class PurchasesScreen extends StatelessWidget {
                                     textColor: AppColor.blueColor),
                                 CustomTextFormField(
                                   color: AppColor.dimblack,
-                                  enable: _.paymentvalue == '1-Link' ? false : true ,
+                                  enable: _.paymentvalue == 'Cheque' ? true : false,
                                   isRounded: true,
                                   textInputType: TextInputType.numberWithOptions(),
                                   controller: _.installmentController,
@@ -473,7 +477,7 @@ class PurchasesScreen extends StatelessWidget {
                                   child: DateFormFieldContainer(
                                     isRounded: false,
                                     isTrue: true,
-                                    enable: _.paymentvalue == '1-Link' ? false : true,
+                                    enable: _.paymentvalue == 'Cheque' ? true : false,
                                     text: '',
                                     mode: DateTimeFieldPickerMode.date,
                                     dateFormatTrue: true,
@@ -528,6 +532,7 @@ class PurchasesScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          _.paymentvalue != '1-Link' ?
                           Padding(
                             padding: EdgeInsets.only(
                                 left: _.paymentProof == null ? 20.0 : 0.0),
@@ -623,8 +628,8 @@ class PurchasesScreen extends StatelessWidget {
                                         fit: BoxFit.fill))
                               ],
                             ),
-                          ),
-                          Padding(
+                          ) : const SizedBox(),
+                          _.paymentvalue == 'Cheque' ? Padding(
                             padding: EdgeInsets.only(
                                 right: _.paymentSlip == null ? 20.0 : 0.0),
                             child: Column(
@@ -719,7 +724,7 @@ class PurchasesScreen extends StatelessWidget {
                                     ))
                               ],
                             ),
-                          )
+                          ) : const SizedBox(),
                         ],
                       ),
                       const SizedBox(height: 10),
@@ -756,7 +761,7 @@ class PurchasesScreen extends StatelessWidget {
                 ),
                 _.isLoading
                     ? const Center(
-                  child: SizedBox(),
+                  child: DialogBox(),
                   // DialogBox(),
                 )
                     : _.noInternet

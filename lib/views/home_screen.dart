@@ -29,7 +29,10 @@ class HomeScreen extends StatelessWidget {
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
                 onTap: () {
-                  controller.scaffoldKey.currentState!.openDrawer();
+                  if(controller.isLoading == false &&
+                      controller.noInternet == false) {
+                    controller.scaffoldKey.currentState!.openDrawer();
+                  }
                 },
                 child: const Icon(
                   Icons.menu,
@@ -130,7 +133,9 @@ class HomeScreen extends StatelessWidget {
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.toNamed(AppRoute.accountopeningrequest)
+                                  ?
+                              // Get.toNamed(AppRoute.accountOpenUploadScreen)
+                              Get.toNamed(AppRoute.accountopeningrequest)
                                   : printInfo(info: 'Do Nothing');
                             },
                             containerColor: AppColor.whiteColor,
@@ -144,7 +149,10 @@ class HomeScreen extends StatelessWidget {
                                   voidcallback: () {
                                     controller.isLoading == false &&
                                             controller.noInternet == false
-                                        ? Get.toNamed(AppRoute.loginRoute)
+                                        ? (){
+                                      Constant.drawerIndex = 9;
+                                      Get.offAllNamed(AppRoute.loginRoute);
+                                    }()
                                         : printInfo(info: 'Do Nothing');
                                   },
                                   containerColor: AppColor.liteblue,
@@ -153,11 +161,14 @@ class HomeScreen extends StatelessWidget {
                                   child: ContainerBox(
                                   icon: const Portofol(),
                                   textColor: AppColor.blueColor,
-                                  text: 'DashBoard',
+                                  text: 'DASHBOARD',
                                   voidcallback: () {
                                     controller.isLoading == false &&
                                             controller.noInternet == false
-                                        ? Get.toNamed(AppRoute.portofolioRoute)
+                                        ? (){
+                                      Constant.drawerIndex = 3;
+                                      Get.offAllNamed(AppRoute.portofolioRoute);
+                                    }()
                                         : printInfo(info: 'Do Nothing');
                                   },
                                   containerColor: AppColor.liteblue,
@@ -255,7 +266,7 @@ class HomeScreen extends StatelessWidget {
                               child: ContainerBox(
                             icon: const Market(),
                             textColor: AppColor.blueColor,
-                            text: 'Market',
+                            text: 'MARKET',
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
@@ -268,8 +279,9 @@ class HomeScreen extends StatelessWidget {
                             },
                             containerColor: AppColor.liteblue,
                           )),
-                          Constant.userId == '-0456'
-                              ? Expanded(
+                          // Constant.userId == '-0456'
+                          //     ?
+                          Expanded(
                                   child: ContainerBox(
                                   icon: const Chat(),
                                   textColor: AppColor.blueColor,
@@ -285,19 +297,19 @@ class HomeScreen extends StatelessWidget {
                                   },
                                   containerColor: AppColor.whiteColor,
                                 ))
-                              : Expanded(
-                                  child: ContainerBox(
-                                  icon: const Portofol(),
-                                  textColor: AppColor.whiteColor,
-                                  text: 'DashBoard',
-                                  voidcallback: () {
-                                    controller.isLoading == false &&
-                                            controller.noInternet == false
-                                        ? Get.toNamed(AppRoute.portofolioRoute)
-                                        : printInfo(info: 'Do Nothing');
-                                  },
-                                  containerColor: AppColor.liteblue,
-                                ))
+                              // : Expanded(
+                              //     child: ContainerBox(
+                              //     icon: const Portofol(),
+                              //     textColor: AppColor.whiteColor,
+                              //     text: 'DashBoard',
+                              //     voidcallback: () {
+                              //       controller.isLoading == false &&
+                              //               controller.noInternet == false
+                              //           ? Get.toNamed(AppRoute.portofolioRoute)
+                              //           : printInfo(info: 'Do Nothing');
+                              //     },
+                              //     containerColor: AppColor.liteblue,
+                              //   ))
                         ],
                       ),
                     ),

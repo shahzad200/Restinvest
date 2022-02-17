@@ -534,7 +534,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                 textAlign: TextAlign.start,
                   text:  TextSpan(
                       text:
-                          'I have read understood the guidlines as stated in the\n',
+                          'I have read understood the guidlines as stated\nin the ',
                       style: TextStyle(color: AppColor.black, fontSize: 12),
                       children: [
                     TextSpan(
@@ -567,7 +567,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                           ' & ',
                     ),TextSpan(
                       text:
-                          'Fund Manager\nReport ',
+                          '\nFund Manager Report ',
                           style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                           recognizer:  TapGestureRecognizer()..onTap = () {
                             Get.to(WebViewScreen(
@@ -578,11 +578,11 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                           },
                     ),TextSpan(
                       text:
-                          'of the funds and the risk involved',
+                          'of the funds and the risk\ninvolved.',
                           style: TextStyle(color: AppColor.black, fontSize: 12),
                     )
                   ])),
-              SizedBox(height:5),
+              // SizedBox(height:5),
               RichText(
                   textAlign: TextAlign.start,
                   text:  TextSpan(
@@ -2675,7 +2675,7 @@ String text;
     return AlertDialog(
       // title: const Text('AlertDialog Title'),
       content: SizedBox(
-        height: 140,
+        height: 162,
         width: Get.width / 1.2,
         child: Column(
           children: [
@@ -2708,9 +2708,13 @@ String text;
                   onTap: (){
                     Get.back();
                   },
-                  child: const Text(
-                    "OK",
-                    style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    child: const Text(
+                      "OK",
+                      style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),

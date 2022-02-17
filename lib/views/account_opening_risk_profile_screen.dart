@@ -110,7 +110,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                               // ),
                               space,
                               const RestInvestTitle(
-                                text: " RISK PROFILE FORM ",
+                                text: " RISK PROFILE FORM: ",
                                 textAlign: TextAlign.start,
                                 textColor: AppColor.black,
                                 fontSize: 12,
@@ -687,10 +687,12 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                       width: 50,
                                       text: "SAVE&NEXT",
                                       onPress: () {
-                                        // _.onSaveData();
-                                        Get.toNamed(AppRoute.accountOpenUploadScreen);
+                                        _.onSaveData();
+                                        // Get.toNamed(AppRoute.accountOpenUploadScreen);
                                       },
                                       isRound: false),
+                                  const SizedBox(width: 20,),
+                                  const Text('5/8')
                                 ],
                               ),
                               const SizedBox(
@@ -716,7 +718,9 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                             width: Get.width,
                             color: Colors.white,
                             child: NoInternetWgt(
-                              onTryAgain: _.onNewDigUserRegDataRpqList(),
+                              onTryAgain: (){
+                                _.onNewDigUserRegDataRpqList();
+                              },
                             ),
                           ),
                         )

@@ -98,6 +98,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                       hint: "Enter Your CNIC/NICOP Numbers",
                                       controller: _.cNicNumberController,
                                       fieldType: Constants.cnicNumber,
+                                      textInputType: TextInputType.number,
                                       inputFormator: [
                                         FilteringTextInputFormatter.digitsOnly,
                                          LengthLimitingTextInputFormatter(13),
@@ -119,10 +120,11 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w900,
                                     ),
                                     CustomTextFormField(
-                                      hint: "+9234xxxxxxxx",
+                                      hint: "Enter Mobile No.",
                                       controller: _.mobileNumberController,
                                       fieldType: Constants.phoneNumberField,
                                       textAlign: TextAlign.start,
+                                      textInputType: TextInputType.text,
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -350,6 +352,10 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                               _.onValidateVerificationCodeForDigUser();
                                               // Get.toNamed(AppRoute.accountopeningbasicinformation);
                                             }),
+                                        const SizedBox(
+                                         width: 20,
+                                        ),
+                                        const Text('1/8')
                                       ],
                                     ),
                                     // CustomRoundButton(height: 35,

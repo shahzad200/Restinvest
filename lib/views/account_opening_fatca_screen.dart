@@ -28,12 +28,16 @@ class AccountOpenFatcaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder<AccountOpenFatcaController>(
         init: AccountOpenFatcaController(),
         builder: (_) {
           var space = const SizedBox(
             height: 10,
           );
+          // printInfo(info: _.stateValue+'JHGGJ'+_.stateCode );
+          // printInfo(info: _.birthCityValue+'JHGGJ'+_.birthCityCode );
+          // printInfo(info: _.cityList[0].cityCode! );
           return SafeArea(
               child: Scaffold(
             appBar: AppBar(
@@ -97,6 +101,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                         CustomTextFormField(
                                           isRounded: true,
                                           hint: "",
+                                          enable: false,
                                           controller: _.titleController,
                                           textInputType: TextInputType.text,
                                           hintColor: AppColor.black,
@@ -114,7 +119,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         const RestInvestTitle(
-                                          text: "CNIC / NICOP NUMBER",
+                                          text: "CNIC / NICOP NUMBER:",
                                           textColor: AppColor.black,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w900,
@@ -131,6 +136,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 13),
                                             NumberFormatter()
                                           ],
+                                          enable: false,
                                           controller: _.cnicController,
                                           hintColor: AppColor.black,
                                           // textInputType: TextInputType.emailAddress,
@@ -202,11 +208,11 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                     .controller
                                                     .newDigUserRegDataAfterOTP!
                                                     .response!
-                                                    .nationalities!
-                                                    .map((Nationalities
+                                                    .countries!
+                                                    .map((Countries
                                                         nationality) {
                                                     return DropdownMenuItem<
-                                                            Nationalities>(
+                                                        Countries>(
                                                         value: nationality,
                                                         child: Text(nationality!
                                                                 .countryName ??
@@ -215,7 +221,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                             onChanged: _.isLoading ||
                                                     _.noInternet
                                                 ? null
-                                                : (Nationalities? value) {
+                                                : (Countries? value) {
                                                     _.countryValue =
                                                         value!.countryName!;
                                                     _.countryCode =
@@ -841,6 +847,8 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                         // Get.toNamed(AppRoute.accountOpenURiskScreen);
                                       },
                                       isRound: false),
+                                  const SizedBox(width: 20,),
+                                  const Text('4/8')
                                 ],
                               ),
                               const SizedBox(

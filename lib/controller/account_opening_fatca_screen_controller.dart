@@ -37,8 +37,8 @@ class AccountOpenFatcaController extends GetxController {
 
   bool isLoading = false;
   bool noInternet = false;
-  String countryValue = "";
-  String countryCode = "";
+  String countryValue = "PAKISTAN";
+  String countryCode = "001";
   String stateValue = "";
   String stateCode = "";
   String taxCountryValue = "PAKISTAN";
@@ -46,7 +46,7 @@ class AccountOpenFatcaController extends GetxController {
   String taxCountryCode = "001";
   String birthCityValue = "";
   String birthCityCode = "";
-  String taxResCountriesOtherThanPakGroupValue = '0';
+  String taxResCountriesOtherThanPakGroupValue = 'N';
   city.CityData? cityData;
   List<state.Response> stateList = [];
   List<city.Response> cityList = [];
@@ -82,6 +82,89 @@ class AccountOpenFatcaController extends GetxController {
     // TODO: implement onInit
     titleController.text = Constant.uTitle;
     cnicController.text = Constant.cNic;
+    if(Constant.validateVerificationCodeForDigUser!.response!.fatcaDisclaimerChecked == true
+    && Constant.validateVerificationCodeForDigUser!.response!.crsDisclaimerChecked == true)
+      {
+        countryCode = Constant.validateVerificationCodeForDigUser!.response!.birthCountryCode ?? '001';
+        if(countryCode != null || countryCode != ''){
+          controller.newDigUserRegDataAfterOTP!.response!.countries!.indexWhere((element){
+            if(element.countryCode == countryCode){
+              countryValue = element.countryName!;
+              onStateData(countryCode).then((value){
+                onCityData(countryCode).then((value) {
+                  stateCode = Constant.validateVerificationCodeForDigUser!.response!.birthStateCode ?? '';
+                  if(stateCode != null || stateCode != ''){
+                     int index = stateList.indexWhere((element) => element.code == stateCode);
+                     printInfo(info: 'IINNDDEECX'+index.toString());
+                     stateValue = stateList[index].description!;
+                    // stateList!.indexWhere((element) {
+                    //   printInfo(info: element.code!+'HJGHJHGJ'+birthCityCode);
+                    //   if(element.code == stateCode){
+                    //     stateValue = element.description!;
+                    //   }
+                    //   return true;
+                    // });
+                  }
+                  birthCityCode = Constant.validateVerificationCodeForDigUser!.response!.birthCityCode ?? '';
+                  if(birthCityCode != null || birthCityCode != ''){
+                    int index = cityList.indexWhere((element) => element.cityCode == birthCityCode);
+                    printInfo(info: 'IINNDDEECX'+index.toString());
+                    birthCityValue = cityList[index].cityName!;
+                    // cityList!.indexWhere((element) {
+                    //   printInfo(info: element.cityCode!+'HJGHJHGJ'+birthCityCode);
+                    //   if(element.cityCode == birthCityCode){
+                    //     birthCityValue = element.cityName!;
+                    //   }
+                    //   return true;
+                    // });
+                  }
+                });
+              });
+              return true;
+            }else{
+              return false;
+            }
+          });
+        }
+
+        taxResCountriesOtherThanPakGroupValue = Constant.validateVerificationCodeForDigUser!.response!.taxResCountryOtherThanPak == ''
+        ? 'N' : Constant.validateVerificationCodeForDigUser!.response!.taxResCountryOtherThanPak ?? 'N';
+
+        if(controller.newDigUserRegDataAfterOTP!.response!.fatcaInfoList!.length == Constant.validateVerificationCodeForDigUser!.response!.fatcaInfo!.length )
+        {
+          for(int k = 0 ; k < controller.newDigUserRegDataAfterOTP!.response!.fatcaInfoList!.length ; k++)
+          {
+            controller.newDigUserRegDataAfterOTP!.response!.fatcaInfoList![k].answer =
+                Constant.validateVerificationCodeForDigUser!.response!.fatcaInfo![k].answer;
+          }
+        }
+        termsConditions = Constant.validateVerificationCodeForDigUser!.response!.crsDisclaimerChecked ?? false;
+
+        taxCountryCode = Constant.validateVerificationCodeForDigUser!.response!.taxPaidCountry ?? '001';
+        if(taxCountryCode != null || taxCountryCode != '')
+          {
+            controller.newDigUserRegDataAfterOTP!.response!.nationalities!.indexWhere((element) {
+              if(element.countryCode == taxCountryCode) {
+                taxCountryValue = element.countryName!;
+              }
+              return true;
+            });
+          }
+        if(taxCountryCode != '001' && taxCountryCode != ''){
+          tinNumberController.text = Constant.validateVerificationCodeForDigUser!.response!.taxIdentificationNumber ?? '';
+        }
+        disclaimerIsChecked = termsConditions = Constant.validateVerificationCodeForDigUser!.response!.fatcaDisclaimerChecked ?? false;
+      }else {
+      onStateData(
+          countryCode).then((value){
+        onCityData(countryCode);
+      });
+    }
+
+
+
+
+
     super.onInit();
   }
 
@@ -204,7 +287,7 @@ class AccountOpenFatcaController extends GetxController {
   }
 
 
-  onCityData(String countryCode) async {
+ Future<bool> onCityData(String countryCode) async {
     try {
       cityList = [];
       birthCityValue = "";
@@ -216,21 +299,24 @@ class AccountOpenFatcaController extends GetxController {
       });
       isLoading = false;
       update();
+      return true;
     } catch (e) {
       if (e.toString() == 'Exception: No Internet') {
         isLoading = false;
         noInternet = true;
         update();
+        return false;
       } else {
         isLoading = false;
         noInternet = false;
         update();
         showToast(e.toString());
+        return false;
       }
     }
   }
 
-  onStateData(String countryCode) async {
+  Future<bool> onStateData(String countryCode) async {
     try {
       stateList = [];
       stateValue = "";
@@ -242,16 +328,19 @@ class AccountOpenFatcaController extends GetxController {
       });
       isLoading = false;
       update();
+      return true;
     } catch (e) {
       if (e.toString() == 'Exception: No Internet') {
         isLoading = false;
         noInternet = true;
         update();
+        return false;
       } else {
         isLoading = false;
         noInternet = false;
         update();
         showToast(e.toString());
+        return false;
       }
     }
   }

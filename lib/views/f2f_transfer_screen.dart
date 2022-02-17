@@ -26,6 +26,7 @@ class F2FTransferScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
+              title: const LogoNit(height: 60,width: 60,),
               backgroundColor: AppColor.whiteColor,
               leading: InkWell(
                 onTap: () {
@@ -217,8 +218,8 @@ class F2FTransferScreen extends StatelessWidget {
                         fontWeight: FontWeight.w800,
                         fontsize: 14,
                         hintColor: AppColor.black,
-                        hint: _.isLoading? '0' : _.electronicUnit() ?? '0',
-                        text: 'From Fund Amount (Rs.)',
+                        hint: _.isLoading? '0' : _.electronicUnit() == '0' ? '0' :_.f.format(double.parse(_.electronicUnit().toString())).toString(),
+                        text:'From Fund Electronic Units',
                         textColor: AppColor.dimblack,
                       )),
                       const SizedBox(
@@ -229,8 +230,8 @@ class F2FTransferScreen extends StatelessWidget {
                         fontWeight: FontWeight.w800,
                         fontsize: 14,
                         hintColor: AppColor.black,
-                        hint: _.isLoading? '0' : _.fundAmount() ?? '0',
-                        text: 'From Fund Electronic Units',
+                        hint: _.isLoading? '0' : _.fundAmount() == '0.00' ? '0' :_.f.format(double.parse(_.fundAmount().toString())).toString(),
+                        text: 'From Fund Amount (Rs.)',
                         textColor: AppColor.dimblack,
                       )),
                     ],
@@ -483,7 +484,7 @@ class F2FTransferScreen extends StatelessWidget {
                           enable: _.isLoading || _.allUnitButton || _.noInternet ? false : _.loadFundsPlans!.response!.portfolioAllocationData!.isNotEmpty &&
                               double.parse(_.loadFundsPlans!.response!.portfolioAllocationData![_.index].fundUnits!) > 0 ? true : false,
                           isRounded: true,
-                          hint: "Unit Balance",hintColor: AppColor.black,
+                          hint: "Enter Units",hintColor: AppColor.black,
                           textInputType: TextInputType.number,
                           onChange: (v){
                             printInfo(info: "jhjghjhHJHGJHGjh"+v);
