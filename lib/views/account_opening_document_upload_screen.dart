@@ -1122,7 +1122,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
 
                             space,
                             const RestInvestTitle(
-                              text: "NOMINEE CNIC:",
+                              text: "NOMINEE CNIC:*",
                               textAlign: TextAlign.start,
                               textColor: AppColor.black,
                               fontWeight: FontWeight.w900,
@@ -1141,7 +1141,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                       buttonColor: AppColor.whiteColor,
                                       textColor: AppColor.black,
                                       onPress: () {
-                                        _.otherUpload = false;
+                                        _.nomineeUpload = false;
                                         _.update();
                                         showModalBottomSheet(
                                             backgroundColor: Colors.transparent,
@@ -1167,20 +1167,16 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                           title:  const Text(
                                                               'Photo Library'),
                                                           onTap: () async {
-                                                            _.otherImage = await _
+                                                            _.nomineeImage =
+                                                            await _
                                                                 .getImageFromGallery();
-                                                            _.otherImageName =
-                                                                p.basename(_
-                                                                    .otherImage!
-                                                                    .path);
-                                                            // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                            // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
-                                                            // _.paymentSlip!.readAsBytes().then((value) {
-                                                            //   _.paymentSlipBytes = Uint8List.fromList(value);});
-                                                            // print("Extention${_.paymentSlipExt}");
+                                                            _.nomineeImageName = p.basename(_
+                                                                .nomineeImage!
+                                                                .path);
+                                                            _.nomineeDoc = _.nomineeImage!.readAsBytesSync();
                                                             _.update();
                                                             Navigator.of(
-                                                                    context)
+                                                                context)
                                                                 .pop();
                                                             showToast('Uploaded');
                                                           }),
@@ -1189,20 +1185,19 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                                             Icons.photo_camera),
                                                         title:
                                                              const Text('Camera'),
-                                                        onTap: () async {
-                                                          _.otherImage = await _
+                                                        onTap:
+                                                            () async {
+                                                          _.nomineeImage =
+                                                          await _
                                                               .getImageFromCamera();
-                                                          _.otherImageName =
+                                                          _.nomineeImageName =
                                                               p.basename(_
-                                                                  .otherImage!
+                                                                  .nomineeImage!
                                                                   .path);
-                                                          // _.paymentSlipExt = p.extension(_.paymentSlip!.path);
-                                                          // _.paymentSlipBytes = _.paymentSlip!.readAsBytesSync();
-                                                          // _.paymentSlip!.readAsBytes().then((value) {
-                                                          //   _.paymentSlipBytes = Uint8List.fromList(value);});
-                                                          // print("Extention${_.paymentSlipExt}");
+                                                          _.nomineeDoc = _.nomineeImage!.readAsBytesSync();
                                                           _.update();
-                                                          Navigator.of(context)
+                                                          Navigator.of(
+                                                              context)
                                                               .pop();
                                                           showToast('Uploaded');
                                                         },
@@ -1228,10 +1223,10 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                   color: AppColor.whiteColor,
                                   border: Border.all(
                                       width: 1, color: AppColor.black)),
-                              child: _.otherUpload && _.otherImage != null
+                              child: _.nomineeUpload && _.nomineeDoc != null
                                   ? Center(
-                                      child: Image.file(
-                                      _.otherImage!,
+                                      child: Image.memory(
+                                      _.nomineeDoc!,
                                       height: 80,
                                       width: 120,
                                     ))
@@ -1251,8 +1246,8 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    if (_.otherImage != null) {
-                                      _.otherUpload = true;
+                                    if (_.nomineeDoc != null) {
+                                      _.nomineeUpload = true;
                                     }
                                     _.update();
                                   },
@@ -1269,11 +1264,11 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                     width: 50,
                                     text: "Remove",
                                     onPress: () {
-                                      if (_.otherUpload) {
-                                        _.otherUpload = false;
+                                      if (_.nomineeUpload) {
+                                        _.nomineeUpload = false;
                                       }
-                                      if (_.otherImage != null) {
-                                        _.otherImage = null;
+                                      if (_.nomineeDoc != null) {
+                                        _.nomineeDoc = null;
                                       }
                                       _.update();
                                     },

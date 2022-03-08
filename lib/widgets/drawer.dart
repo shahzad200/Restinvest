@@ -212,7 +212,7 @@ class CustomDrawer extends StatelessWidget {
                     },
                     leading: const F2F(),
                     title: const RestInvestTitle(
-                      text: "F2F Transfer",
+                      text: "Conversion",
                       textColor: AppColor.black,
                       fontWeight: FontWeight.w700,
                     ),

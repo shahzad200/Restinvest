@@ -230,6 +230,7 @@ class Repository {
           String otherTaxResCountry,
           String taxPaidCountry,
           String taxResCountryOtherThanPak,
+      String? taxResCountryOther,
           String titleOfAccount,
           list,String taxIdNumber,
       ) =>
@@ -242,6 +243,7 @@ class Repository {
           otherTaxResCountry,
           taxPaidCountry,
           taxResCountryOtherThanPak,
+          taxResCountryOther,
           titleOfAccount,
           list,taxIdNumber,Constant.cNic,Constant.sessionID);
 
@@ -250,23 +252,25 @@ class Repository {
 
 
   Future<Common> onPartialSavingForDigUser(
+      String? otherMailingCity, String? otherCity,
       String email,String mobile,String mobileRegWith,String accountTypeOpened,
       String bankAccountNo,String bankBranchAddress,String bankName,String branchName,bool basicInfoDisclaimerChecked,
       bool lifeTimeCheck,String bankCityCode,String city,String cNicExpiryDate,
       String cNicIssueDate,String country,
       String customerName,String dateOfBirth,String dividendMandate,String fatherSpouseName,
       String mailingAddress,String mailingCountryCode,String mailingCity,String maritalStatus,
-      String mothersMaidenName,String nationalityCode,String pakResident,String religion,String residentialAddress,
+      String mothersMaidenName,String nationalityCode,String pakResident,String phoneOne,
+      String phoneTwo, String religion,String residentialAddress,
       int retirementAge,String title,bool zaKatExempt,String noMName,String noMcNic,
       String noMRelation,String noMMobile,
       ) =>
-      _apiClient.onPartialSavingForDigUser(email, mobile,
+      _apiClient.onPartialSavingForDigUser(otherMailingCity,otherCity,email, mobile,
           mobileRegWith,accountTypeOpened,bankAccountNo,
           bankBranchAddress,bankName,branchName,basicInfoDisclaimerChecked,lifeTimeCheck,
           bankCityCode, city, cNicExpiryDate, cNicIssueDate, country,
           customerName, dateOfBirth, dividendMandate, fatherSpouseName,
           mailingAddress, mailingCountryCode, mailingCity, maritalStatus,
-          mothersMaidenName, nationalityCode, pakResident, religion ,residentialAddress,
+          mothersMaidenName, nationalityCode, pakResident,phoneOne,phoneTwo,religion ,residentialAddress,
           retirementAge, title, zaKatExempt, noMName, noMcNic, noMRelation, noMMobile,
           Constant.cNic,Constant.sessionID
       );
@@ -321,11 +325,12 @@ class Repository {
       Uint8List? sigPaper,
       Uint8List? zaKat,
       Uint8List? mobileProof,
+      Uint8List? nominee,
       bool disClaimer,
       ) =>
       _apiClient.onPartialSavingForDigUserScreen6(cNicBack,
           cNicFront, incomeProof,
-          sigPaper,zaKat,mobileProof,disClaimer,Constant.cNic,Constant.sessionID);
+          sigPaper,zaKat,mobileProof,nominee,disClaimer,Constant.cNic,Constant.sessionID);
 
 
   Future<Common> onSaveDigUser(

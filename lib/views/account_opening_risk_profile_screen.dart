@@ -341,7 +341,7 @@ class AccountOpenRiskProfileScreen extends StatelessWidget {
                                     ),
                               space,
                               const RestInvestTitle(
-                                text: "Your Risk Appetite",
+                                text: "Your Risk Appetite:*",
                                 textColor: AppColor.black,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w900,

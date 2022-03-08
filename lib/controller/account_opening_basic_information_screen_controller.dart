@@ -46,6 +46,10 @@ class AccountOpenBasicInformationScreenController extends GetxController{
   TextEditingController kiNcNicController = TextEditingController();
   TextEditingController kinRelationController = TextEditingController();
   TextEditingController kinMobileNumberController = TextEditingController();
+
+  TextEditingController otherCityController = TextEditingController();
+  TextEditingController otherMailingController = TextEditingController();
+
   NewDigUserRegDataAfterOTP? newDigUserRegDataAfterOTP;
   CityData? mailingCityData;
   CityData? currentCityData;
@@ -169,6 +173,9 @@ class AccountOpenBasicInformationScreenController extends GetxController{
              }
            });
          }
+         if(currentCityCode == 'other'){
+           otherCityController.text = Constant.validateVerificationCodeForDigUser!.response!.otherCity ?? '';
+         }
        }).then((value) async {
          isMailingCity = true;
          await onCityData(currentCountryCode).then((value) {
@@ -182,6 +189,9 @@ class AccountOpenBasicInformationScreenController extends GetxController{
                  return false;
                }
              });
+           }
+           if(mailingCityCode == 'other'){
+             otherMailingController.text = Constant.validateVerificationCodeForDigUser!.response!.mailingOtherCity ?? '';
            }
          });
        });
@@ -488,13 +498,65 @@ class AccountOpenBasicInformationScreenController extends GetxController{
       showToast('Please enter IBAN number');
     } else if(dividendMandateGroupValue == '00'){
       showToast('Please select dividend mandate');
+    } else if(kinNameController.text == "" || kinNameController.text.isEmpty || kinNameController.text == null ){
+      showToast('Please enter kin name');
+    } else if(kiNcNicController.text == "" || kiNcNicController.text.isEmpty || kiNcNicController.text == null ){
+      showToast('Please enter kin CNIC');
+    } else if(kinRelationCode == "" || kinRelationValue == "" ){
+      showToast('Please select relation with kin');
+    } else if(kinMobileNumberController.text == "" || kinMobileNumberController.text.isEmpty || kinMobileNumberController.text == null ){
+      showToast('Please enter kin mobile no.');
     } else if(!isChecked){
       showToast('Please check disclaimer');
     } else if(Constant.accType == 'I') {
-      onSave();
+      if(mailingCityCode == 'other'){
+        if(otherMailingController.text == null || otherMailingController.text == ''){
+          showToast('Please enter mailing city name');
+        } else if(currentCityCode == 'other'){
+          if(otherCityController.text == null || otherCityController.text == ''){
+            showToast('Please enter other city name');
+          }else{
+            // printInfo(info: 'Called1');
+            onSave();
+          }
+        }else{
+          // printInfo(info: 'Called2');
+          onSave();
+        }
+      }else if(currentCityCode == 'other'){
+        if(otherCityController.text == null || otherCityController.text == ''){
+          showToast('Please enter other city name');
+        }else{
+          // printInfo(info: 'Called3');
+          onSave();
+        }
+      }else {
+        // printInfo(info: 'Called4');
+        onSave();
+      }
     } else if(retirementValue == "" && retirementCode == ""){
       showToast('Please select retirement age');
-  }  else {
+  }  else if(mailingCityCode == 'other'){
+      if(otherMailingController.text == null || otherMailingController.text == ''){
+        showToast('Please enter mailing city name');
+      } else if(currentCityCode == 'other'){
+        if(otherCityController.text == null || otherCityController.text == ''){
+          showToast('Please enter other city name');
+        }else{
+          // printInfo(info: 'Called5');
+          onSave();
+        }
+      }else{
+        // printInfo(info: 'Called6');
+        onSave();
+      }
+    }else if(currentCityCode == 'other'){
+      if(otherCityController.text == null || otherCityController.text == ''){
+        showToast('Please enter other city name');
+      }else{
+        onSave();
+      }
+    } else{
       onSave();
     }
   }
@@ -504,13 +566,15 @@ class AccountOpenBasicInformationScreenController extends GetxController{
       isLoading = true;
       update();
       common = await _repository.onPartialSavingForDigUser(
+          mailingCityCode == 'other' ? otherMailingController.text : '',
+          currentCityCode == 'other' ? otherCityController.text : '',
           controller.emailController.text, controller.mobileNumberController.text,
           controller.mobileNumberOwnerCode, controller.groupValue, iBanNumberController.text,
           bankBranchController.text, bankNameCode,bankBranchController.text,isChecked,isLifTime,
           bankCityCode, currentCityCode, cNicExpDate, cNicIssueDate, currentCountryCode,
           nameController.text, dObDate, dividendMandateGroupValue, fNameController.text,
           mailingAddressController.text, mailingCountryCode, mailingCityCode, martialCode,
-          mNameController.text, nationalityCode,residentStatusCode,religionCode, currentAddressController.text,
+          mNameController.text, nationalityCode,residentStatusCode,phoneController.text,officePhoneController.text,religionCode, currentAddressController.text,
           Constant.accType == 'I' ? 0 : int.parse(retirementCode), titleCode, zaKatCode, kinNameController.text,
           kiNcNicController.text, kinRelationCode, kinMobileNumberController.text);
 
@@ -521,6 +585,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
       update();
       if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
           Constant.zakValue = zaKatValue;
+          printInfo(info: nameController.text+'jhgjgjhgjgg');
         Constant.uTitle = nameController.text;
         Get.toNamed(
             AppRoute.accountOpenKycDetailScreen);

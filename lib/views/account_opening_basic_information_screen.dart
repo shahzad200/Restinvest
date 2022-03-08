@@ -1343,6 +1343,14 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
+                               _.mailingCityCode == 'other' ?  space : const SizedBox(),
+                                _.mailingCityCode == 'other' ? CustomTextFormField(
+                                  controller: _.otherMailingController,
+                                  isRounded: true,
+                                  hint: "Enter mailing city name",
+                                  hintColor: AppColor.dimblack,
+                                  // textInputType: TextInputType.emailAddress,
+                                ) : const SizedBox(),
                                 space,
                                 Row(
                                   children: [
@@ -1522,6 +1530,14 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
+                                _.currentCityCode == 'other' ?  space : const SizedBox(),
+                                _.currentCityCode == 'other' ? CustomTextFormField(
+                                  controller: _.otherCityController,
+                                  isRounded: true,
+                                  hint: "Enter current city name",
+                                  hintColor: AppColor.dimblack,
+                                  // textInputType: TextInputType.emailAddress,
+                                ) : const SizedBox(),
                                 space,
                                 Row(
                                   children: [
@@ -1934,7 +1950,9 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                         width: 50,
                                         text: "SAVE&NEXT",
                                         onPress: () {
-                                          // Get.toNamed(AppRoute.accountOpenKycDetailScreen);
+                                          // print(Constant.cNic+'  '+_.controller.emailController.text+'  '+_.controller.mobileNumberController.text,);
+
+                                          // Get.toNamed(AppRoute.accountOpenFatcaScreen);
                                           _.onSaveDataAccountOpeningBasicInfo();
                                         },
                                         isRound: false),

@@ -320,7 +320,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         const RestInvestTitle(
-                                          text: "CURRENT CITY:*",
+                                          text: "CITY:*",
                                           textColor: AppColor.black,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w900,
@@ -435,12 +435,20 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                     )
                                     .toList(),
                               ),
-                              const EmptyContainer(
-                                  fontWeight: FontWeight.w900,
-                                  text: "",
-                                  hint: "",
-                                  textColor: AppColor.black,
-                                  hintColor: AppColor.black),
+                              CustomTextFormField(
+                                controller: _.taxResCountryController,
+                                isRounded: true,
+                                enable: _.taxResCountriesOtherThanPakGroupValue == 'oth' ? true :
+                                false,
+                                hint: _.taxResCountriesOtherThanPakGroupValue == 'oth' ? "Enter tax residential country name": "",
+                                hintColor: AppColor.dimblack,
+                              ),
+                              // const EmptyContainer(
+                              //     fontWeight: FontWeight.w900,
+                              //     text: "",
+                              //     hint: "",
+                              //     textColor: AppColor.black,
+                              //     hintColor: AppColor.black),
                               space,
                               ListView.builder(
                                   shrinkWrap: true,

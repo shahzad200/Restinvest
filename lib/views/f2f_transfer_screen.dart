@@ -43,9 +43,21 @@ class F2FTransferScreen extends StatelessWidget {
             body: Stack(
                 children: [
             SingleChildScrollView(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
               child: Column(
                 children: [
+                  const Padding(
+                    padding:  EdgeInsets.only(top: 0.0,bottom: 10),
+                    child:  Align(
+                      alignment: Alignment.topCenter,
+                      child: RestInvestTitle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        text: "CONVERSION",
+                        textColor: AppColor.black,
+                      ),
+                    ),
+                  ),
                   Row(
                     children: [
                       Expanded(
@@ -624,3 +636,6 @@ class F2FTransferScreen extends StatelessWidget {
         });
   }
 }
+
+
+

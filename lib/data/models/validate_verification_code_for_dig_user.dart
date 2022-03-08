@@ -72,6 +72,8 @@ class Response {
     this.lifetimeCnicExpiry,
     this.mailingAddress,
     this.mailingCountryCode,
+    this.mailingOtherCity,
+    this.otherCity,
     this.branchCity,
     this.city,
     this.country,
@@ -114,6 +116,7 @@ class Response {
     this.fatcaDisclaimerChecked,
     this.taxPaidCountry,
     this.taxResCountryOtherThanPak,
+    this.otherTaxResCountry,
     this.titleOfAccount,
     this.fatcaInfo,
     this.taxIdentificationNumber,
@@ -136,6 +139,7 @@ class Response {
     this.incomeProofDoc,
     this.zakatDeclarationDoc,
     this.mobileNoProofDoc,
+    this.requiredDocs,
   });
   String? accountTypeToBeOpened;
   String? cnic;
@@ -157,6 +161,8 @@ class Response {
   bool? lifetimeCnicExpiry;
   String? mailingAddress;
   String? mailingCountryCode;
+  String? mailingOtherCity;
+  String? otherCity;
   String? branchCity;
   String? city;
   String? country;
@@ -199,6 +205,7 @@ class Response {
   bool? fatcaDisclaimerChecked;
   String? taxPaidCountry;
   String? taxResCountryOtherThanPak;
+  String? otherTaxResCountry;
   String? titleOfAccount;
   List<FatcaInfoList>? fatcaInfo;
   String? taxIdentificationNumber;
@@ -221,6 +228,7 @@ class Response {
   Map<String , dynamic>? incomeProofDoc;
   Map<String , dynamic>? zakatDeclarationDoc;
   Map<String , dynamic>? mobileNoProofDoc;
+  List<RedDocs>? requiredDocs;
   Response.fromJson(Map<dynamic, dynamic> json){
     accountTypeToBeOpened = json['accountTypeToBeOpened'];
     cnic = json['cnic'];
@@ -242,6 +250,8 @@ class Response {
     lifetimeCnicExpiry = json['lifetimeCnicExpiry'] ?? false;
     mailingAddress = json['mailingAddress'] ?? '';
     mailingCountryCode = json['mailingCountryCode'] ?? '';
+    mailingOtherCity = json['mailingOtherCity'] ?? '';
+    otherCity = json['otherCity'] ?? '';
     branchCity = json['branchCity'] ?? '';
     city = json['city'] ?? '';
     country = json['country'] ?? '';
@@ -285,6 +295,7 @@ class Response {
     fatcaDisclaimerChecked = json['fatcaDisclaimerChecked'] ?? false;
     taxPaidCountry = json['taxPaidCountry'] ?? '';
     taxResCountryOtherThanPak = json['taxResCountryOtherThanPak'] ?? '';
+    otherTaxResCountry = json['otherTaxResCountry'] ?? '';
     titleOfAccount = json['titleOfAccount'] ?? '';
     fatcaInfo = List.from(json['fatcaInfo']).map((e)=>FatcaInfoList.fromJson(e)).toList();
     taxIdentificationNumber = json['taxIdentificationNumber'] ?? '';
@@ -307,6 +318,7 @@ class Response {
     incomeProofDoc = json['incomeProofDoc'] ?? null;
     zakatDeclarationDoc = json['zakatDeclarationDoc'] ?? null;
     mobileNoProofDoc = json['mobileNoProofDoc'] ?? null;
+    requiredDocs = List.from(json['requiredDocs']).map((e)=>RedDocs.fromJson(e)).toList();
   }
 
   Map<dynamic, dynamic> toJson() {
@@ -331,6 +343,8 @@ class Response {
     _data['lifetimeCnicExpiry'] = lifetimeCnicExpiry;
     _data['mailingAddress'] = mailingAddress;
     _data['mailingCountryCode'] = mailingCountryCode;
+    _data['mailingOtherCity'] = mailingOtherCity;
+    _data['otherCity'] = otherCity;
     _data['branchCity'] = branchCity;
     _data['city'] = city;
     _data['country'] = country;
@@ -373,6 +387,7 @@ class Response {
     _data['fatcaDisclaimerChecked'] = fatcaDisclaimerChecked;
     _data['taxPaidCountry'] = taxPaidCountry;
     _data['taxResCountryOtherThanPak'] = taxResCountryOtherThanPak;
+    _data['otherTaxResCountry'] = otherTaxResCountry;
     _data['titleOfAccount'] = titleOfAccount;
     _data['fatcaInfo'] = fatcaInfo!.map((e)=>e.toJson()).toList();
     _data['taxIdentificationNumber'] = taxIdentificationNumber;
@@ -393,6 +408,7 @@ class Response {
     _data['incomeProofDoc'] = incomeProofDoc;
     _data['zakatDeclarationDoc'] = zakatDeclarationDoc;
     _data['mobileNoProofDoc'] = mobileNoProofDoc;
+    _data['requiredDocs'] = requiredDocs!.map((e)=>e.toJson()).toList();
     return _data;
   }
 }
@@ -1418,8 +1434,37 @@ class Document {
 //     return _data;
 //   }
 // }
-//
-//
+class RedDocs {
+  RedDocs({
+    this.documentName,
+    this.fileName,
+    this.fileExtension,
+    this.fileContent
+  });
+  String? documentName;
+  String? fileName;
+  String? fileExtension;
+  List<dynamic>? fileContent;
+
+  RedDocs.fromJson(Map<dynamic, dynamic> json){
+    documentName = json['documentName'];
+    fileName = (json['fileName'] ?? '').toString();
+    fileExtension = (json['fileExtension'] ?? '').toString();
+    fileContent = json['fileContent'] ?? [];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['documentName'] = documentName;
+    _data['fileName'] = fileName;
+    _data['fileExtension'] = fileExtension;
+    _data['fileContent'] = fileContent;
+    return _data;
+  }
+
+}
+
+
 class FatcaInfoList {
   FatcaInfoList({
     this.answer,

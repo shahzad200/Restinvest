@@ -3,7 +3,9 @@ import 'dart:typed_data';
 import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:investintrust/controller/account_opening_kyc_detail_screen_controller.dart';
 import 'package:investintrust/data/models/load_fund_plans.dart';
 
 // import 'package:investintrust/data/models/load_fund_plans.dart';
@@ -56,9 +58,21 @@ class PurchasesScreen extends StatelessWidget {
             body: Stack(
               children: [
                 SingleChildScrollView(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
                   child: Column(
                     children: [
+                      const Padding(
+                        padding:  EdgeInsets.only(top: 0.0,bottom: 10),
+                        child:  Align(
+                          alignment: Alignment.topCenter,
+                          child: RestInvestTitle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            text: "PURCHASE",
+                            textColor: AppColor.black,
+                          ),
+                        ),
+                      ),
                       Row(
                         children: [
                           Expanded(
@@ -381,12 +395,16 @@ class PurchasesScreen extends StatelessWidget {
                                   textInputType: TextInputType.number,
                                   hint: "",
                                   onChange: (value){
-                                    if(int.parse(value.toString()) >= 1000000 ){
-                                      _.amountController.text = '1000000';
+                                    if(int.parse(value.toString().replaceAll(',', '')) >= 1000000 ){
+                                      _.amountController.text = '100,000,0';
                                       _.update();
                                       showToast('The amount cannot exceed 1000000 (1 million)');
                                     }
                                   },
+                                  inputFormator: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    NumberForm()
+                                  ],
                                   //  textInputType: TextInputType.emailAddress,
                                 ),
                               ],
@@ -429,7 +447,7 @@ class PurchasesScreen extends StatelessWidget {
                                     textColor: AppColor.blueColor),
                                 CustomTextFormField(
                                   isRounded: true,
-                                  textInputType: TextInputType.numberWithOptions(),
+                                  textInputType: TextInputType.text,
                                   controller: _.bankAccountController,
                                   hint: "",
                                   length: 24,

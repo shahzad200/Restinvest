@@ -318,6 +318,7 @@ class F2FTransferScreenController extends GetxController {
       update();
       if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
         customDialogPin(context,"Request Submitted successfully");
+        clearPage();
       }
       // update();
     } catch (e) {
@@ -341,5 +342,44 @@ class F2FTransferScreenController extends GetxController {
     }
 
   }
+
+
+  void clearPage() async {
+     isChecked = false;
+     accountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
+
+     unitBalanceController.text = '';
+     pinCodeController.text = '';
+
+     fundValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundShort ?? '';
+     fundCode = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode ?? '';
+     toAccountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
+     toFundValue = "";
+     toFundCode = "";
+     unitButton = true;
+     percentageButton = false;
+     allUnitButton = false;
+     isCheckPrivacy = false;
+
+     investButton = false;
+     portfolioButton = false;
+     buttonclick3 = false;
+
+     isLoading = false;
+     noInternet = false;
+     loadFundsPlans = null;
+
+     fundIndex = 0;
+     index = 0;
+     fundVolume = '0';
+      approxAmount = '';
+      approxUnits = '';
+      dataValue = '';
+     findIndex();
+     onLoadFundsPlans();
+
+  }
+
+
 
 }

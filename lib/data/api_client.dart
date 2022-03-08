@@ -33,9 +33,10 @@ class ApiClient {
   static const _baseUrl =
       // 'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
       // 'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
+      // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
 
   // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
-  'http://192.168.0.174:8094/AssetConnectMobilePortal/UserService/';
+  'http://192.168.0.61:8094/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
@@ -413,6 +414,8 @@ class ApiClient {
   Future<LoginModel> onLogin(String userId, String password) async {
     LoginModel? loginModel;
     try {
+      printInfo(info: jsonEncode(
+          <String, String>{'userId': userId, 'password': password}).toString());
       final response = await http.post(
         Uri.parse(_epLogin),
         headers: <String, String>{
@@ -421,9 +424,8 @@ class ApiClient {
         body: jsonEncode(
             <String, String>{'userId': userId, 'password': password}),
       );
-      printInfo(info: password);
+      printInfo(info: response.body.toString());
       if (response.statusCode == 200) {
-        printInfo(info: response.body);
         loginModel = LoginModel.fromJson(jsonDecode(response.body));
         if (loginModel.meta!.code.toString() == 200.toString()) {
           return loginModel;
@@ -561,7 +563,8 @@ class ApiClient {
 
   Future<LoadFundsPlans> onLoadFundsPlans(String userId, String fundCode,
       String folioNumber, String requestType) async {
-    printInfo(info: jsonEncode(<String, String>{
+    printInfo(
+        info: jsonEncode(<String, String>{
       'userId': userId,
       'fundCode': fundCode,
       'folioNumber': folioNumber,
@@ -1182,6 +1185,14 @@ class ApiClient {
   ) async {
     ValidateVerificationCodeForDigUser? common;
     try {
+      print(jsonEncode(<String, String>{
+        'cnic': cNic,
+        'email': email,
+        'mobile': mobile,
+        'mobileRegisteredWith': mobileRegisteredWith,
+        'accountTypeToBeOpened': accountTypeToBeOpened,
+        'verificationCode': verificationCode
+      }).toString());
       final response = await http.post(
         Uri.parse(_epValidateVerificationCodeForDigUser),
         headers: <String, String>{
@@ -1231,6 +1242,7 @@ class ApiClient {
       String otherTaxResCountry,
       String taxPaidCountry,
       String taxResCountryOtherThanPak,
+      String? taxResCountryOther,
       String titleOfAccount,
       list,
       String taxIdNumber,
@@ -1249,7 +1261,7 @@ class ApiClient {
         "birthStateCode": "$birthStatecode",
         "crsDisclaimerChecked": disclamierCheck,
         "fatcaDisclaimerChecked": fatcaDisclamierCheck,
-        "otherTaxResCountry": "test tax res country",
+        "otherTaxResCountry": taxResCountryOther,
         "taxIdentificationNumber": taxIdNumber,
         "taxPaidCountry": "$taxPaidCountry",
         "taxResCountryOtherThanPak": "$taxResCountryOtherThanPak",
@@ -1270,8 +1282,8 @@ class ApiClient {
           "birthStateCode": "$birthStatecode",
           "crsDisclaimerChecked": disclamierCheck,
           "fatcaDisclaimerChecked": fatcaDisclamierCheck,
-          "otherTaxResCountry": "test tax res country",
-          "taxIdentificationNumber": null,
+          "otherTaxResCountry": taxResCountryOther,
+          "taxIdentificationNumber": taxIdNumber,
           "taxPaidCountry": "$taxPaidCountry",
           "taxResCountryOtherThanPak": "$taxResCountryOtherThanPak",
           "titleOfAccount": "$titleOfAccount",
@@ -1299,6 +1311,8 @@ class ApiClient {
   }
 
   Future<Common> onPartialSavingForDigUser(
+      String? otherMailingCity,
+      String? otherCity,
       String email,
       String mobile,
       String mobileRegWith,
@@ -1325,6 +1339,8 @@ class ApiClient {
       String mothersMaidenName,
       String nationalityCode,
       String pakResident,
+      String phoneOne,
+      String phoneTwo,
       String religion,
       String residentialAddress,
       int retirementAge,
@@ -1364,14 +1380,14 @@ class ApiClient {
         "mailingAddress": mailingAddress,
         "mailingCountryCode": mailingCountryCode,
         "mailingCity": mailingCity,
-        "mailingOtherCity": "test mailing city",
+        "mailingOtherCity": otherMailingCity,
         "maritalStatus": maritalStatus,
         "mothersMaidenName": mothersMaidenName,
         "nationalityCode": nationalityCode,
-        "otherCity": "test other city",
+        "otherCity": otherCity,
         "pakResident": pakResident,
-        "phoneOne": null,
-        "phoneTwo": null,
+        "phoneOne": phoneOne,
+        "phoneTwo": phoneTwo,
         "religion": religion,
         "residentialAddress": residentialAddress,
         "retirementAge": retirementAge,
@@ -1417,14 +1433,14 @@ class ApiClient {
           "mailingAddress": mailingAddress,
           "mailingCountryCode": mailingCountryCode,
           "mailingCity": mailingCity,
-          "mailingOtherCity": "test mailing city",
+          "mailingOtherCity": otherMailingCity,
           "maritalStatus": maritalStatus,
           "mothersMaidenName": mothersMaidenName,
           "nationalityCode": nationalityCode,
-          "otherCity": "test other city",
+          "otherCity": otherCity,
           "pakResident": pakResident,
-          "phoneOne": null,
-          "phoneTwo": null,
+          "phoneOne": phoneOne,
+          "phoneTwo": phoneTwo,
           "religion": religion,
           "residentialAddress": residentialAddress,
           "retirementAge": retirementAge,
@@ -1676,6 +1692,7 @@ class ApiClient {
       Uint8List? sigPaper,
       Uint8List? zaKat,
       Uint8List? mobileProof,
+      Uint8List? nominee,
       bool disClaimer,
       String cNic,
       String sessionID) async {
@@ -1718,7 +1735,18 @@ class ApiClient {
                 "fileContent": zaKat
               }
             : null,
-        "requiredDocs": []
+        "requiredDocs": [
+          [
+            nominee != null
+                ? {
+                    "documentName": "nomineeDoc",
+                    "fileName": "nominee.jpg",
+                    "fileExtension": ".jpg",
+                    "fileContent": nominee
+                  }
+                : null
+          ]
+        ]
       }.toString()));
       final response = await http.post(
         Uri.parse(_epPartialSavingForDigUser),
@@ -1764,7 +1792,15 @@ class ApiClient {
                 }
               : null,
           "docUploadDisclaimerChecked": disClaimer,
-          "requiredDocs": []
+          "requiredDocs": [
+            nominee != null
+                ? {
+                    "fileName": "nominee.jpg",
+                    "fileExtension": ".jpg",
+                    "fileContent": nominee
+                  }
+                : null
+          ]
         }),
       );
       if (response.statusCode == 200) {

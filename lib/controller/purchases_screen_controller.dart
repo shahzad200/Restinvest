@@ -357,7 +357,7 @@ class PurchasesScreenController extends GetxController {
       _repository.onSavePurchase(
         fundCode,
         accountValue,
-        amountController.text,
+        amountController.text.toString().replaceAll(',', ''),
         paymentvalue == 'Cheque' ? installmentController.text : '',
         paymentvalue == 'Cheque' ? date!.day.toString()+'/'+date!.month.toString()+'/'+date!.year.toString() : '',
         bankNameController.text,
@@ -381,6 +381,7 @@ class PurchasesScreenController extends GetxController {
       update();
       if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
         customDialogPin(context,"Request Submitted successfully");
+        clearPage();
       }
     } catch(e){
       if (e.toString() == 'Exception: No Internet') {
@@ -401,6 +402,9 @@ class PurchasesScreenController extends GetxController {
             fontSize: 16.0);
       }
     }
+
+
+
 
 
 
@@ -459,4 +463,65 @@ class PurchasesScreenController extends GetxController {
           );
         });
   }
+
+  void clearPage() async {
+    isChecked = false;
+    fundNamevalue = "";
+    // String accountvalue = "";
+    paymentvalue = "Cheque";
+    paymentvalueCode = "CH";
+
+    unitButton = true;
+    percentageButton = false;
+    percentageEnable = false;
+    allUnitButton = false;
+    isLoading = false;
+    noInternet = false;
+    isCheckPrivacy = false;
+
+    paymentProof = null;
+    paymentProofExt = '';
+    paymentSlip = null;
+    paymentSlipExt = '';
+    paymentProofBytes = [];
+    paymentSlipBytes = [];
+    date = null;
+    collectionBankAccount = "";
+    collectionBankCode = "";
+    fundSale = "";
+
+    unitBalanceController.text = '';
+    percentController.text = '';
+    picCodeController.text = '';
+    amountController.text = '';
+    bankNameController.text = '';
+    bankAccountController.text = '';
+    installmentController.text = '';
+    fundNameListItems = [];
+    loadFundsPlansP = null;
+    loadFundsPlans = null;
+    // FundBankAccountDetails? selectedFund;
+    calUnitBalanceValue = null;
+
+    // Common? submitResponse;
+    fundValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundShort ?? '';
+    fundCode = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode ?? '';
+    fundSaleValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundSaleLoad ?? '';
+    accountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
+    fundBankName = '';
+    fundBankAccountNumber = '';
+    fundBankCode = '';
+
+    if(accountValue != '') {
+      onLoadFundsPlans();
+      // onLoadFundsPlansP();
+    }
+
+    update();
+  }
+
+
+
+
+
 }

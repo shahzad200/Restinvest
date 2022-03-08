@@ -294,27 +294,40 @@ class TaxCalculatorScreen extends StatelessWidget {
                             ),
                             space,
                             // space,
-                            const RestInvestTitle(
-                              text: "DISCLAIMER:",
-                              textColor: AppColor.black,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 12,
+                            // const RestInvestTitle(
+                            //   text: "DISCLAIMER:",
+                            //   textColor: AppColor.black,
+                            //   fontWeight: FontWeight.w900,
+                            //   fontSize: 12,
+                            // ),
+                            // space,
+                            Row(
+                              children: const [
+                                Expanded(
+                                  child:  RestInvestTitle(
+                                    text:
+                                        "* As per section 62 of Income Tax Ordinance,2001,an indiviual investor of open end mutual fund account can claim tax credit on investment up to Rs. 2,000,000/- or 20% of individual's taxable income whichever is lower.",
+                                    textColor: AppColor.black,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
                             ),
                             space,
-                            const RestInvestTitle(
-                              text:
-                                  "As per section 62 of Income Tax Ordinance,2001,an indiviual investor of open\nend mutual fund account can claim tax credit on investment up to Rs. 2,000,000/-\nor 20% of individual's taxable income whichever is lower.",
-                              textColor: AppColor.black,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 10,
-                            ),
-                            space,
-                            const RestInvestTitle(
-                              text:
-                                  "As per section 62 of Income Tax Ordinance,2001,an eligible person joining\Vountary Pension Scheme can avail tax credit up to 20% of (eligible) person's\ntaxable income for the relevant tax year. ",
-                              textColor: AppColor.black,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 10,
+                            Row(
+                              children: const [
+
+                                 Expanded(
+                                   child: RestInvestTitle(
+                                    text:
+                                        "** As per section 63 of Income Tax Ordinance,2001,an eligible person joining Vountary Pension Scheme can avail tax credit up to 20% of (eligible) person's taxable income for the relevant tax year. ",
+                                    textColor: AppColor.black,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 10,
+                                ),
+                                 ),
+                              ],
                             ),
                             space
                           ],

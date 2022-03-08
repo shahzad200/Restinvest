@@ -21,6 +21,7 @@ class AccountOpenPreviewScreenController extends GetxController{
   bool cNicFront = true;
   bool cNicBack = false;
   bool srcIncome = false;
+  bool nominee = false;
   bool sigPage = false;
   bool zaKat = false;
   bool mobileReg = false;

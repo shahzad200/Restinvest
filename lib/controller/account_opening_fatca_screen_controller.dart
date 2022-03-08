@@ -28,6 +28,7 @@ class AccountOpenFatcaController extends GetxController {
   var charactor = 0;
   TextEditingController titleController = TextEditingController();
   TextEditingController tinNumberController = TextEditingController();
+  TextEditingController taxResCountryController = TextEditingController();
   TextEditingController cnicController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
@@ -130,6 +131,10 @@ class AccountOpenFatcaController extends GetxController {
         taxResCountriesOtherThanPakGroupValue = Constant.validateVerificationCodeForDigUser!.response!.taxResCountryOtherThanPak == ''
         ? 'N' : Constant.validateVerificationCodeForDigUser!.response!.taxResCountryOtherThanPak ?? 'N';
 
+        if(taxResCountriesOtherThanPakGroupValue == 'oth'){
+          taxResCountryController.text = Constant.validateVerificationCodeForDigUser!.response!.otherTaxResCountry ?? '';
+        }
+
         if(controller.newDigUserRegDataAfterOTP!.response!.fatcaInfoList!.length == Constant.validateVerificationCodeForDigUser!.response!.fatcaInfo!.length )
         {
           for(int k = 0 ; k < controller.newDigUserRegDataAfterOTP!.response!.fatcaInfoList!.length ; k++)
@@ -146,8 +151,11 @@ class AccountOpenFatcaController extends GetxController {
             controller.newDigUserRegDataAfterOTP!.response!.nationalities!.indexWhere((element) {
               if(element.countryCode == taxCountryCode) {
                 taxCountryValue = element.countryName!;
+                return true;
+              } else{
+                return false;
               }
-              return true;
+
             });
           }
         if(taxCountryCode != '001' && taxCountryCode != ''){
@@ -187,12 +195,30 @@ class AccountOpenFatcaController extends GetxController {
                       if(taxCountryCode != '001'){
                         if(tinNumberController.text != null && tinNumberController.text != "")
                         {
-                          onSaveData(context);
+                          if(taxResCountriesOtherThanPakGroupValue != 'oth'){
+                            onSaveData(context);
+                          } else{
+                            if(taxResCountryController.text != null && taxResCountryController.text != '')
+                            {
+                              onSaveData(context);
+                            } else{
+                              showToast('Please enter tax residential country');
+                            }
+                          }
                         }else{
                           showToast('Please enter Tin Number');
                         }
                       }else{
-                        onSaveData(context);
+                        if(taxResCountriesOtherThanPakGroupValue != 'oth'){
+                          onSaveData(context);
+                        } else{
+                          if(taxResCountryController.text != null && taxResCountryController.text != '')
+                          {
+                            onSaveData(context);
+                          } else{
+                            showToast('Please enter tax residential country');
+                          }
+                        }
                       }
                     } else {
                       showToast('Please check disclaimer');
@@ -246,6 +272,7 @@ class AccountOpenFatcaController extends GetxController {
           taxCountryValue,
           taxCountryCode,
           taxResCountriesOtherThanPakGroupValue,
+          taxResCountriesOtherThanPakGroupValue == 'oth' ? taxResCountryController.text : '',
           titleController.text,
           list,taxCountryCode == '001' ? '' : tinNumberController.text);
       print(common.toString());

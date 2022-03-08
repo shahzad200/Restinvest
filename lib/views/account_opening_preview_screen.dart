@@ -16,7 +16,8 @@ import '../utils/colors.dart';
 import '../widgets/constant_widget.dart';
 
 class AccountOpenPreviewScreen extends StatelessWidget {
-  const AccountOpenPreviewScreen({Key? key}
+  int i = 1;
+   AccountOpenPreviewScreen({Key? key}
   ) : super(key: key);
 
    // Uint8List? cNicFront;
@@ -26,6 +27,7 @@ class AccountOpenPreviewScreen extends StatelessWidget {
    // Uint8List? zktPaper;
   @override
   Widget build(BuildContext context) {
+
     // final width = Get.width;
     // final height = Get.height;
     return GetBuilder<AccountOpenPreviewScreenController>(
@@ -68,7 +70,7 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                         border:
                             Border.all(width: 1, color: AppColor.blueColor)),
                     child: Column(children: [
-                      const CustomTextContainer(
+                       const CustomTextContainer(
                         fontSize: 14,
                         height: 35,
                         text: "PREVIEW",
@@ -94,6 +96,7 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.cNicBack = false;
                                         _.srcIncome = false;
                                         _.mobileReg = false;
+                                        _.nominee = false;
                                         _.update();
                                       },
                                       child:  RestInvestTitle(
@@ -114,6 +117,7 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.cNicBack = true;
                                         _.srcIncome = false;
                                         _.mobileReg = false;
+                                        _.nominee = false;
                                         _.update();
                                       },
                                       child:  RestInvestTitle(
@@ -134,6 +138,7 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.cNicBack = false;
                                         _.srcIncome = true;
                                         _.mobileReg = false;
+                                        _.nominee = false;
                                         _.update();
                                       },
                                       child: RestInvestTitle(
@@ -148,16 +153,38 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                     space,
                                     InkWell(
                                       onTap: (){
+                                        _.sigPage = false;
+                                        _.zaKat = false;
+                                        _.cNicFront = false;
+                                        _.cNicBack = false;
+                                        _.srcIncome = false;
+                                        _.nominee = true;
+                                        _.mobileReg = false;
+                                        _.update();
+                                      },
+                                      child: RestInvestTitle(
+                                        text: "4: Nominee CNIC",
+                                        textAlign: TextAlign.start,
+                                        textColor: AppColor.blueColor,
+                                        fontSize: 12,
+                                        fontWeight: _.nominee == true ?
+                                        FontWeight.w900 : FontWeight.w500,
+                                      ),
+                                    ),
+                                    space,
+                                    InkWell(
+                                      onTap: (){
                                         _.sigPage = true;
                                         _.zaKat = false;
                                         _.cNicFront = false;
                                         _.cNicBack = false;
                                         _.srcIncome = false;
                                         _.mobileReg = false;
+                                        _.nominee = false;
                                         _.update();
                                       },
                                       child: RestInvestTitle(
-                                        text: "4: Signature",
+                                        text: "5: Signature",
                                         textAlign: TextAlign.start,
                                         textColor: AppColor.blueColor,
                                         fontSize: 12,
@@ -174,10 +201,11 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.srcIncome = false;
                                         _.sigPage = false;
                                         _.mobileReg = false;
+                                        _.nominee = false;
                                         _.update();
                                       },
                                       child:   RestInvestTitle(
-                                        text: "5: Zakat Paper",
+                                        text: "6: Zakat Paper",
                                         textAlign: TextAlign.start,
                                         textColor: AppColor.blueColor,
                                         fontSize: 12,
@@ -195,10 +223,12 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                         _.srcIncome = false;
                                         _.sigPage = false;
                                         _.mobileReg = true;
+                                        _.nominee = false;
                                         _.update();
                                       },
                                       child:   RestInvestTitle(
-                                        text: "6: Mobile Doc",
+                                        text: Constant.zakValue == 'YES' ? "7: Mobile Doc"
+                                        : "6: Mobile Doc",
                                         textAlign: TextAlign.start,
                                         textColor: AppColor.blueColor,
                                         fontSize: 12,
@@ -222,6 +252,7 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                             _.cNicFront ? _.con.cNicF!
                                         : _.cNicBack ? _.con.cNicB!
                                         : _.srcIncome ? _.con.srcIn!
+                                        : _.nominee ? _.con.nomineeDoc!
                                         : _.sigPage ? _.con.planImg!
                                         : _.zaKat ? _.con.zaKat!
                                         : _.mobileReg ? _.con.mobile!

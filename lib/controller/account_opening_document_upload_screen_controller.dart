@@ -24,7 +24,8 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
   File? plainImage;
   File? zaKatImage;
   File? mobileImage;
-  File? otherImage;
+  // File? otherImage;
+  File? nomineeImage;
   String? cnicFrontName;
   String? cnicBackName;
   String? srcIncomeName;
@@ -32,6 +33,7 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
   String? otherImageName;
   String? zaKatImageName;
   String? mobileImageName;
+  String? nomineeImageName;
   Common? common;
   bool isLoading = false;
   bool noInternet = false;
@@ -41,7 +43,8 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
   bool signUpload = false;
   bool zaKatUpload = false;
   bool mobileUpload = false;
-  bool otherUpload = false;
+  // bool otherUpload = false;
+  bool nomineeUpload = false;
   final _repository = Repository();
   Uint8List? cNicB;
   Uint8List? cNicF;
@@ -49,6 +52,7 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
   Uint8List? planImg;
   Uint8List? zaKat;
   Uint8List? mobile;
+  Uint8List? nomineeDoc;
 
 
   @override
@@ -73,6 +77,11 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
       List<int> intListSig = dynamicListSig.cast<int>().toList(); //This is the magical line.
       planImg = Uint8List.fromList(intListSig);
       signUpload = true;
+
+      dynamic dynamicListNominee = Constant.validateVerificationCodeForDigUser!.response!.requiredDocs![0].fileContent;
+      List<int> intListNominee = dynamicListNominee.cast<int>().toList(); //This is the magical line.
+      nomineeDoc = Uint8List.fromList(intListNominee);
+      nomineeUpload = true;
       // printInfo(info: planImg.toString());
 
       if(Constant.validateVerificationCodeForDigUser!.response!.zakatExempt == true)
@@ -146,7 +155,11 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
         isLoading = false;
         update();
         showToast('Please select plane image');
-      } else if(Constant.zakValue == 'YES'){
+      } else if(nomineeDoc == null){
+        isLoading = false;
+        update();
+        showToast('Please select nominee cnic image');
+      }else if(Constant.zakValue == 'YES'){
         if(zaKat == null){
           isLoading = false;
           update();
@@ -203,14 +216,14 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
         //   mobile = mobileImage!.readAsBytesSync();
         // }
         common = await _repository.onPartialSavingForDigUserScreen6(cNicB, cNicF,
-            srcIn, planImg,zaKat,mobile,isChecked);
+            srcIn, planImg,zaKat,mobile,nomineeDoc,isChecked);
         isLoading = false;
         if (noInternet) {
           noInternet = false;
         }
         update();
         if(common!.meta!.message == 'OK' && common!.meta!.code == '200'){
-          Get.to(const AccountOpenPreviewScreen());
+          Get.to( AccountOpenPreviewScreen());
         }
       } catch (e) {
         if (e.toString() == 'Exception: No Internet') {

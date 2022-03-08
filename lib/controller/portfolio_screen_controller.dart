@@ -44,10 +44,19 @@ class PortofolioScreenController extends GetxController {
   static final DateFormat formatter = DateFormat.yMMMMd();
    String? formatted ;
 
+   double amountAccount = 0.0;
    String accNumber = Constant.loginModel!.response!.accounts![0].folioNumber.toString();
   var f = NumberFormat("###,###.0#", "en_US");
   @override
   void onInit() async{
+
+    for (int i = 0; i < Constant.loginModel!.response!
+        .accounts![0].userFundBalances!.length; i++) {
+      amountAccount = amountAccount + double.parse(Constant
+          .loginModel!.response!.accounts![0]
+          .userFundBalances![i].fundvolume!);
+    }
+
     formatted = formatter.format(now.subtract(const Duration(days: 1)));
     print(formatted);
     tooltipBehavior = TooltipBehavior(enable: true,);

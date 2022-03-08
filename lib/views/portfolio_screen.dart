@@ -126,7 +126,7 @@ class PortofolioScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           // RemoteMessage message = _messages[index];
                           // _.totalInvestment = 0.0;
-
+                          printInfo(info: 'JHJHGGHJ'+index.toString());
                           var userfund = 0.0;
                           for (int i = 0; i < Constant.loginModel!.response!
                               .accounts![index].userFundBalances!.length; i++) {
@@ -790,11 +790,12 @@ class PortofolioScreen extends StatelessWidget {
             text: "${controller.f.format(
                 double.parse(amount! ?? '0.0') ?? 0.0)}",
 
-            fontWeight: FontWeight.w900,
-            textColor: AppColor.black,
+            fontWeight: FontWeight.bold,
+            textColor: controller.amountAccount.toStringAsFixed(2) == amount ? AppColor.black :AppColor.dimblack,
           ),
           onTap: () async {
             print("pressed");
+            controller.amountAccount =  double.parse(amount);
             controller.selectedAccount = account;
             controller.chartDataSummery = [];
             controller.chartDataPurchase = [];

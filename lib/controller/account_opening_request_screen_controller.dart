@@ -102,9 +102,10 @@ class AccountOpenRequestScreenController extends GetxController {
     update();
   }
 
-  // 675765765
-  // 65757-5675765-6
-  // hfghfg@gmail.com
+  // 45345-3453453-4
+  // 03042084628
+  // dsfdsf@gmail.com
+
   onGenVerificationCodeForDigUser(BuildContext context) async {
       if (cNicNumberController.text.isEmpty ||
           cNicNumberController.text == '' ||

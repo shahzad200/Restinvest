@@ -352,6 +352,7 @@ class RedemptionScreenController extends GetxController {
       update();
       if(submitResponse!.meta!.message == 'OK' && submitResponse!.meta!.code == '200'){
         customDialogPin(context,"Request Submitted successfully");
+        clearPage();
       }
       // update();
     } catch (e) {
@@ -375,6 +376,53 @@ class RedemptionScreenController extends GetxController {
     }
   }
 
+
+
+  void clearPage() async {
+    index = 0;
+    unitButton = true;
+    percentageButton = false;
+    allUnitButton = false;
+    unitBalanceController.text = '';
+    calUnitBalanceValue = 0.0;
+    isCheckPrivacy = false;
+    // update();
+    isLoading = true;
+    update();
+    accountvalue = Constant.loginModel!.response!.accounts![0].folioNumber!;
+    fundNameListItems = [];
+    Constant.loginModel!.response!.accounts![0].userFundBalances!.forEach((element) {
+      map.fundShort =element.fundShort;
+      map.fundCode =element.fundCode;
+      map.fundvolume =element.fundvolume;
+      map.fundName =element.fundName;
+      map.fundPercent =element.fundPercent;
+      map.fundRedPrice =element.fundRedPrice;
+      map.fundSaleLoad =element.fundSaleLoad;
+      map.fundUnits =element.fundUnits;
+      map.offerPrice =element.offerPrice;
+      map.priceDate =element.priceDate;
+      map.unitClassess =element.unitClassess;
+      fundNameListItems.add(login.UserFundBalances.fromJson(map.toJson()));
+
+    });
+    if(fundNameListItems.isNotEmpty){
+      fundNamevalue = fundNameListItems[0].fundShort!;
+      fundNameCode = fundNameListItems[0].fundCode!;
+    }
+     unitBalanceController.text = '';
+     percentController.text = '';
+     picCodeController.text = '';
+    loadFundsPlans = null;
+    loadFundsPlans =await  api.onLoadFundsPlans(Constant.userId, Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode!, accountvalue, "RED");
+    print(loadFundsPlans!.response!);
+    if(isLoading) {
+      isLoading = false;
+    }
+    update();
+
+
+  }
 
   investTrust(index) {
     switch (index) {
