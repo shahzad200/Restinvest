@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:nit/widgets/constant_widget.dart';
 
 Future<void> CustomDialog (context){
   return showGeneralDialog(

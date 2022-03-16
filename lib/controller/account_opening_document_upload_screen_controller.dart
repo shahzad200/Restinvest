@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:investintrust/utils/constants.dart';
+import 'package:nit/utils/constants.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

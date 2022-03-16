@@ -104,8 +104,8 @@ class Accounts {
   Bank? bankDetails;
   String? folioNumber;
   List<FundNavPriceData>? fundNavPriceData;
-  List<dynamic>? pensionFundList;
-  List<dynamic>? portfolioAllocationData;
+  List<PensionFundList>? pensionFundList;
+  List<PortfolioAllocationData>? portfolioAllocationData;
   List<PortfolioAnalyPurchases>? portfolioAnalyPurchases;
   String? portfolioAnalyPurchasesMaxValue;
   String? portfolioAnalyPurchasesMinValue;
@@ -122,9 +122,8 @@ class Accounts {
     fundNavPriceData = List.from(json['fundNavPriceData'])
         .map((e) => FundNavPriceData.fromJson(e))
         .toList();
-    pensionFundList = List.castFrom<dynamic, dynamic>(json['pensionFundList']);
-    portfolioAllocationData =
-        List.castFrom<dynamic, dynamic>(json['portfolioAllocationData']);
+    pensionFundList = List.from(json['pensionFundList']).map((e)=>PensionFundList.fromJson(e)).toList();
+    portfolioAllocationData = List.from(json['portfolioAllocationData']).map((e)=>PortfolioAllocationData.fromJson(e)).toList();
     portfolioAnalyPurchases = List.from(json['portfolioAnalyPurchases'])
         .map((e) => PortfolioAnalyPurchases.fromJson(e))
         .toList();
@@ -151,8 +150,8 @@ class Accounts {
     _data['folioNumber'] = folioNumber;
     _data['fundNavPriceData'] =
         fundNavPriceData!.map((e) => e.toJson()).toList();
-    _data['pensionFundList'] = pensionFundList;
-    _data['portfolioAllocationData'] = portfolioAllocationData;
+    _data['pensionFundList'] = pensionFundList!.map((e)=>e.toJson()).toList();
+    _data['portfolioAllocationData'] = portfolioAllocationData!.map((e)=>e.toJson()).toList();
     _data['portfolioAnalyPurchases'] =
         portfolioAnalyPurchases!.map((e) => e.toJson()).toList();
     _data['portfolioAnalyPurchasesMaxValue'] = portfolioAnalyPurchasesMaxValue;
@@ -228,12 +227,12 @@ class FundNavPriceData {
 
 class PortfolioAnalyPurchases {
   PortfolioAnalyPurchases({
-    required this.amountYaxis,
-    required this.fundShortXaxis,
+     this.amountYaxis,
+     this.fundShortXaxis,
   });
 
-  late final String amountYaxis;
-  late final String fundShortXaxis;
+   String? amountYaxis;
+   String? fundShortXaxis;
 
   PortfolioAnalyPurchases.fromJson(Map<String, dynamic> json) {
     amountYaxis = json['amountYaxis'];
@@ -461,3 +460,91 @@ class User {
     return _data;
   }
 }
+
+
+class PensionFundList {
+  PensionFundList({
+     this.emplyerId,
+     this.emplyerName,
+     this.fundCode,
+     this.fundName,
+     this.fundShort,
+     this.isPlanEnable,
+    this.minSaleAmount,
+     this.salesLoad,
+  });
+   String? emplyerId;
+   String? emplyerName;
+   String? fundCode;
+   String? fundName;
+   String? fundShort;
+   String? isPlanEnable;
+   String? minSaleAmount;
+   int? salesLoad;
+
+  PensionFundList.fromJson(Map<String, dynamic> json){
+    emplyerId = json['emplyerId'];
+    emplyerName = json['emplyerName'];
+    fundCode = json['fundCode'];
+    fundName = json['fundName'];
+    fundShort = json['fundShort'];
+    isPlanEnable = json['isPlanEnable'];
+    minSaleAmount = json['minSaleAmount'] ?? '';
+    salesLoad = json['salesLoad'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['emplyerId'] = emplyerId;
+    _data['emplyerName'] = emplyerName;
+    _data['fundCode'] = fundCode;
+    _data['fundName'] = fundName;
+    _data['fundShort'] = fundShort;
+    _data['isPlanEnable'] = isPlanEnable;
+    _data['minSaleAmount'] = minSaleAmount;
+    _data['salesLoad'] = salesLoad;
+    return _data;
+  }
+}
+
+class PortfolioAllocationData {
+  PortfolioAllocationData({
+     this.fundCode,
+     this.fundName,
+     this.fundPercent,
+     this.fundRedPrice,
+     this.fundShort,
+     this.fundUnits,
+     this.fundvolume,
+  });
+   String? fundCode;
+   String? fundName;
+   String? fundPercent;
+   String? fundRedPrice;
+   String? fundShort;
+   String? fundUnits;
+   String? fundvolume;
+
+  PortfolioAllocationData.fromJson(Map<String, dynamic> json){
+    fundCode = json['fundCode'];
+    fundName = json['fundName'];
+    fundPercent = json['fundPercent'];
+    fundRedPrice = json['fundRedPrice'];
+    fundShort = json['fundShort'];
+    fundUnits = json['fundUnits'];
+    fundvolume = json['fundvolume'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['fundCode'] = fundCode;
+    _data['fundName'] = fundName;
+    _data['fundPercent'] = fundPercent;
+    _data['fundRedPrice'] = fundRedPrice;
+    _data['fundShort'] = fundShort;
+    _data['fundUnits'] = fundUnits;
+    _data['fundvolume'] = fundvolume;
+    return _data;
+  }
+}
+

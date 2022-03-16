@@ -1,4 +1,4 @@
-package com.example.investintrust
+package softech.assetconnect.nit
 
 import io.flutter.embedding.android.FlutterActivity
 

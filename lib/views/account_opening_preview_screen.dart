@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/no_internet.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/no_internet.dart';
 import '../controller/account_opening_preview_screen_controller.dart';
 
 import '../widgets/button.dart';

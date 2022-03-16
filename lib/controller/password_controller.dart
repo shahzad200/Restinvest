@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:nit/widgets/constant_widget.dart';
 import '../data/models/common_model.dart';
 import '../data/repository.dart';
 class PasswordScreenController extends GetxController{

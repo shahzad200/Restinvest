@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/widgets/no_internet.dart';
+import 'package:nit/widgets/no_internet.dart';
 import '../data/models/login_model.dart';
 import '../utils/constants.dart';
 import '../widgets/custome_dialog.dart';
@@ -101,8 +101,7 @@ class RedemptionScreen extends StatelessWidget {
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 25),
-                                  items: Constant
-                                      .loginModel!.response!.accounts!
+                                  items: _.listAccount
                                       .map((Accounts? fromAccountItems) {
                                     return DropdownMenuItem<Accounts>(
                                         value: fromAccountItems,

@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/common_model.dart';
-import 'package:investintrust/data/models/new_dig_user_reg_data_req_list.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:nit/data/models/common_model.dart';
+import 'package:nit/data/models/new_dig_user_reg_data_req_list.dart';
+import 'package:nit/data/repository.dart';
+import 'package:nit/routes/routes.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/constant_widget.dart';
 
 
 class AccountOpenRiskProfileScreenController extends GetxController{

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/profile_screen_controller.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/utils/colors.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/custom_divider.dart';
-import 'package:investintrust/widgets/drawer.dart';
+import 'package:nit/controller/profile_screen_controller.dart';
+import 'package:nit/data/models/login_model.dart';
+import 'package:nit/utils/colors.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/constant_widget.dart';
+import 'package:nit/widgets/custom_divider.dart';
+import 'package:nit/widgets/drawer.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -78,7 +78,7 @@ class UserProfile extends StatelessWidget {
                               ),
                               icon: const Icon(Icons.keyboard_arrow_down,
                                   color: AppColor.blueColor, size: 35),
-                              items: Constant.loginModel!.response!.accounts!.map<
+                              items: _.listAccount.map<
                                   DropdownMenuItem<Accounts>>((Accounts? value) {
                                 return DropdownMenuItem<Accounts>(
                                   value: value,
@@ -480,6 +480,7 @@ class UserProfile extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     //  Constant.loginModel!.response!.user!.title
+                    // text: '',
                     text: Constant.loginModel!.response!.accounts![_.index].bankDetails!.accountNumber ?? '',
                     textColor: AppColor.black,
                   ),
@@ -505,6 +506,7 @@ class UserProfile extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     //  Constant.loginModel!.response!.user!.title
+                    // text: '',
                     text: Constant.loginModel!.response!.accounts![_.index].bankDetails!.bankAccTitle ?? '',
                     textColor: AppColor.black,
                   ),
@@ -530,6 +532,7 @@ class UserProfile extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     //  Constant.loginModel!.response!.user!.title
+                   // text: '',
                     text: Constant.loginModel!.response!.accounts![_.index].bankDetails!.bankName ?? '',
                     textColor: AppColor.black,
                   ),
@@ -555,6 +558,7 @@ class UserProfile extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     //  Constant.loginModel!.response!.user!.title
+                    // text: '',
                     text: Constant.loginModel!.response!.accounts![_.index].bankDetails!.bankAddress ?? '',
                     textColor: AppColor.black,
                   ),

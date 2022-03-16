@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/views/home_screen.dart';
-import 'package:investintrust/views/login_screen.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/views/home_screen.dart';
+import 'package:nit/views/login_screen.dart';
 import '../routes/routes.dart';
 
 

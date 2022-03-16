@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/utils/constants.dart';
+import 'package:nit/routes/routes.dart';
+import 'package:nit/utils/constants.dart';
 import '../controller/account_opening_submit_button_screen_controller.dart';
 import '../widgets/button.dart';
 import '../utils/colors.dart';
@@ -130,7 +130,7 @@ class AccountOpenSubmitButtonScreen extends StatelessWidget {
                             space,
                             const RestInvestTitle(
                               text:
-                                  "Thank you for choosing National Investment Trusted Limited to Serve your financial needs.Your Account Opening application has been Submitted Successfully.If you have any queries,please contact our customer services department viva email at care@nit.com.pk or cell on our toll free number 0800-00648 ",
+                                  "Thank you for choosing National Investment Trusted Limited to Serve your financial needs.Your Account Opening application has been Submitted Successfully.If you have any queries,please contact our customer services department viva email at care@nit.softech.pk or cell on our toll free number 0800-00648 ",
                               textAlign: TextAlign.start,
                               textColor: AppColor.dimblack,
                               fontSize: 12,

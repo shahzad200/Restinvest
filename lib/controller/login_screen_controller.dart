@@ -5,13 +5,13 @@ import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/utils/strings.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/custome_dialog.dart';
+import 'package:nit/data/models/login_model.dart';
+import 'package:nit/data/repository.dart';
+import 'package:nit/routes/routes.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/utils/strings.dart';
+import 'package:nit/widgets/constant_widget.dart';
+import 'package:nit/widgets/custome_dialog.dart';
 
 class LoginScreenController extends GetxController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -47,6 +47,9 @@ class LoginScreenController extends GetxController {
 
 
   void onLoginPress(context) async{
+
+    // _repository.onVpsViewReport();
+
     if(userNameController.text == '' || userNameController.text == null){
       Fluttertoast.showToast(
           msg: 'Please Enter User Name',
@@ -94,7 +97,8 @@ class LoginScreenController extends GetxController {
         Get.offAllNamed(AppRoute.portofolioRoute);
         Constant.userId =
             Constant.loginModel!.response!.user!.userid.toString();
-
+        Constant.isVps = false;
+        Constant.accountIndex = 0;
         isLoading = false;
         update();
       } catch (e) {

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/common_model.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/views/account_opening_submit_button_screen.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:nit/data/models/common_model.dart';
+import 'package:nit/data/repository.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/views/account_opening_submit_button_screen.dart';
+import 'package:nit/widgets/constant_widget.dart';
 
 import 'account_opening_document_upload_screen_controller.dart';
 

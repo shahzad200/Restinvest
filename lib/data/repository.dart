@@ -1,15 +1,15 @@
 import 'dart:typed_data';
 
-import 'package:investintrust/data/models/calculate_tax.dart';
-import 'package:investintrust/data/models/daily_nav_prices.dart';
-import 'package:investintrust/data/models/load_dashboard.dart';
-import 'package:investintrust/data/models/load_fund_plans.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/data/models/new_user_reg_data.dart';
-import 'package:investintrust/data/models/social_media_links.dart';
-import 'package:investintrust/data/models/view_reports.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/utils/strings.dart';
+import 'package:nit/data/models/calculate_tax.dart';
+import 'package:nit/data/models/daily_nav_prices.dart';
+import 'package:nit/data/models/load_dashboard.dart';
+import 'package:nit/data/models/load_fund_plans.dart';
+import 'package:nit/data/models/login_model.dart';
+import 'package:nit/data/models/new_user_reg_data.dart';
+import 'package:nit/data/models/social_media_links.dart';
+import 'package:nit/data/models/view_reports.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/utils/strings.dart';
 import 'api_client.dart';
 import 'models/city_data.dart';
 import 'models/city_sector_model.dart';
@@ -23,7 +23,13 @@ import 'models/new_user_pin_gen.dart';
 import 'models/new_user_reg.dart';
 import 'models/state_data.dart';
 import 'models/validate_verification_code_for_dig_user.dart';
-
+import 'models/vps/load_balance_for_vps_redemption.dart';
+import 'models/vps/load_existing_schema_data.dart';
+import 'models/vps/load_fund.dart';
+import 'models/vps/load_schema_allocation.dart';
+import 'models/vps/vps_load_fund_plans.dart';
+import 'models/vps/load_schema_allocation.dart' as pension;
+import 'models/vps/vps_view_report.dart';
 class Repository {
   final _apiClient = ApiClient();
 
@@ -337,6 +343,29 @@ class Repository {
       ) =>
       _apiClient.onSaveDigUser(Constant.cNic, Constant.sessionID);
 
+  Future<Common> onVpsContribution(
+      String transactionValue,
+      String fundCode,
+      String bankBranch,
+      String folioNumber,
+      String paymentMode,
+      String chequeDate,
+      String chequeNo,
+      String paymentExtension,
+      Uint8List? paymentProof,
+      String depositExtension,
+      Uint8List? depositProof,
+      String authorizationPinCode,
+      String bankAccountNo,
+      String collectionBankCode,
+      String collectionBankAccount) =>
+  _apiClient.onVpsContribution(Constant.userId, Constant.loginModel!.response!.user!.userType ?? '',
+      Constant.loginModel!.response!.user!.sessionId ?? '', Constant.loginModel!.response!.user!.sessionAccessCode ?? '',
+      Constant.loginModel!.response!.user!.sessionDateTime ?? '',
+      transactionValue, fundCode,
+      bankBranch, folioNumber, paymentMode, chequeDate, chequeNo,
+      paymentExtension, paymentProof, depositExtension, depositProof,
+      authorizationPinCode, bankAccountNo, collectionBankCode, collectionBankAccount);
 
   Future<Common> onSavePurchase(
       String fundCode,
@@ -364,6 +393,66 @@ class Repository {
       Constant.loginModel!.response!.user!.userType ?? '',
       paymentMode, collectionBankAccount, collectionBankCode, fundSaleLoad,
       paymentProof, paymentExtension, depositProof, depositExtension);
+
+  Future<VpsLoadFolioFunds> onVpsLoadFolioFunds(String folioNumber, String requestType)
+   => _apiClient.onVpsLoadFolioFunds(folioNumber, requestType);
+
+  Future<VpsLoadFundPlan> onVpsRedLoadFolioFunds(String folioNumber, String requestType)
+  => _apiClient.onVpsRedLoadFolioFunds(folioNumber, requestType, Constant.userId);
+
+
+  Future<Common> onVpsGeneratePinCode(String folioNumber, String req)
+  => _apiClient.onVpsGeneratePinCode(Constant.userId, folioNumber, req);
+
+  Future<LoadBalancesForVpsRedemption> onVpsLoadBalancesForVpsRedemption(
+      String folioNumber, String fundCode, String? classCode)
+  => _apiClient.onVpsLoadBalancesForVpsRedemption(folioNumber, fundCode, classCode);
+
+
+  Future<Common> onSaveVpsRedemption(
+      String redTransType,String transactionValue,
+      String availableBalance,String maturity,String afterRetirement,
+      String fundCode,String unitClass,String folioNumber,String authorizationPinCode,
+      String yearOne,String taxPaidOne,String taxableSalaryOne,Uint8List? taxOne,String taxExtOne,
+      String yearTwo,String taxPaidTwo,String taxableSalaryTwo,Uint8List? taxTwo,String taxExtTwo,
+      String yearThree,String taxPaidThree,String taxableSalaryThree,Uint8List? taxThree,String taxExtThree,
+      )
+  => _apiClient.onSaveVpsRedemption(Constant.loginModel!.response!.user!.userid ?? '',
+      Constant.loginModel!.response!.user!.userType ?? '',
+      Constant.loginModel!.response!.user!.sessionId ?? '',
+      Constant.loginModel!.response!.user!.sessionAccessCode ?? '',
+      Constant.loginModel!.response!.user!.sessionDateTime ?? '',
+      redTransType, transactionValue, availableBalance,
+      maturity, afterRetirement, fundCode, unitClass, folioNumber,
+      authorizationPinCode, yearOne, taxPaidOne, taxableSalaryOne,
+      taxOne, taxExtOne, yearTwo, taxPaidTwo, taxableSalaryTwo,
+      taxTwo, taxExtTwo, yearThree, taxPaidThree,
+      taxableSalaryThree, taxThree, taxExtThree);
+
+
+  Future<LoadExistingSchemeData> onVpsLoadExistingSchemaData(
+      String folioNumber)
+  => _apiClient.onVpsLoadExistingSchemaData(folioNumber);
+
+  Future<LoadSchemeAllocations> onVpsLoadSchemeAllocations(
+      String folioNumber,String fundCode,String schemeCode,String previousSchemeCode)
+  => _apiClient.onVpsLoadSchemeAllocations(folioNumber, fundCode, schemeCode, previousSchemeCode);
+
+  Future<Common> onSaveChangeScheme(
+      String fundCode,String folioNumber,String schemeCode,
+      String previousSchemeCode,String authorizationPinCode,List<pension.PensionSubFunds>? list
+      )
+  => _apiClient.onSaveChangeScheme(
+      Constant.loginModel!.response!.user!.userid ?? '',
+      Constant.loginModel!.response!.user!.userType ?? '',
+      Constant.loginModel!.response!.user!.sessionId ?? '',
+      Constant.loginModel!.response!.user!.sessionAccessCode ?? '',
+      Constant.loginModel!.response!.user!.sessionDateTime ?? '',
+      fundCode, folioNumber, schemeCode, previousSchemeCode,
+      authorizationPinCode, list);
+
+  Future<VpsViewReport> onVpsViewReport()
+  => _apiClient.onVpsViewReport();
 
 
 }

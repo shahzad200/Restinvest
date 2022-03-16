@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/widgets/no_internet.dart';
+import 'package:nit/widgets/no_internet.dart';
 import '../controller/portfolio_screen_controller.dart';
 
 
@@ -126,7 +126,6 @@ class PortofolioScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           // RemoteMessage message = _messages[index];
                           // _.totalInvestment = 0.0;
-                          printInfo(info: 'JHJHGGHJ'+index.toString());
                           var userfund = 0.0;
                           for (int i = 0; i < Constant.loginModel!.response!
                               .accounts![index].userFundBalances!.length; i++) {
@@ -134,7 +133,7 @@ class PortofolioScreen extends StatelessWidget {
                                 .loginModel!.response!.accounts![index]
                                 .userFundBalances![i].fundvolume!);
                           }
-                          return listItem(Constant.loginModel!.response!
+                          return listItem(index,Constant.loginModel!.response!
                               .accounts![index], userfund.toStringAsFixed(2), _,
                               context);
                         }),
@@ -774,7 +773,7 @@ class PortofolioScreen extends StatelessWidget {
         });
   }
 
-  Widget listItem(Accounts? account, String? amount,
+  Widget listItem(int index,Accounts? account, String? amount,
       PortofolioScreenController controller, context) {
     return Column(
       children: [
@@ -794,6 +793,15 @@ class PortofolioScreen extends StatelessWidget {
             textColor: controller.amountAccount.toStringAsFixed(2) == amount ? AppColor.black :AppColor.dimblack,
           ),
           onTap: () async {
+            if(account.vpsAccount == true){
+              Constant.isVps = true;
+              Constant.accountIndex = index;
+              controller.update();
+            }else{
+              Constant.isVps = false;
+              Constant.accountIndex = index;
+              controller.update();
+            }
             print("pressed");
             controller.amountAccount =  double.parse(amount);
             controller.selectedAccount = account;
@@ -833,10 +841,10 @@ class PortofolioScreen extends StatelessWidget {
                 element) {
               print("pie value");
               print("pie value");
-              if (double.parse('${element["fundPercent"]}') != 0.0) {
+              if (double.parse('${element.fundPercent}') != 0.0) {
                 controller.data.add(
-                  ChartData('${element["fundShort"]}',
-                      double.parse('${element["fundPercent"]}')),
+                  ChartData('${element.fundShort}',
+                      double.parse('${element.fundPercent}')),
                 );
               }
             });

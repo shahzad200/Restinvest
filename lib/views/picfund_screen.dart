@@ -31,7 +31,7 @@ class PicFundScreen extends StatelessWidget {
                 ),
               ),
               body: WebView(
-                initialUrl: 'https://nit.com.pk/newnit/Pickyourfunds.aspx ',
+                initialUrl: 'https://nit.softech.pk/newnit/Pickyourfunds.aspx ',
               ));
         });
   }

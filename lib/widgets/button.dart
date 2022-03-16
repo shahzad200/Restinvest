@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:investintrust/utils/colors.dart';
+import 'package:nit/utils/colors.dart';
 
 class RestInvestButton extends StatelessWidget {
   const RestInvestButton({

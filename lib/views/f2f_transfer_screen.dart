@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/data/models/load_fund_plans.dart' as fund;
-import 'package:investintrust/widgets/no_internet.dart';
+import 'package:nit/data/models/login_model.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/data/models/load_fund_plans.dart' as fund;
+import 'package:nit/widgets/no_internet.dart';
 import '../controller/f2f_transfer_screen_controller.dart';
 import '/controller/f2f_transfer_screen_controller.dart';
-import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
+import 'package:nit/widgets/transaction_dialog.dart' as trans;
 import '../utils/colors.dart';
 import '../widgets/button.dart';
 import '../widgets/constant_widget.dart';
@@ -96,7 +96,7 @@ class F2FTransferScreen extends StatelessWidget {
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
-                                  items: Constant.loginModel!.response!.accounts!.map<DropdownMenuItem<Accounts>>((Accounts? value){
+                                  items: _.listAccount.map<DropdownMenuItem<Accounts>>((Accounts? value){
                                     return DropdownMenuItem<Accounts>(
                                       value: value,
                                       child: Text(value!.folioNumber!),
@@ -289,7 +289,7 @@ class F2FTransferScreen extends StatelessWidget {
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down,
                                       color: AppColor.blueColor, size: 35),
-                                  items: Constant.loginModel!.response!.accounts!.map<DropdownMenuItem<Accounts>>((Accounts? value){
+                                  items: _.listAccount.map<DropdownMenuItem<Accounts>>((Accounts? value){
                                     return DropdownMenuItem<Accounts>(
                                       value: value,
                                       child: Text(value!.folioNumber!),

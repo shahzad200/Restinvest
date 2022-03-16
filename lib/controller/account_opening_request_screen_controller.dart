@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/models/common_model.dart';
-import 'package:investintrust/data/models/gen_verification_code_for_dig_user.dart';
-import 'package:investintrust/data/models/new_dig_user_reg_data_before_otp.dart';
-import 'package:investintrust/data/models/validate_verification_code_for_dig_user.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:nit/data/models/common_model.dart';
+import 'package:nit/data/models/gen_verification_code_for_dig_user.dart';
+import 'package:nit/data/models/new_dig_user_reg_data_before_otp.dart';
+import 'package:nit/data/models/validate_verification_code_for_dig_user.dart';
+import 'package:nit/data/repository.dart';
+import 'package:nit/routes/routes.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/constant_widget.dart';
 
 
 class AccountOpenRequestScreenController extends GetxController {
@@ -104,7 +104,7 @@ class AccountOpenRequestScreenController extends GetxController {
 
   // 45345-3453453-4
   // 03042084628
-  // dsfdsf@gmail.com
+  // dsfdsf@gmail.softech
 
   onGenVerificationCodeForDigUser(BuildContext context) async {
       if (cNicNumberController.text.isEmpty ||

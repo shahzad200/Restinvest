@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:investintrust/views/account_opening_document_upload_screen.dart';
-import 'package:investintrust/views/account_opening_fatca_screen.dart';
-import 'package:investintrust/views/account_opening_kyc_detail_screen.dart';
-import 'package:investintrust/views/account_opening_risk_profile_screen.dart';
-import 'package:investintrust/views/user_profile.dart';
+import 'package:nit/views/account_opening_document_upload_screen.dart';
+import 'package:nit/views/account_opening_fatca_screen.dart';
+import 'package:nit/views/account_opening_kyc_detail_screen.dart';
+import 'package:nit/views/account_opening_risk_profile_screen.dart';
+import 'package:nit/views/user_profile.dart';
+import 'package:nit/views/vps/change_scheme_screen.dart';
+import 'package:nit/views/vps/contribution_request_screen.dart';
+import 'package:nit/views/vps/vps_redemption_screen.dart';
 import '../views/account_opening_bank_detail_screen.dart';
 import '../views/account_opening_basic_information_screen.dart';
 import '../views/account_opening_request_screen.dart';
@@ -67,11 +70,26 @@ class AppRoute {
   static const String accountOpenFatcaScreen='/accountOpenFatcaScreen';
   static const String accountOpenUploadScreen='/accountOpenUploadScreen';
   static const String accountOpenURiskScreen='/accountOpenRickScreen';
-
+// VPS
+  static const String vpsContribution = '/vpsContribution';
+  static const String vpsRedemption = '/vpsRedemption';
+  static const String vpsChangeSchema = '/vpsChangeSchema';
   AppRoute._();
 
   static List<GetPage> get navMain {
     return [
+      GetPage(
+        name: AppRoute.vpsContribution,
+        page: () => const ContributionScreen(),
+      ),
+      GetPage(
+        name: AppRoute.vpsRedemption,
+        page: () => const VpsRedemptionScreen(),
+      ),
+      GetPage(
+        name: AppRoute.vpsChangeSchema,
+        page: () => const ChangeSchemeScreen(),
+      ),
       GetPage(
         name: AppRoute.accountOpenURiskScreen,
         page: () => const AccountOpenRiskProfileScreen(),

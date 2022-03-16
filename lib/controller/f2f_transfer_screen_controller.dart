@@ -3,25 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:investintrust/data/models/common_model.dart';
-import 'package:investintrust/data/models/load_fund_plans.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
+import 'package:nit/data/models/common_model.dart';
+import 'package:nit/data/models/load_fund_plans.dart';
+import 'package:nit/data/models/login_model.dart';
+import 'package:nit/data/repository.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/constant_widget.dart';
+import 'package:nit/widgets/transaction_dialog.dart' as trans;
 
 class F2FTransferScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool isChecked = false;
-  String accountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
+  String accountValue = Constant.loginModel!.response!.accounts![Constant.accountIndex].folioNumber ?? '';
 
   TextEditingController unitBalanceController = TextEditingController();
   TextEditingController pinCodeController = TextEditingController();
-
-  String fundValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundShort ?? '';
-  String fundCode = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode ?? '';
-  String toAccountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
+  List<Accounts> listAccount = [];
+  String fundValue = '';
+  String fundCode = '';
+  String toAccountValue = Constant.loginModel!.response!.accounts![Constant.accountIndex].folioNumber ?? '';
   String toFundValue = "";
   String toFundCode = "";
   bool unitButton = true;
@@ -42,6 +43,11 @@ class F2FTransferScreenController extends GetxController {
   Common? common;
   @override
   void onInit() async {
+    Constant.loginModel!.response!.accounts!.forEach((element) {
+      if(element.vpsAccount != true){
+        listAccount.add(element);
+      }
+    });
     findIndex();
       onLoadFundsPlans();
     super.onInit();
@@ -50,8 +56,10 @@ class F2FTransferScreenController extends GetxController {
   int fundIndex = 0;
   int findIndex(){
      fundIndex = Constant.loginModel!.response!.accounts!.indexWhere((element) => element.folioNumber == accountValue);
-    fundValue = Constant.loginModel!.response!.accounts![fundIndex].userFundBalances![0].fundShort!;
-    fundCode = Constant.loginModel!.response!.accounts![fundIndex].userFundBalances![0].fundCode!;
+     if(Constant.loginModel!.response!.accounts![fundIndex].userFundBalances!.isNotEmpty){
+       fundValue = Constant.loginModel!.response!.accounts![fundIndex].userFundBalances![0].fundShort!;
+       fundCode = Constant.loginModel!.response!.accounts![fundIndex].userFundBalances![0].fundCode!;
+     }
     return fundIndex;
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/utils/colors.dart';
+import 'package:nit/utils/colors.dart';
 import 'package:webview_flutter/webview_flutter.dart' as web;
 import 'constant_widget.dart';
 

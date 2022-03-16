@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/widgets/drawer.dart';
+import 'package:nit/widgets/drawer.dart';
 import '../utils/constant.dart';
 
 

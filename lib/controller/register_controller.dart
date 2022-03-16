@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/data/api_client.dart';
-import 'package:investintrust/data/models/common_model.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/widgets/custome_dialog.dart';
+import 'package:nit/data/api_client.dart';
+import 'package:nit/data/models/common_model.dart';
+import 'package:nit/routes/routes.dart';
+import 'package:nit/widgets/custome_dialog.dart';
 
 class RegisterScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();

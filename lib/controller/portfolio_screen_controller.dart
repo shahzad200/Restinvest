@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:investintrust/data/models/load_dashboard.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/custome_dialog.dart';
+import 'package:nit/data/models/load_dashboard.dart';
+import 'package:nit/data/models/login_model.dart';
+import 'package:nit/data/repository.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/constant_widget.dart';
+import 'package:nit/widgets/custome_dialog.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'login_screen_controller.dart';
@@ -45,15 +45,15 @@ class PortofolioScreenController extends GetxController {
    String? formatted ;
 
    double amountAccount = 0.0;
-   String accNumber = Constant.loginModel!.response!.accounts![0].folioNumber.toString();
+   String accNumber = Constant.loginModel!.response!.accounts![Constant.accountIndex].folioNumber.toString();
   var f = NumberFormat("###,###.0#", "en_US");
   @override
   void onInit() async{
 
     for (int i = 0; i < Constant.loginModel!.response!
-        .accounts![0].userFundBalances!.length; i++) {
+        .accounts![Constant.accountIndex].userFundBalances!.length; i++) {
       amountAccount = amountAccount + double.parse(Constant
-          .loginModel!.response!.accounts![0]
+          .loginModel!.response!.accounts![Constant.accountIndex]
           .userFundBalances![i].fundvolume!);
     }
 
@@ -81,11 +81,19 @@ class PortofolioScreenController extends GetxController {
 
   @override
   void onReady() async{
+    printInfo(info: 'JHGJG'+Constant.accountIndex.toString());
+    selectedAccount = Constant.loginModel!.response!.accounts![Constant.accountIndex];
 
-    selectedAccount = Constant.loginModel!.response!.accounts![0];
-    loadDashboard =  await _repository.onLoadDashBoard(Constant.loginModel!.response!.accounts![0].folioNumber.toString());
-
-
+    if(selectedAccount!.vpsAccount == true){
+      Constant.isVps = true;
+      Constant.accountIndex = Constant.accountIndex;
+      update();
+    }else{
+      Constant.isVps = false;
+      Constant.accountIndex = Constant.accountIndex;
+      update();
+    }
+    loadDashboard =  await _repository.onLoadDashBoard(Constant.loginModel!.response!.accounts![Constant.accountIndex].folioNumber.toString());
 
     // loadDashboard.response
     isSummery = true;
@@ -111,10 +119,10 @@ class PortofolioScreenController extends GetxController {
       print("pie value");
       print("pie value${element}");
       print("pie value");
-      if(double.parse('${element["fundPercent"]}') != 0.0) {
+      if(double.parse('${element.fundPercent}') != 0.0) {
         data.add(
-          ChartData('${element["fundShort"]}',
-              double.parse('${element["fundPercent"]}')),
+          ChartData('${element.fundShort}',
+              double.parse('${element.fundPercent}')),
         );
       }
     });

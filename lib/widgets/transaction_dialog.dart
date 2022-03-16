@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/utils/colors.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
+import 'package:nit/utils/colors.dart';
+import 'package:nit/widgets/constant_widget.dart';
 
 void showDialog(
     context,

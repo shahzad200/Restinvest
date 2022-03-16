@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:investintrust/utils/Strings.dart';
-import 'package:investintrust/utils/colors.dart';
-import 'package:investintrust/utils/my_images.dart';
+import 'package:nit/utils/Strings.dart';
+import 'package:nit/utils/colors.dart';
+import 'package:nit/utils/my_images.dart';
 import 'button.dart';
 
 class NoInternetWgt extends StatelessWidget {

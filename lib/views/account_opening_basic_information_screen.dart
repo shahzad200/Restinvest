@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/routes/routes.dart';
-import 'package:investintrust/utils/constants.dart';
+import 'package:nit/routes/routes.dart';
+import 'package:nit/utils/constants.dart';
 import '../data/models/new_dig_user_reg_data_after_otp.dart';
 
 import '../utils/constant.dart';
@@ -1110,7 +1110,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                             controller: _.eMailAddressController,
                                             isRounded: true,
                                             enable: false,
-                                            hint: "abc@gmail.com",
+                                            hint: "abc@gmail.softech",
                                             hintColor: AppColor.dimblack,
                                             // textInputType: TextInputType.emailAddress,
                                           ),

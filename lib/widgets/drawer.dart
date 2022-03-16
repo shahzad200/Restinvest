@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/views/user_profile.dart';
+import 'package:nit/views/user_profile.dart';
 
 import '../routes/routes.dart';
 import '../utils/colors.dart';
@@ -166,13 +166,14 @@ class CustomDrawer extends StatelessWidget {
                       } else {
                         Constant.drawerIndex = 4;
                         Get.back();
-                        Get.offAllNamed(AppRoute.redemptionRoute);
+                        Constant.isVps ? Get.offAllNamed(AppRoute.vpsRedemption)
+                            : Get.offAllNamed(AppRoute.redemptionRoute);
                       }
                       // CustomDialog(context);
                     },
                     leading: const Redemption(),
-                    title: const RestInvestTitle(
-                      text: "Redemption",
+                    title:  RestInvestTitle(
+                      text: Constant.isVps ? "VPS Redemption" :"Redemption",
                       textColor: AppColor.black,
                       fontWeight: FontWeight.w700,
                     ),
@@ -187,12 +188,14 @@ class CustomDrawer extends StatelessWidget {
                       } else {
                         Constant.drawerIndex = 5;
                         Get.back();
-                        Get.offAllNamed(AppRoute.purchasesRoute);
+                        Constant.isVps ? Get.toNamed(AppRoute.vpsContribution)
+                         : Get.offAllNamed(AppRoute.purchasesRoute);
+
                       }
                     },
                     leading: const Purchase(),
-                    title: const RestInvestTitle(
-                      text: "Purchase",
+                    title: RestInvestTitle(
+                      text: Constant.isVps ? "VPS Contribution" :"Purchase",
                       textColor: AppColor.black,
                       fontWeight: FontWeight.w700,
                     ),
@@ -207,12 +210,12 @@ class CustomDrawer extends StatelessWidget {
                       } else {
                         Constant.drawerIndex = 6;
                         Get.back();
-                        Get.offAllNamed(AppRoute.f2ftransferRoute);
+                        Constant.isVps ? Get.offAllNamed(AppRoute.vpsChangeSchema) : Get.offAllNamed(AppRoute.f2ftransferRoute);
                       }
                     },
                     leading: const F2F(),
-                    title: const RestInvestTitle(
-                      text: "Conversion",
+                    title: RestInvestTitle(
+                      text: Constant.isVps ? "VPS Change Scheme" :"Conversion",
                       textColor: AppColor.black,
                       fontWeight: FontWeight.w700,
                     ),
@@ -220,14 +223,16 @@ class CustomDrawer extends StatelessWidget {
                   CustomDivider(
                     color: AppColor.black.withOpacity(0.1),
                   ),
-                  ListTile(
+                ListTile(
                     onTap: () {
-                      if (Constant.drawerIndex == 7) {
-                        Get.back();
-                      } else {
-                        Constant.drawerIndex = 7;
-                        Get.back();
-                        Get.offAllNamed(AppRoute.reportsRoute);
+                      if(!Constant.isVps){
+                        if (Constant.drawerIndex == 7) {
+                          Get.back();
+                        } else {
+                          Constant.drawerIndex = 7;
+                          Get.back();
+                          Get.offAllNamed(AppRoute.reportsRoute);
+                        }
                       }
                     },
                     leading: const Report(),
@@ -244,7 +249,7 @@ class CustomDrawer extends StatelessWidget {
                     onTap: () {
                       Get.to(WebViewScreen(
                         title: 'Complains',
-                        link: 'https://nit.com.pk/NewNit/Complains.aspx',
+                        link: 'https://nit.softech.pk/NewNit/Complains.aspx',
                       ));
                     },
                     leading: const Complaint(),
@@ -271,6 +276,36 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
+                // CustomDivider(
+                //   color: AppColor.black.withOpacity(0.1),
+                // ),
+                // ListTile(
+                //   onTap: () {
+                //     Get.back();
+                //     Get.toNamed(AppRoute.vpsChangeSchema);
+                //   },
+                //   leading: const Logout(),
+                //   title: const RestInvestTitle(
+                //     text: "VPS Change Schema",
+                //     textColor: AppColor.black,
+                //     fontWeight: FontWeight.w700,
+                //   ),
+                // ),
+                // CustomDivider(
+                //   color: AppColor.black.withOpacity(0.1),
+                // ),
+                // ListTile(
+                //   onTap: () {
+                //     Get.back();
+                //     Get.toNamed(AppRoute.vpsRedemption);
+                //   },
+                //   leading: const Logout(),
+                //   title: const RestInvestTitle(
+                //     text: "VPS Redemption",
+                //     textColor: AppColor.black,
+                //     fontWeight: FontWeight.w700,
+                //   ),
+                // ),
                 ]),
           //   ],
           // ),

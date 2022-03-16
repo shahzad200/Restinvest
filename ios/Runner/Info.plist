@@ -24,6 +24,9 @@
 	<array>
 		<string>https</string>
 		<string>http</string>
+		<string>tel</string>
+		<string>telprompt</string>
+		<string>mailto</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

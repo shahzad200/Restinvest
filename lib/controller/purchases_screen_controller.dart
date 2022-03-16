@@ -1,21 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:nit/data/models/login_model.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:investintrust/data/api_client.dart';
-import 'package:investintrust/data/models/common_model.dart';
-import 'package:investintrust/data/models/load_fund_plans.dart';
-import 'package:investintrust/data/models/load_fund_plans_p.dart';
-import 'package:investintrust/data/models/login_model.dart' as login;
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
+import 'package:nit/data/api_client.dart';
+import 'package:nit/data/models/common_model.dart';
+import 'package:nit/data/models/load_fund_plans.dart';
+import 'package:nit/data/models/load_fund_plans_p.dart';
+import 'package:nit/data/models/login_model.dart' as login;
+import 'package:nit/data/repository.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/constant_widget.dart';
+import 'package:nit/widgets/transaction_dialog.dart' as trans;
 
 class PurchasesScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -46,6 +47,8 @@ class PurchasesScreenController extends GetxController {
   String collectionBankCode = "";
   String fundSale = "";
 
+  List<Accounts> listAccount = [];
+
   TextEditingController unitBalanceController = TextEditingController();
   TextEditingController percentController = TextEditingController();
   TextEditingController picCodeController = TextEditingController();
@@ -63,52 +66,30 @@ class PurchasesScreenController extends GetxController {
   double? calUnitBalanceValue;
   Common? common;
   // Common? submitResponse;
-  String fundValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundShort ?? '';
-  String fundCode = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode ?? '';
-  String fundSaleValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundSaleLoad ?? '';
-  String accountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
+  String fundValue = '';
+  String fundCode = '';
+  String fundSaleValue = '';
+  String accountValue = Constant.loginModel!.response!.accounts![Constant.accountIndex].folioNumber ?? '';
   String fundBankName = '';
   String fundBankAccountNumber = '';
   String fundBankCode = '';
   @override
   void onInit() async {
+    Constant.loginModel!.response!.accounts!.forEach((element) {
+      if(element.vpsAccount != true){
+        listAccount.add(element);
+      }
+    });
+    if(Constant.loginModel!.response!.accounts![Constant.accountIndex].userFundBalances!.isNotEmpty){
+      fundValue = Constant.loginModel!.response!.accounts![Constant.accountIndex].userFundBalances![0].fundShort ?? '';
+      fundCode = Constant.loginModel!.response!.accounts![Constant.accountIndex].userFundBalances![0].fundCode ?? '';
+      fundSaleValue = Constant.loginModel!.response!.accounts![Constant.accountIndex].userFundBalances![0].fundSaleLoad ?? '';
+    }
+
     if(accountValue != '') {
       onLoadFundsPlans();
       // onLoadFundsPlansP();
     }
-    // accountvalue = Constant.loginModel!.response!.accounts![0].folioNumber!;
-    // Constant.loginModel!.response!.accounts![0].userFundBalances!
-    //     .forEach((element) {
-    //   map.fundShort = element.fundShort;
-    //   map.fundCode = element.fundCode;
-    //   map.fundvolume = element.fundvolume;
-    //   map.fundName = element.fundName;
-    //   map.fundPercent = element.fundPercent;
-    //   map.fundRedPrice = element.fundRedPrice;
-    //   map.fundSaleLoad = element.fundSaleLoad;
-    //   map.fundUnits = element.fundUnits;
-    //   map.offerPrice = element.offerPrice;
-    //   map.priceDate = element.priceDate;
-    //   map.unitClassess = element.unitClassess;
-    //   fundNameListItems.add(login.UserFundBalances.fromJson(map.toJson()));
-    // });
-    // if (fundNameListItems.isNotEmpty) {
-    //   fundNamevalue = fundNameListItems[0].fundShort!;
-    //   fundSale = fundNameListItems[0].fundSaleLoad!;
-    // }
-    // // loadFundsPlans =await  api.onLoadFundsPlans(Constant.userId, Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode!, accountvalue, "RED");
-    // loadFundsPlans = await api.onLoadFundsPlans(
-    //     Constant.userId,
-    //     Constant
-    //         .loginModel!.response!.accounts![0].userFundBalances![0].fundCode!,
-    //     accountValue,
-    //     "FTF");
-    // if (loadFundsPlans != null) {
-    //   selectedFund =
-    //       loadFundsPlans!.response!.toFunds![0].fundBankAccountDetails![0];
-    //   collectionBankAccount = selectedFund!.accountNo!;
-    //   collectionBankCode = selectedFund!.bankCode!;
-    // }
 
     update();
     super.onInit();

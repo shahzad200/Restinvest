@@ -5,15 +5,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:investintrust/controller/account_opening_kyc_detail_screen_controller.dart';
-import 'package:investintrust/data/models/load_fund_plans.dart';
+import 'package:nit/controller/account_opening_kyc_detail_screen_controller.dart';
+import 'package:nit/data/models/load_fund_plans.dart';
 
-// import 'package:investintrust/data/models/load_fund_plans.dart';
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/utils/constant.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/custome_dialog.dart';
-import 'package:investintrust/widgets/no_internet.dart';
+// import 'package:nit/data/models/load_fund_plans.dart';
+import 'package:nit/data/models/login_model.dart';
+import 'package:nit/utils/constant.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/custome_dialog.dart';
+import 'package:nit/widgets/no_internet.dart';
 import 'package:path/path.dart' as p;
 import '../utils/lists.dart';
 
@@ -112,8 +112,7 @@ class PurchasesScreen extends StatelessWidget {
                                       ),
                                       icon: const Icon(Icons.keyboard_arrow_down,
                                           color: AppColor.blueColor, size: 25),
-                                      items: Constant
-                                          .loginModel!.response!.accounts!
+                                      items: _.listAccount!
                                           .map((Accounts? fromAccountItems) {
                                         return DropdownMenuItem<Accounts>(
                                             value: fromAccountItems,

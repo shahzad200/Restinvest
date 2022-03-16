@@ -1,6 +1,6 @@
-import 'package:investintrust/data/models/login_model.dart';
-import 'package:investintrust/data/models/social_media_links.dart';
-import 'package:investintrust/data/models/validate_verification_code_for_dig_user.dart';
+import 'package:nit/data/models/login_model.dart';
+import 'package:nit/data/models/social_media_links.dart';
+import 'package:nit/data/models/validate_verification_code_for_dig_user.dart';
 
 class Constant{
   static ValidateVerificationCodeForDigUser? validateVerificationCodeForDigUser;
@@ -13,17 +13,19 @@ class Constant{
   static String userId = '-0456';
   static int drawerIndex = 1;
   static LoginModel? loginModel;
+  static bool isVps = false;
+  static int accountIndex = 0;
   static SocialMediaLink? socialMediaLink;
-  static String linkComplains = 'https://nit.com.pk/NewNit/Complains.aspx';
-  static String linkConsolidatedFMRW = 'https://nit.com.pk/NewNit/ConsolidatedFMRW.aspx';
-  static String linkFundOfferingDoc = 'https://nit.com.pk/fund_offering_doc';
-  static String linkMarketSummary = 'https://www.psx.com.pk/market-summary';
-  static String linkProducts = 'https://nit.com.pk/newnit/funds.aspx';
-  static String linkPickYourFunds = 'https://nit.com.pk/newnit/Pickyourfunds.aspx';
-  static String linkNAV = 'https://nit.com.pk/NewNIT/NAV.aspx';
-  static String linkBranches = 'https://nit.com.pk/NewNIT/Branches.aspx';
-  static String linkAboutUs = 'https://nit.com.pk/NewNIT/AboutUs.aspx';
-  static String linkLearning = 'https://nit.com.pk/NewNIT/Learning.aspx';
+  static String linkComplains = 'https://nit.softech.pk/NewNit/Complains.aspx';
+  static String linkConsolidatedFMRW = 'https://nit.softech.pk/NewNit/ConsolidatedFMRW.aspx';
+  static String linkFundOfferingDoc = 'https://nit.softech.pk/fund_offering_doc';
+  static String linkMarketSummary = 'https://www.psx.softech.pk/market-summary';
+  static String linkProducts = 'https://nit.softech.pk/newnit/funds.aspx';
+  static String linkPickYourFunds = 'https://nit.softech.pk/newnit/Pickyourfunds.aspx';
+  static String linkNAV = 'https://nit.softech.pk/NewNIT/NAV.aspx';
+  static String linkBranches = 'https://nit.softech.pk/NewNIT/Branches.aspx';
+  static String linkAboutUs = 'https://nit.softech.pk/NewNIT/AboutUs.aspx';
+  static String linkLearning = 'https://nit.softech.pk/NewNIT/Learning.aspx';
 
 
 

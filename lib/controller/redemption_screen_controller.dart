@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
-import 'package:investintrust/data/api_client.dart';
-import 'package:investintrust/data/models/common_model.dart';
-import 'package:investintrust/data/models/load_fund_plans.dart';
-import 'package:investintrust/data/models/login_model.dart' as login;
-import 'package:investintrust/data/repository.dart';
-import 'package:investintrust/utils/constants.dart';
-import 'package:investintrust/widgets/constant_widget.dart';
-import 'package:investintrust/widgets/transaction_dialog.dart' as trans;
+import 'package:nit/data/api_client.dart';
+import 'package:nit/data/models/common_model.dart';
+import 'package:nit/data/models/load_fund_plans.dart';
+import 'package:nit/data/models/login_model.dart' as login;
+import 'package:nit/data/models/login_model.dart';
+import 'package:nit/data/repository.dart';
+import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/constant_widget.dart';
+import 'package:nit/widgets/transaction_dialog.dart' as trans;
 
 
 class RedemptionScreenController extends GetxController {
@@ -43,14 +44,24 @@ class RedemptionScreenController extends GetxController {
   Common? pinCode;
   Common? submitResponse;
 
-
+  List<Accounts> listAccount = [];
 
   @override
   void onInit() async{
     isLoading = true;
     update();
-    accountvalue = Constant.loginModel!.response!.accounts![0].folioNumber!;
-    Constant.loginModel!.response!.accounts![0].userFundBalances!.forEach((element) {
+    Constant.loginModel!.response!.accounts!.forEach((element) {
+      if(element.vpsAccount != true){
+        listAccount.add(element);
+      }
+    });
+    // for (int i = 0; i < Constant.loginModel!.response!.accounts!.length; i++) {
+    //   if (Constant.loginModel!.response!.accounts![i].vpsAccount == true) {
+    //     listAccount.add(Constant.loginModel!.response!.accounts![i]);
+    //   }
+    // }
+    accountvalue = listAccount[0].folioNumber!;
+    listAccount[0].userFundBalances!.forEach((element) {
       map.fundShort =element.fundShort;
       map.fundCode =element.fundCode;
       map.fundvolume =element.fundvolume;
@@ -69,8 +80,9 @@ class RedemptionScreenController extends GetxController {
       fundNamevalue = fundNameListItems[0].fundShort!;
       fundNameCode = fundNameListItems[0].fundCode!;
     }
-    loadFundsPlans =await  api.onLoadFundsPlans(Constant.userId, Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode!, accountvalue, "RED");
-    print(loadFundsPlans!.response!);
+    if(listAccount[0].userFundBalances!.isNotEmpty){
+      loadFundsPlans =await  api.onLoadFundsPlans(Constant.userId, listAccount[0].userFundBalances![0].fundCode!, accountvalue, "RED");
+    }
     if(isLoading) {
       isLoading = false;
     }
@@ -389,9 +401,9 @@ class RedemptionScreenController extends GetxController {
     // update();
     isLoading = true;
     update();
-    accountvalue = Constant.loginModel!.response!.accounts![0].folioNumber!;
+    accountvalue = listAccount[0].folioNumber!;
     fundNameListItems = [];
-    Constant.loginModel!.response!.accounts![0].userFundBalances!.forEach((element) {
+    listAccount[0].userFundBalances!.forEach((element) {
       map.fundShort =element.fundShort;
       map.fundCode =element.fundCode;
       map.fundvolume =element.fundvolume;
@@ -414,7 +426,7 @@ class RedemptionScreenController extends GetxController {
      percentController.text = '';
      picCodeController.text = '';
     loadFundsPlans = null;
-    loadFundsPlans =await  api.onLoadFundsPlans(Constant.userId, Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode!, accountvalue, "RED");
+    loadFundsPlans =await  api.onLoadFundsPlans(Constant.userId, listAccount[0].userFundBalances![0].fundCode!, accountvalue, "RED");
     print(loadFundsPlans!.response!);
     if(isLoading) {
       isLoading = false;
