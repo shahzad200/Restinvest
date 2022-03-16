@@ -451,8 +451,8 @@ class Repository {
       fundCode, folioNumber, schemeCode, previousSchemeCode,
       authorizationPinCode, list);
 
-  Future<VpsViewReport> onVpsViewReport()
-  => _apiClient.onVpsViewReport();
+  Future<VpsViewReport> onVpsViewReport(String accountValue,String fromDate,String toDate,String pensionFund
+      ,String reportType) => _apiClient.onVpsViewReport(accountValue, fromDate, toDate, pensionFund, reportType);
 
 
 }

@@ -31,8 +31,8 @@ class AccountOpenRequestScreenController extends GetxController {
 
   NewDigUserRegDataBeforeOTP? newDigUserRegDataBeforeOTP;
   GenVerificationCodeForDigUser? genVerificationCodeForDigUser;
-  Common? common;
   ValidateVerificationCodeForDigUser? validateVerificationCodeForDigUser;
+  Common? common;
   bool isLoading = false;
   bool noInternet = false;
   final _repository = Repository();

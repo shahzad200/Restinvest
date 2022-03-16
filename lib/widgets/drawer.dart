@@ -7,6 +7,7 @@ import '../routes/routes.dart';
 import '../utils/colors.dart';
 import '../utils/constants.dart';
 
+import '../views/vps/vps_account_statement_screen.dart';
 import '../widgets/constant_widget.dart';
 import '../widgets/custome_dialog.dart';
 import '../widgets/web_view.dart';
@@ -225,19 +226,17 @@ class CustomDrawer extends StatelessWidget {
                   ),
                 ListTile(
                     onTap: () {
-                      if(!Constant.isVps){
                         if (Constant.drawerIndex == 7) {
                           Get.back();
                         } else {
                           Constant.drawerIndex = 7;
                           Get.back();
-                          Get.offAllNamed(AppRoute.reportsRoute);
+                          Constant.isVps ? Get.offAll(const VpsAccountStatementScreen()) : Get.offAllNamed(AppRoute.reportsRoute);
                         }
-                      }
                     },
                     leading: const Report(),
-                    title: const RestInvestTitle(
-                      text: "Reports",
+                    title: RestInvestTitle(
+                      text: Constant.isVps ? "VPS ACCOUNT STATEMENT " :"Reports",
                       textColor: AppColor.black,
                       fontWeight: FontWeight.w700,
                     ),
@@ -276,21 +275,9 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                // CustomDivider(
-                //   color: AppColor.black.withOpacity(0.1),
-                // ),
-                // ListTile(
-                //   onTap: () {
-                //     Get.back();
-                //     Get.toNamed(AppRoute.vpsChangeSchema);
-                //   },
-                //   leading: const Logout(),
-                //   title: const RestInvestTitle(
-                //     text: "VPS Change Schema",
-                //     textColor: AppColor.black,
-                //     fontWeight: FontWeight.w700,
-                //   ),
-                // ),
+                CustomDivider(
+                  color: AppColor.black.withOpacity(0.1),
+                ),
                 // CustomDivider(
                 //   color: AppColor.black.withOpacity(0.1),
                 // ),

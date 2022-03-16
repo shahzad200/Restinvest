@@ -469,18 +469,17 @@ class UserProfile extends StatelessWidget {
                   left: 15.0, right: 10, top: 14, bottom: 14),
               child: Row(
                 children:  [
-                  const RestInvestTitle(
+                 const RestInvestTitle(
                     fontWeight: FontWeight.w900,
                     fontSize: 14,
                     text: "Account Number:",
                     textColor: AppColor.black,
                   ),
-                  const  SizedBox(width: 10,),
+                  SizedBox(width: 10,),
                   RestInvestTitle(
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     //  Constant.loginModel!.response!.user!.title
-                    // text: '',
                     text: Constant.loginModel!.response!.accounts![_.index].bankDetails!.accountNumber ?? '',
                     textColor: AppColor.black,
                   ),
@@ -494,19 +493,18 @@ class UserProfile extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 15.0, right: 10, top: 14, bottom: 14),
               child: Row(
-                children:  [
+                children: [
                   const RestInvestTitle(
                     fontWeight: FontWeight.w900,
                     fontSize: 14,
                     text: "Bank Account Title:",
                     textColor: AppColor.black,
                   ),
-                  const SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                   RestInvestTitle(
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     //  Constant.loginModel!.response!.user!.title
-                    // text: '',
                     text: Constant.loginModel!.response!.accounts![_.index].bankDetails!.bankAccTitle ?? '',
                     textColor: AppColor.black,
                   ),
@@ -520,7 +518,7 @@ class UserProfile extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 15.0, right: 10, top: 14, bottom: 14),
               child: Row(
-                children:  [
+                children: [
                   const RestInvestTitle(
                     fontWeight: FontWeight.w900,
                     fontSize: 14,
@@ -532,7 +530,6 @@ class UserProfile extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     //  Constant.loginModel!.response!.user!.title
-                   // text: '',
                     text: Constant.loginModel!.response!.accounts![_.index].bankDetails!.bankName ?? '',
                     textColor: AppColor.black,
                   ),
@@ -546,8 +543,8 @@ class UserProfile extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 15.0, right: 10, top: 14, bottom: 14),
               child: Row(
-                children:  [
-                  const  RestInvestTitle(
+                children: [
+                  const RestInvestTitle(
                     fontWeight: FontWeight.w900,
                     fontSize: 14,
                     text: "Bank Address:",
@@ -558,7 +555,6 @@ class UserProfile extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     //  Constant.loginModel!.response!.user!.title
-                    // text: '',
                     text: Constant.loginModel!.response!.accounts![_.index].bankDetails!.bankAddress ?? '',
                     textColor: AppColor.black,
                   ),

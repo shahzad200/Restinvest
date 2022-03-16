@@ -2383,21 +2383,22 @@ class ApiClient {
       }
     }
   }
-
-  Future<VpsViewReport> onVpsViewReport(
+  // "01/01/2021"
+  Future<VpsViewReport> onVpsViewReport(String accountValue,String fromDate,String toDate,String pensionFund
+      ,String reportType
      ) async {
     VpsViewReport? vpsViewReport;
     try {
       printInfo(
           info: jsonEncode(<String, dynamic>{
-            "folioNumber":"12345-1234568-0-1",
-            "fromDate":"01/01/2021",
-            "toDate":"15/03/2022",
+            "folioNumber":accountValue,
+            "fromDate":fromDate,
+            "toDate":toDate,
             "corporatePrt":"", /*pass "1" for corporate account type otherwise ""*/
             "individualPrt":"",/*pass "1" for individual account type otherwise ""*/
             "allOption":"ALL",/*pass "ALL" for all account type otherwise ""*/
-            "pensionFund":"00005", /*ALL in case of all funds*/
-            "reportType":"vpsAccStmt"
+            "pensionFund":pensionFund, /*ALL in case of all funds*/
+            "reportType":reportType
           }.toString()));
       final response = await http.post(
         Uri.parse(_epVpsViewReport),
@@ -2405,14 +2406,14 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, dynamic>{
-          "folioNumber":"12345-1234568-0-1",
-          "fromDate":"01/01/2021",
-          "toDate":"15/03/2022",
+          "folioNumber":accountValue,
+          "fromDate":fromDate,
+          "toDate":toDate,
           "corporatePrt":"", /*pass "1" for corporate account type otherwise ""*/
           "individualPrt":"",/*pass "1" for individual account type otherwise ""*/
           "allOption":"ALL",/*pass "ALL" for all account type otherwise ""*/
-          "pensionFund":"00005", /*ALL in case of all funds*/
-          "reportType":"vpsAccStmt"
+          "pensionFund":pensionFund, /*ALL in case of all funds*/
+          "reportType":reportType
         }),
       );
       if (response.statusCode == 200) {

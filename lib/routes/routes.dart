@@ -34,6 +34,7 @@ import '../views/splash_screen.dart';
 import '../views/text_calculator_screen.dart';
 import '../views/user_screen.dart';
 import '../views/view_report_screen.dart';
+import '../views/vps/vps_account_statement_screen.dart';
 
 class AppRoute {
   // static const String splashRoute = '/';
@@ -74,6 +75,7 @@ class AppRoute {
   static const String vpsContribution = '/vpsContribution';
   static const String vpsRedemption = '/vpsRedemption';
   static const String vpsChangeSchema = '/vpsChangeSchema';
+  static const String vpsaccountStatement = '/vpsaccountStatement';
   AppRoute._();
 
   static List<GetPage> get navMain {
@@ -210,6 +212,10 @@ class AppRoute {
       GetPage(
           name: AppRoute.accountOpenUploadScreen,
           page: () => const AccountOpenDocumentUploadScreen(),
+      ),
+      GetPage(
+        name: AppRoute.vpsaccountStatement,
+        page: () => const VpsAccountStatementScreen(),
       ),
     ];
   }
