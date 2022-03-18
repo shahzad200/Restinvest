@@ -1091,10 +1091,13 @@ class ApiClient {
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body);
-        NewDigUserRegDataBeforeOTP newDigUserRegDataBeforeOTP =
-            NewDigUserRegDataBeforeOTP.fromJson(jsonDecode(response.body));
-        if (newDigUserRegDataBeforeOTP.meta!.code.toString() ==
-            200.toString()) {
+        // NewDigUserRegDataBeforeOTP newDigUserRegDataBeforeOTP =
+        //     NewDigUserRegDataBeforeOTP.fromJson(jsonDecode(response.body));
+        NewDigUserRegDataBeforeOTP newDigUserRegDataBeforeOTP=NewDigUserRegDataBeforeOTP.fromJson(jsonDecode(response.body));
+        if (
+        newDigUserRegDataBeforeOTP.meta!.code.toString() ==
+            200.toString())
+        {
           return newDigUserRegDataBeforeOTP;
         } else {
           throw Exception(newDigUserRegDataBeforeOTP.meta!.message);
