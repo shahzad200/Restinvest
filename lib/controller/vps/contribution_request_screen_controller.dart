@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nit/data/models/common_model.dart';
-import 'package:nit/data/models/load_fund_plans.dart';
+
 import 'package:nit/data/models/login_model.dart';
 import 'package:nit/data/models/vps/load_fund.dart';
 import 'package:nit/data/repository.dart';

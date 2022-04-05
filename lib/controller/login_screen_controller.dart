@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:typed_data';
+
 
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter/material.dart';
@@ -9,8 +9,7 @@ import 'package:nit/data/models/login_model.dart';
 import 'package:nit/data/repository.dart';
 import 'package:nit/routes/routes.dart';
 import 'package:nit/utils/constants.dart';
-import 'package:nit/utils/strings.dart';
-import 'package:nit/widgets/constant_widget.dart';
+
 import 'package:nit/widgets/custome_dialog.dart';
 
 class LoginScreenController extends GetxController {
@@ -94,7 +93,7 @@ class LoginScreenController extends GetxController {
             userNameController.text, encrypted.base16.toString());
         Constant.drawerIndex = 3;
         Get.back();
-        Get.offAllNamed(AppRoute.portofolioRoute);
+        Get.offAllNamed(AppRoute.portoFolioRoute);
         Constant.userId =
             Constant.loginModel!.response!.user!.userid.toString();
         Constant.isVps = false;

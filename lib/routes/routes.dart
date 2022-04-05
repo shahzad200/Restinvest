@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:nit/views/account_opening_document_upload_screen.dart';
-import 'package:nit/views/account_opening_fatca_screen.dart';
-import 'package:nit/views/account_opening_kyc_detail_screen.dart';
-import 'package:nit/views/account_opening_risk_profile_screen.dart';
-import 'package:nit/views/user_profile.dart';
-import 'package:nit/views/vps/change_scheme_screen.dart';
-import 'package:nit/views/vps/contribution_request_screen.dart';
-import 'package:nit/views/vps/vps_redemption_screen.dart';
+import '../views/account_opening_document_upload_screen.dart';
+import '../views/account_opening_fatca_screen.dart';
+import '../views/account_opening_kyc_detail_screen.dart';
+import '../views/account_opening_risk_profile_screen.dart';
+import '../views/user_profile.dart';
+import '../views/vps/change_scheme_screen.dart';
+import '../views/vps/contribution_request_screen.dart';
+import '../views/vps/vps_redemption_screen.dart';
 import '../views/account_opening_bank_detail_screen.dart';
 import '../views/account_opening_basic_information_screen.dart';
 import '../views/account_opening_request_screen.dart';
@@ -30,7 +30,6 @@ import '../views/purchases_screen.dart';
 import '../views/redemption_screen.dart';
 import '../views/register_screen.dart';
 import '../views/reports_screen.dart';
-import '../views/splash_screen.dart';
 import '../views/text_calculator_screen.dart';
 import '../views/user_screen.dart';
 import '../views/view_report_screen.dart';
@@ -51,22 +50,20 @@ class AppRoute {
   static const String productRoute = '/product';
   static const String fundRoute = '/fund';
   static const String generateCode = '/generateCode';
-
   static const String redemptionRoute = '/redemption';
   static const String fundManagerRoute = '/fundManager';
-  static const String portofolioRoute = '/portofolio';
+  static const String portoFolioRoute = '/portoFolio';
   static const String profileRoute = '/profile';
   static const String purchasesRoute = '/purchases';
-  static const String f2ftransferRoute = '/f2ftransfer';
+  static const String f2fTransferRoute = '/f2fTransfer';
   static const String reportsRoute = '/reports';
-  static const String viewreportsRoute = '/viewreports';
-  static const String dailynavRoute = '/dailynav';
-  static const String taxcalculatorRoute = '/taxcalculator';
+  static const String viewReportsRoute = '/viewReports';
+  static const String dailyNavRoute = '/dailyNav';
+  static const String taxCalculatorRoute = '/taxCalculator';
   static const String pinConfirmation='/pinConfirmation';
-
-  static const String accountopeningrequest='/accountopeningrequest';
-  static const String accountopeningbasicinformation='/accountopeningbasicinformation';
-  static const String accountopeningbankdetail='/accountopeningbankdetail';
+  static const String accountOpeningRequest='/accountOpeningRequest';
+  static const String accountOpeningBasicInformation='/accountOpeningBasicInformation';
+  static const String accountOpeningBankDetail='/accountOpeningBankDetail';
   static const String accountOpenKycDetailScreen='/accountOpenKycDetailScreen';
   static const String accountOpenFatcaScreen='/accountOpenFatcaScreen';
   static const String accountOpenUploadScreen='/accountOpenUploadScreen';
@@ -75,7 +72,7 @@ class AppRoute {
   static const String vpsContribution = '/vpsContribution';
   static const String vpsRedemption = '/vpsRedemption';
   static const String vpsChangeSchema = '/vpsChangeSchema';
-  static const String vpsaccountStatement = '/vpsaccountStatement';
+  static const String vpsAccountStatement = '/vpsAccountStatement';
   AppRoute._();
 
   static List<GetPage> get navMain {
@@ -149,8 +146,8 @@ class AppRoute {
         page: () => const RedemptionScreen(),
       ),
       GetPage(
-        name: AppRoute.portofolioRoute,
-        page: () => const PortofolioScreen(),
+        name: AppRoute.portoFolioRoute,
+        page: () => const PortoFolioScreen(),
       ),
       GetPage(
         name: AppRoute.profileRoute,
@@ -161,7 +158,7 @@ class AppRoute {
         page: () => const PurchasesScreen(),
       ),
       GetPage(
-        name: AppRoute.f2ftransferRoute,
+        name: AppRoute.f2fTransferRoute,
         page: () => const F2FTransferScreen(),
       ),
       GetPage(
@@ -169,15 +166,15 @@ class AppRoute {
         page: () => const ReportsScreen(),
       ),
       GetPage(
-        name: AppRoute.viewreportsRoute,
+        name: AppRoute.viewReportsRoute,
         page: () => const ViewReportsScreen(),
       ),
       GetPage(
-        name: AppRoute.dailynavRoute,
+        name: AppRoute.dailyNavRoute,
         page: () => const DailyNavScreen(),
       ),
       GetPage(
-        name: AppRoute.taxcalculatorRoute,
+        name: AppRoute.taxCalculatorRoute,
         page: () => const TaxCalculatorScreen(),
       ),
       GetPage(
@@ -189,11 +186,11 @@ class AppRoute {
         page: () =>const  PinConfirmationScreen()
       ),
       GetPage(
-          name: AppRoute.accountopeningrequest,
+          name: AppRoute.accountOpeningRequest,
           page: () => const AccountOpenRequestScreen()
       ),
       GetPage(
-          name: AppRoute.accountopeningbasicinformation,
+          name: AppRoute.accountOpeningBasicInformation,
           page: () =>const  AccountOpenBasicInformationScreen()
       ),
       GetPage(
@@ -202,7 +199,7 @@ class AppRoute {
       ),
 
       GetPage(
-          name: AppRoute.accountopeningbankdetail,
+          name: AppRoute.accountOpeningBankDetail,
           page: () => const AccountOpenBankDetailScreen()
       ),
       GetPage(
@@ -214,7 +211,7 @@ class AppRoute {
           page: () => const AccountOpenDocumentUploadScreen(),
       ),
       GetPage(
-        name: AppRoute.vpsaccountStatement,
+        name: AppRoute.vpsAccountStatement,
         page: () => const VpsAccountStatementScreen(),
       ),
     ];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nit/controller/account_opening_kyc_detail_screen_controller.dart';
+
 import 'package:nit/controller/vps/vps_redemption_screen_controller.dart';
 import 'package:nit/data/models/login_model.dart';
 import 'package:nit/data/models/vps/vps_load_fund_plans.dart' as vps;
@@ -312,7 +312,7 @@ class VpsRedemptionScreen extends StatelessWidget {
                                 children: [
                                   const RestInvestTitle(
                                     text:
-                                        "Last closing balance before Redemption(Amount):",
+                                        "Investment Value before redemption(Amount):",
                                     fontSize: 10,
                                     textColor: AppColor.black,
                                     fontWeight: FontWeight.w900,
@@ -378,7 +378,7 @@ class VpsRedemptionScreen extends StatelessWidget {
                                     (states) => AppColor.blueColor),
                               ),
                               RestInvestTitle(
-                                text: "25% Of Total Balance",
+                                text: "50% Of Total Balance",
                                 textColor: controller.groupValue == 1
                                     ? AppColor.black
                                     : AppColor.dimblack,

@@ -1,10 +1,7 @@
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:nit/routes/routes.dart';
 
 import '../widgets/no_internet.dart';
 

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utils/constants.dart';
@@ -135,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                                       controller.noInternet == false
                                   ?
                               // Get.toNamed(AppRoute.accountOpenUploadScreen)
-                              Get.toNamed(AppRoute.accountopeningrequest)
+                              Get.toNamed(AppRoute.accountOpeningRequest)
                                   : printInfo(info: 'Do Nothing');
                             },
                             containerColor: AppColor.whiteColor,
@@ -167,7 +167,7 @@ class HomeScreen extends StatelessWidget {
                                             controller.noInternet == false
                                         ? (){
                                       Constant.drawerIndex = 3;
-                                      Get.offAllNamed(AppRoute.portofolioRoute);
+                                      Get.offAllNamed(AppRoute.portoFolioRoute);
                                     }()
                                         : printInfo(info: 'Do Nothing');
                                   },
@@ -325,7 +325,7 @@ class HomeScreen extends StatelessWidget {
                             voidcallback: () {
                               controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.toNamed(AppRoute.taxcalculatorRoute)
+                                  ? Get.toNamed(AppRoute.taxCalculatorRoute)
                                   : printInfo(info: 'Do Nothing');
                             },
                             containerColor: AppColor.whiteColor,
@@ -338,7 +338,7 @@ class HomeScreen extends StatelessWidget {
                                   voidcallback: () {
                                     controller.isLoading == false &&
                                             controller.noInternet == false
-                                        ? Get.toNamed(AppRoute.dailynavRoute)
+                                        ? Get.toNamed(AppRoute.dailyNavRoute)
                                         : printInfo(info: 'Do Nothing');
                                   },
                                   containerColor: AppColor.liteblue)),

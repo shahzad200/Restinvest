@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -134,7 +134,7 @@ class LoginScreen extends StatelessWidget {
 
                   InkWell(
                       onTap: () {
-                        Get.toNamed(AppRoute.dailynavRoute);
+                        Get.toNamed(AppRoute.dailyNavRoute);
                       },
                       child: const RestInvestTitle(
                           text: "Daily Nav",fontWeight: FontWeight.w900,
@@ -143,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   InkWell(
                       onTap: () {
-                        Get.toNamed(AppRoute.taxcalculatorRoute);
+                        Get.toNamed(AppRoute.taxCalculatorRoute);
                       },
                       child: const RestInvestTitle(
                           text: "Tax Calculator",fontWeight: FontWeight.w900,

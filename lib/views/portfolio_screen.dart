@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nit/widgets/no_internet.dart';
@@ -19,8 +19,8 @@ import '../widgets/custom_divider.dart';
 
 import '../widgets/drawer.dart';
 
-class PortofolioScreen extends StatelessWidget {
-  const PortofolioScreen({Key? key}) : super(key: key);
+class PortoFolioScreen extends StatelessWidget {
+  const PortoFolioScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

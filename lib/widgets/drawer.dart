@@ -147,7 +147,7 @@ class CustomDrawer extends StatelessWidget {
                       } else {
                         Constant.drawerIndex = 3;
                         Get.back();
-                        Get.offAllNamed(AppRoute.portofolioRoute);
+                        Get.offAllNamed(AppRoute.portoFolioRoute);
                       }
                     },
                     leading: const Portofolio(),
@@ -211,7 +211,7 @@ class CustomDrawer extends StatelessWidget {
                       } else {
                         Constant.drawerIndex = 6;
                         Get.back();
-                        Constant.isVps ? Get.offAllNamed(AppRoute.vpsChangeSchema) : Get.offAllNamed(AppRoute.f2ftransferRoute);
+                        Constant.isVps ? Get.offAllNamed(AppRoute.vpsChangeSchema) : Get.offAllNamed(AppRoute.f2fTransferRoute);
                       }
                     },
                     leading: const F2F(),

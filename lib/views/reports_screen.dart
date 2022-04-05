@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -57,7 +57,7 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute+"?param=AccStmt");
+                      Get.toNamed(AppRoute.viewReportsRoute+"?param=AccStmt");
                     },
                     text: "Account Statement",
                   ),
@@ -66,7 +66,7 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute+"?param=StmtOfAcc");
+                      Get.toNamed(AppRoute.viewReportsRoute+"?param=StmtOfAcc");
                     },
                     text: "Statement of Account ",
                   ),
@@ -91,7 +91,7 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute+"?param=RedStatus");
+                      Get.toNamed(AppRoute.viewReportsRoute+"?param=RedStatus");
                     },
                     text: "Redemption Report",
                   ),
@@ -100,14 +100,14 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute+"?param=SaleStatus");
+                      Get.toNamed(AppRoute.viewReportsRoute+"?param=SaleStatus");
                     },
                     text: "Purchase Report",
                   ),
                   CustomDivider(color: AppColor.black.withOpacity(0.1)),
                   ReportsInkWellButton(
                     onTap: () {
-                      Get.toNamed(AppRoute.viewreportsRoute+"?param=TransferStatus");
+                      Get.toNamed(AppRoute.viewReportsRoute+"?param=TransferStatus");
                     },
                     text: "F2F Transfer Report",
                   ),

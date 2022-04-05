@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -259,7 +259,7 @@ class AccountOpenRequestScreenController extends GetxController {
           Constant.cNic = validateVerificationCodeForDigUser!.response!.cnic!;
             Constant.accType = groupValue;
             Constant.mobileReg = mobileNumberOwnerCode;
-          Get.toNamed(AppRoute.accountopeningbasicinformation);
+          Get.toNamed(AppRoute.accountOpeningBasicInformation);
         }
       } catch (e) {
         if (e.toString() == 'Exception: No Internet') {
