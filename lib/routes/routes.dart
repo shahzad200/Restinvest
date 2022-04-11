@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:nit/views/new_account_screen.dart';
 import '../views/account_opening_document_upload_screen.dart';
 import '../views/account_opening_fatca_screen.dart';
 import '../views/account_opening_kyc_detail_screen.dart';
@@ -68,6 +69,7 @@ class AppRoute {
   static const String accountOpenFatcaScreen='/accountOpenFatcaScreen';
   static const String accountOpenUploadScreen='/accountOpenUploadScreen';
   static const String accountOpenURiskScreen='/accountOpenRickScreen';
+  static const String newAccountScreen='/newAccountScreen';
 // VPS
   static const String vpsContribution = '/vpsContribution';
   static const String vpsRedemption = '/vpsRedemption';
@@ -213,6 +215,10 @@ class AppRoute {
       GetPage(
         name: AppRoute.vpsAccountStatement,
         page: () => const VpsAccountStatementScreen(),
+      ),
+      GetPage(
+        name: AppRoute.newAccountScreen,
+        page: () => const NewAccountScreen(),
       ),
     ];
   }

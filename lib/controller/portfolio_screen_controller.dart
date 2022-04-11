@@ -49,6 +49,9 @@ class PortofolioScreenController extends GetxController {
   @override
   void onInit() async{
 
+    // print(Constant.userId,);
+    print(Constant.accountIndex);
+
     for (int i = 0; i < Constant.loginModel!.response!
         .accounts![Constant.accountIndex].userFundBalances!.length; i++) {
       amountAccount = amountAccount + double.parse(Constant

@@ -327,7 +327,6 @@ class UserFundBalances {
   }
 }
 
-
 class Bank{
   String? accountNumber;
   String? bankAccTitle;
@@ -460,7 +459,6 @@ class User {
     return _data;
   }
 }
-
 
 class PensionFundList {
   PensionFundList({

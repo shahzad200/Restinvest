@@ -12,10 +12,9 @@ import 'package:nit/data/models/new_user_reg_data.dart';
 
 import 'package:nit/data/models/social_media_links.dart';
 import 'package:nit/data/models/vps/load_existing_schema_data.dart';
-import 'package:nit/utils/constants.dart';
 
 import 'models/city_sector_model.dart';
-import 'models/gen_verification_code_for_dig_user.dart';
+
 import 'models/load_dashboard.dart';
 import 'models/load_fund_plans.dart';
 import 'models/load_fund_plans_p.dart';
@@ -44,7 +43,7 @@ class ApiClient {
       // 'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
       // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
       // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
-      'http://192.168.0.65:8094/AssetConnectMobilePortal/UserService/';
+      'http://192.168.0.84:8094/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
@@ -69,38 +68,29 @@ class ApiClient {
   static const _epGetExpectedFund = _baseUrl + 'getExpectedFund';
 
   // DIGITAL ACCOUNT
-  static const _epNewDigUserRegDataBeforeOTP =
-      _baseUrl + 'NewDigUserRegDataBeforeOTP';
-  static const _epNewDigUserRegDataAfterOTP =
-      _baseUrl + 'NewDigUserRegDataAfterOTP';
-  static const _epNewDigUserRegDataRpqList =
-      _baseUrl + 'NewDigUserRegDataRpqList';
-  static const _epGenVerificationCodeForDigUser =
-      _baseUrl + 'genVerificationCodeForDigUser';
-  static const _epValidateVerificationCodeForDigUser =
-      _baseUrl + 'validateVerificationCodeForDigUser';
-  static const _epPartialSavingForDigUser =
-      _baseUrl + 'partialSavingForDigUser';
+  static const _epNewDigUserRegDataBeforeOTP = _baseUrl + 'NewDigUserRegDataBeforeOTP';
+  static const _epNewDigUserRegDataAfterOTP = _baseUrl + 'NewDigUserRegDataAfterOTP';
+  static const _epNewDigUserRegDataRpqList = _baseUrl + 'NewDigUserRegDataRpqList';
+  static const _epGenVerificationCodeForDigUser = _baseUrl + 'genVerificationCodeForDigUser';
+  static const _epValidateVerificationCodeForDigUser = _baseUrl + 'validateVerificationCodeForDigUser';
+  static const _epPartialSavingForDigUser = _baseUrl + 'partialSavingForDigUser';
   static const _epStateData = _baseUrl + 'StateData';
   static const _epSaveDigUser = _baseUrl + 'saveDigUser';
-  static const _epLoadDigUserMissingDetailLinkData =
-      _baseUrl + 'loadDigUserMissingDetailLinkData';
-  static const _epGenVerificationCodeForDigUserMissingDet =
-      _baseUrl + 'genVerificationCodeForDigUserMissingDet';
-  static const _epValidateVerificationCodeForDigUserMissingDet =
-      _baseUrl + 'validateVerificationCodeForDigUserMissingDet';
+  static const _epLoadDigUserMissingDetailLinkData = _baseUrl + 'loadDigUserMissingDetailLinkData';
+  static const _epGenVerificationCodeForDigUserMissingDet = _baseUrl + 'genVerificationCodeForDigUserMissingDet';
+  static const _epValidateVerificationCodeForDigUserMissingDet = _baseUrl + 'validateVerificationCodeForDigUserMissingDet';
   static const _epSaveDigUserMissingDet = _baseUrl + 'saveDigUserMissingDet';
 
   // VPS
   static const _epVpsContribution = _baseUrl + 'saveContribution';
   static const _epVpsLoadFolioFunds = _baseUrl + 'loadFolioFunds';
   static const _epVpsGeneratePinCode = _baseUrl + 'generatePinCode';
-  static const _epVpsLoadBalancesForVpsRedemption = _baseUrl+ 'loadBalancesForVpsRedemption';
-  static const _epVpsSaveVpsRedemption = _baseUrl+ 'saveVpsRedemption';
-  static const _epVpsLoadExistingSchemeData = _baseUrl+ 'loadExistingSchemeData';
-  static const _epVpsLoadSchemeAllocations = _baseUrl+ 'loadSchemeAllocations';
-  static const _epVpsSaveChangeScheme = _baseUrl+ 'saveChangeScheme';
-  static const _epVpsViewReport = _baseUrl+ 'viewReport';
+  static const _epVpsLoadBalancesForVpsRedemption = _baseUrl + 'loadBalancesForVpsRedemption';
+  static const _epVpsSaveVpsRedemption = _baseUrl + 'saveVpsRedemption';
+  static const _epVpsLoadExistingSchemeData = _baseUrl + 'loadExistingSchemeData';
+  static const _epVpsLoadSchemeAllocations = _baseUrl + 'loadSchemeAllocations';
+  static const _epVpsSaveChangeScheme = _baseUrl + 'saveChangeScheme';
+  static const _epVpsViewReport = _baseUrl + 'viewReport';
 
   Future<ViewReport> onViewReport(
     String fromDate,
@@ -1093,11 +1083,10 @@ class ApiClient {
         printInfo(info: response.body);
         // NewDigUserRegDataBeforeOTP newDigUserRegDataBeforeOTP =
         //     NewDigUserRegDataBeforeOTP.fromJson(jsonDecode(response.body));
-        NewDigUserRegDataBeforeOTP newDigUserRegDataBeforeOTP=NewDigUserRegDataBeforeOTP.fromJson(jsonDecode(response.body));
-        if (
-        newDigUserRegDataBeforeOTP.meta!.code.toString() ==
-            200.toString())
-        {
+        NewDigUserRegDataBeforeOTP newDigUserRegDataBeforeOTP =
+            NewDigUserRegDataBeforeOTP.fromJson(jsonDecode(response.body));
+        if (newDigUserRegDataBeforeOTP.meta!.code.toString() ==
+            200.toString()) {
           return newDigUserRegDataBeforeOTP;
         } else {
           throw Exception(newDigUserRegDataBeforeOTP.meta!.message);
@@ -1992,14 +1981,13 @@ class ApiClient {
     }
   }
 
-
-
-  Future<VpsLoadFolioFunds> onVpsLoadFolioFunds(String folioNumber, String requestType) async {
+  Future<VpsLoadFolioFunds> onVpsLoadFolioFunds(
+      String folioNumber, String requestType) async {
     printInfo(
         info: jsonEncode(<String, String>{
-          'folioNumber': folioNumber,
-          'requestType': requestType
-        }).toString());
+      'folioNumber': folioNumber,
+      'requestType': requestType
+    }).toString());
     try {
       final response = await http.post(
         Uri.parse(_epVpsLoadFolioFunds),
@@ -2014,7 +2002,7 @@ class ApiClient {
       printInfo(info: response.body.toString());
       if (response.statusCode == 200) {
         VpsLoadFolioFunds loadFundsPlans =
-        VpsLoadFolioFunds.fromJson(jsonDecode(response.body));
+            VpsLoadFolioFunds.fromJson(jsonDecode(response.body));
         if (loadFundsPlans.meta!.code.toString() == 200.toString()) {
           return loadFundsPlans;
         } else {
@@ -2028,13 +2016,14 @@ class ApiClient {
     }
   }
 
-  Future<VpsLoadFundPlan> onVpsRedLoadFolioFunds(String folioNumber, String requestType, String userId) async {
+  Future<VpsLoadFundPlan> onVpsRedLoadFolioFunds(
+      String folioNumber, String requestType, String userId) async {
     printInfo(
         info: jsonEncode(<String, String>{
-          'userId': userId,
-          'folioNumber': folioNumber,
-          'requestType': requestType
-        }).toString());
+      'userId': userId,
+      'folioNumber': folioNumber,
+      'requestType': requestType
+    }).toString());
     try {
       final response = await http.post(
         Uri.parse(_epLoadFundsPlans),
@@ -2050,7 +2039,7 @@ class ApiClient {
       printInfo(info: response.body.toString());
       if (response.statusCode == 200) {
         VpsLoadFundPlan loadFundsPlans =
-        VpsLoadFundPlan.fromJson(jsonDecode(response.body));
+            VpsLoadFundPlan.fromJson(jsonDecode(response.body));
         if (loadFundsPlans.meta!.code.toString() == 200.toString()) {
           return loadFundsPlans;
         } else {
@@ -2063,7 +2052,6 @@ class ApiClient {
       throw Exception('No Internet');
     }
   }
-
 
   Future<Common> onVpsGeneratePinCode(
       String userId, String folioNumber, String req) async {
@@ -2096,34 +2084,33 @@ class ApiClient {
     }
   }
 
-
-
-
   Future<LoadBalancesForVpsRedemption> onVpsLoadBalancesForVpsRedemption(
       String folioNumber, String fundCode, String? classCode) async {
     try {
       LoadBalancesForVpsRedemption? loadBalancesForVpsRedemption;
       printInfo(
           info: jsonEncode(<String, String>{
-            "folioNumber":folioNumber,
-            "fundCode":fundCode,
-            "classCode": classCode!
-          }).toString());
+        "folioNumber": folioNumber,
+        "fundCode": fundCode,
+        "classCode": classCode!
+      }).toString());
       final response = await http.post(
         Uri.parse(_epVpsLoadBalancesForVpsRedemption),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
-          "folioNumber":folioNumber,
-          "fundCode":fundCode,
+          "folioNumber": folioNumber,
+          "fundCode": fundCode,
           "classCode": classCode!
         }),
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body.toString());
-        loadBalancesForVpsRedemption = LoadBalancesForVpsRedemption.fromJson(jsonDecode(response.body));
-        if (loadBalancesForVpsRedemption.meta!.code.toString() == 200.toString()) {
+        loadBalancesForVpsRedemption =
+            LoadBalancesForVpsRedemption.fromJson(jsonDecode(response.body));
+        if (loadBalancesForVpsRedemption.meta!.code.toString() ==
+            200.toString()) {
           return loadBalancesForVpsRedemption;
         } else {
           throw Exception(loadBalancesForVpsRedemption.meta!.message);
@@ -2136,94 +2123,141 @@ class ApiClient {
     }
   }
 
-
   Future<Common> onSaveVpsRedemption(
-      String userId,String userType,String sessionId,String accessCode,
-      String sessionStartDate,String redTransType,String transactionValue,
-      String availableBalance,String maturity,String afterRetirement,
-      String fundCode,String unitClass,String folioNumber,String authorizationPinCode,
-      String yearOne,String taxPaidOne,String taxableSalaryOne,Uint8List? taxOne,String taxExtOne,
-      String yearTwo,String taxPaidTwo,String taxableSalaryTwo,Uint8List? taxTwo,String taxExtTwo,
-      String yearThree,String taxPaidThree,String taxableSalaryThree,Uint8List? taxThree,String taxExtThree,
-      ) async {
+    String userId,
+    String userType,
+    String sessionId,
+    String accessCode,
+    String sessionStartDate,
+    String redTransType,
+    String transactionValue,
+    String availableBalance,
+    String maturity,
+    String afterRetirement,
+    String fundCode,
+    String unitClass,
+    String folioNumber,
+    String authorizationPinCode,
+    String yearOne,
+    String taxPaidOne,
+    String taxableSalaryOne,
+    Uint8List? taxOne,
+    String taxExtOne,
+    String yearTwo,
+    String taxPaidTwo,
+    String taxableSalaryTwo,
+    Uint8List? taxTwo,
+    String taxExtTwo,
+    String yearThree,
+    String taxPaidThree,
+    String taxableSalaryThree,
+    Uint8List? taxThree,
+    String taxExtThree,
+  ) async {
     Common? common;
     try {
       printInfo(
           info: jsonEncode(<String, dynamic>{
-            "userId":userId,
-            "userType":userType,
-            "sessionId":sessionId,
-            "accessCode":accessCode,
-            "sessionStartDate":sessionStartDate,
-            "redTransType":redTransType,
-            "transactionValue":transactionValue,
-            "availableBalance":availableBalance,
-            "maturity":maturity,
-            "afterRetirement":afterRetirement,
-            "fundCode":fundCode,
-            "unitClass":unitClass,
-            "folioNumber":folioNumber,
-            "authorizationPinCode":authorizationPinCode,
-          "taxDetails":[
-          {"year":yearOne,
-            "taxPaid":taxPaidOne,
-          "taxableSalary":taxableSalaryOne,
-          "paidTaxProof" :{
-          "fileName":"tax1.jpg",
-          "fileExtension":taxExtOne,
-          "fileContent":taxOne}},
-          {"year":yearTwo,"taxPaid":taxPaidTwo,
-          "taxableSalary":taxableSalaryTwo,
-          "paidTaxProof" :{
-          "fileName":"tax2.pdf",
-          "fileExtension":taxExtTwo,
-          "fileContent":taxTwo}},
-          {"year":yearThree,"taxPaid":taxPaidThree,"taxableSalary":taxableSalaryThree,
-          "paidTaxProof" :{
-          "fileName":"tax3.jpg",
-          "fileExtension":taxExtThree,
-          "fileContent":taxThree
-          }}]}.toString()));
+        "userId": userId,
+        "userType": userType,
+        "sessionId": sessionId,
+        "accessCode": accessCode,
+        "sessionStartDate": sessionStartDate,
+        "redTransType": redTransType,
+        "transactionValue": transactionValue,
+        "availableBalance": availableBalance,
+        "maturity": maturity,
+        "afterRetirement": afterRetirement,
+        "fundCode": fundCode,
+        "unitClass": unitClass,
+        "folioNumber": folioNumber,
+        "authorizationPinCode": authorizationPinCode,
+        "taxDetails": [
+          {
+            "year": yearOne,
+            "taxPaid": taxPaidOne,
+            "taxableSalary": taxableSalaryOne,
+            "paidTaxProof": {
+              "fileName": "tax1.jpg",
+              "fileExtension": taxExtOne,
+              "fileContent": taxOne
+            }
+          },
+          {
+            "year": yearTwo,
+            "taxPaid": taxPaidTwo,
+            "taxableSalary": taxableSalaryTwo,
+            "paidTaxProof": {
+              "fileName": "tax2.pdf",
+              "fileExtension": taxExtTwo,
+              "fileContent": taxTwo
+            }
+          },
+          {
+            "year": yearThree,
+            "taxPaid": taxPaidThree,
+            "taxableSalary": taxableSalaryThree,
+            "paidTaxProof": {
+              "fileName": "tax3.jpg",
+              "fileExtension": taxExtThree,
+              "fileContent": taxThree
+            }
+          }
+        ]
+      }.toString()));
       final response = await http.post(
         Uri.parse(_epVpsSaveVpsRedemption),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, dynamic>{
-          "userId":userId,
-          "userType":userType,
-          "sessionId":sessionId,
-          "accessCode":accessCode,
-          "sessionStartDate":sessionStartDate,
-          "redTransType":redTransType,
-          "transactionValue":transactionValue,
-          "availableBalance":availableBalance,
-          "maturity":maturity,
-          "afterRetirement":afterRetirement,
-          "fundCode":fundCode,
-          "unitClass":unitClass,
-          "folioNumber":folioNumber,
-          "authorizationPinCode":authorizationPinCode,
-          "taxDetails":[
-            {"year":yearOne,
-              "taxPaid":taxPaidOne,
-              "taxableSalary":taxableSalaryOne,
-              "paidTaxProof" :{
-                "fileName":"tax1.jpg",
-                "fileExtension":taxExtOne,
-                "fileContent":taxOne}},
-            {"year":yearTwo,"taxPaid":taxPaidTwo,
-              "taxableSalary":taxableSalaryTwo,
-              "paidTaxProof" :{
-                "fileName":"tax2.pdf",
-                "fileExtension":taxExtTwo,
-                "fileContent":taxTwo}},
-            {"year":yearThree,"taxPaid":taxPaidThree,"taxableSalary":taxableSalaryThree,
-              "paidTaxProof" :{
-                "fileName":"tax3.jpg",
-                "fileExtension":taxExtThree,
-                "fileContent":taxThree
-              }}]}),
+          "userId": userId,
+          "userType": userType,
+          "sessionId": sessionId,
+          "accessCode": accessCode,
+          "sessionStartDate": sessionStartDate,
+          "redTransType": redTransType,
+          "transactionValue": transactionValue,
+          "availableBalance": availableBalance,
+          "maturity": maturity,
+          "afterRetirement": afterRetirement,
+          "fundCode": fundCode,
+          "unitClass": unitClass,
+          "folioNumber": folioNumber,
+          "authorizationPinCode": authorizationPinCode,
+          "taxDetails": [
+            {
+              "year": yearOne,
+              "taxPaid": taxPaidOne,
+              "taxableSalary": taxableSalaryOne,
+              "paidTaxProof": {
+                "fileName": "tax1.jpg",
+                "fileExtension": taxExtOne,
+                "fileContent": taxOne
+              }
+            },
+            {
+              "year": yearTwo,
+              "taxPaid": taxPaidTwo,
+              "taxableSalary": taxableSalaryTwo,
+              "paidTaxProof": {
+                "fileName": "tax2.pdf",
+                "fileExtension": taxExtTwo,
+                "fileContent": taxTwo
+              }
+            },
+            {
+              "year": yearThree,
+              "taxPaid": taxPaidThree,
+              "taxableSalary": taxableSalaryThree,
+              "paidTaxProof": {
+                "fileName": "tax3.jpg",
+                "fileExtension": taxExtThree,
+                "fileContent": taxThree
+              }
+            }
+          ]
+        }),
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body.toString());
@@ -2249,27 +2283,27 @@ class ApiClient {
     }
   }
 
-
   Future<LoadExistingSchemeData> onVpsLoadExistingSchemaData(
       String folioNumber) async {
     try {
       LoadExistingSchemeData? loadExistingSchemeData;
       printInfo(
           info: jsonEncode(<String, String>{
-            "folioNumber":folioNumber,
-          }).toString());
+        "folioNumber": folioNumber,
+      }).toString());
       final response = await http.post(
         Uri.parse(_epVpsLoadExistingSchemeData),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
-          "folioNumber":folioNumber,
+          "folioNumber": folioNumber,
         }),
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body.toString());
-        loadExistingSchemeData = LoadExistingSchemeData.fromJson(jsonDecode(response.body));
+        loadExistingSchemeData =
+            LoadExistingSchemeData.fromJson(jsonDecode(response.body));
         if (loadExistingSchemeData.meta!.code.toString() == 200.toString()) {
           return loadExistingSchemeData;
         } else {
@@ -2283,32 +2317,33 @@ class ApiClient {
     }
   }
 
-  Future<LoadSchemeAllocations> onVpsLoadSchemeAllocations(
-      String folioNumber,String fundCode,String schemeCode,String previousSchemeCode) async {
+  Future<LoadSchemeAllocations> onVpsLoadSchemeAllocations(String folioNumber,
+      String fundCode, String schemeCode, String previousSchemeCode) async {
     try {
       LoadSchemeAllocations? loadSchemeAllocations;
       printInfo(
           info: jsonEncode(<String, String>{
-            "folioNumber":folioNumber,
-            "fundCode":fundCode,
-            "schemeCode":schemeCode,
-            "previousSchemeCode":previousSchemeCode
-          }).toString());
+        "folioNumber": folioNumber,
+        "fundCode": fundCode,
+        "schemeCode": schemeCode,
+        "previousSchemeCode": previousSchemeCode
+      }).toString());
       final response = await http.post(
         Uri.parse(_epVpsLoadSchemeAllocations),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
-          "folioNumber":folioNumber,
-          "fundCode":fundCode,
-          "schemeCode":schemeCode,
-          "previousSchemeCode":previousSchemeCode
+          "folioNumber": folioNumber,
+          "fundCode": fundCode,
+          "schemeCode": schemeCode,
+          "previousSchemeCode": previousSchemeCode
         }),
       );
       if (response.statusCode == 200) {
         printInfo(info: response.body.toString());
-        loadSchemeAllocations = LoadSchemeAllocations.fromJson(jsonDecode(response.body));
+        loadSchemeAllocations =
+            LoadSchemeAllocations.fromJson(jsonDecode(response.body));
         if (loadSchemeAllocations.meta!.code.toString() == 200.toString()) {
           return loadSchemeAllocations;
         } else {
@@ -2322,44 +2357,52 @@ class ApiClient {
     }
   }
 
-
   Future<Common> onSaveChangeScheme(
-      String userId,String userType,String sessionId,String accessCode,
-      String sessionStartDate,String fundCode,String folioNumber,String schemeCode,
-      String previousSchemeCode,String authorizationPinCode,List<pension.PensionSubFunds>? list
-     ) async {
+      String userId,
+      String userType,
+      String sessionId,
+      String accessCode,
+      String sessionStartDate,
+      String fundCode,
+      String folioNumber,
+      String schemeCode,
+      String previousSchemeCode,
+      String authorizationPinCode,
+      List<pension.PensionSubFunds>? list) async {
     Common? common;
     try {
       printInfo(
           info: jsonEncode(<String, dynamic>{
-            "userId":userId,
-            "userType":userType,
-            "sessionId":sessionId,
-            "accessCode":accessCode,
-            "sessionStartDate":sessionStartDate,
-            "fundCode":fundCode,
-            "folioNumber":folioNumber,
-            "schemeCode":schemeCode,
-            "previousSchemeCode":previousSchemeCode,//value obtained from "loadExistingSchemeData" api call
-            "authorizationPinCode":authorizationPinCode,
-            "pensionSubfunds": list
-           }.toString()));
+        "userId": userId,
+        "userType": userType,
+        "sessionId": sessionId,
+        "accessCode": accessCode,
+        "sessionStartDate": sessionStartDate,
+        "fundCode": fundCode,
+        "folioNumber": folioNumber,
+        "schemeCode": schemeCode,
+        "previousSchemeCode":
+            previousSchemeCode, //value obtained from "loadExistingSchemeData" api call
+        "authorizationPinCode": authorizationPinCode,
+        "pensionSubfunds": list
+      }.toString()));
       final response = await http.post(
         Uri.parse(_epVpsSaveChangeScheme),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, dynamic>{
-          "userId":userId,
-          "userType":userType,
-          "sessionId":sessionId,
-          "accessCode":accessCode,
-          "sessionStartDate":sessionStartDate,
-          "fundCode":fundCode,
-          "folioNumber":folioNumber,
-          "schemeCode":schemeCode,
-          "previousSchemeCode":previousSchemeCode,//value obtained from "loadExistingSchemeData" api call
-          "authorizationPinCode":authorizationPinCode,
+          "userId": userId,
+          "userType": userType,
+          "sessionId": sessionId,
+          "accessCode": accessCode,
+          "sessionStartDate": sessionStartDate,
+          "fundCode": fundCode,
+          "folioNumber": folioNumber,
+          "schemeCode": schemeCode,
+          "previousSchemeCode":
+              previousSchemeCode, //value obtained from "loadExistingSchemeData" api call
+          "authorizationPinCode": authorizationPinCode,
           "pensionSubfunds": list
         }),
       );
@@ -2386,37 +2429,45 @@ class ApiClient {
       }
     }
   }
+
   // "01/01/2021"
-  Future<VpsViewReport> onVpsViewReport(String accountValue,String fromDate,String toDate,String pensionFund
-      ,String reportType
-     ) async {
+  Future<VpsViewReport> onVpsViewReport(String accountValue, String fromDate,
+      String toDate, String pensionFund, String reportType) async {
     VpsViewReport? vpsViewReport;
     try {
       printInfo(
           info: jsonEncode(<String, dynamic>{
-            "folioNumber":accountValue,
-            "fromDate":fromDate,
-            "toDate":toDate,
-            "corporatePrt":"", /*pass "1" for corporate account type otherwise ""*/
-            "individualPrt":"",/*pass "1" for individual account type otherwise ""*/
-            "allOption":"ALL",/*pass "ALL" for all account type otherwise ""*/
-            "pensionFund":pensionFund, /*ALL in case of all funds*/
-            "reportType":reportType
-          }.toString()));
+        "folioNumber": accountValue,
+        "fromDate": fromDate,
+        "toDate": toDate,
+        "corporatePrt": "",
+        /*pass "1" for corporate account type otherwise ""*/
+        "individualPrt": "",
+        /*pass "1" for individual account type otherwise ""*/
+        "allOption": "ALL",
+        /*pass "ALL" for all account type otherwise ""*/
+        "pensionFund": pensionFund,
+        /*ALL in case of all funds*/
+        "reportType": reportType
+      }.toString()));
       final response = await http.post(
         Uri.parse(_epVpsViewReport),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, dynamic>{
-          "folioNumber":accountValue,
-          "fromDate":fromDate,
-          "toDate":toDate,
-          "corporatePrt":"", /*pass "1" for corporate account type otherwise ""*/
-          "individualPrt":"",/*pass "1" for individual account type otherwise ""*/
-          "allOption":"ALL",/*pass "ALL" for all account type otherwise ""*/
-          "pensionFund":pensionFund, /*ALL in case of all funds*/
-          "reportType":reportType
+          "folioNumber": accountValue,
+          "fromDate": fromDate,
+          "toDate": toDate,
+          "corporatePrt": "",
+          /*pass "1" for corporate account type otherwise ""*/
+          "individualPrt": "",
+          /*pass "1" for individual account type otherwise ""*/
+          "allOption": "ALL",
+          /*pass "ALL" for all account type otherwise ""*/
+          "pensionFund": pensionFund,
+          /*ALL in case of all funds*/
+          "reportType": reportType
         }),
       );
       if (response.statusCode == 200) {
@@ -2431,10 +2482,12 @@ class ApiClient {
         throw Exception('No Internet');
       }
     } catch (e) {
-      if (e.toString() == 'Exception: ' + vpsViewReport!.meta!.error.toString()) {
+      if (e.toString() ==
+          'Exception: ' + vpsViewReport!.meta!.error.toString()) {
         throw Exception(vpsViewReport!.meta!.error.toString());
       } else {
-        if (e.toString() == 'Exception: ' + vpsViewReport!.meta!.error.toString()) {
+        if (e.toString() ==
+            'Exception: ' + vpsViewReport!.meta!.error.toString()) {
           throw Exception(vpsViewReport!.meta!.error.toString());
         } else {
           throw Exception('No Internet');
@@ -2442,6 +2495,4 @@ class ApiClient {
       }
     }
   }
-
-
 }

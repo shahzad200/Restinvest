@@ -9,7 +9,7 @@ import 'package:nit/data/repository.dart';
 import 'package:nit/routes/routes.dart';
 import 'package:nit/utils/constants.dart';
 import 'package:nit/widgets/constant_widget.dart';
-import 'package:nit/widgets/custome_dialog.dart';
+
 
 import 'account_opening_basic_information_screen_controller.dart';
 
@@ -25,7 +25,7 @@ class AccountOpenFatcaController extends GetxController {
   String tinNumber = "xzcxzc";
   bool disclaimerIsChecked = false;
   bool termsConditions = false;
-  var charactor = 0;
+  var character = 0;
   TextEditingController titleController = TextEditingController();
   TextEditingController tinNumberController = TextEditingController();
   TextEditingController taxResCountryController = TextEditingController();
@@ -80,7 +80,7 @@ class AccountOpenFatcaController extends GetxController {
   ];
   @override
   void onInit() {
-    // TODO: implement onInit
+
     titleController.text = Constant.uTitle;
     cnicController.text = Constant.cNic;
     if(Constant.validateVerificationCodeForDigUser!.response!.fatcaDisclaimerChecked == true

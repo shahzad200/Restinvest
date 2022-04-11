@@ -197,7 +197,7 @@ class PortoFolioScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 5.0),
                       child: Row(
                         children: [
-                          RestInvestTitle(text: "PKR (000)",
+                          const RestInvestTitle(text: "PKR (000)",
                             fontSize: 12,
                             fontWeight: FontWeight.w500,),
                           SizedBox(width: Get.width / 4,),

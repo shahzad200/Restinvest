@@ -241,6 +241,21 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
+                CustomDivider(
+                  color: AppColor.black.withOpacity(0.1),
+                ),
+                ListTile(
+                  onTap: () {
+                    Get.back();
+                    Get.toNamed(AppRoute.newAccountScreen);
+                  },
+                  leading: const Logout(),
+                  title: const RestInvestTitle(
+                    text: "New Account",
+                    textColor: AppColor.black,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                   CustomDivider(
                     color: AppColor.black.withOpacity(0.1),
                   ),
@@ -251,6 +266,7 @@ class CustomDrawer extends StatelessWidget {
                         link: 'https://nit.softech.pk/NewNit/Complains.aspx',
                       ));
                     },
+
                     leading: const Complaint(),
                     title: const RestInvestTitle(
                       text: "Complaints",
@@ -275,24 +291,8 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                CustomDivider(
-                  color: AppColor.black.withOpacity(0.1),
-                ),
-                // CustomDivider(
-                //   color: AppColor.black.withOpacity(0.1),
-                // ),
-                // ListTile(
-                //   onTap: () {
-                //     Get.back();
-                //     Get.toNamed(AppRoute.vpsRedemption);
-                //   },
-                //   leading: const Logout(),
-                //   title: const RestInvestTitle(
-                //     text: "VPS Redemption",
-                //     textColor: AppColor.black,
-                //     fontWeight: FontWeight.w700,
-                //   ),
-                // ),
+
+
                 ]),
           //   ],
           // ),
