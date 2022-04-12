@@ -249,7 +249,9 @@ class CustomDrawer extends StatelessWidget {
                     Get.back();
                     Get.toNamed(AppRoute.newAccountScreen);
                   },
-                  leading: const Logout(),
+                  leading: const Padding(
+                      padding: EdgeInsets.only(right: 4),
+                      child: Icon(Icons.person)),
                   title: const RestInvestTitle(
                     text: "New Account",
                     textColor: AppColor.black,

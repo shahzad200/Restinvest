@@ -14,7 +14,7 @@ class Constant{
   static int drawerIndex = 1;
   static LoginModel? loginModel;
   static bool isVps = false;
-  static bool isUms=true;
+  static bool isUms=false;
   static int accountIndex = 0;
   static SocialMediaLink? socialMediaLink;
   static String linkComplains = 'https://nit.softech.pk/NewNit/Complains.aspx';
