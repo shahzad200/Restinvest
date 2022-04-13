@@ -2,7 +2,7 @@ import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
 import 'package:nit/utils/colors.dart';
 import 'package:intl/intl.dart';
-import 'package:nit/widgets/constant_widget.dart';
+import '../widgets/constant_widget.dart';
 
 // class DateFormFieldContainer extends StatefulWidget {
 //   const DateFormFieldContainer({
@@ -88,19 +88,19 @@ class DateFormFieldContainer extends StatelessWidget {
         required this.onDateSelected,
         this.initialValue,
         this.enable = true,
-      required  this.isTrue,
+        required  this.isTrue,
         this.dateFormat,
         required this.text,})
       : super(key: key);
-  final DateTimeFieldPickerMode mode;
-  final bool dateFormatTrue;
-  final Function(dynamic) onDateSelected;
-  final dynamic dateFormat;
-  final dynamic initialValue;
-  final bool isRounded;
-  final bool enable;
-  final String text;
-  final bool isTrue;
+       final DateTimeFieldPickerMode mode;
+       final bool dateFormatTrue;
+       final Function(dynamic) onDateSelected;
+       final dynamic dateFormat;
+       final dynamic initialValue;
+       final bool isRounded;
+       final bool enable;
+       final String text;
+       final bool isTrue;
 
   @override
   Widget build(BuildContext context) {

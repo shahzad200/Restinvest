@@ -42,7 +42,7 @@ class RegisterScreen extends StatelessWidget {
                             _.updateUserName(val);
                           },
                           controller: _.accNumberController,
-                          textInputType: TextInputType.numberWithOptions(),
+                          textInputType: const TextInputType.numberWithOptions(),
                           hint: "Account No.",
                           fieldType: Constants.accountNo,
                           textAlign: TextAlign.center,
@@ -55,7 +55,7 @@ class RegisterScreen extends StatelessWidget {
                             _.updateNumber(val);
                           },
                           controller: _.cnicController,
-                          textInputType: TextInputType.numberWithOptions(),
+                          textInputType: const TextInputType.numberWithOptions(),
                           hint: "CNIC - 85202-6761678-8",
                           fieldType: Constants.cnicNumber,
                           textAlign: TextAlign.center,

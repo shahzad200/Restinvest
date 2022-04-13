@@ -29,7 +29,7 @@ class TaxCalculatorScreen extends StatelessWidget {
               backgroundColor: AppColor.whiteColor,
               title: Padding(
                 padding:  EdgeInsets.only(right: Get.width/6),
-                child: Logo(
+                child: const Logo(
                   height: 55,
                   width: 55,
                 ),
@@ -48,7 +48,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                         border:
                             Border.all(width: 1, color: AppColor.blueColor)),
                     child: Column(children: [
-                       CustomTextContainer(fontSize: 14,
+                       const CustomTextContainer(fontSize: 14,
                         height: 45,
                         text: "TAX SAVING CALCULATOR",
                         textAlign: TextAlign.center,
@@ -304,7 +304,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                                 Expanded(
                                   child:  RestInvestTitle(
                                     text:
-                                        "* As per section 62 of Income Tax Ordinance,2001,an indiviual investor of open end mutual fund account can claim tax credit on investment up to Rs. 2,000,000/- or 20% of individual's taxable income whichever is lower.",
+                                        "* As per section 62 of Income Tax Ordinance,2001,an individual investor of open end mutual fund account can claim tax credit on investment up to Rs. 2,000,000/- or 20% of individual's taxable income whichever is lower.",
                                     textColor: AppColor.black,
                                     fontWeight: FontWeight.w900,
                                     fontSize: 10,

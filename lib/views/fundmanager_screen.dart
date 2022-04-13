@@ -33,7 +33,7 @@ class FundManagerScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            body: WebView(
+            body: const WebView(
               initialUrl: 'https://nit.softech.pk/newnit/ConsolidatedFMR.aspx',
             ),
           );
