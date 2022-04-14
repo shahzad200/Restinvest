@@ -41,9 +41,9 @@ class ApiClient {
   static const _baseUrl =
       // 'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
       // 'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
+       'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
       // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
-      // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
-      'http://192.168.0.84:8094/AssetConnectMobilePortal/UserService/';
+      // 'http://192.168.0.99:8094/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
@@ -68,26 +68,37 @@ class ApiClient {
   static const _epGetExpectedFund = _baseUrl + 'getExpectedFund';
 
   // DIGITAL ACCOUNT
-  static const _epNewDigUserRegDataBeforeOTP = _baseUrl + 'NewDigUserRegDataBeforeOTP';
-  static const _epNewDigUserRegDataAfterOTP = _baseUrl + 'NewDigUserRegDataAfterOTP';
-  static const _epNewDigUserRegDataRpqList = _baseUrl + 'NewDigUserRegDataRpqList';
-  static const _epGenVerificationCodeForDigUser = _baseUrl + 'genVerificationCodeForDigUser';
-  static const _epValidateVerificationCodeForDigUser = _baseUrl + 'validateVerificationCodeForDigUser';
-  static const _epPartialSavingForDigUser = _baseUrl + 'partialSavingForDigUser';
+  static const _epNewDigUserRegDataBeforeOTP =
+      _baseUrl + 'NewDigUserRegDataBeforeOTP';
+  static const _epNewDigUserRegDataAfterOTP =
+      _baseUrl + 'NewDigUserRegDataAfterOTP';
+  static const _epNewDigUserRegDataRpqList =
+      _baseUrl + 'NewDigUserRegDataRpqList';
+  static const _epGenVerificationCodeForDigUser =
+      _baseUrl + 'genVerificationCodeForDigUser';
+  static const _epValidateVerificationCodeForDigUser =
+      _baseUrl + 'validateVerificationCodeForDigUser';
+  static const _epPartialSavingForDigUser =
+      _baseUrl + 'partialSavingForDigUser';
   static const _epStateData = _baseUrl + 'StateData';
   static const _epSaveDigUser = _baseUrl + 'saveDigUser';
-  static const _epLoadDigUserMissingDetailLinkData = _baseUrl + 'loadDigUserMissingDetailLinkData';
-  static const _epGenVerificationCodeForDigUserMissingDet = _baseUrl + 'genVerificationCodeForDigUserMissingDet';
-  static const _epValidateVerificationCodeForDigUserMissingDet = _baseUrl + 'validateVerificationCodeForDigUserMissingDet';
+  static const _epLoadDigUserMissingDetailLinkData =
+      _baseUrl + 'loadDigUserMissingDetailLinkData';
+  static const _epGenVerificationCodeForDigUserMissingDet =
+      _baseUrl + 'genVerificationCodeForDigUserMissingDet';
+  static const _epValidateVerificationCodeForDigUserMissingDet =
+      _baseUrl + 'validateVerificationCodeForDigUserMissingDet';
   static const _epSaveDigUserMissingDet = _baseUrl + 'saveDigUserMissingDet';
 
   // VPS
   static const _epVpsContribution = _baseUrl + 'saveContribution';
   static const _epVpsLoadFolioFunds = _baseUrl + 'loadFolioFunds';
   static const _epVpsGeneratePinCode = _baseUrl + 'generatePinCode';
-  static const _epVpsLoadBalancesForVpsRedemption = _baseUrl + 'loadBalancesForVpsRedemption';
+  static const _epVpsLoadBalancesForVpsRedemption =
+      _baseUrl + 'loadBalancesForVpsRedemption';
   static const _epVpsSaveVpsRedemption = _baseUrl + 'saveVpsRedemption';
-  static const _epVpsLoadExistingSchemeData = _baseUrl + 'loadExistingSchemeData';
+  static const _epVpsLoadExistingSchemeData =
+      _baseUrl + 'loadExistingSchemeData';
   static const _epVpsLoadSchemeAllocations = _baseUrl + 'loadSchemeAllocations';
   static const _epVpsSaveChangeScheme = _baseUrl + 'saveChangeScheme';
   static const _epVpsViewReport = _baseUrl + 'viewReport';
