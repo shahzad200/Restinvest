@@ -129,7 +129,7 @@ class RedemptionScreenController extends GetxController {
     return val;
   }
 
-
+  String fundVolume = '';
   String approxAmount = '';
   String approxUnits = '';
   calculateUnits(String s){
@@ -139,6 +139,7 @@ class RedemptionScreenController extends GetxController {
         String d = loadFundsPlans!.response!.userFundBalances![index].fundRedPrice ?? '0';
         double val = double.parse(d) * double.parse(s);
         approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
+        print("sssssssssssssssssssssssssss$approxAmount");
         update();
       } else{
         unitBalanceController.text = '';
@@ -164,6 +165,7 @@ class RedemptionScreenController extends GetxController {
         double approxUni = val / 100;
         double approxAmo = approxUni * double.parse(red);
         approxAmount = approxAmo.toStringAsFixed(2);
+        print("zzzzzzzzzzzzzzzzzzzzz$approxAmount");
         approxUnits = approxUni.toStringAsFixed(2);
         update();
       } else{
@@ -183,14 +185,23 @@ class RedemptionScreenController extends GetxController {
 
     }
     if(allUnitButton){
+
       if(loadFundsPlans != null) {
         if(loadFundsPlans!.response!.userFundBalances!.isNotEmpty) {
           String d = loadFundsPlans!.response!.userFundBalances![index].fundRedPrice ?? '0';
           String u = loadFundsPlans!.response!.userFundBalances![index].fundUnits ?? '0';
           double val = double.parse(d) * double.parse(u);
-          approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
-          print(approxAmount);
+          // approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
+          approxAmount =  val == 0 ? '': loadFundsPlans!.response!.userFundBalances![index].fundvolume.toString();
+          // print('>>>>> $');
+          // approxUnits =  val == 0 ? '': loadFundsPlans!.response!.userFundBalances![index].fundUnits.toString();
+
+          print('>>>>> $approxAmount');
+          print("KJHKJH"+loadFundsPlans!.response!.userFundBalances![index].fundUnits!);
+
+
           unitBalanceController.text = u.toString();
+
           update();
         }
       }
@@ -301,7 +312,9 @@ class RedemptionScreenController extends GetxController {
         }
       }
       if(allUnitButton){
-        print(approxUnits);
+        print(">>>>>>>>>>>>>>$approxUnits");
+        print(">>>>>>>>>>>>>>");
+        print(">>>>>>>>>>>>>>$approxAmount");
         if (double.parse(approxAmount) > 0 ||
             double.parse(approxUnits) > 0) {
           trans.showDialog(
@@ -346,10 +359,11 @@ class RedemptionScreenController extends GetxController {
         submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, unitBalanceController.text.toString());
 
       }if(percentageButton){
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "P", percentController.text, approxAmount);
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "P", percentController.text, approxAmount.toString(),);
 
       }if(allUnitButton){
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, approxAmount);
+        print("ahjshdkjsadhjksdhjsadhsajkdh");
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, fundVolume);
 
       }
       // submitResponse = await _repository.onSaveFundTransfer(
