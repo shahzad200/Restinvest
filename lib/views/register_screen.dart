@@ -78,11 +78,12 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         CustomFormField(
                           onTextChange: (val) {
-                            _.updatePassword(val);
+                            _.cellNumber(val);
                           },
                           textInputType: TextInputType.number,
                           fieldType: Constants.phoneNumberField,
                           hint: "Register Cell Number",
+                          controller: _.cellNumberController,
                           textAlign: TextAlign.center,
                         ),
                       ],

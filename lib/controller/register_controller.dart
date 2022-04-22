@@ -11,8 +11,8 @@ class RegisterScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var userName = "".obs;
-  var password = "".obs;
-  var number = "".obs;
+  var cnicNumber = "".obs;
+  var cellNumber = "".obs;
   var email = "".obs;
   bool isLoading = false;
   bool noInternet = false;
@@ -21,7 +21,7 @@ class RegisterScreenController extends GetxController {
 
   TextEditingController accNumberController = TextEditingController();
 
-  TextEditingController numberController = TextEditingController();
+  TextEditingController cellNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
   TextEditingController cnicController = TextEditingController();
@@ -36,8 +36,8 @@ class RegisterScreenController extends GetxController {
     update();
   }
 
-  void updatePassword(value) {
-    password(value);
+  void updateNumber(value) {
+    cnicNumber(value);
     update();
   }
 
@@ -46,8 +46,8 @@ class RegisterScreenController extends GetxController {
     update();
   }
 
-  void updateNumber(value) {
-    number(value);
+  void updateCellNumber(value) {
+    cellNumber(value);
     update();
   }
 
@@ -56,18 +56,30 @@ class RegisterScreenController extends GetxController {
       isLoading = true;
       CustomDialog(context);
       update();
+      print( cnicController.text);
+      print( cellNumberController.text);
+      print( accNumberController.text);
+      print( emailController.text);
 
       CustomDialog(context);
       response = await api.onRegisteredUser(accNumberController.text,
-          cnicController.text, emailController.text, numberController.text);
+          cnicController.text, emailController.text, cellNumberController.text);
       Get.back();
       if (response != null) {
-        Get.toNamed(AppRoute.pinConfirmation);
+        Get.toNamed(AppRoute.pinConfirmation,arguments: {
+          "cNic": cnicController.text,
+          "email":  emailController.text,
+          "cellNumber": cellNumberController.text,
+          "accountNumber":accNumberController.text
+        });
       }
 
       isLoading = false;
       update();
+
+
     } catch (e) {
+
       Get.back();
       if (e.toString() == 'Exception: No Internet') {
         isLoading = false;

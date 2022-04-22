@@ -25,7 +25,7 @@ class PinConfirmationScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
                   child: Column(
                     children: [
-                      Logo(
+                      const Logo(
                         height: 120,
                         width: 120,
                       ),
@@ -44,12 +44,14 @@ class PinConfirmationScreen extends StatelessWidget {
                         key: _.formKey,
                         child: Column(
                           children: [
-                            CustomFormField(  controller: _.accountNoController,
-                              fieldType: Constants.accountNo,
+                            CustomFormField(
                               onTextChange: (val) {
-                                _.updateAccountNumber(val);
+                                _.updateUserName(val);
                               },
-                              hint: "Account No ",
+                              controller: _.accNumberController,
+                              textInputType: const TextInputType.numberWithOptions(),
+                              hint: "Account No.",
+                              fieldType: Constants.accountNo,
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(
@@ -57,7 +59,7 @@ class PinConfirmationScreen extends StatelessWidget {
                             ),
                             CustomFormField(
                               hint: "Security Code",
-                              controller: _.securityCodeController,
+                              controller: _.pinCodeController,
                               textInputType: TextInputType.number,
                               fieldType: Constants.securitycode,
                               onTextChange: (val) {
@@ -76,12 +78,12 @@ class PinConfirmationScreen extends StatelessWidget {
                           text: "Register",
                           buttonColor: AppColor.blueColor,
                           textColor: AppColor.whiteColor,
-                          onPress: () {
-                            if (_.formKey.currentState!.validate()) {
-                              _.formKey.currentState!.save();
-
-                            }
-                          }),
+    onPress: () {
+      if (_.formKey.currentState!.validate()) {
+        _.formKey.currentState!.save();
+        _.onSubmitt(context);
+      }
+    } ),
                       const SizedBox(
                         height: 20,
                       ),

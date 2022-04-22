@@ -294,6 +294,9 @@ class ApiClient {
       String accountNo, String cnic, String email, String cell) async {
     Common? common;
     try {
+
+      print(cell.toString());
+      print(email.toString());
       final response = await http.post(
         Uri.parse(_epRegisteredUser),
         headers: <String, String>{

@@ -107,7 +107,7 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
                                         fontSize: 12,
                                       ),
                                       Container(
-                                        // margin: EdgeInsets.all(10.0),
+
                                         padding: const EdgeInsets.only(
                                             left: 10.0, right: 5.0),
                                         height: 35,
@@ -126,7 +126,7 @@ class AccountOpenBankDetailScreen extends StatelessWidget {
 
                                             borderRadius:
                                                 BorderRadius.circular(6),
-                                            // value: _.dropdownvalue,
+
                                             hint: RestInvestTitle(
                                               text: _.amountvalue == null ||
                                                       _.amountvalue == ""
