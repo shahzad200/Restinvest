@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                                     ? Get.to(WebViewScreen(
                                         title: 'NAV History',
                                         link:
-                                            '${Constant.socialMediaLink!.response!.homeLinks!.latestNav}',
+                                            'https://nit.com.pk/NewNIT/NAV.aspx',
                                       ))
                                     : printInfo(info: 'Do Nothing');
                               },
@@ -191,7 +191,7 @@ class HomeScreen extends StatelessWidget {
                                   ? Get.to(WebViewScreen(
                                       title: 'Fund Manager Reports',
                                       link:
-                                          'https://nit.softech.pk/newnit/ConsolidatedFMR.aspx',
+                                          'https://nit.com.pk/newnit/ConsolidatedFMR.aspx',
                                     ))
                                   : printInfo(info: 'Do Nothing');
                             },
@@ -208,7 +208,7 @@ class HomeScreen extends StatelessWidget {
                                   ? Get.to(WebViewScreen(
                                       title: 'News',
                                       link:
-                                          'https://nit.softech.pk/newnit/News.aspx',
+                                          'https://nit.com.pk/newnit/News.aspx',
                                     ))
                                   : printInfo(info: 'Do Nothing');
                             },
@@ -249,7 +249,7 @@ class HomeScreen extends StatelessWidget {
                                   ? Get.to(WebViewScreen(
                                       title: 'Pick Your Fund',
                                       link:
-                                          'https://nit.softech.pk/newnit/Pickyourfunds.aspx',
+                                          'https://nit.com.pk/newnit/Pickyourfunds.aspx',
                                     ))
                                   : printInfo(info: 'Do Nothing');
                             },
