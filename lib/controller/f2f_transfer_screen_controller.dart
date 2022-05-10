@@ -112,7 +112,7 @@ class F2FTransferScreenController extends GetxController {
               msg: 'Unit Balance must less than or equal to available units',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
+              timeInSecForIosWeb: 5,
               backgroundColor: Colors.black,
               textColor: Colors.white,
               fontSize: 16.0);
@@ -137,7 +137,7 @@ class F2FTransferScreenController extends GetxController {
               msg: 'Percentage must be less than or equal to 100',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
+              timeInSecForIosWeb: 5,
               backgroundColor: Colors.black,
               textColor: Colors.white,
               fontSize: 16.0);
@@ -224,7 +224,7 @@ class F2FTransferScreenController extends GetxController {
             msg: e.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -260,7 +260,7 @@ class F2FTransferScreenController extends GetxController {
             msg: e.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -285,7 +285,7 @@ class F2FTransferScreenController extends GetxController {
                 msg: 'Please enter Fund Balance/Percentage',
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
+                timeInSecForIosWeb: 5,
                 backgroundColor: Colors.black,
                 textColor: Colors.white,
                 fontSize: 16.0);
@@ -295,7 +295,7 @@ class F2FTransferScreenController extends GetxController {
               msg: 'Please enter Fund Balance/Percentage',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
+              timeInSecForIosWeb: 5,
               backgroundColor: Colors.black,
               textColor: Colors.white,
               fontSize: 16.0);
@@ -305,7 +305,7 @@ class F2FTransferScreenController extends GetxController {
             msg: 'Please enter Fund Balance/Percentage',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -342,7 +342,7 @@ class F2FTransferScreenController extends GetxController {
             msg: e.toString().replaceAll('Exception:', ''),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);

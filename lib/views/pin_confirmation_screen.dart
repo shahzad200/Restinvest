@@ -60,7 +60,7 @@ class PinConfirmationScreen extends StatelessWidget {
                             CustomFormField(
                               hint: "Security Code",
                               controller: _.pinCodeController,
-                              textInputType: TextInputType.number,
+                              // textInputType: TextInputType.number,
                               fieldType: Constants.securitycode,
                               onTextChange: (val) {
                                 _.updateSecurityCode(val);

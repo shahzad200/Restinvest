@@ -16,8 +16,10 @@ class CustomFormField extends StatefulWidget {
         this.controller,
         this.icon,
         this.isRounded=true,
-        this.hasIcon = true})
-      : super(key: key);
+      //   this.hasIcon = true})
+      // : super(key: key);
+  this.hasIcon = true,this.inputFormator =const [],})
+: super(key: key);
   final String hint;
   final TextAlign textAlign;
   final TextInputType textInputType;
@@ -28,6 +30,7 @@ class CustomFormField extends StatefulWidget {
   final bool hasIcon;
   final bool isRounded;
   final TextEditingController? controller;
+  final List<TextInputFormatter> inputFormator;
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
 }
@@ -56,6 +59,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
       textAlign: TextAlign.center,
       cursorColor: AppColor.blueColor,
       textCapitalization:widget.fieldType == 13? TextCapitalization.characters:TextCapitalization.none,
+
       validator: (val) {
         switch (widget.fieldType) {
           case Constants.emailField:
@@ -274,6 +278,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       maxLength: widget.length,
       cursorHeight: 20,
       enabled: widget.enable,
+
       inputFormatters: widget.inputFormator,
       obscuringCharacter: "*",
       decoration: InputDecoration(

@@ -601,7 +601,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                               '',
                             ));
                           },
-                        ),TextSpan(
+                        ),const TextSpan(
                           text:
                           ' and all\ncharges governing in this transaction.',
                           style: TextStyle(color: AppColor.black, fontSize: 12, ),
@@ -2731,7 +2731,7 @@ Future<bool?> showToast(String s){
       msg: s,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
+      timeInSecForIosWeb: 5,
       backgroundColor: Colors.black,
       textColor: Colors.white,
       fontSize: 16.0);

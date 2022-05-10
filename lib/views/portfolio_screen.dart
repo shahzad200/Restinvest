@@ -208,7 +208,7 @@ class PortoFolioScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -289,13 +289,13 @@ class PortoFolioScreen extends StatelessWidget {
                             ),
                           ),
                           !_.isSummery ?
-                          _.loadDashboard == null ? SizedBox() :
-                          !_.buttonclick3 ? SizedBox() : double.parse(
+                          _.loadDashboard == null ? const SizedBox() :
+                          !_.buttonclick3 ? const SizedBox() : double.parse(
                               _.loadDashboard!.response!
                                   .portfolioSummaryMaxValue!) == 0.00 ? Padding(
                             padding: EdgeInsets.only(
                               left: Get.width / 4, top: 100,),
-                            child: RestInvestTitle(text: "No Data Found",
+                            child: const RestInvestTitle(text: "No Data Found",
                               textColor: AppColor.blueColor,
                               fontSize: 20,
                               fontWeight: FontWeight.w600,),
@@ -463,15 +463,15 @@ class PortoFolioScreen extends StatelessWidget {
                               :
                           Padding(padding: EdgeInsets.only(
                               top: 100, left: Get.width / 5),
-                              child: CircularProgressIndicator()),
-                          _.selectedAccount == null ? SizedBox() :
+                              child: const CircularProgressIndicator()),
+                          _.selectedAccount == null ? const SizedBox() :
                           _.buttonclick4 ?
                           double.parse(_.selectedAccount!
                               .portfolioAnalyPurchasesMaxValue!) == 0.00
                               ? Padding(
                             padding: EdgeInsets.only(
                               left: Get.width / 4, top: 100,),
-                            child: RestInvestTitle(text: "No Data Found",
+                            child: const RestInvestTitle(text: "No Data Found",
                               textColor: AppColor.blueColor,
                               fontSize: 20,
                               fontWeight: FontWeight.w600,),
@@ -559,7 +559,7 @@ class PortoFolioScreen extends StatelessWidget {
                                             yValueMapper: (ChartData data,
                                                 _) => data.y,
                                             name: '',
-                                            dataLabelSettings: DataLabelSettings(
+                                            dataLabelSettings: const DataLabelSettings(
                                                 textStyle: TextStyle(
                                                     fontSize: 10,
                                                     color: AppColor.whiteColor),
@@ -577,8 +577,8 @@ class PortoFolioScreen extends StatelessWidget {
                                       ])
                               ),
                             ),
-                          ) : SizedBox(),
-                          _.selectedAccount == null ? SizedBox() :
+                          ) : const SizedBox(),
+                          _.selectedAccount == null ? const SizedBox() :
                           !_.buttonclick5 ? const SizedBox() :
                           double.parse(_.selectedAccount!
                               .portfolioAnalyRedemptionsMaxValue!) == 0.00
@@ -673,9 +673,9 @@ class PortoFolioScreen extends StatelessWidget {
                                             yValueMapper: (ChartData data,
                                                 _) => data.y,
                                             name: '',
-                                            dataLabelSettings: DataLabelSettings(
+                                            dataLabelSettings: const DataLabelSettings(
 
-                                              textStyle: TextStyle(fontSize: 10,
+                                              textStyle:  TextStyle(fontSize: 10,
                                                   color: AppColor.whiteColor),
                                               isVisible: true,
                                               labelAlignment: ChartDataLabelAlignment
@@ -696,8 +696,8 @@ class PortoFolioScreen extends StatelessWidget {
                     ],
                   ),
                   _.portfolioButton ?
-                  _.data.isEmpty ? Center(child: Padding(
-                      padding: const EdgeInsets.only(top: 30.0),
+                  _.data.isEmpty ? const Center(child: Padding(
+                      padding: EdgeInsets.only(top: 30.0),
                       child: RestInvestTitle(text: "No Data Found",
                         textColor: AppColor.blueColor,
                         fontSize: 20,
@@ -710,7 +710,7 @@ class PortoFolioScreen extends StatelessWidget {
                         legend: Legend(
                             isVisible: true,
                             overflowMode: LegendItemOverflowMode.wrap,
-                            textStyle: TextStyle(fontSize: 14),
+                            textStyle: const TextStyle(fontSize: 14),
                             iconHeight: 14,
                             iconWidth: 14
                           // Border color and bord
@@ -721,7 +721,7 @@ class PortoFolioScreen extends StatelessWidget {
                             enableTooltip: true,
                             dataLabelMapper: (ChartData data, _) => "${data
                                 .y}%",
-                            dataLabelSettings: DataLabelSettings(
+                            dataLabelSettings: const DataLabelSettings(
                               // useSeriesColor: true,
 
                               textStyle: TextStyle(fontSize: 11,
@@ -740,7 +740,7 @@ class PortoFolioScreen extends StatelessWidget {
                           )
                         ]
                     ),
-                  ) : SizedBox(),
+                  ) : const SizedBox(),
                 ],
               ),
             ),

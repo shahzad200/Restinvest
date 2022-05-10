@@ -88,7 +88,7 @@ class AccountOpenRequestScreenController extends GetxController {
             msg: e.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -114,7 +114,7 @@ class AccountOpenRequestScreenController extends GetxController {
             msg: 'Please Enter cNic Number',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -126,7 +126,7 @@ class AccountOpenRequestScreenController extends GetxController {
             msg: 'Please Enter Mobile Number',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -137,7 +137,7 @@ class AccountOpenRequestScreenController extends GetxController {
             msg: 'Please Enter Email Address',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -173,7 +173,7 @@ class AccountOpenRequestScreenController extends GetxController {
             //     msg: e.toString().replaceAll('Exception: ', ''),
             //     toastLength: Toast.LENGTH_SHORT,
             //     gravity: ToastGravity.CENTER,
-            //     timeInSecForIosWeb: 1,
+            //     timeInSecForIosWeb: 5,
             //     backgroundColor: Colors.black,
             //     textColor: Colors.white,
             //     fontSize: 16.0);
@@ -192,7 +192,7 @@ class AccountOpenRequestScreenController extends GetxController {
           msg: 'Please Enter cNic Number',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -204,7 +204,7 @@ class AccountOpenRequestScreenController extends GetxController {
           msg: 'Please Enter Mobile Number',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -215,7 +215,7 @@ class AccountOpenRequestScreenController extends GetxController {
           msg: 'Please Enter Email Address',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -224,7 +224,7 @@ class AccountOpenRequestScreenController extends GetxController {
           msg: 'Please select Ownership of your Mobile Number',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -233,7 +233,7 @@ class AccountOpenRequestScreenController extends GetxController {
           msg: 'Please select Account Type',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -274,7 +274,7 @@ class AccountOpenRequestScreenController extends GetxController {
               msg: e.toString().replaceAll('Exception:', ''),
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
+              timeInSecForIosWeb: 5,
               backgroundColor: Colors.black,
               textColor: Colors.white,
               fontSize: 16.0);

@@ -41,7 +41,7 @@ class RegisterScreen extends StatelessWidget {
                           onTextChange: (val) {
                             _.updateUserName(val);
                           },
-                          controller: _.accNumberController,
+                          controller: _.accountNumberController,
                           textInputType: const TextInputType.numberWithOptions(),
                           hint: "Account No.",
                           fieldType: Constants.accountNo,
@@ -52,7 +52,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         CustomFormField(
                           onTextChange: (val) {
-                            _.updateNumber(val);
+                            _.updateCnicNumber(val);
                           },
                           controller: _.cnicController,
                           textInputType: const TextInputType.numberWithOptions(),
@@ -104,7 +104,7 @@ class RegisterScreen extends StatelessWidget {
                       //     msg: "Please fill all fields",
                       //     toastLength: Toast.LENGTH_SHORT,
                       //     gravity: ToastGravity.BOTTOM,
-                      //     timeInSecForIosWeb: 1,
+                      //     timeInSecForIosWeb: 5,
                       //     backgroundColor: Colors.black,
                       //     textColor: Colors.white,
                       //     fontSize: 16.0);
