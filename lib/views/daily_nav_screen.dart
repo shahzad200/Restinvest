@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nit/widgets/web_view.dart';
 import '../controller/daily_nav_screen_controller.dart';
 
 import 'package:get/get.dart';
@@ -223,7 +224,13 @@ class DailyNavScreen extends StatelessWidget {
                                   child: RestInvestButton(
                                     isSquare: true,
                                     text: "NAV HISTORY",
-                                    onPress: () {},
+                                    onPress: () {
+                                      Get.to(WebViewScreen(
+                                        title: 'NAV History',
+                                        link:
+                                        'https://nit.com.pk/NewNIT/NAV.aspx',
+                                      ));
+                                    },
                                     buttonColor: AppColor.blueColor,
                                     textColor: AppColor.whiteColor,
                                   ),

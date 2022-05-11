@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../controller/report_screen_controller.dart';
 import '../routes/routes.dart';
+import '../widgets/button.dart';
 import '../widgets/constant_widget.dart';
 import '../widgets/custom_divider.dart';
 
@@ -111,6 +112,18 @@ class ReportsScreen extends StatelessWidget {
                     },
                     text: "F2F Transfer Report",
                   ),
+                  const SizedBox(height: 20,),
+                  RestInvestButton(width: 200,
+                      text: "Back",
+                      buttonColor: AppColor.blueColor,
+                      textColor: AppColor.whiteColor,
+                      textSize: 18,
+                      onPress: () {
+
+
+                       Get.toNamed(AppRoute.homeRoute);
+
+                      }  ),
                 ],
               ),
             ),

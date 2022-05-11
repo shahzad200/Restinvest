@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:nit/routes/routes.dart';
 
 import '../utils/constant.dart';
 
@@ -100,6 +101,7 @@ class RegisterScreen extends StatelessWidget {
                         _.onSubmitt(context);
                       }
 
+
                       // Fluttertoast.showToast(
                       //     msg: "Please fill all fields",
                       //     toastLength: Toast.LENGTH_SHORT,
@@ -109,6 +111,19 @@ class RegisterScreen extends StatelessWidget {
                       //     textColor: Colors.white,
                       //     fontSize: 16.0);
                     },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  RestInvestButton(
+                      text: "Home",
+                      buttonColor: AppColor.whiteColor,
+                      textColor: AppColor.blueColor,
+                      onPress: () {
+
+                        Get.toNamed(AppRoute.homeRoute);
+
+                      }
                   ),
                 ],
               ),

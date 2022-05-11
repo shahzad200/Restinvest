@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:nit/controller/term_condition_screen_controller.dart';
 import 'package:nit/views/new_account_screen.dart';
 import '../views/account_opening_document_upload_screen.dart';
 import '../views/account_opening_fatca_screen.dart';
 import '../views/account_opening_kyc_detail_screen.dart';
 import '../views/account_opening_risk_profile_screen.dart';
+import '../views/term_conditiion_screen.dart';
 import '../views/user_profile.dart';
 import '../views/vps/change_scheme_screen.dart';
 import '../views/vps/contribution_request_screen.dart';
@@ -41,6 +43,7 @@ class AppRoute {
   static const String loginRoute = '/login';
   static const String signUpRoute = '/signUp';
   static const String passwordRoute = '/password';
+  static const String termConditionRoute = '/termCondition';
   static const String registerRoute = '/register';
   static const String userRoute = '/user';
   static const String homeRoute = '/home';
@@ -211,6 +214,10 @@ class AppRoute {
       GetPage(
           name: AppRoute.accountOpenUploadScreen,
           page: () => const AccountOpenDocumentUploadScreen(),
+      ),
+      GetPage(
+        name: AppRoute.termConditionRoute,
+        page: () => const TermConditionScreen(),
       ),
       GetPage(
         name: AppRoute.vpsAccountStatement,

@@ -43,7 +43,10 @@ class ApiClient {
       // 'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
       //   'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
       // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
-      'http://192.168.0.60:8094/AssetConnectMobilePortal/UserService/';
+      // 'http://192.168.0.60:8094/AssetConnectMobilePortal/UserService/';
+      //  'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      'http://192.168.0.99:8094/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
@@ -303,14 +306,9 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
-          //   "cnic": "37405-0568059-9",
-          //   "registeredCellNo": "03214528114",
-          //   "folioNumber":"29547",
-          //   "registeredEmail":"ali.tahir@softech.com.pk"
-          // }
           'folioNumber': accountNo,
           'cnic': cnic,
-          'registeredEmail': email.trim(),
+          'registeredEmail': email,
           'registeredCellNo': cell,
         }),
       );

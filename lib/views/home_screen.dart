@@ -74,7 +74,11 @@ class HomeScreen extends StatelessWidget {
                                     ? Get.to(WebViewScreen(
                                         title: 'NAV History',
                                         link:
+
                                             'https://nit.com.pk/NewNIT/NAV.aspx'
+
+
+
                                       ))
                                     : printInfo(info: 'Do Nothing');
                               },
@@ -208,7 +212,11 @@ class HomeScreen extends StatelessWidget {
                                   ? Get.to(WebViewScreen(
                                       title: 'News',
                                       link:
+
                                       'https://nit.com.pk/newnit/News.aspx',
+
+
+
                                     ))
                                   : printInfo(info: 'Do Nothing');
                             },

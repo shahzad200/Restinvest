@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nit/routes/routes.dart';
 import '../controller/password_controller.dart';
 import '../utils/constant.dart';
 
@@ -80,6 +81,19 @@ class PasswordScreen extends StatelessWidget {
                            (_.onSubmit(context));
                         }
                       }),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  RestInvestButton(
+                      text: "Home",
+                      buttonColor: AppColor.whiteColor,
+                      textColor: AppColor.blueColor,
+                      onPress: () {
+
+                        Get.toNamed(AppRoute.homeRoute);
+
+                        }
+                      ),
                   const SizedBox(
                     height: 20,
                   ),

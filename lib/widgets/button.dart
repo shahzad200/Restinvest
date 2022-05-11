@@ -7,6 +7,7 @@ class RestInvestButton extends StatelessWidget {
     required this.text,
     required this.onPress,
     this.height = 48,
+
     this.width = double.infinity,
     this.textSize = 18.0,
     this.buttonColor = AppColor.blueColor,
@@ -18,6 +19,7 @@ class RestInvestButton extends StatelessWidget {
   final VoidCallback? onPress;
   final double textSize;
   final Color buttonColor;
+
   final Color textColor;
 
   final double width;
@@ -33,6 +35,7 @@ class RestInvestButton extends StatelessWidget {
           onPrimary: textColor,
           textStyle: TextStyle(
             fontSize: textSize,
+              // fontWeight: FontWeight.w800
           ),
           minimumSize: Size(width, height),
           shape: RoundedRectangleBorder(
@@ -43,7 +46,62 @@ class RestInvestButton extends StatelessWidget {
                 : BorderRadius.circular(30.0),
           ),
         ),
-        child: Text(text));
+        child: Text(text,));
+  }
+}
+class RegisterButton extends StatelessWidget {
+  const RegisterButton({
+    Key? key,
+    required this.text,
+    required this.text1,
+    required this.onPress,
+    this.height = 48,
+
+    this.width = double.infinity,
+    this.textSize = 18.0,
+    this.buttonColor = AppColor.blueColor,
+    this.isSquare = false,
+    this.textColor = AppColor.whiteColor,
+  }) : super(key: key);
+  final String text;
+  final String text1;
+
+  final VoidCallback? onPress;
+  final double textSize;
+  final Color buttonColor;
+
+  final Color textColor;
+
+  final double width;
+  final double height;
+  final bool isSquare;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        onPressed: onPress,
+        style: ElevatedButton.styleFrom(
+          primary: buttonColor,
+          onPrimary: textColor,
+          textStyle: TextStyle(
+            fontSize: textSize,
+            // fontWeight: FontWeight.w800
+          ),
+          minimumSize: Size(width, height),
+          shape: RoundedRectangleBorder(
+            borderRadius: isSquare
+                ? BorderRadius.circular(0
+
+            )
+                : BorderRadius.circular(30.0),
+          ),
+        ),
+        child: Column(
+          children: [
+            Text("Register Now!",style: TextStyle(),),
+            Text("(Exsisting Unit Holder)",style: TextStyle(fontSize: 10,color: AppColor.blueColor),),
+          ],
+        ));
   }
 }
 

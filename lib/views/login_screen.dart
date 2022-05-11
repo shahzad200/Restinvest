@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:nit/widgets/drawer.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../utils/constant.dart';
 
 
@@ -13,6 +14,7 @@ import '../widgets/button.dart';
 import '../widgets/constant_widget.dart';
 
 import '../widgets/textformfiled.dart';
+import '../widgets/web_view.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -98,37 +100,63 @@ class LoginScreen extends StatelessWidget {
                       text: "Login",
                       buttonColor: AppColor.blueColor,
                       textColor: AppColor.whiteColor,
+                      textSize: 20,
                       onPress: () {
                         _.onLoginPress(context);
+                        _.userNameController.text = "";
+                        _.passwordController.text = "";
+
                         // if (_.formKey.currentState!.validate()) {
                         //   _.formKey.currentState!.save();
                         //   (_.onLoginPress());
                         // }
-                      }),
+
+                      }  ),
                   const SizedBox(
                     height: 20,
                   ),
-                  const HeadingText(
-                    text: "TERM & CONDITION",fontWeight: FontWeight.w900,
-                    textAlign: TextAlign.center,
-                    underlineColor: AppColor.blueColor,
-                    textColor: AppColor.darkblue,
+                  InkWell(
+                    onTap: () {
+                      _.isLoading == false &&
+                          _.noInternet == false
+                          ? Get.toNamed(
+
+                        AppRoute.termConditionRoute)
+                          : printInfo(info: 'Do Nothing');
+                    },
+                    child:  const HeadingText(
+                      text: "TERM & CONDITION",fontWeight: FontWeight.w900,
+                      textAlign: TextAlign.center,
+                      underlineColor: AppColor.blueColor,
+                      textColor: AppColor.darkblue,
+                    ) ,
                   ),
                   const SizedBox(
                     height: 20,
                   ),
+
                   const RestInvestTitle(
                       text: "Still don't have an account?",fontWeight: FontWeight.w900,
                       textAlign: TextAlign.center,
                       textColor: AppColor.darkblue),
                   const SizedBox(height: 20),
-                  RestInvestButton(
-                    text: "Register now!",
-                    buttonColor: AppColor.whiteColor,
-                    textColor: AppColor.blueColor,
-                    onPress: () {
-                      Get.toNamed(AppRoute.registerRoute);
-                    },
+                  // RestInvestButton(
+                  //   text: "    Register now!\nExsisting Unit Holder",
+                  //   buttonColor: AppColor.whiteColor,
+                  //   textColor: AppColor.blueColor,
+                  //    textSize: 16,
+                  //   onPress: () {
+                  //     Get.toNamed(AppRoute.registerRoute);
+                  //   },
+                  // ),
+                  RegisterButton(
+                      text: "Register now!",
+                       buttonColor: AppColor.whiteColor,
+                       textColor: AppColor.blueColor,
+                        textSize: 20,
+                       onPress: () {
+                         Get.toNamed(AppRoute.registerRoute);
+                       }, text1: '',
                   ),
                   const SizedBox(height: 20),
 
@@ -190,28 +218,28 @@ class LoginScreen extends StatelessWidget {
                   //         textAlign: TextAlign.center,
                   //         textColor: AppColor.blueColor)),
                   const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      RestInvestTitle(
-                        text: "Powered by",
-                        textAlign: TextAlign.center,
-                        textColor: AppColor.blueColor,fontWeight: FontWeight.w800,
-                        fontSize: 14,
-                      ),
-                      SizedBox(
-                        width: 2,
-                      ),
-                      HeadingText(
-                        text: "SOFTECH SYSTEM",
-                        textAlign: TextAlign.center,
-                        underlineColor: AppColor.blueColor,
-                        textColor: AppColor.blueColor,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 14,
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: const [
+                  //     RestInvestTitle(
+                  //       text: "Powered by",
+                  //       textAlign: TextAlign.center,
+                  //       textColor: AppColor.blueColor,fontWeight: FontWeight.w800,
+                  //       fontSize: 14,
+                  //     ),
+                  //     SizedBox(
+                  //       width: 2,
+                  //     ),
+                  //     HeadingText(
+                  //       text: "SOFTECH SYSTEM",
+                  //       textAlign: TextAlign.center,
+                  //       underlineColor: AppColor.blueColor,
+                  //       textColor: AppColor.blueColor,
+                  //       fontWeight: FontWeight.w900,
+                  //       fontSize: 14,
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
