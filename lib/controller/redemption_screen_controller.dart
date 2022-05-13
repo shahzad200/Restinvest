@@ -364,7 +364,12 @@ class RedemptionScreenController extends GetxController {
 
       }if(allUnitButton){
         print("ahjshdkjsadhjksdhjsadhsajkdh");
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, fundVolume);
+        print(fundVolume);
+        print(fundNameCode);
+
+         print("");
+        // print(calUnitBalanceValue);
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, fundVolume,);
 
       }
       // submitResponse = await _repository.onSaveFundTransfer(
