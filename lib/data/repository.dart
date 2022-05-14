@@ -188,7 +188,8 @@ class Repository {
     String redTransType,
     String totalUnits,
     String transactionValue,
-    // String toFundCode,
+      {String? unitsCheck}
+          // String toFundCode,
   ) =>
       _apiClient.onSaveRedemption(
           Constant.loginModel!.response!.user!.sessionAccessCode ?? '',
@@ -203,7 +204,8 @@ class Repository {
           'XX',
           '0',
           Constant.loginModel!.response!.user!.userid ?? '',
-          Constant.loginModel!.response!.user!.userType ?? '');
+          Constant.loginModel!.response!.user!.userType ?? '',
+          unitsCheck:unitsCheck!);
 
   Future<NewDigUserRegDataBeforeOTP> onNewDigUserRegDataBeforeOTP() =>
       _apiClient.onNewDigUserRegDataBeforeOTP();

@@ -357,10 +357,10 @@ class RedemptionScreenController extends GetxController {
       isLoading = true;
       update();
       if(unitButton){
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, unitBalanceController.text.toString());
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, unitBalanceController.text.toString(),unitsCheck : "unit");
 
       }if(percentageButton){
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "P", percentController.text, approxAmount.toString(),);
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "P", percentController.text, approxAmount.toString(),unitsCheck: "percentage");
 
       }if(allUnitButton){
         print("ahjshdkjsadhjksdhjsadhsajkdh");
@@ -369,7 +369,7 @@ class RedemptionScreenController extends GetxController {
 
          print("");
         // print(calUnitBalanceValue);
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, fundVolume,);
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, fundVolume,unitsCheck:  "allunits");
 
       }
       // submitResponse = await _repository.onSaveFundTransfer(
