@@ -199,18 +199,23 @@ class ViewReportsScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 25),
-                      SizedBox(
-                        height: 40,
-                        width: 200,
-                        child: RestInvestButton(
-                          text: 'VIEW REPORT',
-                          buttonColor: AppColor.blueColor,
-                          textColor: AppColor.whiteColor,
-                          onPress: (){
-                            _.isLoading || _.noInternet ? null :
-                            _.onViewReport();
-                          },
-                        ),
+                      RestInvestButton(
+                        text: 'VIEW REPORT',
+                        buttonColor: AppColor.blueColor,
+                        textColor: AppColor.whiteColor,
+                        onPress: (){
+                          _.isLoading || _.noInternet ? null :
+                          _.onViewReport();
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      RestInvestButton(
+                        text: 'BACK',
+                        buttonColor: AppColor.whiteColor,
+                        textColor: AppColor.blueColor,
+                        onPress: (){
+                         Get.back();
+                        },
                       ),
                     ],
                   ),

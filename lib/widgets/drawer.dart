@@ -152,7 +152,7 @@ class CustomDrawer extends StatelessWidget {
                     },
                     leading: const Portofolio(),
                     title: const RestInvestTitle(
-                      text: "Portofolio",
+                      text: "Portfolio",
                       textColor: AppColor.black,
                       fontWeight: FontWeight.w700,
                     ),
@@ -265,7 +265,7 @@ class CustomDrawer extends StatelessWidget {
                     onTap: () {
                       Get.to(WebViewScreen(
                         title: 'Complains',
-                        link: 'https://nit.softech.pk/NewNit/Complains.aspx',
+                        link: 'https://nit.com.pk/NewNit/Complains.aspx',
                       ));
                     },
 

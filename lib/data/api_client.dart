@@ -41,9 +41,12 @@ class ApiClient {
   static const _baseUrl =
       // 'http://192.168.0.106:8094/AssetConnectMobilePortal/UserService/';
       // 'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
+      //   'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      //      'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      'http://192.168.0.99:8094/AssetConnectMobilePortal/UserService/';
       //  'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
-      'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
-      // 'http://192.168.0.99:8094/AssetConnectMobilePortal/UserService/';
+      // 'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      // 'http://192.168.0.60:8094/AssetConnectMobilePortal/UserService/';
   static const _epSocialMediaLinks = _baseUrl + 'socialMediaLinks';
   static const _epLogin = _baseUrl + 'login';
   static const _epLoadDashBoard = _baseUrl + 'loadDashboard';
@@ -953,7 +956,8 @@ class ApiClient {
         'sessionId': sessionId,
         'sessionStartDate': sessionStartDate,
         'totalUnits': totalUnits,
-        'transactionValue': transactionValue,
+        'transactionValue': totalUnits,
+        // 'transactionValue': transactionValue,
         'unitClass': unitClass,
         'unitPlan': unitPlan,
         'userId': userId,

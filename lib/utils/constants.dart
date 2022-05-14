@@ -27,6 +27,8 @@ class Constant{
   static String linkBranches = 'https://nit.softech.pk/NewNIT/Branches.aspx';
   static String linkAboutUs = 'https://nit.com.pk/NewNIT/AboutUs.aspx';
   static String linkLearning = 'https://nit.softech.pk/NewNIT/Learning.aspx';
+  static String termCondition = 'https://nit.com.pk/terms-of-use';
+
 
 
 

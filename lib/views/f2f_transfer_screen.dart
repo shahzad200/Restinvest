@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nit/data/models/login_model.dart';
 import 'package:nit/utils/constants.dart';
@@ -498,6 +499,15 @@ class F2FTransferScreen extends StatelessWidget {
                           isRounded: true,
                           hint: "Enter Units",hintColor: AppColor.black,
                           textInputType: TextInputType.number,
+                          inputFormator: <TextInputFormatter>[
+                            FilteringTextInputFormatter.allow(
+                              RegExp(r'[0-9]'),
+                            ),
+                            FilteringTextInputFormatter.deny(
+                              RegExp(
+                                  r'^0+'), //users can't type 0 at 1st position
+                            ),
+                          ],
                           onChange: (v){
                             printInfo(info: "jhjghjhHJHGJHGjh"+v);
                             if(v==''){

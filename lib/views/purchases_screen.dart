@@ -471,7 +471,7 @@ class PurchasesScreen extends StatelessWidget {
                                   color: AppColor.dimblack,
                                   enable: _.paymentvalue == 'Cheque' ? true : false,
                                   isRounded: true,
-                                  textInputType: TextInputType.numberWithOptions(),
+                                  textInputType: const TextInputType.numberWithOptions(),
                                   controller: _.installmentController,
                                   hint: "",
                                   // textInputType: TextInputType.emailAddress,
@@ -543,7 +543,7 @@ class PurchasesScreen extends StatelessWidget {
                               ))
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Row(
@@ -555,11 +555,11 @@ class PurchasesScreen extends StatelessWidget {
                                 left: _.paymentProof == null ? 20.0 : 0.0),
                             child: Column(
                               children: [
-                                RestInvestTitle(
+                                const RestInvestTitle(
                                   text: "Payment Proof",
                                   textColor: AppColor.blueColor,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 GestureDetector(
@@ -571,19 +571,19 @@ class PurchasesScreen extends StatelessWidget {
                                           builder: (BuildContext bc) {
                                             return SafeArea(
                                               child: Container(
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                     borderRadius: BorderRadius.only(
                                                         topRight:
                                                         Radius.circular(20),
                                                         topLeft:
                                                         Radius.circular(20)),
                                                     color: Colors.white),
-                                                child: new Wrap(
+                                                child:  Wrap(
                                                   children: <Widget>[
-                                                    new ListTile(
-                                                        leading: new Icon(
+                                                     ListTile(
+                                                        leading:  const Icon(
                                                             Icons.photo_library),
-                                                        title: new Text(
+                                                        title:  const Text(
                                                             'Photo Library'),
                                                         onTap: () async {
                                                           _.paymentProof = await _
@@ -606,10 +606,10 @@ class PurchasesScreen extends StatelessWidget {
                                                           Navigator.of(context)
                                                               .pop();
                                                         }),
-                                                    new ListTile(
-                                                      leading: new Icon(
+                                                     ListTile(
+                                                      leading:  const Icon(
                                                           Icons.photo_camera),
-                                                      title: new Text('Camera'),
+                                                      title:  const Text('Camera'),
                                                       onTap: () async {
                                                         _.paymentProof = await _
                                                             .getImageFromCamera();
@@ -651,11 +651,11 @@ class PurchasesScreen extends StatelessWidget {
                                 right: _.paymentSlip == null ? 20.0 : 0.0),
                             child: Column(
                               children: [
-                                RestInvestTitle(
+                                const RestInvestTitle(
                                   text: "Payment Slip",
                                   textColor: AppColor.blueColor,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 GestureDetector(
@@ -667,19 +667,19 @@ class PurchasesScreen extends StatelessWidget {
                                           builder: (BuildContext bc) {
                                             return SafeArea(
                                               child: Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.only(
+                                                decoration: const BoxDecoration(
+                                                    borderRadius: const BorderRadius.only(
                                                         topRight:
-                                                        Radius.circular(20),
+                                                        const Radius.circular(20),
                                                         topLeft:
                                                         Radius.circular(20)),
                                                     color: Colors.white),
-                                                child: new Wrap(
+                                                child:  Wrap(
                                                   children: <Widget>[
-                                                    new ListTile(
-                                                        leading: new Icon(
+                                                     ListTile(
+                                                        leading: const Icon(
                                                             Icons.photo_library),
-                                                        title: new Text(
+                                                        title: const Text(
                                                             'Photo Library'),
                                                         onTap: () async {
                                                           _.paymentSlip = await _
@@ -699,10 +699,10 @@ class PurchasesScreen extends StatelessWidget {
                                                           Navigator.of(context)
                                                               .pop();
                                                         }),
-                                                    new ListTile(
-                                                      leading: new Icon(
+                                                     ListTile(
+                                                      leading:  const Icon(
                                                           Icons.photo_camera),
-                                                      title: new Text('Camera'),
+                                                      title:  const Text('Camera'),
                                                       onTap: () async {
                                                         _.paymentSlip = await _
                                                             .getImageFromCamera();

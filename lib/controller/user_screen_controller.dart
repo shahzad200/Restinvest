@@ -66,7 +66,7 @@ class UserScreenController extends GetxController {
             msg: e.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -83,7 +83,7 @@ class UserScreenController extends GetxController {
             msg: 'Please Select Title',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -92,7 +92,7 @@ class UserScreenController extends GetxController {
             msg: 'Please Select CNIC Issue Date',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -101,7 +101,7 @@ class UserScreenController extends GetxController {
             msg: 'Please Select CNIC Expiry Date',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -110,7 +110,7 @@ class UserScreenController extends GetxController {
             msg: 'Please Select Source of Income',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -119,7 +119,7 @@ class UserScreenController extends GetxController {
             msg: 'Please Select Occupation',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -128,7 +128,7 @@ class UserScreenController extends GetxController {
             msg: 'Please Select Income Bracket',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);

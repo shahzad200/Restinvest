@@ -74,7 +74,11 @@ class HomeScreen extends StatelessWidget {
                                     ? Get.to(WebViewScreen(
                                         title: 'NAV History',
                                         link:
-                                            'https://nit.com.pk/NewNIT/NAV.aspx',
+
+                                            'https://nit.com.pk/NewNIT/NAV.aspx'
+
+
+
                                       ))
                                     : printInfo(info: 'Do Nothing');
                               },
@@ -151,7 +155,7 @@ class HomeScreen extends StatelessWidget {
                                             controller.noInternet == false
                                         ? (){
                                       Constant.drawerIndex = 9;
-                                      Get.offAllNamed(AppRoute.loginRoute);
+                                      Get.toNamed(AppRoute.loginRoute);
                                     }()
                                         : printInfo(info: 'Do Nothing');
                                   },
@@ -167,7 +171,7 @@ class HomeScreen extends StatelessWidget {
                                             controller.noInternet == false
                                         ? (){
                                       Constant.drawerIndex = 3;
-                                      Get.offAllNamed(AppRoute.portoFolioRoute);
+                                      Get.toNamed(AppRoute.portoFolioRoute);
                                     }()
                                         : printInfo(info: 'Do Nothing');
                                   },
@@ -208,7 +212,11 @@ class HomeScreen extends StatelessWidget {
                                   ? Get.to(WebViewScreen(
                                       title: 'News',
                                       link:
-                                          'https://nit.com.pk/newnit/News.aspx',
+
+                                      'https://nit.com.pk/newnit/News.aspx',
+
+
+
                                     ))
                                   : printInfo(info: 'Do Nothing');
                             },

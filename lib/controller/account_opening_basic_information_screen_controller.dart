@@ -603,7 +603,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
             msg: e.toString().replaceAll('Exception:', ''),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);

@@ -137,7 +137,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
             msg: e.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -152,7 +152,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select Age',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -161,7 +161,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select Martial Status',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -170,7 +170,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select No. of Dependent',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -179,7 +179,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select Occupation',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -188,7 +188,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select Qualification',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -197,7 +197,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select Risk Appetite',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -206,7 +206,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select Investment Objective',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -215,7 +215,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select Investment Horizon',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -224,7 +224,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select Investment Knowledge',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -233,7 +233,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           msg: 'Please Select Investment Position',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -287,7 +287,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
               msg: e.toString().replaceAll('Exception:', ''),
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
+              timeInSecForIosWeb: 5,
               backgroundColor: Colors.black,
               textColor: Colors.white,
               fontSize: 16.0);

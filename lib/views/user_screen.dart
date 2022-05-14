@@ -359,7 +359,7 @@ class UserScreen extends StatelessWidget {
                               //     msg: "Please fill all fields",
                               //     toastLength: Toast.LENGTH_SHORT,
                               //     gravity: ToastGravity.BOTTOM,
-                              //     timeInSecForIosWeb: 1,
+                              //     timeInSecForIosWeb: 5,
                               //     backgroundColor: Colors.black,
                               //     textColor: Colors.white,
                               //     fontSize: 16.0);

@@ -1,25 +1,28 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:nit/data/api_client.dart';
-import 'package:nit/data/models/common_model.dart';
+
 import 'package:nit/routes/routes.dart';
 import 'package:nit/widgets/custome_dialog.dart';
+
+import '../data/api_client.dart';
+import '../data/models/common_model.dart';
 
 class RegisterScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
+
   var userName = "".obs;
-  var cnicNumber = "".obs;
   var cellNumber = "".obs;
+  var cnicNumber = "".obs;
   var email = "".obs;
   bool isLoading = false;
   bool noInternet = false;
   ApiClient api = ApiClient();
   Common? response;
 
-  TextEditingController accNumberController = TextEditingController();
+  TextEditingController accountNumberController = TextEditingController();
 
   TextEditingController cellNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -36,8 +39,8 @@ class RegisterScreenController extends GetxController {
     update();
   }
 
-  void updateNumber(value) {
-    cnicNumber(value);
+  void updateCellNumber(value) {
+    cellNumber(value);
     update();
   }
 
@@ -46,8 +49,8 @@ class RegisterScreenController extends GetxController {
     update();
   }
 
-  void updateCellNumber(value) {
-    cellNumber(value);
+  void updateCnicNumber(value) {
+    cnicNumber(value);
     update();
   }
 
@@ -58,11 +61,11 @@ class RegisterScreenController extends GetxController {
       update();
       print( cnicController.text);
       print( cellNumberController.text);
-      print( accNumberController.text);
+      print( accountNumberController.text);
       print( emailController.text);
 
       CustomDialog(context);
-      response = await api.onRegisteredUser(accNumberController.text,
+      response = await api.onRegisteredUser(accountNumberController.text,
           cnicController.text, emailController.text, cellNumberController.text);
       Get.back();
       if (response != null) {
@@ -70,7 +73,7 @@ class RegisterScreenController extends GetxController {
           "cNic": cnicController.text,
           "email":  emailController.text,
           "cellNumber": cellNumberController.text,
-          "accountNumber":accNumberController.text
+          "accountNumber":accountNumberController.text
         });
       }
 
@@ -94,7 +97,7 @@ class RegisterScreenController extends GetxController {
             msg: e.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);

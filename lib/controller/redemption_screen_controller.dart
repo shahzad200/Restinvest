@@ -149,7 +149,7 @@ class RedemptionScreenController extends GetxController {
             msg: 'Unit Balance must less than or equal to available units',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -177,9 +177,10 @@ class RedemptionScreenController extends GetxController {
             msg: 'Percentage must less than or equal to 100',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
+
             fontSize: 16.0);
       }
 
@@ -234,7 +235,7 @@ class RedemptionScreenController extends GetxController {
             msg: e.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -276,7 +277,7 @@ class RedemptionScreenController extends GetxController {
               msg: 'Please enter Fund Balance',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
+              timeInSecForIosWeb: 5,
               backgroundColor: Colors.black,
               textColor: Colors.white,
               fontSize: 16.0);
@@ -305,7 +306,7 @@ class RedemptionScreenController extends GetxController {
               msg: 'Please enter Percentage',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
+              timeInSecForIosWeb: 5,
               backgroundColor: Colors.black,
               textColor: Colors.white,
               fontSize: 16.0);
@@ -334,7 +335,7 @@ class RedemptionScreenController extends GetxController {
             msg: 'Please Check Terms & Conditions',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -344,7 +345,7 @@ class RedemptionScreenController extends GetxController {
           msg: 'Please enter Pin',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -363,7 +364,12 @@ class RedemptionScreenController extends GetxController {
 
       }if(allUnitButton){
         print("ahjshdkjsadhjksdhjsadhsajkdh");
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, fundVolume);
+        print(fundVolume);
+        print(fundNameCode);
+
+         print("");
+        // print(calUnitBalanceValue);
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, fundVolume,);
 
       }
       // submitResponse = await _repository.onSaveFundTransfer(
@@ -392,7 +398,7 @@ class RedemptionScreenController extends GetxController {
             msg: e.toString().replaceAll('Exception:', ''),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
+            timeInSecForIosWeb: 5,
             backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0);

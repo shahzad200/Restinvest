@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nit/widgets/no_internet.dart';
 import '../data/models/login_model.dart';
@@ -354,9 +355,20 @@ class RedemptionScreen extends StatelessWidget {
                                         double.parse(_.electronicUnit()!) > 0
                                             ? true
                                             : false,
+                                    inputFormator: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]'),
+                                      ),
+                                      FilteringTextInputFormatter.deny(
+                                        RegExp(
+                                            r'^0+'), //users can't type 0 at 1st position
+                                      ),
+                                    ],
+
+
                                     onChange: (val) {
                                       print(val);
-                                      if (val.isNotEmpty) {
+                                      if (val.isNotEmpty && int.parse(val)  != 0) {
                                         _.calUnitBalanceValue =
                                             _.calUnitBalance(val);
                                       } else {
