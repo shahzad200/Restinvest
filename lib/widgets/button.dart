@@ -99,7 +99,7 @@ class RegisterButton extends StatelessWidget {
         child: Column(
           children: [
             Text("Register Now!",style: TextStyle(),),
-            Text("(Exsisting Unit Holder)",style: TextStyle(fontSize: 10,color: AppColor.blueColor),),
+            Text("(Existing Unit Holder)",style: TextStyle(fontSize: 10,color: AppColor.blueColor,),),
           ],
         ));
   }
