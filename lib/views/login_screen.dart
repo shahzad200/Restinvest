@@ -141,7 +141,7 @@ class LoginScreen extends StatelessWidget {
                       textColor: AppColor.darkblue),
                   const SizedBox(height: 20),
                   // RestInvestButton(
-                  //   text: "    Register now!\nExsisting Unit Holder",
+                  //   text: "",
                   //   buttonColor: AppColor.whiteColor,
                   //   textColor: AppColor.blueColor,
                   //    textSize: 16,
@@ -153,10 +153,10 @@ class LoginScreen extends StatelessWidget {
                       text: "Register now!",
                        buttonColor: AppColor.whiteColor,
                        textColor: AppColor.blueColor,
-                        textSize: 20,
+                        textSize: 18,
                        onPress: () {
                          Get.toNamed(AppRoute.registerRoute);
-                       }, text1: '',
+                       }, text1: '(Existing Unit Holder)',
                   ),
                   const SizedBox(height: 20),
 
