@@ -224,6 +224,9 @@ class PurchasesScreen extends StatelessWidget {
                                                 child: Text(value!.fundShort!));
                                           }).toList(),
                                       onChanged: (ToFunds? value) async {
+                                        print("detail");
+                                        print(value!.toJson().toString());
+                                        print("@detail");
                                         _.fundValue = value!.fundShort!;
                                         _.fundCode = value!.fundCode!;
                                         _.fundSaleValue = value.fundSaleLoad!;
