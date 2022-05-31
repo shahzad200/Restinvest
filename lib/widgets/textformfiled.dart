@@ -115,9 +115,10 @@ class _CustomFormFieldState extends State<CustomFormField> {
               } else {
                 return null;
               }
-            } case Constants.cnicNumber:
+            }
+            case Constants.cnicNumber:
           {
-            if (val!.isEmpty) {
+            if (val!.isEmpty||val.length >= 13) {
               return "Please enter the cnic number";
             } else {
               return null;

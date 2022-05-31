@@ -448,9 +448,14 @@ class AccountOpenBasicInformationScreenController extends GetxController{
       showToast('Please enter father/husband name');
     } else if(mNameController.text == "" || mNameController.text.isEmpty || mNameController.text == null){
       showToast('Please enter mother name');
-    } else if(cNicController.text == "" || cNicController.text.isEmpty || cNicController.text == null){
+    }
+    else if(cNicController.text == "" || cNicController.text.isEmpty || cNicController.text == null){
       showToast('Please enter cnic name');
-    } else if(cNicIssueDate == "" || cNicIssueDate == IssueDate){
+    }
+    else if(cNicController.text.length <= 13){
+      showToast('Invalid Email');
+    }
+    else if(cNicIssueDate == "" || cNicIssueDate == IssueDate){
       showToast('Please select cnic issue date');
     } else if(cNicExpDate == "" || cNicExpDate == IssueDate){
       showToast('Please select cnic expire date');

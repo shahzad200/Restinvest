@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:nit/utils/constants.dart';
 
 import '../data/models/new_dig_user_reg_data_before_otp.dart';
 
@@ -97,14 +98,16 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                       controller: _.cNicNumberController,
                                       fieldType: Constants.cnicNumber,
                                       textInputType: TextInputType.number,
+
+
                                       inputFormator: [
                                         FilteringTextInputFormatter.digitsOnly,
                                          LengthLimitingTextInputFormatter(13),
-                                         NumberFormatter()
+                                        NumberTextInputFormatter()
                                       ],
-                                      onChange: (va){
-                                        print(va);
+                                      onChange: (val){
                                         print(_.cNicNumberController.text);
+
                                       },
                                       textAlign: TextAlign.start,
                                     ),
@@ -122,7 +125,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                       controller: _.mobileNumberController,
                                       fieldType: Constants.phoneNumberField,
                                       textAlign: TextAlign.start,
-                                      textInputType: TextInputType.text,
+                                      textInputType: TextInputType.number,
                                     ),
                                     const SizedBox(
                                       height: 10,

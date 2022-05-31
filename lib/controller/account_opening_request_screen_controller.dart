@@ -18,10 +18,17 @@ class AccountOpenRequestScreenController extends GetxController {
   var userName = "".obs;
   var password = "".obs;
   var number = "".obs;
+  var cnicNumber = "".obs;
+  var cnic = "";
+
   var email = "".obs;
   String mobileNumberOwner = 'Select';
   String mobileNumberOwnerCode = '';
   bool isChecked = false;
+  void updateCnicNumber(value) {
+    cnicNumber(value);
+    update();
+  }
   String groupValue = 'I';
   var character = 0;
   TextEditingController cNicNumberController = TextEditingController();
@@ -36,7 +43,14 @@ class AccountOpenRequestScreenController extends GetxController {
   bool isLoading = false;
   bool noInternet = false;
   final _repository = Repository();
-
+  bool validate = false;
+   bool IsValidCNIC(String cnic)
+  {
+    RegExp check = new RegExp("^[0-9]{5}-[0-9]{7}-[0-9]{1}");
+    bool valid = false;
+    valid = check.hasMatch(cnic);
+    return valid;
+  }
   @override
   void onInit() {
     // TODO: implement onInit
@@ -63,6 +77,7 @@ class AccountOpenRequestScreenController extends GetxController {
     number(value);
     update();
   }
+
 
   onNewDigUserRegDataBeforeOTP() async {
     try {
@@ -109,7 +124,9 @@ class AccountOpenRequestScreenController extends GetxController {
   onGenVerificationCodeForDigUser(BuildContext context) async {
       if (cNicNumberController.text.isEmpty ||
           cNicNumberController.text == '' ||
-          cNicNumberController.text == null) {
+          cNicNumberController.text == null
+       // cNicNumberController.text.length <= 13
+      ) {
         Fluttertoast.showToast(
             msg: 'Please Enter cNic Number',
             toastLength: Toast.LENGTH_SHORT,
@@ -119,6 +136,14 @@ class AccountOpenRequestScreenController extends GetxController {
             textColor: Colors.white,
             fontSize: 16.0);
       }
+      else if( cNicNumberController.text.length <= 13){ Fluttertoast.showToast(
+          msg: 'Invalid Email',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 5,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);}
       else if (mobileNumberController.text.isEmpty ||
           mobileNumberController.text == '' ||
           mobileNumberController.text == null) {
@@ -187,7 +212,9 @@ class AccountOpenRequestScreenController extends GetxController {
   onValidateVerificationCodeForDigUser() async {
     if (cNicNumberController.text.isEmpty ||
         cNicNumberController.text == '' ||
-        cNicNumberController.text == null) {
+        cNicNumberController.text == null
+
+    ) {
       Fluttertoast.showToast(
           msg: 'Please Enter cNic Number',
           toastLength: Toast.LENGTH_SHORT,

@@ -64,6 +64,7 @@ class PinConfirmationController extends GetxController{
     emailController.text=argument["email"];
     cellNumberController.text=argument["cellNumber"];
     accNumberController.text=argument["accountNumber"];
+    update();
 
 
 
