@@ -7,7 +7,9 @@ import 'package:nit/data/models/common_model.dart';
 import 'package:nit/data/models/load_fund_plans.dart';
 import 'package:nit/data/models/login_model.dart';
 import 'package:nit/data/repository.dart';
+import 'package:nit/utils/constant.dart';
 import 'package:nit/utils/constants.dart';
+import 'package:nit/utils/lists.dart';
 import 'package:nit/widgets/constant_widget.dart';
 import 'package:nit/widgets/transaction_dialog.dart' as trans;
 
@@ -235,11 +237,21 @@ class F2FTransferScreenController extends GetxController {
 
   onLoadFundsPlans() async {
     try {
+
+
+      print(fundNameItems);
+      print("jdksaksjdklsajdlksdjaaaaaa");
+      print("asaddddddddddddddddddddd");
+
       isLoading = true;
       toAccountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
       update();
-      printInfo(info: accountValue+'jjgjgj'+fundCode+'hhghgh');
+      printInfo(info: accountValue+'jjgjgj'+fundCode+'hhghgh',);
       loadFundsPlans = await _repository.onLoadFundsPlans(fundCode, accountValue, "FTF");
+
+      print("hello world");
+      print(loadFundsPlans);
+
       toFundValue = loadFundsPlans!.response!.toFunds![0].fundShort!;
       toFundCode = loadFundsPlans!.response!.toFunds![0].fundCode!;
       isLoading = false;
@@ -270,6 +282,16 @@ class F2FTransferScreenController extends GetxController {
   }
 
   onSubmitPress(BuildContext context){
+
+    print(toFundValue);
+    print("cxzzfdsfdsfdsfds");
+    print(toAccountValue);
+    print("Asafd");
+    print(toAccountItems);
+
+
+    print(fundNameItems.toString());
+
       if(unitBalanceController.text != ''){
         if(dataValue != ''){
           if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
@@ -314,6 +336,17 @@ class F2FTransferScreenController extends GetxController {
 
   onOkPress(BuildContext context) async {
     try {
+      print(fundNameItems.toString());
+
+    print(accountValue);print(toFundCode);
+print ( Constants.pincode);
+print("kjshjdashdkjsadhkjsadddddd");
+print(pinCodeController.text);
+    print("saim");
+    print(toAccountValue);
+    print("dddddd");
+print (fundValue);
+print (dataValue);
       isLoading = true;
       update();
       common = await _repository.onSaveFundTransfer(
@@ -362,7 +395,7 @@ class F2FTransferScreenController extends GetxController {
      fundValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundShort ?? '';
      fundCode = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode ?? '';
      toAccountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
-     toFundValue = "";
+     toFundValue = "B";
      toFundCode = "";
      unitButton = true;
      percentageButton = false;

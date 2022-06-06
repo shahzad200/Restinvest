@@ -157,7 +157,19 @@ class RedemptionScreenController extends GetxController {
 
     }
     if(percentageButton){
+      print (">>>>>>>>>>>>>>>>>>");
+      print(double.parse(s).toString());
+      // print(double.parse(d).toString());
+      print(approxUnits.toString());
+      print( approxAmount.toString());
+      print({"double.parse(d).toString() * double.parse(s).toString()"});
+
+
+      print("saimksjdskajdlkasdjsalk");
+      // print(val.toString());
       if(double.parse(s)<=100){
+
+
         String d = loadFundsPlans!.response!.userFundBalances![index].fundUnits ?? '0';
         String red = loadFundsPlans!.response!.userFundBalances![index].fundRedPrice ?? '0';
         percentageEnable = d == null || d == null? false:true;
