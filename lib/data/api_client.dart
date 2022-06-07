@@ -1022,7 +1022,7 @@ class ApiClient {
       String userType,
       String toFundCode,
       String toFundUnitClass,
-      String toFundUnitPlan) async {
+      String toFundUnitPlan,) async {
     Common? common;
     try {
       printInfo(

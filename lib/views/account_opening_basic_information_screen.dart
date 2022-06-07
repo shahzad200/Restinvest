@@ -256,7 +256,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           inputFormator: [
                                             FilteringTextInputFormatter.digitsOnly,
                                             new LengthLimitingTextInputFormatter(13),
-                                            new NumberTextInputFormatter()
+                                            new NumberFormatter()
                                           ],
                                             hint: "1111-111111111-1",
                                             hintColor: AppColor.dimblack,
@@ -1809,7 +1809,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                   inputFormator: [
                                     FilteringTextInputFormatter.digitsOnly,
                                     LengthLimitingTextInputFormatter(13),
-                                    NumberTextInputFormatter()
+                                    NumberFormatter()
                                   ],
                                   onChange: (va){
                                     // print(va);
@@ -1989,29 +1989,37 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
         });
   }
 }
-
-class NumberTextInputFormatter extends TextInputFormatter {
+class NumberFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    final int newTextLength = newValue.text.length;
-    int selectionIndex = newValue.selection.end;
-    int usedSubstringIndex = 0;
-    final StringBuffer newText =  StringBuffer();
-    if (newTextLength >= 6) {
-      newText.write(newValue.text.substring(0, usedSubstringIndex = 5) + '-');
-      if (newValue.selection.end >= 5) selectionIndex += 1;
+    var text = newValue.text;
+
+    if (newValue.selection.baseOffset == 0) {
+      return newValue;
     }
-    if (newTextLength >= 13) {
-      newText.write(newValue.text.substring(5, usedSubstringIndex = 12) + '-');
-      if (newValue.selection.end >= 12) selectionIndex += 1;
+
+    var buffer = new StringBuffer();
+    for (int i = 0; i < text.length; i++) {
+      buffer.write(text[i]);
+      var nonZeroIndex = i + 1;
+      print(text.length);
+      if (nonZeroIndex <= 5) {
+        print("non");
+        print(nonZeroIndex);
+        if (nonZeroIndex % 5 == 0 && nonZeroIndex != text.length) {
+          buffer.write('-'); // Add double spaces.
+        }
+      } else {
+        if (nonZeroIndex % 12 == 0 && nonZeroIndex != text.length) {
+          buffer.write('-'); // Add double spaces.
+        }
+      }
     }
-    // Dump the rest.
-    if (newTextLength >= usedSubstringIndex)
-      newText.write(newValue.text.substring(usedSubstringIndex));
-    return  TextEditingValue(
-      text: newText.toString(),
-      selection:  TextSelection.collapsed(offset: selectionIndex),
-    );
+
+    var string = buffer.toString();
+    return newValue.copyWith(
+        text: string,
+        selection: new TextSelection.collapsed(offset: string.length));
   }
 }

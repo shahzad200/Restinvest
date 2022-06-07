@@ -354,6 +354,7 @@ class F2FTransferScreen extends StatelessWidget {
                                   }).toList(),
                                   onChanged: _.isLoading || _.noInternet ? null : (fund.ToFunds? value) {
                                     _.toFundValue = value!.fundShort!;
+                                    _.toFundValue=='NIT SIF'?'B':value!.fundShort!;
                                     _.toFundCode = value!.fundCode!;
                                     _.update();
                                   },

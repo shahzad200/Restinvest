@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:nit/routes/routes.dart';
+import 'package:nit/views/account_opening_basic_information_screen.dart';
 
 import '../utils/constant.dart';
 
@@ -40,10 +41,11 @@ class RegisterScreen extends StatelessWidget {
                       children: [
                         CustomFormField(
                           onTextChange: (val) {
-                            _.updateUserName(val);
+                            _.updateAccountNo(val);
                           },
                           controller: _.accountNumberController,
-                          textInputType: const TextInputType.numberWithOptions(),
+                          textInputType:
+                              const TextInputType.numberWithOptions(),
                           hint: "Account No.",
                           fieldType: Constants.accountNo,
                           textAlign: TextAlign.center,
@@ -52,21 +54,48 @@ class RegisterScreen extends StatelessWidget {
                           height: 10,
                         ),
                         CustomFormField(
-                          onTextChange: (val) {
-                            _.updateCnicNumber(val);
-                          },
-                          controller: _.cnicController,
-                          textInputType: const TextInputType.numberWithOptions(),
-                          hint: "CNIC - 85202-6761678-8",
-                          fieldType: Constants.cnicNumber,
-                          textAlign: TextAlign.center,
+                           // hintColor: AppColor.black,
+                            hint: "Enter Your CNIC/NICOP Numbers",
+                            onTextChange: (val) {
+                              _.updateCnicNumber(val);
+                            },
+                            inputFormator: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(13),
+                              NumberFormatter()
+                            ],
+                            controller: _.cnicController,
+                            textInputType: const TextInputType.numberWithOptions(),
+
+                            fieldType: Constants.cnicNumber,
+                            textAlign: TextAlign.center
+
                         ),
+                        // CustomFormField(
+                        //
+                        //     hint: "Enter Your CNIC/NICOP Numbers",
+                        //     onTextChange: (val) {
+                        //       _.updateCnicNumber(val);
+                        //     },
+                        //     inputFormator: [
+                        //       FilteringTextInputFormatter.digitsOnly,
+                        //       LengthLimitingTextInputFormatter(13),
+                        //       NumberFormatter()
+                        //     ],
+                        //     controller: _.cnicController,
+                        //     textInputType: const TextInputType.numberWithOptions(),
+                        //
+                        //     // fieldType: Constants.cnicNumber,
+                        //     textAlign: TextAlign.center
+                        //
+                        // ),
                         const SizedBox(
                           height: 10,
                         ),
                         CustomFormField(
                           onTextChange: (val) {
                             _.updateEmail(val);
+                            _.update();
                           },
                           controller: _.emailController,
                           textInputType: TextInputType.emailAddress,
@@ -79,52 +108,48 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         CustomFormField(
                           onTextChange: (val) {
-                            _.cellNumber(val);
+                            _.updateCellNumber(val);
+                            _.update();
                           },
                           textInputType: TextInputType.number,
                           fieldType: Constants.phoneNumberField,
                           hint: "Register Cell Number",
-                          controller: _.cellNumberController,
                           textAlign: TextAlign.center,
+                          controller: _.cellNumberController,
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 20),
                   RestInvestButton(
-                    text: "Submit",
-                    buttonColor: AppColor.blueColor,
-                    textColor: AppColor.whiteColor,
-                    onPress: () {
-                      if (_.formKey.currentState!.validate()) {
-                        _.formKey.currentState!.save();
-                        _.onSubmitt(context);
-                      }
 
-
-                      // Fluttertoast.showToast(
-                      //     msg: "Please fill all fields",
-                      //     toastLength: Toast.LENGTH_SHORT,
-                      //     gravity: ToastGravity.BOTTOM,
-                      //     timeInSecForIosWeb: 5,
-                      //     backgroundColor: Colors.black,
-                      //     textColor: Colors.white,
-                      //     fontSize: 16.0);
-                    },
-                  ),
+                      text: "Submit",
+                      buttonColor: AppColor.blueColor,
+                      textColor: AppColor.whiteColor,
+                      onPress: () {
+                        if (_.formKey.currentState!.validate()) {
+                          _.formKey.currentState!.save();
+                          _.onSubmitt(context);
+                          _.accountNumberController.text = "";
+                          _.cnicController.text = "";
+                          _.emailController.text = "";
+                          _.cellNumberController.text = "";
+                        }
+                        ;
+                      }),
                   const SizedBox(
                     height: 10,
                   ),
                   RestInvestButton(
+
                       text: "Home",
                       buttonColor: AppColor.whiteColor,
                       textColor: AppColor.blueColor,
                       onPress: () {
-
                         Get.toNamed(AppRoute.homeRoute);
 
-                      }
-                  ),
+
+                      }),
                 ],
               ),
             ),

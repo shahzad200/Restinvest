@@ -8,29 +8,34 @@ class CustomFormField extends StatefulWidget {
   CustomFormField(
       {Key? key,
         required this.hint,
-        this.textInputType = TextInputType.emailAddress,
+        this.textInputType,
+
         required this.onTextChange,
+        this.inputFormator = const [],
+        this.onChange,
         this.obscureText = false,
+        this.hintColor,
         this.fieldType = 2,
         this.textAlign = TextAlign.start,
-        this.controller,
+        required this.controller,
         this.icon,
-        this.isRounded=true,
-      //   this.hasIcon = true})
-      // : super(key: key);
-  this.hasIcon = true,this.inputFormator =const [],})
-: super(key: key);
-  final String hint;
+        this.isRounded = true,
+        this.hasIcon = true})
+      : super(key: key);
+  final String? hint;
   final TextAlign textAlign;
-  final TextInputType textInputType;
-  final Function(String) onTextChange;
+  final TextInputType? textInputType;
+  final onTextChange;
   bool obscureText;
   final int fieldType;
   final IconData? icon;
+  final List<TextInputFormatter> inputFormator;
   final bool hasIcon;
   final bool isRounded;
+  final Function(String)? onChange;
+  final hintColor;
+
   final TextEditingController? controller;
-  final List<TextInputFormatter> inputFormator;
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
 }
@@ -38,7 +43,9 @@ class CustomFormField extends StatefulWidget {
 class _CustomFormFieldState extends State<CustomFormField> {
   @override
   Widget build(BuildContext context) {
+
     return TextFormField(controller: widget.controller,
+       inputFormatters: widget.inputFormator,
       obscuringCharacter: "*",
       decoration: InputDecoration(
 
@@ -313,62 +320,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       borderRadius: BorderRadius.circular(
         isRounded ? 0 : 0,
       ),
-    );
-  }
-}
-class NumberTextInputFormatterScreen extends TextInputFormatter {
-  int whichNumber;
-  NumberTextInputFormatterScreen(this.whichNumber);
-
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue,
-      TextEditingValue newValue,
-      ) {
-    final int newTextLength = newValue.text.length;
-    int selectionIndex = newValue.selection.end;
-    int usedSubstringIndex = 0;
-    final StringBuffer newText = StringBuffer();
-    switch (whichNumber) {
-      case 1:
-        {
-          if (newTextLength >= 1 ) {
-            newText.write('(');
-            if (newValue.selection.end >= 1) selectionIndex++;
-          }
-          if (newTextLength >= 4 ) {
-            newText.write(
-                newValue.text.substring(0, usedSubstringIndex = 3) + ') ');
-            if (newValue.selection.end >= 3) selectionIndex += 2;
-          }
-          if (newTextLength >= 7 ) {
-            newText.write(
-                newValue.text.substring(3, usedSubstringIndex = 6) + '-');
-            if (newValue.selection.end >= 6) selectionIndex++;
-          }
-          if (newTextLength >= 11 ) {
-            newText.write(
-                newValue.text.substring(6, usedSubstringIndex = 10) + ' ');
-            if (newValue.selection.end >= 10) selectionIndex++;
-          }
-          break;
-        }
-      case 91:
-        {
-          if (newTextLength >= 5) {
-            newText.write(
-                newValue.text.substring(0, usedSubstringIndex = 5) + ' ');
-            if (newValue.selection.end >= 6) selectionIndex++;
-          }
-          break;
-        }
-    }
-    // Dump the rest.
-    if (newTextLength >= usedSubstringIndex)
-      newText.write(newValue.text.substring(usedSubstringIndex));
-    return TextEditingValue(
-      text: newText.toString(),
-      selection: TextSelection.collapsed(offset: selectionIndex),
     );
   }
 }

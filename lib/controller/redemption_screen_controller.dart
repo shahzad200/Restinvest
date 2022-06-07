@@ -372,7 +372,7 @@ class RedemptionScreenController extends GetxController {
         submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, unitBalanceController.text.toString(),unitsCheck : "unit");
 
       }if(percentageButton){
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "P", percentController.text, approxAmount.toString(),unitsCheck: "percentage");
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "P", percentController.text,approxUnits.toString(),unitsCheck: "percentage");
 
       }if(allUnitButton){
         print("ahjshdkjsadhjksdhjsadhsajkdh");

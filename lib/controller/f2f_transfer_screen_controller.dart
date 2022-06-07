@@ -252,6 +252,11 @@ class F2FTransferScreenController extends GetxController {
       print("hello world");
       print(loadFundsPlans);
 
+      print("shahzad");
+    print ( toFundValue);
+    print(">>>>>>>>>>>>>>>>>>>>>>");
+   print( toFundCode);
+
       toFundValue = loadFundsPlans!.response!.toFunds![0].fundShort!;
       toFundCode = loadFundsPlans!.response!.toFunds![0].fundCode!;
       isLoading = false;
@@ -283,11 +288,15 @@ class F2FTransferScreenController extends GetxController {
 
   onSubmitPress(BuildContext context){
 
-    print(toFundValue);
+
     print("cxzzfdsfdsfdsfds");
     print(toAccountValue);
     print("Asafd");
-    print(toAccountItems);
+
+    print(fundValue);
+    print("cxzzfdsfdsfdsfds");
+    print(toFundValue);
+
 
 
     print(fundNameItems.toString());
@@ -347,6 +356,12 @@ print(pinCodeController.text);
     print("dddddd");
 print (fundValue);
 print (dataValue);
+print("hjkjjjkkjljlklklklklklklklklklklklklk");
+print(fundCode.toString());
+      print("hjkjjjkkjljlklklklklklklklklklklklklk");
+print(toFundValue.toString());
+      print("ali");
+      print(toFundCode.toString());
       isLoading = true;
       update();
       common = await _repository.onSaveFundTransfer(

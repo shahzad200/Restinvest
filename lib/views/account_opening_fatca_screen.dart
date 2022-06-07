@@ -132,7 +132,7 @@ class AccountOpenFatcaScreen extends StatelessWidget {
                                                 .digitsOnly,
                                             LengthLimitingTextInputFormatter(
                                                 13),
-                                            NumberTextInputFormatter()
+                                            NumberFormatter()
                                           ],
                                           enable: false,
                                           controller: _.cnicController,

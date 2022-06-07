@@ -103,7 +103,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                       inputFormator: [
                                         FilteringTextInputFormatter.digitsOnly,
                                          LengthLimitingTextInputFormatter(13),
-                                        NumberTextInputFormatter()
+                                        NumberFormatter()
                                       ],
                                       onChange: (val){
                                         print(_.cNicNumberController.text);

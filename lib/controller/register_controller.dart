@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import 'package:nit/data/api_client.dart';
+import 'package:nit/data/models/common_model.dart';
 import 'package:nit/routes/routes.dart';
 import 'package:nit/widgets/custome_dialog.dart';
-
-import '../data/api_client.dart';
-import '../data/models/common_model.dart';
 
 class RegisterScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  var userName = "".obs;
+  var accountNo = "".obs;
   var cellNumber = "".obs;
   var cnicNumber = "".obs;
   var email = "".obs;
@@ -34,8 +33,8 @@ class RegisterScreenController extends GetxController {
     super.onInit();
   }
 
-  void updateUserName(value) {
-    userName(value);
+  void updateAccountNo(value) {
+    accountNo(value);
     update();
   }
 
@@ -59,6 +58,10 @@ class RegisterScreenController extends GetxController {
       isLoading = true;
       CustomDialog(context);
       update();
+      var cnic=cnicController.text;
+      var email=emailController.text;
+      var accountNo=accountNumberController.text;
+      var cellNumber=cellNumberController.text;
       print( cnicController.text);
       print( cellNumberController.text);
       print( accountNumberController.text);
@@ -68,12 +71,22 @@ class RegisterScreenController extends GetxController {
       response = await api.onRegisteredUser(accountNumberController.text,
           cnicController.text, emailController.text, cellNumberController.text);
       Get.back();
+      update();
       if (response != null) {
+
+        print("jdjdjdjd");
+
+        print( cnic);
+        print(cellNumber);
+        print( accountNo);
+        print( email);
+        print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
         Get.toNamed(AppRoute.pinConfirmation,arguments: {
-          "cNic": cnicController.text,
-          "email":  emailController.text,
-          "cellNumber": cellNumberController.text,
-          "accountNumber":accountNumberController.text
+          "cNic": cnic,
+          "email": email,
+          "cellNumber": cellNumber,
+          "accountNumber":accountNo,
+
         });
       }
 
