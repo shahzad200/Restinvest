@@ -300,7 +300,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusedErrorBorder: _inputBorder(widget.isRounded),
         filled: true,
         labelText: widget.label,
-        hintText: widget.hint,hintStyle: TextStyle(color:widget.hintColor,fontSize: 12),
+        hintText: widget.hint,hintStyle: TextStyle(color:widget.hintColor,fontSize: 12,),
         fillColor: AppColor.whiteColor,
       ),
       keyboardType: widget.textInputType,

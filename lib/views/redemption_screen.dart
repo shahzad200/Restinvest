@@ -115,10 +115,9 @@ class RedemptionScreen extends StatelessWidget {
                                     value.userFundBalances!.forEach((element) {
                                       _.fundNameListItems.add(element);
                                     });
-                                    _.fundNamevalue =
-                                        _.fundNameListItems[0].fundShort!;
-                                    _.fundNameCode =
-                                    _.fundNameListItems[0].fundCode!;
+                                    _.fundNamevalue = _.fundNameListItems[0].fundShort!;
+                                    _.fundNamevalue == "NIT SIF"?  "B":_.fundNameListItems[0].fundShort!;
+                                    _.fundNameCode = _.fundNameListItems[0].fundCode!;
                                     CustomDialog(context);
                                     _.loadFundsPlans = await _.api
                                         .onLoadFundsPlans(
@@ -195,7 +194,11 @@ class RedemptionScreen extends StatelessWidget {
                                             fundNameListItems!.fundShort!));
                                   }).toList(),
                                   onChanged: (UserFundBalances? value) async {
+                                    print(_.fundNamevalue.toString());
+                                    print("Shahzad".toString());
+                                    print(_.fundNamevalue.toString());
                                     _.fundNamevalue = value!.fundShort!;
+                                    _.fundNamevalue=='NIT SIF'?'B':value!.fundShort!;
                                     _.fundNameCode = value!.fundCode!;
                                     CustomDialog(context);
                                     _.loadFundsPlans = await _.api

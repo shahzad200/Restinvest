@@ -55,7 +55,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         CustomFormField(
                            // hintColor: AppColor.black,
-                            hint: "Enter Your CNIC/NICOP Numbers",
+                            hint: "CNIC - 85202-6761678-8",
                             onTextChange: (val) {
                               _.updateCnicNumber(val);
                             },

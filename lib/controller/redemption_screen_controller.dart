@@ -41,11 +41,14 @@ class RedemptionScreenController extends GetxController {
   double? calUnitBalanceValue;
   Common? pinCode;
   Common? submitResponse;
-
+ String ?fundUnits;
   List<Accounts> listAccount = [];
 
   @override
   void onInit() async{
+
+
+
     isLoading = true;
     update();
     Constant.loginModel!.response!.accounts!.forEach((element) {
@@ -97,12 +100,19 @@ class RedemptionScreenController extends GetxController {
 
   late int index = 0;
   String? electronicUnit(){
+
+
+
+
     if(loadFundsPlans != null) {
+      print(fundNamevalue);
+      print("saad");
+      print(fundVolume);
       if(loadFundsPlans!.response!.userFundBalances!.isNotEmpty){
         index = loadFundsPlans!.response!.userFundBalances!.indexWhere((
             element) => element.fundShort == fundNamevalue);
-        return loadFundsPlans!.response!.userFundBalances![index ?? 0]
-            .fundUnits;
+         fundUnits= loadFundsPlans!.response!.userFundBalances![index ?? 0].fundUnits;
+         return fundUnits;
       }else{
         return '0';
       }
@@ -157,16 +167,22 @@ class RedemptionScreenController extends GetxController {
 
     }
     if(percentageButton){
+      print (">>>>>>>>>>>>>>>>>>nnnnn");
+      print(fundVolume);
       print (">>>>>>>>>>>>>>>>>>");
       print(double.parse(s).toString());
       // print(double.parse(d).toString());
       print(approxUnits.toString());
+      print (">>>>>>>>>>>>>>>>>>gggg");
       print( approxAmount.toString());
       print({"double.parse(d).toString() * double.parse(s).toString()"});
 
-
-      print("saimksjdskajdlkasdjsalk");
-      // print(val.toString());
+      print (">>>>>>>>>>>>>>>>>>unit");
+      print(loadFundsPlans!.response!.userFundBalances![index].fundUnits.toString());
+      print (">>>>>>>>>>>>>>>>>>price");
+       print(loadFundsPlans!.response!.userFundBalances![index].fundRedPrice.toString());
+      print (">>>>>>>>>>>>>>>>>>volume");
+      print(loadFundsPlans!.response!.userFundBalances![index].fundvolume.toString());
       if(double.parse(s)<=100){
 
 
@@ -211,6 +227,7 @@ class RedemptionScreenController extends GetxController {
 
           print('>>>>> $approxAmount');
           print("KJHKJH"+loadFundsPlans!.response!.userFundBalances![index].fundUnits!);
+          print('>>>>> $approxUnits');
 
 
           unitBalanceController.text = u.toString();
@@ -257,6 +274,7 @@ class RedemptionScreenController extends GetxController {
 
 
   onSubmitPress(BuildContext context){
+    print('tttttttttttt${fundUnits.toString()}');
     // api.onSaveRedemption(accessCode, authorizationPinCode, folioNumber, fundCode, redTransType, sessionId, sessionStartDate, totalUnits, transactionValue, unitClass, unitPlan, userId, userType)
     // if(unitBalanceController.text != null){
     //   if(calUnitBalanceValue != 0){
@@ -325,9 +343,9 @@ class RedemptionScreenController extends GetxController {
         }
       }
       if(allUnitButton){
-        print(">>>>>>>>>>>>>>$approxUnits");
+        print(">>>>>>>>>>>>>>$approxUnits>>>>>>>>>>>>>>>>>>>>>>>>>");
         print(">>>>>>>>>>>>>>");
-        print(">>>>>>>>>>>>>>$approxAmount");
+        print(">>>>>>>>>>>>>>$approxAmount>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         if (double.parse(approxAmount) > 0 ||
             double.parse(approxUnits) > 0) {
           trans.showDialog(
@@ -372,7 +390,7 @@ class RedemptionScreenController extends GetxController {
         submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "U", unitBalanceController.text, unitBalanceController.text.toString(),unitsCheck : "unit");
 
       }if(percentageButton){
-        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "P", percentController.text,approxUnits.toString(),unitsCheck: "percentage");
+        submitResponse = await _repository.onSaveRedemption(picCodeController.text, accountvalue, fundNameCode,  "P", percentController.text,fundUnits.toString(),unitsCheck: "percentage");
 
       }if(allUnitButton){
         print("ahjshdkjsadhjksdhjsadhsajkdh");
