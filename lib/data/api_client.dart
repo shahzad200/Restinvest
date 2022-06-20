@@ -282,8 +282,7 @@ class ApiClient {
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
         } else {
-          throw  customDialogPin(
-              context, common.meta!.error);
+          throw   Exception(common.meta!.error.toString());
         }
       } else {
         throw Exception('No Internet');
@@ -291,8 +290,7 @@ class ApiClient {
     } catch (e) {
       print("saim");
       if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
-        throw customDialogPin(
-            context, common.meta!.error);
+        throw Exception(common.meta!.error);
       } else {
         print("saimali????");
         throw Exception('No Internet');
