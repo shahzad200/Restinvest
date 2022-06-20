@@ -11,6 +11,7 @@ import 'package:nit/data/models/login_model.dart';
 import 'package:nit/data/repository.dart';
 import 'package:nit/utils/constants.dart';
 import 'package:nit/widgets/constant_widget.dart';
+import 'package:nit/widgets/custome_dialog.dart';
 import 'package:nit/widgets/transaction_dialog.dart' as trans;
 
 
@@ -424,14 +425,15 @@ class RedemptionScreenController extends GetxController {
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString().replaceAll('Exception:', ''),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
+        // Fluttertoast.showToast(
+        //     msg: e.toString().replaceAll('Exception:', ''),
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIosWeb: 5,
+        //     backgroundColor: Colors.black,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
       }
     }
   }
