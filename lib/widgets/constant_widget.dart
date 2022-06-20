@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -2646,14 +2648,14 @@ class DialogBox extends StatelessWidget {
 }
 
 
-Future<void> customDialogPin (context,text){
+Future<void>  customDialogPin (context,text){
   return showGeneralDialog(
     barrierLabel: "Barrier",
     barrierDismissible: true,
     barrierColor: Colors.black.withOpacity(0.5),
     transitionDuration: const Duration(milliseconds: 700),
     context: context,
-    pageBuilder: (_, __, ___) {
+    pageBuilder: (_, __, ___,) {
       return DialogPinCode(text);
     },
     // transitionBuilder: (_, anim, __, child) {

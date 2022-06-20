@@ -18,6 +18,8 @@ import 'package:nit/utils/constants.dart';
 import 'package:nit/widgets/constant_widget.dart';
 import 'package:nit/widgets/transaction_dialog.dart' as trans;
 
+import 'login_screen_controller.dart';
+
 class PurchasesScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -373,20 +375,24 @@ class PurchasesScreenController extends GetxController {
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString().replaceAll('Exception:', ''),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        // customDialogPin(context,'Exception:', );
+        // customDialog(context,'',e.toString().replaceAll('Exception:', '') );
+        customDialogPin(
+            context, common!.meta!.error);
+        // Fluttertoast.showToast(
+        //     msg: e.toString().replaceAll('Exception:', ''),
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIosWeb: 5,
+        //     backgroundColor: Colors.black,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
       }
     }
 
 
 
-
+    // msg: e.toString().replaceAll('Exception:', ''),
 
 
      // api.onSavePurchase(

@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -155,7 +157,7 @@ class LoginScreen extends StatelessWidget {
                        textColor: AppColor.blueColor,
                         textSize: 18,
                        onPress: () {
-                         Get.toNamed(AppRoute.registerRoute);
+                         customDialog(context,"",e.toString().replaceAll('Exception:', '') );;
                        }, text1: '(Existing Unit Holder)',
                   ),
                   const SizedBox(height: 20),

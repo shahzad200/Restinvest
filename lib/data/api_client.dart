@@ -12,7 +12,9 @@ import 'package:nit/data/models/new_user_reg_data.dart';
 
 import 'package:nit/data/models/social_media_links.dart';
 import 'package:nit/data/models/vps/load_existing_schema_data.dart';
+import 'package:path/path.dart';
 
+import '../widgets/constant_widget.dart';
 import 'models/city_sector_model.dart';
 
 import 'models/load_dashboard.dart';
@@ -39,9 +41,9 @@ class ApiClient {
   // VDA3927
   // 0
   static const _baseUrl =
-      // 'http://192.168.0.141:8094/AssetConnectMobilePortal/UserService/';
+      'http://192.168.0.141:8094/AssetConnectMobilePortal/UserService/';
       // 'http://210.2.139.99:8094/AssetConnectMobilePortal/UserService/';
-        'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
+      //   'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
       //      'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
       // 'http://192.168.0.80:8094/AssetConnectMobilePortal/UserService/';
       //  'https://investintrust.nit.com.pk:8443/AssetConnectMobilePortal/UserService/';
@@ -280,15 +282,19 @@ class ApiClient {
         if (common.meta!.code.toString() == 200.toString()) {
           return common;
         } else {
-          throw Exception(common.meta!.error);
+          throw  customDialogPin(
+              context, common.meta!.error);
         }
       } else {
         throw Exception('No Internet');
       }
     } catch (e) {
+      print("saim");
       if (e.toString() == 'Exception: ' + common!.meta!.error.toString()) {
-        throw Exception(common!.meta!.error.toString());
+        throw customDialogPin(
+            context, common.meta!.error);
       } else {
+        print("saimali????");
         throw Exception('No Internet');
       }
     }

@@ -357,3 +357,45 @@ SizedBox(height: 30,),
     },
   );
 }
+Future<void>  customDialog (context,text, String string){
+  return showGeneralDialog(
+    barrierLabel: "Barrier",
+    barrierDismissible: true,
+    barrierColor: Colors.black.withOpacity(0.5),
+    transitionDuration: const Duration(milliseconds: 700),
+    context: context,
+    pageBuilder: (_, __, ___,) {
+      return Dialog(text);
+    },
+    // transitionBuilder: (_, anim, __, child) {
+    //   return SlideTransition(
+    //     position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+    //     child: child,
+    //   );
+    // },
+  );
+
+}
+
+
+class Dialog extends StatelessWidget {
+  Dialog(this.messageApi, {Key? key}) : super(key: key);
+  String messageApi;
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      // title: const Text('AlertDialog Title'),
+        content: SizedBox(
+            height: 162,
+            width: Get.width / 1.2,
+            child: Column(
+                children: [
+                  Column(
+                      children: [
+                        Row(mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,children: [IconButton(onPressed: (){Get.back();}, icon: Icon(Icons.clear))],),
+                        Text(messageApi)
+                      ]
+                  ),
+                ]) ));
+  }
+}
