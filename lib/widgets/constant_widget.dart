@@ -2777,15 +2777,15 @@ class DialogPinnCode extends StatelessWidget {
       margin: const EdgeInsets.only(left: 0.0,right: 0.0),
       child: Stack(
         children: <Widget>[
-          Container(
+          Container(height: Get.height/3.6,
             padding: const EdgeInsets.only(
-              top: 18.0,
+              top: 10.0,
             ),
             margin: const EdgeInsets.only(top: 13.0,right: 8.0),
             decoration: BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(16.0),
+                borderRadius: BorderRadius.circular(10.0),
                 boxShadow: const <BoxShadow>[
                   BoxShadow(
                     color: Colors.black26,
@@ -2806,13 +2806,14 @@ class DialogPinnCode extends StatelessWidget {
                   height: 10.0,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child:  Text(text, style:const TextStyle(fontSize: 16.0,color: Colors.black)),
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Expanded(child: RestInvestTitle(text: text, textColor: AppColor.black,fontSize: 14, textAlign: TextAlign.justify,)),
                 ),
-                const SizedBox(height: 24.0),
+
+                const SizedBox(height: 40.0),
                 InkWell(
                   child: Container(
-                    padding: const EdgeInsets.only(top: 15.0,bottom:15.0),
+                    padding: const EdgeInsets.only(top: 60.0,bottom:15.0),
                     decoration: const BoxDecoration(
                       color:Colors.white,
                       borderRadius:  BorderRadius.only(
@@ -2824,7 +2825,7 @@ class DialogPinnCode extends StatelessWidget {
                         padding: EdgeInsets.only(right: 10),
                         child:  Text(
                           "Cancel",
-                          style:  TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.w900),
+                          style:  TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.bold),
                           textAlign: TextAlign.end,
                         ),
                       ),
@@ -2833,7 +2834,7 @@ class DialogPinnCode extends StatelessWidget {
                         padding: EdgeInsets.only(right: 10),
                         child:  Text(
                           "OK",
-                          style: TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.w900),
+                          style: TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.bold),
                           textAlign: TextAlign.end,
                         ),
                       ),
