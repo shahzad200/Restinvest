@@ -506,7 +506,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
   Widget build(BuildContext context) {
     return Container(
       color: AppColor.lightGreyColor,
-      padding: EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(5.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -537,12 +537,12 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                   text:  TextSpan(
                       text:
                           'I have read understood the guidlines as stated\nin the ',
-                      style: TextStyle(color: AppColor.black, fontSize: 12),
+                      style: const TextStyle(color: AppColor.black, fontSize: 12),
                       children: [
                     TextSpan(
                       text:
                           'offering Documents',
-                      style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
+                      style: const TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                       recognizer:  TapGestureRecognizer()..onTap = () {
                         Get.to(WebViewScreen(
                           title: 'NAV',
@@ -550,13 +550,13 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                           '',
                         ));
                       },
-                    ),TextSpan(
+                    ),const TextSpan(
                       text:
                           ' / ',
                     ),TextSpan(
                       text:
                           'Trust Deed',
-                          style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
+                          style: const TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                           recognizer: new TapGestureRecognizer()..onTap = () {
                             Get.to(WebViewScreen(
                               title: 'NAV',
@@ -564,13 +564,13 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                               '',
                             ));
                           },
-                    ),TextSpan(
+                    ),const TextSpan(
                       text:
                           ' & ',
                     ),TextSpan(
                       text:
                           '\nFund Manager Report ',
-                          style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
+                          style: const TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                           recognizer:  TapGestureRecognizer()..onTap = () {
                             Get.to(WebViewScreen(
                               title: 'NAV',
@@ -578,7 +578,7 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                               '',
                             ));
                           },
-                    ),TextSpan(
+                    ),const TextSpan(
                       text:
                           'of the funds and the risk\ninvolved.',
                           style: TextStyle(color: AppColor.black, fontSize: 12),
@@ -590,12 +590,12 @@ class _CheckBoxContainerState extends State<CheckBoxContainer> {
                   text:  TextSpan(
                       text:
                       'I confirm acceptance of',
-                      style: TextStyle(color: AppColor.black, fontSize: 12),
+                      style: const TextStyle(color: AppColor.black, fontSize: 12),
                       children: [
                         TextSpan(
                           text:
                           ' Terms & Conditions',
-                          style: TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
+                          style: const TextStyle(color: AppColor.blueColor, fontSize: 12, decoration: TextDecoration.underline,),
                           recognizer:  TapGestureRecognizer()..onTap = () {
                             Get.to(WebViewScreen(
                               title: 'NAV',
@@ -1036,9 +1036,9 @@ class RoundContainer extends StatelessWidget {
               // color: textColor,
             ),
             borderRadius: isSquare
-                ? BorderRadius.vertical(
-                    top: Radius.circular(0),
-                    bottom: Radius.circular(0),
+                ? const BorderRadius.vertical(
+                    top: const Radius.circular(0),
+                    bottom: const Radius.circular(0),
                   )
                 : BorderRadius.circular(8),
           ),
@@ -2774,19 +2774,19 @@ class DialogPinnCode extends StatelessWidget {
 
   Widget dialogContent(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 0.0,right: 0.0),
+      margin: const EdgeInsets.only(left: 0.0,right: 0.0),
       child: Stack(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               top: 18.0,
             ),
-            margin: EdgeInsets.only(top: 13.0,right: 8.0),
+            margin: const EdgeInsets.only(top: 13.0,right: 8.0),
             decoration: BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(16.0),
-                boxShadow: <BoxShadow>[
+                boxShadow: const <BoxShadow>[
                   BoxShadow(
                     color: Colors.black26,
                     blurRadius: 0.0,
@@ -2797,31 +2797,47 @@ class DialogPinnCode extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                SizedBox(
-                  height: 20.0,
+
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child:  Text("Error", style:TextStyle(fontSize: 20.0,color: Colors.red,fontWeight: FontWeight.w900)),
+                ),
+                const SizedBox(
+                  height: 10.0,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: new Text(text, style:TextStyle(fontSize: 16.0,color: Colors.black)),
+                  child:  Text(text, style:const TextStyle(fontSize: 16.0,color: Colors.black)),
                 ),
-                SizedBox(height: 24.0),
+                const SizedBox(height: 24.0),
                 InkWell(
                   child: Container(
-                    padding: EdgeInsets.only(top: 15.0,bottom:15.0),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.only(top: 15.0,bottom:15.0),
+                    decoration: const BoxDecoration(
                       color:Colors.white,
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(16.0),
-                          bottomRight: Radius.circular(16.0)),
+                      borderRadius:  BorderRadius.only(
+                          bottomLeft: Radius.circular(10.0),
+                          bottomRight:  Radius.circular(10.0)),
                     ),
-                    child:  Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Text(
-                        "OK",
-                        style: TextStyle(color: AppColor.blueColor,fontSize: 16.0),
-                        textAlign: TextAlign.end,
+                    child:  Row(mainAxisAlignment: MainAxisAlignment.end,children: const [
+                       Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child:  Text(
+                          "Cancel",
+                          style:  TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.w900),
+                          textAlign: TextAlign.end,
+                        ),
                       ),
-                    ),
+                       SizedBox(width: 10,),
+                       Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child:  Text(
+                          "OK",
+                          style: TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.w900),
+                          textAlign: TextAlign.end,
+                        ),
+                      ),
+                    ],)
                   ),
                   onTap:(){
                     Navigator.pop(context);
@@ -2830,22 +2846,7 @@ class DialogPinnCode extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            right: 0.0,
-            child: GestureDetector(
-              onTap: (){
-                Navigator.of(context).pop();
-              },
-              child: Align(
-                alignment: Alignment.topRight,
-                child: CircleAvatar(
-                  radius: 14.0,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.close, color: AppColor.blueColor),
-                ),
-              ),
-            ),
-          ),
+
         ],
       ),
     );

@@ -137,11 +137,11 @@ class LoginScreen extends StatelessWidget {
                     height: 20,
                   ),
 
-                  const RestInvestTitle(
-                      text: "Still don't have an account?",fontWeight: FontWeight.w900,
-                      textAlign: TextAlign.center,
-                      textColor: AppColor.darkblue),
-                  const SizedBox(height: 20),
+                  // const RestInvestTitle(
+                  //     text: "Still don't have an account?",fontWeight: FontWeight.w900,
+                  //     textAlign: TextAlign.center,
+                  //     textColor: AppColor.darkblue),
+                  // const SizedBox(height: 20),
                   // RestInvestButton(
                   //   text: "",
                   //   buttonColor: AppColor.whiteColor,
@@ -162,27 +162,27 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
 
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed(AppRoute.dailyNavRoute);
-                      },
-                      child: const RestInvestTitle(
-                          text: "Daily Nav",fontWeight: FontWeight.w900,
-                          textAlign: TextAlign.center,
-                          textColor: AppColor.blueColor)),
-                  const SizedBox(height: 10),
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed(AppRoute.taxCalculatorRoute);
-                      },
-                      child: const RestInvestTitle(
-                          text: "Tax Calculator",fontWeight: FontWeight.w900,
-                          textAlign: TextAlign.center,
-                          textColor: AppColor.blueColor)),
-
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  // InkWell(
+                  //     onTap: () {
+                  //       Get.toNamed(AppRoute.dailyNavRoute);
+                  //     },
+                  //     child: const RestInvestTitle(
+                  //         text: "Daily Nav",fontWeight: FontWeight.w900,
+                  //         textAlign: TextAlign.center,
+                  //         textColor: AppColor.blueColor)),
+                  // const SizedBox(height: 10),
+                  // InkWell(
+                  //     onTap: () {
+                  //       Get.toNamed(AppRoute.taxCalculatorRoute);
+                  //     },
+                  //     child: const RestInvestTitle(
+                  //         text: "Tax Calculator",fontWeight: FontWeight.w900,
+                  //         textAlign: TextAlign.center,
+                  //         textColor: AppColor.blueColor)),
+                  //
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
                   // InkWell(
                   //     onTap: () {
                   //       Get.toNamed(AppRoute.accountopeningrequest);
