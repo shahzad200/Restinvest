@@ -165,7 +165,7 @@ class TaxCalculatorScreen extends StatelessWidget {
                                 textSize: 12,
                                 onPress: () {
                                   // _.displayDialog(context, _);
-                                  _.onCalculate();
+                                  _.onCalculate(context);
                                 },
                                 height: 30,
                                 width: Get.width / 1.9,

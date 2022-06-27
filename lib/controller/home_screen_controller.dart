@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:nit/widgets/constant_widget.dart';
+import 'package:path/path.dart';
 
 import '../data/repository.dart';
 import '../utils/constants.dart';
@@ -71,6 +73,7 @@ class HomeScreenController extends GetxController {
         isLoading = false;
         noInternet = false;
         update();
+        // customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
         Fluttertoast.showToast(
             msg: e.toString(),
             toastLength: Toast.LENGTH_SHORT,

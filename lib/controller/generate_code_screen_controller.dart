@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:nit/widgets/constant_widget.dart';
+import 'package:path/path.dart';
 import '../data/models/city_data.dart';
 import '../data/models/city_sector_model.dart';
 import '../data/models/new_user_pin_gen.dart';
@@ -131,14 +133,7 @@ class GenerateCodeScreenController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
       }
     }
   }
@@ -175,14 +170,7 @@ class GenerateCodeScreenController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
       }
     }
   }

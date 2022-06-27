@@ -1403,7 +1403,7 @@ class AccountOpenDocumentUploadScreen extends StatelessWidget {
                                         if (_.isLoading) {
                                           printInfo(info: 'jhjh');
                                         } else {
-                                          _.onSaveDoc();
+                                          _.onSaveDoc(context);
                                         }
                                         // Get.to(const AccountOpenPreviewScreen());
                                       },

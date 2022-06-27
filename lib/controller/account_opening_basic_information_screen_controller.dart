@@ -10,6 +10,7 @@ import 'package:nit/routes/routes.dart';
 import 'package:nit/utils/constants.dart';
 import 'package:nit/widgets/constant_widget.dart';
 
+
 import 'account_opening_request_screen_controller.dart';
 
 
@@ -439,7 +440,7 @@ class AccountOpenBasicInformationScreenController extends GetxController{
     return date.year.toString()+'-'+date.month.toString()+'-'+date.day.toString();
   }
 
-  onSaveDataAccountOpeningBasicInfo() async {
+  onSaveDataAccountOpeningBasicInfo(context) async {
     if(titleValue == "" && titleCode == ""){
       showToast('Please select title');
     } else if(nameController.text == "" || nameController.text.isEmpty || nameController.text == null){
@@ -522,22 +523,22 @@ class AccountOpenBasicInformationScreenController extends GetxController{
             showToast('Please enter other city name');
           }else{
             // printInfo(info: 'Called1');
-            onSave();
+            onSave(context);
           }
         }else{
           // printInfo(info: 'Called2');
-          onSave();
+          onSave(context);
         }
       }else if(currentCityCode == 'other'){
         if(otherCityController.text == null || otherCityController.text == ''){
           showToast('Please enter other city name');
         }else{
           // printInfo(info: 'Called3');
-          onSave();
+          onSave(context);
         }
       }else {
         // printInfo(info: 'Called4');
-        onSave();
+        onSave(context);
       }
     } else if(retirementValue == "" && retirementCode == ""){
       showToast('Please select retirement age');
@@ -549,24 +550,24 @@ class AccountOpenBasicInformationScreenController extends GetxController{
           showToast('Please enter other city name');
         }else{
           // printInfo(info: 'Called5');
-          onSave();
+          onSave(context);
         }
       }else{
         // printInfo(info: 'Called6');
-        onSave();
+        onSave(context);
       }
     }else if(currentCityCode == 'other'){
       if(otherCityController.text == null || otherCityController.text == ''){
         showToast('Please enter other city name');
       }else{
-        onSave();
+        onSave(context);
       }
     } else{
-      onSave();
+      onSave(context);
     }
   }
 
-  onSave() async {
+  onSave(context) async {
     try {
       isLoading = true;
       update();
@@ -604,14 +605,15 @@ class AccountOpenBasicInformationScreenController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString().replaceAll('Exception:', ''),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
+        // Fluttertoast.showToast(
+        //     msg: e.toString().replaceAll('Exception:', ''),
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIosWeb: 5,
+        //     backgroundColor: Colors.black,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
       }
     }
   }

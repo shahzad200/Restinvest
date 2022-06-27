@@ -1,8 +1,11 @@
+
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:nit/widgets/constant_widget.dart';
+
 import '../data/models/view_reports.dart';
 import '../data/repository.dart';
 import '../widgets/pdf_view.dart';
@@ -36,7 +39,7 @@ class ViewReportsScreenController extends GetxController {
         date.year.toString();
   }
 
-  onViewReport() async {
+  onViewReport(context) async {
     reportType = Get.parameters!['param'] ?? 'TransferStatus';
     if (startDate != "" && startDate != null) {
       if (endDate != "" && endDate != null) {
@@ -64,14 +67,15 @@ class ViewReportsScreenController extends GetxController {
               isLoading = false;
               noInternet = false;
               update();
-              Fluttertoast.showToast(
-                  msg: e.toString().replaceAll('Exception: ', ''),
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.black,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+               customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
+              // Fluttertoast.showToast(
+              //     msg: e.toString().replaceAll('Exception: ', ''),
+              //     toastLength: Toast.LENGTH_SHORT,
+              //     gravity: ToastGravity.CENTER,
+              //     timeInSecForIosWeb: 5,
+              //     backgroundColor: Colors.black,
+              //     textColor: Colors.white,
+              //     fontSize: 16.0);
             }
           }
         } else {

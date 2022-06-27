@@ -2,13 +2,15 @@ import 'dart:typed_data';
 
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:get/get.dart';
 import 'package:nit/data/repository.dart';
+
 
 import '../../data/models/login_model.dart';
 import '../../data/models/vps/vps_view_report.dart';
 import '../../utils/constants.dart';
+import '../../widgets/constant_widget.dart';
 import '../../widgets/pdf_view.dart';
 
 
@@ -78,7 +80,7 @@ class VpsAccountStatementScreenController extends GetxController{
   }
 
   Uint8List? unit8list;
-  onVpsAccountStatement() async {
+  onVpsAccountStatement(context) async {
     try {
       isLoading = true;
       update();
@@ -106,14 +108,15 @@ class VpsAccountStatementScreenController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
+        // Fluttertoast.showToast(
+        //     msg: e.toString(),
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIosWeb: 5,
+        //     backgroundColor: Colors.black,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
       }
     }
   }

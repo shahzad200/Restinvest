@@ -10,6 +10,7 @@ import 'package:nit/routes/routes.dart';
 import 'package:nit/utils/constants.dart';
 import 'package:nit/widgets/constant_widget.dart';
 
+
 import 'account_opening_basic_information_screen_controller.dart';
 import 'account_opening_request_screen_controller.dart';
 
@@ -119,7 +120,7 @@ class AccountOpenKycDetailScreenController extends GetxController{
   }
 
 
-  onSaveDataKycDetail() async {
+  onSaveDataKycDetail(context) async {
     if (occupationGroupValue == '00') {
       showToast('Please select occupation/profession');
     } else if (inComeGroupValue == '00') {
@@ -160,7 +161,7 @@ class AccountOpenKycDetailScreenController extends GetxController{
           expTurnoverAmountController.text == null){
         showToast('Please enter expected turnover amount');
       } else {
-        onSaveData();
+        onSaveData(context);
       }
     } else if (employerController.text == "" || employerController.text.isEmpty ||
         employerController.text == null) {
@@ -170,10 +171,10 @@ class AccountOpenKycDetailScreenController extends GetxController{
         expTurnoverAmountController.text == null){
       showToast('Please enter expected turnover amount');
     } else {
-      onSaveData();
+      onSaveData(context);
     }
   }
-  onSaveData() async {
+  onSaveData(context) async {
     try {
       isLoading = true;
       update();
@@ -223,14 +224,15 @@ class AccountOpenKycDetailScreenController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString().replaceAll('Exception:', ''),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
+        // Fluttertoast.showToast(
+        //     msg: e.toString().replaceAll('Exception:', ''),
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIosWeb: 5,
+        //     backgroundColor: Colors.black,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
       }
     }
   }

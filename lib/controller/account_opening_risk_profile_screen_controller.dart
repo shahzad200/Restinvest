@@ -10,6 +10,7 @@ import 'package:nit/utils/constants.dart';
 import 'package:nit/widgets/constant_widget.dart';
 
 
+
 class AccountOpenRiskProfileScreenController extends GetxController{
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -251,7 +252,7 @@ class AccountOpenRiskProfileScreenController extends GetxController{
   }
 
 
-  onSaveData() async {
+  onSaveData(context) async {
     if(!isCalculate){
       showToast('Please calculate risk');
     }else if(!isChecked){
@@ -283,14 +284,15 @@ class AccountOpenRiskProfileScreenController extends GetxController{
           isLoading = false;
           noInternet = false;
           update();
-          Fluttertoast.showToast(
-              msg: e.toString().replaceAll('Exception:', ''),
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0);
+          customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
+          // Fluttertoast.showToast(
+          //     msg: e.toString().replaceAll('Exception:', ''),
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     gravity: ToastGravity.CENTER,
+          //     timeInSecForIosWeb: 5,
+          //     backgroundColor: Colors.black,
+          //     textColor: Colors.white,
+          //     fontSize: 16.0);
         }
       }
     }

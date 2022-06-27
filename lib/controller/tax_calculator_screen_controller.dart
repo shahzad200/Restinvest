@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:nit/widgets/constant_widget.dart';
+
 import '../data/models/calculate_tax.dart';
 import '../data/repository.dart';
 
@@ -64,7 +66,7 @@ class TaxCalculatorScreenController extends GetxController {
     super.onReady();
   }
 
-  onCalculate() async {
+  onCalculate(context) async {
     try {
       calculateTax = await _repository.onCalculateTax(
           categoryValue == 'Salaried' ? 'S' : "N",
@@ -84,14 +86,15 @@ class TaxCalculatorScreenController extends GetxController {
         update();
       } else {
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
+        // Fluttertoast.showToast(
+        //     msg: e.toString(),
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIosWeb: 5,
+        //     backgroundColor: Colors.black,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
       }
     }
   }

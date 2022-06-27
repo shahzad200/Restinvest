@@ -12,9 +12,7 @@ import 'package:nit/data/models/new_user_reg_data.dart';
 
 import 'package:nit/data/models/social_media_links.dart';
 import 'package:nit/data/models/vps/load_existing_schema_data.dart';
-import 'package:path/path.dart';
 
-import '../widgets/constant_widget.dart';
 import 'models/city_sector_model.dart';
 
 import 'models/load_dashboard.dart';

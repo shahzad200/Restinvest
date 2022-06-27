@@ -703,7 +703,7 @@ class AccountOpenKycDetailScreen extends StatelessWidget {
                                           width: 50,
                                           text: "SAVE&NEXT",
                                           onPress: () {
-                                            _.onSaveDataKycDetail();
+                                            _.onSaveDataKycDetail(context);
                                             // Get.toNamed(AppRoute.accountOpenFatcaScreen);
                                           },
                                           isRound: false),

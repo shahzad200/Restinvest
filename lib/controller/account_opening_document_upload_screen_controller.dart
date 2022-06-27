@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../data/models/common_model.dart';
 import '../data/repository.dart';
 import '../views/account_opening_preview_screen.dart';
@@ -136,7 +137,7 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
   }
 
 
-  onSaveDoc()async{
+  onSaveDoc(context)async{
     isLoading = true;
     update();
       if(cNicF == null){
@@ -172,12 +173,12 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
           } else{
             isLoading = false;
             update();
-            onUploadDoc();
+            onUploadDoc(context);
           }
         } else{
           isLoading = false;
           update();
-          onUploadDoc();
+          onUploadDoc(context);
         }
       } else if(Constant.mobileReg != '4'){
         if(mobile == null){
@@ -187,16 +188,16 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
         } else{
           isLoading = false;
           update();
-          onUploadDoc();
+          onUploadDoc(context);
         }
       }  else{
         isLoading = false;
         update();
-        onUploadDoc();
+        onUploadDoc(context);
       }
   }
 
-  onUploadDoc() async {
+  onUploadDoc(context) async {
     if(isChecked){
       try {
         if(!isLoading) {
@@ -234,7 +235,7 @@ class AccountOpenDocumentUploadScreenController extends GetxController{
           isLoading = false;
           noInternet = false;
           update();
-          showToast(e.toString().replaceAll('Exception:', ''));
+          customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
         }
       }
     } else {

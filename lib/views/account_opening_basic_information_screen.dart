@@ -1953,7 +1953,7 @@ class AccountOpenBasicInformationScreen extends StatelessWidget {
                                           // print(Constant.cNic+'  '+_.controller.emailController.text+'  '+_.controller.mobileNumberController.text,);
 
                                           // Get.toNamed(AppRoute.accountOpenFatcaScreen);
-                                          _.onSaveDataAccountOpeningBasicInfo();
+                                          _.onSaveDataAccountOpeningBasicInfo(context);
                                         },
                                         isRound: false),
                                     const SizedBox(width: 20,),

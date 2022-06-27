@@ -283,7 +283,7 @@ class AccountOpenPreviewScreen extends StatelessWidget {
                                     text: "Submit",
                                     onPress: () {
                                       if(_.isLoading == false) {
-                                        _.onSubmit();
+                                        _.onSubmit(context);
                                       }
                                     },
                                     isRound: false),

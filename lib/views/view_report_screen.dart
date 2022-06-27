@@ -205,7 +205,7 @@ class ViewReportsScreen extends StatelessWidget {
                         textColor: AppColor.whiteColor,
                         onPress: (){
                           _.isLoading || _.noInternet ? null :
-                          _.onViewReport();
+                          _.onViewReport(context);
                         },
                       ),
                       const SizedBox(height: 10),

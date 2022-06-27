@@ -12,6 +12,7 @@ import 'package:nit/utils/constants.dart';
 import 'package:nit/widgets/constant_widget.dart';
 
 
+
 class AccountOpenRequestScreenController extends GetxController {
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -209,7 +210,7 @@ class AccountOpenRequestScreenController extends GetxController {
 
 
 
-  onValidateVerificationCodeForDigUser() async {
+  onValidateVerificationCodeForDigUser(context) async {
     if (cNicNumberController.text.isEmpty ||
         cNicNumberController.text == '' ||
         cNicNumberController.text == null
@@ -297,14 +298,7 @@ class AccountOpenRequestScreenController extends GetxController {
           isLoading = false;
           noInternet = false;
           update();
-          Fluttertoast.showToast(
-              msg: e.toString().replaceAll('Exception:', ''),
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0);
+          customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
         }
       }
     }

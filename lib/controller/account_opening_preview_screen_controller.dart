@@ -7,6 +7,7 @@ import 'package:nit/utils/constants.dart';
 import 'package:nit/views/account_opening_submit_button_screen.dart';
 import 'package:nit/widgets/constant_widget.dart';
 
+
 import 'account_opening_document_upload_screen_controller.dart';
 
 
@@ -27,7 +28,7 @@ class AccountOpenPreviewScreenController extends GetxController{
   bool mobileReg = false;
   AccountOpenDocumentUploadScreenController con = Get.find<AccountOpenDocumentUploadScreenController>();
 
-  onSubmit() async {
+  onSubmit(context) async {
     try {
       isLoading = true;
       update();
@@ -56,7 +57,7 @@ class AccountOpenPreviewScreenController extends GetxController{
         isLoading = false;
         noInternet = false;
         update();
-        showToast(e.toString().replaceAll('Exception:', ''));
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
       }
     }
   }

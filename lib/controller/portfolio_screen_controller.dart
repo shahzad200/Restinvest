@@ -8,6 +8,7 @@ import 'package:nit/data/models/load_dashboard.dart';
 import 'package:nit/data/models/login_model.dart';
 import 'package:nit/data/repository.dart';
 import 'package:nit/utils/constants.dart';
+import 'package:nit/widgets/constant_widget.dart';
 
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -212,14 +213,15 @@ class PortofolioScreenController extends GetxController {
         isLoading = false;
         noInternet = false;
         update();
-        Fluttertoast.showToast(
-            msg: e.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
+        // Fluttertoast.showToast(
+        //     msg: e.toString(),
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIosWeb: 5,
+        //     backgroundColor: Colors.black,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
       }
     }
     return dashboad!;

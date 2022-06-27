@@ -323,7 +323,7 @@ class VpsAccountStatementScreen extends StatelessWidget {
                                       buttonColor: AppColor.blueColor,
                                       textColor: AppColor.whiteColor,
                                       onPress: () {
-                                        _.onVpsAccountStatement();
+                                        _.onVpsAccountStatement(context);
                                       }),
                                 ],
                               ),

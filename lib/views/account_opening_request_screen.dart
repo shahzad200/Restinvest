@@ -350,7 +350,7 @@ class AccountOpenRequestScreen extends StatelessWidget {
                                             buttonColor: AppColor.blueColor,
                                             textColor: AppColor.whiteColor,
                                             onPress: () {
-                                              _.onValidateVerificationCodeForDigUser();
+                                              _.onValidateVerificationCodeForDigUser(context);
                                               // Get.toNamed(AppRoute.accountopeningbasicinformation);
                                             }),
                                         const SizedBox(

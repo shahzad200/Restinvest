@@ -379,14 +379,15 @@ class PurchasesScreenController extends GetxController {
         // customDialog(context,'',e.toString().replaceAll('Exception:', '') );
         // customDialogPin(
         //     context, common!.meta!.error);
-        Fluttertoast.showToast(
-            msg: e.toString().replaceAll('Exception:', ''),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        customDialogPinn(context,e.toString().replaceAll('Exception:', ''));
+        // Fluttertoast.showToast(
+        //     msg: e.toString().replaceAll('Exception:', ''),
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIosWeb: 5,
+        //     backgroundColor: Colors.black,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
       }
     }
 
