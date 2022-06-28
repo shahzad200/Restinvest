@@ -157,7 +157,7 @@ class LoginScreen extends StatelessWidget {
                        textColor: AppColor.blueColor,
                         textSize: 18,
                        onPress: () {
-                         customDialog(context,"",e.toString().replaceAll('Exception:', '') );;
+                        Get.toNamed(AppRoute.registerRoute);
                        }, text1: '(Existing Unit Holder)',
                   ),
                   const SizedBox(height: 20),

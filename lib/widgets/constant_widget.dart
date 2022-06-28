@@ -2773,81 +2773,67 @@ class DialogPinnCode extends StatelessWidget {
   }
 
   Widget dialogContent(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 0.0,right: 0.0),
-      child: Stack(
+    return Container( height: 170,
+      width: Get.width / 1.2,
+      padding: const EdgeInsets.only(
+        top: 6.0,
+      ),
+      margin: const EdgeInsets.only(top: 13.0,right: 8.0),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10.0),
+          boxShadow: const <BoxShadow>[
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 0.0,
+              offset: Offset(0.0, 0.0),
+            ),
+          ]),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(height: Get.height/3.6,
-            padding: const EdgeInsets.only(
-              top: 10.0,
-            ),
-            margin: const EdgeInsets.only(top: 13.0,right: 8.0),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: const <BoxShadow>[
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 0.0,
-                    offset: Offset(0.0, 0.0),
-                  ),
-                ]),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
 
-                const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child:  Text("Error", style:TextStyle(fontSize: 20.0,color: Colors.red,fontWeight: FontWeight.w900)),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Expanded(child: RestInvestTitle(text: text, textColor: AppColor.black,fontSize: 14, textAlign: TextAlign.justify,)),
-                ),
-
-                const SizedBox(height: 40.0),
-                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 60.0,bottom:15.0),
-                    decoration: const BoxDecoration(
-                      color:Colors.white,
-                      borderRadius:  BorderRadius.only(
-                          bottomLeft: Radius.circular(10.0),
-                          bottomRight:  Radius.circular(10.0)),
-                    ),
-                    child:  Row(mainAxisAlignment: MainAxisAlignment.end,children: const [
-                       Padding(
-                        padding: EdgeInsets.only(right: 10),
-                        child:  Text(
-                          "Cancel",
-                          style:  TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.end,
-                        ),
-                      ),
-                       SizedBox(width: 10,),
-                       Padding(
-                        padding: EdgeInsets.only(right: 10),
-                        child:  Text(
-                          "OK",
-                          style: TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.end,
-                        ),
-                      ),
-                    ],)
-                  ),
-                  onTap:(){
-                    Navigator.pop(context);
-                  },
-                )
-              ],
-            ),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
+            child:  Text("Error", style:TextStyle(fontSize: 20.0,color: Colors.red,fontWeight: FontWeight.w900)),
+          ),
+          const SizedBox(
+            height: 10.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Expanded(child: RestInvestTitle(text: text, textColor: AppColor.black,fontSize: 14, textAlign: TextAlign.justify,)),
           ),
 
+          const SizedBox(height: 40.0),
+          InkWell(
+            child: Align(    alignment: Alignment.bottomRight,
+              child: Row(mainAxisAlignment: MainAxisAlignment.end,children: const [
+                 Padding(
+                  padding: EdgeInsets.only(right: 10,top: 30),
+                  child:  Text(
+                    "Cancel",
+                    style:  TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+                 SizedBox(width: 10,),
+                 Padding(
+                  padding: EdgeInsets.only(right: 10,top: 30),
+                  child:  Text(
+                    "OK",
+                    style: TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+              ],),
+            ),
+            onTap:(){
+              Navigator.pop(context);
+            },
+          )
         ],
       ),
     );

@@ -16,7 +16,7 @@ import 'package:nit/widgets/transaction_dialog.dart' as trans;
 
 
 class RedemptionScreenController extends GetxController {
-  var formKey = GlobalKey<FormState>();
+  // var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool isChecked = false;
   String fundNamevalue = "";

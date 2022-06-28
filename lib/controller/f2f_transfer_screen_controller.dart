@@ -14,7 +14,7 @@ import 'package:nit/widgets/constant_widget.dart';
 import 'package:nit/widgets/transaction_dialog.dart' as trans;
 
 class F2FTransferScreenController extends GetxController {
-  var formKey = GlobalKey<FormState>();
+  // var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool isChecked = false;
   String accountValue = Constant.loginModel!.response!.accounts![Constant.accountIndex].folioNumber ?? '';
