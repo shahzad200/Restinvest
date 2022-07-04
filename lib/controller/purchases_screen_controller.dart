@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:nit/data/models/login_model.dart';
@@ -21,7 +20,7 @@ import 'package:nit/widgets/transaction_dialog.dart' as trans;
 import 'login_screen_controller.dart';
 
 class PurchasesScreenController extends GetxController {
-   var formKey = GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool isChecked = false;
   String fundNamevalue = "";
@@ -253,24 +252,33 @@ class PurchasesScreenController extends GetxController {
   onSubmitPress(BuildContext context) {
     printInfo(info: amountController.text );
     if(amountController.text == null || amountController.text == ''){
-      showToast('Please enter amount');
+      //  showToast('Please enter amount');
+      customDialogPinn(context,"Please enter amount");
     }else if(bankNameController.text == null || bankNameController.text == ""){
-      showToast('Please enter bank name');
+      // showToast('Please enter bank name');
+      customDialogPinn(context,"Please enter bank name");
     } else if(bankAccountController.text == null || bankAccountController.text == ""){
-      showToast('Please enter bank account number');
+      //showToast('Please enter bank account number');
+      customDialogPinn(context,"Please enter bank account number");
     } else if(paymentvalue == 'Cheque'){
       if(installmentController.text == null || installmentController.text == "" ){
-        showToast('Please enter cheque/instrument No.');
+        // showToast('Please enter cheque/instrument No.');
+        customDialogPinn(context,"Please enter cheque/instrument No.");
       }else if(date == null){
-        showToast('Please enter cheque/instrument Date.');
+        // showToast('Please enter cheque/instrument Date.');
+        customDialogPinn(context,"Please enter cheque/instrument Date.");
       } else if(picCodeController.text == null || picCodeController.text == ''){
-        showToast('Please enter pin code');
+        //showToast('Please enter pin code');
+        customDialogPinn(context,"Please enter pin code");
       } else if (paymentProof == null) {
-        showToast('Please add payment proof');
+        //showToast('Please add payment proof');
+        customDialogPinn(context,"Please add payment proof");
       } else if (paymentSlip == null){
-        showToast('Please add payment slip');
+        // showToast('Please add payment slip');
+        customDialogPinn(context,"Please add payment slip");
       } else if(!isCheckPrivacy){
-        showToast('Please accept terms and conditions');
+        //showToast('Please accept terms and conditions');
+        customDialogPinn(context,"Please accept terms and conditions");
       } else {
         trans.showDialog(
             context,
@@ -286,9 +294,11 @@ class PurchasesScreenController extends GetxController {
       }
     } else if(paymentvalue == '1-Link'){
       if(picCodeController.text == null || picCodeController.text == ''){
-        showToast('Please enter pin code');
+        // showToast('Please enter pin code');
+        customDialogPinn(context,"Please accept terms and conditions");
       } else if(!isCheckPrivacy){
-        showToast('Please accept terms and conditions');
+        //  showToast('Please accept terms and conditions');
+        customDialogPinn(context,"Please accept terms and conditions");
       } else {
         trans.showDialog(
             context,
@@ -303,11 +313,14 @@ class PurchasesScreenController extends GetxController {
             onOkPress);
       }
     } else if(picCodeController.text == null || picCodeController.text == ''){
-      showToast('Please enter pin code');
+      //showToast('Please enter pin code');
+      customDialogPinn(context,"Please enter pin code");
     } else if (paymentProof == null) {
-      showToast('Please add payment proof');
+      // showToast('Please add payment proof');
+      customDialogPinn(context,"Please add payment proofs");
     }  else if(!isCheckPrivacy){
-      showToast('Please accept terms and conditions');
+      // showToast('Please accept terms and conditions');
+      customDialogPinn(context,"Please accept terms and conditions");
     } else {
       trans.showDialog(
           context,
@@ -396,31 +409,31 @@ class PurchasesScreenController extends GetxController {
     // msg: e.toString().replaceAll('Exception:', ''),
 
 
-     // api.onSavePurchase(
-     //   fundValue,
-     //   accountValue,
-     //   amountController.text,
-     //   installmentController.text,
-     //   date.toString(),
-     //   bankNameController.text,
-     //   bankAccountController.text,
-     //   picCodeController.text,
-     //   paymentvalueCode,
-     //   collectionBankAccount,
-     //   collectionBankCode,
-     //   fundSale,
-     //   "${paymentProofBytes == null || paymentProofBytes.isEmpty?null :base64Encode(paymentProofBytes)}",
-     //   // base64Encode(paymentProofBytes),
-     //   paymentProofExt!,
-     //   "${paymentSlipBytes == null || paymentSlipBytes.isEmpty?null :base64Encode(paymentSlipBytes)}",
-     //
-     //   "${paymentSlipExt}",
-     // );
-      // submitResponse = await _repository.onSaveFundTransfer(
-      //     pinCodeController.text, accountValue, toAccountValue,
-      //     fundCode, percentageButton ? "P" : "U", "totalUnits", dataValue, toFundCode);
+    // api.onSavePurchase(
+    //   fundValue,
+    //   accountValue,
+    //   amountController.text,
+    //   installmentController.text,
+    //   date.toString(),
+    //   bankNameController.text,
+    //   bankAccountController.text,
+    //   picCodeController.text,
+    //   paymentvalueCode,
+    //   collectionBankAccount,
+    //   collectionBankCode,
+    //   fundSale,
+    //   "${paymentProofBytes == null || paymentProofBytes.isEmpty?null :base64Encode(paymentProofBytes)}",
+    //   // base64Encode(paymentProofBytes),
+    //   paymentProofExt!,
+    //   "${paymentSlipBytes == null || paymentSlipBytes.isEmpty?null :base64Encode(paymentSlipBytes)}",
+    //
+    //   "${paymentSlipExt}",
+    // );
+    // submitResponse = await _repository.onSaveFundTransfer(
+    //     pinCodeController.text, accountValue, toAccountValue,
+    //     fundCode, percentageButton ? "P" : "U", "totalUnits", dataValue, toFundCode);
 
-      // update();
+    // update();
     // } catch (e) {
     //   if (e.toString() == 'Exception: No Internet') {
     //     isLoading = false;

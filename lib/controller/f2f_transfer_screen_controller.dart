@@ -51,17 +51,17 @@ class F2FTransferScreenController extends GetxController {
       }
     });
     findIndex();
-      onLoadFundsPlans();
+    onLoadFundsPlans();
     super.onInit();
   }
 
   int fundIndex = 0;
   int findIndex(){
-     fundIndex = Constant.loginModel!.response!.accounts!.indexWhere((element) => element.folioNumber == accountValue);
-     if(Constant.loginModel!.response!.accounts![fundIndex].userFundBalances!.isNotEmpty){
-       fundValue = Constant.loginModel!.response!.accounts![fundIndex].userFundBalances![0].fundShort!;
-       fundCode = Constant.loginModel!.response!.accounts![fundIndex].userFundBalances![0].fundCode!;
-     }
+    fundIndex = Constant.loginModel!.response!.accounts!.indexWhere((element) => element.folioNumber == accountValue);
+    if(Constant.loginModel!.response!.accounts![fundIndex].userFundBalances!.isNotEmpty){
+      fundValue = Constant.loginModel!.response!.accounts![fundIndex].userFundBalances![0].fundShort!;
+      fundCode = Constant.loginModel!.response!.accounts![fundIndex].userFundBalances![0].fundCode!;
+    }
     return fundIndex;
   }
 
@@ -98,66 +98,66 @@ class F2FTransferScreenController extends GetxController {
   String approxAmount = '';
   String approxUnits = '';
   String dataValue = '';
-    calculateUnits(String s){
-      if(unitButton){
-        dataValue = s;
-        if(double.parse(dataValue) <= double.parse(loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0')) {
-          String d = loadFundsPlans!.response!.portfolioAllocationData![index]
-              .fundRedPrice ?? '0';
-          double val = double.parse(d) * double.parse(s);
-          approxAmount = val == 0 ? '' : val.toStringAsFixed(2);
+  calculateUnits(String s){
+    if(unitButton){
+      dataValue = s;
+      if(double.parse(dataValue) <= double.parse(loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0')) {
+        String d = loadFundsPlans!.response!.portfolioAllocationData![index]
+            .fundRedPrice ?? '0';
+        double val = double.parse(d) * double.parse(s);
+        approxAmount = val == 0 ? '' : val.toStringAsFixed(2);
+        update();
+      } else{
+        unitBalanceController.text = '';
+        update();
+        Fluttertoast.showToast(
+            msg: 'Unit Balance must less than or equal to available units',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 5,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+    if(percentageButton){
+      dataValue = s;
+      if(double.parse(dataValue) <= 100)
+      {
+        String d = loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0';
+        String red = loadFundsPlans!.response!.portfolioAllocationData![index].fundRedPrice ?? '0';
+        double val = double.parse(d) * double.parse(s);
+        double approxUni = val / 100;
+        double approxAmo = approxUni * double.parse(red);
+        approxAmount = approxAmo.toStringAsFixed(2);
+        approxUnits = approxUni.toStringAsFixed(2);
+        update();
+      } else {
+        unitBalanceController.text = '';
+        update();
+        Fluttertoast.showToast(
+            msg: 'Percentage must be less than or equal to 100',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 5,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+    if(allUnitButton){
+      if(loadFundsPlans != null) {
+        if(loadFundsPlans!.response!.portfolioAllocationData!.isNotEmpty) {
+          String d = loadFundsPlans!.response!.portfolioAllocationData![index].fundRedPrice ?? '0';
+          String u = loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0';
+          double val = double.parse(d) * double.parse(u);
+          approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
+          unitBalanceController.text = u.toString();
+          dataValue = u;
           update();
-        } else{
-          unitBalanceController.text = '';
-          update();
-          Fluttertoast.showToast(
-              msg: 'Unit Balance must less than or equal to available units',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0);
         }
       }
-      if(percentageButton){
-        dataValue = s;
-        if(double.parse(dataValue) <= 100)
-          {
-            String d = loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0';
-            String red = loadFundsPlans!.response!.portfolioAllocationData![index].fundRedPrice ?? '0';
-            double val = double.parse(d) * double.parse(s);
-            double approxUni = val / 100;
-            double approxAmo = approxUni * double.parse(red);
-            approxAmount = approxAmo.toStringAsFixed(2);
-            approxUnits = approxUni.toStringAsFixed(2);
-            update();
-          } else {
-          unitBalanceController.text = '';
-          update();
-          Fluttertoast.showToast(
-              msg: 'Percentage must be less than or equal to 100',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }
-      }
-      if(allUnitButton){
-        if(loadFundsPlans != null) {
-          if(loadFundsPlans!.response!.portfolioAllocationData!.isNotEmpty) {
-            String d = loadFundsPlans!.response!.portfolioAllocationData![index].fundRedPrice ?? '0';
-            String u = loadFundsPlans!.response!.portfolioAllocationData![index].fundUnits ?? '0';
-            double val = double.parse(d) * double.parse(u);
-            approxAmount =  val == 0 ? '': val.toStringAsFixed(2);
-            unitBalanceController.text = u.toString();
-            dataValue = u;
-            update();
-          }
-          }
-      }
+    }
   }
 
   investTrust(index) {
@@ -253,9 +253,9 @@ class F2FTransferScreenController extends GetxController {
       print(loadFundsPlans);
 
       print("shahzad");
-    print ( toFundValue);
-    print(">>>>>>>>>>>>>>>>>>>>>>");
-   print( toFundCode);
+      print ( toFundValue);
+      print(">>>>>>>>>>>>>>>>>>>>>>");
+      print( toFundCode);
 
       toFundValue = loadFundsPlans!.response!.toFunds![0].fundShort!;
       toFundCode = loadFundsPlans!.response!.toFunds![0].fundCode!;
@@ -301,65 +301,71 @@ class F2FTransferScreenController extends GetxController {
 
     print(fundNameItems.toString());
 
-      if(unitBalanceController.text != ''){
-        if(dataValue != ''){
-          if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
-            if(isCheckPrivacy){
-              trans.showDialog(context,accountValue,toAccountValue,fundValue,
-                  toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',
-                  onOkPress);
-            }else{
-              showToast("Please accept Terms & Conditions.");
-            }
-          } else {
-            Fluttertoast.showToast(
-                msg: 'Please enter Fund Balance/Percentage',
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 5,
-                backgroundColor: Colors.black,
-                textColor: Colors.white,
-                fontSize: 16.0);
+    if(unitBalanceController.text != ''){
+      if(dataValue != ''){
+        if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
+          if(isCheckPrivacy){
+            trans.showDialog(context,accountValue,toAccountValue,fundValue,
+                toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',
+                onOkPress);
+          }else{
+            // showToast( "Please accept Terms & Conditions.");
+            customDialogPinn(context,"Please accept Terms & Conditions.");
           }
         } else {
-          Fluttertoast.showToast(
-              msg: 'Please enter Fund Balance/Percentage',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0);
+          // Fluttertoast.showToast(
+          //     msg: 'Please enter Fund Balance/Percentage',
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     gravity: ToastGravity.CENTER,
+          //     timeInSecForIosWeb: 5,
+          //     backgroundColor: Colors.black,
+          //     textColor: Colors.white,
+          //     fontSize: 16.0);
+          customDialogPinn(context,"Please enter Fund Balance/Percentage");
         }
       } else {
-        Fluttertoast.showToast(
-            msg: 'Please enter Fund Balance/Percentage',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        // Fluttertoast.showToast(
+        //     msg: 'Please enter Fund Balance/Percentage',
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIosWeb: 5,
+        //     backgroundColor: Colors.black,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
+        customDialogPinn(context,"Please enter Fund Balance/Percentage");
+
       }
+    } else {
+      // Fluttertoast.showToast(
+      //     msg: 'Please enter Fund Balance/Percentage',
+      //     toastLength: Toast.LENGTH_SHORT,
+      //     gravity: ToastGravity.CENTER,
+      //     timeInSecForIosWeb: 5,
+      //     backgroundColor: Colors.black,
+      //     textColor: Colors.white,
+      //     fontSize: 16.0);
+      customDialogPinn(context,"Please enter Fund Balance/Percentage");
+
+    }
   }
 
   onOkPress(BuildContext context) async {
     try {
       print(fundNameItems.toString());
 
-    print(accountValue);print(toFundCode);
-print ( Constants.pincode);
-print("kjshjdashdkjsadhkjsadddddd");
-print(pinCodeController.text);
-    print("saim");
-    print(toAccountValue);
-    print("dddddd");
-print (fundValue);
-print (dataValue);
-print("hjkjjjkkjljlklklklklklklklklklklklklk");
-print(fundCode.toString());
+      print(accountValue);print(toFundCode);
+      print ( Constants.pincode);
+      print("kjshjdashdkjsadhkjsadddddd");
+      print(pinCodeController.text);
+      print("saim");
+      print(toAccountValue);
+      print("dddddd");
+      print (fundValue);
+      print (dataValue);
       print("hjkjjjkkjljlklklklklklklklklklklklklk");
-print(toFundValue.toString());
+      print(fundCode.toString());
+      print("hjkjjjkkjljlklklklklklklklklklklklklk");
+      print(toFundValue.toString());
       print("ali");
       print(toFundCode.toString());
       isLoading = true;
@@ -402,38 +408,38 @@ print(toFundValue.toString());
 
 
   void clearPage() async {
-     isChecked = false;
-     accountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
+    isChecked = false;
+    accountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
 
-     unitBalanceController.text = '';
-     pinCodeController.text = '';
+    unitBalanceController.text = '';
+    pinCodeController.text = '';
 
-     fundValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundShort ?? '';
-     fundCode = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode ?? '';
-     toAccountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
-     toFundValue = "B";
-     toFundCode = "";
-     unitButton = true;
-     percentageButton = false;
-     allUnitButton = false;
-     isCheckPrivacy = false;
+    fundValue = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundShort ?? '';
+    fundCode = Constant.loginModel!.response!.accounts![0].userFundBalances![0].fundCode ?? '';
+    toAccountValue = Constant.loginModel!.response!.accounts![0].folioNumber ?? '';
+    toFundValue = "B";
+    toFundCode = "";
+    unitButton = true;
+    percentageButton = false;
+    allUnitButton = false;
+    isCheckPrivacy = false;
 
-     investButton = false;
-     portfolioButton = false;
-     buttonclick3 = false;
+    investButton = false;
+    portfolioButton = false;
+    buttonclick3 = false;
 
-     isLoading = false;
-     noInternet = false;
-     loadFundsPlans = null;
+    isLoading = false;
+    noInternet = false;
+    loadFundsPlans = null;
 
-     fundIndex = 0;
-     index = 0;
-     fundVolume = '0';
-      approxAmount = '';
-      approxUnits = '';
-      dataValue = '';
-     findIndex();
-     onLoadFundsPlans();
+    fundIndex = 0;
+    index = 0;
+    fundVolume = '0';
+    approxAmount = '';
+    approxUnits = '';
+    dataValue = '';
+    findIndex();
+    onLoadFundsPlans();
 
   }
 

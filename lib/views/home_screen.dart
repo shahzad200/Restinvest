@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
               title: Padding(
                 padding: const EdgeInsets.only(right: 50),
                 child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Image.asset(
                     'assets/images/logonit.png',
                     fit: BoxFit.contain,
@@ -70,16 +70,16 @@ class HomeScreen extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 controller.isLoading == false &&
-                                        controller.noInternet == false
+                                    controller.noInternet == false
                                     ? Get.to(WebViewScreen(
-                                        title: 'NAV History',
-                                        link:
+                                    title: 'NAV History',
+                                    link:
 
-                                            'https://nit.com.pk/NewNIT/NAV.aspx'
+                                    'https://nit.com.pk/NewNIT/NAV.aspx'
 
 
 
-                                      ))
+                                ))
                                     : printInfo(info: 'Do Nothing');
                               },
                               child: IconButtonText(
@@ -90,12 +90,12 @@ class HomeScreen extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 controller.isLoading == false &&
-                                        controller.noInternet == false
+                                    controller.noInternet == false
                                     ? Get.to(WebViewScreen(
-                                        title: 'Branches',
-                                        link:
-                                            '${Constant.socialMediaLink!.response!.homeLinks!.branchLocator}',
-                                      ))
+                                  title: 'Branches',
+                                  link:
+                                  '${Constant.socialMediaLink!.response!.homeLinks!.branchLocator}',
+                                ))
                                     : printInfo(info: 'Do Nothing');
                               },
                               child: IconButtonText(
@@ -107,12 +107,12 @@ class HomeScreen extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 controller.isLoading == false &&
-                                        controller.noInternet == false
+                                    controller.noInternet == false
                                     ? Get.to(WebViewScreen(
-                                        title: 'Learning',
-                                        link:
-                                            '${Constant.socialMediaLink!.response!.homeLinks!.learning}',
-                                      ))
+                                  title: 'Learning',
+                                  link:
+                                  '${Constant.socialMediaLink!.response!.homeLinks!.learning}',
+                                ))
                                     : printInfo(info: 'Do Nothing');
                               },
                               child: IconButtonText(
@@ -128,55 +128,55 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: ContainerBox(
-                            icon: const Icon(
-                              Icons.account_circle_outlined,
-                              color: Colors.black,
-                            ),
-                            textColor: AppColor.blueColor,
-                            text: 'OPEN  DIGITAL\n   ACCOUNT',
-                            voidcallback: () {
-                              controller.isLoading == false &&
+                                icon: const Icon(
+                                  Icons.account_circle_outlined,
+                                  color: Colors.black,
+                                ),
+                                textColor: AppColor.blueColor,
+                                text: 'OPEN  DIGITAL\n   ACCOUNT',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ?
-                              // Get.toNamed(AppRoute.accountOpenUploadScreen)
-                              Get.toNamed(AppRoute.accountOpeningRequest)
-                                  : printInfo(info: 'Do Nothing');
-                            },
-                            containerColor: AppColor.whiteColor,
-                          )),
+                                      ?
+                                  // Get.toNamed(AppRoute.accountOpenUploadScreen)
+                                  Get.toNamed(AppRoute.accountOpeningRequest)
+                                      : printInfo(info: 'Do Nothing');
+                                },
+                                containerColor: AppColor.whiteColor,
+                              )),
                           Constant.userId == '-0456'
                               ? Expanded(
-                                  child: ContainerBox(
-                                  icon: const Portofol(),
-                                  textColor: AppColor.blueColor,
-                                  text: 'LOGIN',
-                                  voidcallback: () {
-                                    controller.isLoading == false &&
-                                            controller.noInternet == false
-                                        ? (){
-                                      Constant.drawerIndex = 9;
-                                      Get.toNamed(AppRoute.loginRoute);
-                                    }()
-                                        : printInfo(info: 'Do Nothing');
-                                  },
-                                  containerColor: AppColor.liteblue,
-                                ))
+                              child: ContainerBox(
+                                icon: const Portofol(),
+                                textColor: AppColor.blueColor,
+                                text: 'LOGIN',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
+                                      controller.noInternet == false
+                                      ? (){
+                                    Constant.drawerIndex = 9;
+                                    Get.toNamed(AppRoute.loginRoute);
+                                  }()
+                                      : printInfo(info: 'Do Nothing');
+                                },
+                                containerColor: AppColor.liteblue,
+                              ))
                               : Expanded(
-                                  child: ContainerBox(
-                                  icon: const Portofol(),
-                                  textColor: AppColor.blueColor,
-                                  text: 'DASHBOARD',
-                                  voidcallback: () {
-                                    controller.isLoading == false &&
-                                            controller.noInternet == false
-                                        ? (){
-                                      Constant.drawerIndex = 3;
-                                      Get.toNamed(AppRoute.portoFolioRoute);
-                                    }()
-                                        : printInfo(info: 'Do Nothing');
-                                  },
-                                  containerColor: AppColor.liteblue,
-                                ))
+                              child: ContainerBox(
+                                icon: const Portofol(),
+                                textColor: AppColor.blueColor,
+                                text: 'DASHBOARD',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
+                                      controller.noInternet == false
+                                      ? (){
+                                    Constant.drawerIndex = 3;
+                                    Get.toNamed(AppRoute.portoFolioRoute);
+                                  }()
+                                      : printInfo(info: 'Do Nothing');
+                                },
+                                containerColor: AppColor.liteblue,
+                              ))
                         ],
                       ),
                     ),
@@ -186,42 +186,42 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: ContainerBox(
-                            icon: const FundManager(),
-                            textColor: AppColor.blueColor,
-                            text: 'FUND MANAGER\n       REPORT',
-                            voidcallback: () {
-                              controller.isLoading == false &&
+                                icon: const FundManager(),
+                                textColor: AppColor.blueColor,
+                                text: 'FUND MANAGER\n       REPORT',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebViewScreen(
-                                      title: 'Fund Manager Reports',
-                                      link:
-                                          'https://nit.com.pk/newnit/ConsolidatedFMR.aspx',
-                                    ))
-                                  : printInfo(info: 'Do Nothing');
-                            },
-                            containerColor: AppColor.liteblue,
-                          )),
+                                      ? Get.to(WebViewScreen(
+                                    title: 'Fund Manager Reports',
+                                    link:
+                                    'https://nit.com.pk/newnit/ConsolidatedFMR.aspx',
+                                  ))
+                                      : printInfo(info: 'Do Nothing');
+                                },
+                                containerColor: AppColor.liteblue,
+                              )),
                           Expanded(
                               child: ContainerBox(
-                            textColor: AppColor.blueColor,
-                            icon: const News(),
-                            text: 'NEWS',
-                            voidcallback: () {
-                              controller.isLoading == false &&
+                                textColor: AppColor.blueColor,
+                                icon: const News(),
+                                text: 'NEWS',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebViewScreen(
-                                      title: 'News',
-                                      link:
+                                      ? Get.to(WebViewScreen(
+                                    title: 'News',
+                                    link:
 
-                                      'https://nit.com.pk/newnit/News.aspx',
+                                    'https://nit.com.pk/newnit/News.aspx',
 
 
 
-                                    ))
-                                  : printInfo(info: 'Do Nothing');
-                            },
-                            containerColor: AppColor.whiteColor,
-                          )),
+                                  ))
+                                      : printInfo(info: 'Do Nothing');
+                                },
+                                containerColor: AppColor.whiteColor,
+                              )),
                         ],
                       ),
                     ),
@@ -231,38 +231,38 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: ContainerBox(
-                            icon: const Product(),
-                            textColor: AppColor.blueColor,
-                            text: 'PRODUCTS',
-                            voidcallback: () {
-                              controller.isLoading == false &&
+                                icon: const Product(),
+                                textColor: AppColor.blueColor,
+                                text: 'PRODUCTS',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebViewScreen(
-                                      title: 'Products',
-                                      link:
-                                          '${Constant.socialMediaLink!.response!.homeLinks!.products}',
-                                    ))
-                                  : printInfo(info: 'Do Nothing');
-                            },
-                            containerColor: AppColor.whiteColor,
-                          )),
+                                      ? Get.to(WebViewScreen(
+                                    title: 'Products',
+                                    link:
+                                    '${Constant.socialMediaLink!.response!.homeLinks!.products}',
+                                  ))
+                                      : printInfo(info: 'Do Nothing');
+                                },
+                                containerColor: AppColor.whiteColor,
+                              )),
                           Expanded(
                               child: ContainerBox(
-                            icon: const PicFund(),
-                            textColor: AppColor.blueColor,
-                            text: 'PICK YOUR FUND',
-                            voidcallback: () {
-                              controller.isLoading == false &&
+                                icon: const PicFund(),
+                                textColor: AppColor.blueColor,
+                                text: 'PICK YOUR FUND',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebViewScreen(
-                                      title: 'Pick Your Fund',
-                                      link:
-                                          'https://nit.com.pk/newnit/Pickyourfunds.aspx',
-                                    ))
-                                  : printInfo(info: 'Do Nothing');
-                            },
-                            containerColor: AppColor.liteblue,
-                          )),
+                                      ? Get.to(WebViewScreen(
+                                    title: 'Pick Your Fund',
+                                    link:
+                                    'https://nit.com.pk/newnit/Pickyourfunds.aspx',
+                                  ))
+                                      : printInfo(info: 'Do Nothing');
+                                },
+                                containerColor: AppColor.liteblue,
+                              )),
                         ],
                       ),
                     ),
@@ -272,52 +272,52 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: ContainerBox(
-                            icon: const Market(),
-                            textColor: AppColor.blueColor,
-                            text: 'MARKET',
-                            voidcallback: () {
-                              controller.isLoading == false &&
+                                icon: const Market(),
+                                textColor: AppColor.blueColor,
+                                text: 'MARKET',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.to(WebViewScreen(
-                                      title: 'Market',
-                                      link:
-                                          '${Constant.socialMediaLink!.response!.homeLinks!.market}',
-                                    ))
-                                  : printInfo(info: 'Do Nothing');
-                            },
-                            containerColor: AppColor.liteblue,
-                          )),
+                                      ? Get.to(WebViewScreen(
+                                    title: 'Market',
+                                    link:
+                                    '${Constant.socialMediaLink!.response!.homeLinks!.market}',
+                                  ))
+                                      : printInfo(info: 'Do Nothing');
+                                },
+                                containerColor: AppColor.liteblue,
+                              )),
                           // Constant.userId == '-0456'
                           //     ?
                           Expanded(
-                                  child: ContainerBox(
-                                  icon: const Chat(),
-                                  textColor: AppColor.blueColor,
-                                  text: 'ABOUT',
-                                  voidcallback: () {
-                                    controller.isLoading == false &&
-                                            controller.noInternet == false
-                                        ? Get.to(WebViewScreen(
-                                            title: 'About Us',
-                                            link: Constant.linkAboutUs,
-                                          ))
-                                        : printInfo(info: 'Do Nothing');
-                                  },
-                                  containerColor: AppColor.whiteColor,
-                                ))
-                              // : Expanded(
-                              //     child: ContainerBox(
-                              //     icon: const Portofol(),
-                              //     textColor: AppColor.whiteColor,
-                              //     text: 'DashBoard',
-                              //     voidcallback: () {
-                              //       controller.isLoading == false &&
-                              //               controller.noInternet == false
-                              //           ? Get.toNamed(AppRoute.portofolioRoute)
-                              //           : printInfo(info: 'Do Nothing');
-                              //     },
-                              //     containerColor: AppColor.liteblue,
-                              //   ))
+                              child: ContainerBox(
+                                icon: const Chat(),
+                                textColor: AppColor.blueColor,
+                                text: 'ABOUT',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
+                                      controller.noInternet == false
+                                      ? Get.to(WebViewScreen(
+                                    title: 'About Us',
+                                    link: Constant.linkAboutUs,
+                                  ))
+                                      : printInfo(info: 'Do Nothing');
+                                },
+                                containerColor: AppColor.whiteColor,
+                              ))
+                          // : Expanded(
+                          //     child: ContainerBox(
+                          //     icon: const Portofol(),
+                          //     textColor: AppColor.whiteColor,
+                          //     text: 'DashBoard',
+                          //     voidcallback: () {
+                          //       controller.isLoading == false &&
+                          //               controller.noInternet == false
+                          //           ? Get.toNamed(AppRoute.portofolioRoute)
+                          //           : printInfo(info: 'Do Nothing');
+                          //     },
+                          //     containerColor: AppColor.liteblue,
+                          //   ))
                         ],
                       ),
                     ),
@@ -327,17 +327,17 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: ContainerBox(
-                            icon: const Calculator(),
-                            textColor: AppColor.blueColor,
-                            text: 'TAX CALCULATOR',
-                            voidcallback: () {
-                              controller.isLoading == false &&
+                                icon: const Calculator(),
+                                textColor: AppColor.blueColor,
+                                text: 'TAX CALCULATOR',
+                                voidcallback: () {
+                                  controller.isLoading == false &&
                                       controller.noInternet == false
-                                  ? Get.toNamed(AppRoute.taxCalculatorRoute)
-                                  : printInfo(info: 'Do Nothing');
-                            },
-                            containerColor: AppColor.whiteColor,
-                          )),
+                                      ? customDialogPinn(context,"Sorry! Currently not Available")
+                                      : printInfo(info: 'Do Nothing');
+                                  },
+                                containerColor: AppColor.whiteColor,
+                              )),
                           Expanded(
                               child: ContainerBox(
                                   icon: const DailyNav(),
@@ -345,7 +345,7 @@ class HomeScreen extends StatelessWidget {
                                   text: 'DAILY NAV',
                                   voidcallback: () {
                                     controller.isLoading == false &&
-                                            controller.noInternet == false
+                                        controller.noInternet == false
                                         ? Get.toNamed(AppRoute.dailyNavRoute)
                                         : printInfo(info: 'Do Nothing');
                                   },
@@ -361,14 +361,14 @@ class HomeScreen extends StatelessWidget {
                           Expanded(
                               child: RowContainerBox(
                                   containerColor:
-                                      AppColor.blueColor.withOpacity(.8),
+                                  AppColor.blueColor.withOpacity(.8),
                                   text: "Call",
                                   textColor: AppColor.whiteColor,
                                   voidcallback: () {
                                     controller.isLoading == false &&
-                                            controller.noInternet == false
+                                        controller.noInternet == false
                                         ? customLaunch(
-                                            'tel:${Constant.socialMediaLink!.response!.homeLinks!.advisorSms}')
+                                        'tel:${Constant.socialMediaLink!.response!.homeLinks!.advisorSms}')
                                         : printInfo(info: 'Do Nothing');
                                   },
                                   icon: const Call())),
@@ -378,7 +378,7 @@ class HomeScreen extends StatelessWidget {
                           Expanded(
                               child: RowContainerBox(
                                   containerColor:
-                                      AppColor.blueColor.withOpacity(.8),
+                                  AppColor.blueColor.withOpacity(.8),
                                   text: "SMS",
                                   textColor: AppColor.whiteColor,
                                   voidcallback: () {
@@ -397,14 +397,14 @@ class HomeScreen extends StatelessWidget {
                           Expanded(
                               child: RowContainerBox(
                                   containerColor:
-                                      AppColor.blueColor.withOpacity(.8),
+                                  AppColor.blueColor.withOpacity(.8),
                                   text: "EMAIL",
                                   textColor: AppColor.whiteColor,
                                   voidcallback: () {
                                     controller.isLoading == false &&
-                                            controller.noInternet == false
+                                        controller.noInternet == false
                                         ? customLaunch(
-                                            'mailto:${Constant.socialMediaLink!.response!.homeLinks!.advisorEmail}')
+                                        'mailto:${Constant.socialMediaLink!.response!.homeLinks!.advisorEmail}')
                                         : printInfo(info: 'Do Nothing');
                                   },
                                   icon: const Mail())),
@@ -435,21 +435,21 @@ class HomeScreen extends StatelessWidget {
                 ),
                 controller.isLoading
                     ? const Center(
-                        child: DialogBox(),
-                      )
+                  child: DialogBox(),
+                )
                     : controller.noInternet
-                        ? Positioned(
-                            bottom: 0,
-                            child: Container(
-                              height: 180,
-                              width: Get.width,
-                              color: Colors.white,
-                              child: NoInternetWgt(
-                                onTryAgain: controller.getSocialLinks,
-                              ),
-                            ),
-                          )
-                        : const SizedBox()
+                    ? Positioned(
+                  bottom: 0,
+                  child: Container(
+                    height: 180,
+                    width: Get.width,
+                    color: Colors.white,
+                    child: NoInternetWgt(
+                      onTryAgain: controller.getSocialLinks,
+                    ),
+                  ),
+                )
+                    : const SizedBox()
               ],
             ),
             // controller.isLoading
