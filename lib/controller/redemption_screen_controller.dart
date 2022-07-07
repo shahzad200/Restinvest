@@ -279,7 +279,7 @@ class RedemptionScreenController extends GetxController {
     // api.onSaveRedemption(accessCode, authorizationPinCode, folioNumber, fundCode, redTransType, sessionId, sessionStartDate, totalUnits, transactionValue, unitClass, unitPlan, userId, userType)
     // if(unitBalanceController.text != null){
     //   if(calUnitBalanceValue != 0){
-    if(picCodeController.text != null && picCodeController.text != ""&&unitBalanceController.text!=null&&unitBalanceController.text != "") {
+    if(unitBalanceController.text!=null&&unitBalanceController.text != "") {
       if(isCheckPrivacy!){
 
 
