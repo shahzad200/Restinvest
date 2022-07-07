@@ -279,7 +279,7 @@ class RedemptionScreenController extends GetxController {
     // api.onSaveRedemption(accessCode, authorizationPinCode, folioNumber, fundCode, redTransType, sessionId, sessionStartDate, totalUnits, transactionValue, unitClass, unitPlan, userId, userType)
     // if(unitBalanceController.text != null){
     //   if(calUnitBalanceValue != 0){
-    if(picCodeController.text != null && picCodeController.text != "") {
+    if(picCodeController.text != null && picCodeController.text != ""&&unitBalanceController.text!=null&&unitBalanceController.text != "") {
       if(isCheckPrivacy!){
 
 
@@ -312,7 +312,7 @@ class RedemptionScreenController extends GetxController {
             //     backgroundColor: Colors.black,
             //     textColor: Colors.white,
             //     fontSize: 16.0);
-            customDialogPinn(context,"Please enter Fund Balance");
+            customDialogPinn(context,"Please enter Fund Balance/Percentage");
 
           }
         }
@@ -343,7 +343,7 @@ class RedemptionScreenController extends GetxController {
             //     backgroundColor: Colors.black,
             //     textColor: Colors.white,
             //     fontSize: 16.0);
-            customDialogPinn(context,"Please enter Percentage");
+            customDialogPinn(context,"Please enter Fund Balance/Percentage");
           }
         }
         if(allUnitButton){
@@ -388,7 +388,6 @@ class RedemptionScreenController extends GetxController {
 
     }
   }
-
   onOkPress(BuildContext context)async{
     try {
       isLoading = true;

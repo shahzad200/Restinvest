@@ -301,7 +301,7 @@ class F2FTransferScreenController extends GetxController {
 
     print(fundNameItems.toString());
 
-    if(unitBalanceController.text != ''){
+    if(unitBalanceController.text != ''&& pinCodeController.text != null && pinCodeController.text != ""){
       if(dataValue != ''){
         if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
           if(isCheckPrivacy){
@@ -332,7 +332,7 @@ class F2FTransferScreenController extends GetxController {
         //     backgroundColor: Colors.black,
         //     textColor: Colors.white,
         //     fontSize: 16.0);
-        customDialogPinn(context,"Please enter Fund Balance/Percentage");
+        customDialogPinn(context,"Please enterpin code");
 
       }
     } else {

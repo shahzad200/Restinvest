@@ -2799,7 +2799,7 @@ class DialogPinnCode extends StatelessWidget {
             height: 6.0,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 15,right: 15),
             child: RestInvestTitle(text: text, textColor: AppColor.black,fontSize: 14, textAlign: TextAlign.justify,),
           ),
 
@@ -2807,15 +2807,8 @@ class DialogPinnCode extends StatelessWidget {
           InkWell(
             child: Align(    alignment: Alignment.bottomRight,
               child: Row(mainAxisAlignment: MainAxisAlignment.end,children: const [
-                 Padding(
-                  padding: EdgeInsets.only(right: 10,top: 30),
-                  child:  Text(
-                    "Cancel",
-                    style:  TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.end,
-                  ),
-                ),
-                 SizedBox(width: 10,),
+
+
                  Padding(
                   padding: EdgeInsets.only(right: 10,top: 30),
                   child:  Text(
