@@ -2810,7 +2810,7 @@ class DialogPinnCode extends StatelessWidget {
 
 
                  Padding(
-                  padding: EdgeInsets.only(right: 10,top: 30),
+                  padding: EdgeInsets.only(right: 10,top: 20),
                   child:  Text(
                     "OK",
                     style: TextStyle(color: AppColor.blueColor,fontSize: 14.0,fontWeight: FontWeight.bold),

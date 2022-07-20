@@ -59,7 +59,7 @@ class NewAccountScreen extends StatelessWidget {
                                    alignment: Alignment.topLeft,
                                   child: InkWell(
                                     onTap: () {
-                                      Get.offAllNamed(
+                                      Get.toNamed(
                                           AppRoute.accountOpeningRequest);
                                     },
                                     child: const RestInvestTitle(
@@ -84,7 +84,7 @@ class NewAccountScreen extends StatelessWidget {
                               alignment: Alignment.topLeft,
                               child: InkWell(
                                 onTap: () {
-                                  Get.offAllNamed(
+                                  Get.toNamed(
                                       AppRoute.accountOpeningRequest);
                                 },
                                 child: const RestInvestTitle(

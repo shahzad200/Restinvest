@@ -302,17 +302,40 @@ class F2FTransferScreenController extends GetxController {
     print(fundNameItems.toString());
 
     if(unitBalanceController.text != ''){
-      if(dataValue != ''){
-        if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
-          if(isCheckPrivacy){
-            trans.showDialog(context,accountValue,toAccountValue,fundValue,
-                toFundValue,'',dataValue,percentageButton ? 'Percentage':'Units','FTF',
-                onOkPress);
-          }else{
-            // showToast( "Please accept Terms & Conditions.");
-            customDialogPinn(context,"Please accept Terms & Conditions.");
+      if(pinCodeController.text != "" && pinCodeController.text != null){
+
+
+        if(dataValue != ''){
+          if(double.parse(dataValue) > 0 || double.parse(unitBalanceController.text) > 0 ){
+            if(isCheckPrivacy) {
+              trans.showDialog(
+                  context,
+                  accountValue,
+                  toAccountValue,
+                  fundValue,
+                  toFundValue,
+                  '',
+                  dataValue,
+                  percentageButton ? 'Percentage' : 'Units',
+                  'FTF',
+                  onOkPress);
+            }else{
+              customDialogPinn(context,"Please accept terms and conditions");
+            }
+
+          } else {
+            // Fluttertoast.showToast(
+            //     msg: 'Please enter Fund Balance/Percentage',
+            //     toastLength: Toast.LENGTH_SHORT,
+            //     gravity: ToastGravity.CENTER,
+            //     timeInSecForIosWeb: 5,
+            //     backgroundColor: Colors.black,
+            //     textColor: Colors.white,
+            //     fontSize: 16.0);
+            customDialogPinn(context,"Please enter correct value");
           }
         } else {
+
           // Fluttertoast.showToast(
           //     msg: 'Please enter Fund Balance/Percentage',
           //     toastLength: Toast.LENGTH_SHORT,
@@ -321,19 +344,13 @@ class F2FTransferScreenController extends GetxController {
           //     backgroundColor: Colors.black,
           //     textColor: Colors.white,
           //     fontSize: 16.0);
-          customDialogPinn(context,"Please enter Fund Balance/Percentage");
-        }
-      } else {
-        // Fluttertoast.showToast(
-        //     msg: 'Please enter Fund Balance/Percentage',
-        //     toastLength: Toast.LENGTH_SHORT,
-        //     gravity: ToastGravity.CENTER,
-        //     timeInSecForIosWeb: 5,
-        //     backgroundColor: Colors.black,
-        //     textColor: Colors.white,
-        //     fontSize: 16.0);
-        customDialogPinn(context,"Please enter pin code");
+          customDialogPinn(context,"Please enter pin code");
 
+        }
+
+      }
+      else{
+        customDialogPinn(context,"Please enter pin code");
       }
     } else {
       // Fluttertoast.showToast(
@@ -347,6 +364,7 @@ class F2FTransferScreenController extends GetxController {
       customDialogPinn(context,"Please enter Fund Balance/Percentage");
 
     }
+
   }
 
   onOkPress(BuildContext context) async {

@@ -279,46 +279,85 @@ class RedemptionScreenController extends GetxController {
     // api.onSaveRedemption(accessCode, authorizationPinCode, folioNumber, fundCode, redTransType, sessionId, sessionStartDate, totalUnits, transactionValue, unitClass, unitPlan, userId, userType)
     // if(unitBalanceController.text != null){
     //   if(calUnitBalanceValue != 0){
-    if(unitBalanceController.text!=null&&unitBalanceController.text != "") {
-      if(isCheckPrivacy!){
+    if(unitBalanceController.text != null && unitBalanceController.text != "") {
+
+      if(picCodeController.text != "" && picCodeController.text != null){
+        if(isCheckPrivacy!){
 
 
-        print("data pin");
-        if (unitButton) {
-          if (unitBalanceController.text != null ||
-              percentController.text != "") {
-            if (calUnitBalanceValue! > 0 ||
-                double.parse(unitBalanceController.text) > 0) {
-              trans.showDialog(
-                  context,
-                  accountvalue,
-                  '',
-                  '',
-                  '',
-                  fundNamevalue,
-                  "${unitBalanceController.text}",
-                  // "${calUnitBalanceValue}",
-                  percentageButton ? 'Percentage' : 'Units',
-                  'RED',
-                  onOkPress);
+          print("Unit field isn't empty");
+          if (unitButton) {
+            if (unitBalanceController.text != null ||
+                percentController.text != "") {
+              if (calUnitBalanceValue! > 0 ||
+                  double.parse(unitBalanceController.text) > 0) {
+                trans.showDialog(
+                    context,
+                    accountvalue,
+                    '',
+                    '',
+                    '',
+                    fundNamevalue,
+                    "${unitBalanceController.text}",
+                    // "${calUnitBalanceValue}",
+                    percentageButton ? 'Percentage' : 'Units',
+                    'RED',
+                    onOkPress);
+              }
+              else {
+
+                customDialogPinn(context,"Please enter Correct Values");
+
+              }
+            }
+            else {
+              // Fluttertoast.showToast(
+              //     msg: 'Please enter Fund Balance',
+              //     toastLength: Toast.LENGTH_SHORT,
+              //     gravity: ToastGravity.CENTER,
+              //     timeInSecForIosWeb: 5,
+              //     backgroundColor: Colors.black,
+              //     textColor: Colors.white,
+              //     fontSize: 16.0);
+              customDialogPinn(context,"Please enter Fund Balance/Percentage");
+            }
+
+          }
+
+
+          if (percentageButton) {
+            if (percentController.text != null && percentController.text != "") {
+              if (double.parse(approxAmount) > 0 ||
+                  double.parse(approxUnits) > 0) {
+                trans.showDialog(
+                    context,
+                    accountvalue,
+                    '',
+                    '',
+                    '',
+                    fundNamevalue,
+                    percentController.text,
+                    percentageButton ? 'Percentage' : 'Units',
+                    'RED',
+                    onOkPress);
+              }
+            }
+            else {
+              // Fluttertoast.showToast(
+              //     msg: 'Please enter Percentage',
+              //     toastLength: Toast.LENGTH_SHORT,
+              //     gravity: ToastGravity.CENTER,
+              //     timeInSecForIosWeb: 5,
+              //     backgroundColor: Colors.black,
+              //     textColor: Colors.white,
+              //     fontSize: 16.0);
+              customDialogPinn(context,"Please enter Fund Balance/Percentage");
             }
           }
-          else {
-            // Fluttertoast.showToast(
-            //     msg: 'Please enter Fund Balance',
-            //     toastLength: Toast.LENGTH_SHORT,
-            //     gravity: ToastGravity.CENTER,
-            //     timeInSecForIosWeb: 5,
-            //     backgroundColor: Colors.black,
-            //     textColor: Colors.white,
-            //     fontSize: 16.0);
-            customDialogPinn(context,"Please enter Fund Balance/Percentage");
-
-          }
-        }
-
-        if (percentageButton) {
-          if (percentController.text != null && percentController.text != "") {
+          if(allUnitButton){
+            print(">>>>>>>>>>>>>>$approxUnits>>>>>>>>>>>>>>>>>>>>>>>>>");
+            print(">>>>>>>>>>>>>>");
+            print(">>>>>>>>>>>>>>$approxAmount>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             if (double.parse(approxAmount) > 0 ||
                 double.parse(approxUnits) > 0) {
               trans.showDialog(
@@ -328,54 +367,30 @@ class RedemptionScreenController extends GetxController {
                   '',
                   '',
                   fundNamevalue,
-                  percentController.text,
+                  "${unitBalanceController.text}",
                   percentageButton ? 'Percentage' : 'Units',
                   'RED',
                   onOkPress);
             }
           }
-          else {
-            // Fluttertoast.showToast(
-            //     msg: 'Please enter Percentage',
-            //     toastLength: Toast.LENGTH_SHORT,
-            //     gravity: ToastGravity.CENTER,
-            //     timeInSecForIosWeb: 5,
-            //     backgroundColor: Colors.black,
-            //     textColor: Colors.white,
-            //     fontSize: 16.0);
-            customDialogPinn(context,"Please enter Fund Balance/Percentage");
-          }
+        }else{
+          // Fluttertoast.showToast(
+          //     msg: 'Please Check Terms & Conditions',
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     gravity: ToastGravity.CENTER,
+          //     timeInSecForIosWeb: 5,
+          //     backgroundColor: Colors.black,
+          //     textColor: Colors.white,
+          //     fontSize: 16.0);
+          customDialogPinn(context,"Please accept terms and conditions");
         }
-        if(allUnitButton){
-          print(">>>>>>>>>>>>>>$approxUnits>>>>>>>>>>>>>>>>>>>>>>>>>");
-          print(">>>>>>>>>>>>>>");
-          print(">>>>>>>>>>>>>>$approxAmount>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-          if (double.parse(approxAmount) > 0 ||
-              double.parse(approxUnits) > 0) {
-            trans.showDialog(
-                context,
-                accountvalue,
-                '',
-                '',
-                '',
-                fundNamevalue,
-                "${unitBalanceController.text}",
-                percentageButton ? 'Percentage' : 'Units',
-                'RED',
-                onOkPress);
-          }
-        }}else{
-        // Fluttertoast.showToast(
-        //     msg: 'Please Check Terms & Conditions',
-        //     toastLength: Toast.LENGTH_SHORT,
-        //     gravity: ToastGravity.CENTER,
-        //     timeInSecForIosWeb: 5,
-        //     backgroundColor: Colors.black,
-        //     textColor: Colors.white,
-        //     fontSize: 16.0);
-        customDialogPinn(context,"Please Check Terms & Conditions");
       }
-    }else{
+      else{
+        customDialogPinn(context,"Please enter pin code");
+      }
+
+    }
+    else{
       // Fluttertoast.showToast(
       //     msg: 'Please enter Pin',
       //     toastLength: Toast.LENGTH_SHORT,
@@ -384,7 +399,7 @@ class RedemptionScreenController extends GetxController {
       //     backgroundColor: Colors.black,
       //     textColor: Colors.white,
       //     fontSize: 16.0);
-      customDialogPinn(context,"Please enter Pin");
+      customDialogPinn(context,"Please enter Fund Balance/Percentage");
 
     }
   }

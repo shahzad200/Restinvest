@@ -579,7 +579,7 @@ class F2FTransferScreen extends StatelessWidget {
                           text: "Generate Financial",
                           buttonColor: AppColor.blueColor,
                           textColor: AppColor.whiteColor,
-                          textSize: 16,
+                          textSize: 14,
                         ),
                       ))
                     ],

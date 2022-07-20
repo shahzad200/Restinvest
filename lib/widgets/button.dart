@@ -46,7 +46,12 @@ class RestInvestButton extends StatelessWidget {
                 : BorderRadius.circular(30.0),
           ),
         ),
-        child: Text(text,));
+        child: Row(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,
+
+          children: [
+            Text(text,),
+          ],
+        ));
   }
 }
 class RegisterButton extends StatelessWidget {
